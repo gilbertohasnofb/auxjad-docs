@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Welcome to auxjad’s documentation! &mdash; auxjad 0.2.0 documentation</title>
+  <title>Welcome to auxjad’s documentation! &mdash; auxjad 0.3.0 documentation</title>
   
 
   
@@ -56,7 +56,7 @@
             
             
               <div class="version">
-                0.2
+                0.3
               </div>
             
           
@@ -83,8 +83,16 @@
               <!-- Local TOC -->
               <div class="local-toc"><ul>
 <li><a class="reference internal" href="#">Welcome to auxjad’s documentation!</a></li>
-<li><a class="reference internal" href="#module-auxjad">The <cite>auxjad</cite> package</a><ul>
+<li><a class="reference internal" href="#module-auxjad">the auxjad package</a><ul>
 <li><a class="reference internal" href="#auxjad">auxjad</a></li>
+<li><a class="reference internal" href="#cartographycontainer">CartographyContainer</a></li>
+<li><a class="reference internal" href="#container-comparator">container_comparator</a></li>
+<li><a class="reference internal" href="#leafdynmaker">LeafDynMaker</a></li>
+<li><a class="reference internal" href="#loopwindowbyelements">LoopWindowByElements</a></li>
+<li><a class="reference internal" href="#remove-repeated-dynamics">remove_repeated_dynamics</a></li>
+<li><a class="reference internal" href="#remove-repeated-time-signatures">remove_repeated_time_signatures</a></li>
+<li><a class="reference internal" href="#simplified-time-signature-ratio">simplified_time_signature_ratio</a></li>
+<li><a class="reference internal" href="#tenneyscontainer">TenneysContainer</a></li>
 </ul>
 </li>
 </ul>
@@ -157,18 +165,303 @@
 </div>
 </div>
 <div class="section" id="module-auxjad">
-<span id="the-auxjad-package"></span><h1>The <cite>auxjad</cite> package<a class="headerlink" href="#module-auxjad" title="Permalink to this headline">¶</a></h1>
+<span id="the-auxjad-package"></span><h1>the auxjad package<a class="headerlink" href="#module-auxjad" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="auxjad">
 <h2>auxjad<a class="headerlink" href="#auxjad" title="Permalink to this headline">¶</a></h2>
-<p>Auxiliary functions and classes for Abjad 3.0. All classes and functions have a
+<p>Auxiliary functions and classes for Abjad 3.1. All classes and functions have a
 <cite>__doc__</cite> attribute with usage instructions.</p>
 <p>Documentation is available at <a class="reference external" href="https://gilbertohasnofb.github.io/auxjad-docs/">https://gilbertohasnofb.github.io/auxjad-docs/</a>.
 A pdf version of the documentation is also available in the <cite>docs</cite> directory.</p>
 <p>Bugs can be reported to <a class="reference external" href="https://github.com/gilbertohasnofb/auxjad/issues">https://github.com/gilbertohasnofb/auxjad/issues</a>.</p>
 <p>This library is published under the MIT License.</p>
+</div>
+<div class="section" id="cartographycontainer">
+<h2>CartographyContainer<a class="headerlink" href="#cartographycontainer" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="auxjad.CartographyContainer">
+<em class="property">class </em><code class="descclassname">auxjad.</code><code class="descname">CartographyContainer</code><span class="sig-paren">(</span><em>container: list</em>, <em>*</em>, <em>decay_rate: float = 0.75</em><span class="sig-paren">)</span><a class="headerlink" href="#auxjad.CartographyContainer" title="Permalink to this definition">¶</a></dt>
+<dd><p>A container used to store, manipulate, and select objects using a
+decaying weighted function.</p>
+<div class="example docutils container">
+<p>The container should be initialised with a list of objects. The
+contents of the list can be absolutely anything.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">container</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">CartographyContainer</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">container</span><span class="o">.</span><span class="n">contents</span>
+<span class="go">[0, 1, 2, 3, 4]</span>
+</pre></div>
+</div>
+<p>The default decay rate is 0.75; that is, the weight of any given
+elements is the weight of the previous one multiplied by 0.75. The
+weights are associated with the index position, not the elements
+themselves.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">container</span><span class="o">.</span><span class="n">weights</span>
+<span class="go">[1.0, 0.75, 0.5625, 0.421875, 0.31640625]</span>
+</pre></div>
+</div>
+<p>Applying the len() function to the container will give the length of
+the container.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">len</span><span class="p">(</span><span class="n">container</span><span class="p">)</span>
+<span class="go">5</span>
+</pre></div>
+</div>
+<p>Calling the container will output one of its elements, selected
+according to its weight function.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">result</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">30</span><span class="p">):</span>
+<span class="gp">... </span>    <span class="n">result</span> <span class="o">+=</span> <span class="nb">str</span><span class="p">(</span><span class="n">container</span><span class="p">())</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">result</span>
+<span class="go">203001402200011111101400310140</span>
+</pre></div>
+</div>
+</div>
+<div class="example docutils container">
+<p>The keyword argument decay_rate can be used to set a different decay
+rate when creating a container.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">container</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">CartographyContainer</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">],</span>
+<span class="gp">... </span>                                        <span class="n">decay_rate</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span>
+<span class="gp">... </span>                                        <span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">cartography_container</span><span class="o">.</span><span class="n">weights</span>
+<span class="go">[1.0, 0.5, 0.25, 0.125, 0.0625]</span>
+</pre></div>
+</div>
+<p>The decay rate can also be set after the creation of a container,
+using the method set_decay_rate().</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">container</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">CartographyContainer</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">container</span><span class="o">.</span><span class="n">set_decay_rate</span><span class="p">(</span><span class="mf">0.2</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">container</span><span class="o">.</span><span class="n">weights</span>
+<span class="go">[1.0, 0.2, 0.04000000000000001, 0.008000000000000002,</span>
+<span class="go">0.0016000000000000003]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">result</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">30</span><span class="p">):</span>
+<span class="gp">... </span>    <span class="n">result</span> <span class="o">+=</span> <span class="nb">str</span><span class="p">(</span><span class="n">container</span><span class="p">())</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">result</span>
+<span class="go">&#39;000001002100000201001030000100&#39;</span>
+</pre></div>
+</div>
+</div>
+<div class="example docutils container">
+<p>Appending is a type of container transformation. It discards the first
+element of the container, shifts all others leftwards, and then appends
+the new element to the rightmost index.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">container</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">CartographyContainer</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">container</span><span class="o">.</span><span class="n">contents</span>
+<span class="go">[0, 1, 2, 3, 4]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">container</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">container</span><span class="o">.</span><span class="n">contents</span>
+<span class="go">[1, 2, 3, 4, 5]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">container</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="mi">42</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">container</span><span class="o">.</span><span class="n">contents</span>
+<span class="go">[2, 3, 4, 5, 42]</span>
+</pre></div>
+</div>
+</div>
+<div class="example docutils container">
+<p>The method append_keeping_n() is similar to append(), but it keeps the
+first n indeces untouched. It thus discards the n+1-th element, shifts
+all the next ones lefwards and then appends the new element at the end
+of the container.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">container</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">CartographyContainer</span><span class="p">([</span><span class="mi">10</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">14</span><span class="p">,</span> <span class="mi">31</span><span class="p">,</span> <span class="mi">98</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">container</span><span class="o">.</span><span class="n">contents</span>
+<span class="go">[10, 7, 14, 31, 98]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">container</span><span class="o">.</span><span class="n">append_keeping_n</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">container</span><span class="o">.</span><span class="n">contents</span>
+<span class="go">[10, 7, 31, 98, 100]</span>
+</pre></div>
+</div>
+</div>
+<div class="example docutils container">
+<p>Prepending is another type of container transformation. It discards the
+last element of the container, shifts all others rightwards, and then
+prepends the new element to the leftmost index.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">container</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">CartographyContainer</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">container</span><span class="o">.</span><span class="n">contents</span>
+<span class="go">[0, 1, 2, 3, 4]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">container</span><span class="o">.</span><span class="n">prepend</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">container</span><span class="o">.</span><span class="n">contents</span>
+<span class="go">[-1, 0, 1, 2, 3]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">container</span><span class="o">.</span><span class="n">prepend</span><span class="p">(</span><span class="mi">71</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">container</span><span class="o">.</span><span class="n">contents</span>
+<span class="go">[71, -1, 0, 1, 2]</span>
+</pre></div>
+</div>
+</div>
+<div class="example docutils container">
+<p>Rotation is another type of container transformation. It rotates all
+elements rightwards, while moving the rightmost element into the
+leftmost index. It can take the optional keyword argument anticlockwise
+which if set to True will rotate in the opposite direction.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">container</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">CartographyContainer</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">container</span><span class="o">.</span><span class="n">contents</span>
+<span class="go">[0, 1, 2, 3, 4]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">container</span><span class="o">.</span><span class="n">rotate</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">container</span><span class="o">.</span><span class="n">contents</span>
+<span class="go">[1, 2, 3, 4, 0]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">container</span><span class="o">.</span><span class="n">rotate</span><span class="p">(</span><span class="n">anticlockwise</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">container</span><span class="o">.</span><span class="n">contents</span>
+<span class="go">[0, 1, 2, 3, 4]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">container</span><span class="o">.</span><span class="n">rotate</span><span class="p">(</span><span class="n">anticlockwise</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">container</span><span class="o">.</span><span class="n">contents</span>
+<span class="go">[1, 2, 3, 4, 0]</span>
+</pre></div>
+</div>
+</div>
+<div class="example docutils container">
+<p>The method randomise() will randomise the position of the elements of
+a container.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">container</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">CartographyContainer</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">container</span><span class="o">.</span><span class="n">contents</span>
+<span class="go">[0, 1, 2, 3, 4]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">container</span><span class="o">.</span><span class="n">randomise</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">container</span><span class="o">.</span><span class="n">contents</span>
+<span class="go">[1, 4, 3, 0, 2]</span>
+</pre></div>
+</div>
+</div>
+<div class="example docutils container">
+<p>The contents of a container can also be altered after it has been
+initialised using the set_container() method. The length of the
+container can change too.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">container</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">CartographyContainer</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">],</span>
+<span class="gp">... </span>                                        <span class="n">decay_rate</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span>
+<span class="gp">... </span>                                        <span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">len</span><span class="p">(</span><span class="n">container</span><span class="p">)</span>
+<span class="go">5</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">container</span><span class="o">.</span><span class="n">weights</span>
+<span class="go">[1.0, 0.5, 0.25, 0.125, 0.0625]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">container</span><span class="o">.</span><span class="n">set_container</span><span class="p">([</span><span class="mi">10</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">14</span><span class="p">,</span> <span class="mi">31</span><span class="p">,</span> <span class="mi">98</span><span class="p">,</span> <span class="mi">47</span><span class="p">,</span> <span class="mi">32</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">container</span><span class="o">.</span><span class="n">contents</span>
+<span class="go">[10, 7, 14, 31, 98, 47, 32]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">len</span><span class="p">(</span><span class="n">container</span><span class="p">)</span>
+<span class="go">7</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">container</span><span class="o">.</span><span class="n">weights</span>
+<span class="go">[1.0, 0.5, 0.25, 0.125, 0.0625, 0.03125, 0.015625]</span>
+</pre></div>
+</div>
+</div>
+<div class="example docutils container">
+<p>To method replace_element() replaces a specific element at a specified
+index.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">container</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">CartographyContainer</span><span class="p">([</span><span class="mi">10</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">14</span><span class="p">,</span> <span class="mi">31</span><span class="p">,</span> <span class="mi">98</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">container</span><span class="o">.</span><span class="n">contents</span>
+<span class="go">[10, 7, 14, 31, 98]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">container</span><span class="o">.</span><span class="n">replace_element</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">container</span><span class="o">.</span><span class="n">contents</span>
+<span class="go">[10, 7, 100, 31, 98]</span>
+</pre></div>
+</div>
+</div>
+<div class="example docutils container">
+<p>The attribute previous_index stores the previously selected index. It
+can be used with the get_element() method in order to retrieve the last
+value output by the object.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">container</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">CartographyContainer</span><span class="p">([</span><span class="mi">10</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">14</span><span class="p">,</span> <span class="mi">31</span><span class="p">,</span> <span class="mi">98</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">container</span><span class="p">()</span>
+<span class="go">31</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">previous_index</span> <span class="o">=</span> <span class="n">container</span><span class="o">.</span><span class="n">previous_index</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">previous_index</span>
+<span class="go">3</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">container</span><span class="o">.</span><span class="n">get_element</span><span class="p">(</span><span class="n">previous_index</span><span class="p">)</span>
+<span class="go">31</span>
+</pre></div>
+</div>
+</div>
+</dd></dl>
+
+</div>
+<div class="section" id="container-comparator">
+<h2>container_comparator<a class="headerlink" href="#container-comparator" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="auxjad.container_comparator">
+<code class="descclassname">auxjad.</code><code class="descname">container_comparator</code><span class="sig-paren">(</span><em>container1: abjad.core.Container.Container</em>, <em>container2: abjad.core.Container.Container</em>, <em>*</em>, <em>include_indicators: bool = False</em><span class="sig-paren">)</span> &#x2192; bool<a class="headerlink" href="#auxjad.container_comparator" title="Permalink to this definition">¶</a></dt>
+<dd><p>A comparator function returning True when two containers are identical
+and False when they are not.</p>
+<div class="example docutils container">
+<p>When the pitches and effective durations of all leaves in both
+containers are identical, this function returns <code class="docutils literal notranslate"><span class="pre">True</span></code>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">container1</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;c&#39;4 d&#39;4 e&#39;4 f&#39;4 &lt;g&#39; a&#39;&gt;2 r2&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">container2</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;c&#39;4 d&#39;4 e&#39;4 f&#39;4 &lt;g&#39; a&#39;&gt;2 r2&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">auxjad</span><span class="o">.</span><span class="n">container_comparator</span><span class="p">(</span><span class="n">container1</span><span class="p">,</span> <span class="n">container2</span><span class="p">)</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+</div>
+<div class="example docutils container">
+<p>Even if all leaves of both containers are identical in pitches and in
+written_duration, the function considers the effective duration so that
+situations like the one below do not yield a false positive:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">container1</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;c&#39;4 d&#39;4 e&#39;4 f&#39;4 &lt;g&#39; a&#39;&gt;2 r2&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">container2</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;\times 3/2 {c&#39;4 d&#39;4 e&#39;4} &quot;</span>
+<span class="gp">... </span>                         <span class="s2">&quot;f&#39;4 &lt;g&#39; a&#39;&gt;2 r2&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">auxjad</span><span class="o">.</span><span class="n">container_comparator</span><span class="p">(</span><span class="n">container1</span><span class="p">,</span> <span class="n">container2</span><span class="p">)</span>
+<span class="go">False</span>
+</pre></div>
+</div>
+</div>
+<div class="example docutils container">
+<p>By default, this function ignores indicators, so the containers in the
+example below are understood to be identical:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">container1</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;c&#39;4\pp d&#39;4 e&#39;4-. f&#39;4 &lt;g&#39; a&#39;&gt;2-&gt; r2&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">container2</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;c&#39;4 d&#39;4 e&#39;4 f&#39;4 &lt;g&#39; a&#39;&gt;2 r2&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">auxjad</span><span class="o">.</span><span class="n">container_comparator</span><span class="p">(</span><span class="n">container1</span><span class="p">,</span> <span class="n">container2</span><span class="p">)</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+</div>
+<div class="example docutils container">
+<p>Setting the argument <code class="docutils literal notranslate"><span class="pre">include_indicators</span></code> to <code class="docutils literal notranslate"><span class="pre">True</span></code> forces the
+function to include indicators in its comparison. In that case, the
+containers in the example above are not considered identical any
+longer:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">container1</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;c&#39;4\pp d&#39;4 e&#39;4-. f&#39;4 &lt;g&#39; a&#39;&gt;2-&gt; r2&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">container2</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;c&#39;4 d&#39;4 e&#39;4 f&#39;4 &lt;g&#39; a&#39;&gt;2 r2&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">auxjad</span><span class="o">.</span><span class="n">container_comparator</span><span class="p">(</span><span class="n">container1</span><span class="p">,</span>
+<span class="gp">... </span>                            <span class="n">container2</span><span class="p">,</span>
+<span class="gp">... </span>                            <span class="n">include_indicators</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+<span class="gp">... </span>                            <span class="p">)</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+</div>
+<div class="example docutils container">
+<p>This function also handles grace notes:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">container1</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;c&#39;4 d&#39;4 e&#39;4 f&#39;4&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">container2</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;c&#39;4 \grace{d&#39;4} d&#39;4 e&#39;4 f&#39;4&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">auxjad</span><span class="o">.</span><span class="n">container_comparator</span><span class="p">(</span><span class="n">container1</span><span class="p">,</span> <span class="n">container2</span><span class="p">)</span>
+<span class="go">False</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">container1</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;c&#39;4 d&#39;4 e&#39;4 f&#39;4 &lt;g&#39; a&#39;&gt;2 r2&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">container2</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;c&#39;4 \grace{c&#39;&#39;4} d&#39;4 e&#39;4 &quot;</span>
+<span class="gp">... </span>                         <span class="s2">&quot;f&#39;4 &lt;g&#39; a&#39;&gt;2 r2&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">auxjad</span><span class="o">.</span><span class="n">container_comparator</span><span class="p">(</span><span class="n">container1</span><span class="p">,</span> <span class="n">container2</span><span class="p">)</span>
+<span class="go">False</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">container1</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;c&#39;4 \grace{c&#39;&#39;4} d&#39;4 e&#39;4 &quot;</span>
+<span class="gp">... </span>                         <span class="s2">&quot;f&#39;4 &lt;g&#39; a&#39;&gt;2 r2&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">container2</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;c&#39;4 \grace{c&#39;&#39;8} d&#39;4 e&#39;4 &quot;</span>
+<span class="gp">... </span>                         <span class="s2">&quot;f&#39;4 &lt;g&#39; a&#39;&gt;2 r2&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">auxjad</span><span class="o">.</span><span class="n">container_comparator</span><span class="p">(</span><span class="n">container1</span><span class="p">,</span> <span class="n">container2</span><span class="p">)</span>
+<span class="go">False</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">container1</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;c&#39;4 \grace{c&#39;&#39;16} d&#39;4 e&#39;4 &quot;</span>
+<span class="gp">... </span>                         <span class="s2">&quot;f&#39;4 &lt;g&#39; a&#39;&gt;2 r2&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">container2</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;c&#39;4 \grace{c&#39;&#39;16} d&#39;4 e&#39;4 &quot;</span>
+<span class="gp">... </span>                         <span class="s2">&quot;f&#39;4 &lt;g&#39; a&#39;&gt;2 r2&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">auxjad</span><span class="o">.</span><span class="n">container_comparator</span><span class="p">(</span><span class="n">container1</span><span class="p">,</span> <span class="n">container2</span><span class="p">)</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+</div>
+</dd></dl>
+
+</div>
+<div class="section" id="leafdynmaker">
+<h2>LeafDynMaker<a class="headerlink" href="#leafdynmaker" title="Permalink to this headline">¶</a></h2>
 <dl class="class">
 <dt id="auxjad.LeafDynMaker">
-<em class="property">class </em><code class="descclassname">auxjad.</code><code class="descname">LeafDynMaker</code><span class="sig-paren">(</span><em>decrease_monotonic=True</em>, <em>forbidden_duration=None</em>, <em>metrical_hierarchy=None</em>, <em>skips_instead_of_rests=False</em>, <em>repeat_ties=False</em>, <em>use_multimeasure_rests=False</em><span class="sig-paren">)</span><a class="headerlink" href="#auxjad.LeafDynMaker" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">auxjad.</code><code class="descname">LeafDynMaker</code><span class="sig-paren">(</span><em>*</em>, <em>increase_monotonic: bool = None</em>, <em>forbidden_note_duration: Union[abjad.utilities.Duration.Duration</em>, <em>Tuple[int</em>, <em>int]] = None</em>, <em>forbidden_rest_duration: Union[abjad.utilities.Duration.Duration</em>, <em>Tuple[int</em>, <em>int]] = None</em>, <em>skips_instead_of_rests: bool = None</em>, <em>tag: abjad.system.Tag.Tag = None</em>, <em>use_multimeasure_rests: bool = None</em><span class="sig-paren">)</span><a class="headerlink" href="#auxjad.LeafDynMaker" title="Permalink to this definition">¶</a></dt>
 <dd><p>An extension of abjad.LeafMaker which can also take optional lists of
 dynamics and articulations.</p>
 <div class="example docutils container">
@@ -208,9 +501,8 @@ dynamics and articulations.</p>
 </div>
 </div>
 <div class="example docutils container">
-<blockquote>
-<div>Tuple elements in <code class="docutils literal notranslate"><span class="pre">pitches</span></code> result in chords. None-valued elements
-in <code class="docutils literal notranslate"><span class="pre">pitches</span></code> result in rests:</div></blockquote>
+<p>Tuple elements in <code class="docutils literal notranslate"><span class="pre">pitches</span></code> result in chords. None-valued elements
+in <code class="docutils literal notranslate"><span class="pre">pitches</span></code> result in rests:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">pitches</span> <span class="o">=</span> <span class="p">[</span><span class="mi">5</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">7</span><span class="p">)]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">durations</span> <span class="o">=</span> <span class="p">[(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">),</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">8</span><span class="p">),</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">16</span><span class="p">)]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">dynamics</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;p&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="s1">&#39;f&#39;</span><span class="p">]</span>
@@ -323,96 +615,975 @@ only:</p>
 </pre></div>
 </div>
 </div>
+<div class="example docutils container">
+<p>Similarly to abjad’s native classes, it accepts many types of elements
+in its input lists:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">pitches</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span>
+<span class="gp">... </span>           <span class="s2">&quot;d&#39;&quot;</span><span class="p">,</span>
+<span class="gp">... </span>           <span class="s1">&#39;E4&#39;</span><span class="p">,</span>
+<span class="gp">... </span>           <span class="n">abjad</span><span class="o">.</span><span class="n">NumberedPitch</span><span class="p">(</span><span class="mi">5</span><span class="p">),</span>
+<span class="gp">... </span>           <span class="n">abjad</span><span class="o">.</span><span class="n">NamedPitch</span><span class="p">(</span><span class="s2">&quot;g&#39;&quot;</span><span class="p">),</span>
+<span class="gp">... </span>           <span class="n">abjad</span><span class="o">.</span><span class="n">NamedPitch</span><span class="p">(</span><span class="s2">&quot;A4&quot;</span><span class="p">),</span>
+<span class="gp">... </span>           <span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">durations</span> <span class="o">=</span> <span class="p">[(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">32</span><span class="p">),</span>
+<span class="gp">... </span>             <span class="s2">&quot;2/32&quot;</span><span class="p">,</span>
+<span class="gp">... </span>             <span class="n">abjad</span><span class="o">.</span><span class="n">Duration</span><span class="p">(</span><span class="s2">&quot;3/32&quot;</span><span class="p">),</span>
+<span class="gp">... </span>             <span class="n">abjad</span><span class="o">.</span><span class="n">Duration</span><span class="p">(</span><span class="mf">0.125</span><span class="p">),</span>
+<span class="gp">... </span>             <span class="n">abjad</span><span class="o">.</span><span class="n">Duration</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">32</span><span class="p">),</span>
+<span class="gp">... </span>             <span class="n">abjad</span><span class="o">.</span><span class="n">Duration</span><span class="p">(</span><span class="mi">6</span><span class="o">/</span><span class="mi">32</span><span class="p">),</span>
+<span class="gp">... </span>             <span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">leaf_dyn_maker</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">LeafDynMaker</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">notes</span> <span class="o">=</span> <span class="n">leaf_dyn_maker</span><span class="p">(</span><span class="n">pitches</span><span class="p">,</span> <span class="n">durations</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">staff</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span><span class="n">notes</span><span class="p">)</span>
+<span class="go">\new Staff</span>
+<span class="go">{</span>
+<span class="go">    c&#39;32</span>
+<span class="go">    d&#39;16</span>
+<span class="go">    e&#39;16.</span>
+<span class="go">    f&#39;8</span>
+<span class="go">    g&#39;8</span>
+<span class="go">    ~</span>
+<span class="go">    g&#39;32</span>
+<span class="go">    a&#39;8.</span>
+<span class="go">}</span>
+</pre></div>
+</div>
+</div>
 </dd></dl>
 
+</div>
+<div class="section" id="loopwindowbyelements">
+<h2>LoopWindowByElements<a class="headerlink" href="#loopwindowbyelements" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="auxjad.LoopWindowByElements">
+<em class="property">class </em><code class="descclassname">auxjad.</code><code class="descname">LoopWindowByElements</code><span class="sig-paren">(</span><em>container: abjad.core.Container.Container</em>, <em>elements_per_window: int</em>, <em>*</em>, <em>step_size: int = 1</em>, <em>max_steps: int = 1</em>, <em>repetition_chance: float = 0.0</em>, <em>initial_head_position: int = 0</em><span class="sig-paren">)</span><a class="headerlink" href="#auxjad.LoopWindowByElements" title="Permalink to this definition">¶</a></dt>
+<dd><p>Takes a container as input as well as an integer representing the
+number of elements per looping window, then outputs a container with
+the elements processed in the looping process. For instance, if the initial
+container had the leaves [A, B, C, D, E, F] and the looping window was size
+three, the output would be: A B C B C D C D E D E F E F F, which can be
+better visualised as:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>A B C
+  B C D
+    C D E
+      D E F
+        E F
+          F
+</pre></div>
+</div>
+<div class="example docutils container">
+<p>Usage is similar to other factory classes. It takes a container (or
+child class equivalent) and the size of the window. Each call of the
+object, in thi case looper(), will output the result and move the
+window forwards. Notice that the time signatures in the example below
+are commented out with %%% because abjad only adds them to the score
+once the leaves are part of a staff:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">input_music</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;c&#39;4 d&#39;2 e&#39;4 f&#39;2 ~ f&#39;8 g&#39;1&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">looper</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">LoopWindowByElements</span><span class="p">(</span><span class="n">input_music</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">notes</span> <span class="o">=</span> <span class="n">looper</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">staff</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span><span class="n">notes</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">f</span><span class="p">(</span><span class="n">staff</span><span class="p">)</span>
+<span class="go">\new Staff</span>
+<span class="go">{</span>
+<span class="go">    \time 4/4</span>
+<span class="go">    c&#39;4</span>
+<span class="go">    d&#39;2</span>
+<span class="go">    e&#39;4</span>
+<span class="go">}</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">notes</span> <span class="o">=</span> <span class="n">looper</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">staff</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span><span class="n">notes</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">f</span><span class="p">(</span><span class="n">staff</span><span class="p">)</span>
+<span class="go">\new Staff</span>
+<span class="go">{</span>
+<span class="go">    \time 11/8</span>
+<span class="go">    d&#39;2</span>
+<span class="go">    e&#39;4</span>
+<span class="go">    f&#39;2</span>
+<span class="go">    ~</span>
+<span class="go">    f&#39;8</span>
+<span class="go">}</span>
+</pre></div>
+</div>
+<p>The method get_current_window() will output the current window without
+moving the head forwards.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">notes</span> <span class="o">=</span> <span class="n">looper</span><span class="o">.</span><span class="n">get_current_window</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">staff</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span><span class="n">notes</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">f</span><span class="p">(</span><span class="n">staff</span><span class="p">)</span>
+<span class="go">\new Staff</span>
+<span class="go">{</span>
+<span class="go">    \time 11/8</span>
+<span class="go">    d&#39;2</span>
+<span class="go">    e&#39;4</span>
+<span class="go">    f&#39;2</span>
+<span class="go">    ~</span>
+<span class="go">    f&#39;8</span>
+<span class="go">}</span>
+</pre></div>
+</div>
+</div>
+<div class="example docutils container">
+<p>This class can take many optional keyword arguments during its
+creation. step_size dictates the size of each individual step in
+number of elements (default value is 1). max_steps sets the maximum
+number of steps that the window can advance when the object is called,
+ranging between 1 and the input value (default is also 1).
+repetition_chance sets the chance of a window result repeating itself
+(that is, the window not moving forward when called). It should range
+from 0.0 to 1.0 (default 0.0, i.e. no repetition). Finally,
+initial_head_position can be used to offset the starting position of
+the looping window (default is 0).</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">input_music</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;c&#39;4 d&#39;2 e&#39;4 f&#39;2 ~ f&#39;8 g&#39;1&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">looper</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">LoopWindowByElements</span><span class="p">(</span><span class="n">input_music</span><span class="p">,</span>
+<span class="gp">... </span>                                     <span class="mi">3</span><span class="p">,</span>
+<span class="gp">... </span>                                     <span class="n">step_size</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+<span class="gp">... </span>                                     <span class="n">max_steps</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
+<span class="gp">... </span>                                     <span class="n">repetition_chance</span><span class="o">=</span><span class="mf">0.25</span><span class="p">,</span>
+<span class="gp">... </span>                                     <span class="n">initial_head_position</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+<span class="gp">... </span>                                     <span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">looper</span><span class="o">.</span><span class="n">elements_per_window</span>
+<span class="go">3</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">looper</span><span class="o">.</span><span class="n">step_size</span>
+<span class="go">1</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">looper</span><span class="o">.</span><span class="n">repetition_chance</span>
+<span class="go">0.25</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">looper</span><span class="o">.</span><span class="n">max_steps</span>
+<span class="go">2</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">looper</span><span class="o">.</span><span class="n">current_head_position</span>
+<span class="go">0</span>
+</pre></div>
+</div>
+</div>
+<div class="example docutils container">
+<p>This class has an internal counter which counts the number of times it
+has been called. It can be reset with the method reset_counter().
+Resetting the counter will not reset the current_head_position. To
+change the head position, use the method set_head_position(). Notice
+that the counter simply counts the number of calls, while the
+current_head_position only moves forwards after a call (since it may
+not move at all when using repetition_chance). It also stays at 0 after
+the very first call, since that is when the 0-th window is output.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">input_music</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;c&#39;4 d&#39;2 e&#39;4 f&#39;2 ~ f&#39;8 g&#39;1&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">looper</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">LoopWindowByElements</span><span class="p">(</span><span class="n">input_music</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">looper</span><span class="o">.</span><span class="n">counter</span>
+<span class="go">0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">looper</span><span class="o">.</span><span class="n">current_head_position</span>
+<span class="go">0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">4</span><span class="p">):</span>
+<span class="gp">... </span>    <span class="n">looper</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">looper</span><span class="o">.</span><span class="n">counter</span>
+<span class="go">4</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">looper</span><span class="o">.</span><span class="n">current_head_position</span>
+<span class="go">3</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">looper</span><span class="o">.</span><span class="n">reset_counter</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">looper</span><span class="o">.</span><span class="n">current_head_position</span>
+<span class="go">4</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">looper</span><span class="o">.</span><span class="n">counter</span>
+<span class="go">0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">looper</span><span class="o">.</span><span class="n">set_head_position</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">looper</span><span class="o">.</span><span class="n">current_head_position</span>
+<span class="go">0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">looper</span><span class="o">.</span><span class="n">counter</span>
+<span class="go">0</span>
+</pre></div>
+</div>
+</div>
+<div class="example docutils container">
+<p>The function len() can be used to get the total number of elements in
+the container.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">input_music</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;c&#39;4 d&#39;2 e&#39;4 f&#39;2 ~ f&#39;8 g&#39;1&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">looper</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">LoopWindowByElements</span><span class="p">(</span><span class="n">input_music</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">len</span><span class="p">(</span><span class="n">looper</span><span class="p">)</span>
+<span class="go">5</span>
+</pre></div>
+</div>
+</div>
+<div class="example docutils container">
+<p>To run through the whole process automatically, from the initial head
+position until the process outputs the single last element, use the
+method output_all(). A property named done will also change to True
+once the process has reached the end.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">input_music</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;c&#39;4 d&#39;4 e&#39;4 f&#39;4&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">looper</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">LoopWindowByElements</span><span class="p">(</span><span class="n">input_music</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">looper</span><span class="o">.</span><span class="n">done</span>
+<span class="go">False</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">window</span> <span class="o">=</span> <span class="n">looper</span><span class="o">.</span><span class="n">output_all</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">looper</span><span class="o">.</span><span class="n">done</span>
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">f</span><span class="p">(</span><span class="n">window</span><span class="p">)</span>
+<span class="go">\new Staff</span>
+<span class="go">{</span>
+<span class="go">    \time 2/4</span>
+<span class="go">    c&#39;4</span>
+<span class="go">    d&#39;4</span>
+<span class="go">    \time 2/4</span>
+<span class="go">    d&#39;4</span>
+<span class="go">    e&#39;4</span>
+<span class="go">    \time 2/4</span>
+<span class="go">    e&#39;4</span>
+<span class="go">    f&#39;4</span>
+<span class="go">    \time 1/4</span>
+<span class="go">    f&#39;4</span>
+<span class="go">}</span>
+</pre></div>
+</div>
+</div>
+<div class="example docutils container">
+<p>This class can handle tuplets, but the output is not ideal and so this
+functionality should be considered experimental. Time signatures will
+be correct when dealing with partial tuplets (thus having non-standard
+values in their denominators), but each individual note of a tuplet
+will have the ratio printed above it.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">input_music</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;c&#39;4 d&#39;8 \times 2/3 {a4 g2}&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">looper</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">LoopWindowByElements</span><span class="p">(</span><span class="n">input_music</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">window</span> <span class="o">=</span> <span class="n">looper</span><span class="o">.</span><span class="n">output_all</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">f</span><span class="p">(</span><span class="n">window</span><span class="p">)</span>
+<span class="go">\new Staff</span>
+<span class="go">{</span>
+<span class="go">    \time 3/8</span>
+<span class="go">    c&#39;4</span>
+<span class="go">    d&#39;8</span>
+<span class="go">    #(ly:expect-warning &quot;strange time signature found&quot;)</span>
+<span class="go">    \time 7/24</span>
+<span class="go">    d&#39;8</span>
+<span class="go">    \tweak edge-height #&#39;(0.7 . 0)</span>
+<span class="go">    \times 2/3 {</span>
+<span class="go">        a4</span>
+<span class="go">    }</span>
+<span class="go">    \tweak edge-height #&#39;(0.7 . 0)</span>
+<span class="go">    \times 2/3 {</span>
+<span class="go">        \time 2/4</span>
+<span class="go">        a4</span>
+<span class="go">    }</span>
+<span class="go">    \tweak edge-height #&#39;(0.7 . 0)</span>
+<span class="go">    \times 2/3 {</span>
+<span class="go">        g2</span>
+<span class="go">    }</span>
+<span class="go">    \tweak edge-height #&#39;(0.7 . 0)</span>
+<span class="go">    \times 2/3 {</span>
+<span class="go">        #(ly:expect-warning &quot;strange time signature found&quot;)</span>
+<span class="go">        \time 2/6</span>
+<span class="go">        g2</span>
+<span class="go">    }</span>
+<span class="go">}</span>
+</pre></div>
+</div>
+</div>
+</dd></dl>
+
+</div>
+<div class="section" id="remove-repeated-dynamics">
+<h2>remove_repeated_dynamics<a class="headerlink" href="#remove-repeated-dynamics" title="Permalink to this headline">¶</a></h2>
 <dl class="function">
-<dt id="auxjad.container_comparator">
-<code class="descclassname">auxjad.</code><code class="descname">container_comparator</code><span class="sig-paren">(</span><em>container1</em>, <em>container2</em>, <em>include_indicators: bool = False</em>, <em>include_grace_notes: bool = False</em><span class="sig-paren">)</span> &#x2192; bool<a class="headerlink" href="#auxjad.container_comparator" title="Permalink to this definition">¶</a></dt>
-<dd><p>A comparator function returning True when two containers are identical
-and False when they are not.</p>
+<dt id="auxjad.remove_repeated_dynamics">
+<code class="descclassname">auxjad.</code><code class="descname">remove_repeated_dynamics</code><span class="sig-paren">(</span><em>container: abjad.core.Container.Container</em>, <em>*</em>, <em>ignore_hairpins: bool = False</em>, <em>reset_after_rests: bool = False</em><span class="sig-paren">)</span> &#x2192; abjad.core.Container.Container<a class="headerlink" href="#auxjad.remove_repeated_dynamics" title="Permalink to this definition">¶</a></dt>
+<dd><p>A function which removes all consecutive repeated dynamics. It removes
+consecutive effective dynamics, even if separated by any number of
+notes without one. It resets its memory of what was the previous dynamic
+every time it finds a hairpin, since notation such as “c‘4f&gt; c‘4f&gt;” is
+quite common; this behaviour can be toggled off using the ignore_hairpins
+keyword. By default, it remembers the previous dynamic even with notes
+separated by rests; this can be toggled off using reset_after_rests=True.
+To set a maximum length of silence after which dynamics are restated, set
+reset_after_rests to a duration using abjad.Duration() or any other
+duration format accepted by Abjad.</p>
 <div class="example docutils container">
-<p>When the pitches and effective durations of all leaves in both
-containers are identical, this function returns <code class="docutils literal notranslate"><span class="pre">True</span></code>:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">container1</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;c&#39;4 d&#39;4 e&#39;4 f&#39;4 &lt;g&#39; a&#39;&gt;2 r2&quot;</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">container2</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;c&#39;4 d&#39;4 e&#39;4 f&#39;4 &lt;g&#39; a&#39;&gt;2 r2&quot;</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">auxjad</span><span class="o">.</span><span class="n">container_comparator</span><span class="p">(</span><span class="n">container1</span><span class="p">,</span> <span class="n">container2</span><span class="p">)</span>
-<span class="go">True</span>
+<p>When two consecutive leaves have identical dynamics, the second
+one is removed:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">staff</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;c&#39;4\pp d&#39;8\pp | c&#39;4\f d&#39;8\f&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">f</span><span class="p">(</span><span class="n">staff</span><span class="p">)</span>
+<span class="go">\new Staff</span>
+<span class="go">{</span>
+<span class="go">    c&#39;4</span>
+<span class="go">    \pp</span>
+<span class="go">    d&#39;8</span>
+<span class="go">    \pp</span>
+<span class="go">    c&#39;4</span>
+<span class="go">    \f</span>
+<span class="go">    d&#39;8</span>
+<span class="go">    \f</span>
+<span class="go">}</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">staff</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">remove_repeated_dynamics</span><span class="p">(</span><span class="n">staff</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">f</span><span class="p">(</span><span class="n">staff</span><span class="p">)</span>
+<span class="go">\new Staff</span>
+<span class="go">{</span>
+<span class="go">    c&#39;4</span>
+<span class="go">    \pp</span>
+<span class="go">    d&#39;8</span>
+<span class="go">    c&#39;4</span>
+<span class="go">    \f</span>
+<span class="go">    d&#39;8</span>
+<span class="go">}</span>
 </pre></div>
 </div>
 </div>
 <div class="example docutils container">
-<p>Even if all leaves of both containers are identical in pitches and in
-written_duration, the function considers the effective duration so that
-situations like the one below do not yield a false positive:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">container1</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;c&#39;4 d&#39;4 e&#39;4 f&#39;4 &lt;g&#39; a&#39;&gt;2 r2&quot;</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">container2</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;\times 3/2 {c&#39;4 d&#39;4 e&#39;4} f&#39;4 &lt;g&#39; a&#39;&gt;2 r2&quot;</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">auxjad</span><span class="o">.</span><span class="n">container_comparator</span><span class="p">(</span><span class="n">container1</span><span class="p">,</span> <span class="n">container2</span><span class="p">)</span>
-<span class="go">False</span>
+<p>The function also removes dynamics that are separated by an arbitrary
+number of leaves without dynamics:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">staff</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;c&#39;4\p d&#39;8 | e&#39;4.\p | c&#39;4\p d&#39;8\f&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">f</span><span class="p">(</span><span class="n">staff</span><span class="p">)</span>
+<span class="go">\new Staff</span>
+<span class="go">{</span>
+<span class="go">    c&#39;4</span>
+<span class="go">    \p</span>
+<span class="go">    d&#39;8</span>
+<span class="go">    e&#39;4.</span>
+<span class="go">    \p</span>
+<span class="go">    c&#39;4</span>
+<span class="go">    \p</span>
+<span class="go">    d&#39;8</span>
+<span class="go">    \f</span>
+<span class="go">}</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">staff</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">remove_repeated_dynamics</span><span class="p">(</span><span class="n">staff</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">f</span><span class="p">(</span><span class="n">staff</span><span class="p">)</span>
+<span class="go">\new Staff</span>
+<span class="go">{</span>
+<span class="go">    c&#39;4</span>
+<span class="go">    \p</span>
+<span class="go">    d&#39;8</span>
+<span class="go">    e&#39;4.</span>
+<span class="go">    c&#39;4</span>
+<span class="go">    d&#39;8</span>
+<span class="go">    \f</span>
+<span class="go">}</span>
 </pre></div>
 </div>
 </div>
 <div class="example docutils container">
-<p>By default, this function ignores indicators, so the containers in the
-example below are understood to be identical:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">container1</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;c&#39;4\pp d&#39;4 e&#39;4-. f&#39;4 &lt;g&#39; a&#39;&gt;2-&gt; r2&quot;</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">container2</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;c&#39;4 d&#39;4 e&#39;4 f&#39;4 &lt;g&#39; a&#39;&gt;2 r2&quot;</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">auxjad</span><span class="o">.</span><span class="n">container_comparator</span><span class="p">(</span><span class="n">container1</span><span class="p">,</span> <span class="n">container2</span><span class="p">)</span>
-<span class="go">True</span>
+<p>The input container can also handle subcontainers:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">staff</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">([</span><span class="n">abjad</span><span class="o">.</span><span class="n">Note</span><span class="p">(</span><span class="s2">&quot;c&#39;2&quot;</span><span class="p">),</span>
+<span class="gp">... </span>                     <span class="n">abjad</span><span class="o">.</span><span class="n">Chord</span><span class="p">(</span><span class="s2">&quot;&lt;d&#39; f&#39;&gt;2&quot;</span><span class="p">),</span>
+<span class="gp">... </span>                     <span class="n">abjad</span><span class="o">.</span><span class="n">Tuplet</span><span class="p">((</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="s2">&quot;g2 a2 b2&quot;</span><span class="p">),</span>
+<span class="gp">... </span>                     <span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">attach</span><span class="p">(</span><span class="n">abjad</span><span class="o">.</span><span class="n">Dynamic</span><span class="p">(</span><span class="s1">&#39;ppp&#39;</span><span class="p">),</span> <span class="n">staff</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">attach</span><span class="p">(</span><span class="n">abjad</span><span class="o">.</span><span class="n">Dynamic</span><span class="p">(</span><span class="s1">&#39;ppp&#39;</span><span class="p">),</span> <span class="n">staff</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">attach</span><span class="p">(</span><span class="n">abjad</span><span class="o">.</span><span class="n">Dynamic</span><span class="p">(</span><span class="s1">&#39;ppp&#39;</span><span class="p">),</span> <span class="n">staff</span><span class="p">[</span><span class="mi">2</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">f</span><span class="p">(</span><span class="n">staff</span><span class="p">)</span>
+<span class="go">\new Staff</span>
+<span class="go">{</span>
+<span class="go">    c&#39;2</span>
+<span class="go">    \ppp</span>
+<span class="go">    &lt;d&#39; f&#39;&gt;2</span>
+<span class="go">    \ppp</span>
+<span class="go">    \times 2/3 {</span>
+<span class="go">        g2</span>
+<span class="go">        \ppp</span>
+<span class="go">        a2</span>
+<span class="go">        b2</span>
+<span class="go">    }</span>
+<span class="go">}</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">staff</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">remove_repeated_dynamics</span><span class="p">(</span><span class="n">staff</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">f</span><span class="p">(</span><span class="n">staff</span><span class="p">)</span>
+<span class="go">\new Staff</span>
+<span class="go">{</span>
+<span class="go">    c&#39;2</span>
+<span class="go">    \ppp</span>
+<span class="go">    &lt;d&#39; f&#39;&gt;2</span>
+<span class="go">    \times 2/3 {</span>
+<span class="go">        g2</span>
+<span class="go">        a2</span>
+<span class="go">        b2</span>
+<span class="go">    }</span>
+<span class="go">}</span>
 </pre></div>
 </div>
 </div>
 <div class="example docutils container">
-<p>Setting the argument <code class="docutils literal notranslate"><span class="pre">include_indicators</span></code> to <code class="docutils literal notranslate"><span class="pre">True</span></code> forces the
-function to include indicators in its comparison. In that case, the
-containers in the example above are not considered identical any
-longer:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">container1</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;c&#39;4\pp d&#39;4 e&#39;4-. f&#39;4 &lt;g&#39; a&#39;&gt;2-&gt; r2&quot;</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">container2</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;c&#39;4 d&#39;4 e&#39;4 f&#39;4 &lt;g&#39; a&#39;&gt;2 r2&quot;</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">auxjad</span><span class="o">.</span><span class="n">container_comparator</span><span class="p">(</span><span class="n">container1</span><span class="p">,</span>
-<span class="gp">... </span>                            <span class="n">container2</span><span class="p">,</span>
-<span class="gp">... </span>                            <span class="n">include_indicators</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
-<span class="gp">... </span>                            <span class="p">)</span>
-<span class="go">True</span>
+<p>By default, repeated dynamics with hairpins in between are not removed,
+but consecutive ones will.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">staff</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;c&#39;4\pp\&lt; d&#39;8\f\&gt; | c&#39;4\f d&#39;8\f&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">f</span><span class="p">(</span><span class="n">staff</span><span class="p">)</span>
+<span class="go">\new Staff</span>
+<span class="go">{</span>
+<span class="go">    c&#39;4</span>
+<span class="go">    \pp</span>
+<span class="go">    \&lt;</span>
+<span class="go">    d&#39;8</span>
+<span class="go">    \f</span>
+<span class="go">    \&gt;</span>
+<span class="go">    c&#39;4</span>
+<span class="go">    \f</span>
+<span class="go">    d&#39;8</span>
+<span class="go">    \f</span>
+<span class="go">}</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">staff</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">remove_repeated_dynamics</span><span class="p">(</span><span class="n">staff</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">f</span><span class="p">(</span><span class="n">staff</span><span class="p">)</span>
+<span class="go">\new Staff</span>
+<span class="go">{</span>
+<span class="go">    c&#39;4</span>
+<span class="go">    \pp</span>
+<span class="go">    \&lt;</span>
+<span class="go">    d&#39;8</span>
+<span class="go">    \f</span>
+<span class="go">    \&gt;</span>
+<span class="go">    c&#39;4</span>
+<span class="go">    \f</span>
+<span class="go">    d&#39;8</span>
+<span class="go">}</span>
+</pre></div>
+</div>
+<p>To override the previous behaviour, set ignore_hairpins to True and
+hairpins will be ignored.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">staff</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;c&#39;4\pp\&lt; d&#39;8\f\&gt; | c&#39;4\f d&#39;8\f&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">f</span><span class="p">(</span><span class="n">staff</span><span class="p">)</span>
+<span class="go">\new Staff</span>
+<span class="go">{</span>
+<span class="go">    c&#39;4</span>
+<span class="go">    \pp</span>
+<span class="go">    \&lt;</span>
+<span class="go">    d&#39;8</span>
+<span class="go">    \f</span>
+<span class="go">    \&gt;</span>
+<span class="go">    c&#39;4</span>
+<span class="go">    \f</span>
+<span class="go">    d&#39;8</span>
+<span class="go">    \f</span>
+<span class="go">}</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">staff</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">remove_repeated_dynamics</span><span class="p">(</span><span class="n">staff</span><span class="p">,</span>
+<span class="gp">... </span>                                        <span class="n">ignore_hairpins</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+<span class="gp">... </span>                                        <span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">f</span><span class="p">(</span><span class="n">staff</span><span class="p">)</span>
+<span class="go">\new Staff</span>
+<span class="go">{</span>
+<span class="go">    c&#39;4</span>
+<span class="go">    \pp</span>
+<span class="go">    \&lt;</span>
+<span class="go">    d&#39;8</span>
+<span class="go">    \f</span>
+<span class="go">    \&gt;</span>
+<span class="go">    c&#39;4</span>
+<span class="go">    d&#39;8</span>
+<span class="go">}</span>
 </pre></div>
 </div>
 </div>
 <div class="example docutils container">
-<p>By default, this function ignores grace notes, so the containers in the
-example below are understood to be identical:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">container1</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;c&#39;4 d&#39;4 e&#39;4 f&#39;4 &lt;g&#39; a&#39;&gt;2 r2&quot;</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">container2</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;c&#39;4 \grace{c&#39;&#39;4} d&#39;4 e&#39;4 f&#39;4 &lt;g&#39; a&#39;&gt;2 r2&quot;</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">auxjad</span><span class="o">.</span><span class="n">container_comparator</span><span class="p">(</span><span class="n">container1</span><span class="p">,</span> <span class="n">container2</span><span class="p">)</span>
-<span class="go">True</span>
+<p>By default, rests are treated just like any other leaf and thus notes
+with an identical dynamic separated by an arbitrary number of rests
+will be considered as repeated and the second dynamic will be removed.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">staff</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;c&#39;4\pp r2. | c&#39;4\pp&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">staff</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">remove_repeated_dynamics</span><span class="p">(</span><span class="n">staff</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">f</span><span class="p">(</span><span class="n">staff</span><span class="p">)</span>
+<span class="go">\new Staff</span>
+<span class="go">{</span>
+<span class="go">    c&#39;4</span>
+<span class="go">    \pp</span>
+<span class="go">    r2.</span>
+<span class="go">    c&#39;4</span>
+<span class="go">}</span>
+</pre></div>
+</div>
+<p>To override the previous behaviour, set reset_after_rests to True and
+dynamics will always be restated after a rest.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">staff</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;c&#39;4\pp r2. | c&#39;4\pp&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">staff</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">remove_repeated_dynamics</span><span class="p">(</span><span class="n">staff</span><span class="p">,</span>
+<span class="gp">... </span>                                        <span class="n">reset_after_rests</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+<span class="gp">... </span>                                        <span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">f</span><span class="p">(</span><span class="n">staff</span><span class="p">)</span>
+<span class="go">\new Staff</span>
+<span class="go">{</span>
+<span class="go">    c&#39;4</span>
+<span class="go">    \pp</span>
+<span class="go">    r2.</span>
+<span class="go">    c&#39;4</span>
+<span class="go">    \pp</span>
+<span class="go">}</span>
 </pre></div>
 </div>
 </div>
 <div class="example docutils container">
-<p>Setting the argument <code class="docutils literal notranslate"><span class="pre">include_grace_notes</span></code> to <code class="docutils literal notranslate"><span class="pre">True</span></code> forces the
-function to include grace notes in its comparison. In that case, the
-containers in the example above are not considered identical any
-longer:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">container1</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;c&#39;4 d&#39;4 e&#39;4 f&#39;4 &lt;g&#39; a&#39;&gt;2 r2&quot;</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">container2</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;c&#39;4 \grace{c&#39;&#39;4} d&#39;4 e&#39;4 f&#39;4 &lt;g&#39; a&#39;&gt;2 r2&quot;</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">auxjad</span><span class="o">.</span><span class="n">container_comparator</span><span class="p">(</span><span class="n">container1</span><span class="p">,</span>
-<span class="gp">... </span>                            <span class="n">container2</span><span class="p">,</span>
-<span class="gp">... </span>                            <span class="n">include_grace_notes</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
-<span class="gp">... </span>                            <span class="p">)</span>
-<span class="go">False</span>
+<p>The argument reset_after_rests takes not only boolean values but also
+duration (abjad.Duration, tuple, float, etc.). This sets the maximum
+length of rests before which identical dynamics are restated. If the
+total length of rests falls below that value, then repeated dynamics
+are removed.</p>
+<p>In the case below, a rest of r2. is shorter than a duration of (4, 4),
+so the repeated dynamic is removed.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">staff</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;c&#39;4\pp r2. | c&#39;4\pp&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">staff</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">remove_repeated_dynamics</span><span class="p">(</span><span class="n">staff</span><span class="p">,</span>
+<span class="gp">... </span>                                        <span class="n">reset_after_rests</span><span class="o">=</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">),</span>
+<span class="gp">... </span>                                        <span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">f</span><span class="p">(</span><span class="n">staff</span><span class="p">)</span>
+<span class="go">\new Staff</span>
+<span class="go">{</span>
+<span class="go">    c&#39;4</span>
+<span class="go">    \pp</span>
+<span class="go">    r2.</span>
+<span class="go">    c&#39;4</span>
+<span class="go">}</span>
+</pre></div>
+</div>
+<p>But setting the duration to 2/4 forces the dynamic to be restated.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">staff</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;c&#39;4\pp r2. | c&#39;4\pp&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">staff</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">remove_repeated_dynamics</span><span class="p">(</span><span class="n">staff</span><span class="p">,</span>
+<span class="gp">... </span>                                        <span class="n">reset_after_rests</span><span class="o">=</span><span class="mi">2</span><span class="o">/</span><span class="mi">4</span><span class="p">,</span>
+<span class="gp">... </span>                                        <span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">f</span><span class="p">(</span><span class="n">staff</span><span class="p">)</span>
+<span class="go">\new Staff</span>
+<span class="go">{</span>
+<span class="go">    c&#39;4</span>
+<span class="go">    \pp</span>
+<span class="go">    r2.</span>
+<span class="go">    c&#39;4</span>
+<span class="go">    \pp</span>
+<span class="go">}</span>
 </pre></div>
 </div>
 </div>
 <div class="example docutils container">
-<p>When the argument <code class="docutils literal notranslate"><span class="pre">include_grace_notes</span></code> is set to <code class="docutils literal notranslate"><span class="pre">True</span></code>, the
-function will consider not only a grace note is attached to a given
-leaf, but also wether the contents of the grace containers are the
-identical:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">container1</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;c&#39;4 \grace{c&#39;&#39;4} d&#39;4 e&#39;4 f&#39;4 &lt;g&#39; a&#39;&gt;2 r2&quot;</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">container2</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;c&#39;4 \grace{c&#39;&#39;8} d&#39;4 e&#39;4 f&#39;4 &lt;g&#39; a&#39;&gt;2 r2&quot;</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">auxjad</span><span class="o">.</span><span class="n">container_comparator</span><span class="p">(</span><span class="n">container1</span><span class="p">,</span>
-<span class="gp">... </span>                            <span class="n">container2</span><span class="p">,</span>
-<span class="gp">... </span>                            <span class="n">include_grace_notes</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
-<span class="gp">... </span>                            <span class="p">)</span>
-<span class="go">False</span>
+<p>The function also handles measure rests with reset_after_rests.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">staff</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;c&#39;4\pp r2. | R1 | c&#39;4\pp&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">staff</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">remove_repeated_dynamics</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="n">staff</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">reset_after_rests</span><span class="o">=</span><span class="n">abjad</span><span class="o">.</span><span class="n">Duration</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">),</span>
+<span class="gp">... </span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">f</span><span class="p">(</span><span class="n">staff</span><span class="p">)</span>
+<span class="go">\new Staff</span>
+<span class="go">{</span>
+<span class="go">    c&#39;4</span>
+<span class="go">    \pp</span>
+<span class="go">    r2.</span>
+<span class="go">    R1</span>
+<span class="go">    c&#39;4</span>
+<span class="go">    \pp</span>
+<span class="go">}</span>
+</pre></div>
+</div>
+</div>
+</dd></dl>
+
+</div>
+<div class="section" id="remove-repeated-time-signatures">
+<h2>remove_repeated_time_signatures<a class="headerlink" href="#remove-repeated-time-signatures" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="auxjad.remove_repeated_time_signatures">
+<code class="descclassname">auxjad.</code><code class="descname">remove_repeated_time_signatures</code><span class="sig-paren">(</span><em>container: abjad.core.Container.Container</em><span class="sig-paren">)</span> &#x2192; abjad.core.Container.Container<a class="headerlink" href="#auxjad.remove_repeated_time_signatures" title="Permalink to this definition">¶</a></dt>
+<dd><p>A function which removes all unecessary time signatures. It removes
+consecutive effective time signatures, even if separated by any number of
+bars with no time signature.</p>
+<div class="example docutils container">
+<p>When two consecutive bars have identical time signatures, the second
+one is removed:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">staff</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;c&#39;4 d&#39;8 | c&#39;4 d&#39;8&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">attach</span><span class="p">(</span><span class="n">abjad</span><span class="o">.</span><span class="n">TimeSignature</span><span class="p">((</span><span class="mi">3</span><span class="p">,</span> <span class="mi">8</span><span class="p">)),</span> <span class="n">staff</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">attach</span><span class="p">(</span><span class="n">abjad</span><span class="o">.</span><span class="n">TimeSignature</span><span class="p">((</span><span class="mi">3</span><span class="p">,</span> <span class="mi">8</span><span class="p">)),</span> <span class="n">staff</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">f</span><span class="p">(</span><span class="n">staff</span><span class="p">)</span>
+<span class="go">\new Staff</span>
+<span class="go">{</span>
+<span class="go">    \time 3/8</span>
+<span class="go">    c&#39;4</span>
+<span class="go">    d&#39;8</span>
+<span class="go">    \time 3/8</span>
+<span class="go">    c&#39;4</span>
+<span class="go">    d&#39;8</span>
+<span class="go">}</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">staff</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">remove_repeated_time_signatures</span><span class="p">(</span><span class="n">staff</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">f</span><span class="p">(</span><span class="n">staff</span><span class="p">)</span>
+<span class="go">\new Staff</span>
+<span class="go">{</span>
+<span class="go">    \time 3/8</span>
+<span class="go">    c&#39;4</span>
+<span class="go">    d&#39;8</span>
+<span class="go">    c&#39;4</span>
+<span class="go">    d&#39;8</span>
+<span class="go">}</span>
+</pre></div>
+</div>
+</div>
+<div class="example docutils container">
+<p>The function also removes time signatures that are separated by an
+arbitrary number of bars without one:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">staff</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;c&#39;4 d&#39;8 e&#39;4. c&#39;4 d&#39;8&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">attach</span><span class="p">(</span><span class="n">abjad</span><span class="o">.</span><span class="n">TimeSignature</span><span class="p">((</span><span class="mi">3</span><span class="p">,</span> <span class="mi">8</span><span class="p">)),</span> <span class="n">staff</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">attach</span><span class="p">(</span><span class="n">abjad</span><span class="o">.</span><span class="n">TimeSignature</span><span class="p">((</span><span class="mi">3</span><span class="p">,</span> <span class="mi">8</span><span class="p">)),</span> <span class="n">staff</span><span class="p">[</span><span class="mi">3</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">f</span><span class="p">(</span><span class="n">staff</span><span class="p">)</span>
+<span class="go">\new Staff</span>
+<span class="go">{</span>
+<span class="go">    \time 3/8</span>
+<span class="go">    c&#39;4</span>
+<span class="go">    d&#39;8</span>
+<span class="go">    e&#39;4.</span>
+<span class="go">    \time 3/8</span>
+<span class="go">    c&#39;4</span>
+<span class="go">    d&#39;8</span>
+<span class="go">}</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">staff</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">remove_repeated_time_signatures</span><span class="p">(</span><span class="n">staff</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">f</span><span class="p">(</span><span class="n">staff</span><span class="p">)</span>
+<span class="go">\new Staff</span>
+<span class="go">{</span>
+<span class="go">    \time 3/8</span>
+<span class="go">    c&#39;4</span>
+<span class="go">    d&#39;8</span>
+<span class="go">    e&#39;4.</span>
+<span class="go">    c&#39;4</span>
+<span class="go">    d&#39;8</span>
+<span class="go">}</span>
+</pre></div>
+</div>
+</div>
+<div class="example docutils container">
+<p>The input container can also handle subcontainers, including cases in
+which the time signatures are attached to leaves of subcontainers:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">staff</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">([</span><span class="n">abjad</span><span class="o">.</span><span class="n">Note</span><span class="p">(</span><span class="s2">&quot;c&#39;2&quot;</span><span class="p">),</span>
+<span class="gp">... </span>                     <span class="n">abjad</span><span class="o">.</span><span class="n">Chord</span><span class="p">(</span><span class="s2">&quot;&lt;d&#39; f&#39;&gt;2&quot;</span><span class="p">),</span>
+<span class="gp">... </span>                     <span class="n">abjad</span><span class="o">.</span><span class="n">Tuplet</span><span class="p">((</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="s2">&quot;g2 a2 b2&quot;</span><span class="p">),</span>
+<span class="gp">... </span>                     <span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">attach</span><span class="p">(</span><span class="n">abjad</span><span class="o">.</span><span class="n">TimeSignature</span><span class="p">((</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">)),</span> <span class="n">staff</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">attach</span><span class="p">(</span><span class="n">abjad</span><span class="o">.</span><span class="n">TimeSignature</span><span class="p">((</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">)),</span> <span class="n">staff</span><span class="p">[</span><span class="mi">2</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">f</span><span class="p">(</span><span class="n">staff</span><span class="p">)</span>
+<span class="go">\new Staff</span>
+<span class="go">{</span>
+<span class="go">    \time 2/2</span>
+<span class="go">    c&#39;2</span>
+<span class="go">    &lt;d&#39; f&#39;&gt;2</span>
+<span class="go">    \times 2/3 {</span>
+<span class="go">        \time 2/2</span>
+<span class="go">        g2</span>
+<span class="go">        a2</span>
+<span class="go">        b2</span>
+<span class="go">    }</span>
+<span class="go">}</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">staff</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">remove_repeated_time_signatures</span><span class="p">(</span><span class="n">staff</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">f</span><span class="p">(</span><span class="n">staff</span><span class="p">)</span>
+<span class="go">\new Staff</span>
+<span class="go">{</span>
+<span class="go">    \time 2/2</span>
+<span class="go">    c&#39;2</span>
+<span class="go">    &lt;d&#39; f&#39;&gt;2</span>
+<span class="go">    \times 2/3 {</span>
+<span class="go">        g2</span>
+<span class="go">        a2</span>
+<span class="go">        b2</span>
+<span class="go">    }</span>
+<span class="go">}</span>
+</pre></div>
+</div>
+</div>
+</dd></dl>
+
+</div>
+<div class="section" id="simplified-time-signature-ratio">
+<h2>simplified_time_signature_ratio<a class="headerlink" href="#simplified-time-signature-ratio" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="auxjad.simplified_time_signature_ratio">
+<code class="descclassname">auxjad.</code><code class="descname">simplified_time_signature_ratio</code><span class="sig-paren">(</span><em>ratio</em>, <em>*</em>, <em>min_denominator: int = 4</em><span class="sig-paren">)</span> &#x2192; tuple<a class="headerlink" href="#auxjad.simplified_time_signature_ratio" title="Permalink to this definition">¶</a></dt>
+<dd><p>A function simplifies the ratio of a given time signature respecting a
+minimum denominator value. Input is a tuple of two integers.</p>
+<div class="example docutils container">
+<p>By default, the function simplifies the ratio of numerator/denominator
+using a minimum denominator value of 4 (that is, the denominator will
+not get smaller than 4). In the case below, (2, 4) is the simplest
+representaion of the ratio (4, 8) with a denominator equal to or larger
+than 4.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ratio</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">simplified_time_signature_ratio</span><span class="p">((</span><span class="mi">4</span><span class="p">,</span> <span class="mi">8</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">time_signature</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">TimeSignature</span><span class="p">(</span><span class="n">ratio</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">format</span><span class="p">(</span><span class="n">time_signature</span><span class="p">)</span>
+<span class="go">abjad.TimeSignature((2, 4))</span>
+</pre></div>
+</div>
+<p>If a ratio cannot be simplified at all, the function returns the
+original values.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ratio</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">simplified_time_signature_ratio</span><span class="p">((</span><span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">time_signature</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">TimeSignature</span><span class="p">(</span><span class="n">ratio</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">format</span><span class="p">(</span><span class="n">time_signature</span><span class="p">)</span>
+<span class="go">abjad.TimeSignature((7, 8))</span>
+</pre></div>
+</div>
+<p>The min_denominator can be set to values other than 4. If set to 2,
+the simplest representaion of the ratio (4, 8) becomes (1, 2).</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ratio</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">simplified_time_signature_ratio</span><span class="p">((</span><span class="mi">4</span><span class="p">,</span> <span class="mi">8</span><span class="p">),</span>
+<span class="gp">... </span>                                               <span class="n">min_denominator</span><span class="o">=</span><span class="mi">2</span>
+<span class="gp">... </span>                                               <span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">time_signature</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">TimeSignature</span><span class="p">(</span><span class="n">ratio</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">format</span><span class="p">(</span><span class="n">time_signature</span><span class="p">)</span>
+<span class="go">abjad.TimeSignature((1, 2))</span>
+</pre></div>
+</div>
+</div>
+</dd></dl>
+
+</div>
+<div class="section" id="tenneyscontainer">
+<h2>TenneysContainer<a class="headerlink" href="#tenneyscontainer" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="auxjad.TenneysContainer">
+<em class="property">class </em><code class="descclassname">auxjad.</code><code class="descname">TenneysContainer</code><span class="sig-paren">(</span><em>container: list</em>, <em>*</em>, <em>weights: list = None</em>, <em>curvature: float = 1.0</em><span class="sig-paren">)</span><a class="headerlink" href="#auxjad.TenneysContainer" title="Permalink to this definition">¶</a></dt>
+<dd><p>TenneysContainer in an implementation of the Dissonant Counterpoint
+Algorithm by James Tenney. This class can be used to randomly select
+elements from an input list, giving more weight to elements which have not
+been selected in recent iterations. In other words, Tenney’s algorithm
+uses feedback in order to lower the weight of recently selected elements.</p>
+<p>This implementation is based on the paper: Polansky, L., Barnett, A. and
+Winter, M. (2011) ‘A Few More Words About James Tenney: Dissonant
+Counterpoint and Statistical Feedback’, Journal of Mathematics and Music,
+5(2), pp. 63–82.</p>
+<div class="example docutils container">
+<p>The container should be initialised with a list of objects. The
+contents of the list can be absolutely anything.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">container</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">TenneysContainer</span><span class="p">([</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="s1">&#39;B&#39;</span><span class="p">,</span> <span class="s1">&#39;C&#39;</span><span class="p">,</span> <span class="s1">&#39;D&#39;</span><span class="p">,</span> <span class="s1">&#39;E&#39;</span><span class="p">,</span> <span class="s1">&#39;F&#39;</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">container</span><span class="o">.</span><span class="n">contents</span>
+<span class="go">[&#39;A&#39;, &#39;B&#39;, &#39;C&#39;, &#39;D&#39;, &#39;E&#39;, &#39;F&#39;]</span>
+</pre></div>
+</div>
+<p>Applying the len() function to the container will give the length of
+the container.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">len</span><span class="p">(</span><span class="n">container</span><span class="p">)</span>
+<span class="go">6</span>
+</pre></div>
+</div>
+<p>When no other keyword arguments are used, the default probabilities of
+each element in the list is 1.0. Probabilities are not normalised. Use
+the previous_index attribute to check the previously selected index
+(default is None).</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">container</span><span class="o">.</span><span class="n">probabilities</span>
+<span class="go">[1.0, 1.0, 1.0, 1.0, 1.0, 1.0]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">container</span><span class="o">.</span><span class="n">previous_index</span>
+<span class="go">None</span>
+</pre></div>
+</div>
+<p>Calling the container will output one of its elements, selected
+according to the current probability values. After each call, the
+object updates all probability values, setting the previously selected
+element’s probability at 0.0 and raising all other probabilities
+according to a growth function (more on this below).</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">result</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">30</span><span class="p">):</span>
+<span class="gp">... </span>    <span class="n">result</span> <span class="o">+=</span> <span class="n">container</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">result</span>
+<span class="go">&#39;EDFACEABAFDCEDAFADCBFEDABEDFEC&#39;</span>
+</pre></div>
+</div>
+<p>From the result above it is possible to see that there are no immediate
+repetitions of elements (since once selected, their probability is
+always set to 0.0 and will take at least one iteration to grow to a
+non-zero value). Checking the probabilities and previous_index
+attributes will give us their current values.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">container</span><span class="o">.</span><span class="n">probabilities</span>
+<span class="go">[6.0, 5.0, 0.0, 3.0, 1.0, 2.0]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">container</span><span class="o">.</span><span class="n">previous_index</span>
+<span class="go">2</span>
+</pre></div>
+</div>
+</div>
+<div class="example docutils container">
+<p>This class can take two optional keywords argument during its
+instantiation, namely weights and curvature. weights takes a list of
+floats with the individual weights of each element; by default, all
+weights are set to 1.0. These weights affects the effective
+probability of each element. The other argument, curvature, is the
+exponent of the growth function for all elements. The growth function
+takes as input the number of iterations since an element has been last
+selected, and raise this number by the curvature value. If curvature
+is set to 1.0 (which is its default value), the growth is linear with
+each iteration. If set to a value larger than 0.0 and less than 1.0,
+the growth is negative (or concave), so that the chances of an element
+which is not being selected will grow at ever smaller rates as the
+number of iterations it has not been selected increase. If the
+curvature is set to 1.0, the growth is linear with the number of
+iterations. If the curvature is larger than 1.0, the curvature is
+positive (or convex) and the growth will accelerate as the number of
+iterations an element has not been selected grows. Setting the
+curvature to 0.0 will result in an static probability vector with all
+values set to 1.0, except for the previously selected one which will be
+set to 0.0; this will result in a uniformly random selection without
+repetition.</p>
+<p>With linear curvature (default value of 1.0):</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">container</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">TenneysContainer</span><span class="p">([</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="s1">&#39;B&#39;</span><span class="p">,</span> <span class="s1">&#39;C&#39;</span><span class="p">,</span> <span class="s1">&#39;D&#39;</span><span class="p">,</span> <span class="s1">&#39;E&#39;</span><span class="p">,</span> <span class="s1">&#39;F&#39;</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">container</span><span class="o">.</span><span class="n">curvature</span>
+<span class="go">1.0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">container</span><span class="o">.</span><span class="n">weights</span>
+<span class="go">[1.0, 1.0, 1.0, 1.0, 1.0, 1.0]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">container</span><span class="o">.</span><span class="n">probabilities</span>
+<span class="go">[1.0, 1.0, 1.0, 1.0, 1.0, 1.0]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">container</span><span class="p">()</span>
+<span class="go">&#39;B&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">container</span><span class="o">.</span><span class="n">curvature</span>
+<span class="go">1.0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">container</span><span class="o">.</span><span class="n">weights</span>
+<span class="go">[1.0, 1.0, 1.0, 1.0, 1.0, 1.0]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">container</span><span class="o">.</span><span class="n">probabilities</span>
+<span class="go">[2.0, 0.0, 2.0, 2.0, 2.0, 2.0]</span>
+</pre></div>
+</div>
+</div>
+<div class="example docutils container">
+<p>Using a convex curvature:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">container</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">TenneysContainer</span><span class="p">([</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="s1">&#39;B&#39;</span><span class="p">,</span> <span class="s1">&#39;C&#39;</span><span class="p">,</span> <span class="s1">&#39;D&#39;</span><span class="p">,</span> <span class="s1">&#39;E&#39;</span><span class="p">,</span> <span class="s1">&#39;F&#39;</span><span class="p">],</span>
+<span class="gp">... </span>                                    <span class="n">curvature</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span>
+<span class="gp">... </span>                                    <span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">container</span><span class="o">.</span><span class="n">curvature</span>
+<span class="go">0.2</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">container</span><span class="o">.</span><span class="n">weights</span>
+<span class="go">[1.0, 1.0, 1.0, 1.0, 1.0, 1.0]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">container</span><span class="o">.</span><span class="n">probabilities</span>
+<span class="go">[1.0, 1.0, 1.0, 1.0, 1.0, 1.0]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">container</span><span class="p">()</span>
+<span class="go">&#39;C&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">container</span><span class="o">.</span><span class="n">curvature</span>
+<span class="go">0.2</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">container</span><span class="o">.</span><span class="n">weights</span>
+<span class="go">[1.0, 1.0, 1.0, 1.0, 1.0, 1.0]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">container</span><span class="o">.</span><span class="n">probabilities</span>
+<span class="go">[1.148698354997035, 1.148698354997035, 0.0, 1.148698354997035,</span>
+<span class="go">1.148698354997035, 1.148698354997035]</span>
+</pre></div>
+</div>
+<p>With a convex curvature, the growth of the probability of each
+non-selected term gets smaller as the number of times it is not
+selected increases. The smaller the curvature is, the less difference
+there will be between any non-previously selected elements. This
+results in sequences which have more chances of a same element being
+near each other. In the sequence below, note how there are many cases
+of a same element being separated only by a single other one, such as
+‘ACA’ in index 6.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">result</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">30</span><span class="p">):</span>
+<span class="gp">... </span>    <span class="n">result</span> <span class="o">+=</span> <span class="n">container</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">result</span>
+<span class="go">&#39;DACBEDFACABDACECBEFAEDBAFBABFD&#39;</span>
+</pre></div>
+</div>
+<p>Checking the probability values at this point outputs:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">container</span><span class="o">.</span><span class="n">probabilities</span>
+<span class="go">[1.2457309396155174, 1.148698354997035, 1.6952182030724354, 0.0,</span>
+<span class="go">1.5518455739153598, 1.0]</span>
+</pre></div>
+</div>
+<p>As we can see, all non-zero values are relatively close to each other,
+which is why there is a high chance of an element being selected again
+just two iterations apart.</p>
+</div>
+<div class="example docutils container">
+<p>Using a concave curvature:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">container</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">TenneysContainer</span><span class="p">([</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="s1">&#39;B&#39;</span><span class="p">,</span> <span class="s1">&#39;C&#39;</span><span class="p">,</span> <span class="s1">&#39;D&#39;</span><span class="p">,</span> <span class="s1">&#39;E&#39;</span><span class="p">,</span> <span class="s1">&#39;F&#39;</span><span class="p">],</span>
+<span class="gp">... </span>                                    <span class="n">curvature</span><span class="o">=</span><span class="mf">15.2</span><span class="p">,</span>
+<span class="gp">... </span>                                    <span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">container</span><span class="o">.</span><span class="n">curvature</span>
+<span class="go">0.2</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">container</span><span class="o">.</span><span class="n">weights</span>
+<span class="go">[1.0, 1.0, 1.0, 1.0, 1.0, 1.0]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">container</span><span class="o">.</span><span class="n">probabilities</span>
+<span class="go">[1.0, 1.0, 1.0, 1.0, 1.0, 1.0]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">container</span><span class="p">()</span>
+<span class="go">&#39;C&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">container</span><span class="o">.</span><span class="n">curvature</span>
+<span class="go">0.2</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">container</span><span class="o">.</span><span class="n">weights</span>
+<span class="go">[1.0, 1.0, 1.0, 1.0, 1.0, 1.0]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">container</span><span class="o">.</span><span class="n">probabilities</span>
+<span class="go">[37640.547696542824, 37640.547696542824, 37640.547696542824, 0.0,</span>
+<span class="go">37640.547696542824, 37640.547696542824]</span>
+</pre></div>
+</div>
+<p>With a concave curvature, the growth of the probability of each
+non-selected term gets larger as the number of times it is not selected
+increases. The larger the curvature is, the larger difference there
+will be between any non-previously selected elements. This results in
+sequences which have less chances of a same element being near each
+other. In the sequence below, with a curvature of 15.2, note how the
+elements are as far apart from each other, resulting in a repeating
+string of ‘DFAECB’.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">result</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">30</span><span class="p">):</span>
+<span class="gp">... </span>    <span class="n">result</span> <span class="o">+=</span> <span class="n">container</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">result</span>
+<span class="go">&#39;DFAECBDFAECBDFAECBDFAECBDFAECB&#39;</span>
+</pre></div>
+</div>
+<p>Checking the probability values at this point outputs:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">container</span><span class="o">.</span><span class="n">probabilities</span>
+<span class="go">[17874877.39956566, 0.0, 1.0, 42106007735.02238,</span>
+<span class="go">37640.547696542824, 1416810830.8957152]</span>
+</pre></div>
+</div>
+<p>As we can see, the non-zero values vary wildly. The higher the
+curvature, the higher the difference between these values, making some
+of them much more likely to be selected.</p>
+</div>
+<div class="example docutils container">
+<p>Each element can also have a fixed weight to themselves. This will
+affect the probability calculation. The example below uses the default
+linear curvature.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">container</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">TenneysContainer</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="p">[</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="s1">&#39;B&#39;</span><span class="p">,</span> <span class="s1">&#39;C&#39;</span><span class="p">,</span> <span class="s1">&#39;D&#39;</span><span class="p">,</span> <span class="s1">&#39;E&#39;</span><span class="p">,</span> <span class="s1">&#39;F&#39;</span><span class="p">],</span>
+<span class="gp">... </span>    <span class="n">weights</span><span class="o">=</span><span class="p">[</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">5.0</span><span class="p">,</span> <span class="mf">5.0</span><span class="p">,</span> <span class="mf">10.0</span><span class="p">,</span> <span class="mf">20.0</span><span class="p">],</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">container</span><span class="o">.</span><span class="n">weights</span>
+<span class="go">[1.0, 1.0, 5.0, 5.0, 10.0, 20.0]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">container</span><span class="o">.</span><span class="n">probabilities</span>
+<span class="go">[1.0, 1.0, 5.0, 5.0, 10.0, 20.0]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">result</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">30</span><span class="p">):</span>
+<span class="gp">... </span>    <span class="n">result</span> <span class="o">+=</span> <span class="n">container</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">result</span>
+<span class="go">&#39;FBEFECFDEADFEDFEDBFECDAFCEDCFE&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">container</span><span class="o">.</span><span class="n">weights</span>
+<span class="go">[1.0, 1.0, 5.0, 5.0, 10.0, 20.0]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">container</span><span class="o">.</span><span class="n">probabilities</span>
+<span class="go">[7.0, 12.0, 10.0, 15.0, 0.0, 20.0]</span>
+</pre></div>
+</div>
+</div>
+<div class="example docutils container">
+<p>To reset the probability to its initial value, use the method
+reset_probabilities().</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">container</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">TenneysContainer</span><span class="p">([</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="s1">&#39;B&#39;</span><span class="p">,</span> <span class="s1">&#39;C&#39;</span><span class="p">,</span> <span class="s1">&#39;D&#39;</span><span class="p">,</span> <span class="s1">&#39;E&#39;</span><span class="p">,</span> <span class="s1">&#39;F&#39;</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">30</span><span class="p">):</span>
+<span class="gp">... </span>    <span class="n">container</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">container</span><span class="o">.</span><span class="n">probabilities</span>
+<span class="go">[4.0, 3.0, 1.0, 0.0, 5.0, 2.0]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">container</span><span class="o">.</span><span class="n">reset_probabilities</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">container</span><span class="o">.</span><span class="n">probabilities</span>
+<span class="go">[1.0, 1.0, 1.0, 1.0, 1.0, 1.0]</span>
+</pre></div>
+</div>
+</div>
+<div class="example docutils container">
+<p>To replace an element in the container, use the method
+replace_element(). This will not affect the current probability vector,
+and the new element will have the same probability as the one it
+replaced.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">container</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">TenneysContainer</span><span class="p">([</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="s1">&#39;B&#39;</span><span class="p">,</span> <span class="s1">&#39;C&#39;</span><span class="p">,</span> <span class="s1">&#39;D&#39;</span><span class="p">,</span> <span class="s1">&#39;E&#39;</span><span class="p">,</span> <span class="s1">&#39;F&#39;</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">30</span><span class="p">):</span>
+<span class="gp">... </span>    <span class="n">container</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">container</span><span class="o">.</span><span class="n">replace_element</span><span class="p">(</span><span class="s1">&#39;foo&#39;</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">container</span><span class="o">.</span><span class="n">contents</span>
+<span class="go">[&#39;A&#39;, &#39;B&#39;, &#39;foo&#39;, &#39;D&#39;, &#39;E&#39;, &#39;F&#39;]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">container</span><span class="o">.</span><span class="n">probabilities</span>
+<span class="go">[3.0, 2.0, 1.0, 7.0, 5.0, 0.0]</span>
+</pre></div>
+</div>
+</div>
+<div class="example docutils container">
+<p>A new container of an arbitrary length can be set at any point using
+the method set_container(). Do notice that the probabilities will be
+reset at that point. This method can take the optional keyword argument
+weights similarly to when instantiating the class.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">container</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">TenneysContainer</span><span class="p">([</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="s1">&#39;B&#39;</span><span class="p">,</span> <span class="s1">&#39;C&#39;</span><span class="p">,</span> <span class="s1">&#39;D&#39;</span><span class="p">,</span> <span class="s1">&#39;E&#39;</span><span class="p">,</span> <span class="s1">&#39;F&#39;</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">30</span><span class="p">):</span>
+<span class="gp">... </span>    <span class="n">container</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">container</span><span class="o">.</span><span class="n">probabilities</span>
+<span class="go">[2.0, 1.0, 4.0, 3.0, 0.0, 5.0]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">container</span><span class="o">.</span><span class="n">set_container</span><span class="p">([</span><span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">8</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">container</span><span class="o">.</span><span class="n">contents</span>
+<span class="go">[2, 4, 6, 8]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">len</span><span class="p">(</span><span class="n">container</span><span class="p">)</span>
+<span class="go">4</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">container</span><span class="o">.</span><span class="n">weights</span>
+<span class="go">[1.0, 1.0, 1.0, 1.0]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">container</span><span class="o">.</span><span class="n">probabilities</span>
+<span class="go">[1.0, 1.0, 1.0, 1.0]</span>
+</pre></div>
+</div>
+</div>
+<div class="example docutils container">
+<p>To change the curvature value at any point, use the set_curvature()
+method.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">container</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">TenneysContainer</span><span class="p">([</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="s1">&#39;B&#39;</span><span class="p">,</span> <span class="s1">&#39;C&#39;</span><span class="p">,</span> <span class="s1">&#39;D&#39;</span><span class="p">,</span> <span class="s1">&#39;E&#39;</span><span class="p">,</span> <span class="s1">&#39;F&#39;</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">container</span><span class="o">.</span><span class="n">curvature</span>
+<span class="go">1.0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">container</span><span class="o">.</span><span class="n">set_curvature</span><span class="p">(</span><span class="mf">0.25</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">container</span><span class="o">.</span><span class="n">curvature</span>
+<span class="go">0.25</span>
 </pre></div>
 </div>
 </div>
