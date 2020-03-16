@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Welcome to auxjad’s documentation! &mdash; auxjad 0.3.0 documentation</title>
+  <title>Welcome to auxjad’s documentation! &mdash; auxjad 0.3.2 documentation</title>
   
 
   
@@ -215,6 +215,18 @@ according to its weight function.</p>
 </div>
 </div>
 <div class="example docutils container">
+<p>Calling the container with the optional keyword argument no_repeat set
+to True will forbid immediate repetitions among consecutive calls.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">container</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">CartographyContainer</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">result</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">30</span><span class="p">):</span>
+<span class="gp">... </span>    <span class="n">result</span> <span class="o">+=</span> <span class="nb">str</span><span class="p">(</span><span class="n">container</span><span class="p">(</span><span class="n">no_repeat</span><span class="o">=</span><span class="kc">True</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">result</span>
+<span class="go">210421021020304024230120241202</span>
+</pre></div>
+</div>
+</div>
+<div class="example docutils container">
 <p>The keyword argument decay_rate can be used to set a different decay
 rate when creating a container.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">container</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">CartographyContainer</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">],</span>
@@ -306,6 +318,50 @@ which if set to True will rotate in the opposite direction.</p>
 </div>
 </div>
 <div class="example docutils container">
+<p>It is also possible to mirror two elements around a pivot at the centre
+of the container; given an element (selected by its index), this
+operation will locate and swap it for its complementary element. The
+complementary element is defined as that one which is at a same
+distance from the centre pivot but in the opposite direction.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">container</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">CartographyContainer</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">container</span><span class="o">.</span><span class="n">contents</span>
+<span class="go">[0, 1, 2, 3, 4]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">container</span><span class="o">.</span><span class="n">mirror</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">container</span><span class="o">.</span><span class="n">contents</span>
+<span class="go">[4, 1, 2, 3, 0]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">container</span><span class="o">.</span><span class="n">mirror</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">container</span><span class="o">.</span><span class="n">contents</span>
+<span class="go">[0, 1, 2, 3, 4]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">container</span><span class="o">.</span><span class="n">mirror</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">container</span><span class="o">.</span><span class="n">contents</span>
+<span class="go">[0, 3, 2, 1, 4]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">container</span><span class="o">.</span><span class="n">mirror</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">container</span><span class="o">.</span><span class="n">contents</span>
+<span class="go">[0, 3, 2, 1, 4]</span>
+</pre></div>
+</div>
+</div>
+<div class="example docutils container">
+<p>To mirror a random pair of complementary elements, use the
+mirror_random method. In case of a container with an odd number of
+elements, this method will never pick an element at the pivot point
+since the operation would not change the contents.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">container</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">CartographyContainer</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">container</span><span class="o">.</span><span class="n">contents</span>
+<span class="go">[0, 1, 2, 3, 4]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">container</span><span class="o">.</span><span class="n">mirror_random</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">container</span><span class="o">.</span><span class="n">contents</span>
+<span class="go">[4, 1, 2, 3, 0]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">container</span><span class="o">.</span><span class="n">mirror_random</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">container</span><span class="o">.</span><span class="n">contents</span>
+<span class="go">[4, 3, 2, 1, 0]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">container</span><span class="o">.</span><span class="n">mirror_random</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">container</span><span class="o">.</span><span class="n">contents</span>
+<span class="go">[4, 1, 2, 3, 0]</span>
+</pre></div>
+</div>
+</div>
+<div class="example docutils container">
 <p>The method randomise() will randomise the position of the elements of
 a container.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">container</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">CartographyContainer</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">])</span>
@@ -362,6 +418,18 @@ value output by the object.</p>
 <span class="go">3</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">container</span><span class="o">.</span><span class="n">get_element</span><span class="p">(</span><span class="n">previous_index</span><span class="p">)</span>
 <span class="go">31</span>
+</pre></div>
+</div>
+</div>
+<div class="example docutils container">
+<p>Individual elements are also accessible via indeces of the content
+attribute. When accessed in this manner, they can also be sliced like a
+regular list.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">container</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">CartographyContainer</span><span class="p">([</span><span class="mi">10</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">14</span><span class="p">,</span> <span class="mi">31</span><span class="p">,</span> <span class="mi">98</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">container</span><span class="o">.</span><span class="n">contents</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+<span class="go">14</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">container</span><span class="o">.</span><span class="n">contents</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="mi">4</span><span class="p">]</span>
+<span class="go">[7, 14, 31]</span>
 </pre></div>
 </div>
 </div>
@@ -1314,7 +1382,7 @@ been selected in recent iterations. In other words, Tenney’s algorithm
 uses feedback in order to lower the weight of recently selected elements.</p>
 <p>This implementation is based on the paper: Polansky, L., A. Barnett, and
 M. Winter (2011). <a href="#id1"><span class="problematic" id="id2">`</span></a>A Few More Words About James Tenney: Dissonant
-Counterpoint and Statistical Feedback’. In: Journal of Mathematics and 
+Counterpoint and Statistical Feedback’. In: Journal of Mathematics and
 Music 5(2). pp. 63–82.</p>
 <div class="example docutils container">
 <p>The container should be initialised with a list of objects. The
