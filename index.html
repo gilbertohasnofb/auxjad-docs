@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Welcome to auxjad’s documentation! &mdash; auxjad 0.3.2 documentation</title>
+  <title>Welcome to auxjad’s documentation! &mdash; auxjad 0.3.3 documentation</title>
   
 
   
@@ -742,10 +742,10 @@ better visualised as:</p>
 <div class="example docutils container">
 <p>Usage is similar to other factory classes. It takes a container (or
 child class equivalent) and the size of the window. Each call of the
-object, in thi case looper(), will output the result and move the
-window forwards. Notice that the time signatures in the example below
-are commented out with %%% because abjad only adds them to the score
-once the leaves are part of a staff:</p>
+object, in this case looper(), will move the window forwards and output
+the result. Notice that the time signatures in the example below are
+commented out with %%% because abjad only adds them to the score once
+the leaves are part of a staff:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">input_music</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;c&#39;4 d&#39;2 e&#39;4 f&#39;2 ~ f&#39;8 g&#39;1&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">looper</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">LoopWindowByElements</span><span class="p">(</span><span class="n">input_music</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">notes</span> <span class="o">=</span> <span class="n">looper</span><span class="p">()</span>
@@ -891,6 +891,42 @@ once the process has reached the end.</p>
 <span class="go">    f&#39;4</span>
 <span class="go">    \time 1/4</span>
 <span class="go">    f&#39;4</span>
+<span class="go">}</span>
+</pre></div>
+</div>
+</div>
+<div class="example docutils container">
+<p>To change the size of the window after instantiation, use the method
+set_elements_per_window(). In the example below, the initial window is
+of size 3, and so the first call of the looper object outputs the
+first, second, and third leaves. The window size is then set to 4, and
+the looper is called again, moving to the leaf in the next position,
+thus outputting the second, third, fourth, and fifth leaves.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">input_music</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;c&#39;4 d&#39;2 e&#39;4 f&#39;2 ~ f&#39;8 g&#39;1&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">looper</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">LoopWindowByElements</span><span class="p">(</span><span class="n">input_music</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">notes</span> <span class="o">=</span> <span class="n">looper</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">staff</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span><span class="n">notes</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">f</span><span class="p">(</span><span class="n">staff</span><span class="p">)</span>
+<span class="go">\new Staff</span>
+<span class="go">{</span>
+<span class="go">    \time 4/4</span>
+<span class="go">    c&#39;4</span>
+<span class="go">    d&#39;2</span>
+<span class="go">    e&#39;4</span>
+<span class="go">}</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">looper</span><span class="o">.</span><span class="n">set_elements_per_window</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">notes</span> <span class="o">=</span> <span class="n">looper</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">staff</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span><span class="n">notes</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">f</span><span class="p">(</span><span class="n">staff</span><span class="p">)</span>
+<span class="go">\new Staff</span>
+<span class="go">{</span>
+<span class="go">    \time 19/8</span>
+<span class="go">    d&#39;2</span>
+<span class="go">    e&#39;4</span>
+<span class="go">    f&#39;2</span>
+<span class="go">    ~</span>
+<span class="go">    f&#39;8</span>
+<span class="go">    g&#39;1</span>
 <span class="go">}</span>
 </pre></div>
 </div>
