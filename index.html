@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Welcome to auxjad’s documentation! &mdash; auxjad 0.4.0 documentation</title>
+  <title>Welcome to auxjad’s documentation! &mdash; auxjad 0.6.0 documentation</title>
   
 
   
@@ -17,32 +17,34 @@
   
 
   
+  <script type="text/javascript" src="_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script type="text/javascript" src="_static/jquery.js"></script>
+        <script type="text/javascript" src="_static/underscore.js"></script>
+        <script type="text/javascript" src="_static/doctools.js"></script>
+        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
 
-  
-  
     
 
   
-
   <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" /> 
-
-  
-  <script src="_static/js/modernizr.min.js"></script>
-
 </head>
 
 <body class="wy-body-for-nav">
 
    
   <div class="wy-grid-for-nav">
-
     
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
-        <div class="wy-side-nav-search">
+        <div class="wy-side-nav-search" >
           
 
           
@@ -56,7 +58,7 @@
             
             
               <div class="version">
-                0.4
+                0.6
               </div>
             
           
@@ -87,16 +89,20 @@
 <li><a class="reference internal" href="#auxjad">auxjad</a></li>
 <li><a class="reference internal" href="#are-containers-equal">are_containers_equal</a></li>
 <li><a class="reference internal" href="#are-leaves-tieable">are_leaves_tieable</a></li>
+<li><a class="reference internal" href="#artificialharmonic">ArtificialHarmonic</a></li>
 <li><a class="reference internal" href="#cartographycontainer">CartographyContainer</a></li>
 <li><a class="reference internal" href="#close-container">close_container</a></li>
 <li><a class="reference internal" href="#fill-with-rests">fill_with_rests</a></li>
+<li><a class="reference internal" href="#harmonicnote">HarmonicNote</a></li>
 <li><a class="reference internal" href="#is-container-full">is_container_full</a></li>
 <li><a class="reference internal" href="#leafdynmaker">LeafDynMaker</a></li>
+<li><a class="reference internal" href="#leafshuffler">LeafShuffler</a></li>
 <li><a class="reference internal" href="#loopwindow">LoopWindow</a></li>
 <li><a class="reference internal" href="#loopwindowbyelements">LoopWindowByElements</a></li>
 <li><a class="reference internal" href="#loopwindowbylist">LoopWindowByList</a></li>
 <li><a class="reference internal" href="#remove-repeated-dynamics">remove_repeated_dynamics</a></li>
 <li><a class="reference internal" href="#remove-repeated-time-signatures">remove_repeated_time_signatures</a></li>
+<li><a class="reference internal" href="#rests-to-multimeasure-rest">rests_to_multimeasure_rest</a></li>
 <li><a class="reference internal" href="#simplified-time-signature-ratio">simplified_time_signature_ratio</a></li>
 <li><a class="reference internal" href="#sync-containers">sync_containers</a></li>
 <li><a class="reference internal" href="#tenneyscontainer">TenneysContainer</a></li>
@@ -337,6 +343,208 @@ pitches and thus can be tied, otherwise returning <code class="docutils literal 
 </dd></dl>
 
 </div>
+<div class="section" id="artificialharmonic">
+<h2>ArtificialHarmonic<a class="headerlink" href="#artificialharmonic" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="auxjad.ArtificialHarmonic">
+<em class="property">class </em><code class="descclassname">auxjad.</code><code class="descname">ArtificialHarmonic</code><span class="sig-paren">(</span><em>*arguments</em>, <em>multiplier: Union[abjad.utilities.Duration.Duration</em>, <em>Tuple[int</em>, <em>int]] = None</em>, <em>tag: abjad.system.Tag.Tag = None</em>, <em>style: str = 'harmonic'</em>, <em>is_parenthesized: bool = False</em><span class="sig-paren">)</span><a class="headerlink" href="#auxjad.ArtificialHarmonic" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates an <code class="docutils literal notranslate"><span class="pre">abjad.Chord</span></code> with a tweaked top note head for notating
+artificial harmonics.</p>
+<div class="example docutils container">
+<p>Usage is similar to <code class="docutils literal notranslate"><span class="pre">abjad.Chord</span></code>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">chord</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">ArtificialHarmonic</span><span class="p">(</span><span class="s2">&quot;&lt;g c&#39;&gt;4&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">chord</span><span class="o">.</span><span class="n">style</span>
+<span class="go">&#39;harmonic&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">f</span><span class="p">(</span><span class="n">chord</span><span class="p">)</span>
+<span class="go">&lt;</span>
+<span class="go">    g</span>
+<span class="go">    \tweak style #&#39;harmonic</span>
+<span class="go">    c&#39;</span>
+<span class="go">&gt;4</span>
+</pre></div>
+</div>
+<p>And similarly to <code class="docutils literal notranslate"><span class="pre">abjad.Chord</span></code>, pitch and duration can be input in
+many different ways:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">chord1</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">ArtificialHarmonic</span><span class="p">(</span><span class="s2">&quot;&lt;g c&#39;&gt;4&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">chord2</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">ArtificialHarmonic</span><span class="p">([</span><span class="s2">&quot;g&quot;</span><span class="p">,</span> <span class="s2">&quot;c&#39;&quot;</span><span class="p">],</span> <span class="mi">1</span><span class="o">/</span><span class="mi">4</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">chord3</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">ArtificialHarmonic</span><span class="p">([</span><span class="o">-</span><span class="mi">5</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="mf">0.25</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">chord4</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">ArtificialHarmonic</span><span class="p">([</span><span class="o">-</span><span class="mi">5</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Duration</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">f</span><span class="p">(</span><span class="n">chord1</span><span class="p">)</span>
+<span class="go">&lt;</span>
+<span class="go">    g</span>
+<span class="go">    \tweak style #&#39;harmonic</span>
+<span class="go">    c&#39;</span>
+<span class="go">&gt;4</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">f</span><span class="p">(</span><span class="n">chord2</span><span class="p">)</span>
+<span class="go">&lt;</span>
+<span class="go">    g</span>
+<span class="go">    \tweak style #&#39;harmonic</span>
+<span class="go">    c&#39;</span>
+<span class="go">&gt;4</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">f</span><span class="p">(</span><span class="n">chord3</span><span class="p">)</span>
+<span class="go">&lt;</span>
+<span class="go">    g</span>
+<span class="go">    \tweak style #&#39;harmonic</span>
+<span class="go">    c&#39;</span>
+<span class="go">&gt;4</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">f</span><span class="p">(</span><span class="n">chord4</span><span class="p">)</span>
+<span class="go">&lt;</span>
+<span class="go">    g</span>
+<span class="go">    \tweak style #&#39;harmonic</span>
+<span class="go">    c&#39;</span>
+<span class="go">&gt;4</span>
+</pre></div>
+</div>
+</div>
+<div class="example docutils container">
+<p>It is important to note that this class can only be initialised with
+exactly two pitches. Any other number of pitches will raise a
+<code class="docutils literal notranslate"><span class="pre">ValueError</span></code>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">auxjad</span><span class="o">.</span><span class="n">ArtificialHarmonic</span><span class="p">(</span><span class="s2">&quot;&lt;g c&#39; d&#39;&gt;4&quot;</span><span class="p">)</span>
+<span class="go">ValueError: &#39;ArtificialHarmonic&#39; requires exactly two &#39;note_heads&#39; for</span>
+<span class="go">initialisation</span>
+</pre></div>
+</div>
+</div>
+<div class="example docutils container">
+<p>When creating an <code class="docutils literal notranslate"><span class="pre">ArtificialHarmonic</span></code>, use the keyword argument
+<code class="docutils literal notranslate"><span class="pre">style</span></code> to set a different type of chord head for the top note, such
+as <code class="docutils literal notranslate"><span class="pre">'harmonic-mixed'</span></code>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">chord</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">ArtificialHarmonic</span><span class="p">(</span><span class="s2">&quot;&lt;g c&#39;&gt;4&quot;</span><span class="p">,</span>
+<span class="gp">... </span>                                  <span class="n">style</span><span class="o">=</span><span class="s1">&#39;harmonic-mixed&#39;</span><span class="p">,</span>
+<span class="gp">... </span>                                  <span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">chord</span><span class="o">.</span><span class="n">style</span>
+<span class="go">&#39;harmonic-mixed&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">f</span><span class="p">(</span><span class="n">chord</span><span class="p">)</span>
+<span class="go">&lt;</span>
+<span class="go">    g</span>
+<span class="go">    \tweak style #&#39;harmonic-mixed</span>
+<span class="go">    c&#39;</span>
+<span class="go">&gt;4</span>
+</pre></div>
+</div>
+</div>
+<div class="example docutils container">
+<p>To notate natural harmonics with a parenthesised pitch for the open
+string at the bottom of the interval, set the keyword
+<code class="docutils literal notranslate"><span class="pre">is_parenthesized</span></code> to <code class="docutils literal notranslate"><span class="pre">True</span></code>.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">chord</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">ArtificialHarmonic</span><span class="p">(</span><span class="s2">&quot;&lt;g c&#39;&gt;4&quot;</span><span class="p">,</span>
+<span class="gp">... </span>                                  <span class="n">is_parenthesized</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+<span class="gp">... </span>                                  <span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">chord</span><span class="o">.</span><span class="n">is_parenthesized</span>
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">f</span><span class="p">(</span><span class="n">chord</span><span class="p">)</span>
+<span class="go">&lt;</span>
+<span class="go">    \parenthesize</span>
+<span class="go">    \tweak ParenthesesItem.font-size #-4</span>
+<span class="go">    g</span>
+<span class="go">    \tweak style #&#39;harmonic</span>
+<span class="go">    c&#39;</span>
+<span class="go">&gt;4</span>
+</pre></div>
+</div>
+</div>
+<div class="example docutils container">
+<p>Similarly to <code class="docutils literal notranslate"><span class="pre">abjad.Chord</span></code>, <code class="docutils literal notranslate"><span class="pre">ArtificialHarmonic</span></code> can take
+multipliers:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">chord</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">ArtificialHarmonic</span><span class="p">(</span><span class="s2">&quot;&lt;g c&#39;&gt;4&quot;</span><span class="p">,</span>
+<span class="gp">... </span>                                  <span class="n">multiplier</span><span class="o">=</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span>
+<span class="gp">... </span>                                  <span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">chord</span><span class="o">.</span><span class="n">multiplier</span>
+<span class="go">abjad.Multiplier(2, 3)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">f</span><span class="p">(</span><span class="n">chord</span><span class="p">)</span>
+<span class="go">&lt;</span>
+<span class="go">    g</span>
+<span class="go">    \tweak style #&#39;harmonic</span>
+<span class="go">    c&#39;</span>
+<span class="go">&gt;4 * 2/3</span>
+</pre></div>
+</div>
+</div>
+<div class="example docutils container">
+<p>All properties of <code class="docutils literal notranslate"><span class="pre">abjad.Chord</span></code> are also available to be read. This
+class also includes two new properties named <code class="docutils literal notranslate"><span class="pre">style</span></code> and
+<code class="docutils literal notranslate"><span class="pre">is_parenthesized</span></code>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">chord</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">ArtificialHarmonic</span><span class="p">(</span><span class="s2">&quot;&lt;g c&#39;&gt;4&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">chord</span><span class="o">.</span><span class="n">written_pitches</span>
+<span class="go">&quot;g c&#39;&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">chord</span><span class="o">.</span><span class="n">written_duration</span>
+<span class="go">1/4</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">chord</span><span class="o">.</span><span class="n">style</span>
+<span class="go">&#39;harmonic&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">chord</span><span class="o">.</span><span class="n">is_parenthesized</span>
+<span class="go">False</span>
+</pre></div>
+</div>
+<p>All these properties can be set to different values after
+initialisation:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">chord</span><span class="o">.</span><span class="n">written_pitches</span> <span class="o">=</span> <span class="p">[</span><span class="o">-</span><span class="mi">5</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">chord</span><span class="o">.</span><span class="n">written_duration</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Duration</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">8</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">chord</span><span class="o">.</span><span class="n">style</span> <span class="o">=</span> <span class="s1">&#39;harmonic-mixed&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">chord</span><span class="o">.</span><span class="n">is_parenthesized</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">chord</span><span class="o">.</span><span class="n">written_pitches</span>
+<span class="go">&quot;g d&#39;&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">chord</span><span class="o">.</span><span class="n">written_duration</span>
+<span class="go">1/8</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">chord</span><span class="o">.</span><span class="n">style</span>
+<span class="go">&#39;harmonic-mixed&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">chord</span><span class="o">.</span><span class="n">is_parenthesized</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+</div>
+<div class="example docutils container">
+<p>The methods <code class="docutils literal notranslate"><span class="pre">sounding_pitch()</span></code> and <code class="docutils literal notranslate"><span class="pre">sounding_note()</span></code> return the
+sounding pitch and sounding note, respectively. Their types are
+<code class="docutils literal notranslate"><span class="pre">abjad.Pitch</span></code> and <code class="docutils literal notranslate"><span class="pre">abjad.Note</span></code>, respectively.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">harmonics</span> <span class="o">=</span> <span class="p">[</span><span class="n">ArtificialHarmonic</span><span class="p">(</span><span class="s2">&quot;&lt;g b&gt;4&quot;</span><span class="p">),</span>
+<span class="gp">... </span>             <span class="n">ArtificialHarmonic</span><span class="p">(</span><span class="s2">&quot;&lt;g c&#39;&gt;4&quot;</span><span class="p">),</span>
+<span class="gp">... </span>             <span class="n">ArtificialHarmonic</span><span class="p">(</span><span class="s2">&quot;&lt;g d&#39;&gt;4&quot;</span><span class="p">),</span>
+<span class="gp">... </span>             <span class="n">ArtificialHarmonic</span><span class="p">(</span><span class="s2">&quot;&lt;g e&#39;&gt;4&quot;</span><span class="p">),</span>
+<span class="gp">... </span>             <span class="n">ArtificialHarmonic</span><span class="p">(</span><span class="s2">&quot;&lt;g g&#39;&gt;4&quot;</span><span class="p">),</span>
+<span class="gp">... </span>             <span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">harmonic</span> <span class="ow">in</span> <span class="n">harmonics</span><span class="p">:</span>
+<span class="gp">... </span>    <span class="nb">print</span><span class="p">(</span><span class="n">harmonic</span><span class="o">.</span><span class="n">sounding_pitch</span><span class="p">())</span>
+<span class="go">b&#39;&#39;</span>
+<span class="go">g&#39;&#39;</span>
+<span class="go">d&#39;&#39;</span>
+<span class="go">b&#39;&#39;</span>
+<span class="go">g&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">harmonic</span> <span class="ow">in</span> <span class="n">harmonics</span><span class="p">:</span>
+<span class="gp">... </span>    <span class="nb">print</span><span class="p">(</span><span class="n">harmonic</span><span class="o">.</span><span class="n">sounding_note</span><span class="p">())</span>
+<span class="go">b&#39;&#39;4</span>
+<span class="go">g&#39;&#39;4</span>
+<span class="go">d&#39;&#39;4</span>
+<span class="go">b&#39;&#39;4</span>
+<span class="go">g&#39;4</span>
+</pre></div>
+</div>
+</div>
+<div class="example docutils container">
+<p>The note created by <code class="docutils literal notranslate"><span class="pre">sounding_note()</span></code> inherits all indicators from
+the <code class="docutils literal notranslate"><span class="pre">ArtificialHarmonic</span></code>.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">note</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">ArtificialHarmonic</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;&lt;g c&#39;&gt;4-.\pp&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">f</span><span class="p">(</span><span class="n">note</span><span class="o">.</span><span class="n">sounding_note</span><span class="p">())</span>
+<span class="go">g&#39;&#39;4</span>
+<span class="go">\pp</span>
+<span class="go">- \staccato</span>
+</pre></div>
+</div>
+</div>
+<div class="example docutils container">
+<p>Both <code class="docutils literal notranslate"><span class="pre">sounding_pitch()</span></code> and <code class="docutils literal notranslate"><span class="pre">sounding_note()</span></code> methods raise a
+ValueError exception when it cannot calculate the sounding pitch for
+the given interval.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ArtificialHarmonic</span><span class="p">(</span><span class="s2">&quot;&lt;g ef&#39;&gt;4&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">sounding_pitch</span><span class="p">()</span>
+<span class="go">ValueError: cannot calculate sounding pitch for given interval</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ArtificialHarmonic</span><span class="p">(</span><span class="s2">&quot;&lt;g ef&#39;&gt;4&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">sounding_note</span><span class="p">()</span>
+<span class="go">ValueError: cannot calculate sounding pitch for given interval</span>
+</pre></div>
+</div>
+</div>
+</dd></dl>
+
+</div>
 <div class="section" id="cartographycontainer">
 <h2>CartographyContainer<a class="headerlink" href="#cartographycontainer" title="Permalink to this headline">¶</a></h2>
 <dl class="class">
@@ -400,9 +608,9 @@ decay rate when creating a container.</p>
 </pre></div>
 </div>
 <p>The decay rate can also be set after the creation of a container,
-using the method <code class="docutils literal notranslate"><span class="pre">set_decay_rate()</span></code>.</p>
+using the property <code class="docutils literal notranslate"><span class="pre">decay_rate</span></code>.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">container</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">CartographyContainer</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">])</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">container</span><span class="o">.</span><span class="n">set_decay_rate</span><span class="p">(</span><span class="mf">0.2</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">container</span><span class="o">.</span><span class="n">decay_rate</span> <span class="o">=</span> <span class="mf">0.2</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">container</span><span class="o">.</span><span class="n">weights</span>
 <span class="go">[1.0, 0.2, 0.04000000000000001, 0.008000000000000002,</span>
 <span class="go">0.0016000000000000003]</span>
@@ -538,8 +746,8 @@ of a container.</p>
 </div>
 <div class="example docutils container">
 <p>The contents of a container can also be altered after it has been
-initialised using the <code class="docutils literal notranslate"><span class="pre">set_container()</span></code> method. The length of the
-container can change too.</p>
+initialised using the <code class="docutils literal notranslate"><span class="pre">container</span></code> property. The length of the
+container can change as well.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">container</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">CartographyContainer</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">],</span>
 <span class="gp">... </span>                                        <span class="n">decay_rate</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span>
 <span class="gp">... </span>                                        <span class="p">)</span>
@@ -547,7 +755,7 @@ container can change too.</p>
 <span class="go">5</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">container</span><span class="o">.</span><span class="n">weights</span>
 <span class="go">[1.0, 0.5, 0.25, 0.125, 0.0625]</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">container</span><span class="o">.</span><span class="n">set_container</span><span class="p">([</span><span class="mi">10</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">14</span><span class="p">,</span> <span class="mi">31</span><span class="p">,</span> <span class="mi">98</span><span class="p">,</span> <span class="mi">47</span><span class="p">,</span> <span class="mi">32</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">container</span><span class="o">.</span><span class="n">contents</span> <span class="o">=</span> <span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">14</span><span class="p">,</span> <span class="mi">31</span><span class="p">,</span> <span class="mi">98</span><span class="p">,</span> <span class="mi">47</span><span class="p">,</span> <span class="mi">32</span><span class="p">]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">container</span><span class="o">.</span><span class="n">contents</span>
 <span class="go">[10, 7, 14, 31, 98, 47, 32]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">len</span><span class="p">(</span><span class="n">container</span><span class="p">)</span>
@@ -558,41 +766,27 @@ container can change too.</p>
 </div>
 </div>
 <div class="example docutils container">
-<p>To method <code class="docutils literal notranslate"><span class="pre">replace_element()</span></code> replaces a specific element at a
-specified index.</p>
+<p>This class allows indecing and slicing just like regular lists. This
+can be used to both access and alter elements.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">container</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">CartographyContainer</span><span class="p">([</span><span class="mi">10</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">14</span><span class="p">,</span> <span class="mi">31</span><span class="p">,</span> <span class="mi">98</span><span class="p">])</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">container</span><span class="o">.</span><span class="n">contents</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">container</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+<span class="go">7</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">container</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="mi">4</span><span class="p">]</span>
+<span class="go">[7, 14, 31]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">container</span><span class="p">[:]</span>
 <span class="go">[10, 7, 14, 31, 98]</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">container</span><span class="o">.</span><span class="n">replace_element</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">container</span><span class="o">.</span><span class="n">contents</span>
-<span class="go">[10, 7, 100, 31, 98]</span>
-</pre></div>
-</div>
-</div>
-<div class="example docutils container">
-<p>The attribute previous_index stores the previously selected index. It
-can be used with the <code class="docutils literal notranslate"><span class="pre">get_element()</span></code> method in order to retrieve the
-last value output by the object.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">container</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">CartographyContainer</span><span class="p">([</span><span class="mi">10</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">14</span><span class="p">,</span> <span class="mi">31</span><span class="p">,</span> <span class="mi">98</span><span class="p">])</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">container</span><span class="p">()</span>
 <span class="go">31</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">previous_index</span> <span class="o">=</span> <span class="n">container</span><span class="o">.</span><span class="n">previous_index</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">previous_index</span>
 <span class="go">3</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">container</span><span class="o">.</span><span class="n">get_element</span><span class="p">(</span><span class="n">previous_index</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">container</span><span class="p">[</span><span class="n">previous_index</span><span class="p">]</span>
 <span class="go">31</span>
-</pre></div>
-</div>
-</div>
-<div class="example docutils container">
-<p>Individual elements are also accessible via indeces of the content
-attribute. When accessed in this manner, they can also be sliced like a
-regular list.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">container</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">CartographyContainer</span><span class="p">([</span><span class="mi">10</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">14</span><span class="p">,</span> <span class="mi">31</span><span class="p">,</span> <span class="mi">98</span><span class="p">])</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">container</span><span class="o">.</span><span class="n">contents</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
-<span class="go">14</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">container</span><span class="o">.</span><span class="n">contents</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="mi">4</span><span class="p">]</span>
-<span class="go">[7, 14, 31]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">container</span><span class="o">.</span><span class="n">contents</span>
+<span class="go">[10, 7, 14, 31, 98]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">container</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="mi">100</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">container</span><span class="o">.</span><span class="n">contents</span>
+<span class="go">[10, 7, 100, 31, 98]</span>
 </pre></div>
 </div>
 </div>
@@ -910,6 +1104,113 @@ time signature change, the function raises a <code class="docutils literal notra
 </dd></dl>
 
 </div>
+<div class="section" id="harmonicnote">
+<h2>HarmonicNote<a class="headerlink" href="#harmonicnote" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="auxjad.HarmonicNote">
+<em class="property">class </em><code class="descclassname">auxjad.</code><code class="descname">HarmonicNote</code><span class="sig-paren">(</span><em>*arguments</em>, <em>multiplier: Union[abjad.utilities.Duration.Duration</em>, <em>Tuple[int</em>, <em>int]] = None</em>, <em>tag: abjad.system.Tag.Tag = None</em>, <em>style: str = 'harmonic'</em><span class="sig-paren">)</span><a class="headerlink" href="#auxjad.HarmonicNote" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates an <code class="docutils literal notranslate"><span class="pre">abjad.Note</span></code> with tweaked notehead for harmonics.</p>
+<div class="example docutils container">
+<p>Usage is similar to <code class="docutils literal notranslate"><span class="pre">abjad.Note</span></code>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">note</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">HarmonicNote</span><span class="p">(</span><span class="s2">&quot;c&#39;&#39;4&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">note</span><span class="o">.</span><span class="n">style</span>
+<span class="go">&#39;harmonic&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">f</span><span class="p">(</span><span class="n">note</span><span class="p">)</span>
+<span class="go">\tweak style #&#39;harmonic</span>
+<span class="go">c&#39;&#39;4</span>
+</pre></div>
+</div>
+<p>And similarly to <code class="docutils literal notranslate"><span class="pre">abjad.Note</span></code>, pitch and duration can be input in
+many different ways:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">note1</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">HarmonicNote</span><span class="p">(</span><span class="s2">&quot;c&#39;&#39;4&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">note2</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">HarmonicNote</span><span class="p">(</span><span class="s2">&quot;c&#39;&#39;&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="o">/</span><span class="mi">4</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">note3</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">HarmonicNote</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mf">0.25</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">note4</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">HarmonicNote</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Duration</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">f</span><span class="p">(</span><span class="n">note1</span><span class="p">)</span>
+<span class="go">\tweak style #&#39;harmonic</span>
+<span class="go">c&#39;&#39;4</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">f</span><span class="p">(</span><span class="n">note2</span><span class="p">)</span>
+<span class="go">\tweak style #&#39;harmonic</span>
+<span class="go">c&#39;&#39;4</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">f</span><span class="p">(</span><span class="n">note3</span><span class="p">)</span>
+<span class="go">\tweak style #&#39;harmonic</span>
+<span class="go">c&#39;&#39;4</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">f</span><span class="p">(</span><span class="n">note4</span><span class="p">)</span>
+<span class="go">\tweak style #&#39;harmonic</span>
+<span class="go">c&#39;&#39;4</span>
+</pre></div>
+</div>
+</div>
+<div class="example docutils container">
+<p>When creating an <code class="docutils literal notranslate"><span class="pre">HarmonicNote</span></code>, use the keyword argument <code class="docutils literal notranslate"><span class="pre">style</span></code>
+to set a different type of note head, such as <code class="docutils literal notranslate"><span class="pre">'harmonic-mixed'</span></code>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">note</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">HarmonicNote</span><span class="p">(</span><span class="s2">&quot;c&#39;&#39;4&quot;</span><span class="p">,</span>
+<span class="gp">... </span>                           <span class="n">style</span><span class="o">=</span><span class="s1">&#39;harmonic-mixed&#39;</span><span class="p">,</span>
+<span class="gp">... </span>                           <span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">note</span><span class="o">.</span><span class="n">style</span>
+<span class="go">&#39;harmonic-mixed&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">f</span><span class="p">(</span><span class="n">note</span><span class="p">)</span>
+<span class="go">\tweak style #&#39;harmonic-mixed</span>
+<span class="go">c&#39;&#39;4</span>
+</pre></div>
+</div>
+</div>
+<div class="example docutils container">
+<p>Similarly to <code class="docutils literal notranslate"><span class="pre">abjad.Note</span></code>, <code class="docutils literal notranslate"><span class="pre">HarmonicNote</span></code> can take multipliers:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">note</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">HarmonicNote</span><span class="p">(</span><span class="s2">&quot;c&#39;&#39;4&quot;</span><span class="p">,</span>
+<span class="gp">... </span>                           <span class="n">multiplier</span><span class="o">=</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span>
+<span class="gp">... </span>                           <span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">note</span><span class="o">.</span><span class="n">multiplier</span>
+<span class="go">abjad.Multiplier(2, 3)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">f</span><span class="p">(</span><span class="n">note</span><span class="p">)</span>
+<span class="go">\tweak style #&#39;harmonic</span>
+<span class="go">c&#39;&#39;4 * 2/3</span>
+</pre></div>
+</div>
+</div>
+<div class="example docutils container">
+<p>All properties of <code class="docutils literal notranslate"><span class="pre">abjad.Note</span></code> are also available to be read. This
+class also includes a new property named <code class="docutils literal notranslate"><span class="pre">style</span></code>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">note</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">HarmonicNote</span><span class="p">(</span><span class="s2">&quot;c&#39;&#39;4&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">note</span><span class="o">.</span><span class="n">written_pitch</span>
+<span class="go">&quot;c&#39;&#39;&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">note</span><span class="o">.</span><span class="n">written_duration</span>
+<span class="go">1/4</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">note</span><span class="o">.</span><span class="n">style</span>
+<span class="go">&#39;harmonic&#39;</span>
+</pre></div>
+</div>
+<p>All these properties can be set to different values after
+initialisation:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">note</span><span class="o">.</span><span class="n">written_pitch</span> <span class="o">=</span> <span class="mi">18</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">note</span><span class="o">.</span><span class="n">written_duration</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Duration</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">8</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">note</span><span class="o">.</span><span class="n">style</span> <span class="o">=</span> <span class="s1">&#39;harmonic-mixed&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">note</span><span class="o">.</span><span class="n">written_pitch</span>
+<span class="go">&quot;fs&#39;&#39;&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">note</span><span class="o">.</span><span class="n">written_duration</span>
+<span class="go">1/8</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">note</span><span class="o">.</span><span class="n">style</span>
+<span class="go">&#39;harmonic-mixed&#39;</span>
+</pre></div>
+</div>
+</div>
+<div class="example docutils container">
+<p>To create a note with a regular note head and with a flageolet circle
+above it, use the style <code class="docutils literal notranslate"><span class="pre">'flageolet'</span></code>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">note</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">HarmonicNote</span><span class="p">(</span><span class="s2">&quot;c&#39;&#39;1&quot;</span><span class="p">,</span>
+<span class="gp">... </span>                           <span class="n">style</span><span class="o">=</span><span class="s1">&#39;flageolet&#39;</span><span class="p">,</span>
+<span class="gp">... </span>                           <span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">note</span><span class="o">.</span><span class="n">style</span>
+<span class="go">&#39;flageolet&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">f</span><span class="p">(</span><span class="n">note</span><span class="p">)</span>
+<span class="go">c&#39;&#39;1</span>
+<span class="go">\flageolet</span>
+</pre></div>
+</div>
+</div>
+</dd></dl>
+
+</div>
 <div class="section" id="is-container-full">
 <h2>is_container_full<a class="headerlink" href="#is-container-full" title="Permalink to this headline">¶</a></h2>
 <dl class="function">
@@ -1188,11 +1489,448 @@ in its input lists:</p>
 </dd></dl>
 
 </div>
+<div class="section" id="leafshuffler">
+<h2>LeafShuffler<a class="headerlink" href="#leafshuffler" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="auxjad.LeafShuffler">
+<em class="property">class </em><code class="descclassname">auxjad.</code><code class="descname">LeafShuffler</code><span class="sig-paren">(</span><em>container: abjad.core.Container.Container</em>, <em>*</em>, <em>output_single_measure: bool = False</em>, <em>disable_rewrite_meter: bool = False</em>, <em>force_time_signatures: bool = False</em>, <em>omit_time_signatures: bool = False</em><span class="sig-paren">)</span><a class="headerlink" href="#auxjad.LeafShuffler" title="Permalink to this definition">¶</a></dt>
+<dd><p>Takes an input <code class="docutils literal notranslate"><span class="pre">abjad.Container</span></code> and shuffles its leaves. It can
+shuffle both leaves as well as pitches; it also can roate pitches. When
+shuffling or rotating pitches only, tuplets are allowed. Tuplets are not
+supported when shuffling leaves.</p>
+<div class="example docutils container">
+<p>Calling the object will output a shuffled container.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">container</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;c&#39;4 d&#39;4 e&#39;4 f&#39;4&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">shuffler</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">LeafShuffler</span><span class="p">(</span><span class="n">container</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">music</span> <span class="o">=</span> <span class="n">shuffler</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">staff</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span><span class="n">music</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">f</span><span class="p">(</span><span class="n">staff</span><span class="p">)</span>
+<span class="go">\new Staff</span>
+<span class="go">{</span>
+<span class="go">    \time 4/4</span>
+<span class="go">    d&#39;4</span>
+<span class="go">    c&#39;4</span>
+<span class="go">    f&#39;4</span>
+<span class="go">    e&#39;4</span>
+<span class="go">}</span>
+</pre></div>
+</div>
+<p>To get the result of the last operation, use the property
+<code class="docutils literal notranslate"><span class="pre">current_container</span></code>.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">music</span> <span class="o">=</span> <span class="n">shuffler</span><span class="o">.</span><span class="n">current_container</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">staff</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span><span class="n">music</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">f</span><span class="p">(</span><span class="n">staff</span><span class="p">)</span>
+<span class="go">\new Staff</span>
+<span class="go">{</span>
+<span class="go">    \time 4/4</span>
+<span class="go">    d&#39;4</span>
+<span class="go">    c&#39;4</span>
+<span class="go">    f&#39;4</span>
+<span class="go">    e&#39;4</span>
+<span class="go">}</span>
+</pre></div>
+</div>
+</div>
+<div class="example docutils container">
+<p>Calling the object outputs the same result as using the method
+<code class="docutils literal notranslate"><span class="pre">shuffle_leaves()</span></code>.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">container</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;c&#39;4 d&#39;4 e&#39;4 f&#39;4&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">shuffler</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">LeafShuffler</span><span class="p">(</span><span class="n">container</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">music</span> <span class="o">=</span> <span class="n">shuffler</span><span class="o">.</span><span class="n">shuffle_leaves</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">staff</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span><span class="n">music</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">f</span><span class="p">(</span><span class="n">staff</span><span class="p">)</span>
+<span class="go">\new Staff</span>
+<span class="go">{</span>
+<span class="go">    \time 4/4</span>
+<span class="go">    f&#39;4</span>
+<span class="go">    c&#39;4</span>
+<span class="go">    e&#39;4</span>
+<span class="go">    d&#39;4</span>
+<span class="go">}</span>
+</pre></div>
+</div>
+</div>
+<div class="example docutils container">
+<p>This class has many keyword arguments, all of which can be altered
+after instantiation using properties with the same names as shown
+below.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">container</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;\time 3/4 c&#39;4 d&#39;4 e&#39;4 |&quot;</span>
+<span class="gp">... </span>                            <span class="sa">r</span><span class="s2">&quot;\time 2/4 f&#39;4 g&#39;4 |&quot;</span>
+<span class="gp">... </span>                            <span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">shuffler</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">LeafShuffler</span><span class="p">(</span><span class="n">container</span><span class="p">,</span>
+<span class="gp">... </span>                               <span class="n">output_single_measure</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+<span class="gp">... </span>                               <span class="n">disable_rewrite_meter</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+<span class="gp">... </span>                               <span class="n">force_time_signatures</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+<span class="gp">... </span>                               <span class="n">omit_time_signatures</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+<span class="gp">... </span>                               <span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">shuffler</span><span class="o">.</span><span class="n">output_single_measure</span>
+<span class="go">False</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">shuffler</span><span class="o">.</span><span class="n">disable_rewrite_meter</span>
+<span class="go">False</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">shuffler</span><span class="o">.</span><span class="n">force_time_signatures</span>
+<span class="go">False</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">shuffler</span><span class="o">.</span><span class="n">omit_time_signatures</span>
+<span class="go">False</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">shuffler</span><span class="o">.</span><span class="n">output_single_measure</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">shuffler</span><span class="o">.</span><span class="n">disable_rewrite_meter</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">shuffler</span><span class="o">.</span><span class="n">force_time_signatures</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">shuffler</span><span class="o">.</span><span class="n">omit_time_signatures</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">shuffler</span><span class="o">.</span><span class="n">output_single_measure</span>
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">shuffler</span><span class="o">.</span><span class="n">disable_rewrite_meter</span>
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">shuffler</span><span class="o">.</span><span class="n">force_time_signatures</span>
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">shuffler</span><span class="o">.</span><span class="n">omit_time_signatures</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+</div>
+<div class="example docutils container">
+<p>If <code class="docutils literal notranslate"><span class="pre">output_single_measure</span></code> is set to <code class="docutils literal notranslate"><span class="pre">True</span></code>, then the whole
+container is output as a single measure, having its time signature
+rewritten.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">container</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;\time 3/4 c&#39;4 d&#39;4 e&#39;4 |&quot;</span>
+<span class="gp">... </span>                            <span class="sa">r</span><span class="s2">&quot;\time 2/4 f&#39;4 g&#39;4&quot;</span>
+<span class="gp">... </span>                            <span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">shuffler</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">LeafShuffler</span><span class="p">(</span><span class="n">container</span><span class="p">,</span>
+<span class="gp">... </span>                               <span class="n">output_single_measure</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+<span class="gp">... </span>                               <span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">music</span> <span class="o">=</span> <span class="n">shuffler</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">staff</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span><span class="n">music</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">f</span><span class="p">(</span><span class="n">staff</span><span class="p">)</span>
+<span class="go">\new Staff</span>
+<span class="go">{</span>
+<span class="go">    \time 5/4</span>
+<span class="go">    f&#39;4</span>
+<span class="go">    d&#39;4</span>
+<span class="go">    e&#39;4</span>
+<span class="go">    g&#39;4</span>
+<span class="go">    c&#39;4</span>
+<span class="go">}</span>
+</pre></div>
+</div>
+</div>
+<div class="example docutils container">
+<p>If <code class="docutils literal notranslate"><span class="pre">disable_rewrite_meter</span></code> is set to <code class="docutils literal notranslate"><span class="pre">True</span></code>, then the automatic
+behaviour of rewriting the leaves according to the meter is disabled.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">container</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;\time 3/4 c&#39;16 d&#39;4.. e&#39;4 |&quot;</span>
+<span class="gp">... </span>                            <span class="sa">r</span><span class="s2">&quot;\time 2/4 f&#39;2&quot;</span>
+<span class="gp">... </span>                            <span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">shuffler</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">LeafShuffler</span><span class="p">(</span><span class="n">container</span><span class="p">,</span>
+<span class="gp">... </span>                               <span class="n">output_single_measure</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+<span class="gp">... </span>                               <span class="n">disable_rewrite_meter</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+<span class="gp">... </span>                               <span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">music</span> <span class="o">=</span> <span class="n">shuffler</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">staff</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span><span class="n">music</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">f</span><span class="p">(</span><span class="n">staff</span><span class="p">)</span>
+<span class="go">\new Staff</span>
+<span class="go">{</span>
+<span class="go">    \time 5/4</span>
+<span class="go">    d&#39;4..</span>
+<span class="go">    f&#39;2</span>
+<span class="go">    c&#39;16</span>
+<span class="go">    e&#39;4</span>
+<span class="go">}</span>
+</pre></div>
+</div>
+</div>
+<div class="example docutils container">
+<p>The first call to the instance will add the correct time signature to
+the first leaf. Subsequent calls will only add it if its necessary,
+such as when there is a time signature change in some bar in the
+container.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">container</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;\time 3/4 c&#39;16 d&#39;4.. e&#39;4 | r4 f&#39;2&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">shuffler</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">LeafShuffler</span><span class="p">(</span><span class="n">container</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">music</span> <span class="o">=</span> <span class="n">shuffler</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">staff</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span><span class="n">music</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">f</span><span class="p">(</span><span class="n">staff</span><span class="p">)</span>
+<span class="go">\new Staff</span>
+<span class="go">{</span>
+<span class="go">    \time 3/4</span>
+<span class="go">    d&#39;4..</span>
+<span class="go">    e&#39;16</span>
+<span class="go">    ~</span>
+<span class="go">    e&#39;8.</span>
+<span class="go">    f&#39;16</span>
+<span class="go">    ~</span>
+<span class="go">    f&#39;4..</span>
+<span class="go">    r16</span>
+<span class="go">    r8.</span>
+<span class="go">    c&#39;16</span>
+<span class="go">}</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">music</span> <span class="o">=</span> <span class="n">shuffler</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">staff</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span><span class="n">music</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">f</span><span class="p">(</span><span class="n">staff</span><span class="p">)</span>
+<span class="go">\new Staff</span>
+<span class="go">{</span>
+<span class="go">    c&#39;16</span>
+<span class="go">    e&#39;8.</span>
+<span class="go">    ~</span>
+<span class="go">    e&#39;16</span>
+<span class="go">    f&#39;4..</span>
+<span class="go">    ~</span>
+<span class="go">    f&#39;16</span>
+<span class="go">    r8.</span>
+<span class="go">    r16</span>
+<span class="go">    d&#39;4..</span>
+<span class="go">}</span>
+</pre></div>
+</div>
+<p>It is possible to force time signatures on every call using either
+optional keyword argument <code class="docutils literal notranslate"><span class="pre">force_time_signatures</span></code>.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">container</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;\time 3/4 c&#39;16 d&#39;4.. e&#39;4 | r4 f&#39;2&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">shuffler</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">LeafShuffler</span><span class="p">(</span><span class="n">container</span><span class="p">,</span>
+<span class="gp">... </span>                               <span class="n">force_time_signatures</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+<span class="gp">... </span>                               <span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">music</span> <span class="o">=</span> <span class="n">shuffler</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">staff</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span><span class="n">music</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">f</span><span class="p">(</span><span class="n">staff</span><span class="p">)</span>
+<span class="go">\new Staff</span>
+<span class="go">{</span>
+<span class="go">    \time 3/4</span>
+<span class="go">    d&#39;4..</span>
+<span class="go">    r16</span>
+<span class="go">    r8.</span>
+<span class="go">    c&#39;16</span>
+<span class="go">    f&#39;2</span>
+<span class="go">    e&#39;4</span>
+<span class="go">}</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">music</span> <span class="o">=</span> <span class="n">shuffler</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">staff</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span><span class="n">music</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">f</span><span class="p">(</span><span class="n">staff</span><span class="p">)</span>
+<span class="go">\new Staff</span>
+<span class="go">{</span>
+<span class="go">    \time 3/4</span>
+<span class="go">    c&#39;16</span>
+<span class="go">    e&#39;8.</span>
+<span class="go">    ~</span>
+<span class="go">    e&#39;16</span>
+<span class="go">    f&#39;4..</span>
+<span class="go">    ~</span>
+<span class="go">    f&#39;16</span>
+<span class="go">    r8.</span>
+<span class="go">    r16</span>
+<span class="go">    d&#39;4..</span>
+<span class="go">}</span>
+</pre></div>
+</div>
+</div>
+<div class="example docutils container">
+<p>To disable time signatures altogether, initialise this class with the
+keyword argument <code class="docutils literal notranslate"><span class="pre">omit_time_signatures</span></code> set to <code class="docutils literal notranslate"><span class="pre">True</span></code> (default is
+<code class="docutils literal notranslate"><span class="pre">False</span></code>), or change the <code class="docutils literal notranslate"><span class="pre">omit_time_signatures</span></code> property after
+initialisation.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">container</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;\time 3/4 c&#39;16 d&#39;4.. e&#39;4 | r4 f&#39;2&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">shuffler</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">LeafShuffler</span><span class="p">(</span><span class="n">container</span><span class="p">,</span>
+<span class="gp">... </span>                               <span class="n">omit_time_signatures</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+<span class="gp">... </span>                               <span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">music</span> <span class="o">=</span> <span class="n">shuffler</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">staff</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span><span class="n">music</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">f</span><span class="p">(</span><span class="n">staff</span><span class="p">)</span>
+<span class="go">\new Staff</span>
+<span class="go">{</span>
+<span class="go">    d&#39;4..</span>
+<span class="go">    e&#39;16</span>
+<span class="go">    ~</span>
+<span class="go">    e&#39;8.</span>
+<span class="go">    f&#39;16</span>
+<span class="go">    ~</span>
+<span class="go">    f&#39;4..</span>
+<span class="go">    r16</span>
+<span class="go">    r8.</span>
+<span class="go">    c&#39;16</span>
+<span class="go">}</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">shuffler</span><span class="o">.</span><span class="n">omit_time_signatures</span>
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">shuffler</span><span class="o">.</span><span class="n">omit_time_signatures</span> <span class="o">=</span> <span class="kc">False</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">shuffler</span><span class="o">.</span><span class="n">omit_time_signatures</span>
+<span class="go">False</span>
+</pre></div>
+</div>
+</div>
+<div class="example docutils container">
+<p>To output several shuffled containers at once, use the <code class="docutils literal notranslate"><span class="pre">output_n</span></code>
+method, inputting the desired number of iterations.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">container</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;\time 2/4 c&#39;16 d&#39;4.. | r4 e&#39;8. f&#39;16&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">shuffler</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">LeafShuffler</span><span class="p">(</span><span class="n">container</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">music</span> <span class="o">=</span> <span class="n">shuffler</span><span class="o">.</span><span class="n">output_n</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">staff</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span><span class="n">music</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">f</span><span class="p">(</span><span class="n">staff</span><span class="p">)</span>
+<span class="go">\new Staff</span>
+<span class="go">{</span>
+<span class="go">    \time 2/4</span>
+<span class="go">    d&#39;4..</span>
+<span class="go">    f&#39;16</span>
+<span class="go">    c&#39;16</span>
+<span class="go">    e&#39;8.</span>
+<span class="go">    r4</span>
+<span class="go">    d&#39;4..</span>
+<span class="go">    e&#39;16</span>
+<span class="go">    ~</span>
+<span class="go">    e&#39;8</span>
+<span class="go">    f&#39;16</span>
+<span class="go">    r16</span>
+<span class="go">    r8.</span>
+<span class="go">    c&#39;16</span>
+<span class="go">    r4</span>
+<span class="go">    d&#39;4</span>
+<span class="go">    ~</span>
+<span class="go">    d&#39;8.</span>
+<span class="go">    f&#39;16</span>
+<span class="go">    c&#39;16</span>
+<span class="go">    e&#39;8.</span>
+<span class="go">}</span>
+</pre></div>
+</div>
+</div>
+<div class="example docutils container">
+<p>To shuffle only pitches, keeping the durations of the leaves as they
+are, use the method <code class="docutils literal notranslate"><span class="pre">shuffle_pitches()</span></code>. It handles both notes and
+chords. Rests will remain at their current location.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">container</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;\time 3/4 c&#39;16 d&#39;4.. | r4 e&#39;8. f&#39;16&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">shuffler</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">LeafShuffler</span><span class="p">(</span><span class="n">container</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">music</span> <span class="o">=</span> <span class="n">shuffler</span><span class="o">.</span><span class="n">shuffle_pitches</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">staff</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span><span class="n">music</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">f</span><span class="p">(</span><span class="n">staff</span><span class="p">)</span>
+<span class="go">\new Staff</span>
+<span class="go">{</span>
+<span class="go">    \time 3/4</span>
+<span class="go">    e&#39;16</span>
+<span class="go">    c&#39;4..</span>
+<span class="go">    r4</span>
+<span class="go">    d&#39;8.</span>
+<span class="go">    f&#39;16</span>
+<span class="go">}</span>
+</pre></div>
+</div>
+</div>
+<div class="example docutils container">
+<p>When dealing with pitches, it is possible to use containers containing
+tuplets. And similarly to the method <code class="docutils literal notranslate"><span class="pre">output_n()</span></code>, to output several
+containers with shuffled pitches, use <code class="docutils literal notranslate"><span class="pre">output_n_shuffled_pitches()</span></code>.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">container</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;\times 2/3 {\time 5/4 c&#39;4 d&#39;2}&quot;</span>
+<span class="gp">... </span>                            <span class="sa">r</span><span class="s2">&quot;r4 e&#39;4. f&#39;8&quot;</span>
+<span class="gp">... </span>                            <span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">shuffler</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">LeafShuffler</span><span class="p">(</span><span class="n">container</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">music</span> <span class="o">=</span> <span class="n">shuffler</span><span class="o">.</span><span class="n">output_n_shuffled_pitches</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">staff</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span><span class="n">music</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">f</span><span class="p">(</span><span class="n">staff</span><span class="p">)</span>
+<span class="go">\new Staff</span>
+<span class="go">{</span>
+<span class="go">    \times 2/3 {</span>
+<span class="go">        \time 5/4</span>
+<span class="go">        f&#39;4</span>
+<span class="go">        e&#39;2</span>
+<span class="go">    }</span>
+<span class="go">    r4</span>
+<span class="go">    d&#39;4.</span>
+<span class="go">    c&#39;8</span>
+<span class="go">    \times 2/3 {</span>
+<span class="go">        d&#39;4</span>
+<span class="go">        c&#39;2</span>
+<span class="go">    }</span>
+<span class="go">    r4</span>
+<span class="go">    f&#39;4.</span>
+<span class="go">    e&#39;8</span>
+<span class="go">    \times 2/3 {</span>
+<span class="go">        d&#39;4</span>
+<span class="go">        f&#39;2</span>
+<span class="go">    }</span>
+<span class="go">    r4</span>
+<span class="go">    c&#39;4.</span>
+<span class="go">    e&#39;8</span>
+<span class="go">}</span>
+</pre></div>
+</div>
+</div>
+<div class="example docutils container">
+<p>To rotate pitches, use the <code class="docutils literal notranslate"><span class="pre">rotate_pitches()</span></code> method.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">container</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;\time 3/4 c&#39;16 d&#39;4.. | r4 e&#39;8. f&#39;16&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">shuffler</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">LeafShuffler</span><span class="p">(</span><span class="n">container</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">music</span> <span class="o">=</span> <span class="n">shuffler</span><span class="o">.</span><span class="n">rotate_pitches</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">staff</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span><span class="n">music</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">f</span><span class="p">(</span><span class="n">staff</span><span class="p">)</span>
+<span class="go">\new Staff</span>
+<span class="go">{</span>
+<span class="go">    \time 3/4</span>
+<span class="go">    d&#39;16</span>
+<span class="go">    e&#39;4..</span>
+<span class="go">    r4</span>
+<span class="go">    f&#39;8.</span>
+<span class="go">    c&#39;16</span>
+<span class="go">}</span>
+</pre></div>
+</div>
+</div>
+<div class="example docutils container">
+<p>This method can take two optioanl keyword arguments: <code class="docutils literal notranslate"><span class="pre">anticlockwise</span></code>,
+set to <code class="docutils literal notranslate"><span class="pre">False</span></code> by default, and <code class="docutils literal notranslate"><span class="pre">n_rotations</span></code>, set to 1 by default.
+The first defines the direction of the rotation, while the later sets
+the number of rotations applied.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">container</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;\time 3/4 c&#39;16 d&#39;4.. | r4 e&#39;8. f&#39;16&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">shuffler</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">LeafShuffler</span><span class="p">(</span><span class="n">container</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">music</span> <span class="o">=</span> <span class="n">shuffler</span><span class="o">.</span><span class="n">rotate_pitches</span><span class="p">(</span><span class="n">anticlockwise</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">n_rotations</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">staff</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span><span class="n">music</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">f</span><span class="p">(</span><span class="n">staff</span><span class="p">)</span>
+<span class="go">\new Staff</span>
+<span class="go">{</span>
+<span class="go">    \time 3/4</span>
+<span class="go">    e&#39;16</span>
+<span class="go">    f&#39;4..</span>
+<span class="go">    r4</span>
+<span class="go">    c&#39;8.</span>
+<span class="go">    d&#39;16</span>
+<span class="go">}</span>
+</pre></div>
+</div>
+</div>
+<div class="example docutils container">
+<p>Similarly to the method <code class="docutils literal notranslate"><span class="pre">output_n()</span></code>, to output several containers
+with rotated pitches, use <code class="docutils literal notranslate"><span class="pre">output_n_rotated_pitches()</span></code>.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">container</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;\times 2/3 {\time 5/4 c&#39;4 d&#39;2}&quot;</span>
+<span class="gp">... </span>                            <span class="sa">r</span><span class="s2">&quot;r4 e&#39;4. f&#39;8&quot;</span>
+<span class="gp">... </span>                            <span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">shuffler</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">LeafShuffler</span><span class="p">(</span><span class="n">container</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">music</span> <span class="o">=</span> <span class="n">shuffler</span><span class="o">.</span><span class="n">output_n_rotated_pitches</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">staff</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span><span class="n">music</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">f</span><span class="p">(</span><span class="n">staff</span><span class="p">)</span>
+<span class="go">\new Staff</span>
+<span class="go">{</span>
+<span class="go">    \times 2/3 {</span>
+<span class="go">        \time 5/4</span>
+<span class="go">        d&#39;4</span>
+<span class="go">        e&#39;2</span>
+<span class="go">    }</span>
+<span class="go">    r4</span>
+<span class="go">    f&#39;4.</span>
+<span class="go">    c&#39;8</span>
+<span class="go">    \times 2/3 {</span>
+<span class="go">        e&#39;4</span>
+<span class="go">        f&#39;2</span>
+<span class="go">    }</span>
+<span class="go">    r4</span>
+<span class="go">    c&#39;4.</span>
+<span class="go">    d&#39;8</span>
+<span class="go">    \times 2/3 {</span>
+<span class="go">        f&#39;4</span>
+<span class="go">        c&#39;2</span>
+<span class="go">    }</span>
+<span class="go">    r4</span>
+<span class="go">    d&#39;4.</span>
+<span class="go">    e&#39;8</span>
+<span class="go">}</span>
+</pre></div>
+</div>
+</div>
+</dd></dl>
+
+</div>
 <div class="section" id="loopwindow">
 <h2>LoopWindow<a class="headerlink" href="#loopwindow" title="Permalink to this headline">¶</a></h2>
 <dl class="class">
 <dt id="auxjad.LoopWindow">
-<em class="property">class </em><code class="descclassname">auxjad.</code><code class="descname">LoopWindow</code><span class="sig-paren">(</span><em>container: abjad.core.Container.Container</em>, <em>*</em>, <em>window_size: (&lt;class 'tuple'&gt;</em>, <em>&lt;class 'abjad.meter.Meter'&gt;) = (4</em>, <em>4)</em>, <em>step_size: (&lt;class 'int'&gt;</em>, <em>&lt;class 'float'&gt;</em>, <em>&lt;class 'tuple'&gt;</em>, <em>&lt;class 'str'&gt;</em>, <em>&lt;class 'abjad.utilities.Duration.Duration'&gt;) = (1</em>, <em>16)</em>, <em>max_steps: int = 1</em>, <em>repetition_chance: float = 0.0</em>, <em>forward_bias: float = 1.0</em>, <em>head_position: (&lt;class 'int'&gt;</em>, <em>&lt;class 'float'&gt;</em>, <em>&lt;class 'tuple'&gt;</em>, <em>&lt;class 'str'&gt;</em>, <em>&lt;class 'abjad.utilities.Duration.Duration'&gt;) = 0</em>, <em>omit_time_signature: bool = False</em><span class="sig-paren">)</span><a class="headerlink" href="#auxjad.LoopWindow" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">auxjad.</code><code class="descname">LoopWindow</code><span class="sig-paren">(</span><em>container: abjad.core.Container.Container</em>, <em>*</em>, <em>window_size: (&lt;class 'tuple'&gt;</em>, <em>&lt;class 'abjad.meter.Meter'&gt;) = (4</em>, <em>4)</em>, <em>step_size: (&lt;class 'int'&gt;</em>, <em>&lt;class 'float'&gt;</em>, <em>&lt;class 'tuple'&gt;</em>, <em>&lt;class 'str'&gt;</em>, <em>&lt;class 'abjad.utilities.Duration.Duration'&gt;) = (1</em>, <em>16)</em>, <em>max_steps: int = 1</em>, <em>repetition_chance: float = 0.0</em>, <em>forward_bias: float = 1.0</em>, <em>head_position: (&lt;class 'int'&gt;</em>, <em>&lt;class 'float'&gt;</em>, <em>&lt;class 'tuple'&gt;</em>, <em>&lt;class 'str'&gt;</em>, <em>&lt;class 'abjad.utilities.Duration.Duration'&gt;) = 0</em>, <em>omit_time_signature: bool = False</em>, <em>move_window_on_first_call: bool = False</em><span class="sig-paren">)</span><a class="headerlink" href="#auxjad.LoopWindow" title="Permalink to this definition">¶</a></dt>
 <dd><p>Using a looping window, this slices an input <code class="docutils literal notranslate"><span class="pre">abjad.Container</span></code> and
 output them as containers.</p>
 <div class="example docutils container">
@@ -1231,13 +1969,40 @@ of a sixteenth-note.</p>
 <span class="go">}</span>
 </pre></div>
 </div>
-<p>The method <code class="docutils literal notranslate"><span class="pre">get_current_window()</span></code> will output the current window
-without moving the head forwards.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">notes</span> <span class="o">=</span> <span class="n">looper</span><span class="o">.</span><span class="n">get_current_window</span><span class="p">()</span>
+<p>The property <code class="docutils literal notranslate"><span class="pre">current_window</span></code> can be used to access the current
+window without moving the head forwards.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">notes</span> <span class="o">=</span> <span class="n">looper</span><span class="o">.</span><span class="n">current_window</span><span class="p">()</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">staff</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span><span class="n">notes</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">f</span><span class="p">(</span><span class="n">staff</span><span class="p">)</span>
 <span class="go">\new Staff</span>
 <span class="go">{</span>
+<span class="go">    c&#39;8.</span>
+<span class="go">    d&#39;16</span>
+<span class="go">    ~</span>
+<span class="go">    d&#39;4..</span>
+<span class="go">    e&#39;16</span>
+<span class="go">    ~</span>
+<span class="go">    e&#39;8.</span>
+<span class="go">    f&#39;16</span>
+<span class="go">}</span>
+</pre></div>
+</div>
+</div>
+<div class="example docutils container">
+<p>The very first call will output the input container without processing
+it. To disable this behaviour and have the looping window move on the
+very first call, initialise the class with the keyword argument
+<code class="docutils literal notranslate"><span class="pre">move_window_on_first_call</span></code> set to <code class="docutils literal notranslate"><span class="pre">True</span></code>.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">input_music</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;c&#39;4 d&#39;2 e&#39;4 f&#39;2 ~ f&#39;8 g&#39;1&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">looper</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">LoopWindow</span><span class="p">(</span><span class="n">input_music</span><span class="p">,</span>
+<span class="gp">... </span>                           <span class="n">move_window_on_first_call</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+<span class="gp">... </span>                           <span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">notes</span> <span class="o">=</span> <span class="n">looper</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">staff</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span><span class="n">notes</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">f</span><span class="p">(</span><span class="n">staff</span><span class="p">)</span>
+<span class="go">\new Staff</span>
+<span class="go">{</span>
+<span class="go">    \time 4/4</span>
 <span class="go">    c&#39;8.</span>
 <span class="go">    d&#39;16</span>
 <span class="go">    ~</span>
@@ -1389,15 +2154,14 @@ starting position of the looping window. It must be a tuple or an
 <span class="go">False</span>
 </pre></div>
 </div>
-<p>Use the <code class="docutils literal notranslate"><span class="pre">set_</span></code> methods below to change these values after
-initialisation.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">looper</span><span class="o">.</span><span class="n">set_window_size</span><span class="p">((</span><span class="mi">5</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">looper</span><span class="o">.</span><span class="n">set_step_size</span><span class="p">((</span><span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">looper</span><span class="o">.</span><span class="n">set_max_steps</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">looper</span><span class="o">.</span><span class="n">set_repetition_chance</span><span class="p">(</span><span class="mf">0.1</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">looper</span><span class="o">.</span><span class="n">set_forward_bias</span><span class="p">(</span><span class="mf">0.8</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">looper</span><span class="o">.</span><span class="n">set_head_position</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">looper</span><span class="o">.</span><span class="n">set_omit_time_signature</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+<p>Use the properties below to change these values after initialisation.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">looper</span><span class="o">.</span><span class="n">window_size</span> <span class="o">=</span> <span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">looper</span><span class="o">.</span><span class="n">step_size</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">looper</span><span class="o">.</span><span class="n">max_steps</span> <span class="o">=</span> <span class="mi">3</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">looper</span><span class="o">.</span><span class="n">repetition_chance</span> <span class="o">=</span> <span class="mf">0.1</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">looper</span><span class="o">.</span><span class="n">forward_bias</span> <span class="o">=</span> <span class="mf">0.8</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">looper</span><span class="o">.</span><span class="n">head_position</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">looper</span><span class="o">.</span><span class="n">omit_time_signature</span> <span class="o">=</span> <span class="kc">True</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">looper</span><span class="o">.</span><span class="n">window_size</span>
 <span class="go">5/4</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">looper</span><span class="o">.</span><span class="n">step_size</span>
@@ -1510,11 +2274,11 @@ available for tying pitches.</p>
 </div>
 <div class="example docutils container">
 <p>To change the size of the looping window after instantiation, use the
-method <code class="docutils literal notranslate"><span class="pre">set_window_size()</span></code>. In the example below, the initial window
-is of size (4, 4), but changes to (3, 8) after three calls. Notice how
-the very first call attaches a time signature equivalent to the window
-size to the output window; subsequent calls will not have time
-signatures unless the size of the looping window changes.</p>
+property <code class="docutils literal notranslate"><span class="pre">window_size</span></code>. In the example below, the initial window is
+of size (4, 4), but changes to (3, 8) after three calls. Notice how the
+very first call attaches a time signature equivalent to the window size
+to the output window; subsequent calls will not have time signatures
+unless the size of the looping window changes.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">input_music</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;c&#39;4 d&#39;2 e&#39;4 f&#39;2 ~ f&#39;8 g&#39;1&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">looper</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">LoopWindow</span><span class="p">(</span><span class="n">input_music</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">):</span>
@@ -1550,7 +2314,7 @@ signatures unless the size of the looping window changes.</p>
 <span class="go">    e&#39;8</span>
 <span class="go">    f&#39;8</span>
 <span class="go">}</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">looper</span><span class="o">.</span><span class="n">set_window_size</span><span class="p">((</span><span class="mi">3</span><span class="p">,</span> <span class="mi">8</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">looper</span><span class="o">.</span><span class="n">window_size</span> <span class="o">=</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">8</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">):</span>
 <span class="gp">... </span>    <span class="n">notes</span> <span class="o">=</span> <span class="n">looper</span><span class="p">()</span>
 <span class="gp">... </span>    <span class="n">staff</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span><span class="n">notes</span><span class="p">)</span>
@@ -1575,7 +2339,7 @@ signatures unless the size of the looping window changes.</p>
 </div>
 <p>To disable time signatures altogether, initialise <code class="docutils literal notranslate"><span class="pre">LoopWindow</span></code> with
 the keyword argument <code class="docutils literal notranslate"><span class="pre">omit_time_signature</span></code> set to <code class="docutils literal notranslate"><span class="pre">True</span></code> (default
-is <code class="docutils literal notranslate"><span class="pre">False</span></code>), or use the <code class="docutils literal notranslate"><span class="pre">set_omit_time_signature()</span></code> method after
+is <code class="docutils literal notranslate"><span class="pre">False</span></code>), or use the <code class="docutils literal notranslate"><span class="pre">omit_time_signature</span></code> property after
 initialisation.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">input_music</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;c&#39;4 d&#39;2 e&#39;4 f&#39;2 ~ f&#39;8 g&#39;1&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">looper</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">LoopWindow</span><span class="p">(</span><span class="n">input_music</span><span class="p">,</span> <span class="n">omit_time_signature</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
@@ -1587,6 +2351,50 @@ initialisation.</p>
 <span class="go">    c&#39;4</span>
 <span class="go">    d&#39;2</span>
 <span class="go">    e&#39;4</span>
+<span class="go">}</span>
+</pre></div>
+</div>
+</div>
+<div class="example docutils container">
+<p>This class can handle dynamics and articulations too. When a leaf is
+shortened by the looping window’s movement, the dynamics and
+articulations are still applied to it.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">input_music</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">(</span>
+<span class="gp">... </span><span class="sa">r</span><span class="s2">&quot;c&#39;4-.\pp\&lt; d&#39;2--\f e&#39;4-&gt;\ppp f&#39;2 ~ f&#39;8&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">looper</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">LoopWindow</span><span class="p">(</span><span class="n">input_music</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">staff</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">):</span>
+<span class="gp">... </span>    <span class="n">music</span> <span class="o">=</span> <span class="n">looper</span><span class="p">()</span>
+<span class="gp">... </span>    <span class="n">staff</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">music</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">f</span><span class="p">(</span><span class="n">staff</span><span class="p">)</span>
+<span class="go">\new Staff</span>
+<span class="go">{</span>
+<span class="go">    \time 4/4</span>
+<span class="go">    c&#39;4</span>
+<span class="go">    \pp</span>
+<span class="go">    - \staccato</span>
+<span class="go">    \&lt;</span>
+<span class="go">    d&#39;2</span>
+<span class="go">    \f</span>
+<span class="go">    - \tenuto</span>
+<span class="go">    e&#39;4</span>
+<span class="go">    \ppp</span>
+<span class="go">    - \accent</span>
+<span class="go">    c&#39;8.</span>
+<span class="go">    \pp</span>
+<span class="go">    - \staccato</span>
+<span class="go">    \&lt;</span>
+<span class="go">    d&#39;16</span>
+<span class="go">    \f</span>
+<span class="go">    - \tenuto</span>
+<span class="go">    ~</span>
+<span class="go">    d&#39;4..</span>
+<span class="go">    e&#39;16</span>
+<span class="go">    \ppp</span>
+<span class="go">    - \accent</span>
+<span class="go">    ~</span>
+<span class="go">    e&#39;8.</span>
+<span class="go">    f&#39;16</span>
 <span class="go">}</span>
 </pre></div>
 </div>
@@ -1640,7 +2448,7 @@ considered experimental.</p>
 <h2>LoopWindowByElements<a class="headerlink" href="#loopwindowbyelements" title="Permalink to this headline">¶</a></h2>
 <dl class="class">
 <dt id="auxjad.LoopWindowByElements">
-<em class="property">class </em><code class="descclassname">auxjad.</code><code class="descname">LoopWindowByElements</code><span class="sig-paren">(</span><em>container: abjad.core.Container.Container</em>, <em>*</em>, <em>window_size: int</em>, <em>step_size: int = 1</em>, <em>max_steps: int = 1</em>, <em>repetition_chance: float = 0.0</em>, <em>forward_bias: float = 1.0</em>, <em>head_position: int = 0</em>, <em>omit_time_signature: bool = False</em><span class="sig-paren">)</span><a class="headerlink" href="#auxjad.LoopWindowByElements" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">auxjad.</code><code class="descname">LoopWindowByElements</code><span class="sig-paren">(</span><em>container: abjad.core.Container.Container</em>, <em>*</em>, <em>window_size: int</em>, <em>step_size: int = 1</em>, <em>max_steps: int = 1</em>, <em>repetition_chance: float = 0.0</em>, <em>forward_bias: float = 1.0</em>, <em>head_position: int = 0</em>, <em>omit_all_time_signatures: bool = False</em>, <em>force_identical_time_signatures: bool = False</em>, <em>move_window_on_first_call: bool = False</em><span class="sig-paren">)</span><a class="headerlink" href="#auxjad.LoopWindowByElements" title="Permalink to this definition">¶</a></dt>
 <dd><p>Takes an <code class="docutils literal notranslate"><span class="pre">abjad.Container</span></code> as input as well as an integer
 representing the number of elements per looping window, then outputs a
 container with the elements processed in the looping process. For instance,
@@ -1689,9 +2497,35 @@ move the window forwards and output the result.</p>
 <span class="go">}</span>
 </pre></div>
 </div>
-<p>The method <code class="docutils literal notranslate"><span class="pre">get_current_window()</span></code> will output the current window
-without moving the head forwards.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">notes</span> <span class="o">=</span> <span class="n">looper</span><span class="o">.</span><span class="n">get_current_window</span><span class="p">()</span>
+<p>The property <code class="docutils literal notranslate"><span class="pre">current_window</span></code> can be used to access the current
+window without moving the head forwards.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">notes</span> <span class="o">=</span> <span class="n">looper</span><span class="o">.</span><span class="n">current_window</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">staff</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span><span class="n">notes</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">f</span><span class="p">(</span><span class="n">staff</span><span class="p">)</span>
+<span class="go">\new Staff</span>
+<span class="go">{</span>
+<span class="go">    \time 11/8</span>
+<span class="go">    d&#39;2</span>
+<span class="go">    e&#39;4</span>
+<span class="go">    f&#39;2</span>
+<span class="go">    ~</span>
+<span class="go">    f&#39;8</span>
+<span class="go">}</span>
+</pre></div>
+</div>
+</div>
+<div class="example docutils container">
+<p>The very first call will output the input container without processing
+it. To disable this behaviour and have the looping window move on the
+very first call, initialise the class with the keyword argument
+<code class="docutils literal notranslate"><span class="pre">move_window_on_first_call</span></code> set to <code class="docutils literal notranslate"><span class="pre">True</span></code>.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">input_music</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;c&#39;4 d&#39;2 e&#39;4 f&#39;2 ~ f&#39;8 g&#39;1&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">looper</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">LoopWindowByElements</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="n">input_music</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">window_size</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">move_window_on_first_call</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+<span class="gp">... </span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">notes</span> <span class="o">=</span> <span class="n">looper</span><span class="p">()</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">staff</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span><span class="n">notes</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">f</span><span class="p">(</span><span class="n">staff</span><span class="p">)</span>
 <span class="go">\new Staff</span>
@@ -1724,7 +2558,6 @@ iterator, which can then be used in a for loop to exhaust all windows.</p>
 <span class="go">}</span>
 <span class="go">\new Staff</span>
 <span class="go">{</span>
-<span class="go">    \time 3/4</span>
 <span class="go">    d&#39;2</span>
 <span class="go">    e&#39;4</span>
 <span class="go">}</span>
@@ -1735,6 +2568,12 @@ iterator, which can then be used in a for loop to exhaust all windows.</p>
 <span class="go">}</span>
 </pre></div>
 </div>
+<p>Notice how the second staff in the example above does not have a time
+signature. This is because consecutive identical time signatures are
+omitted by default. To change this behaviour, instantialise this class
+with the keyword argument <code class="docutils literal notranslate"><span class="pre">force_identical_time_signatures</span></code> set to
+<code class="docutils literal notranslate"><span class="pre">True</span></code>, or change the <code class="docutils literal notranslate"><span class="pre">force_identical_time_signatures</span></code> property
+to alter its value after the initialisation.</p>
 </div>
 <div class="example docutils container">
 <p>This class can take many optional keyword arguments during its
@@ -1753,14 +2592,17 @@ backwards). Finally, <code class="docutils literal notranslate"><span class="pre
 starting position of the looping window. It must be an integer and its
 default value is 0.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">input_music</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;c&#39;4 d&#39;2 e&#39;4 f&#39;2 ~ f&#39;8 g&#39;1&quot;</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">looper</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">LoopWindowByElements</span><span class="p">(</span><span class="n">input_music</span><span class="p">,</span>
-<span class="gp">... </span>                                     <span class="n">window_size</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>
-<span class="gp">... </span>                                     <span class="n">step_size</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
-<span class="gp">... </span>                                     <span class="n">max_steps</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
-<span class="gp">... </span>                                     <span class="n">repetition_chance</span><span class="o">=</span><span class="mf">0.25</span><span class="p">,</span>
-<span class="gp">... </span>                                     <span class="n">forward_bias</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span>
-<span class="gp">... </span>                                     <span class="n">head_position</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
-<span class="gp">... </span>                                     <span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">looper</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">LoopWindowByElements</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="n">input_music</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">window_size</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">step_size</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">max_steps</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">repetition_chance</span><span class="o">=</span><span class="mf">0.25</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">forward_bias</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">head_position</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">omit_all_time_signatures</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">force_identical_time_signatures</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+<span class="gp">... </span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">looper</span><span class="o">.</span><span class="n">window_size</span>
 <span class="go">3</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">looper</span><span class="o">.</span><span class="n">step_size</span>
@@ -1773,16 +2615,21 @@ default value is 0.</p>
 <span class="go">2</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">looper</span><span class="o">.</span><span class="n">head_position</span>
 <span class="go">0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">looper</span><span class="o">.</span><span class="n">omit_all_time_signatures</span>
+<span class="go">False</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">looper</span><span class="o">.</span><span class="n">force_identical_time_signatures</span>
+<span class="go">False</span>
 </pre></div>
 </div>
-<p>Use the <code class="docutils literal notranslate"><span class="pre">set_</span></code> methods below to change these values after
-initialisation.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">looper</span><span class="o">.</span><span class="n">set_window_size</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">looper</span><span class="o">.</span><span class="n">set_step_size</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">looper</span><span class="o">.</span><span class="n">set_max_steps</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">looper</span><span class="o">.</span><span class="n">set_repetition_chance</span><span class="p">(</span><span class="mf">0.1</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">looper</span><span class="o">.</span><span class="n">set_forward_bias</span><span class="p">(</span><span class="mf">0.8</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">looper</span><span class="o">.</span><span class="n">set_head_position</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<p>Use the properties below to change these values after initialisation.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">looper</span><span class="o">.</span><span class="n">window_size</span> <span class="o">=</span> <span class="mi">2</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">looper</span><span class="o">.</span><span class="n">step_size</span> <span class="o">=</span> <span class="mi">2</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">looper</span><span class="o">.</span><span class="n">max_steps</span> <span class="o">=</span> <span class="mi">3</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">looper</span><span class="o">.</span><span class="n">repetition_chance</span> <span class="o">=</span> <span class="mf">0.1</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">looper</span><span class="o">.</span><span class="n">forward_bias</span> <span class="o">=</span> <span class="mf">0.8</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">looper</span><span class="o">.</span><span class="n">head_position</span> <span class="o">=</span> <span class="mi">2</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">looper</span><span class="o">.</span><span class="n">omit_all_time_signatures</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">looper</span><span class="o">.</span><span class="n">force_identical_time_signatures</span> <span class="o">=</span> <span class="kc">True</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">looper</span><span class="o">.</span><span class="n">window_size</span>
 <span class="go">2</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">looper</span><span class="o">.</span><span class="n">step_size</span>
@@ -1795,18 +2642,22 @@ initialisation.</p>
 <span class="go">0.8</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">looper</span><span class="o">.</span><span class="n">head_position</span>
 <span class="go">2</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">looper</span><span class="o">.</span><span class="n">omit_all_time_signatures</span>
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">looper</span><span class="o">.</span><span class="n">force_identical_time_signatures</span>
+<span class="go">True</span>
 </pre></div>
 </div>
 </div>
 <div class="example docutils container">
 <p>To disable time signatures altogether, initialise
 <code class="docutils literal notranslate"><span class="pre">LoopWindowByElements</span></code> with the keyword argument
-<code class="docutils literal notranslate"><span class="pre">omit_time_signature</span></code> set to <code class="docutils literal notranslate"><span class="pre">True</span></code> (default is <code class="docutils literal notranslate"><span class="pre">False</span></code>), or use
-the <code class="docutils literal notranslate"><span class="pre">set_omit_time_signature()</span></code> method after initialisation.</p>
+<code class="docutils literal notranslate"><span class="pre">omit_all_time_signatures</span></code> set to <code class="docutils literal notranslate"><span class="pre">True</span></code> (default is <code class="docutils literal notranslate"><span class="pre">False</span></code>), or
+use the <code class="docutils literal notranslate"><span class="pre">omit_time_signature</span></code> property after initialisation.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">input_music</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;c&#39;4 d&#39;2 e&#39;4 f&#39;2 ~ f&#39;8 g&#39;1&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">looper</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">LoopWindowByElements</span><span class="p">(</span><span class="n">input_music</span><span class="p">,</span>
 <span class="gp">... </span>                                     <span class="n">window_size</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>
-<span class="gp">... </span>                                     <span class="n">omit_time_signature</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+<span class="gp">... </span>                                     <span class="n">omit_all_time_signatures</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
 <span class="gp">... </span>                                     <span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">notes</span> <span class="o">=</span> <span class="n">looper</span><span class="p">()</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">staff</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span><span class="n">notes</span><span class="p">)</span>
@@ -1940,12 +2791,12 @@ available for tying pitches.</p>
 </div>
 </div>
 <div class="example docutils container">
-<p>To change the size of the window after instantiation, use the method
-<code class="docutils literal notranslate"><span class="pre">set_window_size()</span></code>. In the example below, the initial window is of
-size 3, and so the first call of the looper object outputs the first,
-second, and third leaves. The window size is then set to 4, and the
-looper is called again, moving to the leaf in the next position, thus
-outputting the second, third, fourth, and fifth leaves.</p>
+<p>To change the size of the looping window after instantiation, use the
+property <code class="docutils literal notranslate"><span class="pre">window_size</span></code>. In the example below, the initial window is
+of size 3, and so the first call of the looper object outputs the
+first, second, and third leaves. The window size is then set to 4, and
+the looper is called again, moving to the leaf in the next position,
+thus outputting the second, third, fourth, and fifth leaves.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">input_music</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;c&#39;4 d&#39;2 e&#39;4 f&#39;2 ~ f&#39;8 g&#39;1&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">looper</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">LoopWindowByElements</span><span class="p">(</span><span class="n">input_music</span><span class="p">,</span>
 <span class="gp">... </span>                                     <span class="n">window_size</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>
@@ -1960,7 +2811,7 @@ outputting the second, third, fourth, and fifth leaves.</p>
 <span class="go">    d&#39;2</span>
 <span class="go">    e&#39;4</span>
 <span class="go">}</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">looper</span><span class="o">.</span><span class="n">set_window_size</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">looper</span><span class="o">.</span><span class="n">window_size</span> <span class="o">=</span> <span class="mi">4</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">notes</span> <span class="o">=</span> <span class="n">looper</span><span class="p">()</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">staff</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span><span class="n">notes</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">f</span><span class="p">(</span><span class="n">staff</span><span class="p">)</span>
@@ -2028,7 +2879,7 @@ will have the ratio printed above it.</p>
 <h2>LoopWindowByList<a class="headerlink" href="#loopwindowbylist" title="Permalink to this headline">¶</a></h2>
 <dl class="class">
 <dt id="auxjad.LoopWindowByList">
-<em class="property">class </em><code class="descclassname">auxjad.</code><code class="descname">LoopWindowByList</code><span class="sig-paren">(</span><em>container: list</em>, <em>*</em>, <em>window_size: int</em>, <em>step_size: int = 1</em>, <em>max_steps: int = 1</em>, <em>repetition_chance: float = 0.0</em>, <em>forward_bias: float = 1.0</em>, <em>head_position: int = 0</em><span class="sig-paren">)</span><a class="headerlink" href="#auxjad.LoopWindowByList" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">auxjad.</code><code class="descname">LoopWindowByList</code><span class="sig-paren">(</span><em>container: list</em>, <em>*</em>, <em>window_size: int</em>, <em>step_size: int = 1</em>, <em>max_steps: int = 1</em>, <em>repetition_chance: float = 0.0</em>, <em>forward_bias: float = 1.0</em>, <em>head_position: int = 0</em>, <em>move_window_on_first_call: bool = False</em><span class="sig-paren">)</span><a class="headerlink" href="#auxjad.LoopWindowByList" title="Permalink to this definition">¶</a></dt>
 <dd><p>Similar to <code class="docutils literal notranslate"><span class="pre">LoopWindowByList</span></code>, but instead of taking an
 <code class="docutils literal notranslate"><span class="pre">abjad.Container</span></code> input, it takes a list of arbitrary size. It then
 outputs the list elements, whatever they may be. The list elements can be
@@ -2060,9 +2911,24 @@ window forwards and output the result:</p>
 <span class="go">[&#39;B&#39;, &#39;C&#39;, &#39;D&#39;]</span>
 </pre></div>
 </div>
-<p>The method get_current_window() will output the current window without
-moving the head forwards.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">looper</span><span class="o">.</span><span class="n">get_current_window</span><span class="p">()</span>
+<p>The property <code class="docutils literal notranslate"><span class="pre">current_window</span></code> can be used to access the current
+window without moving the head forwards.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">looper</span><span class="o">.</span><span class="n">current_window</span>
+<span class="go">[&#39;B&#39;, &#39;C&#39;, &#39;D&#39;]</span>
+</pre></div>
+</div>
+</div>
+<div class="example docutils container">
+<p>The very first call will output the input list without processing
+it. To disable this behaviour and have the looping window move on the
+very first call, initialise the class with the keyword argument
+<code class="docutils literal notranslate"><span class="pre">move_window_on_first_call</span></code> set to <code class="docutils literal notranslate"><span class="pre">True</span></code>.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">input_list</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="s1">&#39;B&#39;</span><span class="p">,</span> <span class="s1">&#39;C&#39;</span><span class="p">,</span> <span class="s1">&#39;D&#39;</span><span class="p">,</span> <span class="s1">&#39;E&#39;</span><span class="p">,</span> <span class="s1">&#39;F&#39;</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">looper</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">LoopWindowByList</span><span class="p">(</span><span class="n">input_list</span><span class="p">,</span>
+<span class="gp">... </span>                                 <span class="n">window_size</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>
+<span class="gp">... </span>                                 <span class="n">move_window_on_first_call</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+<span class="gp">... </span>                                 <span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">looper</span><span class="p">()</span>
 <span class="go">[&#39;B&#39;, &#39;C&#39;, &#39;D&#39;]</span>
 </pre></div>
 </div>
@@ -2093,7 +2959,7 @@ number of steps that the window can advance when the object is called,
 ranging between 1 and the input value (default is also 1).
 <code class="docutils literal notranslate"><span class="pre">repetition_chance</span></code> sets the chance of a window result repeating
 itself (that is, the window not moving forwards when called). It should
-range from 0.0 to 1.0 (default 0.0, i.e. no repetition). 
+range from 0.0 to 1.0 (default 0.0, i.e. no repetition).
 <code class="docutils literal notranslate"><span class="pre">forward_bias</span></code> sets the chance of the window moving forward instead
 of backwards. It should range from 0.0 to 1.0 (default 1.0, which means
 the window can only move forwards. A value of 0.5 gives 50% chance of
@@ -2123,14 +2989,13 @@ starting position of the looping window (default is 0).</p>
 <span class="go">0</span>
 </pre></div>
 </div>
-<p>Use the <code class="docutils literal notranslate"><span class="pre">set_</span></code> methods below to change these values after
-initialisation.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">looper</span><span class="o">.</span><span class="n">set_window_size</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">looper</span><span class="o">.</span><span class="n">set_step_size</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">looper</span><span class="o">.</span><span class="n">set_max_steps</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">looper</span><span class="o">.</span><span class="n">set_repetition_chance</span><span class="p">(</span><span class="mf">0.1</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">looper</span><span class="o">.</span><span class="n">set_forward_bias</span><span class="p">(</span><span class="mf">0.8</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">looper</span><span class="o">.</span><span class="n">set_head_position</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<p>Use the properties below to change these values after initialisation.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">looper</span><span class="o">.</span><span class="n">window_size</span> <span class="o">=</span> <span class="mi">2</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">looper</span><span class="o">.</span><span class="n">step_size</span> <span class="o">=</span> <span class="mi">2</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">looper</span><span class="o">.</span><span class="n">max_steps</span> <span class="o">=</span> <span class="mi">3</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">looper</span><span class="o">.</span><span class="n">repetition_chance</span> <span class="o">=</span> <span class="mf">0.1</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">looper</span><span class="o">.</span><span class="n">forward_bias</span> <span class="o">=</span> <span class="mf">0.8</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">looper</span><span class="o">.</span><span class="n">head_position</span> <span class="o">=</span> <span class="mi">2</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">looper</span><span class="o">.</span><span class="n">window_size</span>
 <span class="go">2</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">looper</span><span class="o">.</span><span class="n">step_size</span>
@@ -2179,18 +3044,18 @@ element, use the method <code class="docutils literal notranslate"><span class="
 </div>
 </div>
 <div class="example docutils container">
-<p>To change the size of the window after instantiation, use the method
-<code class="docutils literal notranslate"><span class="pre">set_window_size()</span></code>. In the example below, the initial window is of
-size 3, and so the first call of the looper object outputs the first,
-second, and third elements of the list. The window size is then set to
-4, and the looper is called again, moving to the element in the next
-position, thus outputting the second, third, fourth, and fifth
+<p>To change the size of the looping window after instantiation, use the
+property <code class="docutils literal notranslate"><span class="pre">window_size</span></code>. In the example below, the initial window is
+of size 3, and so the first call of the looper object outputs the
+first, second, and third elements of the list. The window size is then
+set to 4, and the looper is called again, moving to the element in the
+next position, thus outputting the second, third, fourth, and fifth
 elements.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">input_list</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="s1">&#39;B&#39;</span><span class="p">,</span> <span class="s1">&#39;C&#39;</span><span class="p">,</span> <span class="s1">&#39;D&#39;</span><span class="p">,</span> <span class="s1">&#39;E&#39;</span><span class="p">,</span> <span class="s1">&#39;F&#39;</span><span class="p">]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">looper</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">LoopWindowByList</span><span class="p">(</span><span class="n">input_list</span><span class="p">,</span> <span class="n">window_size</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">looper</span><span class="p">()</span>
 <span class="go">[&#39;A&#39;, &#39;B&#39;, &#39;C&#39;]</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">looper</span><span class="o">.</span><span class="n">set_window_size</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">looper</span><span class="o">.</span><span class="n">window_size</span> <span class="o">=</span> <span class="mi">4</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">looper</span><span class="p">()</span>
 <span class="go">[&#39;B&#39;, &#39;C&#39;, &#39;D&#39;, &#39;E&#39;]</span>
 </pre></div>
@@ -2640,6 +3505,62 @@ which the time signatures are attached to leaves of subcontainers:</p>
 <span class="go">        a2</span>
 <span class="go">        b2</span>
 <span class="go">    }</span>
+<span class="go">}</span>
+</pre></div>
+</div>
+</div>
+</dd></dl>
+
+</div>
+<div class="section" id="rests-to-multimeasure-rest">
+<h2>rests_to_multimeasure_rest<a class="headerlink" href="#rests-to-multimeasure-rest" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="auxjad.rests_to_multimeasure_rest">
+<code class="descclassname">auxjad.</code><code class="descname">rests_to_multimeasure_rest</code><span class="sig-paren">(</span><em>container: abjad.core.Container.Container</em><span class="sig-paren">)</span><a class="headerlink" href="#auxjad.rests_to_multimeasure_rest" title="Permalink to this definition">¶</a></dt>
+<dd><p>Takes an <code class="docutils literal notranslate"><span class="pre">abjad.Container</span></code> and converts all rests into
+<code class="docutils literal notranslate"><span class="pre">abjad.MultimeasureRest</span></code>’s when possible.</p>
+<div class="example docutils container">
+<p>Converts any measure filled with regular rests into a measure with a
+single multi-measure rest.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">container</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;r1&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">auxjad</span><span class="o">.</span><span class="n">rests_to_multimeasure_rest</span><span class="p">(</span><span class="n">container</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">f</span><span class="p">(</span><span class="n">container</span><span class="p">)</span>
+<span class="go">{</span>
+<span class="go">    R1</span>
+<span class="go">}</span>
+</pre></div>
+</div>
+</div>
+<div class="example docutils container">
+<p>Works with measures with multiple regular rests.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">container</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;\time 3/4 r4 r8.. r32 r4&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">auxjad</span><span class="o">.</span><span class="n">rests_to_multimeasure_rest</span><span class="p">(</span><span class="n">container</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">f</span><span class="p">(</span><span class="n">container</span><span class="p">)</span>
+<span class="go">{</span>
+<span class="go">    %%% \time 3/4 %%%</span>
+<span class="go">    R1 * 3/4</span>
+<span class="go">}</span>
+</pre></div>
+</div>
+</div>
+<div class="example docutils container">
+<p>Works with containers with multiple time signatures as well as notes.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">container</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;\time 3/4 r2. | &quot;</span>
+<span class="gp">... </span>                             <span class="s2">&quot;</span><span class="se">\t</span><span class="s2">ime 6/8 r2. | &quot;</span>
+<span class="gp">... </span>                             <span class="s2">&quot;</span><span class="se">\t</span><span class="s2">ime 5/4 c&#39;1 ~ c&#39;4 | r1 r4&quot;</span>
+<span class="gp">... </span>                             <span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">auxjad</span><span class="o">.</span><span class="n">rests_to_multimeasure_rest</span><span class="p">(</span><span class="n">container</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">f</span><span class="p">(</span><span class="n">container</span><span class="p">)</span>
+<span class="go">{</span>
+<span class="go">    %%% \time 3/4 %%%</span>
+<span class="go">    R1 * 3/4</span>
+<span class="go">    %%% \time 6/8 %%%</span>
+<span class="go">    R1 * 3/4</span>
+<span class="go">    %%% \time 5/4 %%%</span>
+<span class="go">    c&#39;1</span>
+<span class="go">    ~</span>
+<span class="go">    c&#39;4</span>
+<span class="go">    R1 * 5/4</span>
 <span class="go">}</span>
 </pre></div>
 </div>
@@ -3227,32 +4148,50 @@ linear curvature.</p>
 </div>
 </div>
 <div class="example docutils container">
-<p>To replace an element in the container, use the method
-<code class="docutils literal notranslate"><span class="pre">replace_element()</span></code>. This will not affect the current probability
-vector, and the new element will have the same probability as the one
-it replaced.</p>
+<p>This class allows slicing to get and set values in the container. This
+will not affect the current probability vector, and the new element
+will have the same probability as the one it replaced.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">container</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">TenneysContainer</span><span class="p">([</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="s1">&#39;B&#39;</span><span class="p">,</span> <span class="s1">&#39;C&#39;</span><span class="p">,</span> <span class="s1">&#39;D&#39;</span><span class="p">,</span> <span class="s1">&#39;E&#39;</span><span class="p">,</span> <span class="s1">&#39;F&#39;</span><span class="p">])</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">30</span><span class="p">):</span>
 <span class="gp">... </span>    <span class="n">container</span><span class="p">()</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">container</span><span class="o">.</span><span class="n">replace_element</span><span class="p">(</span><span class="s1">&#39;foo&#39;</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">container</span><span class="o">.</span><span class="n">contents</span>
-<span class="go">[&#39;A&#39;, &#39;B&#39;, &#39;foo&#39;, &#39;D&#39;, &#39;E&#39;, &#39;F&#39;]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">container</span><span class="o">.</span><span class="n">probabilities</span>
 <span class="go">[3.0, 2.0, 1.0, 7.0, 5.0, 0.0]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">container</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+<span class="go">&#39;C&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">container</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="mi">4</span><span class="p">]</span>
+<span class="go">[&#39;B&#39;, &#39;C&#39;, &#39;D&#39;]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">container</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;foo&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">container</span><span class="o">.</span><span class="n">contents</span>
+<span class="go">[&#39;A&#39;, &#39;B&#39;, &#39;foo&#39;, &#39;D&#39;, &#39;E&#39;, &#39;F&#39;]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">container</span><span class="p">[:]</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;foo&#39;</span><span class="p">,</span> <span class="s1">&#39;bar&#39;</span><span class="p">,</span> <span class="s1">&#39;X&#39;</span><span class="p">,</span> <span class="s1">&#39;Y&#39;</span><span class="p">,</span> <span class="s1">&#39;Z&#39;</span><span class="p">,</span> <span class="s1">&#39;...&#39;</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">container</span><span class="o">.</span><span class="n">contents</span>
+<span class="go">[&#39;foo&#39;, &#39;bar&#39;, &#39;X&#39;, &#39;Y&#39;, &#39;Z&#39;, &#39;...&#39;]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">container</span><span class="o">.</span><span class="n">probabilities</span>
+<span class="go">[3.0, 2.0, 1.0, 7.0, 5.0, 0.0]</span>
+</pre></div>
+</div>
+<p>You cna also check if the object contains a specific element. In the
+case of the container above, we have:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="s1">&#39;foo&#39;</span> <span class="ow">in</span> <span class="n">container</span>
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="s1">&#39;A&#39;</span> <span class="ow">in</span> <span class="n">container</span>
+<span class="go">False</span>
 </pre></div>
 </div>
 </div>
 <div class="example docutils container">
 <p>A new container of an arbitrary length can be set at any point using
-the method <code class="docutils literal notranslate"><span class="pre">set_container()</span></code>. Do notice that the probabilities will
-be reset at that point. This method can take the optional keyword
-argument weights similarly to when instantiating the class.</p>
+the property <code class="docutils literal notranslate"><span class="pre">contents</span></code>. Do notice that the probabilities will be
+reset at that point. This method can take the optional keyword argument
+weights similarly to when instantiating the class.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">container</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">TenneysContainer</span><span class="p">([</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="s1">&#39;B&#39;</span><span class="p">,</span> <span class="s1">&#39;C&#39;</span><span class="p">,</span> <span class="s1">&#39;D&#39;</span><span class="p">,</span> <span class="s1">&#39;E&#39;</span><span class="p">,</span> <span class="s1">&#39;F&#39;</span><span class="p">])</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">30</span><span class="p">):</span>
 <span class="gp">... </span>    <span class="n">container</span><span class="p">()</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">container</span><span class="o">.</span><span class="n">probabilities</span>
 <span class="go">[2.0, 1.0, 4.0, 3.0, 0.0, 5.0]</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">container</span><span class="o">.</span><span class="n">set_container</span><span class="p">([</span><span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">8</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">container</span><span class="o">.</span><span class="n">contents</span>
+<span class="go">[&#39;A&#39;, &#39;B&#39;, &#39;C&#39;, &#39;D&#39;, &#39;E&#39;, &#39;F&#39;]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">container</span><span class="o">.</span><span class="n">contents</span> <span class="o">=</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">8</span><span class="p">]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">container</span><span class="o">.</span><span class="n">contents</span>
 <span class="go">[2, 4, 6, 8]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">len</span><span class="p">(</span><span class="n">container</span><span class="p">)</span>
@@ -3265,12 +4204,12 @@ argument weights similarly to when instantiating the class.</p>
 </div>
 </div>
 <div class="example docutils container">
-<p>To change the curvature value at any point, use the <code class="docutils literal notranslate"><span class="pre">set_curvature()</span></code>
-method.</p>
+<p>To change the curvature value at any point, simply set the property
+<code class="docutils literal notranslate"><span class="pre">curvature</span></code> to a different value.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">container</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">TenneysContainer</span><span class="p">([</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="s1">&#39;B&#39;</span><span class="p">,</span> <span class="s1">&#39;C&#39;</span><span class="p">,</span> <span class="s1">&#39;D&#39;</span><span class="p">,</span> <span class="s1">&#39;E&#39;</span><span class="p">,</span> <span class="s1">&#39;F&#39;</span><span class="p">])</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">container</span><span class="o">.</span><span class="n">curvature</span>
 <span class="go">1.0</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">container</span><span class="o">.</span><span class="n">set_curvature</span><span class="p">(</span><span class="mf">0.25</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">container</span><span class="o">.</span><span class="n">curvature</span> <span class="o">=</span> <span class="mf">0.25</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">container</span><span class="o">.</span><span class="n">curvature</span>
 <span class="go">0.25</span>
 </pre></div>
@@ -3392,26 +4331,16 @@ time signature change, the function raises a <code class="docutils literal notra
   
 
 
-  
-
-    
-    
-      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
-        <script type="text/javascript" src="_static/jquery.js"></script>
-        <script type="text/javascript" src="_static/underscore.js"></script>
-        <script type="text/javascript" src="_static/doctools.js"></script>
-        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    
-
-  
-
-  <script type="text/javascript" src="_static/js/theme.js"></script>
-
   <script type="text/javascript">
       jQuery(function () {
           SphinxRtdTheme.Navigation.enable(true);
       });
-  </script> 
+  </script>
+
+  
+  
+    
+   
 
 </body>
 </html>
