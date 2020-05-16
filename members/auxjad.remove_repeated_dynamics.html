@@ -1,0 +1,564 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>auxjad.remove_repeated_dynamics &mdash; auxjad 0.6.1 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="auxjad.remove_repeated_time_signatures" href="auxjad.remove_repeated_time_signatures.html" />
+    <link rel="prev" title="auxjad.LoopWindowByList" href="auxjad.LoopWindowByList.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> auxjad
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.6
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="auxjad.are_containers_equal.html">auxjad.are_containers_equal</a></li>
+<li class="toctree-l1"><a class="reference internal" href="auxjad.are_leaves_tieable.html">auxjad.are_leaves_tieable</a></li>
+<li class="toctree-l1"><a class="reference internal" href="auxjad.ArtificialHarmonic.html">auxjad.ArtificialHarmonic</a></li>
+<li class="toctree-l1"><a class="reference internal" href="auxjad.CartographyContainer.html">auxjad.CartographyContainer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="auxjad.close_container.html">auxjad.close_container</a></li>
+<li class="toctree-l1"><a class="reference internal" href="auxjad.fill_with_rests.html">auxjad.fill_with_rests</a></li>
+<li class="toctree-l1"><a class="reference internal" href="auxjad.HarmonicNote.html">auxjad.HarmonicNote</a></li>
+<li class="toctree-l1"><a class="reference internal" href="auxjad.is_container_full.html">auxjad.is_container_full</a></li>
+<li class="toctree-l1"><a class="reference internal" href="auxjad.LeafDynMaker.html">auxjad.LeafDynMaker</a></li>
+<li class="toctree-l1"><a class="reference internal" href="auxjad.LeafShuffler.html">auxjad.LeafShuffler</a></li>
+<li class="toctree-l1"><a class="reference internal" href="auxjad.LoopWindow.html">auxjad.LoopWindow</a></li>
+<li class="toctree-l1"><a class="reference internal" href="auxjad.LoopWindowByElements.html">auxjad.LoopWindowByElements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="auxjad.LoopWindowByList.html">auxjad.LoopWindowByList</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">auxjad.remove_repeated_dynamics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="auxjad.remove_repeated_time_signatures.html">auxjad.remove_repeated_time_signatures</a></li>
+<li class="toctree-l1"><a class="reference internal" href="auxjad.rests_to_multimeasure_rest.html">auxjad.rests_to_multimeasure_rest</a></li>
+<li class="toctree-l1"><a class="reference internal" href="auxjad.simplified_time_signature_ratio.html">auxjad.simplified_time_signature_ratio</a></li>
+<li class="toctree-l1"><a class="reference internal" href="auxjad.sync_containers.html">auxjad.sync_containers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="auxjad.TenneysContainer.html">auxjad.TenneysContainer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="auxjad.underfull_duration.html">auxjad.underfull_duration</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">auxjad</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+      <li>auxjad.remove_repeated_dynamics</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/members/auxjad.remove_repeated_dynamics.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="auxjad-remove-repeated-dynamics">
+<h1>auxjad.remove_repeated_dynamics<a class="headerlink" href="#auxjad-remove-repeated-dynamics" title="Permalink to this headline">¶</a></h1>
+<dl class="function">
+<dt id="auxjad.remove_repeated_dynamics">
+<code class="descclassname">auxjad.</code><code class="descname">remove_repeated_dynamics</code><span class="sig-paren">(</span><em>container: abjad.core.Container.Container</em>, <em>*</em>, <em>ignore_hairpins: bool = False</em>, <em>reset_after_rests: bool = False</em><span class="sig-paren">)</span><a class="headerlink" href="#auxjad.remove_repeated_dynamics" title="Permalink to this definition">¶</a></dt>
+<dd><p>A function which removes all consecutive repeated dynamics. It removes
+consecutive effective dynamics, even if separated by any number of
+notes without one. It resets its memory of what was the previous dynamic
+every time it finds a hairpin, since notation such as <code class="docutils literal notranslate"><span class="pre">&quot;c'4\f\&gt;</span> <span class="pre">c'4\f\&gt;&quot;</span></code>
+is quite common; this behaviour can be toggled off using the
+<code class="docutils literal notranslate"><span class="pre">ignore_hairpins</span></code> keyword argument. By default, it remembers the previous
+dynamic even with notes separated by rests; this can be toggled off using
+<code class="docutils literal notranslate"><span class="pre">reset_after_rests=True</span></code>. To set a maximum length of silence after which
+dynamics are restated, set <code class="docutils literal notranslate"><span class="pre">reset_after_rests</span></code> to a duration using
+<code class="docutils literal notranslate"><span class="pre">abjad.Duration()</span></code> or any other duration format accepted by Abjad.</p>
+<div class="example docutils container">
+<p>When two consecutive leaves have identical dynamics, the second
+one is removed:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">staff</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;\time 3/8 c&#39;4\pp d&#39;8\pp | c&#39;4\f d&#39;8\f&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">f</span><span class="p">(</span><span class="n">staff</span><span class="p">)</span>
+<span class="go">\new Staff</span>
+<span class="go">{</span>
+<span class="go">    \time 3/8</span>
+<span class="go">    c&#39;4</span>
+<span class="go">    \pp</span>
+<span class="go">    d&#39;8</span>
+<span class="go">    \pp</span>
+<span class="go">    c&#39;4</span>
+<span class="go">    \f</span>
+<span class="go">    d&#39;8</span>
+<span class="go">    \f</span>
+<span class="go">}</span>
+</pre></div>
+</div>
+<div class="figure">
+<img alt="../_images/image-remove_repeated_dynamics-1.png" src="../_images/image-remove_repeated_dynamics-1.png" />
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">auxjad</span><span class="o">.</span><span class="n">remove_repeated_dynamics</span><span class="p">(</span><span class="n">staff</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">f</span><span class="p">(</span><span class="n">staff</span><span class="p">)</span>
+<span class="go">\new Staff</span>
+<span class="go">{</span>
+<span class="go">    \time 3/8</span>
+<span class="go">    c&#39;4</span>
+<span class="go">    \pp</span>
+<span class="go">    d&#39;8</span>
+<span class="go">    c&#39;4</span>
+<span class="go">    \f</span>
+<span class="go">    d&#39;8</span>
+<span class="go">}</span>
+</pre></div>
+</div>
+<div class="figure">
+<img alt="../_images/image-remove_repeated_dynamics-2.png" src="../_images/image-remove_repeated_dynamics-2.png" />
+</div>
+</div>
+<div class="example docutils container">
+<p>The function also removes dynamics that are separated by an arbitrary
+number of leaves without dynamics:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">staff</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;\time 3/8 c&#39;4\p d&#39;8 | e&#39;4.\p | c&#39;4\p d&#39;8\f&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">f</span><span class="p">(</span><span class="n">staff</span><span class="p">)</span>
+<span class="go">\new Staff</span>
+<span class="go">{</span>
+<span class="go">    \time 3/8</span>
+<span class="go">    c&#39;4</span>
+<span class="go">    \p</span>
+<span class="go">    d&#39;8</span>
+<span class="go">    e&#39;4.</span>
+<span class="go">    \p</span>
+<span class="go">    c&#39;4</span>
+<span class="go">    \p</span>
+<span class="go">    d&#39;8</span>
+<span class="go">    \f</span>
+<span class="go">}</span>
+</pre></div>
+</div>
+<div class="figure">
+<img alt="../_images/image-remove_repeated_dynamics-3.png" src="../_images/image-remove_repeated_dynamics-3.png" />
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">auxjad</span><span class="o">.</span><span class="n">remove_repeated_dynamics</span><span class="p">(</span><span class="n">staff</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">f</span><span class="p">(</span><span class="n">staff</span><span class="p">)</span>
+<span class="go">\new Staff</span>
+<span class="go">{</span>
+<span class="go">    \time 3/8</span>
+<span class="go">    c&#39;4</span>
+<span class="go">    \p</span>
+<span class="go">    d&#39;8</span>
+<span class="go">    e&#39;4.</span>
+<span class="go">    c&#39;4</span>
+<span class="go">    d&#39;8</span>
+<span class="go">    \f</span>
+<span class="go">}</span>
+</pre></div>
+</div>
+<div class="figure">
+<img alt="../_images/image-remove_repeated_dynamics-4.png" src="../_images/image-remove_repeated_dynamics-4.png" />
+</div>
+</div>
+<div class="example docutils container">
+<p>The input container can also handle subcontainers:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">staff</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">([</span><span class="n">abjad</span><span class="o">.</span><span class="n">Note</span><span class="p">(</span><span class="s2">&quot;c&#39;2&quot;</span><span class="p">),</span>
+<span class="gp">... </span>                     <span class="n">abjad</span><span class="o">.</span><span class="n">Chord</span><span class="p">(</span><span class="s2">&quot;&lt;d&#39; f&#39;&gt;2&quot;</span><span class="p">),</span>
+<span class="gp">... </span>                     <span class="n">abjad</span><span class="o">.</span><span class="n">Tuplet</span><span class="p">((</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="s2">&quot;g2 a2 b2&quot;</span><span class="p">),</span>
+<span class="gp">... </span>                     <span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">attach</span><span class="p">(</span><span class="n">abjad</span><span class="o">.</span><span class="n">Dynamic</span><span class="p">(</span><span class="s1">&#39;ppp&#39;</span><span class="p">),</span> <span class="n">staff</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">attach</span><span class="p">(</span><span class="n">abjad</span><span class="o">.</span><span class="n">Dynamic</span><span class="p">(</span><span class="s1">&#39;ppp&#39;</span><span class="p">),</span> <span class="n">staff</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">attach</span><span class="p">(</span><span class="n">abjad</span><span class="o">.</span><span class="n">Dynamic</span><span class="p">(</span><span class="s1">&#39;ppp&#39;</span><span class="p">),</span> <span class="n">staff</span><span class="p">[</span><span class="mi">2</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">f</span><span class="p">(</span><span class="n">staff</span><span class="p">)</span>
+<span class="go">\new Staff</span>
+<span class="go">{</span>
+<span class="go">    c&#39;2</span>
+<span class="go">    \ppp</span>
+<span class="go">    &lt;d&#39; f&#39;&gt;2</span>
+<span class="go">    \ppp</span>
+<span class="go">    \times 2/3 {</span>
+<span class="go">        g2</span>
+<span class="go">        \ppp</span>
+<span class="go">        a2</span>
+<span class="go">        b2</span>
+<span class="go">    }</span>
+<span class="go">}</span>
+</pre></div>
+</div>
+<div class="figure">
+<img alt="../_images/image-remove_repeated_dynamics-5.png" src="../_images/image-remove_repeated_dynamics-5.png" />
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">auxjad</span><span class="o">.</span><span class="n">remove_repeated_dynamics</span><span class="p">(</span><span class="n">staff</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">f</span><span class="p">(</span><span class="n">staff</span><span class="p">)</span>
+<span class="go">\new Staff</span>
+<span class="go">{</span>
+<span class="go">    c&#39;2</span>
+<span class="go">    \ppp</span>
+<span class="go">    &lt;d&#39; f&#39;&gt;2</span>
+<span class="go">    \times 2/3 {</span>
+<span class="go">        g2</span>
+<span class="go">        a2</span>
+<span class="go">        b2</span>
+<span class="go">    }</span>
+<span class="go">}</span>
+</pre></div>
+</div>
+<div class="figure">
+<img alt="../_images/image-remove_repeated_dynamics-6.png" src="../_images/image-remove_repeated_dynamics-6.png" />
+</div>
+</div>
+<div class="example docutils container">
+<p>By default, repeated dynamics with hairpins in between are not removed,
+but consecutive ones will.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">staff</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;c&#39;2\p\&lt; d&#39;2\f\&gt; | c&#39;2\f d&#39;2\f | e&#39;1\p&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">f</span><span class="p">(</span><span class="n">staff</span><span class="p">)</span>
+<span class="go">\new Staff</span>
+<span class="go">{</span>
+<span class="go">    c&#39;1</span>
+<span class="go">    \p</span>
+<span class="go">    \&lt;</span>
+<span class="go">    d&#39;1</span>
+<span class="go">    \f</span>
+<span class="go">    \&gt;</span>
+<span class="go">    c&#39;1</span>
+<span class="go">    \f</span>
+<span class="go">    d&#39;1</span>
+<span class="go">    \f</span>
+<span class="go">    e&#39;1</span>
+<span class="go">    \p</span>
+<span class="go">}</span>
+</pre></div>
+</div>
+<div class="figure">
+<img alt="../_images/image-remove_repeated_dynamics-7.png" src="../_images/image-remove_repeated_dynamics-7.png" />
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">auxjad</span><span class="o">.</span><span class="n">remove_repeated_dynamics</span><span class="p">(</span><span class="n">staff</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">f</span><span class="p">(</span><span class="n">staff</span><span class="p">)</span>
+<span class="go">\new Staff</span>
+<span class="go">{</span>
+<span class="go">    c&#39;1</span>
+<span class="go">    \p</span>
+<span class="go">    \&lt;</span>
+<span class="go">    d&#39;1</span>
+<span class="go">    \f</span>
+<span class="go">    \&gt;</span>
+<span class="go">    c&#39;1</span>
+<span class="go">    \f</span>
+<span class="go">    d&#39;1</span>
+<span class="go">    e&#39;1</span>
+<span class="go">    \p</span>
+<span class="go">}</span>
+</pre></div>
+</div>
+<div class="figure">
+<img alt="../_images/image-remove_repeated_dynamics-8.png" src="../_images/image-remove_repeated_dynamics-8.png" />
+</div>
+<p>To override the previous behaviour, set <code class="docutils literal notranslate"><span class="pre">ignore_hairpins=True</span></code> and
+hairpins will be ignored.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">staff</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;c&#39;2\p\&lt; d&#39;2\f\&gt; | c&#39;2\f d&#39;2\f | e&#39;1\p&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">f</span><span class="p">(</span><span class="n">staff</span><span class="p">)</span>
+<span class="go">\new Staff</span>
+<span class="go">{</span>
+<span class="go">    c&#39;1</span>
+<span class="go">    \p</span>
+<span class="go">    \&lt;</span>
+<span class="go">    d&#39;1</span>
+<span class="go">    \f</span>
+<span class="go">    \&gt;</span>
+<span class="go">    c&#39;1</span>
+<span class="go">    \f</span>
+<span class="go">    d&#39;1</span>
+<span class="go">    \f</span>
+<span class="go">    e&#39;1</span>
+<span class="go">    \p</span>
+<span class="go">}</span>
+</pre></div>
+</div>
+<div class="figure">
+<img alt="../_images/image-remove_repeated_dynamics-9.png" src="../_images/image-remove_repeated_dynamics-9.png" />
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">auxjad</span><span class="o">.</span><span class="n">remove_repeated_dynamics</span><span class="p">(</span><span class="n">staff</span><span class="p">,</span> <span class="n">ignore_hairpins</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">f</span><span class="p">(</span><span class="n">staff</span><span class="p">)</span>
+<span class="go">\new Staff</span>
+<span class="go">{</span>
+<span class="go">    c&#39;1</span>
+<span class="go">    \p</span>
+<span class="go">    \&lt;</span>
+<span class="go">    d&#39;1</span>
+<span class="go">    \f</span>
+<span class="go">    \&gt;</span>
+<span class="go">    c&#39;1</span>
+<span class="go">    d&#39;1</span>
+<span class="go">    e&#39;1</span>
+<span class="go">    \p</span>
+<span class="go">}</span>
+</pre></div>
+</div>
+<div class="figure">
+<img alt="../_images/image-remove_repeated_dynamics-10.png" src="../_images/image-remove_repeated_dynamics-10.png" />
+</div>
+</div>
+<div class="example docutils container">
+<p>By default, rests are treated just like any other leaf and thus notes
+with an identical dynamic separated by an arbitrary number of rests
+will be considered as repeated and the second dynamic will be removed.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">staff</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;c&#39;4\pp r2. | c&#39;4\pp&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">auxjad</span><span class="o">.</span><span class="n">remove_repeated_dynamics</span><span class="p">(</span><span class="n">staff</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">f</span><span class="p">(</span><span class="n">staff</span><span class="p">)</span>
+<span class="go">\new Staff</span>
+<span class="go">{</span>
+<span class="go">    c&#39;4</span>
+<span class="go">    \pp</span>
+<span class="go">    r2.</span>
+<span class="go">    c&#39;4</span>
+<span class="go">}</span>
+</pre></div>
+</div>
+<div class="figure">
+<img alt="../_images/image-remove_repeated_dynamics-11.png" src="../_images/image-remove_repeated_dynamics-11.png" />
+</div>
+<p>To override the previous behaviour, set <code class="docutils literal notranslate"><span class="pre">reset_after_rests=True</span></code> and
+dynamics will always be restated after a rest.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">staff</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;c&#39;4\pp r2. | c&#39;4\pp&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">auxjad</span><span class="o">.</span><span class="n">remove_repeated_dynamics</span><span class="p">(</span><span class="n">staff</span><span class="p">,</span> <span class="n">reset_after_rests</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">f</span><span class="p">(</span><span class="n">staff</span><span class="p">)</span>
+<span class="go">\new Staff</span>
+<span class="go">{</span>
+<span class="go">    c&#39;4</span>
+<span class="go">    \pp</span>
+<span class="go">    r2.</span>
+<span class="go">    c&#39;4</span>
+<span class="go">    \pp</span>
+<span class="go">}</span>
+</pre></div>
+</div>
+<div class="figure">
+<img alt="../_images/image-remove_repeated_dynamics-12.png" src="../_images/image-remove_repeated_dynamics-12.png" />
+</div>
+</div>
+<div class="example docutils container">
+<p>The argument <code class="docutils literal notranslate"><span class="pre">reset_after_rests</span></code> takes not only boolean values but
+also duration (<code class="docutils literal notranslate"><span class="pre">abjad.Duration</span></code>, tuple, float, etc.). This sets the
+maximum length of rests before which identical dynamics are restated.
+If the total length of rests falls below that value, then repeated
+dynamics are removed.</p>
+<p>In the case below, a rest of <code class="docutils literal notranslate"><span class="pre">r2</span></code>. is shorter than a duration of
+(4, 4), so the repeated dynamic is removed.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">staff</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;c&#39;4\pp r2. | c&#39;4\pp&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">auxjad</span><span class="o">.</span><span class="n">remove_repeated_dynamics</span><span class="p">(</span><span class="n">staff</span><span class="p">,</span> <span class="n">reset_after_rests</span><span class="o">=</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">f</span><span class="p">(</span><span class="n">staff</span><span class="p">)</span>
+<span class="go">\new Staff</span>
+<span class="go">{</span>
+<span class="go">    c&#39;4</span>
+<span class="go">    \pp</span>
+<span class="go">    r2.</span>
+<span class="go">    c&#39;4</span>
+<span class="go">}</span>
+</pre></div>
+</div>
+<div class="figure">
+<img alt="../_images/image-remove_repeated_dynamics-13.png" src="../_images/image-remove_repeated_dynamics-13.png" />
+</div>
+<p>But setting the duration to 2/4 forces the dynamic to be restated.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">staff</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;c&#39;4\pp r2. | c&#39;4\pp&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">auxjad</span><span class="o">.</span><span class="n">remove_repeated_dynamics</span><span class="p">(</span><span class="n">staff</span><span class="p">,</span> <span class="n">reset_after_rests</span><span class="o">=</span><span class="mi">2</span><span class="o">/</span><span class="mi">4</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">f</span><span class="p">(</span><span class="n">staff</span><span class="p">)</span>
+<span class="go">\new Staff</span>
+<span class="go">{</span>
+<span class="go">    c&#39;4</span>
+<span class="go">    \pp</span>
+<span class="go">    r2.</span>
+<span class="go">    c&#39;4</span>
+<span class="go">    \pp</span>
+<span class="go">}</span>
+</pre></div>
+</div>
+<div class="figure">
+<img alt="../_images/image-remove_repeated_dynamics-14.png" src="../_images/image-remove_repeated_dynamics-14.png" />
+</div>
+</div>
+<div class="example docutils container">
+<p>The function also handles measure rests with <code class="docutils literal notranslate"><span class="pre">reset_after_rests</span></code>.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">staff</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;c&#39;4\pp r2. | c&#39;4\pp r2. |R1 | c&#39;4\pp&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">auxjad</span><span class="o">.</span><span class="n">remove_repeated_dynamics</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="n">staff</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">reset_after_rests</span><span class="o">=</span><span class="n">abjad</span><span class="o">.</span><span class="n">Duration</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">),</span>
+<span class="gp">... </span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">f</span><span class="p">(</span><span class="n">staff</span><span class="p">)</span>
+<span class="go">\new Staff</span>
+<span class="go">{</span>
+<span class="go">    c&#39;4</span>
+<span class="go">    \pp</span>
+<span class="go">    r2.</span>
+<span class="go">    c&#39;4</span>
+<span class="go">    r2.</span>
+<span class="go">    R1</span>
+<span class="go">    c&#39;4</span>
+<span class="go">    \pp</span>
+<span class="go">}</span>
+</pre></div>
+</div>
+<div class="figure">
+<img alt="../_images/image-remove_repeated_dynamics-15.png" src="../_images/image-remove_repeated_dynamics-15.png" />
+</div>
+</div>
+</dd></dl>
+
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="auxjad.remove_repeated_time_signatures.html" class="btn btn-neutral float-right" title="auxjad.remove_repeated_time_signatures" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="auxjad.LoopWindowByList.html" class="btn btn-neutral float-left" title="auxjad.LoopWindowByList" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2020, Gilberto Agostinho
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>
