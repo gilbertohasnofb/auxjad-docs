@@ -1,0 +1,759 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>auxjad.LoopByLogicalTies &mdash; auxjad 0.6.3 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="auxjad.LoopByWindow" href="auxjad.LoopByWindow.html" />
+    <link rel="prev" title="auxjad.LoopByList" href="auxjad.LoopByList.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> auxjad
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.6
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../index.html">Welcome to auxjad’s documentation!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../examples-main.html">Examples of usage</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../api.html">auxjad API</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="auxjad.ArtificialHarmonic.html">auxjad.ArtificialHarmonic</a></li>
+<li class="toctree-l2"><a class="reference internal" href="auxjad.CartographySelector.html">auxjad.CartographySelector</a></li>
+<li class="toctree-l2"><a class="reference internal" href="auxjad.close_container.html">auxjad.close_container</a></li>
+<li class="toctree-l2"><a class="reference internal" href="auxjad.container_is_full.html">auxjad.container_is_full</a></li>
+<li class="toctree-l2"><a class="reference internal" href="auxjad.containers_are_equal.html">auxjad.containers_are_equal</a></li>
+<li class="toctree-l2"><a class="reference internal" href="auxjad.fill_with_rests.html">auxjad.fill_with_rests</a></li>
+<li class="toctree-l2"><a class="reference internal" href="auxjad.HarmonicNote.html">auxjad.HarmonicNote</a></li>
+<li class="toctree-l2"><a class="reference internal" href="auxjad.LeafDynMaker.html">auxjad.LeafDynMaker</a></li>
+<li class="toctree-l2"><a class="reference internal" href="auxjad.leaves_are_tieable.html">auxjad.leaves_are_tieable</a></li>
+<li class="toctree-l2"><a class="reference internal" href="auxjad.LoopByList.html">auxjad.LoopByList</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">auxjad.LoopByLogicalTies</a></li>
+<li class="toctree-l2"><a class="reference internal" href="auxjad.LoopByWindow.html">auxjad.LoopByWindow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="auxjad.remove_repeated_dynamics.html">auxjad.remove_repeated_dynamics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="auxjad.remove_repeated_time_signatures.html">auxjad.remove_repeated_time_signatures</a></li>
+<li class="toctree-l2"><a class="reference internal" href="auxjad.respell_container.html">auxjad.respell_container</a></li>
+<li class="toctree-l2"><a class="reference internal" href="auxjad.respell_chord.html">auxjad.respell_chord</a></li>
+<li class="toctree-l2"><a class="reference internal" href="auxjad.rests_to_multimeasure_rest.html">auxjad.rests_to_multimeasure_rest</a></li>
+<li class="toctree-l2"><a class="reference internal" href="auxjad.Shuffler.html">auxjad.Shuffler</a></li>
+<li class="toctree-l2"><a class="reference internal" href="auxjad.simplified_time_signature_ratio.html">auxjad.simplified_time_signature_ratio</a></li>
+<li class="toctree-l2"><a class="reference internal" href="auxjad.sync_containers.html">auxjad.sync_containers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="auxjad.TenneySelector.html">auxjad.TenneySelector</a></li>
+<li class="toctree-l2"><a class="reference internal" href="auxjad.underfull_duration.html">auxjad.underfull_duration</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../api.html#indices-and-tables">Indices and tables</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">auxjad</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../api.html">auxjad API</a> &raquo;</li>
+        
+      <li>auxjad.LoopByLogicalTies</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/members/auxjad.LoopByLogicalTies.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="auxjad-loopbylogicalties">
+<h1>auxjad.LoopByLogicalTies<a class="headerlink" href="#auxjad-loopbylogicalties" title="Permalink to this headline">¶</a></h1>
+<dl class="class">
+<dt id="auxjad.LoopByLogicalTies">
+<em class="property">class </em><code class="descclassname">auxjad.</code><code class="descname">LoopByLogicalTies</code><span class="sig-paren">(</span><em>container: abjad.core.Container.Container</em>, <em>*</em>, <em>window_size: int</em>, <em>step_size: int = 1</em>, <em>max_steps: int = 1</em>, <em>repetition_chance: float = 0.0</em>, <em>forward_bias: float = 1.0</em>, <em>head_position: int = 0</em>, <em>omit_all_time_signatures: bool = False</em>, <em>force_identical_time_signatures: bool = False</em>, <em>move_window_on_first_call: bool = False</em><span class="sig-paren">)</span><a class="headerlink" href="#auxjad.LoopByLogicalTies" title="Permalink to this definition">¶</a></dt>
+<dd><p>Takes an <code class="docutils literal notranslate"><span class="pre">abjad.Container</span></code> as input as well as an integer
+representing the number of elements per looping window, then outputs a
+container with the elements processed in the looping process. For instance,
+if the initial container had the leaves <code class="docutils literal notranslate"><span class="pre">[A,</span> <span class="pre">B,</span> <span class="pre">C,</span> <span class="pre">D,</span> <span class="pre">E,</span> <span class="pre">F]</span></code> and the
+looping window was size three, the output would be:</p>
+<p><code class="docutils literal notranslate"><span class="pre">A</span> <span class="pre">B</span> <span class="pre">C</span> <span class="pre">B</span> <span class="pre">C</span> <span class="pre">D</span> <span class="pre">C</span> <span class="pre">D</span> <span class="pre">E</span> <span class="pre">D</span> <span class="pre">E</span> <span class="pre">F</span> <span class="pre">E</span> <span class="pre">F</span> <span class="pre">F</span></code></p>
+<p>This can be better visualised as:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>A B C
+  B C D
+    C D E
+      D E F
+        E F
+          F
+</pre></div>
+</div>
+<div class="example docutils container">
+<p>Usage is similar to other factory classes. It takes a container (or
+child class equivalent) and the number of elements of the window as
+arguments. Each call of the object, in this case <code class="docutils literal notranslate"><span class="pre">looper()</span></code>, will
+move the window forwards and output the result.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">input_music</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;c&#39;4 d&#39;2 e&#39;4 f&#39;2 ~ f&#39;8 g&#39;1&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">looper</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">LoopByLogicalTies</span><span class="p">(</span><span class="n">input_music</span><span class="p">,</span>
+<span class="gp">... </span>                                  <span class="n">window_size</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>
+<span class="gp">... </span>                                  <span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">notes</span> <span class="o">=</span> <span class="n">looper</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">staff</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span><span class="n">notes</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">f</span><span class="p">(</span><span class="n">staff</span><span class="p">)</span>
+<span class="go">\new Staff</span>
+<span class="go">{</span>
+<span class="go">    \time 4/4</span>
+<span class="go">    c&#39;4</span>
+<span class="go">    d&#39;2</span>
+<span class="go">    e&#39;4</span>
+<span class="go">}</span>
+</pre></div>
+</div>
+<div class="figure">
+<img alt="../_images/image-LoopByLogicalTies-1.png" src="../_images/image-LoopByLogicalTies-1.png" />
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">notes</span> <span class="o">=</span> <span class="n">looper</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">staff</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span><span class="n">notes</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">f</span><span class="p">(</span><span class="n">staff</span><span class="p">)</span>
+<span class="go">\new Staff</span>
+<span class="go">{</span>
+<span class="go">    \time 11/8</span>
+<span class="go">    d&#39;2</span>
+<span class="go">    e&#39;4</span>
+<span class="go">    f&#39;2</span>
+<span class="go">    ~</span>
+<span class="go">    f&#39;8</span>
+<span class="go">}</span>
+</pre></div>
+</div>
+<div class="figure">
+<img alt="../_images/image-LoopByLogicalTies-2.png" src="../_images/image-LoopByLogicalTies-2.png" />
+</div>
+<p>The property <code class="docutils literal notranslate"><span class="pre">current_window</span></code> can be used to access the current
+window without moving the head forwards.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">notes</span> <span class="o">=</span> <span class="n">looper</span><span class="o">.</span><span class="n">current_window</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">staff</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span><span class="n">notes</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">f</span><span class="p">(</span><span class="n">staff</span><span class="p">)</span>
+<span class="go">\new Staff</span>
+<span class="go">{</span>
+<span class="go">    \time 11/8</span>
+<span class="go">    d&#39;2</span>
+<span class="go">    e&#39;4</span>
+<span class="go">    f&#39;2</span>
+<span class="go">    ~</span>
+<span class="go">    f&#39;8</span>
+<span class="go">}</span>
+</pre></div>
+</div>
+<div class="figure">
+<img alt="../_images/image-LoopByLogicalTies-3.png" src="../_images/image-LoopByLogicalTies-3.png" />
+</div>
+</div>
+<div class="example docutils container">
+<p>The very first call will output the input container without processing
+it. To disable this behaviour and have the looping window move on the
+very first call, initialise the class with the keyword argument
+<code class="docutils literal notranslate"><span class="pre">move_window_on_first_call</span></code> set to <code class="docutils literal notranslate"><span class="pre">True</span></code>.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">input_music</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;c&#39;4 d&#39;2 e&#39;4 f&#39;2 ~ f&#39;8 g&#39;1&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">looper</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">LoopByLogicalTies</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="n">input_music</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">window_size</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">move_window_on_first_call</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+<span class="gp">... </span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">notes</span> <span class="o">=</span> <span class="n">looper</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">staff</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span><span class="n">notes</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">f</span><span class="p">(</span><span class="n">staff</span><span class="p">)</span>
+<span class="go">\new Staff</span>
+<span class="go">{</span>
+<span class="go">    \time 11/8</span>
+<span class="go">    d&#39;2</span>
+<span class="go">    e&#39;4</span>
+<span class="go">    f&#39;2</span>
+<span class="go">    ~</span>
+<span class="go">    f&#39;8</span>
+<span class="go">}</span>
+</pre></div>
+</div>
+<div class="figure">
+<img alt="../_images/image-LoopByLogicalTies-4.png" src="../_images/image-LoopByLogicalTies-4.png" />
+</div>
+</div>
+<div class="example docutils container">
+<p>The instances of <code class="docutils literal notranslate"><span class="pre">LoopByLogicalTies</span></code> can also be used as an
+iterator, which can then be used in a for loop to exhaust all windows.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">input_music</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;c&#39;4 d&#39;2 e&#39;4&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">looper</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">LoopByLogicalTies</span><span class="p">(</span><span class="n">input_music</span><span class="p">,</span>
+<span class="gp">... </span>                                  <span class="n">window_size</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
+<span class="gp">... </span>                                  <span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">staff</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">window</span> <span class="ow">in</span> <span class="n">looper</span><span class="p">:</span>
+<span class="gp">... </span>    <span class="n">staff</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">window</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">f</span><span class="p">(</span><span class="n">staff</span><span class="p">)</span>
+<span class="go">\new Staff</span>
+<span class="go">{</span>
+<span class="go">    \time 3/4</span>
+<span class="go">    c&#39;4</span>
+<span class="go">    d&#39;2</span>
+<span class="go">    d&#39;2</span>
+<span class="go">    e&#39;4</span>
+<span class="go">    \time 1/4</span>
+<span class="go">    e&#39;4</span>
+<span class="go">}</span>
+</pre></div>
+</div>
+<div class="figure">
+<img alt="../_images/image-LoopByLogicalTies-5.png" src="../_images/image-LoopByLogicalTies-5.png" />
+</div>
+<p>Notice how the second staff in the example above does not have a time
+signature. This is because consecutive identical time signatures are
+omitted by default. To change this behaviour, instantialise this class
+with the keyword argument <code class="docutils literal notranslate"><span class="pre">force_identical_time_signatures</span></code> set to
+<code class="docutils literal notranslate"><span class="pre">True</span></code>, or change the <code class="docutils literal notranslate"><span class="pre">force_identical_time_signatures</span></code> property
+to alter its value after the initialisation.</p>
+</div>
+<div class="example docutils container">
+<p>This class can take many optional keyword arguments during its
+creation. <code class="docutils literal notranslate"><span class="pre">step_size</span></code> dictates the size of each individual step in
+number of elements (default value is 1). <code class="docutils literal notranslate"><span class="pre">max_steps</span></code> sets the maximum
+number of steps that the window can advance when the object is called,
+ranging between 1 and the input value (default is also 1).
+<code class="docutils literal notranslate"><span class="pre">repetition_chance</span></code> sets the chance of a window result repeating
+itself (that is, the window not moving forwards when called). It should
+range from 0.0 to 1.0 (default 0.0, i.e. no repetition).
+<code class="docutils literal notranslate"><span class="pre">forward_bias</span></code> sets the chance of the window moving forward instead
+of backwards. It should range from 0.0 to 1.0 (default 1.0, which means
+the window can only move forwards. A value of 0.5 gives 50% chance of
+moving forwards while a value of 0.0 will move the window only
+backwards). Finally, <code class="docutils literal notranslate"><span class="pre">head_position</span></code> can be used to offset the
+starting position of the looping window. It must be an integer and its
+default value is 0.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">input_music</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;c&#39;4 d&#39;2 e&#39;4 f&#39;2 ~ f&#39;8 g&#39;1&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">looper</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">LoopByLogicalTies</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="n">input_music</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">window_size</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">step_size</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">max_steps</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">repetition_chance</span><span class="o">=</span><span class="mf">0.25</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">forward_bias</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">head_position</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">omit_all_time_signatures</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">force_identical_time_signatures</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+<span class="gp">... </span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">looper</span><span class="o">.</span><span class="n">window_size</span>
+<span class="go">3</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">looper</span><span class="o">.</span><span class="n">step_size</span>
+<span class="go">1</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">looper</span><span class="o">.</span><span class="n">repetition_chance</span>
+<span class="go">0.25</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">looper</span><span class="o">.</span><span class="n">forward_bias</span>
+<span class="go">0.2</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">looper</span><span class="o">.</span><span class="n">max_steps</span>
+<span class="go">2</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">looper</span><span class="o">.</span><span class="n">head_position</span>
+<span class="go">0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">looper</span><span class="o">.</span><span class="n">omit_all_time_signatures</span>
+<span class="go">False</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">looper</span><span class="o">.</span><span class="n">force_identical_time_signatures</span>
+<span class="go">False</span>
+</pre></div>
+</div>
+<p>Use the properties below to change these values after initialisation.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">looper</span><span class="o">.</span><span class="n">window_size</span> <span class="o">=</span> <span class="mi">2</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">looper</span><span class="o">.</span><span class="n">step_size</span> <span class="o">=</span> <span class="mi">2</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">looper</span><span class="o">.</span><span class="n">max_steps</span> <span class="o">=</span> <span class="mi">3</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">looper</span><span class="o">.</span><span class="n">repetition_chance</span> <span class="o">=</span> <span class="mf">0.1</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">looper</span><span class="o">.</span><span class="n">forward_bias</span> <span class="o">=</span> <span class="mf">0.8</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">looper</span><span class="o">.</span><span class="n">head_position</span> <span class="o">=</span> <span class="mi">2</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">looper</span><span class="o">.</span><span class="n">omit_all_time_signatures</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">looper</span><span class="o">.</span><span class="n">force_identical_time_signatures</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">looper</span><span class="o">.</span><span class="n">window_size</span>
+<span class="go">2</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">looper</span><span class="o">.</span><span class="n">step_size</span>
+<span class="go">2</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">looper</span><span class="o">.</span><span class="n">max_steps</span>
+<span class="go">3</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">looper</span><span class="o">.</span><span class="n">repetition_chance</span>
+<span class="go">0.1</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">looper</span><span class="o">.</span><span class="n">forward_bias</span>
+<span class="go">0.8</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">looper</span><span class="o">.</span><span class="n">head_position</span>
+<span class="go">2</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">looper</span><span class="o">.</span><span class="n">omit_all_time_signatures</span>
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">looper</span><span class="o">.</span><span class="n">force_identical_time_signatures</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+</div>
+<div class="example docutils container">
+<p>To disable time signatures altogether, initialise
+<code class="docutils literal notranslate"><span class="pre">LoopByLogicalTies</span></code> with the keyword argument
+<code class="docutils literal notranslate"><span class="pre">omit_all_time_signatures</span></code> set to <code class="docutils literal notranslate"><span class="pre">True</span></code> (default is <code class="docutils literal notranslate"><span class="pre">False</span></code>), or
+use the <code class="docutils literal notranslate"><span class="pre">omit_time_signature</span></code> property after initialisation.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">input_music</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;c&#39;4 d&#39;2 e&#39;4 f&#39;2 ~ f&#39;8 g&#39;1&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">looper</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">LoopByLogicalTies</span><span class="p">(</span><span class="n">input_music</span><span class="p">,</span>
+<span class="gp">... </span>                                  <span class="n">window_size</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>
+<span class="gp">... </span>                                  <span class="n">omit_all_time_signatures</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+<span class="gp">... </span>                                  <span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">notes</span> <span class="o">=</span> <span class="n">looper</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">staff</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span><span class="n">notes</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">f</span><span class="p">(</span><span class="n">staff</span><span class="p">)</span>
+<span class="go">\new Staff</span>
+<span class="go">{</span>
+<span class="go">    c&#39;4</span>
+<span class="go">    d&#39;2</span>
+<span class="go">    e&#39;4</span>
+<span class="go">}</span>
+</pre></div>
+</div>
+<div class="figure">
+<img alt="../_images/image-LoopByLogicalTies-6.png" src="../_images/image-LoopByLogicalTies-6.png" />
+</div>
+</div>
+<div class="example docutils container">
+<p>The function <code class="docutils literal notranslate"><span class="pre">len()</span></code> can be used to get the total number of elements
+in the container.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">input_music</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;c&#39;4 d&#39;2 e&#39;4 f&#39;2 ~ f&#39;8 g&#39;1&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">looper</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">LoopByLogicalTies</span><span class="p">(</span><span class="n">input_music</span><span class="p">,</span>
+<span class="gp">... </span>                                  <span class="n">window_size</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>
+<span class="gp">... </span>                                  <span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">len</span><span class="p">(</span><span class="n">looper</span><span class="p">)</span>
+<span class="go">5</span>
+</pre></div>
+</div>
+</div>
+<div class="example docutils container">
+<p>To run through the whole process and output it as a single container,
+from the initial head position until the process outputs the single
+last element, use the method <code class="docutils literal notranslate"><span class="pre">output_all()</span></code>.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">input_music</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;c&#39;4 d&#39;4 e&#39;4 f&#39;4&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">looper</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">LoopByLogicalTies</span><span class="p">(</span><span class="n">input_music</span><span class="p">,</span>
+<span class="gp">... </span>                                  <span class="n">window_size</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
+<span class="gp">... </span>                                  <span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">window</span> <span class="o">=</span> <span class="n">looper</span><span class="o">.</span><span class="n">output_all</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">staff</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span><span class="n">window</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">f</span><span class="p">(</span><span class="n">staff</span><span class="p">)</span>
+<span class="go">\new Staff</span>
+<span class="go">{</span>
+<span class="go">    \time 2/4</span>
+<span class="go">    c&#39;4</span>
+<span class="go">    d&#39;4</span>
+<span class="go">    \time 2/4</span>
+<span class="go">    d&#39;4</span>
+<span class="go">    e&#39;4</span>
+<span class="go">    \time 2/4</span>
+<span class="go">    e&#39;4</span>
+<span class="go">    f&#39;4</span>
+<span class="go">    \time 1/4</span>
+<span class="go">    f&#39;4</span>
+<span class="go">}</span>
+</pre></div>
+</div>
+<div class="figure">
+<img alt="../_images/image-LoopByLogicalTies-7.png" src="../_images/image-LoopByLogicalTies-7.png" />
+</div>
+</div>
+<div class="example docutils container">
+<p>When using <code class="docutils literal notranslate"><span class="pre">output_all()</span></code>, set the keyword argument
+<code class="docutils literal notranslate"><span class="pre">tie_identical_pitches</span></code> to <code class="docutils literal notranslate"><span class="pre">True</span></code> in order to tie identical notes
+or chords at the end and beginning of consecutive windows.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">input_music</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;c&#39;4 d&#39;2 r8 d&#39;4 &lt;e&#39; g&#39;&gt;8 r4 f&#39;2. &quot;</span>
+<span class="gp">... </span>                              <span class="s2">&quot;&lt;e&#39; g&#39;&gt;16&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">looper</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">LoopByLogicalTies</span><span class="p">(</span><span class="n">input_music</span><span class="p">,</span>
+<span class="gp">... </span>                                  <span class="n">window_size</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span>
+<span class="gp">... </span>                                  <span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">music</span> <span class="o">=</span> <span class="n">looper</span><span class="o">.</span><span class="n">output_all</span><span class="p">(</span><span class="n">tie_identical_pitches</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">staff</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span><span class="n">music</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">f</span><span class="p">(</span><span class="n">staff</span><span class="p">)</span>
+<span class="go">\new Staff</span>
+<span class="go">{</span>
+<span class="go">    \time 9/8</span>
+<span class="go">    c&#39;4</span>
+<span class="go">    d&#39;2</span>
+<span class="go">    r8</span>
+<span class="go">    d&#39;4</span>
+<span class="go">    ~</span>
+<span class="go">    \time 4/4</span>
+<span class="go">    d&#39;2</span>
+<span class="go">    r8</span>
+<span class="go">    d&#39;4</span>
+<span class="go">    &lt;e&#39; g&#39;&gt;8</span>
+<span class="go">    \time 3/4</span>
+<span class="go">    r8</span>
+<span class="go">    d&#39;4</span>
+<span class="go">    &lt;e&#39; g&#39;&gt;8</span>
+<span class="go">    r4</span>
+<span class="go">    \time 11/8</span>
+<span class="go">    d&#39;4</span>
+<span class="go">    &lt;e&#39; g&#39;&gt;8</span>
+<span class="go">    r4</span>
+<span class="go">    f&#39;2.</span>
+<span class="go">    \time 19/16</span>
+<span class="go">    &lt;e&#39; g&#39;&gt;8</span>
+<span class="go">    r4</span>
+<span class="go">    f&#39;2.</span>
+<span class="go">    &lt;e&#39; g&#39;&gt;16</span>
+<span class="go">    \time 17/16</span>
+<span class="go">    r4</span>
+<span class="go">    f&#39;2.</span>
+<span class="go">    &lt;e&#39; g&#39;&gt;16</span>
+<span class="go">    \time 13/16</span>
+<span class="go">    f&#39;2.</span>
+<span class="go">    &lt;e&#39; g&#39;&gt;16</span>
+<span class="go">    ~</span>
+<span class="go">    \time 1/16</span>
+<span class="go">    &lt;e&#39; g&#39;&gt;16</span>
+<span class="go">}</span>
+</pre></div>
+</div>
+<div class="figure">
+<img alt="../_images/image-LoopByLogicalTies-8.png" src="../_images/image-LoopByLogicalTies-8.png" />
+</div>
+</div>
+<div class="example docutils container">
+<p>To run through just part of the process and output it as a single
+container, starting from the initial head position, use the method
+<code class="docutils literal notranslate"><span class="pre">output_n()</span></code> and pass the number of iterations as argument. Similarly
+to <code class="docutils literal notranslate"><span class="pre">output_all()</span></code>, the keyword argument <code class="docutils literal notranslate"><span class="pre">tie_identical_pitches</span></code> is
+available for tying pitches.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">input_music</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;c&#39;4 d&#39;4 e&#39;4 f&#39;4&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">looper</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">LoopByLogicalTies</span><span class="p">(</span><span class="n">input_music</span><span class="p">,</span>
+<span class="gp">... </span>                                  <span class="n">window_size</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
+<span class="gp">... </span>                                  <span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">window</span> <span class="o">=</span> <span class="n">looper</span><span class="o">.</span><span class="n">output_n</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">staff</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span><span class="n">window</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">f</span><span class="p">(</span><span class="n">staff</span><span class="p">)</span>
+<span class="go">\new Staff</span>
+<span class="go">{</span>
+<span class="go">    \time 2/4</span>
+<span class="go">    c&#39;4</span>
+<span class="go">    d&#39;4</span>
+<span class="go">    \time 2/4</span>
+<span class="go">    d&#39;4</span>
+<span class="go">    e&#39;4</span>
+<span class="go">}</span>
+</pre></div>
+</div>
+<div class="figure">
+<img alt="../_images/image-LoopByLogicalTies-9.png" src="../_images/image-LoopByLogicalTies-9.png" />
+</div>
+</div>
+<div class="example docutils container">
+<p>To change the size of the looping window after instantiation, use the
+property <code class="docutils literal notranslate"><span class="pre">window_size</span></code>. In the example below, the initial window is
+of size 3, and so the first call of the looper object outputs the
+first, second, and third leaves. The window size is then set to 4, and
+the looper is called again, moving to the leaf in the next position,
+thus outputting the second, third, fourth, and fifth leaves.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">input_music</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;c&#39;4 d&#39;2 e&#39;4 f&#39;2 ~ f&#39;8 g&#39;1&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">looper</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">LoopByLogicalTies</span><span class="p">(</span><span class="n">input_music</span><span class="p">,</span>
+<span class="gp">... </span>                                  <span class="n">window_size</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>
+<span class="gp">... </span>                                  <span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">notes</span> <span class="o">=</span> <span class="n">looper</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">staff</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span><span class="n">notes</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">f</span><span class="p">(</span><span class="n">staff</span><span class="p">)</span>
+<span class="go">\new Staff</span>
+<span class="go">{</span>
+<span class="go">    \time 4/4</span>
+<span class="go">    c&#39;4</span>
+<span class="go">    d&#39;2</span>
+<span class="go">    e&#39;4</span>
+<span class="go">}</span>
+</pre></div>
+</div>
+<div class="figure">
+<img alt="../_images/image-LoopByLogicalTies-10.png" src="../_images/image-LoopByLogicalTies-10.png" />
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">looper</span><span class="o">.</span><span class="n">window_size</span> <span class="o">=</span> <span class="mi">4</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">notes</span> <span class="o">=</span> <span class="n">looper</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">staff</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span><span class="n">notes</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">f</span><span class="p">(</span><span class="n">staff</span><span class="p">)</span>
+<span class="go">\new Staff</span>
+<span class="go">{</span>
+<span class="go">    \time 19/8</span>
+<span class="go">    d&#39;2</span>
+<span class="go">    e&#39;4</span>
+<span class="go">    f&#39;2</span>
+<span class="go">    ~</span>
+<span class="go">    f&#39;8</span>
+<span class="go">    g&#39;1</span>
+<span class="go">}</span>
+</pre></div>
+</div>
+<div class="figure">
+<img alt="../_images/image-LoopByLogicalTies-11.png" src="../_images/image-LoopByLogicalTies-11.png" />
+</div>
+</div>
+<div class="example docutils container">
+<p>This class can handle tuplets, but the output is not ideal and so this
+functionality should be considered experimental. Time signatures will
+be correct when dealing with partial tuplets (thus having non-standard
+values in their denominators), but each individual note of a tuplet
+will have the ratio printed above it.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">input_music</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;c&#39;4 d&#39;8 \times 2/3 {a4 g2}&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">looper</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">LoopByLogicalTies</span><span class="p">(</span><span class="n">input_music</span><span class="p">,</span>
+<span class="gp">... </span>                                  <span class="n">window_size</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
+<span class="gp">... </span>                                  <span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">window</span> <span class="o">=</span> <span class="n">looper</span><span class="o">.</span><span class="n">output_all</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">staff</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span><span class="n">window</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">f</span><span class="p">(</span><span class="n">staff</span><span class="p">)</span>
+<span class="go">\new Staff</span>
+<span class="go">{</span>
+<span class="go">    \time 3/8</span>
+<span class="go">    c&#39;4</span>
+<span class="go">    d&#39;8</span>
+<span class="go">    #(ly:expect-warning &quot;strange time signature found&quot;)</span>
+<span class="go">    \time 7/24</span>
+<span class="go">    d&#39;8</span>
+<span class="go">    \tweak edge-height #&#39;(0.7 . 0)</span>
+<span class="go">    \times 2/3 {</span>
+<span class="go">        a4</span>
+<span class="go">    }</span>
+<span class="go">    \tweak edge-height #&#39;(0.7 . 0)</span>
+<span class="go">    \times 2/3 {</span>
+<span class="go">        \time 2/4</span>
+<span class="go">        a4</span>
+<span class="go">    }</span>
+<span class="go">    \tweak edge-height #&#39;(0.7 . 0)</span>
+<span class="go">    \times 2/3 {</span>
+<span class="go">        g2</span>
+<span class="go">    }</span>
+<span class="go">    \tweak edge-height #&#39;(0.7 . 0)</span>
+<span class="go">    \times 2/3 {</span>
+<span class="go">        #(ly:expect-warning &quot;strange time signature found&quot;)</span>
+<span class="go">        \time 2/6</span>
+<span class="go">        g2</span>
+<span class="go">    }</span>
+<span class="go">}</span>
+</pre></div>
+</div>
+<div class="figure">
+<img alt="../_images/image-LoopByLogicalTies-12.png" src="../_images/image-LoopByLogicalTies-12.png" />
+</div>
+</div>
+<dl class="method">
+<dt id="auxjad.LoopByLogicalTies.__init__">
+<code class="descname">__init__</code><span class="sig-paren">(</span><em>container: abjad.core.Container.Container</em>, <em>*</em>, <em>window_size: int</em>, <em>step_size: int = 1</em>, <em>max_steps: int = 1</em>, <em>repetition_chance: float = 0.0</em>, <em>forward_bias: float = 1.0</em>, <em>head_position: int = 0</em>, <em>omit_all_time_signatures: bool = False</em>, <em>force_identical_time_signatures: bool = False</em>, <em>move_window_on_first_call: bool = False</em><span class="sig-paren">)</span><a class="headerlink" href="#auxjad.LoopByLogicalTies.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Initialize self.  See help(type(self)) for accurate signature.</p>
+</dd></dl>
+
+<p class="rubric">Methods</p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="#auxjad.LoopByLogicalTies.__init__" title="auxjad.LoopByLogicalTies.__init__"><code class="xref py py-obj docutils literal notranslate"><span class="pre">__init__</span></code></a>(container,&nbsp;*,&nbsp;window_size,&nbsp;…)</td>
+<td>Initialize self.</td>
+</tr>
+<tr class="row-even"><td><code class="xref py py-obj docutils literal notranslate"><span class="pre">output_all</span></code>(*,&nbsp;tie_identical_pitches)</td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><code class="xref py py-obj docutils literal notranslate"><span class="pre">output_n</span></code>(n,&nbsp;*,&nbsp;tie_identical_pitches)</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Attributes</p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><code class="xref py py-obj docutils literal notranslate"><span class="pre">current_window</span></code></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><code class="xref py py-obj docutils literal notranslate"><span class="pre">force_identical_time_signatures</span></code></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><code class="xref py py-obj docutils literal notranslate"><span class="pre">forward_bias</span></code></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><code class="xref py py-obj docutils literal notranslate"><span class="pre">head_position</span></code></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><code class="xref py py-obj docutils literal notranslate"><span class="pre">max_steps</span></code></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><code class="xref py py-obj docutils literal notranslate"><span class="pre">omit_all_time_signatures</span></code></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><code class="xref py py-obj docutils literal notranslate"><span class="pre">repetition_chance</span></code></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><code class="xref py py-obj docutils literal notranslate"><span class="pre">step_size</span></code></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><code class="xref py py-obj docutils literal notranslate"><span class="pre">window_size</span></code></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="auxjad.LoopByWindow.html" class="btn btn-neutral float-right" title="auxjad.LoopByWindow" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="auxjad.LoopByList.html" class="btn btn-neutral float-left" title="auxjad.LoopByList" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2020, Gilberto Agostinho
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>
