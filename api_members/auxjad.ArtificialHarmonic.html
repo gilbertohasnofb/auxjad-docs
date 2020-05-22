@@ -1,0 +1,578 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>auxjad.ArtificialHarmonic &mdash; auxjad 0.7.0 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="auxjad.CartographySelector" href="auxjad.CartographySelector.html" />
+    <link rel="prev" title="auxjad API" href="../api.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> auxjad
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.7
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../index.html">Welcome to auxjad’s documentation!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../examples-main.html">Examples of usage</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../api.html">auxjad API</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">auxjad.ArtificialHarmonic</a></li>
+<li class="toctree-l2"><a class="reference internal" href="auxjad.CartographySelector.html">auxjad.CartographySelector</a></li>
+<li class="toctree-l2"><a class="reference internal" href="auxjad.close_container.html">auxjad.close_container</a></li>
+<li class="toctree-l2"><a class="reference internal" href="auxjad.container_is_full.html">auxjad.container_is_full</a></li>
+<li class="toctree-l2"><a class="reference internal" href="auxjad.containers_are_equal.html">auxjad.containers_are_equal</a></li>
+<li class="toctree-l2"><a class="reference internal" href="auxjad.fill_with_rests.html">auxjad.fill_with_rests</a></li>
+<li class="toctree-l2"><a class="reference internal" href="auxjad.HarmonicNote.html">auxjad.HarmonicNote</a></li>
+<li class="toctree-l2"><a class="reference internal" href="auxjad.LeafDynMaker.html">auxjad.LeafDynMaker</a></li>
+<li class="toctree-l2"><a class="reference internal" href="auxjad.leaves_are_tieable.html">auxjad.leaves_are_tieable</a></li>
+<li class="toctree-l2"><a class="reference internal" href="auxjad.LoopByList.html">auxjad.LoopByList</a></li>
+<li class="toctree-l2"><a class="reference internal" href="auxjad.LoopByNotes.html">auxjad.LoopByNotes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="auxjad.LoopByWindow.html">auxjad.LoopByWindow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="auxjad.remove_repeated_dynamics.html">auxjad.remove_repeated_dynamics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="auxjad.remove_repeated_time_signatures.html">auxjad.remove_repeated_time_signatures</a></li>
+<li class="toctree-l2"><a class="reference internal" href="auxjad.respell_container.html">auxjad.respell_container</a></li>
+<li class="toctree-l2"><a class="reference internal" href="auxjad.respell_chord.html">auxjad.respell_chord</a></li>
+<li class="toctree-l2"><a class="reference internal" href="auxjad.rests_to_multimeasure_rest.html">auxjad.rests_to_multimeasure_rest</a></li>
+<li class="toctree-l2"><a class="reference internal" href="auxjad.Shuffler.html">auxjad.Shuffler</a></li>
+<li class="toctree-l2"><a class="reference internal" href="auxjad.simplified_time_signature_ratio.html">auxjad.simplified_time_signature_ratio</a></li>
+<li class="toctree-l2"><a class="reference internal" href="auxjad.sync_containers.html">auxjad.sync_containers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="auxjad.TenneySelector.html">auxjad.TenneySelector</a></li>
+<li class="toctree-l2"><a class="reference internal" href="auxjad.underfull_duration.html">auxjad.underfull_duration</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../api.html#indices-and-tables">Indices and tables</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">auxjad</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../api.html">auxjad API</a> &raquo;</li>
+        
+      <li>auxjad.ArtificialHarmonic</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/api_members/auxjad.ArtificialHarmonic.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="auxjad-artificialharmonic">
+<h1>auxjad.ArtificialHarmonic<a class="headerlink" href="#auxjad-artificialharmonic" title="Permalink to this headline">¶</a></h1>
+<dl class="py class">
+<dt id="auxjad.ArtificialHarmonic">
+<em class="property">class </em><code class="sig-prename descclassname">auxjad.</code><code class="sig-name descname">ArtificialHarmonic</code><span class="sig-paren">(</span><em class="sig-param">*arguments</em>, <em class="sig-param">multiplier: Union[abjad.utilities.Duration.Duration</em>, <em class="sig-param">Tuple[int</em>, <em class="sig-param">int]] = None</em>, <em class="sig-param">tag: abjad.system.Tag.Tag = None</em>, <em class="sig-param">style: str = 'harmonic'</em>, <em class="sig-param">is_parenthesized: bool = False</em>, <em class="sig-param">markup: str = None</em>, <em class="sig-param">direction: (&lt;class 'str'&gt;</em>, <em class="sig-param">&lt;enum 'VerticalAlignment'&gt;) = 'up'</em><span class="sig-paren">)</span><a class="headerlink" href="#auxjad.ArtificialHarmonic" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates a chord with a tweaked top note head for notating artificial
+harmonics. This is a child class of <code class="docutils literal notranslate"><span class="pre">abjad.Chord</span></code>.</p>
+<div class="example docutils container">
+<p>Usage is similar to <code class="docutils literal notranslate"><span class="pre">abjad.Chord</span></code>:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">harm</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">ArtificialHarmonic</span><span class="p">(</span><span class="s2">&quot;&lt;g c&#39;&gt;4&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">harm</span><span class="o">.</span><span class="n">style</span>
+<span class="go">&#39;harmonic&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">f</span><span class="p">(</span><span class="n">harm</span><span class="p">)</span>
+<span class="go">&lt;</span>
+<span class="go">    g</span>
+<span class="go">    \tweak style #&#39;harmonic</span>
+<span class="go">    c&#39;</span>
+<span class="go">&gt;4</span>
+</pre></div>
+</div>
+<div class="figure align-default">
+<img alt="../_images/image-ArtificialHarmonic-1.png" src="../_images/image-ArtificialHarmonic-1.png" />
+</div>
+<p>And similarly to <code class="docutils literal notranslate"><span class="pre">abjad.Chord</span></code>, pitch and duration can be input in
+many different ways:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">harm1</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">ArtificialHarmonic</span><span class="p">(</span><span class="s2">&quot;&lt;g c&#39;&gt;4&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">harm2</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">ArtificialHarmonic</span><span class="p">([</span><span class="s2">&quot;g&quot;</span><span class="p">,</span> <span class="s2">&quot;c&#39;&quot;</span><span class="p">],</span> <span class="mi">1</span><span class="o">/</span><span class="mi">4</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">harm3</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">ArtificialHarmonic</span><span class="p">([</span><span class="o">-</span><span class="mi">5</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="mf">0.25</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">harm4</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">ArtificialHarmonic</span><span class="p">([</span><span class="o">-</span><span class="mi">5</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Duration</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">staff</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">([</span><span class="n">harm1</span><span class="p">,</span> <span class="n">harm2</span><span class="p">,</span> <span class="n">harm3</span><span class="p">,</span> <span class="n">harm4</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">f</span><span class="p">(</span><span class="n">staff</span><span class="p">)</span>
+<span class="go">\new Staff</span>
+<span class="go">{</span>
+<span class="go">    &lt;</span>
+<span class="go">        g</span>
+<span class="go">        \tweak style #&#39;harmonic</span>
+<span class="go">        c&#39;</span>
+<span class="go">    &gt;4</span>
+<span class="go">    &lt;</span>
+<span class="go">        g</span>
+<span class="go">        \tweak style #&#39;harmonic</span>
+<span class="go">        c&#39;</span>
+<span class="go">    &gt;4</span>
+<span class="go">    &lt;</span>
+<span class="go">        g</span>
+<span class="go">        \tweak style #&#39;harmonic</span>
+<span class="go">        c&#39;</span>
+<span class="go">    &gt;4</span>
+<span class="go">    &lt;</span>
+<span class="go">        g</span>
+<span class="go">        \tweak style #&#39;harmonic</span>
+<span class="go">        c&#39;</span>
+<span class="go">    &gt;4</span>
+<span class="go">}</span>
+</pre></div>
+</div>
+<div class="figure align-default">
+<img alt="../_images/image-ArtificialHarmonic-2.png" src="../_images/image-ArtificialHarmonic-2.png" />
+</div>
+</div>
+<div class="example docutils container">
+<p>It is important to note that this class can only be initialised with
+exactly two pitches. Any other number of pitches will raise a
+<code class="docutils literal notranslate"><span class="pre">ValueError</span></code>:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">auxjad</span><span class="o">.</span><span class="n">ArtificialHarmonic</span><span class="p">(</span><span class="s2">&quot;&lt;g c&#39; d&#39;&gt;4&quot;</span><span class="p">)</span>
+<span class="go">ValueError: &#39;ArtificialHarmonic&#39; requires exactly two &#39;note_heads&#39; for</span>
+<span class="go">initialisation</span>
+</pre></div>
+</div>
+</div>
+<div class="example docutils container">
+<p>When creating an <code class="docutils literal notranslate"><span class="pre">ArtificialHarmonic</span></code>, use the keyword argument
+<code class="docutils literal notranslate"><span class="pre">style</span></code> to set a different type of note head for the top note, such
+as <code class="docutils literal notranslate"><span class="pre">'harmonic-mixed'</span></code>:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">harm</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">ArtificialHarmonic</span><span class="p">(</span><span class="s2">&quot;&lt;g c&#39;&gt;4&quot;</span><span class="p">,</span>
+<span class="gp">... </span>                                 <span class="n">style</span><span class="o">=</span><span class="s1">&#39;harmonic-mixed&#39;</span><span class="p">,</span>
+<span class="gp">... </span>                                 <span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">harm</span><span class="o">.</span><span class="n">style</span>
+<span class="go">&#39;harmonic-mixed&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">f</span><span class="p">(</span><span class="n">harm</span><span class="p">)</span>
+<span class="go">&lt;</span>
+<span class="go">    g</span>
+<span class="go">    \tweak style #&#39;harmonic-mixed</span>
+<span class="go">    c&#39;</span>
+<span class="go">&gt;4</span>
+</pre></div>
+</div>
+<div class="figure align-default">
+<img alt="../_images/image-ArtificialHarmonic-3.png" src="../_images/image-ArtificialHarmonic-3.png" />
+</div>
+</div>
+<div class="example docutils container">
+<p>To notate natural harmonics with a parenthesised pitch for the open
+string at the bottom of the interval, set the keyword
+<code class="docutils literal notranslate"><span class="pre">is_parenthesized</span></code> to <code class="docutils literal notranslate"><span class="pre">True</span></code>.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">harm</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">ArtificialHarmonic</span><span class="p">(</span><span class="s2">&quot;&lt;g c&#39;&gt;4&quot;</span><span class="p">,</span>
+<span class="gp">... </span>                                 <span class="n">is_parenthesized</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+<span class="gp">... </span>                                 <span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">harm</span><span class="o">.</span><span class="n">is_parenthesized</span>
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">f</span><span class="p">(</span><span class="n">harm</span><span class="p">)</span>
+<span class="go">&lt;</span>
+<span class="go">    \parenthesize</span>
+<span class="go">    \tweak ParenthesesItem.font-size #-4</span>
+<span class="go">    g</span>
+<span class="go">    \tweak style #&#39;harmonic</span>
+<span class="go">    c&#39;</span>
+<span class="go">&gt;4</span>
+</pre></div>
+</div>
+<div class="figure align-default">
+<img alt="../_images/image-ArtificialHarmonic-4.png" src="../_images/image-ArtificialHarmonic-4.png" />
+</div>
+</div>
+<div class="example docutils container">
+<p>Similarly to <code class="docutils literal notranslate"><span class="pre">abjad.Chord</span></code>, <code class="docutils literal notranslate"><span class="pre">ArtificialHarmonic</span></code> can take
+multipliers:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">harm</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">ArtificialHarmonic</span><span class="p">(</span><span class="s2">&quot;&lt;g c&#39;&gt;4&quot;</span><span class="p">,</span>
+<span class="gp">... </span>                                 <span class="n">multiplier</span><span class="o">=</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span>
+<span class="gp">... </span>                                 <span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">harm</span><span class="o">.</span><span class="n">multiplier</span>
+<span class="go">abjad.Multiplier(2, 3)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">f</span><span class="p">(</span><span class="n">harm</span><span class="p">)</span>
+<span class="go">&lt;</span>
+<span class="go">    g</span>
+<span class="go">    \tweak style #&#39;harmonic</span>
+<span class="go">    c&#39;</span>
+<span class="go">&gt;4 * 2/3</span>
+</pre></div>
+</div>
+<div class="figure align-default">
+<img alt="../_images/image-ArtificialHarmonic-5.png" src="../_images/image-ArtificialHarmonic-5.png" />
+</div>
+</div>
+<div class="example docutils container">
+<p>All properties of <code class="docutils literal notranslate"><span class="pre">abjad.Chord</span></code> are also available to be read. This
+class also includes two new properties named <code class="docutils literal notranslate"><span class="pre">style</span></code> and
+<code class="docutils literal notranslate"><span class="pre">is_parenthesized</span></code>:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">harm</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">ArtificialHarmonic</span><span class="p">(</span><span class="s2">&quot;&lt;g c&#39;&gt;4&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">harm</span><span class="o">.</span><span class="n">written_pitches</span>
+<span class="go">&quot;g c&#39;&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">harm</span><span class="o">.</span><span class="n">written_duration</span>
+<span class="go">1/4</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">harm</span><span class="o">.</span><span class="n">style</span>
+<span class="go">&#39;harmonic&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">harm</span><span class="o">.</span><span class="n">is_parenthesized</span>
+<span class="go">False</span>
+</pre></div>
+</div>
+<p>All these properties can be set to different values after
+initialisation:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">harm</span><span class="o">.</span><span class="n">written_pitches</span> <span class="o">=</span> <span class="p">[</span><span class="o">-</span><span class="mi">5</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">harm</span><span class="o">.</span><span class="n">written_duration</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Duration</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">8</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">harm</span><span class="o">.</span><span class="n">style</span> <span class="o">=</span> <span class="s1">&#39;harmonic-mixed&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">harm</span><span class="o">.</span><span class="n">is_parenthesized</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">harm</span><span class="o">.</span><span class="n">written_pitches</span>
+<span class="go">&quot;g d&#39;&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">harm</span><span class="o">.</span><span class="n">written_duration</span>
+<span class="go">1/8</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">harm</span><span class="o">.</span><span class="n">style</span>
+<span class="go">&#39;harmonic-mixed&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">harm</span><span class="o">.</span><span class="n">is_parenthesized</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+</div>
+<div class="example docutils container">
+<p>The methods <code class="docutils literal notranslate"><span class="pre">sounding_pitch()</span></code> and <code class="docutils literal notranslate"><span class="pre">sounding_note()</span></code> return the
+sounding pitch and sounding note, respectively. Their types are
+<code class="docutils literal notranslate"><span class="pre">abjad.Pitch</span></code> and <code class="docutils literal notranslate"><span class="pre">abjad.Note</span></code>, respectively.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">harmonics</span> <span class="o">=</span> <span class="p">[</span><span class="n">ArtificialHarmonic</span><span class="p">(</span><span class="s2">&quot;&lt;g b&gt;4&quot;</span><span class="p">),</span>
+<span class="gp">... </span>             <span class="n">ArtificialHarmonic</span><span class="p">(</span><span class="s2">&quot;&lt;g c&#39;&gt;4&quot;</span><span class="p">),</span>
+<span class="gp">... </span>             <span class="n">ArtificialHarmonic</span><span class="p">(</span><span class="s2">&quot;&lt;g d&#39;&gt;4&quot;</span><span class="p">),</span>
+<span class="gp">... </span>             <span class="n">ArtificialHarmonic</span><span class="p">(</span><span class="s2">&quot;&lt;g e&#39;&gt;4&quot;</span><span class="p">),</span>
+<span class="gp">... </span>             <span class="n">ArtificialHarmonic</span><span class="p">(</span><span class="s2">&quot;&lt;g g&#39;&gt;4&quot;</span><span class="p">),</span>
+<span class="gp">... </span>             <span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">harmonic</span> <span class="ow">in</span> <span class="n">harmonics</span><span class="p">:</span>
+<span class="gp">... </span>    <span class="nb">print</span><span class="p">(</span><span class="n">harmonic</span><span class="o">.</span><span class="n">sounding_pitch</span><span class="p">())</span>
+<span class="go">b&#39;&#39;</span>
+<span class="go">g&#39;&#39;</span>
+<span class="go">d&#39;&#39;</span>
+<span class="go">b&#39;&#39;</span>
+<span class="go">g&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">harmonic</span> <span class="ow">in</span> <span class="n">harmonics</span><span class="p">:</span>
+<span class="gp">... </span>    <span class="nb">print</span><span class="p">(</span><span class="n">harmonic</span><span class="o">.</span><span class="n">sounding_note</span><span class="p">())</span>
+<span class="go">b&#39;&#39;4</span>
+<span class="go">g&#39;&#39;4</span>
+<span class="go">d&#39;&#39;4</span>
+<span class="go">b&#39;&#39;4</span>
+<span class="go">g&#39;4</span>
+</pre></div>
+</div>
+</div>
+<div class="example docutils container">
+<p>To add a markup expression to the artificial harmonic, use the
+<code class="docutils literal notranslate"><span class="pre">markup</span></code> optional keyword argument, which takes strings. By default,
+the markup position is above the harmonic note, but this can be
+overridden using the keyword <code class="docutils literal notranslate"><span class="pre">direction</span></code>, which can take strings as
+well as <code class="docutils literal notranslate"><span class="pre">abjad.Up</span></code> and <code class="docutils literal notranslate"><span class="pre">abjad.Down</span></code>:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">harm1</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">ArtificialHarmonic</span><span class="p">(</span><span class="s2">&quot;&lt;a d&#39;&gt;1&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">harm2</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">ArtificialHarmonic</span><span class="p">(</span><span class="s2">&quot;&lt;a d&#39;&gt;1&quot;</span><span class="p">,</span>
+<span class="gp">... </span>                                  <span class="n">markup</span><span class="o">=</span><span class="s1">&#39;I.&#39;</span><span class="p">,</span>
+<span class="gp">... </span>                                  <span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">harm3</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">ArtificialHarmonic</span><span class="p">(</span><span class="s2">&quot;&lt;a d&#39;&gt;1&quot;</span><span class="p">,</span>
+<span class="gp">... </span>                                  <span class="n">markup</span><span class="o">=</span><span class="s1">&#39;I.&#39;</span><span class="p">,</span>
+<span class="gp">... </span>                                  <span class="n">direction</span><span class="o">=</span><span class="n">abjad</span><span class="o">.</span><span class="n">Down</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">staff</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">([</span><span class="n">harm1</span><span class="p">,</span> <span class="n">harm2</span><span class="p">,</span> <span class="n">harm3</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">f</span><span class="p">(</span><span class="n">staff</span><span class="p">)</span>
+<span class="go">\new Staff</span>
+<span class="go">{</span>
+<span class="go">    &lt;</span>
+<span class="go">        a</span>
+<span class="go">        \tweak style #&#39;harmonic</span>
+<span class="go">        d&#39;</span>
+<span class="go">    &gt;1</span>
+<span class="go">    &lt;</span>
+<span class="go">        a</span>
+<span class="go">        \tweak style #&#39;harmonic</span>
+<span class="go">        d&#39;</span>
+<span class="go">    &gt;1</span>
+<span class="go">    ^ \markup { I. }</span>
+<span class="go">    &lt;</span>
+<span class="go">        a</span>
+<span class="go">        \tweak style #&#39;harmonic</span>
+<span class="go">        d&#39;</span>
+<span class="go">    &gt;1</span>
+<span class="go">    _ \markup { I. }</span>
+<span class="go">}</span>
+</pre></div>
+</div>
+<div class="figure align-default">
+<img alt="../_images/image-ArtificialHarmonic-6.png" src="../_images/image-ArtificialHarmonic-6.png" />
+</div>
+<p>Setting <code class="docutils literal notranslate"><span class="pre">markup</span></code> to <code class="docutils literal notranslate"><span class="pre">None</span></code> will remove the markup from the note.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">harm</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">ArtificialHarmonic</span><span class="p">(</span><span class="s2">&quot;&lt;a d&#39;&gt;1&quot;</span><span class="p">,</span>
+<span class="gp">... </span>                                 <span class="n">markup</span><span class="o">=</span><span class="s1">&#39;I.&#39;</span><span class="p">,</span>
+<span class="gp">... </span>                                 <span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">harm</span><span class="o">.</span><span class="n">markup</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">f</span><span class="p">(</span><span class="n">harm</span><span class="p">)</span>
+<span class="go">&lt;</span>
+<span class="go">    a</span>
+<span class="go">    \tweak style #&#39;harmonic</span>
+<span class="go">    d&#39;</span>
+<span class="go">&gt;1</span>
+</pre></div>
+</div>
+<div class="figure align-default">
+<img alt="../_images/image-ArtificialHarmonic-7.png" src="../_images/image-ArtificialHarmonic-7.png" />
+</div>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>If another markup is attached to the harmonic note, trying to set the
+<code class="docutils literal notranslate"><span class="pre">markup</span></code> to <code class="docutils literal notranslate"><span class="pre">None</span></code> will raise an Exception:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">harm</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">ArtificialHarmonic</span><span class="p">(</span><span class="s2">&quot;&lt;a d&#39;&gt;1&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">attach</span><span class="p">(</span><span class="n">abjad</span><span class="o">.</span><span class="n">Markup</span><span class="p">(</span><span class="s1">&#39;test&#39;</span><span class="p">),</span> <span class="n">harm</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">harm</span><span class="o">.</span><span class="n">markup</span> <span class="o">=</span> <span class="s1">&#39;I.&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">harm</span><span class="o">.</span><span class="n">markup</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="go">Exception: multiple indicators attached to client.</span>
+</pre></div>
+</div>
+</div>
+<div class="example docutils container">
+<p>The note created by <code class="docutils literal notranslate"><span class="pre">sounding_note()</span></code> inherits all indicators from
+the <code class="docutils literal notranslate"><span class="pre">ArtificialHarmonic</span></code>.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">harm</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">ArtificialHarmonic</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;&lt;g c&#39;&gt;4-.\pp&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">f</span><span class="p">(</span><span class="n">harm</span><span class="o">.</span><span class="n">sounding_note</span><span class="p">())</span>
+<span class="go">g&#39;&#39;4</span>
+<span class="go">\pp</span>
+<span class="go">- \staccato</span>
+</pre></div>
+</div>
+<div class="figure align-default">
+<img alt="../_images/image-ArtificialHarmonic-8.png" src="../_images/image-ArtificialHarmonic-8.png" />
+</div>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Both <code class="docutils literal notranslate"><span class="pre">sounding_pitch()</span></code> and <code class="docutils literal notranslate"><span class="pre">sounding_note()</span></code> methods raise a
+ValueError exception when it cannot calculate the sounding pitch for
+the given interval.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ArtificialHarmonic</span><span class="p">(</span><span class="s2">&quot;&lt;g ef&#39;&gt;4&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">sounding_pitch</span><span class="p">()</span>
+<span class="go">ValueError: cannot calculate sounding pitch for given interval</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ArtificialHarmonic</span><span class="p">(</span><span class="s2">&quot;&lt;g ef&#39;&gt;4&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">sounding_note</span><span class="p">()</span>
+<span class="go">ValueError: cannot calculate sounding pitch for given interval</span>
+</pre></div>
+</div>
+</div>
+<p class="rubric">Methods</p>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">__init__</span></code>(*arguments[, multiplier, tag, …])</p></td>
+<td><p>Initialises self.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">sounding_note</span></code>()</p></td>
+<td><p>Returns the sounding note of the harmonic as an <code class="docutils literal notranslate"><span class="pre">abjad.Note</span></code>.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">sounding_pitch</span></code>()</p></td>
+<td><p>Returns the sounding pitch of the harmonic as an <code class="docutils literal notranslate"><span class="pre">abjad.Pitch</span></code>.</p></td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Attributes</p>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">direction</span></code></p></td>
+<td><p>The direction of the harmonic note head.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">is_parenthesized</span></code></p></td>
+<td><p>Whether the bottom note head is parenthesised or not.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">markup</span></code></p></td>
+<td><p>The markup of the harmonic note head.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">multiplier</span></code></p></td>
+<td><p>Gets multiplier.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">note_heads</span></code></p></td>
+<td><p>Gets note-heads in chord.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">style</span></code></p></td>
+<td><p>The style of the upper note head.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">tag</span></code></p></td>
+<td><p>Gets component tag.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">written_duration</span></code></p></td>
+<td><p>Gets and sets written duration of chord.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">written_pitches</span></code></p></td>
+<td><p>The written pitches of the two note heads.</p></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="auxjad.CartographySelector.html" class="btn btn-neutral float-right" title="auxjad.CartographySelector" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="../api.html" class="btn btn-neutral float-left" title="auxjad API" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2020, Gilberto Agostinho
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>
