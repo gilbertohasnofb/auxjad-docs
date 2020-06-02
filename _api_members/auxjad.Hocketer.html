@@ -1,0 +1,978 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>auxjad.Hocketer &mdash; auxjad 0.7.2 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="auxjad.LeafDynMaker" href="auxjad.LeafDynMaker.html" />
+    <link rel="prev" title="auxjad.HarmonicNote" href="auxjad.HarmonicNote.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> auxjad
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.7
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../index.html">Welcome to auxjad’s documentation!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../examples/index.html">Examples of usage</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../api.html">auxjad API</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="auxjad.ArtificialHarmonic.html">auxjad.ArtificialHarmonic</a></li>
+<li class="toctree-l2"><a class="reference internal" href="auxjad.CartographySelector.html">auxjad.CartographySelector</a></li>
+<li class="toctree-l2"><a class="reference internal" href="auxjad.close_container.html">auxjad.close_container</a></li>
+<li class="toctree-l2"><a class="reference internal" href="auxjad.container_is_full.html">auxjad.container_is_full</a></li>
+<li class="toctree-l2"><a class="reference internal" href="auxjad.containers_are_equal.html">auxjad.containers_are_equal</a></li>
+<li class="toctree-l2"><a class="reference internal" href="auxjad.fill_with_rests.html">auxjad.fill_with_rests</a></li>
+<li class="toctree-l2"><a class="reference internal" href="auxjad.HarmonicNote.html">auxjad.HarmonicNote</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">auxjad.Hocketer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="auxjad.LeafDynMaker.html">auxjad.LeafDynMaker</a></li>
+<li class="toctree-l2"><a class="reference internal" href="auxjad.leaves_are_tieable.html">auxjad.leaves_are_tieable</a></li>
+<li class="toctree-l2"><a class="reference internal" href="auxjad.LoopByList.html">auxjad.LoopByList</a></li>
+<li class="toctree-l2"><a class="reference internal" href="auxjad.LoopByNotes.html">auxjad.LoopByNotes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="auxjad.LoopByWindow.html">auxjad.LoopByWindow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="auxjad.remove_empty_tuplets.html">auxjad.remove_empty_tuplets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="auxjad.remove_repeated_dynamics.html">auxjad.remove_repeated_dynamics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="auxjad.remove_repeated_time_signatures.html">auxjad.remove_repeated_time_signatures</a></li>
+<li class="toctree-l2"><a class="reference internal" href="auxjad.respell_container.html">auxjad.respell_container</a></li>
+<li class="toctree-l2"><a class="reference internal" href="auxjad.respell_chord.html">auxjad.respell_chord</a></li>
+<li class="toctree-l2"><a class="reference internal" href="auxjad.rests_to_multimeasure_rest.html">auxjad.rests_to_multimeasure_rest</a></li>
+<li class="toctree-l2"><a class="reference internal" href="auxjad.Shuffler.html">auxjad.Shuffler</a></li>
+<li class="toctree-l2"><a class="reference internal" href="auxjad.simplified_time_signature_ratio.html">auxjad.simplified_time_signature_ratio</a></li>
+<li class="toctree-l2"><a class="reference internal" href="auxjad.sync_containers.html">auxjad.sync_containers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="auxjad.TenneySelector.html">auxjad.TenneySelector</a></li>
+<li class="toctree-l2"><a class="reference internal" href="auxjad.underfull_duration.html">auxjad.underfull_duration</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../api.html#indices-and-tables">Indices and tables</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">auxjad</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../api.html">auxjad API</a> &raquo;</li>
+        
+      <li>auxjad.Hocketer</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/_api_members/auxjad.Hocketer.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="auxjad-hocketer">
+<h1>auxjad.Hocketer<a class="headerlink" href="#auxjad-hocketer" title="Permalink to this headline">¶</a></h1>
+<dl class="py class">
+<dt id="auxjad.Hocketer">
+<em class="property">class </em><code class="sig-prename descclassname">auxjad.</code><code class="sig-name descname">Hocketer</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">contents</span><span class="p">:</span> <span class="n">abjad.core.Container.Container</span></em>, <em class="sig-param"><span class="o">*</span></em>, <em class="sig-param"><span class="n">n_voices</span><span class="p">:</span> <span class="n">int</span> <span class="o">=</span> <span class="default_value">2</span></em>, <em class="sig-param"><span class="n">weights</span><span class="p">:</span> <span class="n">list</span> <span class="o">=</span> <span class="default_value">None</span></em>, <em class="sig-param"><span class="n">k</span><span class="p">:</span> <span class="n">int</span> <span class="o">=</span> <span class="default_value">1</span></em>, <em class="sig-param"><span class="n">force_k_voices</span><span class="p">:</span> <span class="n">bool</span> <span class="o">=</span> <span class="default_value">False</span></em>, <em class="sig-param"><span class="n">disable_rewrite_meter</span><span class="p">:</span> <span class="n">bool</span> <span class="o">=</span> <span class="default_value">False</span></em>, <em class="sig-param"><span class="n">use_multimeasure_rests</span><span class="p">:</span> <span class="n">bool</span> <span class="o">=</span> <span class="default_value">True</span></em><span class="sig-paren">)</span><a class="headerlink" href="#auxjad.Hocketer" title="Permalink to this definition">¶</a></dt>
+<dd><p>Hocketer is a hocket generator. It takes an input <code class="docutils literal notranslate"><span class="pre">abjad.Container</span></code>
+and randomly distribute its logical ties among different staves, filling
+the empty durations with rests.</p>
+<div class="example docutils container">
+<p>Calling the object will return a list of <code class="docutils literal notranslate"><span class="pre">abjad.Staff</span></code> generated by
+the hocket process and ready to be assigned to an <code class="docutils literal notranslate"><span class="pre">abjad.Score</span></code>. Each
+call will generate a new random hocket from the input container.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">container</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;c&#39;4 d&#39;4 e&#39;4 f&#39;4&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">hocketer</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">Hocketer</span><span class="p">(</span><span class="n">container</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">music</span> <span class="o">=</span> <span class="n">hocketer</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">score</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Score</span><span class="p">(</span><span class="n">music</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">f</span><span class="p">(</span><span class="n">score</span><span class="p">)</span>
+<span class="go">\new Score</span>
+<span class="go">&lt;&lt;</span>
+<span class="go">    \new Staff</span>
+<span class="go">    {</span>
+<span class="go">        r2</span>
+<span class="go">        e&#39;4</span>
+<span class="go">        r4</span>
+<span class="go">    }</span>
+<span class="go">    \new Staff</span>
+<span class="go">    {</span>
+<span class="go">        c&#39;4</span>
+<span class="go">        d&#39;4</span>
+<span class="go">        r4</span>
+<span class="go">        f&#39;4</span>
+<span class="go">    }</span>
+<span class="go">&gt;&gt;</span>
+</pre></div>
+</div>
+<div class="figure align-default">
+<img alt="../_images/image-Hocketer-1.png" src="../_images/image-Hocketer-1.png" />
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">music</span> <span class="o">=</span> <span class="n">hocketer</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">score</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Score</span><span class="p">(</span><span class="n">music</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">f</span><span class="p">(</span><span class="n">score</span><span class="p">)</span>
+<span class="go">\new Score</span>
+<span class="go">&lt;&lt;</span>
+<span class="go">    \new Staff</span>
+<span class="go">    {</span>
+<span class="go">        c&#39;4</span>
+<span class="go">        d&#39;4</span>
+<span class="go">        e&#39;4</span>
+<span class="go">        r4</span>
+<span class="go">    }</span>
+<span class="go">    \new Staff</span>
+<span class="go">    {</span>
+<span class="go">        r2.</span>
+<span class="go">        f&#39;4</span>
+<span class="go">    }</span>
+<span class="go">&gt;&gt;</span>
+</pre></div>
+</div>
+<div class="figure align-default">
+<img alt="../_images/image-Hocketer-2.png" src="../_images/image-Hocketer-2.png" />
+</div>
+</div>
+<div class="example docutils container">
+<p>Alternatively, it is possible to retrieve an <code class="docutils literal notranslate"><span class="pre">abjad.Selection</span></code> for
+each individual voice generated by the process by indexing or slicing
+the the object itself. In the case below, the hocket process is invoked
+in the third line, and the individual selections are retrieved in the
+loop.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">container</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;c&#39;4 d&#39;4 e&#39;4 f&#39;4&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">hocketer</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">Hocketer</span><span class="p">(</span><span class="n">container</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">hocketer</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">score</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Score</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">selection</span> <span class="ow">in</span> <span class="n">hocketer</span><span class="p">[:]:</span>
+<span class="gp">... </span>    <span class="n">staff</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">([</span><span class="n">selection</span><span class="p">])</span>
+<span class="gp">... </span>    <span class="n">score</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">staff</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">f</span><span class="p">(</span><span class="n">score</span><span class="p">)</span>
+<span class="go">\new Score</span>
+<span class="go">&lt;&lt;</span>
+<span class="go">    \new Staff</span>
+<span class="go">    {</span>
+<span class="go">        c&#39;4</span>
+<span class="go">        r2.</span>
+<span class="go">    }</span>
+<span class="go">    \new Staff</span>
+<span class="go">    {</span>
+<span class="go">        r4</span>
+<span class="go">        d&#39;4</span>
+<span class="go">        e&#39;4</span>
+<span class="go">        f&#39;4</span>
+<span class="go">    }</span>
+<span class="go">&gt;&gt;</span>
+</pre></div>
+</div>
+<div class="figure align-default">
+<img alt="../_images/image-Hocketer-3.png" src="../_images/image-Hocketer-3.png" />
+</div>
+</div>
+<div class="example docutils container">
+<p>To get the result of the last operation, use the property
+<code class="docutils literal notranslate"><span class="pre">current_window</span></code>.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">container</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;c&#39;4 d&#39;4 e&#39;4 f&#39;4&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">hocketer</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">Hocketer</span><span class="p">(</span><span class="n">container</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">music</span> <span class="o">=</span> <span class="n">hocketer</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">score</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Score</span><span class="p">(</span><span class="n">music</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">f</span><span class="p">(</span><span class="n">score</span><span class="p">)</span>
+<span class="go">\new Score</span>
+<span class="go">&lt;&lt;</span>
+<span class="go">    \new Staff</span>
+<span class="go">    {</span>
+<span class="go">        c&#39;4</span>
+<span class="go">        r4</span>
+<span class="go">        e&#39;4</span>
+<span class="go">        r4</span>
+<span class="go">    }</span>
+<span class="go">    \new Staff</span>
+<span class="go">    {</span>
+<span class="go">        r4</span>
+<span class="go">        d&#39;4</span>
+<span class="go">        r4</span>
+<span class="go">        f&#39;4</span>
+<span class="go">    }</span>
+<span class="go">&gt;&gt;</span>
+</pre></div>
+</div>
+<div class="figure align-default">
+<img alt="../_images/image-Hocketer-4.png" src="../_images/image-Hocketer-4.png" />
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">music</span> <span class="o">=</span> <span class="n">hocketer</span><span class="o">.</span><span class="n">current_window</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">score</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Score</span><span class="p">(</span><span class="n">music</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">f</span><span class="p">(</span><span class="n">score</span><span class="p">)</span>
+<span class="go">\new Score</span>
+<span class="go">&lt;&lt;</span>
+<span class="go">    \new Staff</span>
+<span class="go">    {</span>
+<span class="go">        c&#39;4</span>
+<span class="go">        r4</span>
+<span class="go">        e&#39;4</span>
+<span class="go">        r4</span>
+<span class="go">    }</span>
+<span class="go">    \new Staff</span>
+<span class="go">    {</span>
+<span class="go">        r4</span>
+<span class="go">        d&#39;4</span>
+<span class="go">        r4</span>
+<span class="go">        f&#39;4</span>
+<span class="go">    }</span>
+<span class="go">&gt;&gt;</span>
+</pre></div>
+</div>
+<div class="figure align-default">
+<img alt="../_images/image-Hocketer-5.png" src="../_images/image-Hocketer-5.png" />
+</div>
+</div>
+<div class="example docutils container">
+<p>This class has many keyword arguments, all of which can be altered
+after instantiation using properties with the same names as shown
+below.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">container</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;\time 3/4 c&#39;4 d&#39;4 e&#39;4 | f&#39;4 g&#39;4 a&#39;4&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">hocketer</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">Hocketer</span><span class="p">(</span><span class="n">container</span><span class="p">,</span>
+<span class="gp">... </span>                           <span class="n">n_voices</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>
+<span class="gp">... </span>                           <span class="n">weights</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">5</span><span class="p">],</span>
+<span class="gp">... </span>                           <span class="n">k</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
+<span class="gp">... </span>                           <span class="n">force_k_voices</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+<span class="gp">... </span>                           <span class="n">disable_rewrite_meter</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+<span class="gp">... </span>                           <span class="n">use_multimeasure_rests</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+<span class="gp">... </span>                           <span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">hocketer</span><span class="o">.</span><span class="n">n_voices</span>
+<span class="go">3</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">hocketer</span><span class="o">.</span><span class="n">weights</span>
+<span class="go">[1, 2, 5]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">hocketer</span><span class="o">.</span><span class="n">k</span>
+<span class="go">2</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">hocketer</span><span class="o">.</span><span class="n">force_k_voices</span>
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">hocketer</span><span class="o">.</span><span class="n">disable_rewrite_meter</span>
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="ow">not</span> <span class="n">hocketer</span><span class="o">.</span><span class="n">use_multimeasure_rests</span>
+<span class="go">False</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">hocketer</span><span class="o">.</span><span class="n">n_voices</span> <span class="o">=</span> <span class="mi">5</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">hocketer</span><span class="o">.</span><span class="n">weights</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">7</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">hocketer</span><span class="o">.</span><span class="n">k</span> <span class="o">=</span> <span class="mi">3</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">hocketer</span><span class="o">.</span><span class="n">force_k_voices</span> <span class="o">=</span> <span class="kc">False</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">hocketer</span><span class="o">.</span><span class="n">disable_rewrite_meter</span> <span class="o">=</span> <span class="kc">False</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">hocketer</span><span class="o">.</span><span class="n">use_multimeasure_rests</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">hocketer</span><span class="o">.</span><span class="n">n_voices</span>
+<span class="go">5</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">hocketer</span><span class="o">.</span><span class="n">weights</span>
+<span class="go">[1, 1, 1, 2, 7]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">hocketer</span><span class="o">.</span><span class="n">k</span>
+<span class="go">3</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="ow">not</span> <span class="n">hocketer</span><span class="o">.</span><span class="n">force_k_voices</span>
+<span class="go">False</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="ow">not</span> <span class="n">hocketer</span><span class="o">.</span><span class="n">disable_rewrite_meter</span>
+<span class="go">False</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">hocketer</span><span class="o">.</span><span class="n">use_multimeasure_rests</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+</div>
+<div class="example docutils container">
+<p>Use the optional argument <code class="docutils literal notranslate"><span class="pre">n_voices</span></code> to set the number of different
+staves in the output (default is 2).</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">container</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;c&#39;8 d&#39;8 e&#39;8 f&#39;8 g&#39;8 a&#39;8 b&#39;8 c&#39;&#39;8&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">hocketer</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">Hocketer</span><span class="p">(</span><span class="n">container</span><span class="p">,</span> <span class="n">n_voices</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">music</span> <span class="o">=</span> <span class="n">hocketer</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">score</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Score</span><span class="p">(</span><span class="n">music</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">f</span><span class="p">(</span><span class="n">score</span><span class="p">)</span>
+<span class="go">\new Score</span>
+<span class="go">&lt;&lt;</span>
+<span class="go">    \new Staff</span>
+<span class="go">    {</span>
+<span class="go">        c&#39;8</span>
+<span class="go">        r8</span>
+<span class="go">        e&#39;8</span>
+<span class="go">        r8</span>
+<span class="go">        g&#39;8</span>
+<span class="go">        r4.</span>
+<span class="go">    }</span>
+<span class="go">    \new Staff</span>
+<span class="go">    {</span>
+<span class="go">        r8</span>
+<span class="go">        d&#39;8</span>
+<span class="go">        r4.</span>
+<span class="go">        a&#39;8</span>
+<span class="go">        r4</span>
+<span class="go">    }</span>
+<span class="go">    \new Staff</span>
+<span class="go">    {</span>
+<span class="go">        r4.</span>
+<span class="go">        f&#39;8</span>
+<span class="go">        r4</span>
+<span class="go">        b&#39;8</span>
+<span class="go">        c&#39;&#39;8</span>
+<span class="go">    }</span>
+<span class="go">&gt;&gt;</span>
+</pre></div>
+</div>
+<div class="figure align-default">
+<img alt="../_images/image-Hocketer-6.png" src="../_images/image-Hocketer-6.png" />
+</div>
+</div>
+<div class="example docutils container">
+<p>Applying the <code class="docutils literal notranslate"><span class="pre">len()</span></code> function to the hocketer will return the current
+number of voices to be output by the hocketer.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">container</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;c&#39;4 d&#39;4 e&#39;4 f&#39;4 ~ | f&#39;2 g&#39;2&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">hocketer</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">Hocketer</span><span class="p">(</span><span class="n">container</span><span class="p">,</span> <span class="n">n_voices</span><span class="o">=</span><span class="mi">7</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">len</span><span class="p">(</span><span class="n">hocketer</span><span class="p">)</span>
+<span class="go">6</span>
+</pre></div>
+</div>
+</div>
+<div class="example docutils container">
+<p>Set <code class="docutils literal notranslate"><span class="pre">weights</span></code> to a list of numbers (either floats or integers) to
+give different weights to each voice. By default, all voices have equal
+weight. The list in <code class="docutils literal notranslate"><span class="pre">weights</span></code> must have the same length as the number
+of voices. In the example below, <code class="docutils literal notranslate"><span class="pre">weights</span></code> is set to a list of length
+2 (matching the default two voices). The second voice has a higher
+weight to it, and receives more notes from the hocket process as
+expected.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">container</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;c&#39;8 d&#39;8 e&#39;8 f&#39;8 g&#39;8 a&#39;8 b&#39;8 c&#39;&#39;8&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">hocketer</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">Hocketer</span><span class="p">(</span><span class="n">container</span><span class="p">,</span>
+<span class="gp">... </span>                           <span class="n">weights</span><span class="o">=</span><span class="p">[</span><span class="mf">2.1</span><span class="p">,</span> <span class="mf">5.7</span><span class="p">],</span>
+<span class="gp">... </span>                           <span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">music</span> <span class="o">=</span> <span class="n">hocketer</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">score</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Score</span><span class="p">(</span><span class="n">music</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">f</span><span class="p">(</span><span class="n">score</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">f</span><span class="p">(</span><span class="n">score</span><span class="p">)</span>
+<span class="go">\new Score</span>
+<span class="go">&lt;&lt;</span>
+<span class="go">    \new Staff</span>
+<span class="go">    {</span>
+<span class="go">        r8</span>
+<span class="go">        d&#39;8</span>
+<span class="go">        r4</span>
+<span class="go">        g&#39;8</span>
+<span class="go">        r4.</span>
+<span class="go">    }</span>
+<span class="go">    \new Staff</span>
+<span class="go">    {</span>
+<span class="go">        c&#39;8</span>
+<span class="go">        r8</span>
+<span class="go">        e&#39;8</span>
+<span class="go">        f&#39;8</span>
+<span class="go">        r8</span>
+<span class="go">        a&#39;8</span>
+<span class="go">        b&#39;8</span>
+<span class="go">        c&#39;&#39;8</span>
+<span class="go">    }</span>
+<span class="go">&gt;&gt;</span>
+</pre></div>
+</div>
+<div class="figure align-default">
+<img alt="../_images/image-Hocketer-7.png" src="../_images/image-Hocketer-7.png" />
+</div>
+<p>Use the method <code class="docutils literal notranslate"><span class="pre">reset_weights()</span></code> to reset the weights back to their
+default values.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">container</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;c&#39;8 d&#39;8 e&#39;8 f&#39;8 g&#39;8 a&#39;8 b&#39;8 c&#39;&#39;8&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">hocketer</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">Hocketer</span><span class="p">(</span><span class="n">container</span><span class="p">,</span>
+<span class="gp">... </span>                           <span class="n">weights</span><span class="o">=</span><span class="p">[</span><span class="mf">2.1</span><span class="p">,</span> <span class="mf">5.7</span><span class="p">],</span>
+<span class="gp">... </span>                           <span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">hocketer</span><span class="o">.</span><span class="n">weights</span>
+<span class="go">[2.1, 5.7]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">hocketer</span><span class="o">.</span><span class="n">reset_weights</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">hocketer</span><span class="o">.</span><span class="n">weights</span>
+<span class="go">[1.0, 1.0]</span>
+</pre></div>
+</div>
+</div>
+<div class="example docutils container">
+<p>Set <code class="docutils literal notranslate"><span class="pre">k</span></code> to an integer representing how many times each logical tie
+is fed into the hocket process. By default, <code class="docutils literal notranslate"><span class="pre">k</span></code> is set to <code class="docutils literal notranslate"><span class="pre">1</span></code>, so
+each logical tie is assigned to a single voice. Changing this to a
+higher value will increase the chance of a logical tie appearing for
+up to <code class="docutils literal notranslate"><span class="pre">k</span></code> different voices.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">container</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;c&#39;4 d&#39;4 e&#39;4 f&#39;4&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">hocketer</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">Hocketer</span><span class="p">(</span><span class="n">container</span><span class="p">,</span> <span class="n">n_voices</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">music</span> <span class="o">=</span> <span class="n">hocketer</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">score</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Score</span><span class="p">(</span><span class="n">music</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">f</span><span class="p">(</span><span class="n">score</span><span class="p">)</span>
+<span class="go">\new Score</span>
+<span class="go">&lt;&lt;</span>
+<span class="go">    \new Staff</span>
+<span class="go">    {</span>
+<span class="go">        c&#39;4</span>
+<span class="go">        d&#39;4</span>
+<span class="go">        e&#39;4</span>
+<span class="go">        r4</span>
+<span class="go">    }</span>
+<span class="go">    \new Staff</span>
+<span class="go">    {</span>
+<span class="go">        r2</span>
+<span class="go">        e&#39;4</span>
+<span class="go">        f&#39;4</span>
+<span class="go">    }</span>
+<span class="go">    \new Staff</span>
+<span class="go">    {</span>
+<span class="go">        r2.</span>
+<span class="go">        f&#39;4</span>
+<span class="go">    }</span>
+<span class="go">    \new Staff</span>
+<span class="go">    {</span>
+<span class="go">        r4</span>
+<span class="go">        d&#39;4</span>
+<span class="go">        r2</span>
+<span class="go">    }</span>
+<span class="go">&gt;&gt;</span>
+</pre></div>
+</div>
+<div class="figure align-default">
+<img alt="../_images/image-Hocketer-8.png" src="../_images/image-Hocketer-8.png" />
+</div>
+<p>It is important to note that changing <code class="docutils literal notranslate"><span class="pre">k</span></code> to a higher value does not
+guarantee each logical tie will appear in <code class="docutils literal notranslate"><span class="pre">k</span></code> different voices. By
+default, <code class="docutils literal notranslate"><span class="pre">k</span></code> only defines how many times each logical tie is
+processed by the hocket process, which may select the same voice more
+than once. To ensure that each logical tie appears in <code class="docutils literal notranslate"><span class="pre">k</span></code> unique
+voices, set the optional keyword argument <code class="docutils literal notranslate"><span class="pre">force_k_voices</span></code> to
+<code class="docutils literal notranslate"><span class="pre">True</span></code> as shown below.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">container</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;c&#39;8 d&#39;8 e&#39;8 f&#39;8 g&#39;8 a&#39;8 b&#39;8 c&#39;&#39;8&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">hocketer</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">Hocketer</span><span class="p">(</span><span class="n">container</span><span class="p">,</span>
+<span class="gp">... </span>                           <span class="n">n_voices</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>
+<span class="gp">... </span>                           <span class="n">k</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
+<span class="gp">... </span>                           <span class="n">force_k_voices</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+<span class="gp">... </span>                           <span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">music</span> <span class="o">=</span> <span class="n">hocketer</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">score</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Score</span><span class="p">(</span><span class="n">music</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">f</span><span class="p">(</span><span class="n">score</span><span class="p">)</span>
+<span class="go">\new Score</span>
+<span class="go">&lt;&lt;</span>
+<span class="go">    \new Staff</span>
+<span class="go">    {</span>
+<span class="go">        c&#39;8</span>
+<span class="go">        d&#39;8</span>
+<span class="go">        r8</span>
+<span class="go">        f&#39;8</span>
+<span class="go">        g&#39;8</span>
+<span class="go">        r8</span>
+<span class="go">        b&#39;8</span>
+<span class="go">        c&#39;&#39;8</span>
+<span class="go">    }</span>
+<span class="go">    \new Staff</span>
+<span class="go">    {</span>
+<span class="go">        r4</span>
+<span class="go">        e&#39;8</span>
+<span class="go">        r8</span>
+<span class="go">        g&#39;8</span>
+<span class="go">        a&#39;8</span>
+<span class="go">        b&#39;8</span>
+<span class="go">        c&#39;&#39;8</span>
+<span class="go">    }</span>
+<span class="go">    \new Staff</span>
+<span class="go">    {</span>
+<span class="go">        c&#39;8</span>
+<span class="go">        d&#39;8</span>
+<span class="go">        e&#39;8</span>
+<span class="go">        f&#39;8</span>
+<span class="go">        r8</span>
+<span class="go">        a&#39;8</span>
+<span class="go">        r4</span>
+<span class="go">    }</span>
+<span class="go">&gt;&gt;</span>
+</pre></div>
+</div>
+<div class="figure align-default">
+<img alt="../_images/image-Hocketer-9.png" src="../_images/image-Hocketer-9.png" />
+</div>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Setting <code class="docutils literal notranslate"><span class="pre">force_k_voices</span></code> to <code class="docutils literal notranslate"><span class="pre">True</span></code> when <code class="docutils literal notranslate"><span class="pre">k</span></code> is larger than
+<code class="docutils literal notranslate"><span class="pre">n_voices</span></code> will raise an Exception:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">container</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;c&#39;8 d&#39;8 e&#39;8 f&#39;8 g&#39;8 a&#39;8 b&#39;8 c&#39;&#39;8&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">hocketer</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">Hocketer</span><span class="p">(</span><span class="n">container</span><span class="p">,</span> <span class="n">n_voices</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">hocketer</span><span class="o">.</span><span class="n">force_k_voices</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="go">ValueError: &#39;force_k_voices&#39; cannot be set to True if &#39;k&#39; &gt; &#39;n_voices&#39;,</span>
+<span class="go">change &#39;k&#39; first</span>
+</pre></div>
+</div>
+</div>
+<div class="example docutils container">
+<p>By default, this class rewrites uses abjad’s <code class="docutils literal notranslate"><span class="pre">rewrite_meter()</span></code>
+mutation, which is necessary for cleaning up the rests.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">container</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;c&#39;8 d&#39;8 e&#39;8 f&#39;8 g&#39;8 a&#39;8 b&#39;8 c&#39;&#39;8&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">hocketer</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">Hocketer</span><span class="p">(</span><span class="n">container</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">music</span> <span class="o">=</span> <span class="n">hocketer</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">score</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Score</span><span class="p">(</span><span class="n">music</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">f</span><span class="p">(</span><span class="n">score</span><span class="p">)</span>
+<span class="go">\new Score</span>
+<span class="go">&lt;&lt;</span>
+<span class="go">    \new Staff</span>
+<span class="go">    {</span>
+<span class="go">        c&#39;8</span>
+<span class="go">        d&#39;8</span>
+<span class="go">        r4.</span>
+<span class="go">        a&#39;8</span>
+<span class="go">        r4</span>
+<span class="go">    }</span>
+<span class="go">    \new Staff</span>
+<span class="go">    {</span>
+<span class="go">        r4</span>
+<span class="go">        e&#39;8</span>
+<span class="go">        f&#39;8</span>
+<span class="go">        g&#39;8</span>
+<span class="go">        r8</span>
+<span class="go">        b&#39;8</span>
+<span class="go">        c&#39;&#39;8</span>
+<span class="go">    }</span>
+<span class="go">&gt;&gt;</span>
+</pre></div>
+</div>
+<div class="figure align-default">
+<img alt="../_images/image-Hocketer-10.png" src="../_images/image-Hocketer-10.png" />
+</div>
+<p>Set <code class="docutils literal notranslate"><span class="pre">disable_rewrite_meter</span></code> to <code class="docutils literal notranslate"><span class="pre">True</span></code> in order to disable this
+behaviour.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">container</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;c&#39;8 d&#39;8 e&#39;8 f&#39;8 g&#39;8 a&#39;8 b&#39;8 c&#39;&#39;8&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">hocketer</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">Hocketer</span><span class="p">(</span><span class="n">container</span><span class="p">,</span>
+<span class="gp">... </span>                           <span class="n">disable_rewrite_meter</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+<span class="gp">... </span>                           <span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">music</span> <span class="o">=</span> <span class="n">hocketer</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">score</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Score</span><span class="p">(</span><span class="n">music</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">f</span><span class="p">(</span><span class="n">score</span><span class="p">)</span>
+<span class="go">\new Score</span>
+<span class="go">&lt;&lt;</span>
+<span class="go">    \new Staff</span>
+<span class="go">    {</span>
+<span class="go">        c&#39;8</span>
+<span class="go">        d&#39;8</span>
+<span class="go">        r8</span>
+<span class="go">        r8</span>
+<span class="go">        r8</span>
+<span class="go">        a&#39;8</span>
+<span class="go">        r8</span>
+<span class="go">        r8</span>
+<span class="go">    }</span>
+<span class="go">    \new Staff</span>
+<span class="go">    {</span>
+<span class="go">        r8</span>
+<span class="go">        r8</span>
+<span class="go">        e&#39;8</span>
+<span class="go">        f&#39;8</span>
+<span class="go">        g&#39;8</span>
+<span class="go">        r8</span>
+<span class="go">        b&#39;8</span>
+<span class="go">        c&#39;&#39;8</span>
+<span class="go">    }</span>
+<span class="go">&gt;&gt;</span>
+</pre></div>
+</div>
+<div class="figure align-default">
+<img alt="../_images/image-Hocketer-11.png" src="../_images/image-Hocketer-11.png" />
+</div>
+</div>
+<div class="example docutils container">
+<p>By default, this class rewrites all bars that are filled with rests,
+replacing the rests by a multi-measure rest.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">container</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;\time 3/4 c&#39;4 d&#39;4 e&#39;4 f&#39;4 g&#39;4 a&#39;4&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">hocketer</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">Hocketer</span><span class="p">(</span><span class="n">container</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">music</span> <span class="o">=</span> <span class="n">hocketer</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">score</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Score</span><span class="p">(</span><span class="n">music</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">f</span><span class="p">(</span><span class="n">score</span><span class="p">)</span>
+<span class="go">\new Score</span>
+<span class="go">&lt;&lt;</span>
+<span class="go">    \new Staff</span>
+<span class="go">    {</span>
+<span class="go">        \time 3/4</span>
+<span class="go">        R1 * 3/4</span>
+<span class="go">        r4</span>
+<span class="go">        g&#39;4</span>
+<span class="go">        a&#39;4</span>
+<span class="go">    }</span>
+<span class="go">    \new Staff</span>
+<span class="go">    {</span>
+<span class="go">        \time 3/4</span>
+<span class="go">        c&#39;4</span>
+<span class="go">        d&#39;4</span>
+<span class="go">        e&#39;4</span>
+<span class="go">        f&#39;4</span>
+<span class="go">        r2</span>
+<span class="go">    }</span>
+<span class="go">&gt;&gt;</span>
+</pre></div>
+</div>
+<div class="figure align-default">
+<img alt="../_images/image-Hocketer-12.png" src="../_images/image-Hocketer-12.png" />
+</div>
+<p>Set <code class="docutils literal notranslate"><span class="pre">use_multimeasure_rests</span></code> to <code class="docutils literal notranslate"><span class="pre">False</span></code> to disable this behaviour.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">container</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;\time 3/4 c&#39;4 d&#39;4 e&#39;4 f&#39;4 g&#39;4 a&#39;4&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">hocketer</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">Hocketer</span><span class="p">(</span><span class="n">container</span><span class="p">,</span>
+<span class="gp">... </span>                           <span class="n">use_multimeasure_rests</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+<span class="gp">... </span>                           <span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">music</span> <span class="o">=</span> <span class="n">hocketer</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">score</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Score</span><span class="p">(</span><span class="n">music</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">f</span><span class="p">(</span><span class="n">score</span><span class="p">)</span>
+<span class="go">\new Score</span>
+<span class="go">&lt;&lt;</span>
+<span class="go">    \new Staff</span>
+<span class="go">    {</span>
+<span class="go">        \time 3/4</span>
+<span class="go">        r2.</span>
+<span class="go">        r4</span>
+<span class="go">        g&#39;4</span>
+<span class="go">        a&#39;4</span>
+<span class="go">    }</span>
+<span class="go">    \new Staff</span>
+<span class="go">    {</span>
+<span class="go">        \time 3/4</span>
+<span class="go">        c&#39;4</span>
+<span class="go">        d&#39;4</span>
+<span class="go">        e&#39;4</span>
+<span class="go">        f&#39;4</span>
+<span class="go">        r2</span>
+<span class="go">    }</span>
+<span class="go">&gt;&gt;</span>
+</pre></div>
+</div>
+<div class="figure align-default">
+<img alt="../_images/image-Hocketer-13.png" src="../_images/image-Hocketer-13.png" />
+</div>
+</div>
+<div class="example docutils container">
+<p>Use the property <code class="docutils literal notranslate"><span class="pre">contents</span></code> to get the input container upon which the
+hocketer operates. Notice that <code class="docutils literal notranslate"><span class="pre">contents</span></code> remains invariant after
+any shuffling or rotation operations (use <code class="docutils literal notranslate"><span class="pre">current_window</span></code> for the
+transformed selection of music). <code class="docutils literal notranslate"><span class="pre">contents</span></code> can be used to change the
+<code class="docutils literal notranslate"><span class="pre">abjad.Container</span></code> to be shuffled.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">container</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;c&#39;4 d&#39;4 e&#39;4 f&#39;4&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">hocketer</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">Hocketer</span><span class="p">(</span><span class="n">container</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">f</span><span class="p">(</span><span class="n">hocketer</span><span class="o">.</span><span class="n">contents</span><span class="p">)</span>
+<span class="go">{</span>
+<span class="go">    c&#39;4</span>
+<span class="go">    d&#39;4</span>
+<span class="go">    e&#39;4</span>
+<span class="go">    f&#39;4</span>
+<span class="go">}</span>
+</pre></div>
+</div>
+<div class="figure align-default">
+<img alt="../_images/image-Hocketer-14.png" src="../_images/image-Hocketer-14.png" />
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">hocketer</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">f</span><span class="p">(</span><span class="n">hocketer</span><span class="o">.</span><span class="n">contents</span><span class="p">)</span>
+<span class="go">{</span>
+<span class="go">    c&#39;4</span>
+<span class="go">    d&#39;4</span>
+<span class="go">    e&#39;4</span>
+<span class="go">    f&#39;4</span>
+<span class="go">}</span>
+</pre></div>
+</div>
+<div class="figure align-default">
+<img alt="../_images/image-Hocketer-15.png" src="../_images/image-Hocketer-15.png" />
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">hocketer</span><span class="o">.</span><span class="n">contents</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;cs2 ds2&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">f</span><span class="p">(</span><span class="n">hocketer</span><span class="o">.</span><span class="n">contents</span><span class="p">)</span>
+<span class="go">{</span>
+<span class="go">    cs2</span>
+<span class="go">    ds2</span>
+<span class="go">}</span>
+</pre></div>
+</div>
+<div class="figure align-default">
+<img alt="../_images/image-Hocketer-16.png" src="../_images/image-Hocketer-16.png" />
+</div>
+</div>
+<div class="example docutils container">
+<p>This class can handle time signature changes as well as nested tuplets.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">container</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="sa">r</span><span class="s2">&quot;\time 5/4 r4 \times 2/3 {c&#39;4 d&#39;2} e&#39;4. f&#39;8&quot;</span>
+<span class="gp">... </span>    <span class="sa">r</span><span class="s2">&quot;\times 4/5 {\time 4/4 g&#39;2. \times 2/3 {a&#39;8 r8 b&#39;2}}&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">hocketer</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">Hocketer</span><span class="p">(</span><span class="n">container</span><span class="p">,</span>
+<span class="gp">... </span>                           <span class="n">n_voices</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span>
+<span class="gp">... </span>                           <span class="n">k</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
+<span class="gp">... </span>                           <span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">staves</span> <span class="o">=</span> <span class="n">hocketer</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">score</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Score</span><span class="p">(</span><span class="n">staves</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">f</span><span class="p">(</span><span class="n">score</span><span class="p">)</span>
+<span class="go">\new Score</span>
+<span class="go">&lt;&lt;</span>
+<span class="go">    \new Staff</span>
+<span class="go">    {</span>
+<span class="go">        \time 5/4</span>
+<span class="go">        r4</span>
+<span class="go">        \times 2/3 {</span>
+<span class="go">            c&#39;4</span>
+<span class="go">            d&#39;2</span>
+<span class="go">        }</span>
+<span class="go">        r4.</span>
+<span class="go">        f&#39;8</span>
+<span class="go">        \times 4/5 {</span>
+<span class="go">            \time 4/4</span>
+<span class="go">            r2.</span>
+<span class="go">            \times 2/3 {</span>
+<span class="go">                a&#39;8</span>
+<span class="go">                r8</span>
+<span class="go">                r2</span>
+<span class="go">            }</span>
+<span class="go">        }</span>
+<span class="go">    }</span>
+<span class="go">    \new Staff</span>
+<span class="go">    {</span>
+<span class="go">        \time 5/4</span>
+<span class="go">        R1 * 5/4</span>
+<span class="go">        R1</span>
+<span class="go">    }</span>
+<span class="go">    \new Staff</span>
+<span class="go">    {</span>
+<span class="go">        \time 5/4</span>
+<span class="go">        r4</span>
+<span class="go">        \times 2/3 {</span>
+<span class="go">            r4</span>
+<span class="go">            d&#39;2</span>
+<span class="go">        }</span>
+<span class="go">        e&#39;4.</span>
+<span class="go">        f&#39;8</span>
+<span class="go">        \times 4/5 {</span>
+<span class="go">            \time 4/4</span>
+<span class="go">            r2.</span>
+<span class="go">            \times 2/3 {</span>
+<span class="go">                a&#39;8</span>
+<span class="go">                r8</span>
+<span class="go">                b&#39;2</span>
+<span class="go">            }</span>
+<span class="go">        }</span>
+<span class="go">    }</span>
+<span class="go">    \new Staff</span>
+<span class="go">    {</span>
+<span class="go">        \time 5/4</span>
+<span class="go">        r4</span>
+<span class="go">        \times 2/3 {</span>
+<span class="go">            c&#39;4</span>
+<span class="go">            r2</span>
+<span class="go">        }</span>
+<span class="go">        r2</span>
+<span class="go">        \times 4/5 {</span>
+<span class="go">            \time 4/4</span>
+<span class="go">            g&#39;2.</span>
+<span class="go">            \times 2/3 {</span>
+<span class="go">                r8</span>
+<span class="go">                r8</span>
+<span class="go">                b&#39;2</span>
+<span class="go">            }</span>
+<span class="go">        }</span>
+<span class="go">    }</span>
+<span class="go">&gt;&gt;</span>
+</pre></div>
+</div>
+<div class="figure align-default">
+<img alt="../_images/image-Hocketer-17.png" src="../_images/image-Hocketer-17.png" />
+</div>
+</div>
+<p class="rubric">Methods</p>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">__init__</span></code>(contents, *[, n_voices, weights, …])</p></td>
+<td><p>Initialises self.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">reset_weights</span></code>()</p></td>
+<td><p>Resets the weight vector of all voices to an uniform distribution.</p></td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Attributes</p>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">contents</span></code></p></td>
+<td><p>The <code class="docutils literal notranslate"><span class="pre">abjad.Container</span></code> to be hocketed.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">current_window</span></code></p></td>
+<td><p>Read-only property, returns the result of the last operation.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">disable_rewrite_meter</span></code></p></td>
+<td><p>When <code class="docutils literal notranslate"><span class="pre">True</span></code>, the durations of the notes in the output will not be rewritten by the <code class="docutils literal notranslate"><span class="pre">rewrite_meter</span></code> mutation.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">force_k_voices</span></code></p></td>
+<td><p>When <code class="docutils literal notranslate"><span class="pre">True</span></code>, the hocket process will ensure that each logical tie is distributed among <code class="docutils literal notranslate"><span class="pre">k</span></code> voices.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">k</span></code></p></td>
+<td><p>Number of random choice operations applied to a logical tie.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">n_voices</span></code></p></td>
+<td><p>Number of individual voices in the output.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">use_multimeasure_rests</span></code></p></td>
+<td><p>When <code class="docutils literal notranslate"><span class="pre">True</span></code>, the rests in any bars filled only with rests will be replaced by a multi-measure rest.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">weights</span></code></p></td>
+<td><p>The <code class="docutils literal notranslate"><span class="pre">list</span></code> with weights for each voice.</p></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="auxjad.LeafDynMaker.html" class="btn btn-neutral float-right" title="auxjad.LeafDynMaker" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="auxjad.HarmonicNote.html" class="btn btn-neutral float-left" title="auxjad.HarmonicNote" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2020, Gilberto Agostinho
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>
