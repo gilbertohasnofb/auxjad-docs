@@ -106,9 +106,8 @@ elements 2 through 5, then 3 through 6, and so on.
 
     >>> looper = auxjad.LoopByNotes(container, window_size=4)
     >>> staff = abjad.Staff()
-    >>> for _ in range(3):
-    ...     music = looper()
-    ...     staff.append(music)
+    >>> notes = looper.output_n(3)
+    >>> staff.append(notes)
     >>> abjad.f(staff)
     \new Staff
     {
@@ -172,10 +171,12 @@ input for ``auxjad.Shuffler``. This will randomly shuffles the leaves of
 the input container.
 
     >>> container = abjad.Container(looper.current_window)
-    >>> shuffler = auxjad.Shuffler(container, omit_time_signatures=True)
-    >>> for _ in range(3):
-    ...     music = shuffler()
-    ...     staff.append(music)
+    >>> shuffler = auxjad.Shuffler(container,
+    ...                            omit_time_signatures=True,
+    ...                            disable_rewrite_meter=True,
+    ...                            )
+    >>> notes = shuffler.shuffle_n(3)
+    >>> staff.append(notes)
     >>> abjad.f(staff)
     \new Staff
     {
@@ -237,15 +238,7 @@ the input container.
             d'
             \tweak style #'harmonic
             a'
-        >4.
-        ~
-        <
-            \parenthesize
-            \tweak ParenthesesItem.font-size #-4
-            d'
-            \tweak style #'harmonic
-            a'
-        >4.
+        >2.
         <c' df' g'>8
         <
             \parenthesize
@@ -257,6 +250,22 @@ the input container.
         <
             \parenthesize
             \tweak ParenthesesItem.font-size #-4
+            g
+            \tweak style #'harmonic
+            c'
+        >2.
+        r4
+        <
+            \parenthesize
+            \tweak ParenthesesItem.font-size #-4
+            d'
+            \tweak style #'harmonic
+            a'
+        >2.
+        <c' df' g'>8
+        <
+            \parenthesize
+            \tweak ParenthesesItem.font-size #-4
             d'
             \tweak style #'harmonic
             a'
@@ -267,49 +276,8 @@ the input container.
             g
             \tweak style #'harmonic
             c'
-        >2
-        ~
-        <
-            \parenthesize
-            \tweak ParenthesesItem.font-size #-4
-            g
-            \tweak style #'harmonic
-            c'
-        >4
-        r8
-        r8
+        >2.
         <c' df' g'>8
-        <c' df' g'>8
-        <
-            \parenthesize
-            \tweak ParenthesesItem.font-size #-4
-            g
-            \tweak style #'harmonic
-            c'
-        >2
-        ~
-        <
-            \parenthesize
-            \tweak ParenthesesItem.font-size #-4
-            g
-            \tweak style #'harmonic
-            c'
-        >4
-        <
-            \parenthesize
-            \tweak ParenthesesItem.font-size #-4
-            d'
-            \tweak style #'harmonic
-            a'
-        >4.
-        ~
-        <
-            \parenthesize
-            \tweak ParenthesesItem.font-size #-4
-            d'
-            \tweak style #'harmonic
-            a'
-        >4.
         r4
     }
 
@@ -381,15 +349,7 @@ staff.
             d'
             \tweak style #'harmonic
             a'
-        >4.
-        ~
-        <
-            \parenthesize
-            \tweak ParenthesesItem.font-size #-4
-            d'
-            \tweak style #'harmonic
-            a'
-        >4.
+        >2.
         <c' df' g'>8
         <
             \parenthesize
@@ -401,6 +361,22 @@ staff.
         <
             \parenthesize
             \tweak ParenthesesItem.font-size #-4
+            g
+            \tweak style #'harmonic
+            c'
+        >2.
+        r4
+        <
+            \parenthesize
+            \tweak ParenthesesItem.font-size #-4
+            d'
+            \tweak style #'harmonic
+            a'
+        >2.
+        <c' df' g'>8
+        <
+            \parenthesize
+            \tweak ParenthesesItem.font-size #-4
             d'
             \tweak style #'harmonic
             a'
@@ -411,49 +387,8 @@ staff.
             g
             \tweak style #'harmonic
             c'
-        >2
-        ~
-        <
-            \parenthesize
-            \tweak ParenthesesItem.font-size #-4
-            g
-            \tweak style #'harmonic
-            c'
-        >4
-        r8
-        r8
+        >2.
         <c' df' g'>8
-        <c' df' g'>8
-        <
-            \parenthesize
-            \tweak ParenthesesItem.font-size #-4
-            g
-            \tweak style #'harmonic
-            c'
-        >2
-        ~
-        <
-            \parenthesize
-            \tweak ParenthesesItem.font-size #-4
-            g
-            \tweak style #'harmonic
-            c'
-        >4
-        <
-            \parenthesize
-            \tweak ParenthesesItem.font-size #-4
-            d'
-            \tweak style #'harmonic
-            a'
-        >4.
-        ~
-        <
-            \parenthesize
-            \tweak ParenthesesItem.font-size #-4
-            d'
-            \tweak style #'harmonic
-            a'
-        >4.
         r4
     }
 

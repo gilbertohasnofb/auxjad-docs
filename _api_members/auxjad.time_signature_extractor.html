@@ -1,0 +1,354 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>auxjad.time_signature_extractor &mdash; auxjad 0.7.2 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="auxjad.underfull_duration" href="auxjad.underfull_duration.html" />
+    <link rel="prev" title="auxjad.TenneySelector" href="auxjad.TenneySelector.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> auxjad
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.7
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../index.html">Welcome to auxjad’s documentation!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../examples/index.html">Examples of usage</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../api.html">auxjad API</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="auxjad.adjust_clefs.html">auxjad.adjust_clefs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="auxjad.ArtificialHarmonic.html">auxjad.ArtificialHarmonic</a></li>
+<li class="toctree-l2"><a class="reference internal" href="auxjad.CartographySelector.html">auxjad.CartographySelector</a></li>
+<li class="toctree-l2"><a class="reference internal" href="auxjad.close_container.html">auxjad.close_container</a></li>
+<li class="toctree-l2"><a class="reference internal" href="auxjad.container_is_full.html">auxjad.container_is_full</a></li>
+<li class="toctree-l2"><a class="reference internal" href="auxjad.containers_are_equal.html">auxjad.containers_are_equal</a></li>
+<li class="toctree-l2"><a class="reference internal" href="auxjad.enforce_time_signature.html">auxjad.enforce_time_signature</a></li>
+<li class="toctree-l2"><a class="reference internal" href="auxjad.Fader.html">auxjad.Fader</a></li>
+<li class="toctree-l2"><a class="reference internal" href="auxjad.fill_with_rests.html">auxjad.fill_with_rests</a></li>
+<li class="toctree-l2"><a class="reference internal" href="auxjad.HarmonicNote.html">auxjad.HarmonicNote</a></li>
+<li class="toctree-l2"><a class="reference internal" href="auxjad.Hocketer.html">auxjad.Hocketer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="auxjad.LeafDynMaker.html">auxjad.LeafDynMaker</a></li>
+<li class="toctree-l2"><a class="reference internal" href="auxjad.leaves_are_tieable.html">auxjad.leaves_are_tieable</a></li>
+<li class="toctree-l2"><a class="reference internal" href="auxjad.LoopByList.html">auxjad.LoopByList</a></li>
+<li class="toctree-l2"><a class="reference internal" href="auxjad.LoopByNotes.html">auxjad.LoopByNotes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="auxjad.LoopByWindow.html">auxjad.LoopByWindow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="auxjad.Phaser.html">auxjad.Phaser</a></li>
+<li class="toctree-l2"><a class="reference internal" href="auxjad.remove_empty_tuplets.html">auxjad.remove_empty_tuplets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="auxjad.remove_repeated_dynamics.html">auxjad.remove_repeated_dynamics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="auxjad.remove_repeated_time_signatures.html">auxjad.remove_repeated_time_signatures</a></li>
+<li class="toctree-l2"><a class="reference internal" href="auxjad.respell_container.html">auxjad.respell_container</a></li>
+<li class="toctree-l2"><a class="reference internal" href="auxjad.respell_chord.html">auxjad.respell_chord</a></li>
+<li class="toctree-l2"><a class="reference internal" href="auxjad.rests_to_multimeasure_rest.html">auxjad.rests_to_multimeasure_rest</a></li>
+<li class="toctree-l2"><a class="reference internal" href="auxjad.Shuffler.html">auxjad.Shuffler</a></li>
+<li class="toctree-l2"><a class="reference internal" href="auxjad.simplified_time_signature_ratio.html">auxjad.simplified_time_signature_ratio</a></li>
+<li class="toctree-l2"><a class="reference internal" href="auxjad.sync_containers.html">auxjad.sync_containers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="auxjad.TenneySelector.html">auxjad.TenneySelector</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">auxjad.time_signature_extractor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="auxjad.underfull_duration.html">auxjad.underfull_duration</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../api.html#indices-and-tables">Indices and tables</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">auxjad</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../api.html">auxjad API</a> &raquo;</li>
+        
+      <li>auxjad.time_signature_extractor</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/_api_members/auxjad.time_signature_extractor.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="auxjad-time-signature-extractor">
+<h1>auxjad.time_signature_extractor<a class="headerlink" href="#auxjad-time-signature-extractor" title="Permalink to this headline">¶</a></h1>
+<dl class="py function">
+<dt id="auxjad.time_signature_extractor">
+<code class="sig-prename descclassname">auxjad.</code><code class="sig-name descname">time_signature_extractor</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">container</span><span class="p">:</span> <span class="n">abjad.core.Container.Container</span></em>, <em class="sig-param"><span class="o">*</span></em>, <em class="sig-param"><span class="n">do_not_use_none</span><span class="p">:</span> <span class="n">bool</span> <span class="o">=</span> <span class="default_value">False</span></em>, <em class="sig-param"><span class="n">implicit_common_time</span><span class="p">:</span> <span class="n">bool</span> <span class="o">=</span> <span class="default_value">True</span></em>, <em class="sig-param"><span class="n">omit_repeated</span><span class="p">:</span> <span class="n">bool</span> <span class="o">=</span> <span class="default_value">False</span></em><span class="sig-paren">)</span><a class="headerlink" href="#auxjad.time_signature_extractor" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a <code class="docutils literal notranslate"><span class="pre">list</span></code> with the <code class="docutils literal notranslate"><span class="pre">abjad.TimeSignature</span></code> for all measures of
+an input <code class="docutils literal notranslate"><span class="pre">abjad.Container</span></code>.</p>
+<div class="example docutils container">
+<p>This function returns a list with one <code class="docutils literal notranslate"><span class="pre">abjad.TimeSignature</span></code> per
+measure.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">container</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;\time 3/4 c&#39;2. \time 4/4 e&#39;1&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">time_signatures</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">time_signature_extractor</span><span class="p">(</span><span class="n">container</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">time_signatures</span>
+<span class="go">[TimeSignature((3, 4)), TimeSignature((4, 4))]</span>
+</pre></div>
+</div>
+</div>
+<div class="example docutils container">
+<p>By default, the list will contain a <code class="docutils literal notranslate"><span class="pre">None</span></code> if a measure does
+not have an explicit time signature.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">container</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="sa">r</span><span class="s2">&quot;\time 5/8 c&#39;4 ~ c&#39;16 \time 3/8 d&#39;4. e&#39;4.&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">time_signatures</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">time_signature_extractor</span><span class="p">(</span><span class="n">container</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">time_signatures</span>
+<span class="go">[TimeSignature((5, 8)), TimeSignature((3, 8)), None]</span>
+</pre></div>
+</div>
+<p>Set the keyword argument <code class="docutils literal notranslate"><span class="pre">do_not_use_none</span></code> to <code class="docutils literal notranslate"><span class="pre">True</span></code> to change this
+behaviour.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">time_signatures</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">time_signature_extractor</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="n">container</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">do_not_use_none</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+<span class="gp">... </span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">time_signatures</span>
+<span class="go">[TimeSignature((5, 8)), TimeSignature((3, 8)), TimeSignature((3, 8))]</span>
+</pre></div>
+</div>
+</div>
+<div class="example docutils container">
+<p>By default, time signatures are output according to the container, even
+if there are multiple instances of a same time signature.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">container</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="sa">r</span><span class="s2">&quot;\time 3/4 c&#39;2. d&#39;2. \time 3/4 e&#39;2. f&#39;2.&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">time_signatures</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">time_signature_extractor</span><span class="p">(</span><span class="n">container</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">time_signatures</span>
+<span class="go">[abjad.TimeSignature((3, 4)), None, abjad.TimeSignature((3, 4)), None]</span>
+</pre></div>
+</div>
+<p>Set the keyword argument <code class="docutils literal notranslate"><span class="pre">omit_repeated</span></code> to <code class="docutils literal notranslate"><span class="pre">True</span></code> to replace
+repeated time signatures with <code class="docutils literal notranslate"><span class="pre">None</span></code>.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">time_signatures</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">time_signature_extractor</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="n">container</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">omit_repeated</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+<span class="gp">... </span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">time_signatures</span>
+<span class="go">[abjad.TimeSignature((3, 4)), None, None, None]</span>
+</pre></div>
+</div>
+</div>
+<div class="admonition error">
+<p class="admonition-title">Error</p>
+<p>Setting both <code class="docutils literal notranslate"><span class="pre">do_not_use_none</span></code> and <code class="docutils literal notranslate"><span class="pre">omit_repeated</span></code> to <code class="docutils literal notranslate"><span class="pre">True</span></code>
+will raise an exception:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">container</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="sa">r</span><span class="s2">&quot;\time 3/4 c&#39;2. d&#39;2. \time 3/4 e&#39;2. f&#39;2.&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">time_signatures</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">time_signature_extractor</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="n">container</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">do_not_use_none</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">omit_repeated</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+<span class="gp">... </span><span class="p">)</span>
+<span class="go">ValueError: &#39;omit_repeated&#39; and &#39;do_not_use_none&#39; cannot be both set to</span>
+<span class="go">&#39;True&#39;</span>
+</pre></div>
+</div>
+</div>
+<div class="example docutils container">
+<p>LilyPond uses an implicit time signature of 4/4 whenever a time
+signature is not found. This function behaves the same way.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">container</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;c&#39;1 d&#39;1 e&#39;1 f&#39;1&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">time_signatures</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">time_signature_extractor</span><span class="p">(</span><span class="n">container</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">time_signatures</span>
+<span class="go">[TimeSignature((4, 4)), None, None, None]</span>
+</pre></div>
+</div>
+<p>To disable this behaviour, set <code class="docutils literal notranslate"><span class="pre">implicit_common_time</span></code> to <code class="docutils literal notranslate"><span class="pre">False</span></code>.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">time_signatures</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">time_signature_extractor</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="n">container</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">implicit_common_time</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+<span class="gp">... </span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">time_signatures</span>
+<span class="go">[None, None, None, None]</span>
+</pre></div>
+</div>
+</div>
+<div class="admonition error">
+<p class="admonition-title">Error</p>
+<p>Setting <code class="docutils literal notranslate"><span class="pre">do_not_use_none</span></code> to <code class="docutils literal notranslate"><span class="pre">True</span></code> and <code class="docutils literal notranslate"><span class="pre">implicit_common_time</span></code> to
+<code class="docutils literal notranslate"><span class="pre">False</span></code> on a container that starts with no time signature will raise
+an exception:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">container</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;c&#39;1 d&#39;1 e&#39;1 f&#39;1&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">time_signatures</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">time_signature_extractor</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="n">container</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">do_not_use_none</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">implicit_common_time</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+<span class="gp">... </span><span class="p">)</span>
+<span class="go">ValueError: container does not have a time signature attached to its</span>
+<span class="go">first leaf, with &#39;implicit_common_time&#39; set to &#39;False&#39; and</span>
+<span class="go">&#39;omit_repeated&#39; set to &#39;True&#39;</span>
+</pre></div>
+</div>
+</div>
+</dd></dl>
+
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="auxjad.underfull_duration.html" class="btn btn-neutral float-right" title="auxjad.underfull_duration" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="auxjad.TenneySelector.html" class="btn btn-neutral float-left" title="auxjad.TenneySelector" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2020, Gilberto Agostinho
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

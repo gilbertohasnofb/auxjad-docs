@@ -89,11 +89,14 @@
 <li class="toctree-l1"><a class="reference internal" href="../index.html">Welcome to auxjad’s documentation!</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../examples/index.html">Examples of usage</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../api.html">auxjad API</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="auxjad.adjust_clefs.html">auxjad.adjust_clefs</a></li>
 <li class="toctree-l2"><a class="reference internal" href="auxjad.ArtificialHarmonic.html">auxjad.ArtificialHarmonic</a></li>
 <li class="toctree-l2"><a class="reference internal" href="auxjad.CartographySelector.html">auxjad.CartographySelector</a></li>
 <li class="toctree-l2"><a class="reference internal" href="auxjad.close_container.html">auxjad.close_container</a></li>
 <li class="toctree-l2"><a class="reference internal" href="auxjad.container_is_full.html">auxjad.container_is_full</a></li>
 <li class="toctree-l2"><a class="reference internal" href="auxjad.containers_are_equal.html">auxjad.containers_are_equal</a></li>
+<li class="toctree-l2"><a class="reference internal" href="auxjad.enforce_time_signature.html">auxjad.enforce_time_signature</a></li>
+<li class="toctree-l2"><a class="reference internal" href="auxjad.Fader.html">auxjad.Fader</a></li>
 <li class="toctree-l2"><a class="reference internal" href="auxjad.fill_with_rests.html">auxjad.fill_with_rests</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">auxjad.HarmonicNote</a></li>
 <li class="toctree-l2"><a class="reference internal" href="auxjad.Hocketer.html">auxjad.Hocketer</a></li>
@@ -102,6 +105,7 @@
 <li class="toctree-l2"><a class="reference internal" href="auxjad.LoopByList.html">auxjad.LoopByList</a></li>
 <li class="toctree-l2"><a class="reference internal" href="auxjad.LoopByNotes.html">auxjad.LoopByNotes</a></li>
 <li class="toctree-l2"><a class="reference internal" href="auxjad.LoopByWindow.html">auxjad.LoopByWindow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="auxjad.Phaser.html">auxjad.Phaser</a></li>
 <li class="toctree-l2"><a class="reference internal" href="auxjad.remove_empty_tuplets.html">auxjad.remove_empty_tuplets</a></li>
 <li class="toctree-l2"><a class="reference internal" href="auxjad.remove_repeated_dynamics.html">auxjad.remove_repeated_dynamics</a></li>
 <li class="toctree-l2"><a class="reference internal" href="auxjad.remove_repeated_time_signatures.html">auxjad.remove_repeated_time_signatures</a></li>
@@ -112,6 +116,7 @@
 <li class="toctree-l2"><a class="reference internal" href="auxjad.simplified_time_signature_ratio.html">auxjad.simplified_time_signature_ratio</a></li>
 <li class="toctree-l2"><a class="reference internal" href="auxjad.sync_containers.html">auxjad.sync_containers</a></li>
 <li class="toctree-l2"><a class="reference internal" href="auxjad.TenneySelector.html">auxjad.TenneySelector</a></li>
+<li class="toctree-l2"><a class="reference internal" href="auxjad.time_signature_extractor.html">auxjad.time_signature_extractor</a></li>
 <li class="toctree-l2"><a class="reference internal" href="auxjad.underfull_duration.html">auxjad.underfull_duration</a></li>
 </ul>
 </li>
@@ -186,7 +191,7 @@
 <h1>auxjad.HarmonicNote<a class="headerlink" href="#auxjad-harmonicnote" title="Permalink to this headline">¶</a></h1>
 <dl class="py class">
 <dt id="auxjad.HarmonicNote">
-<em class="property">class </em><code class="sig-prename descclassname">auxjad.</code><code class="sig-name descname">HarmonicNote</code><span class="sig-paren">(</span><em class="sig-param">*arguments</em>, <em class="sig-param">multiplier: Union[abjad.utilities.Duration.Duration</em>, <em class="sig-param">Tuple[int</em>, <em class="sig-param">int]] = None</em>, <em class="sig-param">tag: abjad.system.Tag.Tag = None</em>, <em class="sig-param">style: str = 'harmonic'</em>, <em class="sig-param">markup: str = None</em>, <em class="sig-param">direction: (&lt;class 'str'&gt;</em>, <em class="sig-param">&lt;enum 'VerticalAlignment'&gt;) = 'up'</em><span class="sig-paren">)</span><a class="headerlink" href="#auxjad.HarmonicNote" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">auxjad.</code><code class="sig-name descname">HarmonicNote</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">arguments</span></em>, <em class="sig-param"><span class="n">multiplier</span><span class="p">:</span> <span class="n">Optional<span class="p">[</span>Union<span class="p">[</span>abjad.utilities.Duration.Duration<span class="p">, </span>Tuple<span class="p">[</span>int<span class="p">, </span>int<span class="p">]</span><span class="p">]</span><span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em>, <em class="sig-param"><span class="n">tag</span><span class="p">:</span> <span class="n">Optional<span class="p">[</span>abjad.system.Tag.Tag<span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em>, <em class="sig-param"><span class="n">style</span><span class="p">:</span> <span class="n">str</span> <span class="o">=</span> <span class="default_value">'harmonic'</span></em>, <em class="sig-param"><span class="n">markup</span><span class="p">:</span> <span class="n">Optional<span class="p">[</span>str<span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em>, <em class="sig-param"><span class="n">direction</span><span class="p">:</span> <span class="n">Union<span class="p">[</span>str<span class="p">, </span>abjad.enums.VerticalAlignment<span class="p">]</span></span> <span class="o">=</span> <span class="default_value">'up'</span></em><span class="sig-paren">)</span><a class="headerlink" href="#auxjad.HarmonicNote" title="Permalink to this definition">¶</a></dt>
 <dd><p>Creates a note with tweaked notehead for harmonics. This is a child
 class of <code class="docutils literal notranslate"><span class="pre">abjad.Note</span></code>.</p>
 <div class="example docutils container">
@@ -348,10 +353,10 @@ the keyword <code class="docutils literal notranslate"><span class="pre">directi
 <img alt="../_images/image-HarmonicNote-7.png" src="../_images/image-HarmonicNote-7.png" />
 </div>
 </div>
-<div class="admonition warning">
-<p class="admonition-title">Warning</p>
+<div class="admonition error">
+<p class="admonition-title">Error</p>
 <p>If another markup is attached to the harmonic note, trying to set the
-<code class="docutils literal notranslate"><span class="pre">markup</span></code> to <code class="docutils literal notranslate"><span class="pre">None</span></code> will raise an Exception:</p>
+<code class="docutils literal notranslate"><span class="pre">markup</span></code> to <code class="docutils literal notranslate"><span class="pre">None</span></code> will raise an exception:</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">harm</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">HarmonicNote</span><span class="p">(</span><span class="s2">&quot;d&#39;&#39;1&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">attach</span><span class="p">(</span><span class="n">abjad</span><span class="o">.</span><span class="n">Markup</span><span class="p">(</span><span class="s1">&#39;test&#39;</span><span class="p">),</span> <span class="n">harm</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">harm</span><span class="o">.</span><span class="n">markup</span> <span class="o">=</span> <span class="s1">&#39;III.&#39;</span>

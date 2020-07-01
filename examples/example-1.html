@@ -34,7 +34,9 @@
   <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <link rel="index" title="Index" href="../genindex.html" />
-    <link rel="search" title="Search" href="../search.html" /> 
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Example 2" href="example-2.html" />
+    <link rel="prev" title="Examples of usage" href="index.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -83,9 +85,13 @@
             
             
               <p class="caption"><span class="caption-text">Contents</span></p>
-<ul>
+<ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../index.html">Welcome to auxjad’s documentation!</a></li>
-<li class="toctree-l1"><a class="reference internal" href="index.html">Examples of usage</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Examples of usage</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Example 1</a></li>
+<li class="toctree-l2"><a class="reference internal" href="example-2.html">Example 2</a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="../api.html">auxjad API</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../api.html#indices-and-tables">Indices and tables</a></li>
 </ul>
@@ -132,6 +138,8 @@
   <ul class="wy-breadcrumbs">
     
       <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="index.html">Examples of usage</a> &raquo;</li>
         
       <li>Example 1</li>
     
@@ -259,9 +267,8 @@ set to 4, this looper will first output the first four elements, then output
 elements 2 through 5, then 3 through 6, and so on.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">looper</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">LoopByNotes</span><span class="p">(</span><span class="n">container</span><span class="p">,</span> <span class="n">window_size</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">staff</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">()</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">):</span>
-<span class="gp">... </span>    <span class="n">music</span> <span class="o">=</span> <span class="n">looper</span><span class="p">()</span>
-<span class="gp">... </span>    <span class="n">staff</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">music</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">notes</span> <span class="o">=</span> <span class="n">looper</span><span class="o">.</span><span class="n">output_n</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">staff</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">notes</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">f</span><span class="p">(</span><span class="n">staff</span><span class="p">)</span>
 <span class="go">\new Staff</span>
 <span class="go">{</span>
@@ -326,10 +333,12 @@ elements 2 through 5, then 3 through 6, and so on.</p>
 input for <code class="docutils literal notranslate"><span class="pre">auxjad.Shuffler</span></code>. This will randomly shuffles the leaves of
 the input container.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">container</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">(</span><span class="n">looper</span><span class="o">.</span><span class="n">current_window</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">shuffler</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">Shuffler</span><span class="p">(</span><span class="n">container</span><span class="p">,</span> <span class="n">omit_time_signatures</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">):</span>
-<span class="gp">... </span>    <span class="n">music</span> <span class="o">=</span> <span class="n">shuffler</span><span class="p">()</span>
-<span class="gp">... </span>    <span class="n">staff</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">music</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">shuffler</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">Shuffler</span><span class="p">(</span><span class="n">container</span><span class="p">,</span>
+<span class="gp">... </span>                           <span class="n">omit_time_signatures</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+<span class="gp">... </span>                           <span class="n">disable_rewrite_meter</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+<span class="gp">... </span>                           <span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">notes</span> <span class="o">=</span> <span class="n">shuffler</span><span class="o">.</span><span class="n">shuffle_n</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">staff</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">notes</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">f</span><span class="p">(</span><span class="n">staff</span><span class="p">)</span>
 <span class="go">\new Staff</span>
 <span class="go">{</span>
@@ -391,15 +400,7 @@ the input container.</p>
 <span class="go">        d&#39;</span>
 <span class="go">        \tweak style #&#39;harmonic</span>
 <span class="go">        a&#39;</span>
-<span class="go">    &gt;4.</span>
-<span class="go">    ~</span>
-<span class="go">    &lt;</span>
-<span class="go">        \parenthesize</span>
-<span class="go">        \tweak ParenthesesItem.font-size #-4</span>
-<span class="go">        d&#39;</span>
-<span class="go">        \tweak style #&#39;harmonic</span>
-<span class="go">        a&#39;</span>
-<span class="go">    &gt;4.</span>
+<span class="go">    &gt;2.</span>
 <span class="go">    &lt;c&#39; df&#39; g&#39;&gt;8</span>
 <span class="go">    &lt;</span>
 <span class="go">        \parenthesize</span>
@@ -411,6 +412,22 @@ the input container.</p>
 <span class="go">    &lt;</span>
 <span class="go">        \parenthesize</span>
 <span class="go">        \tweak ParenthesesItem.font-size #-4</span>
+<span class="go">        g</span>
+<span class="go">        \tweak style #&#39;harmonic</span>
+<span class="go">        c&#39;</span>
+<span class="go">    &gt;2.</span>
+<span class="go">    r4</span>
+<span class="go">    &lt;</span>
+<span class="go">        \parenthesize</span>
+<span class="go">        \tweak ParenthesesItem.font-size #-4</span>
+<span class="go">        d&#39;</span>
+<span class="go">        \tweak style #&#39;harmonic</span>
+<span class="go">        a&#39;</span>
+<span class="go">    &gt;2.</span>
+<span class="go">    &lt;c&#39; df&#39; g&#39;&gt;8</span>
+<span class="go">    &lt;</span>
+<span class="go">        \parenthesize</span>
+<span class="go">        \tweak ParenthesesItem.font-size #-4</span>
 <span class="go">        d&#39;</span>
 <span class="go">        \tweak style #&#39;harmonic</span>
 <span class="go">        a&#39;</span>
@@ -421,49 +438,8 @@ the input container.</p>
 <span class="go">        g</span>
 <span class="go">        \tweak style #&#39;harmonic</span>
 <span class="go">        c&#39;</span>
-<span class="go">    &gt;2</span>
-<span class="go">    ~</span>
-<span class="go">    &lt;</span>
-<span class="go">        \parenthesize</span>
-<span class="go">        \tweak ParenthesesItem.font-size #-4</span>
-<span class="go">        g</span>
-<span class="go">        \tweak style #&#39;harmonic</span>
-<span class="go">        c&#39;</span>
-<span class="go">    &gt;4</span>
-<span class="go">    r8</span>
-<span class="go">    r8</span>
+<span class="go">    &gt;2.</span>
 <span class="go">    &lt;c&#39; df&#39; g&#39;&gt;8</span>
-<span class="go">    &lt;c&#39; df&#39; g&#39;&gt;8</span>
-<span class="go">    &lt;</span>
-<span class="go">        \parenthesize</span>
-<span class="go">        \tweak ParenthesesItem.font-size #-4</span>
-<span class="go">        g</span>
-<span class="go">        \tweak style #&#39;harmonic</span>
-<span class="go">        c&#39;</span>
-<span class="go">    &gt;2</span>
-<span class="go">    ~</span>
-<span class="go">    &lt;</span>
-<span class="go">        \parenthesize</span>
-<span class="go">        \tweak ParenthesesItem.font-size #-4</span>
-<span class="go">        g</span>
-<span class="go">        \tweak style #&#39;harmonic</span>
-<span class="go">        c&#39;</span>
-<span class="go">    &gt;4</span>
-<span class="go">    &lt;</span>
-<span class="go">        \parenthesize</span>
-<span class="go">        \tweak ParenthesesItem.font-size #-4</span>
-<span class="go">        d&#39;</span>
-<span class="go">        \tweak style #&#39;harmonic</span>
-<span class="go">        a&#39;</span>
-<span class="go">    &gt;4.</span>
-<span class="go">    ~</span>
-<span class="go">    &lt;</span>
-<span class="go">        \parenthesize</span>
-<span class="go">        \tweak ParenthesesItem.font-size #-4</span>
-<span class="go">        d&#39;</span>
-<span class="go">        \tweak style #&#39;harmonic</span>
-<span class="go">        a&#39;</span>
-<span class="go">    &gt;4.</span>
 <span class="go">    r4</span>
 <span class="go">}</span>
 </pre></div>
@@ -536,15 +512,7 @@ staff.</p>
 <span class="go">        d&#39;</span>
 <span class="go">        \tweak style #&#39;harmonic</span>
 <span class="go">        a&#39;</span>
-<span class="go">    &gt;4.</span>
-<span class="go">    ~</span>
-<span class="go">    &lt;</span>
-<span class="go">        \parenthesize</span>
-<span class="go">        \tweak ParenthesesItem.font-size #-4</span>
-<span class="go">        d&#39;</span>
-<span class="go">        \tweak style #&#39;harmonic</span>
-<span class="go">        a&#39;</span>
-<span class="go">    &gt;4.</span>
+<span class="go">    &gt;2.</span>
 <span class="go">    &lt;c&#39; df&#39; g&#39;&gt;8</span>
 <span class="go">    &lt;</span>
 <span class="go">        \parenthesize</span>
@@ -556,6 +524,22 @@ staff.</p>
 <span class="go">    &lt;</span>
 <span class="go">        \parenthesize</span>
 <span class="go">        \tweak ParenthesesItem.font-size #-4</span>
+<span class="go">        g</span>
+<span class="go">        \tweak style #&#39;harmonic</span>
+<span class="go">        c&#39;</span>
+<span class="go">    &gt;2.</span>
+<span class="go">    r4</span>
+<span class="go">    &lt;</span>
+<span class="go">        \parenthesize</span>
+<span class="go">        \tweak ParenthesesItem.font-size #-4</span>
+<span class="go">        d&#39;</span>
+<span class="go">        \tweak style #&#39;harmonic</span>
+<span class="go">        a&#39;</span>
+<span class="go">    &gt;2.</span>
+<span class="go">    &lt;c&#39; df&#39; g&#39;&gt;8</span>
+<span class="go">    &lt;</span>
+<span class="go">        \parenthesize</span>
+<span class="go">        \tweak ParenthesesItem.font-size #-4</span>
 <span class="go">        d&#39;</span>
 <span class="go">        \tweak style #&#39;harmonic</span>
 <span class="go">        a&#39;</span>
@@ -566,49 +550,8 @@ staff.</p>
 <span class="go">        g</span>
 <span class="go">        \tweak style #&#39;harmonic</span>
 <span class="go">        c&#39;</span>
-<span class="go">    &gt;2</span>
-<span class="go">    ~</span>
-<span class="go">    &lt;</span>
-<span class="go">        \parenthesize</span>
-<span class="go">        \tweak ParenthesesItem.font-size #-4</span>
-<span class="go">        g</span>
-<span class="go">        \tweak style #&#39;harmonic</span>
-<span class="go">        c&#39;</span>
-<span class="go">    &gt;4</span>
-<span class="go">    r8</span>
-<span class="go">    r8</span>
+<span class="go">    &gt;2.</span>
 <span class="go">    &lt;c&#39; df&#39; g&#39;&gt;8</span>
-<span class="go">    &lt;c&#39; df&#39; g&#39;&gt;8</span>
-<span class="go">    &lt;</span>
-<span class="go">        \parenthesize</span>
-<span class="go">        \tweak ParenthesesItem.font-size #-4</span>
-<span class="go">        g</span>
-<span class="go">        \tweak style #&#39;harmonic</span>
-<span class="go">        c&#39;</span>
-<span class="go">    &gt;2</span>
-<span class="go">    ~</span>
-<span class="go">    &lt;</span>
-<span class="go">        \parenthesize</span>
-<span class="go">        \tweak ParenthesesItem.font-size #-4</span>
-<span class="go">        g</span>
-<span class="go">        \tweak style #&#39;harmonic</span>
-<span class="go">        c&#39;</span>
-<span class="go">    &gt;4</span>
-<span class="go">    &lt;</span>
-<span class="go">        \parenthesize</span>
-<span class="go">        \tweak ParenthesesItem.font-size #-4</span>
-<span class="go">        d&#39;</span>
-<span class="go">        \tweak style #&#39;harmonic</span>
-<span class="go">        a&#39;</span>
-<span class="go">    &gt;4.</span>
-<span class="go">    ~</span>
-<span class="go">    &lt;</span>
-<span class="go">        \parenthesize</span>
-<span class="go">        \tweak ParenthesesItem.font-size #-4</span>
-<span class="go">        d&#39;</span>
-<span class="go">        \tweak style #&#39;harmonic</span>
-<span class="go">        a&#39;</span>
-<span class="go">    &gt;4.</span>
 <span class="go">    r4</span>
 <span class="go">}</span>
 </pre></div>
@@ -623,6 +566,15 @@ staff.</p>
            
           </div>
           <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="example-2.html" class="btn btn-neutral float-right" title="Example 2" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="index.html" class="btn btn-neutral float-left" title="Examples of usage" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
   
 
   <hr/>

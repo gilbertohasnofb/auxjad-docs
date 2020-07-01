@@ -35,7 +35,7 @@
   <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="auxjad.underfull_duration" href="auxjad.underfull_duration.html" />
+    <link rel="next" title="auxjad.time_signature_extractor" href="auxjad.time_signature_extractor.html" />
     <link rel="prev" title="auxjad.sync_containers" href="auxjad.sync_containers.html" /> 
 </head>
 
@@ -89,11 +89,14 @@
 <li class="toctree-l1"><a class="reference internal" href="../index.html">Welcome to auxjad’s documentation!</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../examples/index.html">Examples of usage</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../api.html">auxjad API</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="auxjad.adjust_clefs.html">auxjad.adjust_clefs</a></li>
 <li class="toctree-l2"><a class="reference internal" href="auxjad.ArtificialHarmonic.html">auxjad.ArtificialHarmonic</a></li>
 <li class="toctree-l2"><a class="reference internal" href="auxjad.CartographySelector.html">auxjad.CartographySelector</a></li>
 <li class="toctree-l2"><a class="reference internal" href="auxjad.close_container.html">auxjad.close_container</a></li>
 <li class="toctree-l2"><a class="reference internal" href="auxjad.container_is_full.html">auxjad.container_is_full</a></li>
 <li class="toctree-l2"><a class="reference internal" href="auxjad.containers_are_equal.html">auxjad.containers_are_equal</a></li>
+<li class="toctree-l2"><a class="reference internal" href="auxjad.enforce_time_signature.html">auxjad.enforce_time_signature</a></li>
+<li class="toctree-l2"><a class="reference internal" href="auxjad.Fader.html">auxjad.Fader</a></li>
 <li class="toctree-l2"><a class="reference internal" href="auxjad.fill_with_rests.html">auxjad.fill_with_rests</a></li>
 <li class="toctree-l2"><a class="reference internal" href="auxjad.HarmonicNote.html">auxjad.HarmonicNote</a></li>
 <li class="toctree-l2"><a class="reference internal" href="auxjad.Hocketer.html">auxjad.Hocketer</a></li>
@@ -102,6 +105,7 @@
 <li class="toctree-l2"><a class="reference internal" href="auxjad.LoopByList.html">auxjad.LoopByList</a></li>
 <li class="toctree-l2"><a class="reference internal" href="auxjad.LoopByNotes.html">auxjad.LoopByNotes</a></li>
 <li class="toctree-l2"><a class="reference internal" href="auxjad.LoopByWindow.html">auxjad.LoopByWindow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="auxjad.Phaser.html">auxjad.Phaser</a></li>
 <li class="toctree-l2"><a class="reference internal" href="auxjad.remove_empty_tuplets.html">auxjad.remove_empty_tuplets</a></li>
 <li class="toctree-l2"><a class="reference internal" href="auxjad.remove_repeated_dynamics.html">auxjad.remove_repeated_dynamics</a></li>
 <li class="toctree-l2"><a class="reference internal" href="auxjad.remove_repeated_time_signatures.html">auxjad.remove_repeated_time_signatures</a></li>
@@ -112,6 +116,7 @@
 <li class="toctree-l2"><a class="reference internal" href="auxjad.simplified_time_signature_ratio.html">auxjad.simplified_time_signature_ratio</a></li>
 <li class="toctree-l2"><a class="reference internal" href="auxjad.sync_containers.html">auxjad.sync_containers</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">auxjad.TenneySelector</a></li>
+<li class="toctree-l2"><a class="reference internal" href="auxjad.time_signature_extractor.html">auxjad.time_signature_extractor</a></li>
 <li class="toctree-l2"><a class="reference internal" href="auxjad.underfull_duration.html">auxjad.underfull_duration</a></li>
 </ul>
 </li>
@@ -186,7 +191,7 @@
 <h1>auxjad.TenneySelector<a class="headerlink" href="#auxjad-tenneyselector" title="Permalink to this headline">¶</a></h1>
 <dl class="py class">
 <dt id="auxjad.TenneySelector">
-<em class="property">class </em><code class="sig-prename descclassname">auxjad.</code><code class="sig-name descname">TenneySelector</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">contents</span><span class="p">:</span> <span class="n">list</span></em>, <em class="sig-param"><span class="o">*</span></em>, <em class="sig-param"><span class="n">weights</span><span class="p">:</span> <span class="n">list</span> <span class="o">=</span> <span class="default_value">None</span></em>, <em class="sig-param"><span class="n">curvature</span><span class="p">:</span> <span class="n">float</span> <span class="o">=</span> <span class="default_value">1.0</span></em><span class="sig-paren">)</span><a class="headerlink" href="#auxjad.TenneySelector" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">auxjad.</code><code class="sig-name descname">TenneySelector</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">contents</span><span class="p">:</span> <span class="n">list</span></em>, <em class="sig-param"><span class="o">*</span></em>, <em class="sig-param"><span class="n">weights</span><span class="p">:</span> <span class="n">Optional<span class="p">[</span>list<span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em>, <em class="sig-param"><span class="n">curvature</span><span class="p">:</span> <span class="n">float</span> <span class="o">=</span> <span class="default_value">1.0</span></em><span class="sig-paren">)</span><a class="headerlink" href="#auxjad.TenneySelector" title="Permalink to this definition">¶</a></dt>
 <dd><p>This in an implementation of the Dissonant Counterpoint Algorithm by
 James Tenney. This class can be used to randomly select elements from an
 input list, giving more weight to elements which have not been selected in
@@ -211,9 +216,7 @@ of the input list.</p>
 </pre></div>
 </div>
 <p>When no other keyword arguments are used, the default probabilities of
-each element in the list is 1.0. Probabilities are not normalised. Use
-the previous_index attribute to check the previously selected index
-(default is None).</p>
+each element in the list is <code class="docutils literal notranslate"><span class="pre">1.0</span></code>. Probabilities are not normalised.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">selector</span><span class="o">.</span><span class="n">probabilities</span>
 <span class="go">[1.0, 1.0, 1.0, 1.0, 1.0, 1.0]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">selector</span><span class="o">.</span><span class="n">previous_index</span>
@@ -253,6 +256,24 @@ properties will return us their current values.</p>
 <span class="go">[6.0, 5.0, 0.0, 3.0, 1.0, 2.0]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">selector</span><span class="o">.</span><span class="n">previous_index</span>
 <span class="go">2</span>
+</pre></div>
+</div>
+</div>
+<div class="example docutils container">
+<p>Use the read-only properties <code class="docutils literal notranslate"><span class="pre">previous_result</span></code> and <code class="docutils literal notranslate"><span class="pre">previous_index</span></code>
+to output the previous result and its index. Default values for both
+is <code class="docutils literal notranslate"><span class="pre">None</span></code>.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">selector</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">TenneySelector</span><span class="p">([</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="s1">&#39;B&#39;</span><span class="p">,</span> <span class="s1">&#39;C&#39;</span><span class="p">,</span> <span class="s1">&#39;D&#39;</span><span class="p">,</span> <span class="s1">&#39;E&#39;</span><span class="p">,</span> <span class="s1">&#39;F&#39;</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">selector</span><span class="o">.</span><span class="n">previous_index</span>
+<span class="go">None</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">selector</span><span class="o">.</span><span class="n">previous_result</span>
+<span class="go">None</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">selector</span><span class="p">()</span>
+<span class="go">C</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">selector</span><span class="o">.</span><span class="n">previous_index</span>
+<span class="go">2</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">selector</span><span class="o">.</span><span class="n">previous_result</span>
+<span class="go">C</span>
 </pre></div>
 </div>
 </div>
@@ -543,10 +564,13 @@ property <code class="docutils literal notranslate"><span class="pre">contents</
 <tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">previous_index</span></code></p></td>
 <td><p>Read-only property, returns the index of the previously output element.</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">probabilities</span></code></p></td>
-<td><p></p></td>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">previous_result</span></code></p></td>
+<td><p>Read-only property, returns the previously output element.</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">weights</span></code></p></td>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">probabilities</span></code></p></td>
+<td><p>Read-only property, returns the probabilities vector.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">weights</span></code></p></td>
 <td><p>The <code class="docutils literal notranslate"><span class="pre">list</span></code> with weights for each element of <code class="docutils literal notranslate"><span class="pre">contents</span></code>.</p></td>
 </tr>
 </tbody>
@@ -563,7 +587,7 @@ property <code class="docutils literal notranslate"><span class="pre">contents</
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="auxjad.underfull_duration.html" class="btn btn-neutral float-right" title="auxjad.underfull_duration" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="auxjad.time_signature_extractor.html" class="btn btn-neutral float-right" title="auxjad.time_signature_extractor" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
         <a href="auxjad.sync_containers.html" class="btn btn-neutral float-left" title="auxjad.sync_containers" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>

@@ -89,11 +89,14 @@
 <li class="toctree-l1"><a class="reference internal" href="../index.html">Welcome to auxjad’s documentation!</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../examples/index.html">Examples of usage</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../api.html">auxjad API</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="auxjad.adjust_clefs.html">auxjad.adjust_clefs</a></li>
 <li class="toctree-l2"><a class="reference internal" href="auxjad.ArtificialHarmonic.html">auxjad.ArtificialHarmonic</a></li>
 <li class="toctree-l2"><a class="reference internal" href="auxjad.CartographySelector.html">auxjad.CartographySelector</a></li>
 <li class="toctree-l2"><a class="reference internal" href="auxjad.close_container.html">auxjad.close_container</a></li>
 <li class="toctree-l2"><a class="reference internal" href="auxjad.container_is_full.html">auxjad.container_is_full</a></li>
 <li class="toctree-l2"><a class="reference internal" href="auxjad.containers_are_equal.html">auxjad.containers_are_equal</a></li>
+<li class="toctree-l2"><a class="reference internal" href="auxjad.enforce_time_signature.html">auxjad.enforce_time_signature</a></li>
+<li class="toctree-l2"><a class="reference internal" href="auxjad.Fader.html">auxjad.Fader</a></li>
 <li class="toctree-l2"><a class="reference internal" href="auxjad.fill_with_rests.html">auxjad.fill_with_rests</a></li>
 <li class="toctree-l2"><a class="reference internal" href="auxjad.HarmonicNote.html">auxjad.HarmonicNote</a></li>
 <li class="toctree-l2"><a class="reference internal" href="auxjad.Hocketer.html">auxjad.Hocketer</a></li>
@@ -102,6 +105,7 @@
 <li class="toctree-l2"><a class="reference internal" href="auxjad.LoopByList.html">auxjad.LoopByList</a></li>
 <li class="toctree-l2"><a class="reference internal" href="auxjad.LoopByNotes.html">auxjad.LoopByNotes</a></li>
 <li class="toctree-l2"><a class="reference internal" href="auxjad.LoopByWindow.html">auxjad.LoopByWindow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="auxjad.Phaser.html">auxjad.Phaser</a></li>
 <li class="toctree-l2"><a class="reference internal" href="auxjad.remove_empty_tuplets.html">auxjad.remove_empty_tuplets</a></li>
 <li class="toctree-l2"><a class="reference internal" href="auxjad.remove_repeated_dynamics.html">auxjad.remove_repeated_dynamics</a></li>
 <li class="toctree-l2"><a class="reference internal" href="auxjad.remove_repeated_time_signatures.html">auxjad.remove_repeated_time_signatures</a></li>
@@ -112,6 +116,7 @@
 <li class="toctree-l2"><a class="reference internal" href="auxjad.simplified_time_signature_ratio.html">auxjad.simplified_time_signature_ratio</a></li>
 <li class="toctree-l2"><a class="reference internal" href="auxjad.sync_containers.html">auxjad.sync_containers</a></li>
 <li class="toctree-l2"><a class="reference internal" href="auxjad.TenneySelector.html">auxjad.TenneySelector</a></li>
+<li class="toctree-l2"><a class="reference internal" href="auxjad.time_signature_extractor.html">auxjad.time_signature_extractor</a></li>
 <li class="toctree-l2"><a class="reference internal" href="auxjad.underfull_duration.html">auxjad.underfull_duration</a></li>
 </ul>
 </li>
@@ -186,18 +191,17 @@
 <h1>auxjad.Shuffler<a class="headerlink" href="#auxjad-shuffler" title="Permalink to this headline">¶</a></h1>
 <dl class="py class">
 <dt id="auxjad.Shuffler">
-<em class="property">class </em><code class="sig-prename descclassname">auxjad.</code><code class="sig-name descname">Shuffler</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">contents</span><span class="p">:</span> <span class="n">abjad.core.Container.Container</span></em>, <em class="sig-param"><span class="o">*</span></em>, <em class="sig-param"><span class="n">output_single_measure</span><span class="p">:</span> <span class="n">bool</span> <span class="o">=</span> <span class="default_value">False</span></em>, <em class="sig-param"><span class="n">disable_rewrite_meter</span><span class="p">:</span> <span class="n">bool</span> <span class="o">=</span> <span class="default_value">False</span></em>, <em class="sig-param"><span class="n">force_time_signatures</span><span class="p">:</span> <span class="n">bool</span> <span class="o">=</span> <span class="default_value">False</span></em>, <em class="sig-param"><span class="n">omit_time_signatures</span><span class="p">:</span> <span class="n">bool</span> <span class="o">=</span> <span class="default_value">False</span></em><span class="sig-paren">)</span><a class="headerlink" href="#auxjad.Shuffler" title="Permalink to this definition">¶</a></dt>
-<dd><p>Shuffler takes an input <code class="docutils literal notranslate"><span class="pre">abjad.Container</span></code> and shuffles its logical
-ties. It can also shuffle only pitches, as well as rotate them. When
-shuffling or rotating pitches only, tuplets are supported. Tuplets are not
-supported when shuffling leaves.</p>
+<em class="property">class </em><code class="sig-prename descclassname">auxjad.</code><code class="sig-name descname">Shuffler</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">contents</span><span class="p">:</span> <span class="n">abjad.core.Container.Container</span></em>, <em class="sig-param"><span class="o">*</span></em>, <em class="sig-param"><span class="n">pitch_only</span><span class="p">:</span> <span class="n">bool</span> <span class="o">=</span> <span class="default_value">False</span></em>, <em class="sig-param"><span class="n">preserve_rest_position</span><span class="p">:</span> <span class="n">bool</span> <span class="o">=</span> <span class="default_value">False</span></em>, <em class="sig-param"><span class="n">disable_rewrite_meter</span><span class="p">:</span> <span class="n">bool</span> <span class="o">=</span> <span class="default_value">False</span></em>, <em class="sig-param"><span class="n">omit_time_signatures</span><span class="p">:</span> <span class="n">bool</span> <span class="o">=</span> <span class="default_value">False</span></em>, <em class="sig-param"><span class="n">boundary_depth</span><span class="p">:</span> <span class="n">Optional<span class="p">[</span>int<span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em>, <em class="sig-param"><span class="n">maximum_dot_count</span><span class="p">:</span> <span class="n">Optional<span class="p">[</span>int<span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em>, <em class="sig-param"><span class="n">rewrite_tuplets</span><span class="p">:</span> <span class="n">bool</span> <span class="o">=</span> <span class="default_value">True</span></em>, <em class="sig-param"><span class="n">processs_on_first_call</span><span class="p">:</span> <span class="n">bool</span> <span class="o">=</span> <span class="default_value">True</span></em><span class="sig-paren">)</span><a class="headerlink" href="#auxjad.Shuffler" title="Permalink to this definition">¶</a></dt>
+<dd><p>Shuffler takes an input <code class="docutils literal notranslate"><span class="pre">abjad.Container</span></code> and shuffles or rotates its
+logical ties or pitches. When shuffling or rotating pitches only, tuplets
+are supported, otherwise tuplets are not supported.</p>
 <div class="example docutils container">
 <p>Calling the object will output a shuffled selection of the input
 container.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">container</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;c&#39;4 d&#39;4 e&#39;4 f&#39;4&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">shuffler</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">Shuffler</span><span class="p">(</span><span class="n">container</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">music</span> <span class="o">=</span> <span class="n">shuffler</span><span class="p">()</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">staff</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span><span class="n">music</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">notes</span> <span class="o">=</span> <span class="n">shuffler</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">staff</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span><span class="n">notes</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">f</span><span class="p">(</span><span class="n">staff</span><span class="p">)</span>
 <span class="go">\new Staff</span>
 <span class="go">{</span>
@@ -212,45 +216,85 @@ container.</p>
 <div class="figure align-default">
 <img alt="../_images/image-Shuffler-1.png" src="../_images/image-Shuffler-1.png" />
 </div>
-<p>To get the result of the last operation, use the property
-<code class="docutils literal notranslate"><span class="pre">current_window</span></code>.</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">music</span> <span class="o">=</span> <span class="n">shuffler</span><span class="o">.</span><span class="n">current_window</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">staff</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span><span class="n">music</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">notes</span> <span class="o">=</span> <span class="n">shuffler</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">staff</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span><span class="n">notes</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">f</span><span class="p">(</span><span class="n">staff</span><span class="p">)</span>
 <span class="go">\new Staff</span>
 <span class="go">{</span>
 <span class="go">    \time 4/4</span>
-<span class="go">    d&#39;4</span>
 <span class="go">    c&#39;4</span>
-<span class="go">    f&#39;4</span>
 <span class="go">    e&#39;4</span>
+<span class="go">    d&#39;4</span>
+<span class="go">    f&#39;4</span>
 <span class="go">}</span>
 </pre></div>
 </div>
 <div class="figure align-default">
 <img alt="../_images/image-Shuffler-2.png" src="../_images/image-Shuffler-2.png" />
 </div>
-</div>
-<div class="example docutils container">
-<p>Calling the object outputs the same result as using the method
-<code class="docutils literal notranslate"><span class="pre">shuffle()</span></code>.</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">container</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;c&#39;4 d&#39;4 e&#39;4 f&#39;4&quot;</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">shuffler</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">Shuffler</span><span class="p">(</span><span class="n">container</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">music</span> <span class="o">=</span> <span class="n">shuffler</span><span class="o">.</span><span class="n">shuffle</span><span class="p">()</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">staff</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span><span class="n">music</span><span class="p">)</span>
+<p>To get the result of the last operation, use the property
+<code class="docutils literal notranslate"><span class="pre">current_window</span></code>.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">notes</span> <span class="o">=</span> <span class="n">shuffler</span><span class="o">.</span><span class="n">current_window</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">staff</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span><span class="n">notes</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">f</span><span class="p">(</span><span class="n">staff</span><span class="p">)</span>
 <span class="go">\new Staff</span>
 <span class="go">{</span>
 <span class="go">    \time 4/4</span>
-<span class="go">    f&#39;4</span>
 <span class="go">    c&#39;4</span>
 <span class="go">    e&#39;4</span>
 <span class="go">    d&#39;4</span>
+<span class="go">    f&#39;4</span>
 <span class="go">}</span>
 </pre></div>
 </div>
 <div class="figure align-default">
 <img alt="../_images/image-Shuffler-3.png" src="../_images/image-Shuffler-3.png" />
+</div>
+<p>Calling the object outputs the same result as using the method
+<code class="docutils literal notranslate"><span class="pre">shuffle()</span></code>.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">notes</span> <span class="o">=</span> <span class="n">shuffler</span><span class="o">.</span><span class="n">shuffle</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">staff</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span><span class="n">notes</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">f</span><span class="p">(</span><span class="n">staff</span><span class="p">)</span>
+<span class="go">\new Staff</span>
+<span class="go">{</span>
+<span class="go">    \time 4/4</span>
+<span class="go">    e&#39;4</span>
+<span class="go">    f&#39;4</span>
+<span class="go">    c&#39;4</span>
+<span class="go">    d&#39;4</span>
+<span class="go">}</span>
+</pre></div>
+</div>
+<div class="figure align-default">
+<img alt="../_images/image-Shuffler-4.png" src="../_images/image-Shuffler-4.png" />
+</div>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Unlike the other classes in auxjad, the very first call of <code class="docutils literal notranslate"><span class="pre">Shuffler</span></code>
+will already process the initial container. To disable this behaviour
+and output the initial container once before shuffling or rotating it,
+initialise the class with the keyword argument
+<code class="docutils literal notranslate"><span class="pre">processs_on_first_call</span></code> set to <code class="docutils literal notranslate"><span class="pre">False</span></code>.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">container</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;c&#39;4 d&#39;4 e&#39;4 f&#39;4&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">shuffler</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">Shuffler</span><span class="p">(</span><span class="n">container</span><span class="p">,</span>
+<span class="gp">... </span>                           <span class="n">processs_on_first_call</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+<span class="gp">... </span>                           <span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">notes</span> <span class="o">=</span> <span class="n">shuffler</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">staff</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span><span class="n">notes</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">f</span><span class="p">(</span><span class="n">staff</span><span class="p">)</span>
+<span class="go">\new Staff</span>
+<span class="go">{</span>
+<span class="go">    \time 4/4</span>
+<span class="go">    c&#39;4</span>
+<span class="go">    d&#39;4</span>
+<span class="go">    e&#39;4</span>
+<span class="go">    f&#39;4</span>
+<span class="go">}</span>
+</pre></div>
+</div>
+<div class="figure align-default">
+<img alt="../_images/image-Shuffler-5.png" src="../_images/image-Shuffler-5.png" />
 </div>
 </div>
 <div class="example docutils container">
@@ -262,193 +306,380 @@ of logical ties of <code class="docutils literal notranslate"><span class="pre">
 <span class="go">5</span>
 </pre></div>
 </div>
+<blockquote>
+<div><p>Do note that consecutive rests are considered as a single logical tie,
+so in the example below the <code class="docutils literal notranslate"><span class="pre">len()</span></code> function returns <code class="docutils literal notranslate"><span class="pre">5</span></code> and not
+<code class="docutils literal notranslate"><span class="pre">6</span></code>. When shuffling or rotating logical ties, consecutive rests are
+also shuffled and rotated together.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">container</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;c&#39;8. d&#39;4 r8 r8. e&#39;16 f&#39;8.&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">shuffler</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">Shuffler</span><span class="p">(</span><span class="n">container</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">len</span><span class="p">(</span><span class="n">shuffler</span><span class="p">)</span>
+<span class="go">5</span>
+</pre></div>
+</div>
+</div></blockquote>
 </div>
 <div class="example docutils container">
 <p>This class has many keyword arguments, all of which can be altered
 after instantiation using properties with the same names as shown
-below.</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">container</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;\time 3/4 c&#39;4 d&#39;4 e&#39;4 |&quot;</span>
-<span class="gp">... </span>                            <span class="sa">r</span><span class="s2">&quot;\time 2/4 f&#39;4 g&#39;4 |&quot;</span>
-<span class="gp">... </span>                            <span class="p">)</span>
+below. Setting <code class="docutils literal notranslate"><span class="pre">pitch_only</span></code> to <code class="docutils literal notranslate"><span class="pre">True</span></code> will enable pitch mode; by
+default, this class shuffles and rotates logical ties, but in pitch
+mode only pitches are shuffled or rotated. By setting
+<code class="docutils literal notranslate"><span class="pre">preserve_rest_position</span></code> to <code class="docutils literal notranslate"><span class="pre">True</span></code> the shuffle and rotation
+operations will not change the position or duration of rests.
+<code class="docutils literal notranslate"><span class="pre">disable_rewrite_meter</span></code> disables the <code class="docutils literal notranslate"><span class="pre">rewrite_meter()</span></code> mutation
+which is applied to the container after every call, and
+<code class="docutils literal notranslate"><span class="pre">omit_time_signatures</span></code> will remove all time signatures from the
+output (both are <code class="docutils literal notranslate"><span class="pre">False</span></code> by default). By default, the first time
+signature is attached only to the first leaf of the first call (unless
+time signature changes require it). The properties <code class="docutils literal notranslate"><span class="pre">boundary_depth</span></code>,
+<code class="docutils literal notranslate"><span class="pre">maximum_dot_count</span></code>, and <code class="docutils literal notranslate"><span class="pre">rewrite_tuplets</span></code> are passed as arguments
+to abjad’s <code class="docutils literal notranslate"><span class="pre">rewrite_meter()</span></code>, see its documentation for more
+information. By default, calling the object will first return the
+original container and subsequent calls will process it; set
+<code class="docutils literal notranslate"><span class="pre">processs_on_first_call</span></code> to <code class="docutils literal notranslate"><span class="pre">True</span></code> and the looping process will be
+applied on the very first call.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">container</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="sa">r</span><span class="s2">&quot;\time 3/4 c&#39;4 d&#39;4 e&#39;4 \time 2/4 f&#39;4 g&#39;4&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">shuffler</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">Shuffler</span><span class="p">(</span><span class="n">container</span><span class="p">,</span>
-<span class="gp">... </span>                           <span class="n">output_single_measure</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+<span class="gp">... </span>                           <span class="n">pitch_only</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+<span class="gp">... </span>                           <span class="n">preserve_rest_position</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
 <span class="gp">... </span>                           <span class="n">disable_rewrite_meter</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
-<span class="gp">... </span>                           <span class="n">force_time_signatures</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
-<span class="gp">... </span>                           <span class="n">omit_time_signatures</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+<span class="gp">... </span>                           <span class="n">omit_time_signatures</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+<span class="gp">... </span>                           <span class="n">boundary_depth</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+<span class="gp">... </span>                           <span class="n">maximum_dot_count</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+<span class="gp">... </span>                           <span class="n">rewrite_tuplets</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+<span class="gp">... </span>                           <span class="n">processs_on_first_call</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
 <span class="gp">... </span>                           <span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">shuffler</span><span class="o">.</span><span class="n">output_single_measure</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">shuffler</span><span class="o">.</span><span class="n">pitch_only</span>
 <span class="go">False</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">shuffler</span><span class="o">.</span><span class="n">preserve_rest_position</span>
+<span class="go">True</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">shuffler</span><span class="o">.</span><span class="n">disable_rewrite_meter</span>
 <span class="go">False</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">shuffler</span><span class="o">.</span><span class="n">force_time_signatures</span>
-<span class="go">False</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">shuffler</span><span class="o">.</span><span class="n">omit_time_signatures</span>
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">shuffler</span><span class="o">.</span><span class="n">boundary_depth</span>
+<span class="go">0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">shuffler</span><span class="o">.</span><span class="n">maximum_dot_count</span>
+<span class="go">1</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">shuffler</span><span class="o">.</span><span class="n">rewrite_tuplets</span>
 <span class="go">False</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">shuffler</span><span class="o">.</span><span class="n">output_single_measure</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">shuffler</span><span class="o">.</span><span class="n">processs_on_first_call</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+<p>Use the properties below to change these values after initialisation.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">shuffler</span><span class="o">.</span><span class="n">pitch_only</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">shuffler</span><span class="o">.</span><span class="n">preserve_rest_position</span> <span class="o">=</span> <span class="kc">False</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">shuffler</span><span class="o">.</span><span class="n">disable_rewrite_meter</span> <span class="o">=</span> <span class="kc">True</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">shuffler</span><span class="o">.</span><span class="n">force_time_signatures</span> <span class="o">=</span> <span class="kc">True</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">shuffler</span><span class="o">.</span><span class="n">omit_time_signatures</span> <span class="o">=</span> <span class="kc">True</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">shuffler</span><span class="o">.</span><span class="n">output_single_measure</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">shuffler</span><span class="o">.</span><span class="n">omit_time_signatures</span> <span class="o">=</span> <span class="kc">False</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">shuffler</span><span class="o">.</span><span class="n">boundary_depth</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">shuffler</span><span class="o">.</span><span class="n">maximum_dot_count</span> <span class="o">=</span> <span class="mi">2</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">shuffler</span><span class="o">.</span><span class="n">rewrite_tuplets</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">shuffler</span><span class="o">.</span><span class="n">processs_on_first_call</span> <span class="o">=</span> <span class="kc">False</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">shuffler</span><span class="o">.</span><span class="n">pitch_only</span>
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">shuffler</span><span class="o">.</span><span class="n">preserve_rest_position</span>
 <span class="go">True</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">shuffler</span><span class="o">.</span><span class="n">disable_rewrite_meter</span>
 <span class="go">True</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">shuffler</span><span class="o">.</span><span class="n">force_time_signatures</span>
-<span class="go">True</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">shuffler</span><span class="o">.</span><span class="n">omit_time_signatures</span>
+<span class="go">False</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">shuffler</span><span class="o">.</span><span class="n">boundary_depth</span>
+<span class="go">1</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">shuffler</span><span class="o">.</span><span class="n">maximum_dot_count</span>
+<span class="go">2</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">shuffler</span><span class="o">.</span><span class="n">rewrite_tuplets</span>
 <span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">shuffler</span><span class="o">.</span><span class="n">processs_on_first_call</span>
+<span class="go">False</span>
 </pre></div>
 </div>
 </div>
 <div class="example docutils container">
-<p>If <code class="docutils literal notranslate"><span class="pre">output_single_measure</span></code> is set to <code class="docutils literal notranslate"><span class="pre">True</span></code>, then the whole
-container is output as a single measure, having its time signature
-rewritten.</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">container</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;\time 3/4 c&#39;4 d&#39;4 e&#39;4 |&quot;</span>
-<span class="gp">... </span>                            <span class="sa">r</span><span class="s2">&quot;\time 2/4 f&#39;4 g&#39;4&quot;</span>
-<span class="gp">... </span>                            <span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">shuffler</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">Shuffler</span><span class="p">(</span><span class="n">container</span><span class="p">,</span>
-<span class="gp">... </span>                           <span class="n">output_single_measure</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
-<span class="gp">... </span>                           <span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">music</span> <span class="o">=</span> <span class="n">shuffler</span><span class="p">()</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">staff</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span><span class="n">music</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">f</span><span class="p">(</span><span class="n">staff</span><span class="p">)</span>
-<span class="go">\new Staff</span>
-<span class="go">{</span>
-<span class="go">    \time 5/4</span>
-<span class="go">    f&#39;4</span>
-<span class="go">    d&#39;4</span>
-<span class="go">    e&#39;4</span>
-<span class="go">    g&#39;4</span>
-<span class="go">    c&#39;4</span>
-<span class="go">}</span>
-</pre></div>
-</div>
-<div class="figure align-default">
-<img alt="../_images/image-Shuffler-4.png" src="../_images/image-Shuffler-4.png" />
-</div>
-</div>
-<div class="example docutils container">
-<p>If <code class="docutils literal notranslate"><span class="pre">disable_rewrite_meter</span></code> is set to <code class="docutils literal notranslate"><span class="pre">True</span></code>, then the automatic
-behaviour of rewriting the leaves according to the meter is disabled.</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">container</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;\time 3/4 c&#39;16 d&#39;4.. e&#39;4 |&quot;</span>
-<span class="gp">... </span>                            <span class="sa">r</span><span class="s2">&quot;\time 2/4 f&#39;2&quot;</span>
-<span class="gp">... </span>                            <span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">shuffler</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">Shuffler</span><span class="p">(</span><span class="n">container</span><span class="p">,</span>
-<span class="gp">... </span>                           <span class="n">output_single_measure</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
-<span class="gp">... </span>                           <span class="n">disable_rewrite_meter</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
-<span class="gp">... </span>                           <span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">music</span> <span class="o">=</span> <span class="n">shuffler</span><span class="p">()</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">staff</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span><span class="n">music</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">f</span><span class="p">(</span><span class="n">staff</span><span class="p">)</span>
-<span class="go">\new Staff</span>
-<span class="go">{</span>
-<span class="go">    \time 5/4</span>
-<span class="go">    d&#39;4..</span>
-<span class="go">    f&#39;2</span>
-<span class="go">    c&#39;16</span>
-<span class="go">    e&#39;4</span>
-<span class="go">}</span>
-</pre></div>
-</div>
-<div class="figure align-default">
-<img alt="../_images/image-Shuffler-5.png" src="../_images/image-Shuffler-5.png" />
-</div>
-</div>
-<div class="example docutils container">
-<p>The first call to the instance will add the correct time signature to
-the first leaf. Subsequent calls will only add it if its necessary,
-such as when there is a time signature change in some bar in the
-container.</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">container</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;\time 3/4 c&#39;16 d&#39;4.. e&#39;4 | r4 f&#39;2&quot;</span><span class="p">)</span>
+<p>By default, the shuffling operation will shuffle logical ties:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">container</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;c&#39;8. d&#39;4 r8 r8. e&#39;16 f&#39;8.&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">shuffler</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">Shuffler</span><span class="p">(</span><span class="n">container</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">music</span> <span class="o">=</span> <span class="n">shuffler</span><span class="p">()</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">staff</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span><span class="n">music</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">notes</span> <span class="o">=</span> <span class="n">shuffler</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">staff</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span><span class="n">notes</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">f</span><span class="p">(</span><span class="n">staff</span><span class="p">)</span>
 <span class="go">\new Staff</span>
 <span class="go">{</span>
-<span class="go">    \time 3/4</span>
-<span class="go">    d&#39;4..</span>
-<span class="go">    e&#39;16</span>
-<span class="go">    ~</span>
-<span class="go">    e&#39;8.</span>
-<span class="go">    f&#39;16</span>
-<span class="go">    ~</span>
-<span class="go">    f&#39;4..</span>
+<span class="go">    \time 4/4</span>
+<span class="go">    r4</span>
 <span class="go">    r16</span>
-<span class="go">    r8.</span>
-<span class="go">    c&#39;16</span>
+<span class="go">    e&#39;16</span>
+<span class="go">    f&#39;8</span>
+<span class="go">    ~</span>
+<span class="go">    f&#39;16</span>
+<span class="go">    d&#39;8.</span>
+<span class="go">    ~</span>
+<span class="go">    d&#39;16</span>
+<span class="go">    c&#39;8.</span>
 <span class="go">}</span>
 </pre></div>
 </div>
 <div class="figure align-default">
 <img alt="../_images/image-Shuffler-6.png" src="../_images/image-Shuffler-6.png" />
 </div>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">music</span> <span class="o">=</span> <span class="n">shuffler</span><span class="p">()</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">staff</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span><span class="n">music</span><span class="p">)</span>
+<p>Setting <code class="docutils literal notranslate"><span class="pre">pitch_only</span></code> to <code class="docutils literal notranslate"><span class="pre">True</span></code> enables pitch mode, so only pitches
+are shuffled (and not durations). Note how in the example below the
+duration of each leaf is the same as the input container.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">container</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;c&#39;8. d&#39;4 r8 r8. e&#39;16 f&#39;8.&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">shuffler</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">Shuffler</span><span class="p">(</span><span class="n">container</span><span class="p">,</span> <span class="n">pitch_only</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">notes</span> <span class="o">=</span> <span class="n">shuffler</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">staff</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span><span class="n">notes</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">f</span><span class="p">(</span><span class="n">staff</span><span class="p">)</span>
 <span class="go">\new Staff</span>
 <span class="go">{</span>
+<span class="go">    \time 4/4</span>
+<span class="go">    f&#39;8.</span>
+<span class="go">    r4</span>
+<span class="go">    d&#39;8</span>
+<span class="go">    ~</span>
+<span class="go">    d&#39;8.</span>
+<span class="go">    ~</span>
 <span class="go">    c&#39;16</span>
 <span class="go">    e&#39;8.</span>
-<span class="go">    ~</span>
-<span class="go">    e&#39;16</span>
-<span class="go">    f&#39;4..</span>
-<span class="go">    ~</span>
-<span class="go">    f&#39;16</span>
-<span class="go">    r8.</span>
-<span class="go">    r16</span>
-<span class="go">    d&#39;4..</span>
 <span class="go">}</span>
 </pre></div>
 </div>
 <div class="figure align-default">
 <img alt="../_images/image-Shuffler-7.png" src="../_images/image-Shuffler-7.png" />
 </div>
-<p>It is possible to force time signatures on every call using either
-optional keyword argument <code class="docutils literal notranslate"><span class="pre">force_time_signatures</span></code>.</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">container</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;\time 3/4 c&#39;16 d&#39;4.. e&#39;4 | r4 f&#39;2&quot;</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">shuffler</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">Shuffler</span><span class="p">(</span><span class="n">container</span><span class="p">,</span>
-<span class="gp">... </span>                           <span class="n">force_time_signatures</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
-<span class="gp">... </span>                           <span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">music</span> <span class="o">=</span> <span class="n">shuffler</span><span class="p">()</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">staff</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span><span class="n">music</span><span class="p">)</span>
+</div>
+<div class="example docutils container">
+<p>Besides shuffling, logical ties and pitches can also be rotated using
+the <code class="docutils literal notranslate"><span class="pre">rotate()</span></code> method. Similarly to shuffling, it can be applied to
+logical ties or pitches only depending on the property <code class="docutils literal notranslate"><span class="pre">pitch_only</span></code>.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">container</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="sa">r</span><span class="s2">&quot;\time 3/4 c&#39;16 d&#39;8. ~ d&#39;4 e&#39;4 r4 f&#39;4 ~ f&#39;8.. g&#39;32&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">shuffler</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">Shuffler</span><span class="p">(</span><span class="n">container</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">notes</span> <span class="o">=</span> <span class="n">shuffler</span><span class="o">.</span><span class="n">rotate</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">staff</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span><span class="n">notes</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">f</span><span class="p">(</span><span class="n">staff</span><span class="p">)</span>
 <span class="go">\new Staff</span>
 <span class="go">{</span>
 <span class="go">    \time 3/4</span>
 <span class="go">    d&#39;4..</span>
+<span class="go">    e&#39;16</span>
+<span class="go">    ~</span>
+<span class="go">    e&#39;8.</span>
 <span class="go">    r16</span>
 <span class="go">    r8.</span>
+<span class="go">    f&#39;16</span>
+<span class="go">    ~</span>
+<span class="go">    f&#39;4</span>
+<span class="go">    ~</span>
+<span class="go">    f&#39;8</span>
+<span class="go">    ~</span>
+<span class="go">    f&#39;32</span>
+<span class="go">    g&#39;32</span>
 <span class="go">    c&#39;16</span>
-<span class="go">    f&#39;2</span>
-<span class="go">    e&#39;4</span>
 <span class="go">}</span>
 </pre></div>
 </div>
 <div class="figure align-default">
 <img alt="../_images/image-Shuffler-8.png" src="../_images/image-Shuffler-8.png" />
 </div>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">music</span> <span class="o">=</span> <span class="n">shuffler</span><span class="p">()</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">staff</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span><span class="n">music</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">container</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="sa">r</span><span class="s2">&quot;\time 3/4 c&#39;16 d&#39;8. ~ d&#39;4 e&#39;4 r4 f&#39;4 ~ f&#39;8.. g&#39;32&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">shuffler</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">Shuffler</span><span class="p">(</span><span class="n">container</span><span class="p">,</span> <span class="n">pitch_only</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">notes</span> <span class="o">=</span> <span class="n">shuffler</span><span class="o">.</span><span class="n">rotate</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">staff</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span><span class="n">notes</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">f</span><span class="p">(</span><span class="n">staff</span><span class="p">)</span>
 <span class="go">\new Staff</span>
 <span class="go">{</span>
 <span class="go">    \time 3/4</span>
-<span class="go">    c&#39;16</span>
+<span class="go">    d&#39;16</span>
 <span class="go">    e&#39;8.</span>
 <span class="go">    ~</span>
-<span class="go">    e&#39;16</span>
-<span class="go">    f&#39;4..</span>
+<span class="go">    e&#39;4</span>
+<span class="go">    r4</span>
+<span class="go">    f&#39;4</span>
+<span class="go">    g&#39;4</span>
 <span class="go">    ~</span>
-<span class="go">    f&#39;16</span>
-<span class="go">    r8.</span>
-<span class="go">    r16</span>
-<span class="go">    d&#39;4..</span>
+<span class="go">    g&#39;8..</span>
+<span class="go">    c&#39;32</span>
 <span class="go">}</span>
 </pre></div>
 </div>
 <div class="figure align-default">
 <img alt="../_images/image-Shuffler-9.png" src="../_images/image-Shuffler-9.png" />
+</div>
+<p>This method can also take the optional parameters <code class="docutils literal notranslate"><span class="pre">n_rotations</span></code> and
+<code class="docutils literal notranslate"><span class="pre">anticlockwise</span></code>. The first is an integer setting the number of
+rotations applied to the material, and the second is a boolean setting
+the direction of the rotation (default <code class="docutils literal notranslate"><span class="pre">False</span></code>).</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">container</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="sa">r</span><span class="s2">&quot;\time 3/4 c&#39;16 d&#39;8. ~ d&#39;4 e&#39;4 r4 f&#39;4 ~ f&#39;8.. g&#39;32&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">shuffler</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">Shuffler</span><span class="p">(</span><span class="n">container</span><span class="p">,</span> <span class="n">pitch_only</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">notes</span> <span class="o">=</span> <span class="n">shuffler</span><span class="o">.</span><span class="n">rotate</span><span class="p">(</span><span class="n">n_rotations</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">anticlockwise</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">staff</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span><span class="n">notes</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">f</span><span class="p">(</span><span class="n">staff</span><span class="p">)</span>
+<span class="go">\new Staff</span>
+<span class="go">{</span>
+<span class="go">    \time 3/4</span>
+<span class="go">    f&#39;16</span>
+<span class="go">    g&#39;8.</span>
+<span class="go">    ~</span>
+<span class="go">    g&#39;4</span>
+<span class="go">    c&#39;4</span>
+<span class="go">    d&#39;4</span>
+<span class="go">    e&#39;4</span>
+<span class="go">    ~</span>
+<span class="go">    e&#39;8..</span>
+<span class="go">    r32</span>
+<span class="go">}</span>
+</pre></div>
+</div>
+<div class="figure align-default">
+<img alt="../_images/image-Shuffler-10.png" src="../_images/image-Shuffler-10.png" />
+</div>
+</div>
+<div class="example docutils container">
+<p>If <code class="docutils literal notranslate"><span class="pre">preserve_rest_position</span></code> is set to <code class="docutils literal notranslate"><span class="pre">True</span></code>, the positions of all
+rests will remain the same after either shuffling and rotation. In
+pitch mode (when <code class="docutils literal notranslate"><span class="pre">pitch_only</span></code> is set to <code class="docutils literal notranslate"><span class="pre">True</span></code>), this means that
+only the pitched notes will be shuffled or rotated, while the rests
+remain in the exact same place.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">container</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;c&#39;8. d&#39;4 r8 r8. e&#39;16 f&#39;8.&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">shuffler</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">Shuffler</span><span class="p">(</span><span class="n">container</span><span class="p">,</span>
+<span class="gp">... </span>                           <span class="n">pitch_only</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+<span class="gp">... </span>                           <span class="n">preserve_rest_position</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+<span class="gp">... </span>                           <span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">notes</span> <span class="o">=</span> <span class="n">shuffler</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">staff</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span><span class="n">notes</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">f</span><span class="p">(</span><span class="n">staff</span><span class="p">)</span>
+<span class="go">\new Staff</span>
+<span class="go">{</span>
+<span class="go">    \time 4/4</span>
+<span class="go">    d&#39;8.</span>
+<span class="go">    f&#39;4</span>
+<span class="go">    r8</span>
+<span class="go">    r8.</span>
+<span class="go">    c&#39;16</span>
+<span class="go">    e&#39;8.</span>
+<span class="go">}</span>
+</pre></div>
+</div>
+<div class="figure align-default">
+<img alt="../_images/image-Shuffler-11.png" src="../_images/image-Shuffler-11.png" />
+</div>
+<p>In logical ties mode, the rests will remain at the same index and will
+have the same total duration as before, but their position in the bar
+might vary since the duration of the pitched logical ties preceeding
+it might change.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">container</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;c&#39;8. d&#39;4 r8 r8. e&#39;16 f&#39;8.&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">shuffler</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">Shuffler</span><span class="p">(</span><span class="n">container</span><span class="p">,</span> <span class="n">preserve_rest_position</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">notes</span> <span class="o">=</span> <span class="n">shuffler</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">staff</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span><span class="n">notes</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">f</span><span class="p">(</span><span class="n">staff</span><span class="p">)</span>
+<span class="go">\new Staff</span>
+<span class="go">{</span>
+<span class="go">    \time 4/4</span>
+<span class="go">    d&#39;4</span>
+<span class="go">    e&#39;16</span>
+<span class="go">    r8.</span>
+<span class="go">    r8</span>
+<span class="go">    f&#39;8</span>
+<span class="go">    ~</span>
+<span class="go">    f&#39;16</span>
+<span class="go">    c&#39;8.</span>
+<span class="go">}</span>
+</pre></div>
+</div>
+<div class="figure align-default">
+<img alt="../_images/image-Shuffler-12.png" src="../_images/image-Shuffler-12.png" />
+</div>
+</div>
+<div class="example docutils container">
+<p>If <code class="docutils literal notranslate"><span class="pre">disable_rewrite_meter</span></code> is set to <code class="docutils literal notranslate"><span class="pre">True</span></code>, then the automatic
+behaviour of rewriting the leaves according to the meter is disabled.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">container</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;c&#39;4 d&#39;8 e&#39;8 f&#39;2&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">shuffler</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">Shuffler</span><span class="p">(</span><span class="n">container</span><span class="p">,</span>
+<span class="gp">... </span>                           <span class="n">disable_rewrite_meter</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+<span class="gp">... </span>                           <span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">notes</span> <span class="o">=</span> <span class="n">shuffler</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">staff</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span><span class="n">notes</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">f</span><span class="p">(</span><span class="n">staff</span><span class="p">)</span>
+<span class="go">\new Staff</span>
+<span class="go">{</span>
+<span class="go">    \time 4/4</span>
+<span class="go">    e&#39;8</span>
+<span class="go">    f&#39;2</span>
+<span class="go">    c&#39;4</span>
+<span class="go">    d&#39;8</span>
+<span class="go">}</span>
+</pre></div>
+</div>
+<div class="figure align-default">
+<img alt="../_images/image-Shuffler-13.png" src="../_images/image-Shuffler-13.png" />
+</div>
+</div>
+<div class="example docutils container">
+<p>To output several shuffled containers at once, use the methods
+<code class="docutils literal notranslate"><span class="pre">shuffle_n</span></code> and <code class="docutils literal notranslate"><span class="pre">rotate_n</span></code>, inputting the desired number of
+iterations. <code class="docutils literal notranslate"><span class="pre">rotate_n</span></code> can also take the optional arguments
+<code class="docutils literal notranslate"><span class="pre">n_rotations</span></code> and <code class="docutils literal notranslate"><span class="pre">anticlockwise</span></code>, similarly to <code class="docutils literal notranslate"><span class="pre">rotate()</span></code>.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">container</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;c&#39;4 d&#39;8 e&#39;4. f&#39;8. g&#39;16&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">shuffler</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">Shuffler</span><span class="p">(</span><span class="n">container</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">notes</span> <span class="o">=</span> <span class="n">shuffler</span><span class="o">.</span><span class="n">shuffle_n</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">staff</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span><span class="n">notes</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">f</span><span class="p">(</span><span class="n">staff</span><span class="p">)</span>
+<span class="go">\new Staff</span>
+<span class="go">{</span>
+<span class="go">    \time 4/4</span>
+<span class="go">    d&#39;8</span>
+<span class="go">    g&#39;16</span>
+<span class="go">    c&#39;16</span>
+<span class="go">    ~</span>
+<span class="go">    c&#39;8.</span>
+<span class="go">    f&#39;16</span>
+<span class="go">    ~</span>
+<span class="go">    f&#39;8</span>
+<span class="go">    e&#39;4.</span>
+<span class="go">    g&#39;16</span>
+<span class="go">    f&#39;8.</span>
+<span class="go">    e&#39;4.</span>
+<span class="go">    c&#39;8</span>
+<span class="go">    ~</span>
+<span class="go">    c&#39;8</span>
+<span class="go">    d&#39;8</span>
+<span class="go">}</span>
+</pre></div>
+</div>
+<div class="figure align-default">
+<img alt="../_images/image-Shuffler-14.png" src="../_images/image-Shuffler-14.png" />
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">container</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;c&#39;4 d&#39;8 e&#39;4. f&#39;8. g&#39;16&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">shuffler</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">Shuffler</span><span class="p">(</span><span class="n">container</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">notes</span> <span class="o">=</span> <span class="n">shuffler</span><span class="o">.</span><span class="n">rotate_n</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">staff</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span><span class="n">notes</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">f</span><span class="p">(</span><span class="n">staff</span><span class="p">)</span>
+<span class="go">\new Staff</span>
+<span class="go">{</span>
+<span class="go">    \time 4/4</span>
+<span class="go">    d&#39;8</span>
+<span class="go">    e&#39;4.</span>
+<span class="go">    f&#39;8.</span>
+<span class="go">    g&#39;16</span>
+<span class="go">    c&#39;4</span>
+<span class="go">    e&#39;4.</span>
+<span class="go">    f&#39;8</span>
+<span class="go">    ~</span>
+<span class="go">    f&#39;16</span>
+<span class="go">    g&#39;16</span>
+<span class="go">    c&#39;8</span>
+<span class="go">    ~</span>
+<span class="go">    c&#39;8</span>
+<span class="go">    d&#39;8</span>
+<span class="go">}</span>
+</pre></div>
+</div>
+<div class="figure align-default">
+<img alt="../_images/image-Shuffler-15.png" src="../_images/image-Shuffler-15.png" />
 </div>
 </div>
 <div class="example docutils container">
@@ -460,11 +691,12 @@ initialisation.</p>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">shuffler</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">Shuffler</span><span class="p">(</span><span class="n">container</span><span class="p">,</span>
 <span class="gp">... </span>                           <span class="n">omit_time_signatures</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
 <span class="gp">... </span>                           <span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">music</span> <span class="o">=</span> <span class="n">shuffler</span><span class="p">()</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">staff</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span><span class="n">music</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">notes</span> <span class="o">=</span> <span class="n">shuffler</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">staff</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span><span class="n">notes</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">f</span><span class="p">(</span><span class="n">staff</span><span class="p">)</span>
 <span class="go">\new Staff</span>
 <span class="go">{</span>
+<span class="go">    \time 4/4</span>
 <span class="go">    d&#39;4..</span>
 <span class="go">    e&#39;16</span>
 <span class="go">    ~</span>
@@ -479,217 +711,151 @@ initialisation.</p>
 </pre></div>
 </div>
 <div class="figure align-default">
-<img alt="../_images/image-Shuffler-10.png" src="../_images/image-Shuffler-10.png" />
+<img alt="../_images/image-Shuffler-16.png" src="../_images/image-Shuffler-16.png" />
 </div>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">shuffler</span><span class="o">.</span><span class="n">omit_time_signatures</span>
-<span class="go">True</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">shuffler</span><span class="o">.</span><span class="n">omit_time_signatures</span> <span class="o">=</span> <span class="kc">False</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">shuffler</span><span class="o">.</span><span class="n">omit_time_signatures</span>
-<span class="go">False</span>
-</pre></div>
 </div>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>All methods that return an <code class="docutils literal notranslate"><span class="pre">abjad.Selection</span></code> will add an initial time
+signature to it. The <code class="docutils literal notranslate"><span class="pre">shuffle_n()</span></code> and <code class="docutils literal notranslate"><span class="pre">rotate_n()</span></code> methods
+automatically remove repeated time signatures. When joining selections
+output by multiple method calls, use
+<code class="docutils literal notranslate"><span class="pre">auxjad.remove_repeated_time_signatures()</span></code> on the whole container
+after fusing the selections to remove any unecessary time signature
+changes.</p>
 </div>
 <div class="example docutils container">
-<p>To output several shuffled containers at once, use the <code class="docutils literal notranslate"><span class="pre">output_n</span></code>
-method, inputting the desired number of iterations.</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">container</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;\time 2/4 c&#39;16 d&#39;4.. | r4 e&#39;8. f&#39;16&quot;</span><span class="p">)</span>
+<p>This class handles time signature changes too:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">container</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="sa">r</span><span class="s2">&quot;\time 3/4 c&#39;8. d&#39;4 r8 r8. \time 2/4 e&#39;16 f&#39;4..&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">shuffler</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">Shuffler</span><span class="p">(</span><span class="n">container</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">music</span> <span class="o">=</span> <span class="n">shuffler</span><span class="o">.</span><span class="n">output_n</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">staff</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span><span class="n">music</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">notes</span> <span class="o">=</span> <span class="n">shuffler</span><span class="o">.</span><span class="n">shuffle_n</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">staff</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span><span class="n">notes</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">f</span><span class="p">(</span><span class="n">staff</span><span class="p">)</span>
 <span class="go">\new Staff</span>
 <span class="go">{</span>
-<span class="go">    \time 2/4</span>
-<span class="go">    d&#39;4..</span>
-<span class="go">    f&#39;16</span>
-<span class="go">    c&#39;16</span>
-<span class="go">    e&#39;8.</span>
-<span class="go">    r4</span>
-<span class="go">    d&#39;4..</span>
+<span class="go">    \time 3/4</span>
 <span class="go">    e&#39;16</span>
+<span class="go">    d&#39;8.</span>
 <span class="go">    ~</span>
-<span class="go">    e&#39;8</span>
-<span class="go">    f&#39;16</span>
+<span class="go">    d&#39;16</span>
+<span class="go">    f&#39;4..</span>
+<span class="go">    \time 2/4</span>
+<span class="go">    c&#39;8.</span>
 <span class="go">    r16</span>
-<span class="go">    r8.</span>
-<span class="go">    c&#39;16</span>
 <span class="go">    r4</span>
-<span class="go">    d&#39;4</span>
+<span class="go">    \time 3/4</span>
+<span class="go">    c&#39;8.</span>
+<span class="go">    f&#39;16</span>
+<span class="go">    ~</span>
+<span class="go">    f&#39;4.</span>
+<span class="go">    r8</span>
+<span class="go">    \time 2/4</span>
+<span class="go">    r8.</span>
+<span class="go">    d&#39;16</span>
 <span class="go">    ~</span>
 <span class="go">    d&#39;8.</span>
-<span class="go">    f&#39;16</span>
-<span class="go">    c&#39;16</span>
-<span class="go">    e&#39;8.</span>
+<span class="go">    e&#39;16</span>
 <span class="go">}</span>
 </pre></div>
 </div>
 <div class="figure align-default">
-<img alt="../_images/image-Shuffler-11.png" src="../_images/image-Shuffler-11.png" />
+<img alt="../_images/image-Shuffler-17.png" src="../_images/image-Shuffler-17.png" />
 </div>
 </div>
-<div class="admonition warning">
-<p class="admonition-title">Warning</p>
-<p>Tuplets not supported by the shuffling operation.</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">container</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;c&#39;2 \times 2/3 {d&#39;4 e&#39;2}&quot;</span><span class="p">)</span>
+<div class="example docutils container">
+<p>Tuplets are supported when <code class="docutils literal notranslate"><span class="pre">pitch_only</span></code> is <code class="docutils literal notranslate"><span class="pre">True</span></code> (pitch-only
+mode).</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">container</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="sa">r</span><span class="s2">&quot;\time 5/4 r4 \times 2/3 {c&#39;4 d&#39;2} e&#39;4. f&#39;8&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">shuffler</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">Shuffler</span><span class="p">(</span><span class="n">container</span><span class="p">,</span> <span class="n">pitch_only</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">notes</span> <span class="o">=</span> <span class="n">shuffler</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">staff</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span><span class="n">notes</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">f</span><span class="p">(</span><span class="n">staff</span><span class="p">)</span>
+<span class="go">\new Staff</span>
+<span class="go">{</span>
+<span class="go">    \time 5/4</span>
+<span class="go">    d&#39;4</span>
+<span class="go">    \times 2/3 {</span>
+<span class="go">        f&#39;4</span>
+<span class="go">        c&#39;2</span>
+<span class="go">    }</span>
+<span class="go">    e&#39;4.</span>
+<span class="go">    r8</span>
+<span class="go">}</span>
+</pre></div>
+</div>
+<div class="figure align-default">
+<img alt="../_images/image-Shuffler-18.png" src="../_images/image-Shuffler-18.png" />
+</div>
+</div>
+<div class="admonition error">
+<p class="admonition-title">Error</p>
+<p>Tuplets are not supported when <code class="docutils literal notranslate"><span class="pre">pitch_only</span></code> is <code class="docutils literal notranslate"><span class="pre">False</span></code> (logical tie
+mode).</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">container</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="sa">r</span><span class="s2">&quot;\time 5/4 r4 \times 2/3 {c&#39;4 d&#39;2} e&#39;4. f&#39;8&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">shuffler</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">Shuffler</span><span class="p">(</span><span class="n">container</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">music</span> <span class="o">=</span> <span class="n">shuffler</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">notes</span> <span class="o">=</span> <span class="n">shuffler</span><span class="p">()</span>
 <span class="go">TypeError: &#39;contents&#39; contain one ore more tuplets, which are not</span>
 <span class="go">currently supported by the shuffle method</span>
 </pre></div>
 </div>
 </div>
 <div class="example docutils container">
-<p>To shuffle only pitches, keeping the durations of the leaves as they
-are, use the method <code class="docutils literal notranslate"><span class="pre">shuffle_pitches()</span></code>. It handles both notes and
-chords. Rests will remain at their current location.</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">container</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;\time 3/4 c&#39;16 d&#39;4.. | r4 e&#39;8. f&#39;16&quot;</span><span class="p">)</span>
+<p>This class can also handle dynamics and articulations.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">container</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="sa">r</span><span class="s2">&quot;&lt;c&#39; e&#39; g&#39;&gt;4--\p d&#39;8-. e&#39;8-. f&#39;4-^\f r4&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">shuffler</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">Shuffler</span><span class="p">(</span><span class="n">container</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">music</span> <span class="o">=</span> <span class="n">shuffler</span><span class="o">.</span><span class="n">shuffle_pitches</span><span class="p">()</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">staff</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span><span class="n">music</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">notes</span> <span class="o">=</span> <span class="n">shuffler</span><span class="o">.</span><span class="n">shuffle_n</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">staff</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span><span class="n">notes</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">f</span><span class="p">(</span><span class="n">staff</span><span class="p">)</span>
 <span class="go">\new Staff</span>
 <span class="go">{</span>
-<span class="go">    \time 3/4</span>
-<span class="go">    e&#39;16</span>
-<span class="go">    c&#39;4..</span>
+<span class="go">    \time 4/4</span>
 <span class="go">    r4</span>
-<span class="go">    d&#39;8.</span>
-<span class="go">    f&#39;16</span>
-<span class="go">}</span>
-</pre></div>
-</div>
-<div class="figure align-default">
-<img alt="../_images/image-Shuffler-12.png" src="../_images/image-Shuffler-12.png" />
-</div>
-</div>
-<div class="example docutils container">
-<p>When dealing with pitches, it is possible to use containers containing
-tuplets. And similarly to the method <code class="docutils literal notranslate"><span class="pre">output_n()</span></code>, to output several
-containers with shuffled pitches, use <code class="docutils literal notranslate"><span class="pre">output_n_shuffled_pitches()</span></code>.</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">container</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;\time 5/4 r4 \times 2/3 {c&#39;4 d&#39;2}&quot;</span>
-<span class="gp">... </span>                            <span class="sa">r</span><span class="s2">&quot;r4 e&#39;4. f&#39;8&quot;</span>
-<span class="gp">... </span>                            <span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">shuffler</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">Shuffler</span><span class="p">(</span><span class="n">container</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">music</span> <span class="o">=</span> <span class="n">shuffler</span><span class="o">.</span><span class="n">output_n_shuffled_pitches</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">staff</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span><span class="n">music</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">f</span><span class="p">(</span><span class="n">staff</span><span class="p">)</span>
-<span class="go">\new Staff</span>
-<span class="go">{</span>
-<span class="go">    \time 5/4</span>
-<span class="go">    r4</span>
-<span class="go">    \times 2/3 {</span>
-<span class="go">        f&#39;4</span>
-<span class="go">        e&#39;2</span>
-<span class="go">    }</span>
-<span class="go">    d&#39;4.</span>
-<span class="go">    c&#39;8</span>
-<span class="go">    r4</span>
-<span class="go">    \times 2/3 {</span>
-<span class="go">        d&#39;4</span>
-<span class="go">        c&#39;2</span>
-<span class="go">    }</span>
-<span class="go">    f&#39;4.</span>
-<span class="go">    e&#39;8</span>
-<span class="go">    r4</span>
-<span class="go">    \times 2/3 {</span>
-<span class="go">        d&#39;4</span>
-<span class="go">        f&#39;2</span>
-<span class="go">    }</span>
-<span class="go">    c&#39;4.</span>
-<span class="go">    e&#39;8</span>
-<span class="go">}</span>
-</pre></div>
-</div>
-<div class="figure align-default">
-<img alt="../_images/image-Shuffler-13.png" src="../_images/image-Shuffler-13.png" />
-</div>
-</div>
-<div class="example docutils container">
-<p>To rotate pitches, use the <code class="docutils literal notranslate"><span class="pre">rotate_pitches()</span></code> method.</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">container</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;\time 3/4 c&#39;16 d&#39;4.. | r4 e&#39;8. f&#39;16&quot;</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">shuffler</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">Shuffler</span><span class="p">(</span><span class="n">container</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">music</span> <span class="o">=</span> <span class="n">shuffler</span><span class="o">.</span><span class="n">rotate_pitches</span><span class="p">()</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">staff</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span><span class="n">music</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">f</span><span class="p">(</span><span class="n">staff</span><span class="p">)</span>
-<span class="go">\new Staff</span>
-<span class="go">{</span>
-<span class="go">    \time 3/4</span>
-<span class="go">    d&#39;16</span>
-<span class="go">    e&#39;4..</span>
-<span class="go">    r4</span>
-<span class="go">    f&#39;8.</span>
-<span class="go">    c&#39;16</span>
-<span class="go">}</span>
-</pre></div>
-</div>
-<div class="figure align-default">
-<img alt="../_images/image-Shuffler-14.png" src="../_images/image-Shuffler-14.png" />
-</div>
-</div>
-<div class="example docutils container">
-<p>This method can take two optioanl keyword arguments: <code class="docutils literal notranslate"><span class="pre">anticlockwise</span></code>,
-set to <code class="docutils literal notranslate"><span class="pre">False</span></code> by default, and <code class="docutils literal notranslate"><span class="pre">n_rotations</span></code>, set to 1 by default.
-The first defines the direction of the rotation, while the later sets
-the number of rotations applied.</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">container</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;\time 3/4 c&#39;16 d&#39;4.. | r4 e&#39;8. f&#39;16&quot;</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">shuffler</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">Shuffler</span><span class="p">(</span><span class="n">container</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">music</span> <span class="o">=</span> <span class="n">shuffler</span><span class="o">.</span><span class="n">rotate_pitches</span><span class="p">(</span><span class="n">anticlockwise</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">n_rotations</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">staff</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span><span class="n">music</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">f</span><span class="p">(</span><span class="n">staff</span><span class="p">)</span>
-<span class="go">\new Staff</span>
-<span class="go">{</span>
-<span class="go">    \time 3/4</span>
-<span class="go">    e&#39;16</span>
-<span class="go">    f&#39;4..</span>
-<span class="go">    r4</span>
-<span class="go">    c&#39;8.</span>
-<span class="go">    d&#39;16</span>
-<span class="go">}</span>
-</pre></div>
-</div>
-<div class="figure align-default">
-<img alt="../_images/image-Shuffler-15.png" src="../_images/image-Shuffler-15.png" />
-</div>
-</div>
-<div class="example docutils container">
-<p>Similarly to the method <code class="docutils literal notranslate"><span class="pre">output_n()</span></code>, to output several containers
-with rotated pitches, use <code class="docutils literal notranslate"><span class="pre">output_n_rotated_pitches()</span></code>.</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">container</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;\time 5/4 r4 \times 2/3 {c&#39;4 d&#39;2}&quot;</span>
-<span class="gp">... </span>                            <span class="sa">r</span><span class="s2">&quot;r4 e&#39;4. f&#39;8&quot;</span>
-<span class="gp">... </span>                            <span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">shuffler</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">Shuffler</span><span class="p">(</span><span class="n">container</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">music</span> <span class="o">=</span> <span class="n">shuffler</span><span class="o">.</span><span class="n">output_n_rotated_pitches</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">staff</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span><span class="n">music</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">f</span><span class="p">(</span><span class="n">staff</span><span class="p">)</span>
-<span class="go">\new Staff</span>
-<span class="go">{</span>
-<span class="go">    \time 5/4</span>
-<span class="go">    r4</span>
-<span class="go">    \times 2/3 {</span>
-<span class="go">        d&#39;4</span>
-<span class="go">        e&#39;2</span>
-<span class="go">    }</span>
-<span class="go">    f&#39;4.</span>
-<span class="go">    c&#39;8</span>
-<span class="go">    r4</span>
-<span class="go">    \times 2/3 {</span>
-<span class="go">        e&#39;4</span>
-<span class="go">        f&#39;2</span>
-<span class="go">    }</span>
-<span class="go">    c&#39;4.</span>
+<span class="go">    f&#39;4</span>
+<span class="go">    \f</span>
+<span class="go">    - \marcato</span>
 <span class="go">    d&#39;8</span>
-<span class="go">    r4</span>
-<span class="go">    \times 2/3 {</span>
-<span class="go">        f&#39;4</span>
-<span class="go">        c&#39;2</span>
-<span class="go">    }</span>
-<span class="go">    d&#39;4.</span>
+<span class="go">    - \staccato</span>
+<span class="go">    &lt;c&#39; e&#39; g&#39;&gt;8</span>
+<span class="go">    \p</span>
+<span class="go">    - \tenuto</span>
+<span class="go">    ~</span>
+<span class="go">    &lt;c&#39; e&#39; g&#39;&gt;8</span>
 <span class="go">    e&#39;8</span>
+<span class="go">    - \staccato</span>
+<span class="go">    f&#39;4</span>
+<span class="go">    \f</span>
+<span class="go">    - \marcato</span>
+<span class="go">    d&#39;8</span>
+<span class="go">    - \staccato</span>
+<span class="go">    &lt;c&#39; e&#39; g&#39;&gt;8</span>
+<span class="go">    \p</span>
+<span class="go">    - \tenuto</span>
+<span class="go">    ~</span>
+<span class="go">    &lt;c&#39; e&#39; g&#39;&gt;8</span>
+<span class="go">    r8</span>
+<span class="go">    r8</span>
+<span class="go">    e&#39;8</span>
+<span class="go">    - \staccato</span>
+<span class="go">    f&#39;4</span>
+<span class="go">    \f</span>
+<span class="go">    - \marcato</span>
+<span class="go">    r4</span>
+<span class="go">    e&#39;8</span>
+<span class="go">    - \staccato</span>
+<span class="go">    d&#39;8</span>
+<span class="go">    - \staccato</span>
+<span class="go">    &lt;c&#39; e&#39; g&#39;&gt;4</span>
+<span class="go">    \p</span>
+<span class="go">    - \tenuto</span>
 <span class="go">}</span>
 </pre></div>
 </div>
 <div class="figure align-default">
-<img alt="../_images/image-Shuffler-16.png" src="../_images/image-Shuffler-16.png" />
+<img alt="../_images/image-Shuffler-19.png" src="../_images/image-Shuffler-19.png" />
 </div>
 </div>
 <div class="example docutils container">
@@ -710,7 +876,7 @@ transformed selection of music). <code class="docutils literal notranslate"><spa
 </pre></div>
 </div>
 <div class="figure align-default">
-<img alt="../_images/image-Shuffler-17.png" src="../_images/image-Shuffler-17.png" />
+<img alt="../_images/image-Shuffler-20.png" src="../_images/image-Shuffler-20.png" />
 </div>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">shuffler</span><span class="p">()</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">f</span><span class="p">(</span><span class="n">shuffler</span><span class="o">.</span><span class="n">contents</span><span class="p">)</span>
@@ -723,7 +889,7 @@ transformed selection of music). <code class="docutils literal notranslate"><spa
 </pre></div>
 </div>
 <div class="figure align-default">
-<img alt="../_images/image-Shuffler-18.png" src="../_images/image-Shuffler-18.png" />
+<img alt="../_images/image-Shuffler-21.png" src="../_images/image-Shuffler-21.png" />
 </div>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">shuffler</span><span class="o">.</span><span class="n">contents</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;cs2 ds2&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">f</span><span class="p">(</span><span class="n">shuffler</span><span class="o">.</span><span class="n">contents</span><span class="p">)</span>
@@ -734,7 +900,139 @@ transformed selection of music). <code class="docutils literal notranslate"><spa
 </pre></div>
 </div>
 <div class="figure align-default">
-<img alt="../_images/image-Shuffler-19.png" src="../_images/image-Shuffler-19.png" />
+<img alt="../_images/image-Shuffler-22.png" src="../_images/image-Shuffler-22.png" />
+</div>
+</div>
+<div class="example docutils container">
+<p>This function uses the default logical tie splitting algorithm from
+abjad’s <code class="docutils literal notranslate"><span class="pre">rewrite_meter()</span></code>.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">container</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;c&#39;4. d&#39;8 e&#39;2&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">shuffler</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">Shuffler</span><span class="p">(</span><span class="n">container</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">notes</span> <span class="o">=</span> <span class="n">shuffler</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">staff</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span><span class="n">notes</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">f</span><span class="p">(</span><span class="n">staff</span><span class="p">)</span>
+<span class="go">\new Staff</span>
+<span class="go">{</span>
+<span class="go">    \time 4/4</span>
+<span class="go">    e&#39;2</span>
+<span class="go">    c&#39;4.</span>
+<span class="go">    d&#39;8</span>
+<span class="go">}</span>
+</pre></div>
+</div>
+<div class="figure align-default">
+<img alt="../_images/image-Shuffler-23.png" src="../_images/image-Shuffler-23.png" />
+</div>
+<p>Set <code class="docutils literal notranslate"><span class="pre">boundary_depth</span></code> to a different number to change its behaviour.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">shuffler</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">Shuffler</span><span class="p">(</span><span class="n">container</span><span class="p">,</span>
+<span class="gp">... </span>                           <span class="n">boundary_depth</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+<span class="gp">... </span>                           <span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">notes</span> <span class="o">=</span> <span class="n">shuffler</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">staff</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span><span class="n">notes</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">f</span><span class="p">(</span><span class="n">staff</span><span class="p">)</span>
+<span class="go">\new Staff</span>
+<span class="go">{</span>
+<span class="go">    \time 4/4</span>
+<span class="go">    e&#39;2</span>
+<span class="go">    c&#39;4</span>
+<span class="go">    ~</span>
+<span class="go">    c&#39;8</span>
+<span class="go">    d&#39;8</span>
+<span class="go">}</span>
+</pre></div>
+</div>
+<div class="figure align-default">
+<img alt="../_images/image-Shuffler-24.png" src="../_images/image-Shuffler-24.png" />
+</div>
+<p>Other arguments available for tweaking the output of abjad’s
+<code class="docutils literal notranslate"><span class="pre">rewrite_meter()</span></code> are <code class="docutils literal notranslate"><span class="pre">maximum_dot_count</span></code> and <code class="docutils literal notranslate"><span class="pre">rewrite_tuplets</span></code>,
+which work exactly as the identically named arguments of
+<code class="docutils literal notranslate"><span class="pre">rewrite_meter()</span></code>.</p>
+</div>
+<div class="example docutils container">
+<p>By default, this class rewrites uses abjad’s <code class="docutils literal notranslate"><span class="pre">rewrite_meter()</span></code>
+mutation.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">container</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;c&#39;4 d&#39;8 e&#39;8 f&#39;2&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">shuffler</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">Shuffler</span><span class="p">(</span><span class="n">container</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">notes</span> <span class="o">=</span> <span class="n">shuffler</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">staff</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span><span class="n">notes</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">f</span><span class="p">(</span><span class="n">staff</span><span class="p">)</span>
+<span class="go">\new Staff</span>
+<span class="go">{</span>
+<span class="go">    \time 4/4</span>
+<span class="go">    e&#39;8</span>
+<span class="go">    f&#39;8</span>
+<span class="go">    ~</span>
+<span class="go">    f&#39;4.</span>
+<span class="go">    c&#39;8</span>
+<span class="go">    ~</span>
+<span class="go">    c&#39;8</span>
+<span class="go">    d&#39;8</span>
+<span class="go">}</span>
+</pre></div>
+</div>
+<div class="figure align-default">
+<img alt="../_images/image-Shuffler-25.png" src="../_images/image-Shuffler-25.png" />
+</div>
+<p>Set <code class="docutils literal notranslate"><span class="pre">disable_rewrite_meter</span></code> to <code class="docutils literal notranslate"><span class="pre">True</span></code> in order to disable this
+behaviour.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">container</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;c&#39;4 d&#39;8 e&#39;8 f&#39;2&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">shuffler</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">Shuffler</span><span class="p">(</span><span class="n">container</span><span class="p">,</span>
+<span class="gp">... </span>                           <span class="n">disable_rewrite_meter</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+<span class="gp">... </span>                           <span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">notes</span> <span class="o">=</span> <span class="n">shuffler</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">staff</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span><span class="n">notes</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">f</span><span class="p">(</span><span class="n">staff</span><span class="p">)</span>
+<span class="go">\new Staff</span>
+<span class="go">{</span>
+<span class="go">    \time 4/4</span>
+<span class="go">    e&#39;8</span>
+<span class="go">    f&#39;2</span>
+<span class="go">    c&#39;4</span>
+<span class="go">    d&#39;8</span>
+<span class="go">}</span>
+</pre></div>
+</div>
+<div class="figure align-default">
+<img alt="../_images/image-Shuffler-26.png" src="../_images/image-Shuffler-26.png" />
+</div>
+</div>
+<div class="example docutils container">
+<p>The instances of <code class="docutils literal notranslate"><span class="pre">Shuffler</span></code> can also be used as an iterator, which
+can then be used in a for loop. Note that unlike the methods
+<code class="docutils literal notranslate"><span class="pre">shuffle_n()</span></code> and <code class="docutils literal notranslate"><span class="pre">rotate_n()</span></code>, time signatures are added to each
+window returned by the shuffler. Use the function
+<code class="docutils literal notranslate"><span class="pre">auxjad.remove_repeated_time_signatures()</span></code> to clean the output when
+using <code class="docutils literal notranslate"><span class="pre">Shuffler</span></code> in this way. It is also important to note that a
+<code class="docutils literal notranslate"><span class="pre">break</span></code> statement is needed when using <code class="docutils literal notranslate"><span class="pre">Shuffler</span></code> as an iterator.
+The reason is that shuffling is a process that can happen indefinitely
+(unlike some of the other classes in this package).</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">container</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;\time 3/4 c&#39;4 d&#39;4 e&#39;4&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">shuffler</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">Shuffler</span><span class="p">(</span><span class="n">container</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">staff</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">window</span> <span class="ow">in</span> <span class="n">shuffler</span><span class="p">:</span>
+<span class="gp">... </span>    <span class="n">staff</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">window</span><span class="p">)</span>
+<span class="gp">... </span>    <span class="k">if</span> <span class="n">abjad</span><span class="o">.</span><span class="n">inspect</span><span class="p">(</span><span class="n">staff</span><span class="p">)</span><span class="o">.</span><span class="n">duration</span><span class="p">()</span> <span class="o">==</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Duration</span><span class="p">((</span><span class="mi">9</span><span class="p">,</span> <span class="mi">4</span><span class="p">)):</span>
+<span class="gp">... </span>        <span class="k">break</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">auxjad</span><span class="o">.</span><span class="n">remove_repeated_time_signatures</span><span class="p">(</span><span class="n">staff</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">f</span><span class="p">(</span><span class="n">staff</span><span class="p">)</span>
+<span class="go">\new Staff</span>
+<span class="go">{</span>
+<span class="go">    \time 3/4</span>
+<span class="go">    c&#39;4</span>
+<span class="go">    d&#39;4</span>
+<span class="go">    e&#39;4</span>
+<span class="go">    c&#39;4</span>
+<span class="go">    d&#39;4</span>
+<span class="go">    e&#39;4</span>
+<span class="go">    c&#39;4</span>
+<span class="go">    d&#39;4</span>
+<span class="go">    e&#39;4</span>
+<span class="go">}</span>
+</pre></div>
+</div>
+<div class="figure align-default">
+<img alt="../_images/image-Shuffler-27.png" src="../_images/image-Shuffler-27.png" />
 </div>
 </div>
 <p class="rubric">Methods</p>
@@ -744,26 +1042,20 @@ transformed selection of music). <code class="docutils literal notranslate"><spa
 <col style="width: 90%" />
 </colgroup>
 <tbody>
-<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">__init__</span></code>(contents, *[, …])</p></td>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">__init__</span></code>(contents, *[, pitch_only, …])</p></td>
 <td><p>Initialises self.</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">output_n</span></code>(n)</p></td>
-<td><p>Goes through <code class="docutils literal notranslate"><span class="pre">n</span></code> iterations of the shuffling process and outputs a single <code class="docutils literal notranslate"><span class="pre">abjad.Selection</span></code>.</p></td>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">rotate</span></code>(*[, n_rotations, anticlockwise])</p></td>
+<td><p>Rotates logical ties or pitches of <code class="docutils literal notranslate"><span class="pre">contents</span></code>.</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">output_n_rotated_pitches</span></code>(n, *[, …])</p></td>
-<td><p>Goes through <code class="docutils literal notranslate"><span class="pre">n</span></code> iterations of the pitch rotation process and outputs a single <code class="docutils literal notranslate"><span class="pre">abjad.Selection</span></code>.</p></td>
-</tr>
-<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">output_n_shuffled_pitches</span></code>(n)</p></td>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">rotate_n</span></code>(n, *[, n_rotations, anticlockwise])</p></td>
 <td><p>Goes through <code class="docutils literal notranslate"><span class="pre">n</span></code> iterations of the pitch shuffling process and outputs a single <code class="docutils literal notranslate"><span class="pre">abjad.Selection</span></code>.</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">rotate_pitches</span></code>(*[, n_rotations, anticlockwise])</p></td>
-<td><p>Rotates the pitches of <code class="docutils literal notranslate"><span class="pre">contents</span></code>.</p></td>
-</tr>
 <tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">shuffle</span></code>()</p></td>
-<td><p>Shuffles the logical ties of <code class="docutils literal notranslate"><span class="pre">contents</span></code>.</p></td>
+<td><p>Shuffles logical ties or pitches of <code class="docutils literal notranslate"><span class="pre">contents</span></code>.</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">shuffle_pitches</span></code>()</p></td>
-<td><p>Shuffles only the pitches of <code class="docutils literal notranslate"><span class="pre">contents</span></code>.</p></td>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">shuffle_n</span></code>(n)</p></td>
+<td><p>Goes through <code class="docutils literal notranslate"><span class="pre">n</span></code> iterations of the shuffling process and outputs a single <code class="docutils literal notranslate"><span class="pre">abjad.Selection</span></code>.</p></td>
 </tr>
 </tbody>
 </table>
@@ -774,23 +1066,35 @@ transformed selection of music). <code class="docutils literal notranslate"><spa
 <col style="width: 90%" />
 </colgroup>
 <tbody>
-<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">contents</span></code></p></td>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">boundary_depth</span></code></p></td>
+<td><p>Sets the argument <code class="docutils literal notranslate"><span class="pre">boundary_depth</span></code> of abjad’s <code class="docutils literal notranslate"><span class="pre">rewrite_meter()</span></code>.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">contents</span></code></p></td>
 <td><p>The <code class="docutils literal notranslate"><span class="pre">abjad.Container</span></code> to be shuffled.</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">current_window</span></code></p></td>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">current_window</span></code></p></td>
 <td><p>Read-only property, returns the result of the last operation.</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">disable_rewrite_meter</span></code></p></td>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">disable_rewrite_meter</span></code></p></td>
 <td><p>When <code class="docutils literal notranslate"><span class="pre">True</span></code>, the durations of the notes in the output will not be rewritten by the <code class="docutils literal notranslate"><span class="pre">rewrite_meter</span></code> mutation.</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">force_time_signatures</span></code></p></td>
-<td><p>When <code class="docutils literal notranslate"><span class="pre">True</span></code>, every call will output a selection with a time signature.</p></td>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">maximum_dot_count</span></code></p></td>
+<td><p>Sets the argument <code class="docutils literal notranslate"><span class="pre">maximum_dot_count</span></code> of abjad’s <code class="docutils literal notranslate"><span class="pre">rewrite_meter()</span></code>.</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">omit_time_signatures</span></code></p></td>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">omit_time_signatures</span></code></p></td>
 <td><p>When <code class="docutils literal notranslate"><span class="pre">True</span></code>, the output will contain no time signatures.</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">output_single_measure</span></code></p></td>
-<td><p>When <code class="docutils literal notranslate"><span class="pre">True</span></code>, the output will be a single measure even if the contents of the shuffler are several measures.</p></td>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">pitch_only</span></code></p></td>
+<td><p>When <code class="docutils literal notranslate"><span class="pre">True</span></code>, only the pitches will be shuffled or rotated while the durations remain the same.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">preserve_rest_position</span></code></p></td>
+<td><p>When <code class="docutils literal notranslate"><span class="pre">True</span></code>, shuffle operations will preserve rest positions and durations.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">processs_on_first_call</span></code></p></td>
+<td><p>If <code class="docutils literal notranslate"><span class="pre">True</span></code> then the <code class="docutils literal notranslate"><span class="pre">contents</span></code> will be processed in the very first call.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">rewrite_tuplets</span></code></p></td>
+<td><p>Sets the argument <code class="docutils literal notranslate"><span class="pre">rewrite_tuplets</span></code> of abjad’s <code class="docutils literal notranslate"><span class="pre">rewrite_meter()</span></code>.</p></td>
 </tr>
 </tbody>
 </table>

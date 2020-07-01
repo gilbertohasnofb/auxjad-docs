@@ -34,7 +34,9 @@
   <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <link rel="index" title="Index" href="../genindex.html" />
-    <link rel="search" title="Search" href="../search.html" /> 
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="auxjad API" href="../api.html" />
+    <link rel="prev" title="Example 1" href="example-1.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -83,9 +85,13 @@
             
             
               <p class="caption"><span class="caption-text">Contents</span></p>
-<ul>
+<ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../index.html">Welcome to auxjad’s documentation!</a></li>
-<li class="toctree-l1"><a class="reference internal" href="index.html">Examples of usage</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Examples of usage</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="example-1.html">Example 1</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Example 2</a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="../api.html">auxjad API</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../api.html#indices-and-tables">Indices and tables</a></li>
 </ul>
@@ -132,6 +138,8 @@
   <ul class="wy-breadcrumbs">
     
       <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="index.html">Examples of usage</a> &raquo;</li>
         
       <li>Example 2</li>
     
@@ -241,9 +249,8 @@ forward has the size of a sixteenth-note. These parameters are all adjustable,
 please refer to this library’s API for more information.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">looper</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">LoopByWindow</span><span class="p">(</span><span class="n">container</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">staff</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">()</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">):</span>
-<span class="gp">&gt;&gt;&gt; </span>    <span class="n">music</span> <span class="o">=</span> <span class="n">looper</span><span class="p">()</span>
-<span class="gp">&gt;&gt;&gt; </span>    <span class="n">staff</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">music</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">notes</span> <span class="o">=</span> <span class="n">looper</span><span class="o">.</span><span class="n">output_n</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">staff</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">notes</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">f</span><span class="p">(</span><span class="n">staff</span><span class="p">)</span>
 <span class="go">\new Staff</span>
 <span class="go">{</span>
@@ -286,9 +293,8 @@ input for <code class="docutils literal notranslate"><span class="pre">auxjad.Sh
 the input container.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">container</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">(</span><span class="n">looper</span><span class="o">.</span><span class="n">current_window</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">shuffler</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">Shuffler</span><span class="p">(</span><span class="n">container</span><span class="p">,</span> <span class="n">omit_time_signatures</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">):</span>
-<span class="gp">&gt;&gt;&gt; </span>    <span class="n">music</span> <span class="o">=</span> <span class="n">shuffler</span><span class="p">()</span>
-<span class="gp">&gt;&gt;&gt; </span>    <span class="n">staff</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">music</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">notes</span> <span class="o">=</span> <span class="n">shuffler</span><span class="o">.</span><span class="n">shuffle_n</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">staff</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">notes</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">f</span><span class="p">(</span><span class="n">staff</span><span class="p">)</span>
 <span class="go">\new Staff</span>
 <span class="go">{</span>
@@ -330,22 +336,20 @@ the input container.</p>
 <span class="go">    c&#39;4.</span>
 <span class="go">    af&#39;4.</span>
 <span class="go">    \mp</span>
+<span class="go">    bf&#39;8</span>
+<span class="go">    \mf</span>
+<span class="go">    - \tenuto</span>
+<span class="go">    af&#39;4.</span>
+<span class="go">    \mp</span>
+<span class="go">    c&#39;2</span>
+<span class="go">    \mp</span>
+<span class="go">    - \tenuto</span>
 <span class="go">    c&#39;2</span>
 <span class="go">    \mp</span>
 <span class="go">    - \tenuto</span>
 <span class="go">    bf&#39;8</span>
 <span class="go">    \mf</span>
 <span class="go">    - \tenuto</span>
-<span class="go">    af&#39;4.</span>
-<span class="go">    \mp</span>
-<span class="go">    bf&#39;8</span>
-<span class="go">    \mf</span>
-<span class="go">    - \tenuto</span>
-<span class="go">    c&#39;8</span>
-<span class="go">    \mp</span>
-<span class="go">    - \tenuto</span>
-<span class="go">    ~</span>
-<span class="go">    c&#39;4.</span>
 <span class="go">    af&#39;4.</span>
 <span class="go">    \mp</span>
 <span class="go">}</span>
@@ -356,13 +360,12 @@ the input container.</p>
 </div>
 <p>Let’s use the last output of the shuffler above and feed it into a new looper.
 This time we will use a window of size 3/4.</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">container</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">(</span><span class="n">shuffler</span><span class="o">.</span><span class="n">current_container</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">container</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">(</span><span class="n">shuffler</span><span class="o">.</span><span class="n">current_window</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">looper</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">LoopByWindow</span><span class="p">(</span><span class="n">container</span><span class="p">,</span>
 <span class="gp">... </span>                           <span class="n">window_size</span><span class="o">=</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">),</span>
 <span class="gp">... </span>                           <span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">):</span>
-<span class="gp">&gt;&gt;&gt; </span>    <span class="n">music</span> <span class="o">=</span> <span class="n">looper</span><span class="p">()</span>
-<span class="gp">&gt;&gt;&gt; </span>    <span class="n">staff</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">music</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">notes</span> <span class="o">=</span> <span class="n">looper</span><span class="o">.</span><span class="n">output_n</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">staff</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">notes</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">f</span><span class="p">(</span><span class="n">staff</span><span class="p">)</span>
 <span class="go">\new Staff</span>
 <span class="go">{</span>
@@ -404,49 +407,46 @@ This time we will use a window of size 3/4.</p>
 <span class="go">    c&#39;4.</span>
 <span class="go">    af&#39;4.</span>
 <span class="go">    \mp</span>
+<span class="go">    bf&#39;8</span>
+<span class="go">    \mf</span>
+<span class="go">    - \tenuto</span>
+<span class="go">    af&#39;4.</span>
+<span class="go">    \mp</span>
+<span class="go">    c&#39;2</span>
+<span class="go">    \mp</span>
+<span class="go">    - \tenuto</span>
 <span class="go">    c&#39;2</span>
 <span class="go">    \mp</span>
 <span class="go">    - \tenuto</span>
 <span class="go">    bf&#39;8</span>
 <span class="go">    \mf</span>
 <span class="go">    - \tenuto</span>
-<span class="go">    af&#39;4.</span>
-<span class="go">    \mp</span>
-<span class="go">    bf&#39;8</span>
-<span class="go">    \mf</span>
-<span class="go">    - \tenuto</span>
-<span class="go">    c&#39;8</span>
-<span class="go">    \mp</span>
-<span class="go">    - \tenuto</span>
-<span class="go">    ~</span>
-<span class="go">    c&#39;4.</span>
 <span class="go">    af&#39;4.</span>
 <span class="go">    \mp</span>
 <span class="go">    \time 3/4</span>
+<span class="go">    c&#39;2</span>
+<span class="go">    \mp</span>
+<span class="go">    - \tenuto</span>
 <span class="go">    bf&#39;8</span>
 <span class="go">    \mf</span>
 <span class="go">    - \tenuto</span>
-<span class="go">    c&#39;8</span>
-<span class="go">    \mp</span>
-<span class="go">    - \tenuto</span>
-<span class="go">    ~</span>
-<span class="go">    c&#39;4.</span>
 <span class="go">    af&#39;8</span>
 <span class="go">    \mp</span>
+<span class="go">    c&#39;4..</span>
+<span class="go">    \mp</span>
+<span class="go">    - \tenuto</span>
 <span class="go">    bf&#39;16</span>
 <span class="go">    \mf</span>
 <span class="go">    - \tenuto</span>
-<span class="go">    c&#39;8.</span>
-<span class="go">    \mp</span>
-<span class="go">    - \tenuto</span>
 <span class="go">    ~</span>
-<span class="go">    c&#39;4</span>
-<span class="go">    ~</span>
-<span class="go">    c&#39;16</span>
+<span class="go">    bf&#39;16</span>
 <span class="go">    af&#39;8.</span>
 <span class="go">    \mp</span>
-<span class="go">    c&#39;2</span>
+<span class="go">    c&#39;4.</span>
 <span class="go">    \mp</span>
+<span class="go">    - \tenuto</span>
+<span class="go">    bf&#39;8</span>
+<span class="go">    \mf</span>
 <span class="go">    - \tenuto</span>
 <span class="go">    af&#39;4</span>
 <span class="go">    \mp</span>
@@ -494,6 +494,13 @@ repeated dyanmics. The final result is shown below.</p>
 <span class="go">    ~</span>
 <span class="go">    c&#39;4.</span>
 <span class="go">    af&#39;4.</span>
+<span class="go">    bf&#39;8</span>
+<span class="go">    \mf</span>
+<span class="go">    - \tenuto</span>
+<span class="go">    af&#39;4.</span>
+<span class="go">    \mp</span>
+<span class="go">    c&#39;2</span>
+<span class="go">    - \tenuto</span>
 <span class="go">    c&#39;2</span>
 <span class="go">    - \tenuto</span>
 <span class="go">    bf&#39;8</span>
@@ -501,39 +508,30 @@ repeated dyanmics. The final result is shown below.</p>
 <span class="go">    - \tenuto</span>
 <span class="go">    af&#39;4.</span>
 <span class="go">    \mp</span>
-<span class="go">    bf&#39;8</span>
-<span class="go">    \mf</span>
-<span class="go">    - \tenuto</span>
-<span class="go">    c&#39;8</span>
-<span class="go">    \mp</span>
-<span class="go">    - \tenuto</span>
-<span class="go">    ~</span>
-<span class="go">    c&#39;4.</span>
-<span class="go">    af&#39;4.</span>
 <span class="go">    \time 3/4</span>
+<span class="go">    c&#39;2</span>
+<span class="go">    - \tenuto</span>
 <span class="go">    bf&#39;8</span>
 <span class="go">    \mf</span>
 <span class="go">    - \tenuto</span>
-<span class="go">    c&#39;8</span>
-<span class="go">    \mp</span>
-<span class="go">    - \tenuto</span>
-<span class="go">    ~</span>
-<span class="go">    c&#39;4.</span>
 <span class="go">    af&#39;8</span>
+<span class="go">    \mp</span>
+<span class="go">    c&#39;4..</span>
+<span class="go">    - \tenuto</span>
 <span class="go">    bf&#39;16</span>
 <span class="go">    \mf</span>
 <span class="go">    - \tenuto</span>
-<span class="go">    c&#39;8.</span>
-<span class="go">    \mp</span>
-<span class="go">    - \tenuto</span>
 <span class="go">    ~</span>
-<span class="go">    c&#39;4</span>
-<span class="go">    ~</span>
-<span class="go">    c&#39;16</span>
+<span class="go">    bf&#39;16</span>
 <span class="go">    af&#39;8.</span>
-<span class="go">    c&#39;2</span>
+<span class="go">    \mp</span>
+<span class="go">    c&#39;4.</span>
+<span class="go">    - \tenuto</span>
+<span class="go">    bf&#39;8</span>
+<span class="go">    \mf</span>
 <span class="go">    - \tenuto</span>
 <span class="go">    af&#39;4</span>
+<span class="go">    \mp</span>
 <span class="go">}</span>
 </pre></div>
 </div>
@@ -547,6 +545,15 @@ repeated dyanmics. The final result is shown below.</p>
            
           </div>
           <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../api.html" class="btn btn-neutral float-right" title="auxjad API" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="example-1.html" class="btn btn-neutral float-left" title="Example 1" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
   
 
   <hr/>

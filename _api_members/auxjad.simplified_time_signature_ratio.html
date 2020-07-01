@@ -89,11 +89,14 @@
 <li class="toctree-l1"><a class="reference internal" href="../index.html">Welcome to auxjad’s documentation!</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../examples/index.html">Examples of usage</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../api.html">auxjad API</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="auxjad.adjust_clefs.html">auxjad.adjust_clefs</a></li>
 <li class="toctree-l2"><a class="reference internal" href="auxjad.ArtificialHarmonic.html">auxjad.ArtificialHarmonic</a></li>
 <li class="toctree-l2"><a class="reference internal" href="auxjad.CartographySelector.html">auxjad.CartographySelector</a></li>
 <li class="toctree-l2"><a class="reference internal" href="auxjad.close_container.html">auxjad.close_container</a></li>
 <li class="toctree-l2"><a class="reference internal" href="auxjad.container_is_full.html">auxjad.container_is_full</a></li>
 <li class="toctree-l2"><a class="reference internal" href="auxjad.containers_are_equal.html">auxjad.containers_are_equal</a></li>
+<li class="toctree-l2"><a class="reference internal" href="auxjad.enforce_time_signature.html">auxjad.enforce_time_signature</a></li>
+<li class="toctree-l2"><a class="reference internal" href="auxjad.Fader.html">auxjad.Fader</a></li>
 <li class="toctree-l2"><a class="reference internal" href="auxjad.fill_with_rests.html">auxjad.fill_with_rests</a></li>
 <li class="toctree-l2"><a class="reference internal" href="auxjad.HarmonicNote.html">auxjad.HarmonicNote</a></li>
 <li class="toctree-l2"><a class="reference internal" href="auxjad.Hocketer.html">auxjad.Hocketer</a></li>
@@ -102,6 +105,7 @@
 <li class="toctree-l2"><a class="reference internal" href="auxjad.LoopByList.html">auxjad.LoopByList</a></li>
 <li class="toctree-l2"><a class="reference internal" href="auxjad.LoopByNotes.html">auxjad.LoopByNotes</a></li>
 <li class="toctree-l2"><a class="reference internal" href="auxjad.LoopByWindow.html">auxjad.LoopByWindow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="auxjad.Phaser.html">auxjad.Phaser</a></li>
 <li class="toctree-l2"><a class="reference internal" href="auxjad.remove_empty_tuplets.html">auxjad.remove_empty_tuplets</a></li>
 <li class="toctree-l2"><a class="reference internal" href="auxjad.remove_repeated_dynamics.html">auxjad.remove_repeated_dynamics</a></li>
 <li class="toctree-l2"><a class="reference internal" href="auxjad.remove_repeated_time_signatures.html">auxjad.remove_repeated_time_signatures</a></li>
@@ -112,6 +116,7 @@
 <li class="toctree-l2 current"><a class="current reference internal" href="#">auxjad.simplified_time_signature_ratio</a></li>
 <li class="toctree-l2"><a class="reference internal" href="auxjad.sync_containers.html">auxjad.sync_containers</a></li>
 <li class="toctree-l2"><a class="reference internal" href="auxjad.TenneySelector.html">auxjad.TenneySelector</a></li>
+<li class="toctree-l2"><a class="reference internal" href="auxjad.time_signature_extractor.html">auxjad.time_signature_extractor</a></li>
 <li class="toctree-l2"><a class="reference internal" href="auxjad.underfull_duration.html">auxjad.underfull_duration</a></li>
 </ul>
 </li>
@@ -186,7 +191,7 @@
 <h1>auxjad.simplified_time_signature_ratio<a class="headerlink" href="#auxjad-simplified-time-signature-ratio" title="Permalink to this headline">¶</a></h1>
 <dl class="py function">
 <dt id="auxjad.simplified_time_signature_ratio">
-<code class="sig-prename descclassname">auxjad.</code><code class="sig-name descname">simplified_time_signature_ratio</code><span class="sig-paren">(</span><em class="sig-param">ratio: (&lt;class 'tuple'&gt;</em>, <em class="sig-param">&lt;class 'abjad.indicators.TimeSignature.TimeSignature'&gt;</em>, <em class="sig-param">&lt;class 'abjad.utilities.Duration.Duration'&gt;</em>, <em class="sig-param">&lt;class 'abjad.meter.Meter'&gt;)</em>, <em class="sig-param">*</em>, <em class="sig-param">min_denominator: int = 4</em>, <em class="sig-param">output_pair_of_int: bool = False) -&gt; (&lt;class 'abjad.indicators.TimeSignature.TimeSignature'&gt;</em>, <em class="sig-param">&lt;class 'tuple'&gt;</em><span class="sig-paren">)</span><a class="headerlink" href="#auxjad.simplified_time_signature_ratio" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">auxjad.</code><code class="sig-name descname">simplified_time_signature_ratio</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">ratio</span><span class="p">:</span> <span class="n">Union<span class="p">[</span>tuple<span class="p">, </span>abjad.indicators.TimeSignature.TimeSignature<span class="p">, </span>abjad.utilities.Duration.Duration<span class="p">, </span>abjad.meter.Meter<span class="p">]</span></span></em>, <em class="sig-param"><span class="o">*</span></em>, <em class="sig-param"><span class="n">min_denominator</span><span class="p">:</span> <span class="n">int</span> <span class="o">=</span> <span class="default_value">4</span></em>, <em class="sig-param"><span class="n">output_pair_of_int</span><span class="p">:</span> <span class="n">bool</span> <span class="o">=</span> <span class="default_value">False</span></em><span class="sig-paren">)</span> &#x2192; Union<span class="p">[</span>abjad.indicators.TimeSignature.TimeSignature<span class="p">, </span>tuple<span class="p">]</span><a class="headerlink" href="#auxjad.simplified_time_signature_ratio" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns an <code class="docutils literal notranslate"><span class="pre">abjad.TimeSignature</span></code> with the simplified ratio of an
 input ratio according to a minimum denominator value. The input ratio can
 be a <code class="docutils literal notranslate"><span class="pre">tuple</span></code> of integers, an <code class="docutils literal notranslate"><span class="pre">abjad.TimeSignature</span></code>, <code class="docutils literal notranslate"><span class="pre">abjad.Duration</span></code>,

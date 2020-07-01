@@ -89,11 +89,14 @@
 <li class="toctree-l1"><a class="reference internal" href="../index.html">Welcome to auxjad’s documentation!</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../examples/index.html">Examples of usage</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../api.html">auxjad API</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="auxjad.adjust_clefs.html">auxjad.adjust_clefs</a></li>
 <li class="toctree-l2"><a class="reference internal" href="auxjad.ArtificialHarmonic.html">auxjad.ArtificialHarmonic</a></li>
 <li class="toctree-l2"><a class="reference internal" href="auxjad.CartographySelector.html">auxjad.CartographySelector</a></li>
 <li class="toctree-l2"><a class="reference internal" href="auxjad.close_container.html">auxjad.close_container</a></li>
 <li class="toctree-l2"><a class="reference internal" href="auxjad.container_is_full.html">auxjad.container_is_full</a></li>
 <li class="toctree-l2"><a class="reference internal" href="auxjad.containers_are_equal.html">auxjad.containers_are_equal</a></li>
+<li class="toctree-l2"><a class="reference internal" href="auxjad.enforce_time_signature.html">auxjad.enforce_time_signature</a></li>
+<li class="toctree-l2"><a class="reference internal" href="auxjad.Fader.html">auxjad.Fader</a></li>
 <li class="toctree-l2"><a class="reference internal" href="auxjad.fill_with_rests.html">auxjad.fill_with_rests</a></li>
 <li class="toctree-l2"><a class="reference internal" href="auxjad.HarmonicNote.html">auxjad.HarmonicNote</a></li>
 <li class="toctree-l2"><a class="reference internal" href="auxjad.Hocketer.html">auxjad.Hocketer</a></li>
@@ -102,6 +105,7 @@
 <li class="toctree-l2 current"><a class="current reference internal" href="#">auxjad.LoopByList</a></li>
 <li class="toctree-l2"><a class="reference internal" href="auxjad.LoopByNotes.html">auxjad.LoopByNotes</a></li>
 <li class="toctree-l2"><a class="reference internal" href="auxjad.LoopByWindow.html">auxjad.LoopByWindow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="auxjad.Phaser.html">auxjad.Phaser</a></li>
 <li class="toctree-l2"><a class="reference internal" href="auxjad.remove_empty_tuplets.html">auxjad.remove_empty_tuplets</a></li>
 <li class="toctree-l2"><a class="reference internal" href="auxjad.remove_repeated_dynamics.html">auxjad.remove_repeated_dynamics</a></li>
 <li class="toctree-l2"><a class="reference internal" href="auxjad.remove_repeated_time_signatures.html">auxjad.remove_repeated_time_signatures</a></li>
@@ -112,6 +116,7 @@
 <li class="toctree-l2"><a class="reference internal" href="auxjad.simplified_time_signature_ratio.html">auxjad.simplified_time_signature_ratio</a></li>
 <li class="toctree-l2"><a class="reference internal" href="auxjad.sync_containers.html">auxjad.sync_containers</a></li>
 <li class="toctree-l2"><a class="reference internal" href="auxjad.TenneySelector.html">auxjad.TenneySelector</a></li>
+<li class="toctree-l2"><a class="reference internal" href="auxjad.time_signature_extractor.html">auxjad.time_signature_extractor</a></li>
 <li class="toctree-l2"><a class="reference internal" href="auxjad.underfull_duration.html">auxjad.underfull_duration</a></li>
 </ul>
 </li>
@@ -186,11 +191,11 @@
 <h1>auxjad.LoopByList<a class="headerlink" href="#auxjad-loopbylist" title="Permalink to this headline">¶</a></h1>
 <dl class="py class">
 <dt id="auxjad.LoopByList">
-<em class="property">class </em><code class="sig-prename descclassname">auxjad.</code><code class="sig-name descname">LoopByList</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">contents</span><span class="p">:</span> <span class="n">list</span></em>, <em class="sig-param"><span class="o">*</span></em>, <em class="sig-param"><span class="n">window_size</span><span class="p">:</span> <span class="n">int</span></em>, <em class="sig-param"><span class="n">step_size</span><span class="p">:</span> <span class="n">int</span> <span class="o">=</span> <span class="default_value">1</span></em>, <em class="sig-param"><span class="n">max_steps</span><span class="p">:</span> <span class="n">int</span> <span class="o">=</span> <span class="default_value">1</span></em>, <em class="sig-param"><span class="n">repetition_chance</span><span class="p">:</span> <span class="n">float</span> <span class="o">=</span> <span class="default_value">0.0</span></em>, <em class="sig-param"><span class="n">forward_bias</span><span class="p">:</span> <span class="n">float</span> <span class="o">=</span> <span class="default_value">1.0</span></em>, <em class="sig-param"><span class="n">head_position</span><span class="p">:</span> <span class="n">int</span> <span class="o">=</span> <span class="default_value">0</span></em>, <em class="sig-param"><span class="n">move_window_on_first_call</span><span class="p">:</span> <span class="n">bool</span> <span class="o">=</span> <span class="default_value">False</span></em><span class="sig-paren">)</span><a class="headerlink" href="#auxjad.LoopByList" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">auxjad.</code><code class="sig-name descname">LoopByList</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">contents</span><span class="p">:</span> <span class="n">list</span></em>, <em class="sig-param"><span class="o">*</span></em>, <em class="sig-param"><span class="n">window_size</span><span class="p">:</span> <span class="n">int</span></em>, <em class="sig-param"><span class="n">step_size</span><span class="p">:</span> <span class="n">int</span> <span class="o">=</span> <span class="default_value">1</span></em>, <em class="sig-param"><span class="n">max_steps</span><span class="p">:</span> <span class="n">int</span> <span class="o">=</span> <span class="default_value">1</span></em>, <em class="sig-param"><span class="n">repetition_chance</span><span class="p">:</span> <span class="n">float</span> <span class="o">=</span> <span class="default_value">0.0</span></em>, <em class="sig-param"><span class="n">forward_bias</span><span class="p">:</span> <span class="n">float</span> <span class="o">=</span> <span class="default_value">1.0</span></em>, <em class="sig-param"><span class="n">head_position</span><span class="p">:</span> <span class="n">int</span> <span class="o">=</span> <span class="default_value">0</span></em>, <em class="sig-param"><span class="n">processs_on_first_call</span><span class="p">:</span> <span class="n">bool</span> <span class="o">=</span> <span class="default_value">False</span></em><span class="sig-paren">)</span><a class="headerlink" href="#auxjad.LoopByList" title="Permalink to this definition">¶</a></dt>
 <dd><p>This class can be used to output slices of a <code class="docutils literal notranslate"><span class="pre">list</span></code> using the
-metaphor of a looping window of a variable size. This size is given by
-the argument <code class="docutils literal notranslate"><span class="pre">window_size</span></code>, which is an <code class="docutils literal notranslate"><span class="pre">int</span></code> representing how many
-elements are to be included in each slice.</p>
+metaphor of a looping window of a constant number of elements. This number
+is given by the argument <code class="docutils literal notranslate"><span class="pre">window_size</span></code>, which is an <code class="docutils literal notranslate"><span class="pre">int</span></code> representing
+how many elements are to be included in each slice.</p>
 <p>For instance, if the initial container had the logical ties
 <code class="docutils literal notranslate"><span class="pre">[A,</span> <span class="pre">B,</span> <span class="pre">C,</span> <span class="pre">D,</span> <span class="pre">E,</span> <span class="pre">F]</span></code> (where each letter represents one elemnt of an
 arbitrary  type) and the looping window was size <code class="docutils literal notranslate"><span class="pre">3</span></code>, the output would
@@ -206,9 +211,9 @@ be:</p>
 </pre></div>
 </div>
 <div class="example docutils container">
-<p>It takes a list and the number of elements of the window as arguments.
-Each call of the object, in this case <code class="docutils literal notranslate"><span class="pre">looper()</span></code>, will move the
-window forwards and output the result:</p>
+<p>Calling the object will return a <code class="docutils literal notranslate"><span class="pre">list</span></code> generated by the looping
+process. Each call of the object will move the window forwards and
+output the result.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">input_list</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="s1">&#39;B&#39;</span><span class="p">,</span> <span class="s1">&#39;C&#39;</span><span class="p">,</span> <span class="s1">&#39;D&#39;</span><span class="p">,</span> <span class="s1">&#39;E&#39;</span><span class="p">,</span> <span class="s1">&#39;F&#39;</span><span class="p">]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">looper</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">LoopByList</span><span class="p">(</span><span class="n">input_list</span><span class="p">,</span> <span class="n">window_size</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">looper</span><span class="p">()</span>
@@ -228,11 +233,11 @@ window without moving the head forwards.</p>
 <p>The very first call will output the input list without processing
 it. To disable this behaviour and have the looping window move on the
 very first call, initialise the class with the keyword argument
-<code class="docutils literal notranslate"><span class="pre">move_window_on_first_call</span></code> set to <code class="docutils literal notranslate"><span class="pre">True</span></code>.</p>
+<code class="docutils literal notranslate"><span class="pre">processs_on_first_call</span></code> set to <code class="docutils literal notranslate"><span class="pre">True</span></code>.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">input_list</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="s1">&#39;B&#39;</span><span class="p">,</span> <span class="s1">&#39;C&#39;</span><span class="p">,</span> <span class="s1">&#39;D&#39;</span><span class="p">,</span> <span class="s1">&#39;E&#39;</span><span class="p">,</span> <span class="s1">&#39;F&#39;</span><span class="p">]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">looper</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">LoopByList</span><span class="p">(</span><span class="n">input_list</span><span class="p">,</span>
 <span class="gp">... </span>                           <span class="n">window_size</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>
-<span class="gp">... </span>                           <span class="n">move_window_on_first_call</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+<span class="gp">... </span>                           <span class="n">processs_on_first_call</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
 <span class="gp">... </span>                           <span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">looper</span><span class="p">()</span>
 <span class="go">[&#39;B&#39;, &#39;C&#39;, &#39;D&#39;]</span>
@@ -260,18 +265,22 @@ which can then be used in a for loop to exhaust all windows.</p>
 <div class="example docutils container">
 <p>This class can take many optional keyword arguments during its
 creation. <code class="docutils literal notranslate"><span class="pre">step_size</span></code> dictates the size of each individual step in
-number of elements (default value is 1). <code class="docutils literal notranslate"><span class="pre">max_steps</span></code> sets the maximum
-number of steps that the window can advance when the object is called,
-ranging between 1 and the input value (default is also 1).
-<code class="docutils literal notranslate"><span class="pre">repetition_chance</span></code> sets the chance of a window result repeating
-itself (that is, the window not moving forwards when called). It should
-range from 0.0 to 1.0 (default 0.0, i.e. no repetition).
-<code class="docutils literal notranslate"><span class="pre">forward_bias</span></code> sets the chance of the window moving forward instead
-of backwards. It should range from 0.0 to 1.0 (default 1.0, which means
-the window can only move forwards. A value of 0.5 gives 50% chance of
-moving forwards while a value of 0.0 will move the window only
-backwards). Finally, <code class="docutils literal notranslate"><span class="pre">head_position</span></code> can be used to offset the
-starting position of the looping window (default is 0).</p>
+number of elements (default value is <code class="docutils literal notranslate"><span class="pre">1</span></code>). <code class="docutils literal notranslate"><span class="pre">max_steps</span></code> sets the
+maximum number of steps that the window can advance when the object is
+called, ranging between <code class="docutils literal notranslate"><span class="pre">1</span></code> and the input value (default is also
+<code class="docutils literal notranslate"><span class="pre">1</span></code>). <code class="docutils literal notranslate"><span class="pre">repetition_chance</span></code> sets the chance of a window result
+repeating itself (that is, the window not moving forwards when called).
+It should range from <code class="docutils literal notranslate"><span class="pre">0.0</span></code> to <code class="docutils literal notranslate"><span class="pre">1.0</span></code> (default <code class="docutils literal notranslate"><span class="pre">0.0</span></code>, i.e. no
+repetition). <code class="docutils literal notranslate"><span class="pre">forward_bias</span></code> sets the chance of the window moving
+forward instead of backwards. It should range from <code class="docutils literal notranslate"><span class="pre">0.0</span></code> to <code class="docutils literal notranslate"><span class="pre">1.0</span></code>
+(default <code class="docutils literal notranslate"><span class="pre">1.0</span></code>, which means the window can only move forwards. A
+value of <code class="docutils literal notranslate"><span class="pre">0.5</span></code> gives 50% chance of moving forwards while a value of
+<code class="docutils literal notranslate"><span class="pre">0.0</span></code> will move the window only backwards). Lastly, <code class="docutils literal notranslate"><span class="pre">head_position</span></code>
+can be used to offset the starting position of the looping window. It
+must be an integer and its default value is <code class="docutils literal notranslate"><span class="pre">0</span></code>. By default, calling
+the object will first return the original container and subsequent
+calls will process it; set <code class="docutils literal notranslate"><span class="pre">processs_on_first_call</span></code> to <code class="docutils literal notranslate"><span class="pre">True</span></code> and
+the looping process will be applied on the very first call.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">input_list</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="s1">&#39;B&#39;</span><span class="p">,</span> <span class="s1">&#39;C&#39;</span><span class="p">,</span> <span class="s1">&#39;D&#39;</span><span class="p">,</span> <span class="s1">&#39;E&#39;</span><span class="p">,</span> <span class="s1">&#39;F&#39;</span><span class="p">]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">looper</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">LoopByList</span><span class="p">(</span><span class="n">input_list</span><span class="p">,</span>
 <span class="gp">... </span>                           <span class="n">window_size</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>
@@ -280,6 +289,7 @@ starting position of the looping window (default is 0).</p>
 <span class="gp">... </span>                           <span class="n">repetition_chance</span><span class="o">=</span><span class="mf">0.25</span><span class="p">,</span>
 <span class="gp">... </span>                           <span class="n">forward_bias</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span>
 <span class="gp">... </span>                           <span class="n">head_position</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+<span class="gp">... </span>                           <span class="n">processs_on_first_call</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
 <span class="gp">... </span>                           <span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">looper</span><span class="o">.</span><span class="n">window_size</span>
 <span class="go">3</span>
@@ -293,6 +303,8 @@ starting position of the looping window (default is 0).</p>
 <span class="go">2</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">looper</span><span class="o">.</span><span class="n">head_position</span>
 <span class="go">0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">looper</span><span class="o">.</span><span class="n">processs_on_first_call</span>
+<span class="go">True</span>
 </pre></div>
 </div>
 <p>Use the properties below to change these values after initialisation.</p>
@@ -302,6 +314,7 @@ starting position of the looping window (default is 0).</p>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">looper</span><span class="o">.</span><span class="n">repetition_chance</span> <span class="o">=</span> <span class="mf">0.1</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">looper</span><span class="o">.</span><span class="n">forward_bias</span> <span class="o">=</span> <span class="mf">0.8</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">looper</span><span class="o">.</span><span class="n">head_position</span> <span class="o">=</span> <span class="mi">2</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">looper</span><span class="o">.</span><span class="n">processs_on_first_call</span> <span class="o">=</span> <span class="kc">False</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">looper</span><span class="o">.</span><span class="n">window_size</span>
 <span class="go">2</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">looper</span><span class="o">.</span><span class="n">step_size</span>
@@ -314,6 +327,58 @@ starting position of the looping window (default is 0).</p>
 <span class="go">0.8</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">looper</span><span class="o">.</span><span class="n">head_position</span>
 <span class="go">2</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">looper</span><span class="o">.</span><span class="n">processs_on_first_call</span>
+<span class="go">False</span>
+</pre></div>
+</div>
+</div>
+<div class="example docutils container">
+<p>Set <code class="docutils literal notranslate"><span class="pre">forward_bias</span></code> to <code class="docutils literal notranslate"><span class="pre">0.0</span></code> to move backwards instead of forwards
+(default is <code class="docutils literal notranslate"><span class="pre">1.0</span></code>). The initial <code class="docutils literal notranslate"><span class="pre">head_position</span></code> must be greater
+than <code class="docutils literal notranslate"><span class="pre">0</span></code> otherwise the contents will already be exhausted in the very
+first call (since it will not be able to move backwards from that
+position).</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">input_list</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="s1">&#39;B&#39;</span><span class="p">,</span> <span class="s1">&#39;C&#39;</span><span class="p">,</span> <span class="s1">&#39;D&#39;</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">looper</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">LoopByList</span><span class="p">(</span><span class="n">input_list</span><span class="p">,</span>
+<span class="gp">... </span>                           <span class="n">window_size</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
+<span class="gp">... </span>                           <span class="n">head_position</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
+<span class="gp">... </span>                           <span class="n">forward_bias</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span>
+<span class="gp">... </span>                           <span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">looper</span><span class="o">.</span><span class="n">output_all</span><span class="p">()</span>
+<span class="go">[&#39;C&#39;, &#39;D&#39;, &#39;B&#39;, &#39;C&#39;, &#39;A&#39;, &#39;B&#39;]</span>
+</pre></div>
+</div>
+</div>
+<div class="example docutils container">
+<p>Setingt <code class="docutils literal notranslate"><span class="pre">forward_bias</span></code> to a value in between <code class="docutils literal notranslate"><span class="pre">0.0</span></code> and <code class="docutils literal notranslate"><span class="pre">1.0</span></code> will
+result in random steps being taken forward or backward, according to
+the bias. The initial value of <code class="docutils literal notranslate"><span class="pre">head_position</span></code> will once gain play
+an important role here, as the contents might be exhausted if the
+looper attempts to move backwards after reaching the head position
+<code class="docutils literal notranslate"><span class="pre">0</span></code>.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">input_list</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="s1">&#39;B&#39;</span><span class="p">,</span> <span class="s1">&#39;C&#39;</span><span class="p">,</span> <span class="s1">&#39;D&#39;</span><span class="p">,</span> <span class="s1">&#39;E&#39;</span><span class="p">,</span> <span class="s1">&#39;F&#39;</span><span class="p">,</span> <span class="s1">&#39;G&#39;</span><span class="p">,</span> <span class="s1">&#39;H&#39;</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">looper</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">LoopByList</span><span class="p">(</span><span class="n">input_list</span><span class="p">,</span>
+<span class="gp">... </span>                           <span class="n">window_size</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
+<span class="gp">... </span>                           <span class="n">head_position</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span>
+<span class="gp">... </span>                           <span class="n">forward_bias</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span>
+<span class="gp">... </span>                           <span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">looper</span><span class="o">.</span><span class="n">output_n</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+<span class="go">[&#39;E&#39;, &#39;F&#39;, &#39;D&#39;, &#39;E&#39;, &#39;C&#39;, &#39;D&#39;, &#39;B&#39;, &#39;C&#39;]</span>
+</pre></div>
+</div>
+</div>
+<div class="example docutils container">
+<p>Setting the keyword argument <code class="docutils literal notranslate"><span class="pre">max_steps</span></code> to a value larger than <code class="docutils literal notranslate"><span class="pre">1</span></code>
+will result in a random number of steps (between <code class="docutils literal notranslate"><span class="pre">1</span></code> and
+<code class="docutils literal notranslate"><span class="pre">max_steps</span></code>) being applied at each call.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">input_list</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="s1">&#39;B&#39;</span><span class="p">,</span> <span class="s1">&#39;C&#39;</span><span class="p">,</span> <span class="s1">&#39;D&#39;</span><span class="p">,</span> <span class="s1">&#39;E&#39;</span><span class="p">,</span> <span class="s1">&#39;F&#39;</span><span class="p">,</span> <span class="s1">&#39;G&#39;</span><span class="p">,</span> <span class="s1">&#39;H&#39;</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">looper</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">LoopByList</span><span class="p">(</span><span class="n">input_list</span><span class="p">,</span>
+<span class="gp">... </span>                           <span class="n">window_size</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
+<span class="gp">... </span>                           <span class="n">head_position</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
+<span class="gp">... </span>                           <span class="n">max_steps</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span>
+<span class="gp">... </span>                           <span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">looper</span><span class="o">.</span><span class="n">output_n</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+<span class="go">[&#39;C&#39;, &#39;D&#39;, &#39;D&#39;, &#39;E&#39;, &#39;E&#39;, &#39;F&#39;, &#39;H&#39;]</span>
 </pre></div>
 </div>
 </div>
@@ -385,7 +450,7 @@ previous value and must be reset to <code class="docutils literal notranslate"><
 <span class="gp">&gt;&gt;&gt; </span><span class="n">looper</span><span class="o">.</span><span class="n">contents</span>
 <span class="go">[0, 1, 2, 3, 4]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">looper</span><span class="p">()</span>
-<span class="go">[2, 3, 4]</span>
+<span class="go">[1, 2, 3]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">looper</span><span class="o">.</span><span class="n">head_position</span> <span class="o">=</span> <span class="mi">0</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">looper</span><span class="p">()</span>
 <span class="go">[0, 1, 2]</span>
@@ -490,7 +555,7 @@ the window. The same is true to the <code class="docutils literal notranslate"><
 </colgroup>
 <tbody>
 <tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">contents</span></code></p></td>
-<td><p>The <code class="docutils literal notranslate"><span class="pre">list</span></code> which serves as the basis for the slices of the looper.</p></td>
+<td><p>The <code class="docutils literal notranslate"><span class="pre">list</span></code> to be sliced and looped.</p></td>
 </tr>
 <tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">current_window</span></code></p></td>
 <td><p>Read-only property, returns the window at the current head position.</p></td>
@@ -504,13 +569,16 @@ the window. The same is true to the <code class="docutils literal notranslate"><
 <tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">max_steps</span></code></p></td>
 <td><p>The maximum number of steps per operation.</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">repetition_chance</span></code></p></td>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">processs_on_first_call</span></code></p></td>
+<td><p>If <code class="docutils literal notranslate"><span class="pre">True</span></code> then the <code class="docutils literal notranslate"><span class="pre">contents</span></code> will be processed in the very first call.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">repetition_chance</span></code></p></td>
 <td><p>The chance of the head not moving, thus repeating the output.</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">step_size</span></code></p></td>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">step_size</span></code></p></td>
 <td><p>The size of each step when moving the head.</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">window_size</span></code></p></td>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">window_size</span></code></p></td>
 <td><p>The length of the looping window.</p></td>
 </tr>
 </tbody>
