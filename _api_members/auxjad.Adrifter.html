@@ -1,0 +1,1577 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>auxjad.Adrifter &mdash; auxjad 0.8.0 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="auxjad.adjust_clefs" href="auxjad.adjust_clefs.html" />
+    <link rel="prev" title="auxjad API" href="../api.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> auxjad
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.8
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../index.html">Welcome to auxjad’s documentation!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../examples/index.html">Examples of usage</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../api.html">auxjad API</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">auxjad.Adrifter</a></li>
+<li class="toctree-l2"><a class="reference internal" href="auxjad.adjust_clefs.html">auxjad.adjust_clefs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="auxjad.ArtificialHarmonic.html">auxjad.ArtificialHarmonic</a></li>
+<li class="toctree-l2"><a class="reference internal" href="auxjad.CartographySelector.html">auxjad.CartographySelector</a></li>
+<li class="toctree-l2"><a class="reference internal" href="auxjad.close_container.html">auxjad.close_container</a></li>
+<li class="toctree-l2"><a class="reference internal" href="auxjad.container_is_full.html">auxjad.container_is_full</a></li>
+<li class="toctree-l2"><a class="reference internal" href="auxjad.containers_are_equal.html">auxjad.containers_are_equal</a></li>
+<li class="toctree-l2"><a class="reference internal" href="auxjad.enforce_time_signature.html">auxjad.enforce_time_signature</a></li>
+<li class="toctree-l2"><a class="reference internal" href="auxjad.Fader.html">auxjad.Fader</a></li>
+<li class="toctree-l2"><a class="reference internal" href="auxjad.fill_with_rests.html">auxjad.fill_with_rests</a></li>
+<li class="toctree-l2"><a class="reference internal" href="auxjad.HarmonicNote.html">auxjad.HarmonicNote</a></li>
+<li class="toctree-l2"><a class="reference internal" href="auxjad.Hocketer.html">auxjad.Hocketer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="auxjad.LeafDynMaker.html">auxjad.LeafDynMaker</a></li>
+<li class="toctree-l2"><a class="reference internal" href="auxjad.leaves_are_tieable.html">auxjad.leaves_are_tieable</a></li>
+<li class="toctree-l2"><a class="reference internal" href="auxjad.LoopByList.html">auxjad.LoopByList</a></li>
+<li class="toctree-l2"><a class="reference internal" href="auxjad.LoopByNotes.html">auxjad.LoopByNotes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="auxjad.LoopByWindow.html">auxjad.LoopByWindow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="auxjad.Phaser.html">auxjad.Phaser</a></li>
+<li class="toctree-l2"><a class="reference internal" href="auxjad.remove_empty_tuplets.html">auxjad.remove_empty_tuplets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="auxjad.remove_repeated_dynamics.html">auxjad.remove_repeated_dynamics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="auxjad.remove_repeated_time_signatures.html">auxjad.remove_repeated_time_signatures</a></li>
+<li class="toctree-l2"><a class="reference internal" href="auxjad.respell_container.html">auxjad.respell_container</a></li>
+<li class="toctree-l2"><a class="reference internal" href="auxjad.respell_chord.html">auxjad.respell_chord</a></li>
+<li class="toctree-l2"><a class="reference internal" href="auxjad.rests_to_multimeasure_rest.html">auxjad.rests_to_multimeasure_rest</a></li>
+<li class="toctree-l2"><a class="reference internal" href="auxjad.Shuffler.html">auxjad.Shuffler</a></li>
+<li class="toctree-l2"><a class="reference internal" href="auxjad.simplified_time_signature_ratio.html">auxjad.simplified_time_signature_ratio</a></li>
+<li class="toctree-l2"><a class="reference internal" href="auxjad.sync_containers.html">auxjad.sync_containers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="auxjad.TenneySelector.html">auxjad.TenneySelector</a></li>
+<li class="toctree-l2"><a class="reference internal" href="auxjad.time_signature_extractor.html">auxjad.time_signature_extractor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="auxjad.underfull_duration.html">auxjad.underfull_duration</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../api.html#indices-and-tables">Indices and tables</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">auxjad</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../api.html">auxjad API</a> &raquo;</li>
+        
+      <li>auxjad.Adrifter</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/_api_members/auxjad.Adrifter.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="auxjad-adrifter">
+<h1>auxjad.Adrifter<a class="headerlink" href="#auxjad-adrifter" title="Permalink to this headline">¶</a></h1>
+<dl class="py class">
+<dt id="auxjad.Adrifter">
+<em class="property">class </em><code class="sig-prename descclassname">auxjad.</code><code class="sig-name descname">Adrifter</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">contents_out</span><span class="p">:</span> <span class="n">abjad.core.Container.Container</span></em>, <em class="sig-param"><span class="n">contents_in</span><span class="p">:</span> <span class="n">abjad.core.Container.Container</span></em>, <em class="sig-param"><span class="o">*</span></em>, <em class="sig-param"><span class="n">fade_in_first</span><span class="p">:</span> <span class="n">bool</span> <span class="o">=</span> <span class="default_value">False</span></em>, <em class="sig-param"><span class="n">fade_out_last</span><span class="p">:</span> <span class="n">bool</span> <span class="o">=</span> <span class="default_value">False</span></em>, <em class="sig-param"><span class="n">initial_repetitions</span><span class="p">:</span> <span class="n">int</span> <span class="o">=</span> <span class="default_value">1</span></em>, <em class="sig-param"><span class="n">final_repetitions</span><span class="p">:</span> <span class="n">int</span> <span class="o">=</span> <span class="default_value">1</span></em>, <em class="sig-param"><span class="n">repetition_chance</span><span class="p">:</span> <span class="n">float</span> <span class="o">=</span> <span class="default_value">0.0</span></em>, <em class="sig-param"><span class="n">weighted_duration</span><span class="p">:</span> <span class="n">bool</span> <span class="o">=</span> <span class="default_value">False</span></em>, <em class="sig-param"><span class="n">disable_rewrite_meter</span><span class="p">:</span> <span class="n">bool</span> <span class="o">=</span> <span class="default_value">False</span></em>, <em class="sig-param"><span class="n">omit_time_signatures</span><span class="p">:</span> <span class="n">bool</span> <span class="o">=</span> <span class="default_value">False</span></em>, <em class="sig-param"><span class="n">use_multimeasure_rests</span><span class="p">:</span> <span class="n">bool</span> <span class="o">=</span> <span class="default_value">True</span></em>, <em class="sig-param"><span class="n">boundary_depth</span><span class="p">:</span> <span class="n">Optional<span class="p">[</span>int<span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em>, <em class="sig-param"><span class="n">maximum_dot_count</span><span class="p">:</span> <span class="n">Optional<span class="p">[</span>int<span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em>, <em class="sig-param"><span class="n">rewrite_tuplets</span><span class="p">:</span> <span class="n">bool</span> <span class="o">=</span> <span class="default_value">True</span></em><span class="sig-paren">)</span><a class="headerlink" href="#auxjad.Adrifter" title="Permalink to this definition">¶</a></dt>
+<dd><p>This class takes two <code class="docutils literal notranslate"><span class="pre">abjad.Container</span></code>’s and gradually drifts from
+one into the other, by fading out the first while fading in the second. It
+makes uses of <code class="docutils literal notranslate"><span class="pre">auxjad.Fader</span></code> for that.</p>
+<div class="example docutils container">
+<p>Calling the object will return a tuple of two <code class="docutils literal notranslate"><span class="pre">abjad.Selection</span></code>’s
+generated by the fading process. Each call of the object will apply the
+fading process to one of the two containers of the previous results.
+That is, either a logical tie of <code class="docutils literal notranslate"><span class="pre">container_out</span></code> is removed or a
+logical tie of <code class="docutils literal notranslate"><span class="pre">container_in</span></code> is added.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">container_out</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;fs&#39;4 g&#39;2 bf&#39;4&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">container_in</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;\times 4/5 {cs&#39;&#39;4 d&#39;&#39;1}&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">adrifter</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">Adrifter</span><span class="p">(</span><span class="n">container_out</span><span class="p">,</span> <span class="n">container_in</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">selection_a</span><span class="p">,</span> <span class="n">selection_b</span> <span class="o">=</span> <span class="n">adrifter</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">score</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Score</span><span class="p">([</span>
+<span class="gp">... </span>    <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span><span class="n">selection_a</span><span class="p">),</span>
+<span class="gp">... </span>    <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span><span class="n">selection_b</span><span class="p">),</span>
+<span class="gp">... </span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">f</span><span class="p">(</span><span class="n">score</span><span class="p">)</span>
+<span class="go">\new Score</span>
+<span class="go">&lt;&lt;</span>
+<span class="go">    \new Staff</span>
+<span class="go">    {</span>
+<span class="go">        R1</span>
+<span class="go">    }</span>
+<span class="go">    \new Staff</span>
+<span class="go">    {</span>
+<span class="go">        \time 4/4</span>
+<span class="go">        fs&#39;4</span>
+<span class="go">        g&#39;2</span>
+<span class="go">        bf&#39;4</span>
+<span class="go">    }</span>
+<span class="go">&gt;&gt;</span>
+</pre></div>
+</div>
+<div class="figure align-default">
+<img alt="../_images/image-Adrifter-1.png" src="../_images/image-Adrifter-1.png" />
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">selection_a</span><span class="p">,</span> <span class="n">selection_b</span> <span class="o">=</span> <span class="n">adrifter</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">score</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Score</span><span class="p">([</span>
+<span class="gp">... </span>    <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span><span class="n">selection_a</span><span class="p">),</span>
+<span class="gp">... </span>    <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span><span class="n">selection_b</span><span class="p">),</span>
+<span class="gp">... </span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">f</span><span class="p">(</span><span class="n">score</span><span class="p">)</span>
+<span class="go">\new Score</span>
+<span class="go">&lt;&lt;</span>
+<span class="go">    \new Staff</span>
+<span class="go">    {</span>
+<span class="go">        \times 4/5 {</span>
+<span class="go">            \time 4/4</span>
+<span class="go">            r4</span>
+<span class="go">            d&#39;&#39;1</span>
+<span class="go">        }</span>
+<span class="go">    }</span>
+<span class="go">    \new Staff</span>
+<span class="go">    {</span>
+<span class="go">        \time 4/4</span>
+<span class="go">        fs&#39;4</span>
+<span class="go">        g&#39;2</span>
+<span class="go">        bf&#39;4</span>
+<span class="go">    }</span>
+<span class="go">&gt;&gt;</span>
+</pre></div>
+</div>
+<div class="figure align-default">
+<img alt="../_images/image-Adrifter-2.png" src="../_images/image-Adrifter-2.png" />
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">selection_a</span><span class="p">,</span> <span class="n">selection_b</span> <span class="o">=</span> <span class="n">adrifter</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">score</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Score</span><span class="p">([</span>
+<span class="gp">... </span>    <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span><span class="n">selection_a</span><span class="p">),</span>
+<span class="gp">... </span>    <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span><span class="n">selection_b</span><span class="p">),</span>
+<span class="gp">... </span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">f</span><span class="p">(</span><span class="n">score</span><span class="p">)</span>
+<span class="go">\new Score</span>
+<span class="go">&lt;&lt;</span>
+<span class="go">    \new Staff</span>
+<span class="go">    {</span>
+<span class="go">        \times 4/5 {</span>
+<span class="go">            \time 4/4</span>
+<span class="go">            r4</span>
+<span class="go">            d&#39;&#39;1</span>
+<span class="go">        }</span>
+<span class="go">    }</span>
+<span class="go">    \new Staff</span>
+<span class="go">    {</span>
+<span class="go">        \time 4/4</span>
+<span class="go">        fs&#39;4</span>
+<span class="go">        r2</span>
+<span class="go">        bf&#39;4</span>
+<span class="go">    }</span>
+<span class="go">&gt;&gt;</span>
+</pre></div>
+</div>
+<div class="figure align-default">
+<img alt="../_images/image-Adrifter-3.png" src="../_images/image-Adrifter-3.png" />
+</div>
+<p>The property <code class="docutils literal notranslate"><span class="pre">current_window</span></code> can be used to access the current
+window without moving the head forwards.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">notes</span> <span class="o">=</span> <span class="n">adrifter</span><span class="o">.</span><span class="n">current_window</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">score</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Score</span><span class="p">([</span>
+<span class="gp">... </span>    <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span><span class="n">selection_a</span><span class="p">),</span>
+<span class="gp">... </span>    <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span><span class="n">selection_b</span><span class="p">),</span>
+<span class="gp">... </span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">f</span><span class="p">(</span><span class="n">score</span><span class="p">)</span>
+<span class="go">\new Score</span>
+<span class="go">&lt;&lt;</span>
+<span class="go">    \new Staff</span>
+<span class="go">    {</span>
+<span class="go">        \times 4/5 {</span>
+<span class="go">            \time 4/4</span>
+<span class="go">            r4</span>
+<span class="go">            d&#39;&#39;1</span>
+<span class="go">        }</span>
+<span class="go">    }</span>
+<span class="go">    \new Staff</span>
+<span class="go">    {</span>
+<span class="go">        \time 4/4</span>
+<span class="go">        fs&#39;4</span>
+<span class="go">        r2</span>
+<span class="go">        bf&#39;4</span>
+<span class="go">    }</span>
+<span class="go">&gt;&gt;</span>
+</pre></div>
+</div>
+<div class="figure align-default">
+<img alt="../_images/image-Adrifter-4.png" src="../_images/image-Adrifter-4.png" />
+</div>
+</div>
+<div class="example docutils container">
+<p>To run through the whole process and output it as a tuple of two
+<code class="docutils literal notranslate"><span class="pre">abjad.Staff</span></code>’s, use the method <code class="docutils literal notranslate"><span class="pre">output_all()</span></code>.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">container_out</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;fs&#39;4 g&#39;2 bf&#39;4&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">container_in</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;\times 4/5 {cs&#39;&#39;4 d&#39;1}&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">adrifter</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">Adrifter</span><span class="p">(</span><span class="n">container_out</span><span class="p">,</span> <span class="n">container_in</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">staff_a</span><span class="p">,</span> <span class="n">staff_b</span> <span class="o">=</span> <span class="n">adrifter</span><span class="o">.</span><span class="n">output_all</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">score</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Score</span><span class="p">([</span><span class="n">staff_a</span><span class="p">,</span> <span class="n">staff_b</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">f</span><span class="p">(</span><span class="n">score</span><span class="p">)</span>
+<span class="go">\new Score</span>
+<span class="go">&lt;&lt;</span>
+<span class="go">    \new Staff</span>
+<span class="go">    {</span>
+<span class="go">        R1</span>
+<span class="go">        \times 4/5 {</span>
+<span class="go">            \time 4/4</span>
+<span class="go">            cs&#39;&#39;4</span>
+<span class="go">            r1</span>
+<span class="go">        }</span>
+<span class="go">        \times 4/5 {</span>
+<span class="go">            cs&#39;&#39;4</span>
+<span class="go">            r1</span>
+<span class="go">        }</span>
+<span class="go">        \times 4/5 {</span>
+<span class="go">            cs&#39;&#39;4</span>
+<span class="go">            d&#39;1</span>
+<span class="go">        }</span>
+<span class="go">        \times 4/5 {</span>
+<span class="go">            cs&#39;&#39;4</span>
+<span class="go">            d&#39;1</span>
+<span class="go">        }</span>
+<span class="go">        \times 4/5 {</span>
+<span class="go">            cs&#39;&#39;4</span>
+<span class="go">            d&#39;1</span>
+<span class="go">        }</span>
+<span class="go">    }</span>
+<span class="go">    \new Staff</span>
+<span class="go">    {</span>
+<span class="go">        \time 4/4</span>
+<span class="go">        fs&#39;4</span>
+<span class="go">        g&#39;2</span>
+<span class="go">        bf&#39;4</span>
+<span class="go">        fs&#39;4</span>
+<span class="go">        g&#39;2</span>
+<span class="go">        bf&#39;4</span>
+<span class="go">        fs&#39;4</span>
+<span class="go">        r2</span>
+<span class="go">        bf&#39;4</span>
+<span class="go">        fs&#39;4</span>
+<span class="go">        r2</span>
+<span class="go">        bf&#39;4</span>
+<span class="go">        r2.</span>
+<span class="go">        bf&#39;4</span>
+<span class="go">        R1</span>
+<span class="go">    }</span>
+<span class="go">&gt;&gt;</span>
+</pre></div>
+</div>
+<div class="figure align-default">
+<img alt="../_images/image-Adrifter-5.png" src="../_images/image-Adrifter-5.png" />
+</div>
+</div>
+<div class="example docutils container">
+<p>To run through just part of the process and output it as a tuple of two
+<code class="docutils literal notranslate"><span class="pre">abjad.Staff</span></code>’s, use the method <code class="docutils literal notranslate"><span class="pre">output_n()</span></code> and pass the number of
+iterations as argument.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">container_out</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;e&#39;8 fs&#39;4. r2&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">container_in</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;c&#39;&#39;2 ~ c&#39;&#39;8 d&#39;&#39;4.&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">adrifter</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">Adrifter</span><span class="p">(</span><span class="n">container_out</span><span class="p">,</span> <span class="n">container_in</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">staff_a</span><span class="p">,</span> <span class="n">staff_b</span> <span class="o">=</span> <span class="n">adrifter</span><span class="o">.</span><span class="n">output_n</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">score</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Score</span><span class="p">([</span><span class="n">staff_a</span><span class="p">,</span> <span class="n">staff_b</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">f</span><span class="p">(</span><span class="n">score</span><span class="p">)</span>
+<span class="go">\new Score</span>
+<span class="go">&lt;&lt;</span>
+<span class="go">    \new Staff</span>
+<span class="go">    {</span>
+<span class="go">        \time 4/4</span>
+<span class="go">        R1</span>
+<span class="go">        c&#39;&#39;2</span>
+<span class="go">        ~</span>
+<span class="go">        c&#39;&#39;8</span>
+<span class="go">        r4.</span>
+<span class="go">        c&#39;&#39;2</span>
+<span class="go">        ~</span>
+<span class="go">        c&#39;&#39;8</span>
+<span class="go">        r4.</span>
+<span class="go">    }</span>
+<span class="go">    \new Staff</span>
+<span class="go">    {</span>
+<span class="go">        \time 4/4</span>
+<span class="go">        e&#39;8</span>
+<span class="go">        fs&#39;4.</span>
+<span class="go">        r2</span>
+<span class="go">        e&#39;8</span>
+<span class="go">        fs&#39;4.</span>
+<span class="go">        r2</span>
+<span class="go">        e&#39;8</span>
+<span class="go">        r2..</span>
+<span class="go">    }</span>
+<span class="go">&gt;&gt;</span>
+</pre></div>
+</div>
+<div class="figure align-default">
+<img alt="../_images/image-Adrifter-6.png" src="../_images/image-Adrifter-6.png" />
+</div>
+</div>
+<div class="example docutils container">
+<p>The instances of <code class="docutils literal notranslate"><span class="pre">Adrifter</span></code> can also be used as an iterator, which can
+then be used in a for loop to run through the whole process. Note that
+unlike the methods <code class="docutils literal notranslate"><span class="pre">output_n()</span></code> and <code class="docutils literal notranslate"><span class="pre">output_all()</span></code>, time signatures
+are added to each window returned by the adrifter. Use the function
+<code class="docutils literal notranslate"><span class="pre">auxjad.remove_repeated_time_signatures()</span></code> to clean the output when
+using <code class="docutils literal notranslate"><span class="pre">Adrifter</span></code> in this way.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">container_out</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;e&#39;8 fs&#39;4. r2&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">container_in</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;c&#39;&#39;2 ~ c&#39;&#39;8 d&#39;&#39;4.&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">adrifter</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">Adrifter</span><span class="p">(</span><span class="n">container_out</span><span class="p">,</span> <span class="n">container_in</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">staff_a</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">staff_b</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">selection_a</span><span class="p">,</span> <span class="n">selection_b</span> <span class="ow">in</span> <span class="n">adrifter</span><span class="p">:</span>
+<span class="gp">... </span>    <span class="n">staff_a</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">selection_a</span><span class="p">)</span>
+<span class="gp">... </span>    <span class="n">staff_b</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">selection_b</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">auxjad</span><span class="o">.</span><span class="n">remove_repeated_time_signatures</span><span class="p">(</span><span class="n">staff_a</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">auxjad</span><span class="o">.</span><span class="n">remove_repeated_time_signatures</span><span class="p">(</span><span class="n">staff_b</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">score</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Score</span><span class="p">([</span><span class="n">staff_a</span><span class="p">,</span> <span class="n">staff_b</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">f</span><span class="p">(</span><span class="n">score</span><span class="p">)</span>
+<span class="go">\new Score</span>
+<span class="go">&lt;&lt;</span>
+<span class="go">    \new Staff</span>
+<span class="go">    {</span>
+<span class="go">        \time 4/4</span>
+<span class="go">        R1</span>
+<span class="go">        c&#39;&#39;2</span>
+<span class="go">        ~</span>
+<span class="go">        c&#39;&#39;8</span>
+<span class="go">        r4.</span>
+<span class="go">        c&#39;&#39;2</span>
+<span class="go">        ~</span>
+<span class="go">        c&#39;&#39;8</span>
+<span class="go">        r4.</span>
+<span class="go">        c&#39;&#39;2</span>
+<span class="go">        ~</span>
+<span class="go">        c&#39;&#39;8</span>
+<span class="go">        d&#39;&#39;4.</span>
+<span class="go">        c&#39;&#39;2</span>
+<span class="go">        ~</span>
+<span class="go">        c&#39;&#39;8</span>
+<span class="go">        d&#39;&#39;4.</span>
+<span class="go">    }</span>
+<span class="go">    \new Staff</span>
+<span class="go">    {</span>
+<span class="go">        \time 4/4</span>
+<span class="go">        e&#39;8</span>
+<span class="go">        fs&#39;4.</span>
+<span class="go">        r2</span>
+<span class="go">        e&#39;8</span>
+<span class="go">        fs&#39;4.</span>
+<span class="go">        r2</span>
+<span class="go">        e&#39;8</span>
+<span class="go">        r2..</span>
+<span class="go">        e&#39;8</span>
+<span class="go">        r2..</span>
+<span class="go">        R1</span>
+<span class="go">    }</span>
+<span class="go">&gt;&gt;</span>
+</pre></div>
+</div>
+<div class="figure align-default">
+<img alt="../_images/image-Adrifter-7.png" src="../_images/image-Adrifter-7.png" />
+</div>
+</div>
+<div class="example docutils container">
+<p>This class can take many optional keyword arguments during its
+creation. Setting <code class="docutils literal notranslate"><span class="pre">fade_in_first</span></code> to <code class="docutils literal notranslate"><span class="pre">True</span></code> will ensure that a
+logical tie from <code class="docutils literal notranslate"><span class="pre">container_in</span></code> must be faded in before any logical
+ties of <code class="docutils literal notranslate"><span class="pre">container_out</span></code> are removed (default <code class="docutils literal notranslate"><span class="pre">False</span></code>). Setting
+<code class="docutils literal notranslate"><span class="pre">fade_out_last</span></code> to <code class="docutils literal notranslate"><span class="pre">True</span></code> will ensure that all logical ties from
+<code class="docutils literal notranslate"><span class="pre">container_in</span></code> must be faded in before the very last logical tie of
+<code class="docutils literal notranslate"><span class="pre">container_out</span></code> is removed (default <code class="docutils literal notranslate"><span class="pre">False</span></code>). The arguments
+<code class="docutils literal notranslate"><span class="pre">initial_repetitions</span></code> and <code class="docutils literal notranslate"><span class="pre">final_repetitions</span></code> set the number of
+repetitions of the initial and final measures (default <code class="docutils literal notranslate"><span class="pre">1</span></code> for both).
+<code class="docutils literal notranslate"><span class="pre">repetition_chance</span></code> sets the chance of a measure repeating itself,
+from <code class="docutils literal notranslate"><span class="pre">0.0</span></code> to <code class="docutils literal notranslate"><span class="pre">1.0</span></code> (default is <code class="docutils literal notranslate"><span class="pre">0.0</span></code>, i.e. no repetitions).
+Setting <code class="docutils literal notranslate"><span class="pre">weighted_duration</span></code> to <code class="docutils literal notranslate"><span class="pre">True</span></code> will give more weight to the
+larger container (considering both its number of logical  ties as well
+its length), making it more likely that both will fade in and out at a
+similar rate (default value is <code class="docutils literal notranslate"><span class="pre">False</span></code>). <code class="docutils literal notranslate"><span class="pre">disable_rewrite_meter</span></code>
+disables the <code class="docutils literal notranslate"><span class="pre">rewrite_meter()</span></code> mutation which is applied to the
+container after every call, and <code class="docutils literal notranslate"><span class="pre">omit_time_signatures</span></code> will remove
+all time signatures from the output (both are <code class="docutils literal notranslate"><span class="pre">False</span></code> by default). By
+default, the first time signature is attached only to the first leaf of
+the first call (unless time signature changes require it). Any measure
+filled with rests will be rewritten using a multi-measure rest; set the
+<code class="docutils literal notranslate"><span class="pre">use_multimeasure_rests</span></code> to <code class="docutils literal notranslate"><span class="pre">False</span></code> to disable this behaviour. The
+properties <code class="docutils literal notranslate"><span class="pre">boundary_depth</span></code>, <code class="docutils literal notranslate"><span class="pre">maximum_dot_count</span></code>, and
+<code class="docutils literal notranslate"><span class="pre">rewrite_tuplets</span></code> are passed as arguments to abjad’s
+<code class="docutils literal notranslate"><span class="pre">rewrite_meter()</span></code>, see its documentation for more information.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">container_out</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;fs&#39;4 g&#39;2 bf&#39;4&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">container_in</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;\times 4/5 {cs&#39;&#39;4 d&#39;&#39;1}&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">adrifter</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">Adrifter</span><span class="p">(</span><span class="n">container_out</span><span class="p">,</span>
+<span class="gp">... </span>                           <span class="n">container_in</span><span class="p">,</span>
+<span class="gp">... </span>                           <span class="n">fade_in_first</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+<span class="gp">... </span>                           <span class="n">fade_out_last</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+<span class="gp">... </span>                           <span class="n">initial_repetitions</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>
+<span class="gp">... </span>                           <span class="n">final_repetitions</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>
+<span class="gp">... </span>                           <span class="n">repetition_chance</span><span class="o">=</span><span class="mf">0.7</span><span class="p">,</span>
+<span class="gp">... </span>                           <span class="n">weighted_duration</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+<span class="gp">... </span>                           <span class="n">disable_rewrite_meter</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+<span class="gp">... </span>                           <span class="n">omit_time_signatures</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+<span class="gp">... </span>                           <span class="n">use_multimeasure_rests</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+<span class="gp">... </span>                           <span class="n">boundary_depth</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+<span class="gp">... </span>                           <span class="n">maximum_dot_count</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+<span class="gp">... </span>                           <span class="n">rewrite_tuplets</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+<span class="gp">... </span>                           <span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">adrifter</span><span class="o">.</span><span class="n">fade_in_first</span>
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">adrifter</span><span class="o">.</span><span class="n">fade_out_last</span>
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">adrifter</span><span class="o">.</span><span class="n">initial_repetitions</span>
+<span class="go">3</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">adrifter</span><span class="o">.</span><span class="n">final_repetitions</span>
+<span class="go">3</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">adrifter</span><span class="o">.</span><span class="n">repetition_chance</span>
+<span class="go">0.7</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">adrifter</span><span class="o">.</span><span class="n">weighted_duration</span>
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">adrifter</span><span class="o">.</span><span class="n">disable_rewrite_meter</span>
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">adrifter</span><span class="o">.</span><span class="n">omit_time_signatures</span>
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">adrifter</span><span class="o">.</span><span class="n">use_multimeasure_rests</span>
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">adrifter</span><span class="o">.</span><span class="n">boundary_depth</span>
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">adrifter</span><span class="o">.</span><span class="n">maximum_dot_count</span>
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">adrifter</span><span class="o">.</span><span class="n">rewrite_tuplets</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+<p>Use the properties below to change these values after initialisation.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">adrifter</span><span class="o">.</span><span class="n">fade_in_first</span> <span class="o">=</span> <span class="kc">False</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">adrifter</span><span class="o">.</span><span class="n">fade_out_last</span> <span class="o">=</span> <span class="kc">False</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">adrifter</span><span class="o">.</span><span class="n">initial_repetitions</span> <span class="o">=</span> <span class="mi">4</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">adrifter</span><span class="o">.</span><span class="n">final_repetitions</span> <span class="o">=</span> <span class="mi">7</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">adrifter</span><span class="o">.</span><span class="n">repetition_chance</span> <span class="o">=</span> <span class="mf">0.23</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">adrifter</span><span class="o">.</span><span class="n">weighted_duration</span> <span class="o">=</span> <span class="kc">False</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">adrifter</span><span class="o">.</span><span class="n">disable_rewrite_meter</span> <span class="o">=</span> <span class="kc">False</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">adrifter</span><span class="o">.</span><span class="n">omit_time_signatures</span> <span class="o">=</span> <span class="kc">False</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">adrifter</span><span class="o">.</span><span class="n">use_multimeasure_rests</span> <span class="o">=</span> <span class="kc">False</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">adrifter</span><span class="o">.</span><span class="n">boundary_depth</span> <span class="o">=</span> <span class="kc">False</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">adrifter</span><span class="o">.</span><span class="n">maximum_dot_count</span> <span class="o">=</span> <span class="kc">False</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">adrifter</span><span class="o">.</span><span class="n">rewrite_tuplets</span> <span class="o">=</span> <span class="kc">False</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">adrifter</span><span class="o">.</span><span class="n">fade_in_first</span>
+<span class="go">False</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">adrifter</span><span class="o">.</span><span class="n">fade_out_last</span>
+<span class="go">False</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">assert</span> <span class="n">adrifter</span><span class="o">.</span><span class="n">initial_repetitions</span>
+<span class="go">4</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">assert</span> <span class="n">adrifter</span><span class="o">.</span><span class="n">final_repetitions</span>
+<span class="go">7</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">assert</span> <span class="n">adrifter</span><span class="o">.</span><span class="n">repetition_chance</span>
+<span class="go">0.23</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">adrifter</span><span class="o">.</span><span class="n">weighted_duration</span>
+<span class="go">False</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">adrifter</span><span class="o">.</span><span class="n">disable_rewrite_meter</span>
+<span class="go">False</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">adrifter</span><span class="o">.</span><span class="n">omit_time_signatures</span>
+<span class="go">False</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">adrifter</span><span class="o">.</span><span class="n">use_multimeasure_rests</span>
+<span class="go">False</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">adrifter</span><span class="o">.</span><span class="n">boundary_depth</span>
+<span class="go">False</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">adrifter</span><span class="o">.</span><span class="n">maximum_dot_count</span>
+<span class="go">False</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">adrifter</span><span class="o">.</span><span class="n">rewrite_tuplets</span>
+<span class="go">False</span>
+</pre></div>
+</div>
+</div>
+<div class="example docutils container">
+<p>Use the <code class="docutils literal notranslate"><span class="pre">reset()</span></code> method to reset the adrifter to its initial state.
+This can be used to restart the process at any time.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">container_out</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;fs&#39;4 g&#39;2 bf&#39;4&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">container_in</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;\times 4/5 {cs&#39;&#39;4 d&#39;1}&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">adrifter</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">Adrifter</span><span class="p">(</span><span class="n">container_out</span><span class="p">,</span> <span class="n">container_in</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">staff_a</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">staff_b</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">):</span>
+<span class="gp">... </span>    <span class="n">selection_a</span><span class="p">,</span> <span class="n">selection_b</span> <span class="o">=</span> <span class="n">adrifter</span><span class="p">()</span>
+<span class="gp">... </span>    <span class="n">staff_a</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">selection_a</span><span class="p">)</span>
+<span class="gp">... </span>    <span class="n">staff_b</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">selection_b</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">adrifter</span><span class="o">.</span><span class="n">reset</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">selection_a</span><span class="p">,</span> <span class="n">selection_b</span> <span class="o">=</span> <span class="n">adrifter</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">staff_a</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">selection_a</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">staff_b</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">selection_b</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">auxjad</span><span class="o">.</span><span class="n">remove_repeated_time_signatures</span><span class="p">(</span><span class="n">staff_a</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">auxjad</span><span class="o">.</span><span class="n">remove_repeated_time_signatures</span><span class="p">(</span><span class="n">staff_b</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">score</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Score</span><span class="p">([</span><span class="n">staff_a</span><span class="p">,</span> <span class="n">staff_b</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">f</span><span class="p">(</span><span class="n">score</span><span class="p">)</span>
+<span class="go">\new Score</span>
+<span class="go">&lt;&lt;</span>
+<span class="go">    \new Staff</span>
+<span class="go">    {</span>
+<span class="go">        R1</span>
+<span class="go">        \times 4/5 {</span>
+<span class="go">            \time 4/4</span>
+<span class="go">            cs&#39;&#39;4</span>
+<span class="go">            r1</span>
+<span class="go">        }</span>
+<span class="go">        \times 4/5 {</span>
+<span class="go">            cs&#39;&#39;4</span>
+<span class="go">            r1</span>
+<span class="go">        }</span>
+<span class="go">        R1</span>
+<span class="go">    }</span>
+<span class="go">    \new Staff</span>
+<span class="go">    {</span>
+<span class="go">        \time 4/4</span>
+<span class="go">        fs&#39;4</span>
+<span class="go">        g&#39;2</span>
+<span class="go">        bf&#39;4</span>
+<span class="go">        fs&#39;4</span>
+<span class="go">        g&#39;2</span>
+<span class="go">        bf&#39;4</span>
+<span class="go">        fs&#39;4</span>
+<span class="go">        r2</span>
+<span class="go">        bf&#39;4</span>
+<span class="go">        fs&#39;4</span>
+<span class="go">        g&#39;2</span>
+<span class="go">        bf&#39;4</span>
+<span class="go">    }</span>
+<span class="go">&gt;&gt;</span>
+</pre></div>
+</div>
+<div class="figure align-default">
+<img alt="../_images/image-Adrifter-8.png" src="../_images/image-Adrifter-8.png" />
+</div>
+</div>
+<div class="example docutils container">
+<p>The function <code class="docutils literal notranslate"><span class="pre">len()</span></code> returns the sum of the number of pitched logical
+ties of both <code class="docutils literal notranslate"><span class="pre">contents_in</span></code> and <code class="docutils literal notranslate"><span class="pre">contents_out</span></code>.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">container_out</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;c&#39;4 d&#39;4 ~ d&#39;4 r4&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">container_in</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;r2 c&#39;&#39;2&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">adrifter</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">Adrifter</span><span class="p">(</span><span class="n">container_out</span><span class="p">,</span> <span class="n">container_in</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">len</span><span class="p">(</span><span class="n">adrifter</span><span class="p">)</span>
+<span class="go">3</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">container_out</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;fs&#39;4 g&#39;2 bf&#39;4&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">container_in</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;\times 4/5 {cs&#39;&#39;4 d&#39;&#39;1}&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">adrifter</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">Adrifter</span><span class="p">(</span><span class="n">container_out</span><span class="p">,</span> <span class="n">container_in</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">len</span><span class="p">(</span><span class="n">adrifter</span><span class="p">)</span>
+<span class="go">5</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">container_out</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;c&#39;4 d&#39;4 ~ d&#39;4 r4&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">container_in</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;r2 &lt;c&#39;&#39; e&#39;&#39; g&#39;&#39;&gt;2&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">adrifter</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">Adrifter</span><span class="p">(</span><span class="n">container_out</span><span class="p">,</span> <span class="n">container_in</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">len</span><span class="p">(</span><span class="n">adrifter</span><span class="p">)</span>
+<span class="go">3</span>
+</pre></div>
+</div>
+</div>
+<div class="example docutils container">
+<p>Setting the property <code class="docutils literal notranslate"><span class="pre">fade_in_first</span></code> to <code class="docutils literal notranslate"><span class="pre">True</span></code> will ensure that a
+logical tie from <code class="docutils literal notranslate"><span class="pre">container_in</span></code> must be faded in before any logical
+ties of <code class="docutils literal notranslate"><span class="pre">container_out</span></code> are removed (default <code class="docutils literal notranslate"><span class="pre">False</span></code>). Setting
+<code class="docutils literal notranslate"><span class="pre">fade_out_last</span></code> to <code class="docutils literal notranslate"><span class="pre">True</span></code> will ensure that all logical ties from
+<code class="docutils literal notranslate"><span class="pre">container_in</span></code> must be faded in before the very last logical tie of
+<code class="docutils literal notranslate"><span class="pre">container_out</span></code> is removed (default <code class="docutils literal notranslate"><span class="pre">False</span></code>).</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">container_out</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;\time 3/4 r4 c&#39;4 d&#39;4&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">container_in</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;\time 3/4 a&#39;&#39;4 g&#39;&#39;2&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">adrifter</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">Adrifter</span><span class="p">(</span><span class="n">container_out</span><span class="p">,</span> <span class="n">container_in</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">staff_a</span><span class="p">,</span> <span class="n">staff_b</span> <span class="o">=</span> <span class="n">adrifter</span><span class="o">.</span><span class="n">output_all</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">score</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Score</span><span class="p">([</span><span class="n">staff_a</span><span class="p">,</span> <span class="n">staff_b</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">f</span><span class="p">(</span><span class="n">score</span><span class="p">)</span>
+<span class="go">\new Score</span>
+<span class="go">&lt;&lt;</span>
+<span class="go">    \new Staff</span>
+<span class="go">    {</span>
+<span class="go">        \time 3/4</span>
+<span class="go">        R1 * 3/4</span>
+<span class="go">        R1 * 3/4</span>
+<span class="go">        a&#39;&#39;4</span>
+<span class="go">        r2</span>
+<span class="go">        a&#39;&#39;4</span>
+<span class="go">        r2</span>
+<span class="go">        a&#39;&#39;4</span>
+<span class="go">        g&#39;&#39;2</span>
+<span class="go">    }</span>
+<span class="go">    \new Staff</span>
+<span class="go">    {</span>
+<span class="go">        \time 3/4</span>
+<span class="go">        r4</span>
+<span class="go">        c&#39;4</span>
+<span class="go">        d&#39;4</span>
+<span class="go">        r2</span>
+<span class="go">        d&#39;4</span>
+<span class="go">        r2</span>
+<span class="go">        d&#39;4</span>
+<span class="go">        R1 * 3/4</span>
+<span class="go">        R1 * 3/4</span>
+<span class="go">    }</span>
+<span class="go">&gt;&gt;</span>
+</pre></div>
+</div>
+<div class="figure align-default">
+<img alt="../_images/image-Adrifter-9.png" src="../_images/image-Adrifter-9.png" />
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">adrifter</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">Adrifter</span><span class="p">(</span><span class="n">container_out</span><span class="p">,</span>
+<span class="gp">... </span>                           <span class="n">container_in</span><span class="p">,</span>
+<span class="gp">... </span>                           <span class="n">fade_out_last</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+<span class="gp">... </span>                           <span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">staff_a</span><span class="p">,</span> <span class="n">staff_b</span> <span class="o">=</span> <span class="n">adrifter</span><span class="o">.</span><span class="n">output_all</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">score</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Score</span><span class="p">([</span><span class="n">staff_a</span><span class="p">,</span> <span class="n">staff_b</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">f</span><span class="p">(</span><span class="n">score</span><span class="p">)</span>
+<span class="go">\new Score</span>
+<span class="go">&lt;&lt;</span>
+<span class="go">    \new Staff</span>
+<span class="go">    {</span>
+<span class="go">        \time 3/4</span>
+<span class="go">        R1 * 3/4</span>
+<span class="go">        R1 * 3/4</span>
+<span class="go">        a&#39;&#39;4</span>
+<span class="go">        r2</span>
+<span class="go">        a&#39;&#39;4</span>
+<span class="go">        g&#39;&#39;2</span>
+<span class="go">        a&#39;&#39;4</span>
+<span class="go">        g&#39;&#39;2</span>
+<span class="go">    }</span>
+<span class="go">    \new Staff</span>
+<span class="go">    {</span>
+<span class="go">        \time 3/4</span>
+<span class="go">        r4</span>
+<span class="go">        c&#39;4</span>
+<span class="go">        d&#39;4</span>
+<span class="go">        r2</span>
+<span class="go">        d&#39;4</span>
+<span class="go">        r2</span>
+<span class="go">        d&#39;4</span>
+<span class="go">        r2</span>
+<span class="go">        d&#39;4</span>
+<span class="go">        R1 * 3/4</span>
+<span class="go">    }</span>
+<span class="go">&gt;&gt;</span>
+</pre></div>
+</div>
+<div class="figure align-default">
+<img alt="../_images/image-Adrifter-10.png" src="../_images/image-Adrifter-10.png" />
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">adrifter</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">Adrifter</span><span class="p">(</span><span class="n">container_out</span><span class="p">,</span>
+<span class="gp">... </span>                           <span class="n">container_in</span><span class="p">,</span>
+<span class="gp">... </span>                           <span class="n">fade_in_first</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+<span class="gp">... </span>                           <span class="n">fade_out_last</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+<span class="gp">... </span>                           <span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">staff_a</span><span class="p">,</span> <span class="n">staff_b</span> <span class="o">=</span> <span class="n">adrifter</span><span class="o">.</span><span class="n">output_all</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">score</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Score</span><span class="p">([</span><span class="n">staff_a</span><span class="p">,</span> <span class="n">staff_b</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">f</span><span class="p">(</span><span class="n">score</span><span class="p">)</span>
+<span class="go">\new Score</span>
+<span class="go">&lt;&lt;</span>
+<span class="go">    \new Staff</span>
+<span class="go">    {</span>
+<span class="go">        \time 3/4</span>
+<span class="go">        R1 * 3/4</span>
+<span class="go">        a&#39;&#39;4</span>
+<span class="go">        r2</span>
+<span class="go">        a&#39;&#39;4</span>
+<span class="go">        g&#39;&#39;2</span>
+<span class="go">        a&#39;&#39;4</span>
+<span class="go">        g&#39;&#39;2</span>
+<span class="go">        a&#39;&#39;4</span>
+<span class="go">        g&#39;&#39;2</span>
+<span class="go">    }</span>
+<span class="go">    \new Staff</span>
+<span class="go">    {</span>
+<span class="go">        \time 3/4</span>
+<span class="go">        r4</span>
+<span class="go">        c&#39;4</span>
+<span class="go">        d&#39;4</span>
+<span class="go">        r4</span>
+<span class="go">        c&#39;4</span>
+<span class="go">        d&#39;4</span>
+<span class="go">        r4</span>
+<span class="go">        c&#39;4</span>
+<span class="go">        d&#39;4</span>
+<span class="go">        r2</span>
+<span class="go">        d&#39;4</span>
+<span class="go">        R1 * 3/4</span>
+<span class="go">    }</span>
+<span class="go">&gt;&gt;</span>
+</pre></div>
+</div>
+<div class="figure align-default">
+<img alt="../_images/image-Adrifter-11.png" src="../_images/image-Adrifter-11.png" />
+</div>
+</div>
+<div class="example docutils container">
+<p>Setting <code class="docutils literal notranslate"><span class="pre">weighted_duration</span></code> to <code class="docutils literal notranslate"><span class="pre">True</span></code> will give more weight to the
+larger container (considering both its number of logical  ties as well
+its length), making it more likely that both will fade in and out at a
+similar rate (default value is <code class="docutils literal notranslate"><span class="pre">False</span></code>).</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">container_out</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;e&#39;2 c&#39;2&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">container_in</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="sa">r</span><span class="s2">&quot;c&#39;&#39;8 d&#39;&#39;8 e&#39;&#39;8 f&#39;&#39;8 g&#39;&#39;8 a&#39;&#39;8 b&#39;&#39;8 c&#39;&#39;&#39;8&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">adrifter</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">Adrifter</span><span class="p">(</span><span class="n">container_out</span><span class="p">,</span> <span class="n">container_in</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">staff_a</span><span class="p">,</span> <span class="n">staff_b</span> <span class="o">=</span> <span class="n">adrifter</span><span class="o">.</span><span class="n">output_all</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">score</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Score</span><span class="p">([</span><span class="n">staff_a</span><span class="p">,</span> <span class="n">staff_b</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">f</span><span class="p">(</span><span class="n">score</span><span class="p">)</span>
+<span class="go">\new Score</span>
+<span class="go">&lt;&lt;</span>
+<span class="go">    \new Staff</span>
+<span class="go">    {</span>
+<span class="go">        \time 4/4</span>
+<span class="go">        R1</span>
+<span class="go">        r4.</span>
+<span class="go">        f&#39;&#39;8</span>
+<span class="go">        r2</span>
+<span class="go">        r4.</span>
+<span class="go">        f&#39;&#39;8</span>
+<span class="go">        r2</span>
+<span class="go">        r4.</span>
+<span class="go">        f&#39;&#39;8</span>
+<span class="go">        r4</span>
+<span class="go">        b&#39;&#39;8</span>
+<span class="go">        r8</span>
+<span class="go">        r4.</span>
+<span class="go">        f&#39;&#39;8</span>
+<span class="go">        r4</span>
+<span class="go">        b&#39;&#39;8</span>
+<span class="go">        r8</span>
+<span class="go">        r4.</span>
+<span class="go">        f&#39;&#39;8</span>
+<span class="go">        r8</span>
+<span class="go">        a&#39;&#39;8</span>
+<span class="go">        b&#39;&#39;8</span>
+<span class="go">        r8</span>
+<span class="go">        r4.</span>
+<span class="go">        f&#39;&#39;8</span>
+<span class="go">        g&#39;&#39;8</span>
+<span class="go">        a&#39;&#39;8</span>
+<span class="go">        b&#39;&#39;8</span>
+<span class="go">        r8</span>
+<span class="go">        r4.</span>
+<span class="go">        f&#39;&#39;8</span>
+<span class="go">        g&#39;&#39;8</span>
+<span class="go">        a&#39;&#39;8</span>
+<span class="go">        b&#39;&#39;8</span>
+<span class="go">        c&#39;&#39;&#39;8</span>
+<span class="go">        c&#39;&#39;8</span>
+<span class="go">        r8</span>
+<span class="go">        r8</span>
+<span class="go">        f&#39;&#39;8</span>
+<span class="go">        g&#39;&#39;8</span>
+<span class="go">        a&#39;&#39;8</span>
+<span class="go">        b&#39;&#39;8</span>
+<span class="go">        c&#39;&#39;&#39;8</span>
+<span class="go">        c&#39;&#39;8</span>
+<span class="go">        d&#39;&#39;8</span>
+<span class="go">        r8</span>
+<span class="go">        f&#39;&#39;8</span>
+<span class="go">        g&#39;&#39;8</span>
+<span class="go">        a&#39;&#39;8</span>
+<span class="go">        b&#39;&#39;8</span>
+<span class="go">        c&#39;&#39;&#39;8</span>
+<span class="go">        c&#39;&#39;8</span>
+<span class="go">        d&#39;&#39;8</span>
+<span class="go">        e&#39;&#39;8</span>
+<span class="go">        f&#39;&#39;8</span>
+<span class="go">        g&#39;&#39;8</span>
+<span class="go">        a&#39;&#39;8</span>
+<span class="go">        b&#39;&#39;8</span>
+<span class="go">        c&#39;&#39;&#39;8</span>
+<span class="go">    }</span>
+<span class="go">    \new Staff</span>
+<span class="go">    {</span>
+<span class="go">        \time 4/4</span>
+<span class="go">        e&#39;2</span>
+<span class="go">        c&#39;2</span>
+<span class="go">        e&#39;2</span>
+<span class="go">        c&#39;2</span>
+<span class="go">        r2</span>
+<span class="go">        c&#39;2</span>
+<span class="go">        r2</span>
+<span class="go">        c&#39;2</span>
+<span class="go">        R1</span>
+<span class="go">        R1</span>
+<span class="go">        R1</span>
+<span class="go">        R1</span>
+<span class="go">        R1</span>
+<span class="go">        R1</span>
+<span class="go">        R1</span>
+<span class="go">    }</span>
+<span class="go">&gt;&gt;</span>
+</pre></div>
+</div>
+<div class="figure align-default">
+<img alt="../_images/image-Adrifter-12.png" src="../_images/image-Adrifter-12.png" />
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">adrifter</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">Adrifter</span><span class="p">(</span><span class="n">container_out</span><span class="p">,</span>
+<span class="gp">... </span>                           <span class="n">container_in</span><span class="p">,</span>
+<span class="gp">... </span>                           <span class="n">weighted_duration</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+<span class="gp">... </span>                           <span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">staff_a</span><span class="p">,</span> <span class="n">staff_b</span> <span class="o">=</span> <span class="n">adrifter</span><span class="o">.</span><span class="n">output_all</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">score</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Score</span><span class="p">([</span><span class="n">staff_a</span><span class="p">,</span> <span class="n">staff_b</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">f</span><span class="p">(</span><span class="n">score</span><span class="p">)</span>
+<span class="go">\new Score</span>
+<span class="go">&lt;&lt;</span>
+<span class="go">    \new Staff</span>
+<span class="go">    {</span>
+<span class="go">        \time 4/4</span>
+<span class="go">        R1</span>
+<span class="go">        r4.</span>
+<span class="go">        f&#39;&#39;8</span>
+<span class="go">        r2</span>
+<span class="go">        r4.</span>
+<span class="go">        f&#39;&#39;8</span>
+<span class="go">        r2</span>
+<span class="go">        r4.</span>
+<span class="go">        f&#39;&#39;8</span>
+<span class="go">        r4</span>
+<span class="go">        b&#39;&#39;8</span>
+<span class="go">        r8</span>
+<span class="go">        r4.</span>
+<span class="go">        f&#39;&#39;8</span>
+<span class="go">        r8</span>
+<span class="go">        a&#39;&#39;8</span>
+<span class="go">        b&#39;&#39;8</span>
+<span class="go">        r8</span>
+<span class="go">        r8</span>
+<span class="go">        d&#39;&#39;8</span>
+<span class="go">        r8</span>
+<span class="go">        f&#39;&#39;8</span>
+<span class="go">        r8</span>
+<span class="go">        a&#39;&#39;8</span>
+<span class="go">        b&#39;&#39;8</span>
+<span class="go">        r8</span>
+<span class="go">        r8</span>
+<span class="go">        d&#39;&#39;8</span>
+<span class="go">        r8</span>
+<span class="go">        f&#39;&#39;8</span>
+<span class="go">        r8</span>
+<span class="go">        a&#39;&#39;8</span>
+<span class="go">        b&#39;&#39;8</span>
+<span class="go">        c&#39;&#39;&#39;8</span>
+<span class="go">        c&#39;&#39;8</span>
+<span class="go">        d&#39;&#39;8</span>
+<span class="go">        r8</span>
+<span class="go">        f&#39;&#39;8</span>
+<span class="go">        r8</span>
+<span class="go">        a&#39;&#39;8</span>
+<span class="go">        b&#39;&#39;8</span>
+<span class="go">        c&#39;&#39;&#39;8</span>
+<span class="go">        c&#39;&#39;8</span>
+<span class="go">        d&#39;&#39;8</span>
+<span class="go">        r8</span>
+<span class="go">        f&#39;&#39;8</span>
+<span class="go">        g&#39;&#39;8</span>
+<span class="go">        a&#39;&#39;8</span>
+<span class="go">        b&#39;&#39;8</span>
+<span class="go">        c&#39;&#39;&#39;8</span>
+<span class="go">        c&#39;&#39;8</span>
+<span class="go">        d&#39;&#39;8</span>
+<span class="go">        e&#39;&#39;8</span>
+<span class="go">        f&#39;&#39;8</span>
+<span class="go">        g&#39;&#39;8</span>
+<span class="go">        a&#39;&#39;8</span>
+<span class="go">        b&#39;&#39;8</span>
+<span class="go">        c&#39;&#39;&#39;8</span>
+<span class="go">        c&#39;&#39;8</span>
+<span class="go">        d&#39;&#39;8</span>
+<span class="go">        e&#39;&#39;8</span>
+<span class="go">        f&#39;&#39;8</span>
+<span class="go">        g&#39;&#39;8</span>
+<span class="go">        a&#39;&#39;8</span>
+<span class="go">        b&#39;&#39;8</span>
+<span class="go">        c&#39;&#39;&#39;8</span>
+<span class="go">    }</span>
+<span class="go">    \new Staff</span>
+<span class="go">    {</span>
+<span class="go">        \time 4/4</span>
+<span class="go">        e&#39;2</span>
+<span class="go">        c&#39;2</span>
+<span class="go">        e&#39;2</span>
+<span class="go">        c&#39;2</span>
+<span class="go">        r2</span>
+<span class="go">        c&#39;2</span>
+<span class="go">        r2</span>
+<span class="go">        c&#39;2</span>
+<span class="go">        r2</span>
+<span class="go">        c&#39;2</span>
+<span class="go">        r2</span>
+<span class="go">        c&#39;2</span>
+<span class="go">        r2</span>
+<span class="go">        c&#39;2</span>
+<span class="go">        r2</span>
+<span class="go">        c&#39;2</span>
+<span class="go">        r2</span>
+<span class="go">        c&#39;2</span>
+<span class="go">        r2</span>
+<span class="go">        c&#39;2</span>
+<span class="go">        R1</span>
+<span class="go">    }</span>
+<span class="go">&gt;&gt;</span>
+</pre></div>
+</div>
+<div class="figure align-default">
+<img alt="../_images/image-Adrifter-13.png" src="../_images/image-Adrifter-13.png" />
+</div>
+</div>
+<div class="example docutils container">
+<p>The properties <code class="docutils literal notranslate"><span class="pre">initial_repetitions</span></code> and <code class="docutils literal notranslate"><span class="pre">final_repetitions</span></code> set
+the number of repetitions of the initial and final measures (default is
+<code class="docutils literal notranslate"><span class="pre">1</span></code> for both).</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">container_out</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;a&#39;4 bf&#39;2 r4&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">container_in</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;c&#39;&#39;2 d&#39;&#39;2&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">adrifter</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">Adrifter</span><span class="p">(</span><span class="n">container_out</span><span class="p">,</span>
+<span class="gp">... </span>                           <span class="n">container_in</span><span class="p">,</span>
+<span class="gp">... </span>                           <span class="n">initial_repetitions</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
+<span class="gp">... </span>                           <span class="n">final_repetitions</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>
+<span class="gp">... </span>                           <span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">staff_a</span><span class="p">,</span> <span class="n">staff_b</span> <span class="o">=</span> <span class="n">adrifter</span><span class="o">.</span><span class="n">output_all</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">score</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Score</span><span class="p">([</span><span class="n">staff_a</span><span class="p">,</span> <span class="n">staff_b</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">f</span><span class="p">(</span><span class="n">score</span><span class="p">)</span>
+<span class="go">\new Score</span>
+<span class="go">&lt;&lt;</span>
+<span class="go">    \new Staff</span>
+<span class="go">    {</span>
+<span class="go">        \time 4/4</span>
+<span class="go">        R1</span>
+<span class="go">        R1</span>
+<span class="go">        R1</span>
+<span class="go">        r2</span>
+<span class="go">        d&#39;&#39;2</span>
+<span class="go">        c&#39;&#39;2</span>
+<span class="go">        d&#39;&#39;2</span>
+<span class="go">        c&#39;&#39;2</span>
+<span class="go">        d&#39;&#39;2</span>
+<span class="go">        c&#39;&#39;2</span>
+<span class="go">        d&#39;&#39;2</span>
+<span class="go">        c&#39;&#39;2</span>
+<span class="go">        d&#39;&#39;2</span>
+<span class="go">    }</span>
+<span class="go">    \new Staff</span>
+<span class="go">    {</span>
+<span class="go">        \time 4/4</span>
+<span class="go">        a&#39;4</span>
+<span class="go">        bf&#39;2</span>
+<span class="go">        r4</span>
+<span class="go">        a&#39;4</span>
+<span class="go">        bf&#39;2</span>
+<span class="go">        r4</span>
+<span class="go">        r4</span>
+<span class="go">        bf&#39;2</span>
+<span class="go">        r4</span>
+<span class="go">        r4</span>
+<span class="go">        bf&#39;2</span>
+<span class="go">        r4</span>
+<span class="go">        r4</span>
+<span class="go">        bf&#39;2</span>
+<span class="go">        r4</span>
+<span class="go">        R1</span>
+<span class="go">        R1</span>
+<span class="go">        R1</span>
+<span class="go">    }</span>
+<span class="go">&gt;&gt;</span>
+</pre></div>
+</div>
+<div class="figure align-default">
+<img alt="../_images/image-Adrifter-14.png" src="../_images/image-Adrifter-14.png" />
+</div>
+</div>
+<div class="example docutils container">
+<p>Use <code class="docutils literal notranslate"><span class="pre">repetition_chance</span></code> to set the chance of a measure repeating
+itself, ranging from <code class="docutils literal notranslate"><span class="pre">0.0</span></code> to <code class="docutils literal notranslate"><span class="pre">1.0</span></code> (default is <code class="docutils literal notranslate"><span class="pre">0.0</span></code>,
+i.e. no repetitions).</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">container_out</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;a&#39;4 bf&#39;2 r4&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">container_in</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;c&#39;&#39;2 d&#39;&#39;2&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">adrifter</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">Adrifter</span><span class="p">(</span><span class="n">container_out</span><span class="p">,</span>
+<span class="gp">... </span>                           <span class="n">container_in</span><span class="p">,</span>
+<span class="gp">... </span>                           <span class="n">repetition_chance</span><span class="o">=</span><span class="mf">0.8</span><span class="p">,</span>
+<span class="gp">... </span>                           <span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">staff_a</span><span class="p">,</span> <span class="n">staff_b</span> <span class="o">=</span> <span class="n">adrifter</span><span class="o">.</span><span class="n">output_n</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">score</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Score</span><span class="p">([</span><span class="n">staff_a</span><span class="p">,</span> <span class="n">staff_b</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">f</span><span class="p">(</span><span class="n">score</span><span class="p">)</span>
+<span class="go">\new Score</span>
+<span class="go">&lt;&lt;</span>
+<span class="go">    \new Staff</span>
+<span class="go">    {</span>
+<span class="go">        \time 4/4</span>
+<span class="go">        R1</span>
+<span class="go">        r2</span>
+<span class="go">        d&#39;&#39;2</span>
+<span class="go">        r2</span>
+<span class="go">        d&#39;&#39;2</span>
+<span class="go">        r2</span>
+<span class="go">        d&#39;&#39;2</span>
+<span class="go">    }</span>
+<span class="go">    \new Staff</span>
+<span class="go">    {</span>
+<span class="go">        \time 4/4</span>
+<span class="go">        a&#39;4</span>
+<span class="go">        bf&#39;2</span>
+<span class="go">        r4</span>
+<span class="go">        a&#39;4</span>
+<span class="go">        bf&#39;2</span>
+<span class="go">        r4</span>
+<span class="go">        a&#39;4</span>
+<span class="go">        bf&#39;2</span>
+<span class="go">        r4</span>
+<span class="go">        a&#39;4</span>
+<span class="go">        bf&#39;2</span>
+<span class="go">        r4</span>
+<span class="go">    }</span>
+<span class="go">&gt;&gt;</span>
+</pre></div>
+</div>
+<div class="figure align-default">
+<img alt="../_images/image-Adrifter-15.png" src="../_images/image-Adrifter-15.png" />
+</div>
+</div>
+<div class="example docutils container">
+<p>To disable time signatures altogether, initialise this class with the
+keyword argument <code class="docutils literal notranslate"><span class="pre">omit_time_signatures</span></code> set to <code class="docutils literal notranslate"><span class="pre">True</span></code> (default is
+<code class="docutils literal notranslate"><span class="pre">False</span></code>), or use the <code class="docutils literal notranslate"><span class="pre">omit_time_signatures</span></code> property after
+initialisation.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">container_out</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;fs&#39;4 g&#39;2 bf&#39;4&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">container_in</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;\times 4/5 {cs&#39;&#39;4 d&#39;&#39;1}&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">adrifter</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">Adrifter</span><span class="p">(</span><span class="n">container_out</span><span class="p">,</span>
+<span class="gp">... </span>                           <span class="n">container_in</span><span class="p">,</span>
+<span class="gp">... </span>                           <span class="n">omit_time_signatures</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+<span class="gp">... </span>                           <span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">staff_a</span><span class="p">,</span> <span class="n">staff_b</span> <span class="o">=</span> <span class="n">adrifter</span><span class="o">.</span><span class="n">output_n</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">score</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Score</span><span class="p">([</span><span class="n">staff_a</span><span class="p">,</span> <span class="n">staff_b</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">f</span><span class="p">(</span><span class="n">score</span><span class="p">)</span>
+<span class="go">\new Score</span>
+<span class="go">&lt;&lt;</span>
+<span class="go">    \new Staff</span>
+<span class="go">    {</span>
+<span class="go">        R1</span>
+<span class="go">        R1</span>
+<span class="go">        \times 4/5 {</span>
+<span class="go">            cs&#39;&#39;4</span>
+<span class="go">            r1</span>
+<span class="go">        }</span>
+<span class="go">    }</span>
+<span class="go">    \new Staff</span>
+<span class="go">    {</span>
+<span class="go">        fs&#39;4</span>
+<span class="go">        g&#39;2</span>
+<span class="go">        bf&#39;4</span>
+<span class="go">        fs&#39;4</span>
+<span class="go">        g&#39;2</span>
+<span class="go">        r4</span>
+<span class="go">        fs&#39;4</span>
+<span class="go">        g&#39;2</span>
+<span class="go">        r4</span>
+<span class="go">    }</span>
+<span class="go">&gt;&gt;</span>
+</pre></div>
+</div>
+<div class="figure align-default">
+<img alt="../_images/image-Adrifter-16.png" src="../_images/image-Adrifter-16.png" />
+</div>
+</div>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>All methods that return an <code class="docutils literal notranslate"><span class="pre">abjad.Selection</span></code> will add an initial time
+signature to it. The <code class="docutils literal notranslate"><span class="pre">output_n()</span></code> and <code class="docutils literal notranslate"><span class="pre">output_all()</span></code> methods
+automatically remove repeated time signatures. When joining selections
+output by multiple method calls, use
+<code class="docutils literal notranslate"><span class="pre">auxjad.remove_repeated_time_signatures()</span></code> on the whole container
+after fusing the selections to remove any unecessary time signature
+changes.</p>
+</div>
+<div class="example docutils container">
+<p>This function uses the default logical tie splitting algorithm from
+abjad’s <code class="docutils literal notranslate"><span class="pre">rewrite_meter()</span></code>. It can be disabled with the property
+<code class="docutils literal notranslate"><span class="pre">disable_rewrite_meter</span></code>.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">container_out</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;c&#39;8 d&#39;4 e&#39;8 ~ e&#39;2&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">container_in</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;c&#39;2 d&#39;2&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">adrifter</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">Adrifter</span><span class="p">(</span><span class="n">container_out</span><span class="p">,</span>
+<span class="gp">... </span>                           <span class="n">container_in</span><span class="p">,</span>
+<span class="gp">... </span>                           <span class="n">disable_rewrite_meter</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+<span class="gp">... </span>                           <span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">staff_a</span><span class="p">,</span> <span class="n">staff_b</span> <span class="o">=</span> <span class="n">adrifter</span><span class="o">.</span><span class="n">output_n</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">score</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Score</span><span class="p">([</span><span class="n">staff_a</span><span class="p">,</span> <span class="n">staff_b</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">f</span><span class="p">(</span><span class="n">score</span><span class="p">)</span>
+<span class="go">\new Score</span>
+<span class="go">&lt;&lt;</span>
+<span class="go">    \new Staff</span>
+<span class="go">    {</span>
+<span class="go">        \time 4/4</span>
+<span class="go">        R1</span>
+<span class="go">        R1</span>
+<span class="go">        r2</span>
+<span class="go">        d&#39;2</span>
+<span class="go">    }</span>
+<span class="go">    \new Staff</span>
+<span class="go">    {</span>
+<span class="go">        \time 4/4</span>
+<span class="go">        c&#39;8</span>
+<span class="go">        d&#39;4</span>
+<span class="go">        e&#39;8</span>
+<span class="go">        ~</span>
+<span class="go">        e&#39;2</span>
+<span class="go">        r8</span>
+<span class="go">        d&#39;4</span>
+<span class="go">        e&#39;8</span>
+<span class="go">        ~</span>
+<span class="go">        e&#39;2</span>
+<span class="go">        r8</span>
+<span class="go">        d&#39;4</span>
+<span class="go">        e&#39;8</span>
+<span class="go">        ~</span>
+<span class="go">        e&#39;2</span>
+<span class="go">    }</span>
+<span class="go">&gt;&gt;</span>
+</pre></div>
+</div>
+<div class="figure align-default">
+<img alt="../_images/image-Adrifter-17.png" src="../_images/image-Adrifter-17.png" />
+</div>
+<p>Arguments available for tweaking the output of abjad’s
+<code class="docutils literal notranslate"><span class="pre">rewrite_meter()</span></code> are <code class="docutils literal notranslate"><span class="pre">boundary_depth</span></code>, <code class="docutils literal notranslate"><span class="pre">maximum_dot_count</span></code> and
+<code class="docutils literal notranslate"><span class="pre">rewrite_tuplets</span></code>, which work exactly as the identically named
+arguments of <code class="docutils literal notranslate"><span class="pre">rewrite_meter()</span></code>.</p>
+</div>
+<div class="example docutils container">
+<p>Containers can be switched after initialisation. This will reset the
+process.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">container_out</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="sa">r</span><span class="s2">&quot;\time 3/4 e2 \times 2/3 {fs8 gs4}&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">container_in</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;\time 3/4 c&#39;8 d&#39; e&#39; f&#39; g&#39; a&#39;&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">adrifter</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">Adrifter</span><span class="p">(</span><span class="n">container_out</span><span class="p">,</span> <span class="n">container_in</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">adrifter</span><span class="o">.</span><span class="n">contents_out</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;\time 3/4 a4. bf4.&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">adrifter</span><span class="p">)</span>
+<span class="go">{</span>
+<span class="go">    %%% \time 3/4 %%%</span>
+<span class="go">    c&#39;8</span>
+<span class="go">    d&#39;8</span>
+<span class="go">    e&#39;8</span>
+<span class="go">    f&#39;8</span>
+<span class="go">    g&#39;8</span>
+<span class="go">    a&#39;8</span>
+<span class="go">}</span>
+<span class="go">{</span>
+<span class="go">    %%% \time 3/4 %%%</span>
+<span class="go">    a4.</span>
+<span class="go">    bf4.</span>
+<span class="go">}</span>
+</pre></div>
+</div>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Do note that elements that span multiple notes (such as hairpins,
+ottava indicators, manual beams, etc.) can become problematic when
+notes containing them are split into two. Whenever possible, it is
+always better to attach those to the music after the phasing process is
+concluded.</p>
+</div>
+<div class="example docutils container">
+<p>This class can time signature changes.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">container_out</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="sa">r</span><span class="s2">&quot;\time 3/4 a&#39;4 bf&#39;2 ~ \time 2/4 bf&#39;4 f&#39;4&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">container_in</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="sa">r</span><span class="s2">&quot;\time 3/4 r16 cs&#39;&#39;4.. e&#39;&#39;4 \time 2/4 d&#39;&#39;2&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">adrifter</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">Adrifter</span><span class="p">(</span><span class="n">container_out</span><span class="p">,</span> <span class="n">container_in</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">staff_a</span><span class="p">,</span> <span class="n">staff_b</span> <span class="o">=</span> <span class="n">adrifter</span><span class="o">.</span><span class="n">output_n</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">score</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Score</span><span class="p">([</span><span class="n">staff_a</span><span class="p">,</span> <span class="n">staff_b</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">f</span><span class="p">(</span><span class="n">score</span><span class="p">)</span>
+<span class="go">\new Score</span>
+<span class="go">&lt;&lt;</span>
+<span class="go">    \new Staff</span>
+<span class="go">    {</span>
+<span class="go">        \time 3/4</span>
+<span class="go">        R1 * 3/4</span>
+<span class="go">        \time 2/4</span>
+<span class="go">        R1 * 1/2</span>
+<span class="go">        \time 3/4</span>
+<span class="go">        r16</span>
+<span class="go">        cs&#39;&#39;4..</span>
+<span class="go">        r4</span>
+<span class="go">        \time 2/4</span>
+<span class="go">        R1 * 1/2</span>
+<span class="go">        \time 3/4</span>
+<span class="go">        r16</span>
+<span class="go">        cs&#39;&#39;4..</span>
+<span class="go">        r4</span>
+<span class="go">        \time 2/4</span>
+<span class="go">        R1 * 1/2</span>
+<span class="go">    }</span>
+<span class="go">    \new Staff</span>
+<span class="go">    {</span>
+<span class="go">        \time 3/4</span>
+<span class="go">        a&#39;4</span>
+<span class="go">        bf&#39;2</span>
+<span class="go">        ~</span>
+<span class="go">        \time 2/4</span>
+<span class="go">        bf&#39;4</span>
+<span class="go">        f&#39;4</span>
+<span class="go">        \time 3/4</span>
+<span class="go">        a&#39;4</span>
+<span class="go">        bf&#39;2</span>
+<span class="go">        ~</span>
+<span class="go">        \time 2/4</span>
+<span class="go">        bf&#39;4</span>
+<span class="go">        f&#39;4</span>
+<span class="go">        \time 3/4</span>
+<span class="go">        a&#39;4</span>
+<span class="go">        bf&#39;2</span>
+<span class="go">        ~</span>
+<span class="go">        \time 2/4</span>
+<span class="go">        bf&#39;4</span>
+<span class="go">        r4</span>
+<span class="go">    }</span>
+<span class="go">&gt;&gt;</span>
+</pre></div>
+</div>
+<div class="figure align-default">
+<img alt="../_images/image-Adrifter-18.png" src="../_images/image-Adrifter-18.png" />
+</div>
+</div>
+<div class="example docutils container">
+<p>It is possible to use this class with containers of different lengths
+and time signatures, although this feature is not fully implemented and
+should be considered experimental. LilyPond must be set up to allow
+different simultaneous time signatures, and
+<code class="docutils literal notranslate"><span class="pre">auxjad.sync_containers()</span></code> can be used to add rests to the end of the
+shorter staff.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">container_out</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;\time 3/4 c&#39;4 d&#39;4 e&#39;4&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">container_in</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;\time 4/4 g&#39;2 a&#39;2&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">adrifter</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">Adrifter</span><span class="p">(</span><span class="n">container_out</span><span class="p">,</span>
+<span class="gp">... </span>                           <span class="n">container_in</span><span class="p">,</span>
+<span class="gp">... </span>                           <span class="n">fade_in_first</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+<span class="gp">... </span>                           <span class="n">fade_out_last</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+<span class="gp">... </span>                           <span class="n">weighted_duration</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+<span class="gp">... </span>                           <span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">staff_a</span><span class="p">,</span> <span class="n">staff_b</span> <span class="o">=</span> <span class="n">adrifter</span><span class="o">.</span><span class="n">output_all</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">auxjad</span><span class="o">.</span><span class="n">sync_containers</span><span class="p">(</span><span class="n">staff_a</span><span class="p">,</span> <span class="n">staff_b</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">score</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Score</span><span class="p">([</span><span class="n">staff_a</span><span class="p">,</span> <span class="n">staff_b</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">lilypond_file</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">LilyPondFile</span><span class="o">.</span><span class="n">new</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">score_block</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Block</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;score&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">layout_block</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Block</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;layout&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">score_block</span><span class="o">.</span><span class="n">items</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">score</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">score_block</span><span class="o">.</span><span class="n">items</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">layout_block</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">lilypond_file</span><span class="o">.</span><span class="n">items</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">score_block</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">layout_block</span><span class="o">.</span><span class="n">items</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="sa">r</span><span class="sd">&#39;&#39;&#39;\context {</span>
+<span class="gp">... </span><span class="sd">        \Score</span>
+<span class="gp">... </span><span class="sd">        \remove &quot;Timing_translator&quot;</span>
+<span class="gp">... </span><span class="sd">        \remove &quot;Default_bar_line_engraver&quot;</span>
+<span class="gp">... </span><span class="sd">    }</span>
+<span class="gp">... </span><span class="sd">    \context {</span>
+<span class="gp">... </span><span class="sd">        \Staff</span>
+<span class="gp">... </span><span class="sd">        \consists &quot;Timing_translator&quot;</span>
+<span class="gp">... </span><span class="sd">        \consists &quot;Default_bar_line_engraver&quot;</span>
+<span class="gp">... </span><span class="sd">    }&#39;&#39;&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">f</span><span class="p">(</span><span class="n">score</span><span class="p">)</span>
+<span class="go">\version &quot;2.19.82&quot;  %! abjad.LilyPondFile._get_format_pieces()</span>
+<span class="go">\language &quot;english&quot; %! abjad.LilyPondFile._get_format_pieces()</span>
+<span class="go">\header { %! abjad.LilyPondFile._get_formatted_blocks()</span>
+<span class="go">    tagline = ##f</span>
+<span class="go">} %! abjad.LilyPondFile._get_formatted_blocks()</span>
+<span class="go">\layout {}</span>
+<span class="go">\paper {}</span>
+<span class="go">\score { %! abjad.LilyPondFile._get_formatted_blocks()</span>
+<span class="go">    \new Score</span>
+<span class="go">    &lt;&lt;</span>
+<span class="go">        \new Staff</span>
+<span class="go">        {</span>
+<span class="go">            \time 4/4</span>
+<span class="go">            R1</span>
+<span class="go">            r2</span>
+<span class="go">            a&#39;2</span>
+<span class="go">            r2</span>
+<span class="go">            a&#39;2</span>
+<span class="go">            r2</span>
+<span class="go">            a&#39;2</span>
+<span class="go">            g&#39;2</span>
+<span class="go">            a&#39;2</span>
+<span class="go">            g&#39;2</span>
+<span class="go">            a&#39;2</span>
+<span class="go">        }</span>
+<span class="go">        \new Staff</span>
+<span class="go">        {</span>
+<span class="go">            \time 3/4</span>
+<span class="go">            c&#39;4</span>
+<span class="go">            d&#39;4</span>
+<span class="go">            e&#39;4</span>
+<span class="go">            c&#39;4</span>
+<span class="go">            d&#39;4</span>
+<span class="go">            e&#39;4</span>
+<span class="go">            c&#39;4</span>
+<span class="go">            r4</span>
+<span class="go">            e&#39;4</span>
+<span class="go">            c&#39;4</span>
+<span class="go">            r2</span>
+<span class="go">            c&#39;4</span>
+<span class="go">            r2</span>
+<span class="go">            R1 * 3/4</span>
+<span class="go">            \time 6/4</span>
+<span class="go">            R1 * 3/2</span>
+<span class="go">        }</span>
+<span class="go">    &gt;&gt;</span>
+<span class="go">    \layout {</span>
+<span class="go">        \context {</span>
+<span class="go">            \Score</span>
+<span class="go">            \remove &quot;Timing_translator&quot;</span>
+<span class="go">            \remove &quot;Default_bar_line_engraver&quot;</span>
+<span class="go">        }</span>
+<span class="go">        \context {</span>
+<span class="go">            \Staff</span>
+<span class="go">            \consists &quot;Timing_translator&quot;</span>
+<span class="go">            \consists &quot;Default_bar_line_engraver&quot;</span>
+<span class="go">        }</span>
+<span class="go">    }</span>
+<span class="go">} %! abjad.LilyPondFile._get_formatted_blocks()</span>
+</pre></div>
+</div>
+<div class="figure align-default">
+<img alt="../_images/image-Adrifter-19.png" src="../_images/image-Adrifter-19.png" />
+</div>
+</div>
+<p class="rubric">Methods</p>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">__init__</span></code>(contents_out, contents_in, *[, …])</p></td>
+<td><p>Initialises self.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">output_all</span></code>()</p></td>
+<td><p>Goes through the whole fading process and outputs a single <code class="docutils literal notranslate"><span class="pre">abjad.Selection</span></code>.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">output_n</span></code>(n)</p></td>
+<td><p>Goes through <code class="docutils literal notranslate"><span class="pre">n</span></code> iterations of the fading process and outputs a single <code class="docutils literal notranslate"><span class="pre">abjad.Selection</span></code>.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">reset</span></code>()</p></td>
+<td><p>Resets to the initial state.</p></td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Attributes</p>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">boundary_depth</span></code></p></td>
+<td><p>Sets the argument <code class="docutils literal notranslate"><span class="pre">boundary_depth</span></code> of abjad’s <code class="docutils literal notranslate"><span class="pre">rewrite_meter()</span></code>.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">contents_in</span></code></p></td>
+<td><p>The <code class="docutils literal notranslate"><span class="pre">abjad.Container</span></code> to be faded in.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">contents_out</span></code></p></td>
+<td><p>The <code class="docutils literal notranslate"><span class="pre">abjad.Container</span></code> to be faded out.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">current_window</span></code></p></td>
+<td><p>Read-only property, returns the result of the last operation as a <cite>tuple</cite> of <code class="docutils literal notranslate"><span class="pre">abjad.Staff</span></code>.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">disable_rewrite_meter</span></code></p></td>
+<td><p>When <code class="docutils literal notranslate"><span class="pre">True</span></code>, the durations of the notes in the output will not be rewritten by the <code class="docutils literal notranslate"><span class="pre">rewrite_meter</span></code> mutation.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">fade_in_first</span></code></p></td>
+<td><p>When <code class="docutils literal notranslate"><span class="pre">True</span></code>, the first note of the fade in content will be added before a note from the fade out content is removed.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">fade_out_last</span></code></p></td>
+<td><p>When <code class="docutils literal notranslate"><span class="pre">True</span></code>, the last note of the fade out content will be removed only after the full fade in content is added.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">final_repetitions</span></code></p></td>
+<td><p>The number of times the final containers are repeated after the drifting process ends.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">final_repetitions_counter</span></code></p></td>
+<td><p>Read-only property, returns the counter of <code class="docutils literal notranslate"><span class="pre">final_repetitions</span></code>.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">initial_repetitions</span></code></p></td>
+<td><p>The number of times the initial containers are repeated before the drifting process starts.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">initial_repetitions_counter</span></code></p></td>
+<td><p>Read-only property, returns the counter of <code class="docutils literal notranslate"><span class="pre">initial_repetitions</span></code>.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">maximum_dot_count</span></code></p></td>
+<td><p>Sets the argument <code class="docutils literal notranslate"><span class="pre">maximum_dot_count</span></code> of abjad’s <code class="docutils literal notranslate"><span class="pre">rewrite_meter()</span></code>.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">omit_time_signatures</span></code></p></td>
+<td><p>When <code class="docutils literal notranslate"><span class="pre">True</span></code>, all time signatures will be omitted from the output.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">repetition_chance</span></code></p></td>
+<td><p>The chance of the head not moving, thus repeating the output.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">rewrite_tuplets</span></code></p></td>
+<td><p>Sets the argument <code class="docutils literal notranslate"><span class="pre">rewrite_tuplets</span></code> of abjad’s <code class="docutils literal notranslate"><span class="pre">rewrite_meter()</span></code>.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">use_multimeasure_rests</span></code></p></td>
+<td><p>When <code class="docutils literal notranslate"><span class="pre">True</span></code>, multimeasure rests will be used for silent measures.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">weighted_duration</span></code></p></td>
+<td><p>Weights the choice of fader according to its number of logical ties and total duration.</p></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="auxjad.adjust_clefs.html" class="btn btn-neutral float-right" title="auxjad.adjust_clefs" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="../api.html" class="btn btn-neutral float-left" title="auxjad API" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2020, Gilberto Agostinho
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>
