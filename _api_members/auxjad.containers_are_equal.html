@@ -110,8 +110,9 @@
 <li class="toctree-l2"><a class="reference internal" href="auxjad.remove_empty_tuplets.html">auxjad.remove_empty_tuplets</a></li>
 <li class="toctree-l2"><a class="reference internal" href="auxjad.remove_repeated_dynamics.html">auxjad.remove_repeated_dynamics</a></li>
 <li class="toctree-l2"><a class="reference internal" href="auxjad.remove_repeated_time_signatures.html">auxjad.remove_repeated_time_signatures</a></li>
-<li class="toctree-l2"><a class="reference internal" href="auxjad.respell_container.html">auxjad.respell_container</a></li>
+<li class="toctree-l2"><a class="reference internal" href="auxjad.repeat_container.html">auxjad.repeat_container</a></li>
 <li class="toctree-l2"><a class="reference internal" href="auxjad.respell_chord.html">auxjad.respell_chord</a></li>
+<li class="toctree-l2"><a class="reference internal" href="auxjad.respell_container.html">auxjad.respell_container</a></li>
 <li class="toctree-l2"><a class="reference internal" href="auxjad.rests_to_multimeasure_rest.html">auxjad.rests_to_multimeasure_rest</a></li>
 <li class="toctree-l2"><a class="reference internal" href="auxjad.Shuffler.html">auxjad.Shuffler</a></li>
 <li class="toctree-l2"><a class="reference internal" href="auxjad.simplified_time_signature_ratio.html">auxjad.simplified_time_signature_ratio</a></li>
@@ -195,8 +196,8 @@
 <code class="sig-prename descclassname">auxjad.</code><code class="sig-name descname">containers_are_equal</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">container1</span><span class="p">:</span> <span class="n">abjad.core.Container.Container</span></em>, <em class="sig-param"><span class="n">container2</span><span class="p">:</span> <span class="n">abjad.core.Container.Container</span></em>, <em class="sig-param"><span class="o">*</span></em>, <em class="sig-param"><span class="n">include_indicators</span><span class="p">:</span> <span class="n">bool</span> <span class="o">=</span> <span class="default_value">False</span></em><span class="sig-paren">)</span> &#x2192; bool<a class="headerlink" href="#auxjad.containers_are_equal" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns a <code class="docutils literal notranslate"><span class="pre">bool</span></code> representing whether two input containers (of type
 <code class="docutils literal notranslate"><span class="pre">abjad.Container</span></code> or child class) are identical or not.</p>
-<div class="example docutils container">
-<p>When the pitches and effective durations of all leaves in both
+<dl>
+<dt>Example:</dt><dd><p>When the pitches and effective durations of all leaves in both
 containers are identical, this function returns <code class="docutils literal notranslate"><span class="pre">True</span></code>:</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">container1</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;c&#39;4 d&#39;4 e&#39;4 f&#39;4 &lt;g&#39; a&#39;&gt;2 r2&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">container2</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;c&#39;4 d&#39;4 e&#39;4 f&#39;4 &lt;g&#39; a&#39;&gt;2 r2&quot;</span><span class="p">)</span>
@@ -204,9 +205,8 @@ containers are identical, this function returns <code class="docutils literal no
 <span class="go">True</span>
 </pre></div>
 </div>
-</div>
-<div class="example docutils container">
-<p>Even if all leaves of both containers are identical in relation to both
+</dd>
+<dt>Example:</dt><dd><p>Even if all leaves of both containers are identical in relation to both
 pitches and written durations, the function considers the effective
 durations. This means that situations like the one below do not yield a
 false positive:</p>
@@ -217,9 +217,8 @@ false positive:</p>
 <span class="go">False</span>
 </pre></div>
 </div>
-</div>
-<div class="example docutils container">
-<p>By default, this function ignores indicators, so the containers in the
+</dd>
+<dt>Example:</dt><dd><p>By default, this function ignores indicators, so the containers in the
 example below are understood to be identical:</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">container1</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;c&#39;4\pp d&#39;4 e&#39;4-. f&#39;4 &lt;g&#39; a&#39;&gt;2-&gt; r2&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">container2</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;c&#39;4 d&#39;4 e&#39;4 f&#39;4 &lt;g&#39; a&#39;&gt;2 r2&quot;</span><span class="p">)</span>
@@ -227,9 +226,8 @@ example below are understood to be identical:</p>
 <span class="go">True</span>
 </pre></div>
 </div>
-</div>
-<div class="example docutils container">
-<p>Setting the argument <code class="docutils literal notranslate"><span class="pre">include_indicators</span></code> to <code class="docutils literal notranslate"><span class="pre">True</span></code> forces the
+</dd>
+<dt>Example:</dt><dd><p>Setting the argument <code class="docutils literal notranslate"><span class="pre">include_indicators</span></code> to <code class="docutils literal notranslate"><span class="pre">True</span></code> forces the
 function to include indicators in its comparison. In that case, the
 containers in the example above are not considered identical any
 longer:</p>
@@ -242,9 +240,8 @@ longer:</p>
 <span class="go">True</span>
 </pre></div>
 </div>
-</div>
-<div class="example docutils container">
-<p>This function also handles grace notes:</p>
+</dd>
+<dt>Example:</dt><dd><p>This function also handles grace notes:</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">container1</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;c&#39;4 d&#39;4 e&#39;4 f&#39;4&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">container2</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;c&#39;4 \grace{d&#39;4} d&#39;4 e&#39;4 f&#39;4&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">auxjad</span><span class="o">.</span><span class="n">containers_are_equal</span><span class="p">(</span><span class="n">container1</span><span class="p">,</span> <span class="n">container2</span><span class="p">)</span>
@@ -274,7 +271,8 @@ longer:</p>
 <span class="go">True</span>
 </pre></div>
 </div>
-</div>
+</dd>
+</dl>
 </dd></dl>
 
 </div>

@@ -110,8 +110,9 @@
 <li class="toctree-l2"><a class="reference internal" href="auxjad.remove_empty_tuplets.html">auxjad.remove_empty_tuplets</a></li>
 <li class="toctree-l2"><a class="reference internal" href="auxjad.remove_repeated_dynamics.html">auxjad.remove_repeated_dynamics</a></li>
 <li class="toctree-l2"><a class="reference internal" href="auxjad.remove_repeated_time_signatures.html">auxjad.remove_repeated_time_signatures</a></li>
-<li class="toctree-l2"><a class="reference internal" href="auxjad.respell_container.html">auxjad.respell_container</a></li>
+<li class="toctree-l2"><a class="reference internal" href="auxjad.repeat_container.html">auxjad.repeat_container</a></li>
 <li class="toctree-l2"><a class="reference internal" href="auxjad.respell_chord.html">auxjad.respell_chord</a></li>
+<li class="toctree-l2"><a class="reference internal" href="auxjad.respell_container.html">auxjad.respell_container</a></li>
 <li class="toctree-l2"><a class="reference internal" href="auxjad.rests_to_multimeasure_rest.html">auxjad.rests_to_multimeasure_rest</a></li>
 <li class="toctree-l2"><a class="reference internal" href="auxjad.Shuffler.html">auxjad.Shuffler</a></li>
 <li class="toctree-l2"><a class="reference internal" href="auxjad.simplified_time_signature_ratio.html">auxjad.simplified_time_signature_ratio</a></li>
@@ -193,17 +194,17 @@
 <dl class="py class">
 <dt id="auxjad.TenneySelector">
 <em class="property">class </em><code class="sig-prename descclassname">auxjad.</code><code class="sig-name descname">TenneySelector</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">contents</span><span class="p">:</span> <span class="n">list</span></em>, <em class="sig-param"><span class="o">*</span></em>, <em class="sig-param"><span class="n">weights</span><span class="p">:</span> <span class="n">Optional<span class="p">[</span>list<span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em>, <em class="sig-param"><span class="n">curvature</span><span class="p">:</span> <span class="n">float</span> <span class="o">=</span> <span class="default_value">1.0</span></em><span class="sig-paren">)</span><a class="headerlink" href="#auxjad.TenneySelector" title="Permalink to this definition">¶</a></dt>
-<dd><p>This in an implementation of the Dissonant Counterpoint Algorithm by
-James Tenney. This class can be used to randomly select elements from an
-input list, giving more weight to elements which have not been selected in
-recent iterations. In other words, Tenney’s algorithm uses feedback in
-order to lower the weight of recently selected elements.</p>
+<dd><p><code class="docutils literal notranslate"><span class="pre">TenneySelector</span></code> is an implementation of the Dissonant Counterpoint
+Algorithm by James Tenney. This class can be used to randomly select
+elements from an input list, giving more weight to elements which have not
+been selected in recent iterations. In other words, Tenney’s algorithm uses
+feedback in order to lower the weight of recently selected elements.</p>
 <p>This implementation is based on the paper: Polansky, L., A. Barnett, and
 M. Winter (2011). ‘A Few More Words About James Tenney: Dissonant
 Counterpoint and Statistical Feedback’. In: Journal of Mathematics and
 Music 5(2). pp. 63–82.</p>
-<div class="example docutils container">
-<p>The selector should be initialised with a list of objects. The elements
+<dl>
+<dt>Example:</dt><dd><p>The selector should be initialised with a list of objects. The elements
 of this list can be of any type.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">selector</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">TenneySelector</span><span class="p">([</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="s1">&#39;B&#39;</span><span class="p">,</span> <span class="s1">&#39;C&#39;</span><span class="p">,</span> <span class="s1">&#39;D&#39;</span><span class="p">,</span> <span class="s1">&#39;E&#39;</span><span class="p">,</span> <span class="s1">&#39;F&#39;</span><span class="p">])</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">selector</span><span class="o">.</span><span class="n">contents</span>
@@ -259,9 +260,8 @@ properties will return us their current values.</p>
 <span class="go">2</span>
 </pre></div>
 </div>
-</div>
-<div class="example docutils container">
-<p>Use the read-only properties <code class="docutils literal notranslate"><span class="pre">previous_result</span></code> and <code class="docutils literal notranslate"><span class="pre">previous_index</span></code>
+</dd>
+<dt>Example:</dt><dd><p>Use the read-only properties <code class="docutils literal notranslate"><span class="pre">previous_result</span></code> and <code class="docutils literal notranslate"><span class="pre">previous_index</span></code>
 to output the previous result and its index. Default values for both
 is <code class="docutils literal notranslate"><span class="pre">None</span></code>.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">selector</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">TenneySelector</span><span class="p">([</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="s1">&#39;B&#39;</span><span class="p">,</span> <span class="s1">&#39;C&#39;</span><span class="p">,</span> <span class="s1">&#39;D&#39;</span><span class="p">,</span> <span class="s1">&#39;E&#39;</span><span class="p">,</span> <span class="s1">&#39;F&#39;</span><span class="p">])</span>
@@ -277,9 +277,8 @@ is <code class="docutils literal notranslate"><span class="pre">None</span></cod
 <span class="go">C</span>
 </pre></div>
 </div>
-</div>
-<div class="example docutils container">
-<p>This class can take two optional keywords argument during its
+</dd>
+<dt>Example:</dt><dd><p>This class can take two optional keywords argument during its
 instantiation, namely <code class="docutils literal notranslate"><span class="pre">weights</span></code> and <code class="docutils literal notranslate"><span class="pre">curvature</span></code>. <code class="docutils literal notranslate"><span class="pre">weights</span></code> takes
 a list of floats with the individual weights of each element; by
 default,  all weights are set to 1.0. These weights affects the
@@ -318,9 +317,8 @@ without repetition.</p>
 <span class="go">[2.0, 0.0, 2.0, 2.0, 2.0, 2.0]</span>
 </pre></div>
 </div>
-</div>
-<div class="example docutils container">
-<p>Using a convex curvature:</p>
+</dd>
+<dt>Example:</dt><dd><p>Using a convex curvature:</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">selector</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">TenneySelector</span><span class="p">([</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="s1">&#39;B&#39;</span><span class="p">,</span> <span class="s1">&#39;C&#39;</span><span class="p">,</span> <span class="s1">&#39;D&#39;</span><span class="p">,</span> <span class="s1">&#39;E&#39;</span><span class="p">,</span> <span class="s1">&#39;F&#39;</span><span class="p">],</span>
 <span class="gp">... </span>                                 <span class="n">curvature</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span>
 <span class="gp">... </span>                                 <span class="p">)</span>
@@ -365,9 +363,8 @@ of a same element being separated only by a single other one, such as
 <p>As we can see, all non-zero values are relatively close to each other,
 which is why there is a high chance of an element being selected again
 just two iterations apart.</p>
-</div>
-<div class="example docutils container">
-<p>Using a concave curvature:</p>
+</dd>
+<dt>Example:</dt><dd><p>Using a concave curvature:</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">selector</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">TenneySelector</span><span class="p">([</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="s1">&#39;B&#39;</span><span class="p">,</span> <span class="s1">&#39;C&#39;</span><span class="p">,</span> <span class="s1">&#39;D&#39;</span><span class="p">,</span> <span class="s1">&#39;E&#39;</span><span class="p">,</span> <span class="s1">&#39;F&#39;</span><span class="p">],</span>
 <span class="gp">... </span>                                 <span class="n">curvature</span><span class="o">=</span><span class="mf">15.2</span><span class="p">,</span>
 <span class="gp">... </span>                                 <span class="p">)</span>
@@ -412,9 +409,8 @@ string of <code class="docutils literal notranslate"><span class="pre">'DFAECB'<
 <p>As we can see, the non-zero values vary wildly. The higher the
 curvature, the higher the difference between these values, making some
 of them much more likely to be selected.</p>
-</div>
-<div class="example docutils container">
-<p>Each element can also have a fixed weight to themselves. This will
+</dd>
+<dt>Example:</dt><dd><p>Each element can also have a fixed weight to themselves. This will
 affect the probability calculation. The example below uses the default
 linear curvature.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">selector</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">TenneySelector</span><span class="p">(</span>
@@ -436,9 +432,8 @@ linear curvature.</p>
 <span class="go">[7.0, 12.0, 10.0, 15.0, 0.0, 20.0]</span>
 </pre></div>
 </div>
-</div>
-<div class="example docutils container">
-<p>To reset the probability distribution of all elements to its initial
+</dd>
+<dt>Example:</dt><dd><p>To reset the probability distribution of all elements to its initial
 value (an uniform distribution), use the method
 <code class="docutils literal notranslate"><span class="pre">reset_probabilities()</span></code>.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">selector</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">TenneySelector</span><span class="p">([</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="s1">&#39;B&#39;</span><span class="p">,</span> <span class="s1">&#39;C&#39;</span><span class="p">,</span> <span class="s1">&#39;D&#39;</span><span class="p">,</span> <span class="s1">&#39;E&#39;</span><span class="p">,</span> <span class="s1">&#39;F&#39;</span><span class="p">])</span>
@@ -451,9 +446,8 @@ value (an uniform distribution), use the method
 <span class="go">[1.0, 1.0, 1.0, 1.0, 1.0, 1.0]</span>
 </pre></div>
 </div>
-</div>
-<div class="example docutils container">
-<p>The <code class="docutils literal notranslate"><span class="pre">contents</span></code> of instances of this class can be indexed and sliced.
+</dd>
+<dt>Example:</dt><dd><p>The <code class="docutils literal notranslate"><span class="pre">contents</span></code> of instances of this class can be indexed and sliced.
 This allows reading, assigning, or deleting values from <code class="docutils literal notranslate"><span class="pre">contents</span></code>.
 Replacing elements by assignment will not affect the <code class="docutils literal notranslate"><span class="pre">probabilities</span></code>
 property, and the new elements will have the same probability as the
@@ -491,9 +485,8 @@ case of the selector above, we have:</p>
 <span class="go">False</span>
 </pre></div>
 </div>
-</div>
-<div class="example docutils container">
-<p>A new list of an arbitrary length can be set at any point using the
+</dd>
+<dt>Example:</dt><dd><p>A new list of an arbitrary length can be set at any point using the
 property <code class="docutils literal notranslate"><span class="pre">contents</span></code>. Do notice that both <code class="docutils literal notranslate"><span class="pre">probabilities</span></code> and
 <code class="docutils literal notranslate"><span class="pre">weights</span></code> will be reset at that point.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">selector</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">TenneySelector</span><span class="p">(</span>
@@ -521,9 +514,8 @@ property <code class="docutils literal notranslate"><span class="pre">contents</
 <span class="go">[1.0, 1.0, 1.0, 1.0]</span>
 </pre></div>
 </div>
-</div>
-<div class="example docutils container">
-<p>To change the curvature value at any point, simply set the property
+</dd>
+<dt>Example:</dt><dd><p>To change the curvature value at any point, simply set the property
 <code class="docutils literal notranslate"><span class="pre">curvature</span></code> to a different value.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">selector</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">TenneySelector</span><span class="p">([</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="s1">&#39;B&#39;</span><span class="p">,</span> <span class="s1">&#39;C&#39;</span><span class="p">,</span> <span class="s1">&#39;D&#39;</span><span class="p">,</span> <span class="s1">&#39;E&#39;</span><span class="p">,</span> <span class="s1">&#39;F&#39;</span><span class="p">])</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">selector</span><span class="o">.</span><span class="n">curvature</span>
@@ -533,7 +525,8 @@ property <code class="docutils literal notranslate"><span class="pre">contents</
 <span class="go">0.25</span>
 </pre></div>
 </div>
-</div>
+</dd>
+</dl>
 <p class="rubric">Methods</p>
 <table class="longtable docutils align-default">
 <colgroup>

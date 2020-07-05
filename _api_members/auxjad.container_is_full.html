@@ -110,8 +110,9 @@
 <li class="toctree-l2"><a class="reference internal" href="auxjad.remove_empty_tuplets.html">auxjad.remove_empty_tuplets</a></li>
 <li class="toctree-l2"><a class="reference internal" href="auxjad.remove_repeated_dynamics.html">auxjad.remove_repeated_dynamics</a></li>
 <li class="toctree-l2"><a class="reference internal" href="auxjad.remove_repeated_time_signatures.html">auxjad.remove_repeated_time_signatures</a></li>
-<li class="toctree-l2"><a class="reference internal" href="auxjad.respell_container.html">auxjad.respell_container</a></li>
+<li class="toctree-l2"><a class="reference internal" href="auxjad.repeat_container.html">auxjad.repeat_container</a></li>
 <li class="toctree-l2"><a class="reference internal" href="auxjad.respell_chord.html">auxjad.respell_chord</a></li>
+<li class="toctree-l2"><a class="reference internal" href="auxjad.respell_container.html">auxjad.respell_container</a></li>
 <li class="toctree-l2"><a class="reference internal" href="auxjad.rests_to_multimeasure_rest.html">auxjad.rests_to_multimeasure_rest</a></li>
 <li class="toctree-l2"><a class="reference internal" href="auxjad.Shuffler.html">auxjad.Shuffler</a></li>
 <li class="toctree-l2"><a class="reference internal" href="auxjad.simplified_time_signature_ratio.html">auxjad.simplified_time_signature_ratio</a></li>
@@ -193,11 +194,11 @@
 <dl class="py function">
 <dt id="auxjad.container_is_full">
 <code class="sig-prename descclassname">auxjad.</code><code class="sig-name descname">container_is_full</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">container</span><span class="p">:</span> <span class="n">abjad.core.Container.Container</span></em><span class="sig-paren">)</span> &#x2192; bool<a class="headerlink" href="#auxjad.container_is_full" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns a <code class="docutils literal notranslate"><span class="pre">bool</span></code> representing whether an input container (of type
-<code class="docutils literal notranslate"><span class="pre">abjad.Container</span></code> or child class) has its last bar is fully filled in or
-not.</p>
-<div class="example docutils container">
-<p>Returns <code class="docutils literal notranslate"><span class="pre">True</span></code> if the last bar of any container (or child class) is
+<dd><p>Returns a <code class="docutils literal notranslate"><span class="pre">bool</span></code> representing whether the last bar of an input
+container (of type <code class="docutils literal notranslate"><span class="pre">abjad.Container</span></code> or child class) is fully filled in
+or not.</p>
+<dl>
+<dt>Example:</dt><dd><p>Returns <code class="docutils literal notranslate"><span class="pre">True</span></code> if the last bar of any container (or child class) is
 full, otherwise returns <code class="docutils literal notranslate"><span class="pre">False</span></code>. If no time signature is encountered,
 it uses LilyPond’s convention and considers the container as in 4/4.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">container1</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;c&#39;4 d&#39;4 e&#39;4 f&#39;4&quot;</span><span class="p">)</span>
@@ -214,9 +215,8 @@ it uses LilyPond’s convention and considers the container as in 4/4.</p>
 <span class="go">True</span>
 </pre></div>
 </div>
-</div>
-<div class="example docutils container">
-<p>Handles any time signatures as well as changes of time signature.</p>
+</dd>
+<dt>Example:</dt><dd><p>Handles any time signatures as well as changes of time signature.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">container1</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;\time 4/4 c&#39;4 d&#39;4 e&#39;4 f&#39;4&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">container2</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;\time 3/4 a2. \time 2/4 r2&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">container3</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;\time 5/4 g1 ~ g4 \time 4/4 af&#39;2&quot;</span><span class="p">)</span>
@@ -231,9 +231,8 @@ it uses LilyPond’s convention and considers the container as in 4/4.</p>
 <span class="go">False</span>
 </pre></div>
 </div>
-</div>
-<div class="example docutils container">
-<p>Correctly handles partial time signatures.</p>
+</dd>
+<dt>Example:</dt><dd><p>Correctly handles partial time signatures.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">container</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;c&#39;4 d&#39;4 e&#39;4 f&#39;4&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">time_signature</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">TimeSignature</span><span class="p">((</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">),</span> <span class="n">partial</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">attach</span><span class="p">(</span><span class="n">time_signature</span><span class="p">,</span> <span class="n">container</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
@@ -241,9 +240,8 @@ it uses LilyPond’s convention and considers the container as in 4/4.</p>
 <span class="go">True</span>
 </pre></div>
 </div>
-</div>
-<div class="example docutils container">
-<p>It also handles multi-measure rests.</p>
+</dd>
+<dt>Example:</dt><dd><p>It also handles multi-measure rests.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">container1</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;R1&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">container2</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;\time 3/4 R1*3/4 \time 2/4 r2&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">container3</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;\time 5/4 R1*5/4 \time 4/4 g&#39;&#39;4&quot;</span><span class="p">)</span>
@@ -258,7 +256,8 @@ it uses LilyPond’s convention and considers the container as in 4/4.</p>
 <span class="go">False</span>
 </pre></div>
 </div>
-</div>
+</dd>
+</dl>
 <div class="admonition error">
 <p class="admonition-title">Error</p>
 <p>If a container is malformed, i.e. it has an underfilled bar before a

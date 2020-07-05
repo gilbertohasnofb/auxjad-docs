@@ -36,7 +36,7 @@
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="auxjad.Shuffler" href="auxjad.Shuffler.html" />
-    <link rel="prev" title="auxjad.respell_chord" href="auxjad.respell_chord.html" /> 
+    <link rel="prev" title="auxjad.respell_container" href="auxjad.respell_container.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -110,8 +110,9 @@
 <li class="toctree-l2"><a class="reference internal" href="auxjad.remove_empty_tuplets.html">auxjad.remove_empty_tuplets</a></li>
 <li class="toctree-l2"><a class="reference internal" href="auxjad.remove_repeated_dynamics.html">auxjad.remove_repeated_dynamics</a></li>
 <li class="toctree-l2"><a class="reference internal" href="auxjad.remove_repeated_time_signatures.html">auxjad.remove_repeated_time_signatures</a></li>
-<li class="toctree-l2"><a class="reference internal" href="auxjad.respell_container.html">auxjad.respell_container</a></li>
+<li class="toctree-l2"><a class="reference internal" href="auxjad.repeat_container.html">auxjad.repeat_container</a></li>
 <li class="toctree-l2"><a class="reference internal" href="auxjad.respell_chord.html">auxjad.respell_chord</a></li>
+<li class="toctree-l2"><a class="reference internal" href="auxjad.respell_container.html">auxjad.respell_container</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">auxjad.rests_to_multimeasure_rest</a></li>
 <li class="toctree-l2"><a class="reference internal" href="auxjad.Shuffler.html">auxjad.Shuffler</a></li>
 <li class="toctree-l2"><a class="reference internal" href="auxjad.simplified_time_signature_ratio.html">auxjad.simplified_time_signature_ratio</a></li>
@@ -194,10 +195,10 @@
 <dt id="auxjad.rests_to_multimeasure_rest">
 <code class="sig-prename descclassname">auxjad.</code><code class="sig-name descname">rests_to_multimeasure_rest</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">container</span><span class="p">:</span> <span class="n">abjad.core.Container.Container</span></em><span class="sig-paren">)</span><a class="headerlink" href="#auxjad.rests_to_multimeasure_rest" title="Permalink to this definition">¶</a></dt>
 <dd><p>Mutates an input container (of type <code class="docutils literal notranslate"><span class="pre">abjad.Container</span></code> or child class)
-in place and has no return value. This function looks for bars filled with
+in place and has no return value; this function looks for bars filled with
 regular rests and converts them into an <code class="docutils literal notranslate"><span class="pre">abjad.MultimeasureRest</span></code>.</p>
-<div class="example docutils container">
-<p>Converts any measure filled with regular rests into a measure with a
+<dl>
+<dt>Example:</dt><dd><p>Converts any measure filled with regular rests into a measure with a
 single multi-measure rest.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">container</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;r1&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">auxjad</span><span class="o">.</span><span class="n">rests_to_multimeasure_rest</span><span class="p">(</span><span class="n">container</span><span class="p">)</span>
@@ -210,9 +211,8 @@ single multi-measure rest.</p>
 <div class="figure align-default">
 <img alt="../_images/image-rests_to_multimeasure_rest-1.png" src="../_images/image-rests_to_multimeasure_rest-1.png" />
 </div>
-</div>
-<div class="example docutils container">
-<p>Works with measures with multiple regular rests.</p>
+</dd>
+<dt>Example:</dt><dd><p>Works with measures with multiple regular rests.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">container</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;r2 r8.. r32 r16 r8 r16&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">f</span><span class="p">(</span><span class="n">container</span><span class="p">)</span>
 <span class="go">{</span>
@@ -238,7 +238,8 @@ single multi-measure rest.</p>
 <div class="figure align-default">
 <img alt="../_images/image-rests_to_multimeasure_rest-3.png" src="../_images/image-rests_to_multimeasure_rest-3.png" />
 </div>
-</div>
+</dd>
+</dl>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>Notice that the time signatures in the output are commented out with
@@ -261,20 +262,21 @@ with either <code class="docutils literal notranslate"><span class="pre">abjad.C
 </pre></div>
 </div>
 </div>
-<div class="example docutils container">
-<p>Works with containers with multiple time signatures as well as notes.</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">container</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;\time 3/4 r2. | &quot;</span>
-<span class="gp">... </span>                             <span class="s2">&quot;</span><span class="se">\t</span><span class="s2">ime 6/8 r2. | &quot;</span>
-<span class="gp">... </span>                             <span class="s2">&quot;</span><span class="se">\t</span><span class="s2">ime 5/4 c&#39;1 ~ c&#39;4 | r1 r4&quot;</span>
-<span class="gp">... </span>                             <span class="p">)</span>
+<dl>
+<dt>Example:</dt><dd><p>Works with containers with multiple time signatures as well as notes.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">container</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;\time 3/4 r2. | &quot;</span>
+<span class="gp">... </span>                        <span class="s2">&quot;</span><span class="se">\t</span><span class="s2">ime 6/8 r2. | &quot;</span>
+<span class="gp">... </span>                        <span class="s2">&quot;</span><span class="se">\t</span><span class="s2">ime 5/4 c&#39;1 ~ c&#39;4 | r1 r4&quot;</span>
+<span class="gp">... </span>                        <span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">auxjad</span><span class="o">.</span><span class="n">rests_to_multimeasure_rest</span><span class="p">(</span><span class="n">container</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">f</span><span class="p">(</span><span class="n">container</span><span class="p">)</span>
+<span class="go">\new Staff</span>
 <span class="go">{</span>
-<span class="go">    %%% \time 3/4 %%%</span>
+<span class="go">    \time 3/4</span>
 <span class="go">    R1 * 3/4</span>
-<span class="go">    %%% \time 6/8 %%%</span>
+<span class="go">    \time 6/8</span>
 <span class="go">    R1 * 3/4</span>
-<span class="go">    %%% \time 5/4 %%%</span>
+<span class="go">    \time 5/4</span>
 <span class="go">    c&#39;1</span>
 <span class="go">    ~</span>
 <span class="go">    c&#39;4</span>
@@ -285,9 +287,8 @@ with either <code class="docutils literal notranslate"><span class="pre">abjad.C
 <div class="figure align-default">
 <img alt="../_images/image-rests_to_multimeasure_rest-6.png" src="../_images/image-rests_to_multimeasure_rest-6.png" />
 </div>
-</div>
-<div class="example docutils container">
-<p>Works with containers with tuplets.</p>
+</dd>
+<dt>Example:</dt><dd><p>Works with containers with tuplets.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">container</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;\times 2/3 {r2 r2 r2}&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">f</span><span class="p">(</span><span class="n">container</span><span class="p">)</span>
 <span class="go">{</span>
@@ -346,7 +347,8 @@ with either <code class="docutils literal notranslate"><span class="pre">abjad.C
 <div class="figure align-default">
 <img alt="../_images/image-rests_to_multimeasure_rest-10.png" src="../_images/image-rests_to_multimeasure_rest-10.png" />
 </div>
-</div>
+</dd>
+</dl>
 </dd></dl>
 
 </div>
@@ -362,7 +364,7 @@ with either <code class="docutils literal notranslate"><span class="pre">abjad.C
         <a href="auxjad.Shuffler.html" class="btn btn-neutral float-right" title="auxjad.Shuffler" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="auxjad.respell_chord.html" class="btn btn-neutral float-left" title="auxjad.respell_chord" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="auxjad.respell_container.html" class="btn btn-neutral float-left" title="auxjad.respell_container" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   

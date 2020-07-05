@@ -35,8 +35,8 @@
   <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="auxjad.rests_to_multimeasure_rest" href="auxjad.rests_to_multimeasure_rest.html" />
-    <link rel="prev" title="auxjad.respell_container" href="auxjad.respell_container.html" /> 
+    <link rel="next" title="auxjad.respell_container" href="auxjad.respell_container.html" />
+    <link rel="prev" title="auxjad.repeat_container" href="auxjad.repeat_container.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -110,8 +110,9 @@
 <li class="toctree-l2"><a class="reference internal" href="auxjad.remove_empty_tuplets.html">auxjad.remove_empty_tuplets</a></li>
 <li class="toctree-l2"><a class="reference internal" href="auxjad.remove_repeated_dynamics.html">auxjad.remove_repeated_dynamics</a></li>
 <li class="toctree-l2"><a class="reference internal" href="auxjad.remove_repeated_time_signatures.html">auxjad.remove_repeated_time_signatures</a></li>
-<li class="toctree-l2"><a class="reference internal" href="auxjad.respell_container.html">auxjad.respell_container</a></li>
+<li class="toctree-l2"><a class="reference internal" href="auxjad.repeat_container.html">auxjad.repeat_container</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">auxjad.respell_chord</a></li>
+<li class="toctree-l2"><a class="reference internal" href="auxjad.respell_container.html">auxjad.respell_container</a></li>
 <li class="toctree-l2"><a class="reference internal" href="auxjad.rests_to_multimeasure_rest.html">auxjad.rests_to_multimeasure_rest</a></li>
 <li class="toctree-l2"><a class="reference internal" href="auxjad.Shuffler.html">auxjad.Shuffler</a></li>
 <li class="toctree-l2"><a class="reference internal" href="auxjad.simplified_time_signature_ratio.html">auxjad.simplified_time_signature_ratio</a></li>
@@ -194,10 +195,10 @@
 <dt id="auxjad.respell_chord">
 <code class="sig-prename descclassname">auxjad.</code><code class="sig-name descname">respell_chord</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">chord</span><span class="p">:</span> <span class="n">abjad.core.Chord.Chord</span></em>, <em class="sig-param"><span class="o">*</span></em>, <em class="sig-param"><span class="n">include_multiples</span><span class="p">:</span> <span class="n">bool</span> <span class="o">=</span> <span class="default_value">False</span></em>, <em class="sig-param"><span class="n">respell_by_pitch_class</span><span class="p">:</span> <span class="n">bool</span> <span class="o">=</span> <span class="default_value">False</span></em><span class="sig-paren">)</span><a class="headerlink" href="#auxjad.respell_chord" title="Permalink to this definition">¶</a></dt>
 <dd><p>Mutates an input chord (of type <code class="docutils literal notranslate"><span class="pre">abjad.Chord</span></code> or child class) in
-place and has no return value. This function changes the accidentals of
+place and has no return value; this function changes the accidentals of
 individual pitches of a chord in order to avoid augmented unisons.</p>
-<div class="example docutils container">
-<p>To use this function, apply it to a chord that contains augmented
+<dl>
+<dt>Example:</dt><dd><p>To use this function, apply it to a chord that contains augmented
 unisons.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">chord</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Chord</span><span class="p">(</span><span class="s2">&quot;&lt;c&#39; cs&#39;&gt;4&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">auxjad</span><span class="o">.</span><span class="n">respell_chord</span><span class="p">(</span><span class="n">chord</span><span class="p">)</span>
@@ -208,9 +209,8 @@ unisons.</p>
 <div class="figure align-default">
 <img alt="../_images/image-respell_chord-1.png" src="../_images/image-respell_chord-1.png" />
 </div>
-</div>
-<div class="example docutils container">
-<p>The example below shows the default spelling of 2-note chords by
+</dd>
+<dt>Example:</dt><dd><p>The example below shows the default spelling of 2-note chords by
 <code class="docutils literal notranslate"><span class="pre">Abjad</span></code> in the upper staff, and the respelt 2-note chords in the
 bottom staff.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">staff1</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">()</span>
@@ -265,9 +265,8 @@ bottom staff.</p>
 <div class="figure align-default">
 <img alt="../_images/image-respell_chord-2.png" src="../_images/image-respell_chord-2.png" />
 </div>
-</div>
-<div class="example docutils container">
-<p>The function looks for all augmented unissons in chords of 3 or more
+</dd>
+<dt>Example:</dt><dd><p>The function looks for all augmented unissons in chords of 3 or more
 pitches:</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">chord1</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Chord</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;&lt;a c&#39; cs&#39; f&#39;&gt;1&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">chord2</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Chord</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;&lt;a c&#39; cs&#39; f&#39;&gt;1&quot;</span><span class="p">)</span>
@@ -300,9 +299,8 @@ pitches:</p>
 <div class="figure align-default">
 <img alt="../_images/image-respell_chord-4.png" src="../_images/image-respell_chord-4.png" />
 </div>
-</div>
-<div class="example docutils container">
-<p>By default, this function only changes spelling for pitches that are
+</dd>
+<dt>Example:</dt><dd><p>By default, this function only changes spelling for pitches that are
 1 semitone apart.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">chord1</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Chord</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;&lt;c&#39; cs&#39;&#39;&gt;1&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">chord2</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Chord</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;&lt;c&#39; cs&#39;&#39;&gt;1&quot;</span><span class="p">)</span>
@@ -338,9 +336,8 @@ function with the keyword argument <code class="docutils literal notranslate"><s
 <div class="figure align-default">
 <img alt="../_images/image-respell_chord-6.png" src="../_images/image-respell_chord-6.png" />
 </div>
-</div>
-<div class="example docutils container">
-<p>By default, when this function changes the spelling of a pitch, it does
+</dd>
+<dt>Example:</dt><dd><p>By default, when this function changes the spelling of a pitch, it does
 not change the spelling of all other pitches with the same pitch-class.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">chord1</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Chord</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;&lt;c&#39; cs&#39; cs&#39;&#39;&gt;1&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">chord2</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Chord</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;&lt;c&#39; cs&#39; cs&#39;&#39;&gt;1&quot;</span><span class="p">)</span>
@@ -374,7 +371,8 @@ argument <code class="docutils literal notranslate"><span class="pre">respell_by
 <div class="figure align-default">
 <img alt="../_images/image-respell_chord-8.png" src="../_images/image-respell_chord-8.png" />
 </div>
-</div>
+</dd>
+</dl>
 </dd></dl>
 
 </div>
@@ -387,10 +385,10 @@ argument <code class="docutils literal notranslate"><span class="pre">respell_by
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="auxjad.rests_to_multimeasure_rest.html" class="btn btn-neutral float-right" title="auxjad.rests_to_multimeasure_rest" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="auxjad.respell_container.html" class="btn btn-neutral float-right" title="auxjad.respell_container" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="auxjad.respell_container.html" class="btn btn-neutral float-left" title="auxjad.respell_container" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="auxjad.repeat_container.html" class="btn btn-neutral float-left" title="auxjad.repeat_container" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   

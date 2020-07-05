@@ -110,8 +110,9 @@
 <li class="toctree-l2"><a class="reference internal" href="auxjad.remove_empty_tuplets.html">auxjad.remove_empty_tuplets</a></li>
 <li class="toctree-l2"><a class="reference internal" href="auxjad.remove_repeated_dynamics.html">auxjad.remove_repeated_dynamics</a></li>
 <li class="toctree-l2"><a class="reference internal" href="auxjad.remove_repeated_time_signatures.html">auxjad.remove_repeated_time_signatures</a></li>
-<li class="toctree-l2"><a class="reference internal" href="auxjad.respell_container.html">auxjad.respell_container</a></li>
+<li class="toctree-l2"><a class="reference internal" href="auxjad.repeat_container.html">auxjad.repeat_container</a></li>
 <li class="toctree-l2"><a class="reference internal" href="auxjad.respell_chord.html">auxjad.respell_chord</a></li>
+<li class="toctree-l2"><a class="reference internal" href="auxjad.respell_container.html">auxjad.respell_container</a></li>
 <li class="toctree-l2"><a class="reference internal" href="auxjad.rests_to_multimeasure_rest.html">auxjad.rests_to_multimeasure_rest</a></li>
 <li class="toctree-l2"><a class="reference internal" href="auxjad.Shuffler.html">auxjad.Shuffler</a></li>
 <li class="toctree-l2"><a class="reference internal" href="auxjad.simplified_time_signature_ratio.html">auxjad.simplified_time_signature_ratio</a></li>
@@ -195,8 +196,8 @@
 <code class="sig-prename descclassname">auxjad.</code><code class="sig-name descname">time_signature_extractor</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">container</span><span class="p">:</span> <span class="n">abjad.core.Container.Container</span></em>, <em class="sig-param"><span class="o">*</span></em>, <em class="sig-param"><span class="n">do_not_use_none</span><span class="p">:</span> <span class="n">bool</span> <span class="o">=</span> <span class="default_value">False</span></em>, <em class="sig-param"><span class="n">implicit_common_time</span><span class="p">:</span> <span class="n">bool</span> <span class="o">=</span> <span class="default_value">True</span></em>, <em class="sig-param"><span class="n">omit_repeated</span><span class="p">:</span> <span class="n">bool</span> <span class="o">=</span> <span class="default_value">False</span></em><span class="sig-paren">)</span><a class="headerlink" href="#auxjad.time_signature_extractor" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns a <code class="docutils literal notranslate"><span class="pre">list</span></code> with the <code class="docutils literal notranslate"><span class="pre">abjad.TimeSignature</span></code> for all measures of
 an input <code class="docutils literal notranslate"><span class="pre">abjad.Container</span></code>.</p>
-<div class="example docutils container">
-<p>This function returns a list with one <code class="docutils literal notranslate"><span class="pre">abjad.TimeSignature</span></code> per
+<dl>
+<dt>Example:</dt><dd><p>This function returns a list with one <code class="docutils literal notranslate"><span class="pre">abjad.TimeSignature</span></code> per
 measure.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">container</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;\time 3/4 c&#39;2. \time 4/4 e&#39;1&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">time_signatures</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">time_signature_extractor</span><span class="p">(</span><span class="n">container</span><span class="p">)</span>
@@ -204,9 +205,8 @@ measure.</p>
 <span class="go">[TimeSignature((3, 4)), TimeSignature((4, 4))]</span>
 </pre></div>
 </div>
-</div>
-<div class="example docutils container">
-<p>By default, the list will contain a <code class="docutils literal notranslate"><span class="pre">None</span></code> if a measure does
+</dd>
+<dt>Example:</dt><dd><p>By default, the list will contain a <code class="docutils literal notranslate"><span class="pre">None</span></code> if a measure does
 not have an explicit time signature.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">container</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">(</span>
 <span class="gp">... </span>    <span class="sa">r</span><span class="s2">&quot;\time 5/8 c&#39;4 ~ c&#39;16 \time 3/8 d&#39;4. e&#39;4.&quot;</span><span class="p">)</span>
@@ -225,9 +225,8 @@ behaviour.</p>
 <span class="go">[TimeSignature((5, 8)), TimeSignature((3, 8)), TimeSignature((3, 8))]</span>
 </pre></div>
 </div>
-</div>
-<div class="example docutils container">
-<p>By default, time signatures are output according to the container, even
+</dd>
+<dt>Example:</dt><dd><p>By default, time signatures are output according to the container, even
 if there are multiple instances of a same time signature.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">container</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">(</span>
 <span class="gp">... </span>    <span class="sa">r</span><span class="s2">&quot;\time 3/4 c&#39;2. d&#39;2. \time 3/4 e&#39;2. f&#39;2.&quot;</span><span class="p">)</span>
@@ -246,7 +245,8 @@ repeated time signatures with <code class="docutils literal notranslate"><span c
 <span class="go">[abjad.TimeSignature((3, 4)), None, None, None]</span>
 </pre></div>
 </div>
-</div>
+</dd>
+</dl>
 <div class="admonition error">
 <p class="admonition-title">Error</p>
 <p>Setting both <code class="docutils literal notranslate"><span class="pre">do_not_use_none</span></code> and <code class="docutils literal notranslate"><span class="pre">omit_repeated</span></code> to <code class="docutils literal notranslate"><span class="pre">True</span></code>
@@ -263,8 +263,8 @@ will raise an exception:</p>
 </pre></div>
 </div>
 </div>
-<div class="example docutils container">
-<p>LilyPond uses an implicit time signature of 4/4 whenever a time
+<dl>
+<dt>Example:</dt><dd><p>LilyPond uses an implicit time signature of 4/4 whenever a time
 signature is not found. This function behaves the same way.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">container</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;c&#39;1 d&#39;1 e&#39;1 f&#39;1&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">time_signatures</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">time_signature_extractor</span><span class="p">(</span><span class="n">container</span><span class="p">)</span>
@@ -281,7 +281,8 @@ signature is not found. This function behaves the same way.</p>
 <span class="go">[None, None, None, None]</span>
 </pre></div>
 </div>
-</div>
+</dd>
+</dl>
 <div class="admonition error">
 <p class="admonition-title">Error</p>
 <p>Setting <code class="docutils literal notranslate"><span class="pre">do_not_use_none</span></code> to <code class="docutils literal notranslate"><span class="pre">True</span></code> and <code class="docutils literal notranslate"><span class="pre">implicit_common_time</span></code> to

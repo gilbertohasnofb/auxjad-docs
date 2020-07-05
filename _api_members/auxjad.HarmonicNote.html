@@ -110,8 +110,9 @@
 <li class="toctree-l2"><a class="reference internal" href="auxjad.remove_empty_tuplets.html">auxjad.remove_empty_tuplets</a></li>
 <li class="toctree-l2"><a class="reference internal" href="auxjad.remove_repeated_dynamics.html">auxjad.remove_repeated_dynamics</a></li>
 <li class="toctree-l2"><a class="reference internal" href="auxjad.remove_repeated_time_signatures.html">auxjad.remove_repeated_time_signatures</a></li>
-<li class="toctree-l2"><a class="reference internal" href="auxjad.respell_container.html">auxjad.respell_container</a></li>
+<li class="toctree-l2"><a class="reference internal" href="auxjad.repeat_container.html">auxjad.repeat_container</a></li>
 <li class="toctree-l2"><a class="reference internal" href="auxjad.respell_chord.html">auxjad.respell_chord</a></li>
+<li class="toctree-l2"><a class="reference internal" href="auxjad.respell_container.html">auxjad.respell_container</a></li>
 <li class="toctree-l2"><a class="reference internal" href="auxjad.rests_to_multimeasure_rest.html">auxjad.rests_to_multimeasure_rest</a></li>
 <li class="toctree-l2"><a class="reference internal" href="auxjad.Shuffler.html">auxjad.Shuffler</a></li>
 <li class="toctree-l2"><a class="reference internal" href="auxjad.simplified_time_signature_ratio.html">auxjad.simplified_time_signature_ratio</a></li>
@@ -195,8 +196,8 @@
 <em class="property">class </em><code class="sig-prename descclassname">auxjad.</code><code class="sig-name descname">HarmonicNote</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">arguments</span></em>, <em class="sig-param"><span class="n">multiplier</span><span class="p">:</span> <span class="n">Optional<span class="p">[</span>Union<span class="p">[</span>abjad.utilities.Duration.Duration<span class="p">, </span>Tuple<span class="p">[</span>int<span class="p">, </span>int<span class="p">]</span><span class="p">]</span><span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em>, <em class="sig-param"><span class="n">tag</span><span class="p">:</span> <span class="n">Optional<span class="p">[</span>abjad.system.Tag.Tag<span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em>, <em class="sig-param"><span class="n">style</span><span class="p">:</span> <span class="n">str</span> <span class="o">=</span> <span class="default_value">'harmonic'</span></em>, <em class="sig-param"><span class="n">markup</span><span class="p">:</span> <span class="n">Optional<span class="p">[</span>str<span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em>, <em class="sig-param"><span class="n">direction</span><span class="p">:</span> <span class="n">Union<span class="p">[</span>str<span class="p">, </span>abjad.enums.VerticalAlignment<span class="p">]</span></span> <span class="o">=</span> <span class="default_value">'up'</span></em><span class="sig-paren">)</span><a class="headerlink" href="#auxjad.HarmonicNote" title="Permalink to this definition">¶</a></dt>
 <dd><p>Creates a note with tweaked notehead for harmonics. This is a child
 class of <code class="docutils literal notranslate"><span class="pre">abjad.Note</span></code>.</p>
-<div class="example docutils container">
-<p>Usage is similar to <code class="docutils literal notranslate"><span class="pre">abjad.Note</span></code>:</p>
+<dl>
+<dt>Example:</dt><dd><p>Usage is similar to <code class="docutils literal notranslate"><span class="pre">abjad.Note</span></code>:</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">harm</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">HarmonicNote</span><span class="p">(</span><span class="s2">&quot;c&#39;&#39;4&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">harm</span><span class="o">.</span><span class="n">style</span>
 <span class="go">&#39;harmonic&#39;</span>
@@ -232,9 +233,8 @@ many different ways:</p>
 <div class="figure align-default">
 <img alt="../_images/image-HarmonicNote-2.png" src="../_images/image-HarmonicNote-2.png" />
 </div>
-</div>
-<div class="example docutils container">
-<p>When creating an <code class="docutils literal notranslate"><span class="pre">HarmonicNote</span></code>, use the keyword argument <code class="docutils literal notranslate"><span class="pre">style</span></code>
+</dd>
+<dt>Example:</dt><dd><p>When creating an <code class="docutils literal notranslate"><span class="pre">HarmonicNote</span></code>, use the keyword argument <code class="docutils literal notranslate"><span class="pre">style</span></code>
 to set a different type of note head, such as <code class="docutils literal notranslate"><span class="pre">'harmonic-mixed'</span></code>:</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">harm</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">HarmonicNote</span><span class="p">(</span><span class="s2">&quot;c&#39;&#39;4&quot;</span><span class="p">,</span>
 <span class="gp">... </span>                           <span class="n">style</span><span class="o">=</span><span class="s1">&#39;harmonic-mixed&#39;</span><span class="p">,</span>
@@ -249,9 +249,8 @@ to set a different type of note head, such as <code class="docutils literal notr
 <div class="figure align-default">
 <img alt="../_images/image-HarmonicNote-3.png" src="../_images/image-HarmonicNote-3.png" />
 </div>
-</div>
-<div class="example docutils container">
-<p>Similarly to <code class="docutils literal notranslate"><span class="pre">abjad.Note</span></code>, <code class="docutils literal notranslate"><span class="pre">HarmonicNote</span></code> can take multipliers:</p>
+</dd>
+<dt>Example:</dt><dd><p>Similarly to <code class="docutils literal notranslate"><span class="pre">abjad.Note</span></code>, <code class="docutils literal notranslate"><span class="pre">HarmonicNote</span></code> can take multipliers:</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">harm</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">HarmonicNote</span><span class="p">(</span><span class="s2">&quot;c&#39;&#39;4&quot;</span><span class="p">,</span>
 <span class="gp">... </span>                           <span class="n">multiplier</span><span class="o">=</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span>
 <span class="gp">... </span>                           <span class="p">)</span>
@@ -265,9 +264,8 @@ to set a different type of note head, such as <code class="docutils literal notr
 <div class="figure align-default">
 <img alt="../_images/image-HarmonicNote-4.png" src="../_images/image-HarmonicNote-4.png" />
 </div>
-</div>
-<div class="example docutils container">
-<p>All properties of <code class="docutils literal notranslate"><span class="pre">abjad.Note</span></code> are also available to be read. This
+</dd>
+<dt>Example:</dt><dd><p>All properties of <code class="docutils literal notranslate"><span class="pre">abjad.Note</span></code> are also available to be read. This
 class also includes a new property named <code class="docutils literal notranslate"><span class="pre">style</span></code>:</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">harm</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">HarmonicNote</span><span class="p">(</span><span class="s2">&quot;c&#39;&#39;4&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">harm</span><span class="o">.</span><span class="n">written_pitch</span>
@@ -291,9 +289,8 @@ initialisation:</p>
 <span class="go">&#39;harmonic-mixed&#39;</span>
 </pre></div>
 </div>
-</div>
-<div class="example docutils container">
-<p>To create a harmonic note with a regular note head and with a flageolet
+</dd>
+<dt>Example:</dt><dd><p>To create a harmonic note with a regular note head and with a flageolet
 circle above it, use the style <code class="docutils literal notranslate"><span class="pre">'flageolet'</span></code>:</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">harm</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">HarmonicNote</span><span class="p">(</span><span class="s2">&quot;c&#39;&#39;1&quot;</span><span class="p">,</span>
 <span class="gp">... </span>                           <span class="n">style</span><span class="o">=</span><span class="s1">&#39;flageolet&#39;</span><span class="p">,</span>
@@ -308,9 +305,8 @@ circle above it, use the style <code class="docutils literal notranslate"><span 
 <div class="figure align-default">
 <img alt="../_images/image-HarmonicNote-5.png" src="../_images/image-HarmonicNote-5.png" />
 </div>
-</div>
-<div class="example docutils container">
-<p>To add a markup expression to the harmonic note, use the <code class="docutils literal notranslate"><span class="pre">markup</span></code>
+</dd>
+<dt>Example:</dt><dd><p>To add a markup expression to the harmonic note, use the <code class="docutils literal notranslate"><span class="pre">markup</span></code>
 optional keyword argument, which takes strings. By default, the markup
 position is above the harmonic note, but this can be overridden using
 the keyword <code class="docutils literal notranslate"><span class="pre">direction</span></code>, which can take strings as well as
@@ -353,7 +349,8 @@ the keyword <code class="docutils literal notranslate"><span class="pre">directi
 <div class="figure align-default">
 <img alt="../_images/image-HarmonicNote-7.png" src="../_images/image-HarmonicNote-7.png" />
 </div>
-</div>
+</dd>
+</dl>
 <div class="admonition error">
 <p class="admonition-title">Error</p>
 <p>If another markup is attached to the harmonic note, trying to set the

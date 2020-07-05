@@ -110,8 +110,9 @@
 <li class="toctree-l2"><a class="reference internal" href="_api_members/auxjad.remove_empty_tuplets.html">auxjad.remove_empty_tuplets</a></li>
 <li class="toctree-l2"><a class="reference internal" href="_api_members/auxjad.remove_repeated_dynamics.html">auxjad.remove_repeated_dynamics</a></li>
 <li class="toctree-l2"><a class="reference internal" href="_api_members/auxjad.remove_repeated_time_signatures.html">auxjad.remove_repeated_time_signatures</a></li>
-<li class="toctree-l2"><a class="reference internal" href="_api_members/auxjad.respell_container.html">auxjad.respell_container</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_api_members/auxjad.repeat_container.html">auxjad.repeat_container</a></li>
 <li class="toctree-l2"><a class="reference internal" href="_api_members/auxjad.respell_chord.html">auxjad.respell_chord</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_api_members/auxjad.respell_container.html">auxjad.respell_container</a></li>
 <li class="toctree-l2"><a class="reference internal" href="_api_members/auxjad.rests_to_multimeasure_rest.html">auxjad.rests_to_multimeasure_rest</a></li>
 <li class="toctree-l2"><a class="reference internal" href="_api_members/auxjad.Shuffler.html">auxjad.Shuffler</a></li>
 <li class="toctree-l2"><a class="reference internal" href="_api_members/auxjad.simplified_time_signature_ratio.html">auxjad.simplified_time_signature_ratio</a></li>
@@ -198,10 +199,10 @@ documentaion of each class and function.</p>
 </colgroup>
 <tbody>
 <tr class="row-odd"><td><p><a class="reference internal" href="_api_members/auxjad.Adrifter.html#auxjad.Adrifter" title="auxjad.Adrifter"><code class="xref py py-obj docutils literal notranslate"><span class="pre">auxjad.Adrifter</span></code></a>(contents_out, contents_in, …)</p></td>
-<td><p>This class takes two <code class="docutils literal notranslate"><span class="pre">abjad.Container</span></code>’s and gradually drifts from one into the other, by fading out the first while fading in the second.</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">Adrifter</span></code> takes two <code class="docutils literal notranslate"><span class="pre">abjad.Container</span></code>’s and gradually drifts from one into the other, by fading out the first while fading in the second.</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="_api_members/auxjad.adjust_clefs.html#auxjad.adjust_clefs" title="auxjad.adjust_clefs"><code class="xref py py-obj docutils literal notranslate"><span class="pre">auxjad.adjust_clefs</span></code></a>(container, *[, …])</p></td>
-<td><p>Mutates an input container (of type <code class="docutils literal notranslate"><span class="pre">abjad.Container</span></code> or child class) in place and has no return value.</p></td>
+<td><p>Mutates an input container (of type <code class="docutils literal notranslate"><span class="pre">abjad.Container</span></code> or child class) in place and has no return value; this function removes all consecutive repeated clefs.</p></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="_api_members/auxjad.ArtificialHarmonic.html#auxjad.ArtificialHarmonic" title="auxjad.ArtificialHarmonic"><code class="xref py py-obj docutils literal notranslate"><span class="pre">auxjad.ArtificialHarmonic</span></code></a>(*arguments, …)</p></td>
 <td><p>Creates a chord with a tweaked top note head for notating artificial harmonics.</p></td>
@@ -210,81 +211,84 @@ documentaion of each class and function.</p>
 <td><p>A selector used to store, manipulate, and select objects using a weighted function constructed with a fixed decay rate.</p></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="_api_members/auxjad.close_container.html#auxjad.close_container" title="auxjad.close_container"><code class="xref py py-obj docutils literal notranslate"><span class="pre">auxjad.close_container</span></code></a>(container)</p></td>
-<td><p>Mutates an input container (of type <code class="docutils literal notranslate"><span class="pre">abjad.Container</span></code> or child class) in place and has no return value.</p></td>
+<td><p>Mutates an input container (of type <code class="docutils literal notranslate"><span class="pre">abjad.Container</span></code> or child class) in place and has no return value; this function changes the time signature of the last bar of an underfull in order to make it full.</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="_api_members/auxjad.container_is_full.html#auxjad.container_is_full" title="auxjad.container_is_full"><code class="xref py py-obj docutils literal notranslate"><span class="pre">auxjad.container_is_full</span></code></a>(container)</p></td>
-<td><p>Returns a <code class="docutils literal notranslate"><span class="pre">bool</span></code> representing whether an input container (of type <code class="docutils literal notranslate"><span class="pre">abjad.Container</span></code> or child class) has its last bar is fully filled in or not.</p></td>
+<td><p>Returns a <code class="docutils literal notranslate"><span class="pre">bool</span></code> representing whether the last bar of an input container (of type <code class="docutils literal notranslate"><span class="pre">abjad.Container</span></code> or child class) is fully filled in or not.</p></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="_api_members/auxjad.containers_are_equal.html#auxjad.containers_are_equal" title="auxjad.containers_are_equal"><code class="xref py py-obj docutils literal notranslate"><span class="pre">auxjad.containers_are_equal</span></code></a>(container1, …)</p></td>
 <td><p>Returns a <code class="docutils literal notranslate"><span class="pre">bool</span></code> representing whether two input containers (of type <code class="docutils literal notranslate"><span class="pre">abjad.Container</span></code> or child class) are identical or not.</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="_api_members/auxjad.enforce_time_signature.html#auxjad.enforce_time_signature" title="auxjad.enforce_time_signature"><code class="xref py py-obj docutils literal notranslate"><span class="pre">auxjad.enforce_time_signature</span></code></a>(container, …)</p></td>
-<td><p>Mutates an input container (of type <code class="docutils literal notranslate"><span class="pre">abjad.Container</span></code> or child class) in place and has no return value.</p></td>
+<td><p>Mutates an input container (of type <code class="docutils literal notranslate"><span class="pre">abjad.Container</span></code> or child class) in place and has no return value; this function applies a time signature (or a list of time signatures) to the input container.</p></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="_api_members/auxjad.Fader.html#auxjad.Fader" title="auxjad.Fader"><code class="xref py py-obj docutils literal notranslate"><span class="pre">auxjad.Fader</span></code></a>(contents, *, fader_type, …)</p></td>
-<td><p>This class can be used to fade in or fade out an <code class="docutils literal notranslate"><span class="pre">abjad.Container</span></code> by gradually removing or adding its logical ties one by one.</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">Fader</span></code> takes an <code class="docutils literal notranslate"><span class="pre">abjad.Container</span></code> (or child class) as input and gradually removes or adds its logical ties one by one.</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="_api_members/auxjad.fill_with_rests.html#auxjad.fill_with_rests" title="auxjad.fill_with_rests"><code class="xref py py-obj docutils literal notranslate"><span class="pre">auxjad.fill_with_rests</span></code></a>(container)</p></td>
-<td><p>Mutates an input container (of type <code class="docutils literal notranslate"><span class="pre">abjad.Container</span></code> or child class) in place and has no return value.</p></td>
+<td><p>Mutates an input container (of type <code class="docutils literal notranslate"><span class="pre">abjad.Container</span></code> or child class) in place and has no return value; this function fills a container with rests in order to make it full.</p></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="_api_members/auxjad.HarmonicNote.html#auxjad.HarmonicNote" title="auxjad.HarmonicNote"><code class="xref py py-obj docutils literal notranslate"><span class="pre">auxjad.HarmonicNote</span></code></a>(*arguments, multiplier, …)</p></td>
 <td><p>Creates a note with tweaked notehead for harmonics.</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="_api_members/auxjad.Hocketer.html#auxjad.Hocketer" title="auxjad.Hocketer"><code class="xref py py-obj docutils literal notranslate"><span class="pre">auxjad.Hocketer</span></code></a>(contents, *, n_voices, …)</p></td>
-<td><p>Hocketer is a hocket generator.</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">Hocketer</span></code> is a hocket generator that takes a container as input and randomly distributes its logical ties among different <code class="docutils literal notranslate"><span class="pre">abjad.Staff</span></code>’s.</p></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="_api_members/auxjad.LeafDynMaker.html#auxjad.LeafDynMaker" title="auxjad.LeafDynMaker"><code class="xref py py-obj docutils literal notranslate"><span class="pre">auxjad.LeafDynMaker</span></code></a>(*, increase_monotonic, …)</p></td>
-<td><p>This class can be used to create leaves and logical ties from input lists of pitches, durations, dynamics, and articulations.</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">LeafDynMaker</span></code> creates leaves and logical ties from input lists of pitches, durations, dynamics, and articulations.</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="_api_members/auxjad.leaves_are_tieable.html#auxjad.leaves_are_tieable" title="auxjad.leaves_are_tieable"><code class="xref py py-obj docutils literal notranslate"><span class="pre">auxjad.leaves_are_tieable</span></code></a>(leaf1, leaf2)</p></td>
 <td><p>Returns a <code class="docutils literal notranslate"><span class="pre">bool</span></code> representing whether or not two input leaves (of type <code class="docutils literal notranslate"><span class="pre">abjad.Leaf</span></code> or child class) have identical pitch(es) and thus can be tied.</p></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="_api_members/auxjad.LoopByList.html#auxjad.LoopByList" title="auxjad.LoopByList"><code class="xref py py-obj docutils literal notranslate"><span class="pre">auxjad.LoopByList</span></code></a>(contents, *, window_size, …)</p></td>
-<td><p>This class can be used to output slices of a <code class="docutils literal notranslate"><span class="pre">list</span></code> using the metaphor of a looping window of a constant number of elements.</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">LoopByList</span></code> outputs slices of a <code class="docutils literal notranslate"><span class="pre">list</span></code> using the metaphor of a looping window of a constant number of elements.</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="_api_members/auxjad.LoopByNotes.html#auxjad.LoopByNotes" title="auxjad.LoopByNotes"><code class="xref py py-obj docutils literal notranslate"><span class="pre">auxjad.LoopByNotes</span></code></a>(contents, *, window_size, …)</p></td>
-<td><p>This class can be used to output slices of an <code class="docutils literal notranslate"><span class="pre">abjad.Container</span></code> using the metaphor of a looping window of a constant number of elements.</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">LoopByNotes</span></code> outputs slices of an <code class="docutils literal notranslate"><span class="pre">abjad.Container</span></code> using the metaphor of a looping window of a constant number of elements.</p></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="_api_members/auxjad.LoopByWindow.html#auxjad.LoopByWindow" title="auxjad.LoopByWindow"><code class="xref py py-obj docutils literal notranslate"><span class="pre">auxjad.LoopByWindow</span></code></a>(contents, *, …)</p></td>
-<td><p>This class can be used to output slices of an <code class="docutils literal notranslate"><span class="pre">abjad.Container</span></code> using the metaphor of a looping window of a constant size (given by an <code class="docutils literal notranslate"><span class="pre">abjad.Duration</span></code>).</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">LoopByWindow</span></code> outputs slices of an <code class="docutils literal notranslate"><span class="pre">abjad.Container</span></code> using the metaphor of a looping window of a constant size (given by an <code class="docutils literal notranslate"><span class="pre">abjad.Duration</span></code>).</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="_api_members/auxjad.Phaser.html#auxjad.Phaser" title="auxjad.Phaser"><code class="xref py py-obj docutils literal notranslate"><span class="pre">auxjad.Phaser</span></code></a>(contents, *, step_size, float, …)</p></td>
-<td><p>Phaser will shift all leaves of an <code class="docutils literal notranslate"><span class="pre">abjad.Container</span></code> by a fixed amount.</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">Phaser</span></code> will shift all leaves of an <code class="docutils literal notranslate"><span class="pre">abjad.Container</span></code> by a fixed amount.</p></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="_api_members/auxjad.remove_empty_tuplets.html#auxjad.remove_empty_tuplets" title="auxjad.remove_empty_tuplets"><code class="xref py py-obj docutils literal notranslate"><span class="pre">auxjad.remove_empty_tuplets</span></code></a>(container)</p></td>
-<td><p>Mutates an input container (of type <code class="docutils literal notranslate"><span class="pre">abjad.Container</span></code> or child class) in place and has no return value.</p></td>
+<td><p>Mutates an input container (of type <code class="docutils literal notranslate"><span class="pre">abjad.Container</span></code> or child class) in place and has no return value; this function looks for tuplets filled with rests and replaces them with a single rest.</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="_api_members/auxjad.remove_repeated_dynamics.html#auxjad.remove_repeated_dynamics" title="auxjad.remove_repeated_dynamics"><code class="xref py py-obj docutils literal notranslate"><span class="pre">auxjad.remove_repeated_dynamics</span></code></a>(container, *)</p></td>
-<td><p>Mutates an input container (of type <code class="docutils literal notranslate"><span class="pre">abjad.Container</span></code> or child class) in place and has no return value.</p></td>
+<td><p>Mutates an input container (of type <code class="docutils literal notranslate"><span class="pre">abjad.Container</span></code> or child class) in place and has no return value; this function removes all consecutive repeated dynamic markings.</p></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="_api_members/auxjad.remove_repeated_time_signatures.html#auxjad.remove_repeated_time_signatures" title="auxjad.remove_repeated_time_signatures"><code class="xref py py-obj docutils literal notranslate"><span class="pre">auxjad.remove_repeated_time_signatures</span></code></a>(container)</p></td>
-<td><p>Mutates an input container (of type <code class="docutils literal notranslate"><span class="pre">abjad.Container</span></code> or child class) in place and has no return value.</p></td>
+<td><p>Mutates an input container (of type <code class="docutils literal notranslate"><span class="pre">abjad.Container</span></code> or child class) in place and has no return value; this function removes all consecutive repeated time signatures.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="_api_members/auxjad.respell_container.html#auxjad.respell_container" title="auxjad.respell_container"><code class="xref py py-obj docutils literal notranslate"><span class="pre">auxjad.respell_container</span></code></a>(container, *[, …])</p></td>
-<td><p>Mutates an input container (of type <code class="docutils literal notranslate"><span class="pre">abjad.Container</span></code> or child class) in place and has no return value.</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="_api_members/auxjad.repeat_container.html#auxjad.repeat_container" title="auxjad.repeat_container"><code class="xref py py-obj docutils literal notranslate"><span class="pre">auxjad.repeat_container</span></code></a>(container, n, *[, …])</p></td>
+<td><p>This function returns an <code class="docutils literal notranslate"><span class="pre">abjad.Container</span></code> with <code class="docutils literal notranslate"><span class="pre">n</span></code> repetitions of an input container (of type <code class="docutils literal notranslate"><span class="pre">abjad.Container</span></code> or child class).</p></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="_api_members/auxjad.respell_chord.html#auxjad.respell_chord" title="auxjad.respell_chord"><code class="xref py py-obj docutils literal notranslate"><span class="pre">auxjad.respell_chord</span></code></a>(chord, *[, …])</p></td>
-<td><p>Mutates an input chord (of type <code class="docutils literal notranslate"><span class="pre">abjad.Chord</span></code> or child class) in place and has no return value.</p></td>
+<td><p>Mutates an input chord (of type <code class="docutils literal notranslate"><span class="pre">abjad.Chord</span></code> or child class) in place and has no return value; this function changes the accidentals of individual pitches of a chord in order to avoid augmented unisons.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="_api_members/auxjad.rests_to_multimeasure_rest.html#auxjad.rests_to_multimeasure_rest" title="auxjad.rests_to_multimeasure_rest"><code class="xref py py-obj docutils literal notranslate"><span class="pre">auxjad.rests_to_multimeasure_rest</span></code></a>(container)</p></td>
-<td><p>Mutates an input container (of type <code class="docutils literal notranslate"><span class="pre">abjad.Container</span></code> or child class) in place and has no return value.</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="_api_members/auxjad.respell_container.html#auxjad.respell_container" title="auxjad.respell_container"><code class="xref py py-obj docutils literal notranslate"><span class="pre">auxjad.respell_container</span></code></a>(container, *[, …])</p></td>
+<td><p>Mutates an input container (of type <code class="docutils literal notranslate"><span class="pre">abjad.Container</span></code> or child class) in place and has no return value; this function changes the accidentals of individual pitches of all chords in a container in order to avoid augmented unisons.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="_api_members/auxjad.Shuffler.html#auxjad.Shuffler" title="auxjad.Shuffler"><code class="xref py py-obj docutils literal notranslate"><span class="pre">auxjad.Shuffler</span></code></a>(contents, *, pitch_only, …)</p></td>
-<td><p>Shuffler takes an input <code class="docutils literal notranslate"><span class="pre">abjad.Container</span></code> and shuffles or rotates its logical ties or pitches.</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="_api_members/auxjad.rests_to_multimeasure_rest.html#auxjad.rests_to_multimeasure_rest" title="auxjad.rests_to_multimeasure_rest"><code class="xref py py-obj docutils literal notranslate"><span class="pre">auxjad.rests_to_multimeasure_rest</span></code></a>(container)</p></td>
+<td><p>Mutates an input container (of type <code class="docutils literal notranslate"><span class="pre">abjad.Container</span></code> or child class) in place and has no return value; this function looks for bars filled with regular rests and converts them into an <code class="docutils literal notranslate"><span class="pre">abjad.MultimeasureRest</span></code>.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="_api_members/auxjad.simplified_time_signature_ratio.html#auxjad.simplified_time_signature_ratio" title="auxjad.simplified_time_signature_ratio"><code class="xref py py-obj docutils literal notranslate"><span class="pre">auxjad.simplified_time_signature_ratio</span></code></a>(ratio, *)</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="_api_members/auxjad.Shuffler.html#auxjad.Shuffler" title="auxjad.Shuffler"><code class="xref py py-obj docutils literal notranslate"><span class="pre">auxjad.Shuffler</span></code></a>(contents, *, pitch_only, …)</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">Shuffler</span></code> takes an input <code class="docutils literal notranslate"><span class="pre">abjad.Container</span></code> and shuffles or rotates its logical ties or pitches.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="_api_members/auxjad.simplified_time_signature_ratio.html#auxjad.simplified_time_signature_ratio" title="auxjad.simplified_time_signature_ratio"><code class="xref py py-obj docutils literal notranslate"><span class="pre">auxjad.simplified_time_signature_ratio</span></code></a>(ratio, *)</p></td>
 <td><p>Returns an <code class="docutils literal notranslate"><span class="pre">abjad.TimeSignature</span></code> with the simplified ratio of an input ratio according to a minimum denominator value.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="_api_members/auxjad.sync_containers.html#auxjad.sync_containers" title="auxjad.sync_containers"><code class="xref py py-obj docutils literal notranslate"><span class="pre">auxjad.sync_containers</span></code></a>(*containers[, …])</p></td>
-<td><p>Mutates two or more input containers (of type <code class="docutils literal notranslate"><span class="pre">abjad.Container</span></code> or child class) in place and has no return value.</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="_api_members/auxjad.sync_containers.html#auxjad.sync_containers" title="auxjad.sync_containers"><code class="xref py py-obj docutils literal notranslate"><span class="pre">auxjad.sync_containers</span></code></a>(*containers[, …])</p></td>
+<td><p>Mutates two or more input containers (of type <code class="docutils literal notranslate"><span class="pre">abjad.Container</span></code> or child class) in place and has no return value; this function finds the longest container among the inputs and adds rests to all the shorter ones, making them the same length.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="_api_members/auxjad.TenneySelector.html#auxjad.TenneySelector" title="auxjad.TenneySelector"><code class="xref py py-obj docutils literal notranslate"><span class="pre">auxjad.TenneySelector</span></code></a>(contents, *, weights, …)</p></td>
-<td><p>This in an implementation of the Dissonant Counterpoint Algorithm by James Tenney.</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="_api_members/auxjad.TenneySelector.html#auxjad.TenneySelector" title="auxjad.TenneySelector"><code class="xref py py-obj docutils literal notranslate"><span class="pre">auxjad.TenneySelector</span></code></a>(contents, *, weights, …)</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">TenneySelector</span></code> is an implementation of the Dissonant Counterpoint Algorithm by James Tenney.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="_api_members/auxjad.time_signature_extractor.html#auxjad.time_signature_extractor" title="auxjad.time_signature_extractor"><code class="xref py py-obj docutils literal notranslate"><span class="pre">auxjad.time_signature_extractor</span></code></a>(container, *)</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="_api_members/auxjad.time_signature_extractor.html#auxjad.time_signature_extractor" title="auxjad.time_signature_extractor"><code class="xref py py-obj docutils literal notranslate"><span class="pre">auxjad.time_signature_extractor</span></code></a>(container, *)</p></td>
 <td><p>Returns a <code class="docutils literal notranslate"><span class="pre">list</span></code> with the <code class="docutils literal notranslate"><span class="pre">abjad.TimeSignature</span></code> for all measures of an input <code class="docutils literal notranslate"><span class="pre">abjad.Container</span></code>.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="_api_members/auxjad.underfull_duration.html#auxjad.underfull_duration" title="auxjad.underfull_duration"><code class="xref py py-obj docutils literal notranslate"><span class="pre">auxjad.underfull_duration</span></code></a>(container)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="_api_members/auxjad.underfull_duration.html#auxjad.underfull_duration" title="auxjad.underfull_duration"><code class="xref py py-obj docutils literal notranslate"><span class="pre">auxjad.underfull_duration</span></code></a>(container)</p></td>
 <td><p>Returns the missing <code class="docutils literal notranslate"><span class="pre">abjad.Duration</span></code> of an underfull container (of type <code class="docutils literal notranslate"><span class="pre">abjad.Container</span></code> or child class).</p></td>
 </tr>
 </tbody>

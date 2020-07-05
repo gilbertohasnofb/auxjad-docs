@@ -110,8 +110,9 @@
 <li class="toctree-l2"><a class="reference internal" href="auxjad.remove_empty_tuplets.html">auxjad.remove_empty_tuplets</a></li>
 <li class="toctree-l2"><a class="reference internal" href="auxjad.remove_repeated_dynamics.html">auxjad.remove_repeated_dynamics</a></li>
 <li class="toctree-l2"><a class="reference internal" href="auxjad.remove_repeated_time_signatures.html">auxjad.remove_repeated_time_signatures</a></li>
-<li class="toctree-l2"><a class="reference internal" href="auxjad.respell_container.html">auxjad.respell_container</a></li>
+<li class="toctree-l2"><a class="reference internal" href="auxjad.repeat_container.html">auxjad.repeat_container</a></li>
 <li class="toctree-l2"><a class="reference internal" href="auxjad.respell_chord.html">auxjad.respell_chord</a></li>
+<li class="toctree-l2"><a class="reference internal" href="auxjad.respell_container.html">auxjad.respell_container</a></li>
 <li class="toctree-l2"><a class="reference internal" href="auxjad.rests_to_multimeasure_rest.html">auxjad.rests_to_multimeasure_rest</a></li>
 <li class="toctree-l2"><a class="reference internal" href="auxjad.Shuffler.html">auxjad.Shuffler</a></li>
 <li class="toctree-l2"><a class="reference internal" href="auxjad.simplified_time_signature_ratio.html">auxjad.simplified_time_signature_ratio</a></li>
@@ -202,8 +203,8 @@ the input list being selected is 75% the probability of the element in
 index 0, and the probability of the element in index 2 is 56.25% (0.75^2)
 the probability of the element in index 0. This is the selector used in my
 <em>Cartography</em> series of compositions.</p>
-<div class="example docutils container">
-<p>The selector should be initialised with a list of objects. The elements
+<dl>
+<dt>Example:</dt><dd><p>The selector should be initialised with a list of objects. The elements
 of this list can be of any type.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">selector</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">CartographySelector</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">])</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">selector</span><span class="o">.</span><span class="n">contents</span>
@@ -238,9 +239,8 @@ get the next result.</p>
 <span class="go">0</span>
 </pre></div>
 </div>
-</div>
-<div class="example docutils container">
-<p>By default, only the weight function (defined by the decay rate) is
+</dd>
+<dt>Example:</dt><dd><p>By default, only the weight function (defined by the decay rate) is
 taken into consideration when selecting an element. This means that
 repeated elements can appear, as shown below.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">result</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
@@ -261,9 +261,8 @@ calls.</p>
 <span class="go">210421021020304024230120241202</span>
 </pre></div>
 </div>
-</div>
-<div class="example docutils container">
-<p>The keyword argument <code class="docutils literal notranslate"><span class="pre">decay_rate</span></code> can be used to set a different
+</dd>
+<dt>Example:</dt><dd><p>The keyword argument <code class="docutils literal notranslate"><span class="pre">decay_rate</span></code> can be used to set a different
 decay rate when creating a selector.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">selector</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">CartographySelector</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">],</span>
 <span class="gp">... </span>                                      <span class="n">decay_rate</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span>
@@ -286,9 +285,8 @@ the property <code class="docutils literal notranslate"><span class="pre">decay_
 <span class="go">&#39;000001002100000201001030000100&#39;</span>
 </pre></div>
 </div>
-</div>
-<div class="example docutils container">
-<p>Appending is a type of content transformation. It discards the first
+</dd>
+<dt>Example:</dt><dd><p>Appending is a type of content transformation. It discards the first
 element of the selector’s <code class="docutils literal notranslate"><span class="pre">contents</span></code>, shifts all others leftwards,
 and then appends the new element to the last index.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">selector</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">CartographySelector</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">])</span>
@@ -302,9 +300,8 @@ and then appends the new element to the last index.</p>
 <span class="go">[2, 3, 4, 5, 42]</span>
 </pre></div>
 </div>
-</div>
-<div class="example docutils container">
-<p>The method <code class="docutils literal notranslate"><span class="pre">append_keeping_n()</span></code> is similar to <code class="docutils literal notranslate"><span class="pre">append()</span></code>, but it
+</dd>
+<dt>Example:</dt><dd><p>The method <code class="docutils literal notranslate"><span class="pre">append_keeping_n()</span></code> is similar to <code class="docutils literal notranslate"><span class="pre">append()</span></code>, but it
 keeps the first <code class="docutils literal notranslate"><span class="pre">n</span></code> elements of <code class="docutils literal notranslate"><span class="pre">contents</span></code> untouched. It thus
 discards the n+1-th element, shifts all the next elements one position
 lefwards, and finally appends the new element at the last index.</p>
@@ -316,9 +313,8 @@ lefwards, and finally appends the new element at the last index.</p>
 <span class="go">[10, 7, 31, 98, 100]</span>
 </pre></div>
 </div>
-</div>
-<div class="example docutils container">
-<p>Prepending is another type of content transformation. It discards the
+</dd>
+<dt>Example:</dt><dd><p>Prepending is another type of content transformation. It discards the
 last element of the <code class="docutils literal notranslate"><span class="pre">contents</span></code>, shifts all others rightwards, and
 then prepends the new element to the first index.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">selector</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">CartographySelector</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">])</span>
@@ -332,9 +328,8 @@ then prepends the new element to the first index.</p>
 <span class="go">[71, -1, 0, 1, 2]</span>
 </pre></div>
 </div>
-</div>
-<div class="example docutils container">
-<p>Rotation is another type of content transformation. It rotates all
+</dd>
+<dt>Example:</dt><dd><p>Rotation is another type of content transformation. It rotates all
 elements rightwards, moving the last element to the first index. If the
 optional keyword argument <code class="docutils literal notranslate"><span class="pre">anticlockwise</span></code> is set to <code class="docutils literal notranslate"><span class="pre">True</span></code>, the
 rotation will be in the opposite direction.</p>
@@ -352,9 +347,8 @@ rotation will be in the opposite direction.</p>
 <span class="go">[1, 2, 3, 4, 0]</span>
 </pre></div>
 </div>
-</div>
-<div class="example docutils container">
-<p>The mirror transformation swaps the element of the input index with its
+</dd>
+<dt>Example:</dt><dd><p>The mirror transformation swaps the element of the input index with its
 complementary element. Complementary elements are defined as the pair
 of elements which share the same distance from the centre of the
 <code class="docutils literal notranslate"><span class="pre">contents</span></code> (in terms of number of indeces), and are located at either
@@ -376,9 +370,8 @@ side.</p>
 <span class="go">[0, 3, 2, 1, 4]</span>
 </pre></div>
 </div>
-</div>
-<div class="example docutils container">
-<p>To mirror a random pair of complementary elements, use the
+</dd>
+<dt>Example:</dt><dd><p>To mirror a random pair of complementary elements, use the
 <code class="docutils literal notranslate"><span class="pre">mirror_random()</span></code> method. In case of a selector with an odd number
 of elements, this method will never pick an element at the pivot point
 since the operation would not change the contents.</p>
@@ -396,9 +389,8 @@ since the operation would not change the contents.</p>
 <span class="go">[4, 1, 2, 3, 0]</span>
 </pre></div>
 </div>
-</div>
-<div class="example docutils container">
-<p>The method <code class="docutils literal notranslate"><span class="pre">shuffle()</span></code> will shuffle the position of the elements of
+</dd>
+<dt>Example:</dt><dd><p>The method <code class="docutils literal notranslate"><span class="pre">shuffle()</span></code> will shuffle the position of the elements of
 the selector’s <code class="docutils literal notranslate"><span class="pre">contents</span></code>.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">selector</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">CartographySelector</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">])</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">selector</span><span class="o">.</span><span class="n">contents</span>
@@ -408,9 +400,8 @@ the selector’s <code class="docutils literal notranslate"><span class="pre">co
 <span class="go">[1, 4, 3, 0, 2]</span>
 </pre></div>
 </div>
-</div>
-<div class="example docutils container">
-<p>The contents of a selector can also be altered after it has been
+</dd>
+<dt>Example:</dt><dd><p>The contents of a selector can also be altered after it has been
 initialised using the <code class="docutils literal notranslate"><span class="pre">contents</span></code> property. The length of the
 contents can change as well.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">selector</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">CartographySelector</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">],</span>
@@ -429,9 +420,8 @@ contents can change as well.</p>
 <span class="go">[1.0, 0.5, 0.25, 0.125, 0.0625, 0.03125, 0.015625]</span>
 </pre></div>
 </div>
-</div>
-<div class="example docutils container">
-<p>Use the read-only properties <code class="docutils literal notranslate"><span class="pre">previous_result</span></code> and <code class="docutils literal notranslate"><span class="pre">previous_index</span></code>
+</dd>
+<dt>Example:</dt><dd><p>Use the read-only properties <code class="docutils literal notranslate"><span class="pre">previous_result</span></code> and <code class="docutils literal notranslate"><span class="pre">previous_index</span></code>
 to output the previous result and its index.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">selector</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">CartographySelector</span><span class="p">([</span><span class="mi">10</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">14</span><span class="p">,</span> <span class="mi">31</span><span class="p">,</span> <span class="mi">98</span><span class="p">])</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">selector</span><span class="p">()</span>
@@ -443,9 +433,8 @@ to output the previous result and its index.</p>
 <span class="go">14</span>
 </pre></div>
 </div>
-</div>
-<div class="example docutils container">
-<p>The <code class="docutils literal notranslate"><span class="pre">contents</span></code> of instances of this class can be indexed and sliced.
+</dd>
+<dt>Example:</dt><dd><p>The <code class="docutils literal notranslate"><span class="pre">contents</span></code> of instances of this class can be indexed and sliced.
 This allows reading, assigning, or deleting values from <code class="docutils literal notranslate"><span class="pre">contents</span></code>.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">selector</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">CartographySelector</span><span class="p">([</span><span class="mi">10</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">14</span><span class="p">,</span> <span class="mi">31</span><span class="p">,</span> <span class="mi">98</span><span class="p">])</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">selector</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
@@ -471,7 +460,8 @@ This allows reading, assigning, or deleting values from <code class="docutils li
 <span class="go">[10, 7, 98]</span>
 </pre></div>
 </div>
-</div>
+</dd>
+</dl>
 <p class="rubric">Methods</p>
 <table class="longtable docutils align-default">
 <colgroup>

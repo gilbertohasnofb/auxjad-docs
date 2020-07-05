@@ -110,8 +110,9 @@
 <li class="toctree-l2"><a class="reference internal" href="auxjad.remove_empty_tuplets.html">auxjad.remove_empty_tuplets</a></li>
 <li class="toctree-l2"><a class="reference internal" href="auxjad.remove_repeated_dynamics.html">auxjad.remove_repeated_dynamics</a></li>
 <li class="toctree-l2"><a class="reference internal" href="auxjad.remove_repeated_time_signatures.html">auxjad.remove_repeated_time_signatures</a></li>
-<li class="toctree-l2"><a class="reference internal" href="auxjad.respell_container.html">auxjad.respell_container</a></li>
+<li class="toctree-l2"><a class="reference internal" href="auxjad.repeat_container.html">auxjad.repeat_container</a></li>
 <li class="toctree-l2"><a class="reference internal" href="auxjad.respell_chord.html">auxjad.respell_chord</a></li>
+<li class="toctree-l2"><a class="reference internal" href="auxjad.respell_container.html">auxjad.respell_container</a></li>
 <li class="toctree-l2"><a class="reference internal" href="auxjad.rests_to_multimeasure_rest.html">auxjad.rests_to_multimeasure_rest</a></li>
 <li class="toctree-l2"><a class="reference internal" href="auxjad.Shuffler.html">auxjad.Shuffler</a></li>
 <li class="toctree-l2"><a class="reference internal" href="auxjad.simplified_time_signature_ratio.html">auxjad.simplified_time_signature_ratio</a></li>
@@ -194,10 +195,10 @@
 <dt id="auxjad.enforce_time_signature">
 <code class="sig-prename descclassname">auxjad.</code><code class="sig-name descname">enforce_time_signature</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">container</span><span class="p">:</span> <span class="n">abjad.core.Container.Container</span></em>, <em class="sig-param"><span class="n">time_signatures</span><span class="p">:</span> <span class="n">Union<span class="p">[</span>abjad.indicators.TimeSignature.TimeSignature<span class="p">, </span>tuple<span class="p">, </span>list<span class="p">]</span></span></em>, <em class="sig-param"><span class="o">*</span></em>, <em class="sig-param"><span class="n">cyclic</span><span class="p">:</span> <span class="n">bool</span> <span class="o">=</span> <span class="default_value">False</span></em>, <em class="sig-param"><span class="n">fill_with_rests</span><span class="p">:</span> <span class="n">bool</span> <span class="o">=</span> <span class="default_value">True</span></em>, <em class="sig-param"><span class="n">close_container</span><span class="p">:</span> <span class="n">bool</span> <span class="o">=</span> <span class="default_value">False</span></em>, <em class="sig-param"><span class="n">disable_rewrite_meter</span><span class="p">:</span> <span class="n">bool</span> <span class="o">=</span> <span class="default_value">False</span></em>, <em class="sig-param"><span class="n">boundary_depth</span><span class="p">:</span> <span class="n">Optional<span class="p">[</span>int<span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em>, <em class="sig-param"><span class="n">maximum_dot_count</span><span class="p">:</span> <span class="n">Optional<span class="p">[</span>int<span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em>, <em class="sig-param"><span class="n">rewrite_tuplets</span><span class="p">:</span> <span class="n">bool</span> <span class="o">=</span> <span class="default_value">True</span></em><span class="sig-paren">)</span><a class="headerlink" href="#auxjad.enforce_time_signature" title="Permalink to this definition">¶</a></dt>
 <dd><p>Mutates an input container (of type <code class="docutils literal notranslate"><span class="pre">abjad.Container</span></code> or child class)
-in place and has no return value. This function applies a time
-signature (or a list of time signatures) to the input container.</p>
-<div class="example docutils container">
-<p>The function mutates a container in place, applying a time signature
+in place and has no return value; this function applies a time signature
+(or a list of time signatures) to the input container.</p>
+<dl>
+<dt>Example:</dt><dd><p>The function mutates a container in place, applying a time signature
 to it.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">staff</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;c&#39;1 d&#39;1&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">f</span><span class="p">(</span><span class="n">staff</span><span class="p">)</span>
@@ -228,9 +229,8 @@ to it.</p>
 <div class="figure align-default">
 <img alt="../_images/image-enforce_time_signature-2.png" src="../_images/image-enforce_time_signature-2.png" />
 </div>
-</div>
-<div class="example docutils container">
-<p>The second positional argument can take either <code class="docutils literal notranslate"><span class="pre">abjad.TimeSignature</span></code>
+</dd>
+<dt>Example:</dt><dd><p>The second positional argument can take either <code class="docutils literal notranslate"><span class="pre">abjad.TimeSignature</span></code>
 or a <code class="docutils literal notranslate"><span class="pre">tuple</span></code> for a single time signature (for multiple time
 signatures, use a <code class="docutils literal notranslate"><span class="pre">list</span></code> as shown further below). By default,
 rests will be appended to the end of the staff if necessary.</p>
@@ -264,9 +264,8 @@ rests will be appended to the end of the staff if necessary.</p>
 <div class="figure align-default">
 <img alt="../_images/image-enforce_time_signature-4.png" src="../_images/image-enforce_time_signature-4.png" />
 </div>
-</div>
-<div class="example docutils container">
-<p>Set the optional keyword argument <code class="docutils literal notranslate"><span class="pre">close_container</span></code> to <code class="docutils literal notranslate"><span class="pre">True</span></code> in
+</dd>
+<dt>Example:</dt><dd><p>Set the optional keyword argument <code class="docutils literal notranslate"><span class="pre">close_container</span></code> to <code class="docutils literal notranslate"><span class="pre">True</span></code> in
 order to adjust the last bar’s time signature instead of filling it
 with rests.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">staff</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;c&#39;1 d&#39;1 e&#39;1 f&#39;1&quot;</span><span class="p">)</span>
@@ -310,9 +309,8 @@ with rests.</p>
 <div class="figure align-default">
 <img alt="../_images/image-enforce_time_signature-6.png" src="../_images/image-enforce_time_signature-6.png" />
 </div>
-</div>
-<div class="example docutils container">
-<p>Alternatively, to leave the last bar as it is input (i.e. not filling
+</dd>
+<dt>Example:</dt><dd><p>Alternatively, to leave the last bar as it is input (i.e. not filling
 it with rests nor adjusting the time signature), set the optional
 keyword argument <code class="docutils literal notranslate"><span class="pre">fill_with_rests</span></code> to <code class="docutils literal notranslate"><span class="pre">False</span></code> (default value is
 <code class="docutils literal notranslate"><span class="pre">True</span></code>).</p>
@@ -356,9 +354,8 @@ keyword argument <code class="docutils literal notranslate"><span class="pre">fi
 <div class="figure align-default">
 <img alt="../_images/image-enforce_time_signature-8.png" src="../_images/image-enforce_time_signature-8.png" />
 </div>
-</div>
-<div class="example docutils container">
-<p>The second argument can also take a <code class="docutils literal notranslate"><span class="pre">list</span></code> of <code class="docutils literal notranslate"><span class="pre">abjad.TimeSignature</span></code>
+</dd>
+<dt>Example:</dt><dd><p>The second argument can also take a <code class="docutils literal notranslate"><span class="pre">list</span></code> of <code class="docutils literal notranslate"><span class="pre">abjad.TimeSignature</span></code>
 or <code class="docutils literal notranslate"><span class="pre">tuple</span></code>.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">staff</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;c&#39;1 d&#39;1&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">f</span><span class="p">(</span><span class="n">staff</span><span class="p">)</span>
@@ -391,9 +388,8 @@ or <code class="docutils literal notranslate"><span class="pre">tuple</span></co
 <div class="figure align-default">
 <img alt="../_images/image-enforce_time_signature-10.png" src="../_images/image-enforce_time_signature-10.png" />
 </div>
-</div>
-<div class="example docutils container">
-<p>Consecutive identical time signatures are omitted. Also note that time
+</dd>
+<dt>Example:</dt><dd><p>Consecutive identical time signatures are omitted. Also note that time
 signatures can also be represented as a <code class="docutils literal notranslate"><span class="pre">list</span></code> of <code class="docutils literal notranslate"><span class="pre">tuples</span></code>.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">staff</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;c&#39;1 d&#39;1 e&#39;1 f&#39;1&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">f</span><span class="p">(</span><span class="n">staff</span><span class="p">)</span>
@@ -476,9 +472,8 @@ signatures can also be represented as a <code class="docutils literal notranslat
 <div class="figure align-default">
 <img alt="../_images/image-enforce_time_signature-14.png" src="../_images/image-enforce_time_signature-14.png" />
 </div>
-</div>
-<div class="example docutils container">
-<p>To cycle through the list of time signatures until the container is
+</dd>
+<dt>Example:</dt><dd><p>To cycle through the list of time signatures until the container is
 exhausted, set the optional keyword argument <code class="docutils literal notranslate"><span class="pre">cyclic</span></code> to <code class="docutils literal notranslate"><span class="pre">True</span></code>.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">staff</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;c&#39;1 d&#39;1 e&#39;1 f&#39;1&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">f</span><span class="p">(</span><span class="n">staff</span><span class="p">)</span>
@@ -550,9 +545,8 @@ exhausted, set the optional keyword argument <code class="docutils literal notra
 <div class="figure align-default">
 <img alt="../_images/image-enforce_time_signature-16.png" src="../_images/image-enforce_time_signature-16.png" />
 </div>
-</div>
-<div class="example docutils container">
-<p>By default, this function appled the mutation <code class="docutils literal notranslate"><span class="pre">rewrite_meter()</span></code> to
+</dd>
+<dt>Example:</dt><dd><p>By default, this function appled the mutation <code class="docutils literal notranslate"><span class="pre">rewrite_meter()</span></code> to
 its output.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">staff</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;c&#39;1 ~ c&#39;4 r8 d&#39;4. e&#39;4&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">time_signatures</span> <span class="o">=</span> <span class="p">[</span><span class="n">abjad</span><span class="o">.</span><span class="n">TimeSignature</span><span class="p">((</span><span class="mi">5</span><span class="p">,</span> <span class="mi">4</span><span class="p">)),</span>
@@ -605,9 +599,8 @@ its output.</p>
 <div class="figure align-default">
 <img alt="../_images/image-enforce_time_signature-18.png" src="../_images/image-enforce_time_signature-18.png" />
 </div>
-</div>
-<div class="example docutils container">
-<p>The function handles tuplets, even if they must be split.</p>
+</dd>
+<dt>Example:</dt><dd><p>The function handles tuplets, even if they must be split.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">staff</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;\times 2/3 {c&#39;2 d&#39;2 e&#39;2} f&#39;1&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">f</span><span class="p">(</span><span class="n">staff</span><span class="p">)</span>
 <span class="go">\new Staff</span>
@@ -651,9 +644,8 @@ its output.</p>
 <div class="figure align-default">
 <img alt="../_images/image-enforce_time_signature-20.png" src="../_images/image-enforce_time_signature-20.png" />
 </div>
-</div>
-<div class="example docutils container">
-<p>Note that any time signatures in the input container will be ignored.</p>
+</dd>
+<dt>Example:</dt><dd><p>Note that any time signatures in the input container will be ignored.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">staff</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;\time 3/4 c&#39;2. d&#39;2. e&#39;2. f&#39;2.&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">f</span><span class="p">(</span><span class="n">staff</span><span class="p">)</span>
 <span class="go">\new Staff</span>
@@ -717,9 +709,8 @@ its output.</p>
 <div class="figure align-default">
 <img alt="../_images/image-enforce_time_signature-22.png" src="../_images/image-enforce_time_signature-22.png" />
 </div>
-</div>
-<div class="example docutils container">
-<p>This function uses the default logical tie splitting algorithm from
+</dd>
+<dt>Example:</dt><dd><p>This function uses the default logical tie splitting algorithm from
 abjad’s <code class="docutils literal notranslate"><span class="pre">rewrite_meter()</span></code>.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">staff</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;c&#39;4. d&#39;8 e&#39;2&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">auxjad</span><span class="o">.</span><span class="n">enforce_time_signature</span><span class="p">(</span><span class="n">staff</span><span class="p">,</span>
@@ -763,7 +754,8 @@ abjad’s <code class="docutils literal notranslate"><span class="pre">rewrite_m
 <code class="docutils literal notranslate"><span class="pre">rewrite_meter()</span></code> are <code class="docutils literal notranslate"><span class="pre">maximum_dot_count</span></code> and <code class="docutils literal notranslate"><span class="pre">rewrite_tuplets</span></code>,
 which work exactly as the identically named arguments of
 <code class="docutils literal notranslate"><span class="pre">rewrite_meter()</span></code>.</p>
-</div>
+</dd>
+</dl>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>It is important to notice that the time signatures in the output are

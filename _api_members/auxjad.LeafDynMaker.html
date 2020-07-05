@@ -110,8 +110,9 @@
 <li class="toctree-l2"><a class="reference internal" href="auxjad.remove_empty_tuplets.html">auxjad.remove_empty_tuplets</a></li>
 <li class="toctree-l2"><a class="reference internal" href="auxjad.remove_repeated_dynamics.html">auxjad.remove_repeated_dynamics</a></li>
 <li class="toctree-l2"><a class="reference internal" href="auxjad.remove_repeated_time_signatures.html">auxjad.remove_repeated_time_signatures</a></li>
-<li class="toctree-l2"><a class="reference internal" href="auxjad.respell_container.html">auxjad.respell_container</a></li>
+<li class="toctree-l2"><a class="reference internal" href="auxjad.repeat_container.html">auxjad.repeat_container</a></li>
 <li class="toctree-l2"><a class="reference internal" href="auxjad.respell_chord.html">auxjad.respell_chord</a></li>
+<li class="toctree-l2"><a class="reference internal" href="auxjad.respell_container.html">auxjad.respell_container</a></li>
 <li class="toctree-l2"><a class="reference internal" href="auxjad.rests_to_multimeasure_rest.html">auxjad.rests_to_multimeasure_rest</a></li>
 <li class="toctree-l2"><a class="reference internal" href="auxjad.Shuffler.html">auxjad.Shuffler</a></li>
 <li class="toctree-l2"><a class="reference internal" href="auxjad.simplified_time_signature_ratio.html">auxjad.simplified_time_signature_ratio</a></li>
@@ -193,12 +194,12 @@
 <dl class="py class">
 <dt id="auxjad.LeafDynMaker">
 <em class="property">class </em><code class="sig-prename descclassname">auxjad.</code><code class="sig-name descname">LeafDynMaker</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span></em>, <em class="sig-param"><span class="n">increase_monotonic</span><span class="p">:</span> <span class="n">bool</span> <span class="o">=</span> <span class="default_value">None</span></em>, <em class="sig-param"><span class="n">forbidden_note_duration</span><span class="p">:</span> <span class="n">Union<span class="p">[</span>abjad.utilities.Duration.Duration<span class="p">, </span>Tuple<span class="p">[</span>int<span class="p">, </span>int<span class="p">]</span><span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em>, <em class="sig-param"><span class="n">forbidden_rest_duration</span><span class="p">:</span> <span class="n">Union<span class="p">[</span>abjad.utilities.Duration.Duration<span class="p">, </span>Tuple<span class="p">[</span>int<span class="p">, </span>int<span class="p">]</span><span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em>, <em class="sig-param"><span class="n">skips_instead_of_rests</span><span class="p">:</span> <span class="n">bool</span> <span class="o">=</span> <span class="default_value">None</span></em>, <em class="sig-param"><span class="n">tag</span><span class="p">:</span> <span class="n">abjad.system.Tag.Tag</span> <span class="o">=</span> <span class="default_value">None</span></em>, <em class="sig-param"><span class="n">use_multimeasure_rests</span><span class="p">:</span> <span class="n">bool</span> <span class="o">=</span> <span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#auxjad.LeafDynMaker" title="Permalink to this definition">¶</a></dt>
-<dd><p>This class can be used to create leaves and logical ties from input
-lists of pitches, durations, dynamics, and articulations. It is an
-extension of <code class="docutils literal notranslate"><span class="pre">abjad.LeafMaker</span></code> which can take optional lists of dynamics
-and articulations.</p>
-<div class="example docutils container">
-<p>Usage is similar to <code class="docutils literal notranslate"><span class="pre">abjad.LeafMaker</span></code>:</p>
+<dd><p><code class="docutils literal notranslate"><span class="pre">LeafDynMaker</span></code> creates leaves and logical ties from input lists of
+pitches, durations, dynamics, and articulations. It is an extension of
+<code class="docutils literal notranslate"><span class="pre">abjad.LeafMaker</span></code> which can take optional lists of dynamics and
+articulations.</p>
+<dl>
+<dt>Example:</dt><dd><p>Usage is similar to <code class="docutils literal notranslate"><span class="pre">abjad.LeafMaker</span></code>:</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">pitches</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">9</span><span class="p">]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">durations</span> <span class="o">=</span> <span class="p">[(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">32</span><span class="p">),</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">32</span><span class="p">),</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">32</span><span class="p">),</span> <span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">32</span><span class="p">),</span> <span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">32</span><span class="p">),</span> <span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">32</span><span class="p">)]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">dynamics</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;pp&#39;</span><span class="p">,</span> <span class="s1">&#39;p&#39;</span><span class="p">,</span> <span class="s1">&#39;mp&#39;</span><span class="p">,</span> <span class="s1">&#39;mf&#39;</span><span class="p">,</span> <span class="s1">&#39;f&#39;</span><span class="p">,</span> <span class="s1">&#39;ff&#39;</span><span class="p">]</span>
@@ -235,9 +236,8 @@ and articulations.</p>
 <div class="figure align-default">
 <img alt="../_images/image-LeafDynMaker-1.png" src="../_images/image-LeafDynMaker-1.png" />
 </div>
-</div>
-<div class="example docutils container">
-<p>Tuple elements in <code class="docutils literal notranslate"><span class="pre">pitches</span></code> result in chords. None-valued elements
+</dd>
+<dt>Example:</dt><dd><p>Tuple elements in <code class="docutils literal notranslate"><span class="pre">pitches</span></code> result in chords. None-valued elements
 in <code class="docutils literal notranslate"><span class="pre">pitches</span></code> result in rests:</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">pitches</span> <span class="o">=</span> <span class="p">[</span><span class="mi">5</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">7</span><span class="p">)]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">durations</span> <span class="o">=</span> <span class="p">[(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">),</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">8</span><span class="p">),</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">16</span><span class="p">)]</span>
@@ -262,9 +262,8 @@ in <code class="docutils literal notranslate"><span class="pre">pitches</span></
 <div class="figure align-default">
 <img alt="../_images/image-LeafDynMaker-2.png" src="../_images/image-LeafDynMaker-2.png" />
 </div>
-</div>
-<div class="example docutils container">
-<p>Can omit repeated dynamics with the keyword argument
+</dd>
+<dt>Example:</dt><dd><p>Can omit repeated dynamics with the keyword argument
 <code class="docutils literal notranslate"><span class="pre">omit_repeated_dynamics</span></code>:</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">pitches</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">9</span><span class="p">]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">durations</span> <span class="o">=</span> <span class="p">[(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">32</span><span class="p">),</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">32</span><span class="p">),</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">32</span><span class="p">),</span> <span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">32</span><span class="p">),</span> <span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">32</span><span class="p">),</span> <span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">32</span><span class="p">)]</span>
@@ -297,9 +296,8 @@ in <code class="docutils literal notranslate"><span class="pre">pitches</span></
 <div class="figure align-default">
 <img alt="../_images/image-LeafDynMaker-3.png" src="../_images/image-LeafDynMaker-3.png" />
 </div>
-</div>
-<div class="example docutils container">
-<p>The lengths <code class="docutils literal notranslate"><span class="pre">dynamics</span></code> and <code class="docutils literal notranslate"><span class="pre">articulations</span></code> can be shorter than the
+</dd>
+<dt>Example:</dt><dd><p>The lengths <code class="docutils literal notranslate"><span class="pre">dynamics</span></code> and <code class="docutils literal notranslate"><span class="pre">articulations</span></code> can be shorter than the
 lengths of <code class="docutils literal notranslate"><span class="pre">pitches</span></code> and <code class="docutils literal notranslate"><span class="pre">durations</span></code> (whatever is the greatest):</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">pitches</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">9</span><span class="p">]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">durations</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
@@ -328,9 +326,8 @@ lengths of <code class="docutils literal notranslate"><span class="pre">pitches<
 <div class="figure align-default">
 <img alt="../_images/image-LeafDynMaker-4.png" src="../_images/image-LeafDynMaker-4.png" />
 </div>
-</div>
-<div class="example docutils container">
-<p>If the lengths of either <code class="docutils literal notranslate"><span class="pre">dynamics</span></code> and <code class="docutils literal notranslate"><span class="pre">articulations</span></code> are shorter
+</dd>
+<dt>Example:</dt><dd><p>If the lengths of either <code class="docutils literal notranslate"><span class="pre">dynamics</span></code> and <code class="docutils literal notranslate"><span class="pre">articulations</span></code> are shorter
 than the lengths of <code class="docutils literal notranslate"><span class="pre">pitches</span></code> and <code class="docutils literal notranslate"><span class="pre">durations</span></code> (whatever is the
 greatest), use the optional keyword arguments <code class="docutils literal notranslate"><span class="pre">cyclic_dynamics</span></code> and
 <code class="docutils literal notranslate"><span class="pre">cyclic_articulations</span></code> to apply those parameters cyclically:</p>
@@ -374,9 +371,8 @@ greatest), use the optional keyword arguments <code class="docutils literal notr
 <div class="figure align-default">
 <img alt="../_images/image-LeafDynMaker-5.png" src="../_images/image-LeafDynMaker-5.png" />
 </div>
-</div>
-<div class="example docutils container">
-<p>If the length of <code class="docutils literal notranslate"><span class="pre">articulations</span></code> or <code class="docutils literal notranslate"><span class="pre">dynamics</span></code> is 1, they will be
+</dd>
+<dt>Example:</dt><dd><p>If the length of <code class="docutils literal notranslate"><span class="pre">articulations</span></code> or <code class="docutils literal notranslate"><span class="pre">dynamics</span></code> is 1, they will be
 applied only to the first element.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">pitches</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">9</span><span class="p">]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">durations</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
@@ -402,9 +398,8 @@ applied only to the first element.</p>
 <div class="figure align-default">
 <img alt="../_images/image-LeafDynMaker-6.png" src="../_images/image-LeafDynMaker-6.png" />
 </div>
-</div>
-<div class="example docutils container">
-<p>To apply them to all elements, use the <code class="docutils literal notranslate"><span class="pre">cyclic_dynamics</span></code> and
+</dd>
+<dt>Example:</dt><dd><p>To apply them to all elements, use the <code class="docutils literal notranslate"><span class="pre">cyclic_dynamics</span></code> and
 <code class="docutils literal notranslate"><span class="pre">cyclic_articulations</span></code> optioanl keywords.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">pitches</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">9</span><span class="p">]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">durations</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
@@ -440,9 +435,8 @@ applied only to the first element.</p>
 <div class="figure align-default">
 <img alt="../_images/image-LeafDynMaker-7.png" src="../_images/image-LeafDynMaker-7.png" />
 </div>
-</div>
-<div class="example docutils container">
-<p>Similarly to Abjad’s native classes, it accepts many types of elements
+</dd>
+<dt>Example:</dt><dd><p>Similarly to Abjad’s native classes, it accepts many types of elements
 in its input lists:</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">pitches</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span>
 <span class="gp">... </span>           <span class="s2">&quot;d&#39;&quot;</span><span class="p">,</span>
@@ -490,7 +484,8 @@ in its input lists:</p>
 <div class="figure align-default">
 <img alt="../_images/image-LeafDynMaker-8.png" src="../_images/image-LeafDynMaker-8.png" />
 </div>
-</div>
+</dd>
+</dl>
 <p class="rubric">Methods</p>
 <table class="longtable docutils align-default">
 <colgroup>

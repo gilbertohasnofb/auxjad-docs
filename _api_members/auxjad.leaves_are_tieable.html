@@ -110,8 +110,9 @@
 <li class="toctree-l2"><a class="reference internal" href="auxjad.remove_empty_tuplets.html">auxjad.remove_empty_tuplets</a></li>
 <li class="toctree-l2"><a class="reference internal" href="auxjad.remove_repeated_dynamics.html">auxjad.remove_repeated_dynamics</a></li>
 <li class="toctree-l2"><a class="reference internal" href="auxjad.remove_repeated_time_signatures.html">auxjad.remove_repeated_time_signatures</a></li>
-<li class="toctree-l2"><a class="reference internal" href="auxjad.respell_container.html">auxjad.respell_container</a></li>
+<li class="toctree-l2"><a class="reference internal" href="auxjad.repeat_container.html">auxjad.repeat_container</a></li>
 <li class="toctree-l2"><a class="reference internal" href="auxjad.respell_chord.html">auxjad.respell_chord</a></li>
+<li class="toctree-l2"><a class="reference internal" href="auxjad.respell_container.html">auxjad.respell_container</a></li>
 <li class="toctree-l2"><a class="reference internal" href="auxjad.rests_to_multimeasure_rest.html">auxjad.rests_to_multimeasure_rest</a></li>
 <li class="toctree-l2"><a class="reference internal" href="auxjad.Shuffler.html">auxjad.Shuffler</a></li>
 <li class="toctree-l2"><a class="reference internal" href="auxjad.simplified_time_signature_ratio.html">auxjad.simplified_time_signature_ratio</a></li>
@@ -196,8 +197,8 @@
 <dd><p>Returns a <code class="docutils literal notranslate"><span class="pre">bool</span></code> representing whether or not two input leaves (of
 type <code class="docutils literal notranslate"><span class="pre">abjad.Leaf</span></code> or child class) have identical pitch(es) and thus can
 be tied.</p>
-<div class="example docutils container">
-<p>When the pitches in both leaves are identical, this function returns
+<dl>
+<dt>Example:</dt><dd><p>When the pitches in both leaves are identical, this function returns
 <code class="docutils literal notranslate"><span class="pre">True</span></code>:</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">Leaf1</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Note</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;c&#39;4&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">Leaf2</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Note</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;c&#39;4&quot;</span><span class="p">)</span>
@@ -205,9 +206,8 @@ be tied.</p>
 <span class="go">True</span>
 </pre></div>
 </div>
-</div>
-<div class="example docutils container">
-<p>Durations do not affect the comparison.</p>
+</dd>
+<dt>Example:</dt><dd><p>Durations do not affect the comparison.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">Leaf1</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Note</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;c&#39;2.&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">Leaf2</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Note</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;c&#39;16&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">Leaf3</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Note</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;f&#39;&#39;&#39;16&quot;</span><span class="p">)</span>
@@ -219,9 +219,8 @@ be tied.</p>
 <span class="go">False</span>
 </pre></div>
 </div>
-</div>
-<div class="example docutils container">
-<p>Handles chords as well as pitches.</p>
+</dd>
+<dt>Example:</dt><dd><p>Handles chords as well as pitches.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">chord1</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Chord</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;&lt;c&#39; e&#39; g&#39;&gt;4&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">chord2</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Chord</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;&lt;c&#39; e&#39; g&#39;&gt;16&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">chord3</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Chord</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;&lt;f&#39;&#39;&#39; fs&#39;&#39;&#39;&gt;16&quot;</span><span class="p">)</span>
@@ -233,23 +232,22 @@ be tied.</p>
 <span class="go">False</span>
 </pre></div>
 </div>
-</div>
-<div class="example docutils container">
-<p>Leaves can also be part of containers.</p>
+</dd>
+<dt>Example:</dt><dd><p>Leaves can also be part of containers.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">container</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;r4 &lt;c&#39; e&#39;&gt;4 &lt;c&#39; e&#39;&gt;2&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">auxjad</span><span class="o">.</span><span class="n">leaves_are_tieable</span><span class="p">(</span><span class="n">container</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">container</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
 <span class="go">True</span>
 </pre></div>
 </div>
-</div>
-<div class="example docutils container">
-<p>If rests are input, the return value is <code class="docutils literal notranslate"><span class="pre">False</span></code>.</p>
+</dd>
+<dt>Example:</dt><dd><p>If rests are input, the return value is <code class="docutils literal notranslate"><span class="pre">False</span></code>.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">container</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;r4 g&#39;4 r2&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">auxjad</span><span class="o">.</span><span class="n">leaves_are_tieable</span><span class="p">(</span><span class="n">container</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">container</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
 <span class="go">False</span>
 </pre></div>
 </div>
-</div>
+</dd>
+</dl>
 </dd></dl>
 
 </div>
