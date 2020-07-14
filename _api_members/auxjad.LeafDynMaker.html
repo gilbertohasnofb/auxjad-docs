@@ -90,7 +90,6 @@
 <li class="toctree-l1"><a class="reference internal" href="../examples/index.html">Examples of usage</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../api.html">auxjad API</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="auxjad.Adrifter.html">auxjad.Adrifter</a></li>
-<li class="toctree-l2"><a class="reference internal" href="auxjad.adjust_clefs.html">auxjad.adjust_clefs</a></li>
 <li class="toctree-l2"><a class="reference internal" href="auxjad.ArtificialHarmonic.html">auxjad.ArtificialHarmonic</a></li>
 <li class="toctree-l2"><a class="reference internal" href="auxjad.CartographySelector.html">auxjad.CartographySelector</a></li>
 <li class="toctree-l2"><a class="reference internal" href="auxjad.close_container.html">auxjad.close_container</a></li>
@@ -107,10 +106,13 @@
 <li class="toctree-l2"><a class="reference internal" href="auxjad.LoopByNotes.html">auxjad.LoopByNotes</a></li>
 <li class="toctree-l2"><a class="reference internal" href="auxjad.LoopByWindow.html">auxjad.LoopByWindow</a></li>
 <li class="toctree-l2"><a class="reference internal" href="auxjad.Phaser.html">auxjad.Phaser</a></li>
+<li class="toctree-l2"><a class="reference internal" href="auxjad.prettify_rewrite_meter.html">auxjad.prettify_rewrite_meter</a></li>
 <li class="toctree-l2"><a class="reference internal" href="auxjad.remove_empty_tuplets.html">auxjad.remove_empty_tuplets</a></li>
 <li class="toctree-l2"><a class="reference internal" href="auxjad.remove_repeated_dynamics.html">auxjad.remove_repeated_dynamics</a></li>
 <li class="toctree-l2"><a class="reference internal" href="auxjad.remove_repeated_time_signatures.html">auxjad.remove_repeated_time_signatures</a></li>
 <li class="toctree-l2"><a class="reference internal" href="auxjad.repeat_container.html">auxjad.repeat_container</a></li>
+<li class="toctree-l2"><a class="reference internal" href="auxjad.reposition_clefs.html">auxjad.reposition_clefs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="auxjad.reposition_dynamics.html">auxjad.reposition_dynamics</a></li>
 <li class="toctree-l2"><a class="reference internal" href="auxjad.respell_chord.html">auxjad.respell_chord</a></li>
 <li class="toctree-l2"><a class="reference internal" href="auxjad.respell_container.html">auxjad.respell_container</a></li>
 <li class="toctree-l2"><a class="reference internal" href="auxjad.rests_to_multimeasure_rest.html">auxjad.rests_to_multimeasure_rest</a></li>
@@ -450,15 +452,15 @@ in its input lists:</p>
 <span class="gp">... </span>             <span class="n">abjad</span><span class="o">.</span><span class="n">Duration</span><span class="p">(</span><span class="s2">&quot;3/32&quot;</span><span class="p">),</span>
 <span class="gp">... </span>             <span class="n">abjad</span><span class="o">.</span><span class="n">Duration</span><span class="p">(</span><span class="mf">0.125</span><span class="p">),</span>
 <span class="gp">... </span>             <span class="n">abjad</span><span class="o">.</span><span class="n">Duration</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">32</span><span class="p">),</span>
-<span class="gp">... </span>             <span class="n">abjad</span><span class="o">.</span><span class="n">Duration</span><span class="p">(</span><span class="mi">6</span><span class="o">/</span><span class="mi">32</span><span class="p">),</span>
+<span class="gp">... </span>             <span class="n">abjad</span><span class="o">.</span><span class="n">Duration</span><span class="p">(</span><span class="mi">6</span> <span class="o">/</span> <span class="mi">32</span><span class="p">),</span>
 <span class="gp">... </span>             <span class="p">]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">dynamics</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;p&#39;</span><span class="p">,</span>
 <span class="gp">... </span>            <span class="n">abjad</span><span class="o">.</span><span class="n">Dynamic</span><span class="p">(</span><span class="s1">&#39;f&#39;</span><span class="p">),</span>
 <span class="gp">... </span>            <span class="p">]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">articulations</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;&gt;&#39;</span><span class="p">,</span>
-<span class="gp">... </span>                <span class="n">abjad</span><span class="o">.</span><span class="n">Articulation</span><span class="p">(</span><span class="s1">&#39;-&#39;</span><span class="p">),</span>
-<span class="gp">... </span>                <span class="n">abjad</span><span class="o">.</span><span class="n">Staccato</span><span class="p">(),</span>
-<span class="gp">... </span>                <span class="p">]</span>
+<span class="gp">... </span>                 <span class="n">abjad</span><span class="o">.</span><span class="n">Articulation</span><span class="p">(</span><span class="s1">&#39;-&#39;</span><span class="p">),</span>
+<span class="gp">... </span>                 <span class="n">abjad</span><span class="o">.</span><span class="n">Staccato</span><span class="p">(),</span>
+<span class="gp">... </span>                 <span class="p">]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">leaf_dyn_maker</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">LeafDynMaker</span><span class="p">()</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">notes</span> <span class="o">=</span> <span class="n">leaf_dyn_maker</span><span class="p">(</span><span class="n">pitches</span><span class="p">,</span> <span class="n">durations</span><span class="p">,</span> <span class="n">dynamics</span><span class="p">,</span> <span class="n">articulations</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">staff</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span><span class="n">notes</span><span class="p">)</span>

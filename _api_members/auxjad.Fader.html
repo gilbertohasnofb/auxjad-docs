@@ -90,7 +90,6 @@
 <li class="toctree-l1"><a class="reference internal" href="../examples/index.html">Examples of usage</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../api.html">auxjad API</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="auxjad.Adrifter.html">auxjad.Adrifter</a></li>
-<li class="toctree-l2"><a class="reference internal" href="auxjad.adjust_clefs.html">auxjad.adjust_clefs</a></li>
 <li class="toctree-l2"><a class="reference internal" href="auxjad.ArtificialHarmonic.html">auxjad.ArtificialHarmonic</a></li>
 <li class="toctree-l2"><a class="reference internal" href="auxjad.CartographySelector.html">auxjad.CartographySelector</a></li>
 <li class="toctree-l2"><a class="reference internal" href="auxjad.close_container.html">auxjad.close_container</a></li>
@@ -107,10 +106,13 @@
 <li class="toctree-l2"><a class="reference internal" href="auxjad.LoopByNotes.html">auxjad.LoopByNotes</a></li>
 <li class="toctree-l2"><a class="reference internal" href="auxjad.LoopByWindow.html">auxjad.LoopByWindow</a></li>
 <li class="toctree-l2"><a class="reference internal" href="auxjad.Phaser.html">auxjad.Phaser</a></li>
+<li class="toctree-l2"><a class="reference internal" href="auxjad.prettify_rewrite_meter.html">auxjad.prettify_rewrite_meter</a></li>
 <li class="toctree-l2"><a class="reference internal" href="auxjad.remove_empty_tuplets.html">auxjad.remove_empty_tuplets</a></li>
 <li class="toctree-l2"><a class="reference internal" href="auxjad.remove_repeated_dynamics.html">auxjad.remove_repeated_dynamics</a></li>
 <li class="toctree-l2"><a class="reference internal" href="auxjad.remove_repeated_time_signatures.html">auxjad.remove_repeated_time_signatures</a></li>
 <li class="toctree-l2"><a class="reference internal" href="auxjad.repeat_container.html">auxjad.repeat_container</a></li>
+<li class="toctree-l2"><a class="reference internal" href="auxjad.reposition_clefs.html">auxjad.reposition_clefs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="auxjad.reposition_dynamics.html">auxjad.reposition_dynamics</a></li>
 <li class="toctree-l2"><a class="reference internal" href="auxjad.respell_chord.html">auxjad.respell_chord</a></li>
 <li class="toctree-l2"><a class="reference internal" href="auxjad.respell_container.html">auxjad.respell_container</a></li>
 <li class="toctree-l2"><a class="reference internal" href="auxjad.rests_to_multimeasure_rest.html">auxjad.rests_to_multimeasure_rest</a></li>
@@ -462,12 +464,12 @@ using <code class="docutils literal notranslate"><span class="pre">Fader</span><
 <span class="go">    r4</span>
 <span class="go">    e&#39;4</span>
 <span class="go">    f&#39;4</span>
-<span class="go">    r2</span>
-<span class="go">    e&#39;4</span>
-<span class="go">    f&#39;4</span>
-<span class="go">    r2</span>
+<span class="go">    c&#39;4</span>
+<span class="go">    r4</span>
 <span class="go">    e&#39;4</span>
 <span class="go">    r4</span>
+<span class="go">    c&#39;4</span>
+<span class="go">    r2.</span>
 <span class="go">    R1</span>
 <span class="go">}</span>
 </pre></div>
@@ -666,9 +668,8 @@ use the method <code class="docutils literal notranslate"><span class="pre">outp
 <span class="go">    r4.</span>
 <span class="go">    d&#39;8</span>
 <span class="go">    e&#39;2</span>
-<span class="go">    r4.</span>
-<span class="go">    d&#39;8</span>
 <span class="go">    r2</span>
+<span class="go">    e&#39;2</span>
 <span class="go">    R1</span>
 <span class="go">}</span>
 </pre></div>
@@ -754,17 +755,16 @@ will result in a random number of steps (between <code class="docutils literal n
 <span class="go">    a&#39;8</span>
 <span class="go">    b&#39;8</span>
 <span class="go">    c&#39;&#39;8</span>
-<span class="go">    c&#39;8</span>
-<span class="go">    r8</span>
-<span class="go">    r8</span>
+<span class="go">    r4.</span>
 <span class="go">    f&#39;8</span>
 <span class="go">    g&#39;8</span>
 <span class="go">    a&#39;8</span>
 <span class="go">    b&#39;8</span>
+<span class="go">    c&#39;&#39;8</span>
+<span class="go">    r4.</span>
+<span class="go">    f&#39;8</span>
 <span class="go">    r8</span>
-<span class="go">    r2</span>
-<span class="go">    g&#39;8</span>
-<span class="go">    r8</span>
+<span class="go">    a&#39;8</span>
 <span class="go">    b&#39;8</span>
 <span class="go">    r8</span>
 <span class="go">}</span>
@@ -967,9 +967,9 @@ through abjad’s <code class="docutils literal notranslate"><span class="pre">r
 <span class="go">    c&#39;8</span>
 <span class="go">    r8</span>
 <span class="go">    e&#39;2.</span>
-<span class="go">    c&#39;8</span>
 <span class="go">    r8</span>
-<span class="go">    r2.</span>
+<span class="go">    r8</span>
+<span class="go">    e&#39;2.</span>
 <span class="go">    r8</span>
 <span class="go">    r8</span>
 <span class="go">    r2.</span>
@@ -1091,10 +1091,9 @@ need manual tweaking if the leaf under which they terminate is removed.</p>
 <span class="go">    &lt;e&#39; g&#39; b&#39;&gt;8</span>
 <span class="go">    \f</span>
 <span class="go">    - \accent</span>
-<span class="go">    r8</span>
-<span class="go">    r4...</span>
-<span class="go">    g&#39;32</span>
-<span class="go">    - \staccato</span>
+<span class="go">    d&#39;4.</span>
+<span class="go">    \p</span>
+<span class="go">    r4</span>
 <span class="go">    &lt;e&#39; g&#39; b&#39;&gt;8</span>
 <span class="go">    \f</span>
 <span class="go">    - \accent</span>
@@ -1112,8 +1111,8 @@ need manual tweaking if the leaf under which they terminate is removed.</p>
 <div class="admonition tip">
 <p class="admonition-title">Tip</p>
 <p>The functions <code class="docutils literal notranslate"><span class="pre">auxjad.remove_repeated_dynamics()</span></code> and
-<code class="docutils literal notranslate"><span class="pre">auxjad.adjust_clefs()</span></code> can be used to clean the output and remove
-repeated dynamics and unnecessary clef changes.</p>
+<code class="docutils literal notranslate"><span class="pre">auxjad.reposition_clefs()</span></code> can be used to clean the output and
+remove repeated dynamics and unnecessary clef changes.</p>
 </div>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
@@ -1151,12 +1150,8 @@ has ended.</p>
 <span class="go">        r8</span>
 <span class="go">    }</span>
 <span class="go">    d&#39;2.</span>
-<span class="go">    \times 2/3 {</span>
-<span class="go">        r8</span>
-<span class="go">        d&#39;8</span>
-<span class="go">        r8</span>
-<span class="go">    }</span>
-<span class="go">    r2.</span>
+<span class="go">    r4</span>
+<span class="go">    d&#39;2.</span>
 <span class="go">    R1</span>
 <span class="go">}</span>
 </pre></div>
