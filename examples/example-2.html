@@ -243,11 +243,11 @@ use <code class="docutils literal notranslate"><span class="pre">auxjad.LeafDynM
 <div class="figure align-default">
 <img alt="../_images/image-example-2-1.png" src="../_images/image-example-2-1.png" />
 </div>
-<p>Let’s now use <code class="docutils literal notranslate"><span class="pre">auxjad.LoopByWindow</span></code> to output loops of windows of the material.
-By default, this class uses a window size of a 4/4 measure, and each step
-forward has the size of a sixteenth-note. These parameters are all adjustable,
-please refer to this library’s API for more information.</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">looper</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">LoopByWindow</span><span class="p">(</span><span class="n">container</span><span class="p">)</span>
+<p>Let’s now use <code class="docutils literal notranslate"><span class="pre">auxjad.WindowLooper</span></code> to output loops of windows of the
+material. By default, this class uses a window size of a 4/4 measure, and each
+step forward has the size of a sixteenth-note. These parameters are all
+adjustable, please refer to this library’s API for more information.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">looper</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">WindowLooper</span><span class="p">(</span><span class="n">container</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">staff</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">()</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">notes</span> <span class="o">=</span> <span class="n">looper</span><span class="o">.</span><span class="n">output_n</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">staff</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">notes</span><span class="p">)</span>
@@ -361,9 +361,9 @@ the input container.</p>
 <p>Let’s use the last output of the shuffler above and feed it into a new looper.
 This time we will use a window of size 3/4.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">container</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">(</span><span class="n">shuffler</span><span class="o">.</span><span class="n">current_window</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">looper</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">LoopByWindow</span><span class="p">(</span><span class="n">container</span><span class="p">,</span>
-<span class="gp">... </span>                           <span class="n">window_size</span><span class="o">=</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">),</span>
-<span class="gp">... </span>                           <span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">looper</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">WindowLooper</span><span class="p">(</span><span class="n">container</span><span class="p">,</span>
+<span class="gp">... </span>                             <span class="n">window_size</span><span class="o">=</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">),</span>
+<span class="gp">... </span>                             <span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">notes</span> <span class="o">=</span> <span class="n">looper</span><span class="o">.</span><span class="n">output_n</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">staff</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">notes</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">f</span><span class="p">(</span><span class="n">staff</span><span class="p">)</span>

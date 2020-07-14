@@ -89,22 +89,21 @@
 <li class="toctree-l1"><a class="reference internal" href="../index.html">Welcome to auxjad’s documentation!</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../examples/index.html">Examples of usage</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../api.html">auxjad API</a><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="auxjad.Adrifter.html">auxjad.Adrifter</a></li>
 <li class="toctree-l2"><a class="reference internal" href="auxjad.ArtificialHarmonic.html">auxjad.ArtificialHarmonic</a></li>
 <li class="toctree-l2"><a class="reference internal" href="auxjad.CartographySelector.html">auxjad.CartographySelector</a></li>
 <li class="toctree-l2"><a class="reference internal" href="auxjad.close_container.html">auxjad.close_container</a></li>
 <li class="toctree-l2"><a class="reference internal" href="auxjad.container_is_full.html">auxjad.container_is_full</a></li>
 <li class="toctree-l2"><a class="reference internal" href="auxjad.containers_are_equal.html">auxjad.containers_are_equal</a></li>
+<li class="toctree-l2"><a class="reference internal" href="auxjad.Drifter.html">auxjad.Drifter</a></li>
 <li class="toctree-l2"><a class="reference internal" href="auxjad.enforce_time_signature.html">auxjad.enforce_time_signature</a></li>
 <li class="toctree-l2"><a class="reference internal" href="auxjad.Fader.html">auxjad.Fader</a></li>
 <li class="toctree-l2"><a class="reference internal" href="auxjad.fill_with_rests.html">auxjad.fill_with_rests</a></li>
 <li class="toctree-l2"><a class="reference internal" href="auxjad.HarmonicNote.html">auxjad.HarmonicNote</a></li>
 <li class="toctree-l2"><a class="reference internal" href="auxjad.Hocketer.html">auxjad.Hocketer</a></li>
 <li class="toctree-l2"><a class="reference internal" href="auxjad.LeafDynMaker.html">auxjad.LeafDynMaker</a></li>
+<li class="toctree-l2"><a class="reference internal" href="auxjad.LeafLooper.html">auxjad.LeafLooper</a></li>
 <li class="toctree-l2"><a class="reference internal" href="auxjad.leaves_are_tieable.html">auxjad.leaves_are_tieable</a></li>
-<li class="toctree-l2"><a class="reference internal" href="auxjad.LoopByList.html">auxjad.LoopByList</a></li>
-<li class="toctree-l2"><a class="reference internal" href="auxjad.LoopByNotes.html">auxjad.LoopByNotes</a></li>
-<li class="toctree-l2"><a class="reference internal" href="auxjad.LoopByWindow.html">auxjad.LoopByWindow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="auxjad.ListLooper.html">auxjad.ListLooper</a></li>
 <li class="toctree-l2"><a class="reference internal" href="auxjad.Phaser.html">auxjad.Phaser</a></li>
 <li class="toctree-l2"><a class="reference internal" href="auxjad.prettify_rewrite_meter.html">auxjad.prettify_rewrite_meter</a></li>
 <li class="toctree-l2"><a class="reference internal" href="auxjad.remove_empty_tuplets.html">auxjad.remove_empty_tuplets</a></li>
@@ -122,6 +121,7 @@
 <li class="toctree-l2"><a class="reference internal" href="auxjad.TenneySelector.html">auxjad.TenneySelector</a></li>
 <li class="toctree-l2"><a class="reference internal" href="auxjad.time_signature_extractor.html">auxjad.time_signature_extractor</a></li>
 <li class="toctree-l2"><a class="reference internal" href="auxjad.underfull_duration.html">auxjad.underfull_duration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="auxjad.WindowLooper.html">auxjad.WindowLooper</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../api.html#indices-and-tables">Indices and tables</a></li>
@@ -468,6 +468,58 @@ new one at the last bar if its duration is shorter.</p>
 <img alt="../_images/image-sync_containers-17.png" src="../_images/image-sync_containers-17.png" />
 </div>
 </dd>
+<dt>Example:</dt><dd><p>This function can also receive an <code class="docutils literal notranslate"><span class="pre">abjad.Score</span></code> instead of multiple
+<code class="docutils literal notranslate"><span class="pre">abjad.Container</span></code>’s or <code class="docutils literal notranslate"><span class="pre">abjad.Staff</span></code>’s.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">staff1</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;\time 3/8 c&#39;4. | d&#39;4&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">staff2</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;\time 3/8 c&#39;4. | d&#39;8&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">staff3</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;\time 3/8 c&#39;4. | d&#39;16&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">staff4</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;\time 3/8 c&#39;4.&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">score</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Score</span><span class="p">([</span><span class="n">staff1</span><span class="p">,</span>
+<span class="gp">... </span>                     <span class="n">staff2</span><span class="p">,</span>
+<span class="gp">... </span>                     <span class="n">staff3</span><span class="p">,</span>
+<span class="gp">... </span>                     <span class="n">staff4</span><span class="p">,</span>
+<span class="gp">... </span>                     <span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">auxjad</span><span class="o">.</span><span class="n">sync_containers</span><span class="p">(</span><span class="n">score</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">f</span><span class="p">(</span><span class="n">score</span><span class="p">)</span>
+<span class="go">\new Score</span>
+<span class="go">&lt;&lt;</span>
+<span class="go">    \new Staff</span>
+<span class="go">    {</span>
+<span class="go">        \time 3/8</span>
+<span class="go">        c&#39;4.</span>
+<span class="go">        \time 1/4</span>
+<span class="go">        d&#39;4</span>
+<span class="go">    }</span>
+<span class="go">    \new Staff</span>
+<span class="go">    {</span>
+<span class="go">        \time 3/8</span>
+<span class="go">        c&#39;4.</span>
+<span class="go">        \time 1/4</span>
+<span class="go">        d&#39;8</span>
+<span class="go">        r8</span>
+<span class="go">    }</span>
+<span class="go">    \new Staff</span>
+<span class="go">    {</span>
+<span class="go">        \time 3/8</span>
+<span class="go">        c&#39;4.</span>
+<span class="go">        \time 1/4</span>
+<span class="go">        d&#39;16</span>
+<span class="go">        r8.</span>
+<span class="go">    }</span>
+<span class="go">    \new Staff</span>
+<span class="go">    {</span>
+<span class="go">        \time 3/8</span>
+<span class="go">        c&#39;4.</span>
+<span class="go">        \time 1/4</span>
+<span class="go">        R1 * 1/4</span>
+<span class="go">    }</span>
+<span class="go">&gt;&gt;</span>
+</pre></div>
+</div>
+<div class="figure align-default">
+<img alt="../_images/image-sync_containers-18.png" src="../_images/image-sync_containers-18.png" />
+</div>
+</dd>
 <dt>Example:</dt><dd><p>The containers can be of different length, can have different time
 signatures, and can contain time signature changes as well.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">container1</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;\time 4/4 c&#39;4 d&#39;4 e&#39;4 f&#39;4&quot;</span><span class="p">)</span>
@@ -493,7 +545,7 @@ signatures, and can contain time signature changes as well.</p>
 </pre></div>
 </div>
 <div class="figure align-default">
-<img alt="../_images/image-sync_containers-18.png" src="../_images/image-sync_containers-18.png" />
+<img alt="../_images/image-sync_containers-19.png" src="../_images/image-sync_containers-19.png" />
 </div>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">f</span><span class="p">(</span><span class="n">container2</span><span class="p">)</span>
 <span class="go">\new Staff</span>
@@ -507,7 +559,7 @@ signatures, and can contain time signature changes as well.</p>
 </pre></div>
 </div>
 <div class="figure align-default">
-<img alt="../_images/image-sync_containers-19.png" src="../_images/image-sync_containers-19.png" />
+<img alt="../_images/image-sync_containers-20.png" src="../_images/image-sync_containers-20.png" />
 </div>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">f</span><span class="p">(</span><span class="n">container3</span><span class="p">)</span>
 <span class="go">\new Staff</span>
@@ -520,7 +572,7 @@ signatures, and can contain time signature changes as well.</p>
 </pre></div>
 </div>
 <div class="figure align-default">
-<img alt="../_images/image-sync_containers-20.png" src="../_images/image-sync_containers-20.png" />
+<img alt="../_images/image-sync_containers-21.png" src="../_images/image-sync_containers-21.png" />
 </div>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">f</span><span class="p">(</span><span class="n">container4</span><span class="p">)</span>
 <span class="go">\new Staff</span>
@@ -534,9 +586,10 @@ signatures, and can contain time signature changes as well.</p>
 </pre></div>
 </div>
 <div class="figure align-default">
-<img alt="../_images/image-sync_containers-21.png" src="../_images/image-sync_containers-21.png" />
+<img alt="../_images/image-sync_containers-22.png" src="../_images/image-sync_containers-22.png" />
 </div>
-<p>It’s important to note that LilyPond does not support simultanoues
+</dd>
+<dt>Example:</dt><dd><p>It’s important to note that LilyPond does not support simultanoues
 staves with different time signatures (i.e. polymetric notation) by
 default. In order to enable it, the <code class="docutils literal notranslate"><span class="pre">&quot;Timing_translator&quot;</span></code> and
 <code class="docutils literal notranslate"><span class="pre">&quot;Default_bar_line_engraver&quot;</span></code> must be removed from the <code class="docutils literal notranslate"><span class="pre">Score</span></code>
@@ -638,7 +691,7 @@ how this can be accomplished using Abjad.</p>
 </pre></div>
 </div>
 <div class="figure align-default">
-<img alt="../_images/image-sync_containers-22.png" src="../_images/image-sync_containers-22.png" />
+<img alt="../_images/image-sync_containers-23.png" src="../_images/image-sync_containers-23.png" />
 </div>
 </dd>
 </dl>
