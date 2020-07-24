@@ -1,0 +1,589 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Hocket with random pitches &mdash; auxjad 0.8.2 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Shuffling and fading harmonics" href="example-5-shuffling-harmonics.html" />
+    <link rel="prev" title="Looping with WindowLooper" href="example-3-looping.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> auxjad
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.8
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../index.html">Welcome to auxjad’s documentation!</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Examples of usage</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="example-1-clapping-music.html">Steve Reich’s <em>Clapping Music</em></a></li>
+<li class="toctree-l2"><a class="reference internal" href="example-2-looping.html">Looping with <code class="docutils literal notranslate"><span class="pre">LeafLooper</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="example-3-looping.html">Looping with <code class="docutils literal notranslate"><span class="pre">WindowLooper</span></code></a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Hocket with random pitches</a></li>
+<li class="toctree-l2"><a class="reference internal" href="example-5-shuffling-harmonics.html">Shuffling and fading harmonics</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../api/index.html">auxjad API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../score_gallery/index.html">Score gallery</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">auxjad</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="index.html">Examples of usage</a> &raquo;</li>
+        
+      <li>Hocket with random pitches</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/examples/example-4-hocket-with-random-pitches.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="hocket-with-random-pitches">
+<h1>Hocket with random pitches<a class="headerlink" href="#hocket-with-random-pitches" title="Permalink to this headline">¶</a></h1>
+<p>In this example, we will use some of <code class="docutils literal notranslate"><span class="pre">auxjad</span></code>’s classes to generate a hocket
+with random pitches.</p>
+<p>First, we start by importing both <code class="docutils literal notranslate"><span class="pre">abjad</span></code> and <code class="docutils literal notranslate"><span class="pre">auxjad</span></code>.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">abjad</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">auxjad</span>
+</pre></div>
+</div>
+<p>First, let’s create a container with an arbitrary rhythm. The pitches do not
+matter at this point since we will randomise them shortly.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">container</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;c&#39;4 ~ c&#39;16 r8 c&#39;16 c&#39;4 c&#39;16 r8.&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">f</span><span class="p">(</span><span class="n">container</span><span class="p">)</span>
+<span class="go">{</span>
+<span class="go">    c&#39;4</span>
+<span class="go">    ~</span>
+<span class="go">    c&#39;16</span>
+<span class="go">    r8</span>
+<span class="go">    c&#39;16</span>
+<span class="go">    c&#39;4</span>
+<span class="go">    c&#39;16</span>
+<span class="go">    r8.</span>
+<span class="go">}</span>
+</pre></div>
+</div>
+<div class="figure align-default">
+<img alt="../_images/image-example-4-hocket-with-random-pitches-1.png" src="../_images/image-example-4-hocket-with-random-pitches-1.png" />
+</div>
+<p>Next, let’s initialise <code class="docutils literal notranslate"><span class="pre">PitchRandomiser</span></code> with this container as well as a
+list representing pitches. This will be the source for the random pitches
+selected by this randomiser.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">randomiser</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">PitchRandomiser</span><span class="p">(</span><span class="n">container</span><span class="p">,</span>
+<span class="gp">... </span>                                    <span class="n">pitches</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">],</span>
+<span class="gp">... </span>                                    <span class="p">)</span>
+</pre></div>
+</div>
+<p>We can now output three measures with random pitches using the <code class="docutils literal notranslate"><span class="pre">output_n</span></code>
+method.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">staff</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">notes</span> <span class="o">=</span> <span class="n">randomiser</span><span class="o">.</span><span class="n">output_n</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">staff</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">notes</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">f</span><span class="p">(</span><span class="n">container</span><span class="p">)</span>
+<span class="go">\new Staff</span>
+<span class="go">{</span>
+<span class="go">    f&#39;4</span>
+<span class="go">    ~</span>
+<span class="go">    f&#39;16</span>
+<span class="go">    r8</span>
+<span class="go">    fs&#39;16</span>
+<span class="go">    d&#39;4</span>
+<span class="go">    cs&#39;16</span>
+<span class="go">    r8.</span>
+<span class="go">    fs&#39;4</span>
+<span class="go">    ~</span>
+<span class="go">    fs&#39;16</span>
+<span class="go">    r8</span>
+<span class="go">    cs&#39;16</span>
+<span class="go">    ef&#39;4</span>
+<span class="go">    e&#39;16</span>
+<span class="go">    r8.</span>
+<span class="go">    c&#39;4</span>
+<span class="go">    ~</span>
+<span class="go">    c&#39;16</span>
+<span class="go">    r8</span>
+<span class="go">    ef&#39;16</span>
+<span class="go">    c&#39;4</span>
+<span class="go">    cs&#39;16</span>
+<span class="go">    r8.</span>
+<span class="go">}</span>
+</pre></div>
+</div>
+<div class="figure align-default">
+<img alt="../_images/image-example-4-hocket-with-random-pitches-2.png" src="../_images/image-example-4-hocket-with-random-pitches-2.png" />
+</div>
+<p>Let’s now change the pitch list using the property <code class="docutils literal notranslate"><span class="pre">pitches</span></code> of the
+randomiser.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">randomiser</span><span class="o">.</span><span class="n">pitches</span> <span class="o">=</span> <span class="p">[</span><span class="mi">13</span><span class="p">,</span> <span class="mi">14</span><span class="p">,</span> <span class="mi">16</span><span class="p">,</span> <span class="mi">17</span><span class="p">,</span> <span class="mi">21</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>Generating three more measures results in:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">notes</span> <span class="o">=</span> <span class="n">randomiser</span><span class="o">.</span><span class="n">output_n</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">staff</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">notes</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">f</span><span class="p">(</span><span class="n">container</span><span class="p">)</span>
+<span class="go">\new Staff</span>
+<span class="go">{</span>
+<span class="go">    f&#39;4</span>
+<span class="go">    ~</span>
+<span class="go">    f&#39;16</span>
+<span class="go">    r8</span>
+<span class="go">    fs&#39;16</span>
+<span class="go">    d&#39;4</span>
+<span class="go">    cs&#39;16</span>
+<span class="go">    r8.</span>
+<span class="go">    fs&#39;4</span>
+<span class="go">    ~</span>
+<span class="go">    fs&#39;16</span>
+<span class="go">    r8</span>
+<span class="go">    cs&#39;16</span>
+<span class="go">    ef&#39;4</span>
+<span class="go">    e&#39;16</span>
+<span class="go">    r8.</span>
+<span class="go">    c&#39;4</span>
+<span class="go">    ~</span>
+<span class="go">    c&#39;16</span>
+<span class="go">    r8</span>
+<span class="go">    ef&#39;16</span>
+<span class="go">    c&#39;4</span>
+<span class="go">    cs&#39;16</span>
+<span class="go">    r8.</span>
+<span class="go">    f&#39;&#39;4</span>
+<span class="go">    ~</span>
+<span class="go">    f&#39;&#39;16</span>
+<span class="go">    r8</span>
+<span class="go">    f&#39;&#39;16</span>
+<span class="go">    cs&#39;&#39;4</span>
+<span class="go">    f&#39;&#39;16</span>
+<span class="go">    r8.</span>
+<span class="go">    f&#39;&#39;4</span>
+<span class="go">    ~</span>
+<span class="go">    f&#39;&#39;16</span>
+<span class="go">    r8</span>
+<span class="go">    a&#39;&#39;16</span>
+<span class="go">    e&#39;&#39;4</span>
+<span class="go">    f&#39;&#39;16</span>
+<span class="go">    r8.</span>
+<span class="go">    a&#39;&#39;4</span>
+<span class="go">    ~</span>
+<span class="go">    a&#39;&#39;16</span>
+<span class="go">    r8</span>
+<span class="go">    cs&#39;&#39;16</span>
+<span class="go">    e&#39;&#39;4</span>
+<span class="go">    f&#39;&#39;16</span>
+<span class="go">    r8.</span>
+<span class="go">}</span>
+</pre></div>
+</div>
+<div class="figure align-default">
+<img alt="../_images/image-example-4-hocket-with-random-pitches-3.png" src="../_images/image-example-4-hocket-with-random-pitches-3.png" />
+</div>
+<p>Up to now, the pitches were being selected with equal weight (i.e. an uniform
+distribution). Changing the <code class="docutils literal notranslate"><span class="pre">weights</span></code> property to a list of <code class="docutils literal notranslate"><span class="pre">int</span></code>’s or
+<code class="docutils literal notranslate"><span class="pre">float</span></code>’s allow us to give more weight to certain pitches. It’s important
+that this list has the same length as the number of pitches in <code class="docutils literal notranslate"><span class="pre">pitches</span></code>.</p>
+<blockquote>
+<div><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">randomiser</span><span class="o">.</span><span class="n">weights</span> <span class="o">=</span> <span class="p">[</span><span class="mi">6</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>Generating three more measures results in:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">notes</span> <span class="o">=</span> <span class="n">randomiser</span><span class="o">.</span><span class="n">output_n</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">staff</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">notes</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">f</span><span class="p">(</span><span class="n">container</span><span class="p">)</span>
+<span class="go">\new Staff</span>
+<span class="go">{</span>
+<span class="go">    f&#39;4</span>
+<span class="go">    ~</span>
+<span class="go">    f&#39;16</span>
+<span class="go">    r8</span>
+<span class="go">    fs&#39;16</span>
+<span class="go">    d&#39;4</span>
+<span class="go">    cs&#39;16</span>
+<span class="go">    r8.</span>
+<span class="go">    fs&#39;4</span>
+<span class="go">    ~</span>
+<span class="go">    fs&#39;16</span>
+<span class="go">    r8</span>
+<span class="go">    cs&#39;16</span>
+<span class="go">    ef&#39;4</span>
+<span class="go">    e&#39;16</span>
+<span class="go">    r8.</span>
+<span class="go">    c&#39;4</span>
+<span class="go">    ~</span>
+<span class="go">    c&#39;16</span>
+<span class="go">    r8</span>
+<span class="go">    ef&#39;16</span>
+<span class="go">    c&#39;4</span>
+<span class="go">    cs&#39;16</span>
+<span class="go">    r8.</span>
+<span class="go">    f&#39;&#39;4</span>
+<span class="go">    ~</span>
+<span class="go">    f&#39;&#39;16</span>
+<span class="go">    r8</span>
+<span class="go">    f&#39;&#39;16</span>
+<span class="go">    cs&#39;&#39;4</span>
+<span class="go">    f&#39;&#39;16</span>
+<span class="go">    r8.</span>
+<span class="go">    f&#39;&#39;4</span>
+<span class="go">    ~</span>
+<span class="go">    f&#39;&#39;16</span>
+<span class="go">    r8</span>
+<span class="go">    a&#39;&#39;16</span>
+<span class="go">    e&#39;&#39;4</span>
+<span class="go">    f&#39;&#39;16</span>
+<span class="go">    r8.</span>
+<span class="go">    a&#39;&#39;4</span>
+<span class="go">    ~</span>
+<span class="go">    a&#39;&#39;16</span>
+<span class="go">    r8</span>
+<span class="go">    cs&#39;&#39;16</span>
+<span class="go">    e&#39;&#39;4</span>
+<span class="go">    f&#39;&#39;16</span>
+<span class="go">    r8.</span>
+<span class="go">    cs&#39;&#39;4</span>
+<span class="go">    ~</span>
+<span class="go">    cs&#39;&#39;16</span>
+<span class="go">    r8</span>
+<span class="go">    d&#39;&#39;16</span>
+<span class="go">    d&#39;&#39;4</span>
+<span class="go">    d&#39;&#39;16</span>
+<span class="go">    r8.</span>
+<span class="go">    d&#39;&#39;4</span>
+<span class="go">    ~</span>
+<span class="go">    d&#39;&#39;16</span>
+<span class="go">    r8</span>
+<span class="go">    cs&#39;&#39;16</span>
+<span class="go">    d&#39;&#39;4</span>
+<span class="go">    a&#39;&#39;16</span>
+<span class="go">    r8.</span>
+<span class="go">    d&#39;&#39;4</span>
+<span class="go">    ~</span>
+<span class="go">    d&#39;&#39;16</span>
+<span class="go">    r8</span>
+<span class="go">    cs&#39;&#39;16</span>
+<span class="go">    d&#39;&#39;4</span>
+<span class="go">    cs&#39;&#39;16</span>
+<span class="go">    r8.</span>
+<span class="go">}</span>
+</pre></div>
+</div>
+</div></blockquote>
+<div class="figure align-default">
+<img alt="../_images/image-example-4-hocket-with-random-pitches-4.png" src="../_images/image-example-4-hocket-with-random-pitches-4.png" />
+</div>
+<p>Let’s now feed this staff of music into <code class="docutils literal notranslate"><span class="pre">auxjad.Hocketer</span></code>. This class will
+distribute each note to a different voice, each given their own staff. See its
+documentation for more information. For a basic usage with three voices, we
+simply initialise <code class="docutils literal notranslate"><span class="pre">Hocketer</span></code> with the staff we previously created as well as
+the desired number of voices.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">hocketer</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">Hocketer</span><span class="p">(</span><span class="n">staff</span><span class="p">,</span>
+<span class="gp">... </span>                           <span class="n">n_voices</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>
+<span class="gp">... </span>                           <span class="p">)</span>
+</pre></div>
+</div>
+<p>To create the final score, we can simply assign its return value to an
+<code class="docutils literal notranslate"><span class="pre">abjad.Score</span></code>.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">music</span> <span class="o">=</span> <span class="n">hocketer</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">score</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Score</span><span class="p">(</span><span class="n">music</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">f</span><span class="p">(</span><span class="n">score</span><span class="p">)</span>
+<span class="go">\new Score</span>
+<span class="go">&lt;&lt;</span>
+<span class="go">    \new Staff</span>
+<span class="go">    {</span>
+<span class="go">        f&#39;4</span>
+<span class="go">        ~</span>
+<span class="go">        f&#39;16</span>
+<span class="go">        r4..</span>
+<span class="go">        cs&#39;16</span>
+<span class="go">        r8.</span>
+<span class="go">        R1</span>
+<span class="go">        R1</span>
+<span class="go">        f&#39;&#39;4</span>
+<span class="go">        ~</span>
+<span class="go">        f&#39;&#39;16</span>
+<span class="go">        r16</span>
+<span class="go">        r16</span>
+<span class="go">        f&#39;&#39;16</span>
+<span class="go">        r2</span>
+<span class="go">        R1</span>
+<span class="go">        a&#39;&#39;4</span>
+<span class="go">        ~</span>
+<span class="go">        a&#39;&#39;16</span>
+<span class="go">        r8.</span>
+<span class="go">        e&#39;&#39;4</span>
+<span class="go">        r4</span>
+<span class="go">        r2.</span>
+<span class="go">        d&#39;&#39;16</span>
+<span class="go">        r8.</span>
+<span class="go">        r4..</span>
+<span class="go">        cs&#39;&#39;16</span>
+<span class="go">        r2</span>
+<span class="go">        r4..</span>
+<span class="go">        cs&#39;&#39;16</span>
+<span class="go">        r4</span>
+<span class="go">        cs&#39;&#39;16</span>
+<span class="go">        r8.</span>
+<span class="go">    }</span>
+<span class="go">    \new Staff</span>
+<span class="go">    {</span>
+<span class="go">        r2</span>
+<span class="go">        d&#39;4</span>
+<span class="go">        r4</span>
+<span class="go">        fs&#39;4</span>
+<span class="go">        ~</span>
+<span class="go">        fs&#39;16</span>
+<span class="go">        r8.</span>
+<span class="go">        r2</span>
+<span class="go">        c&#39;4</span>
+<span class="go">        ~</span>
+<span class="go">        c&#39;16</span>
+<span class="go">        r16</span>
+<span class="go">        r16</span>
+<span class="go">        ef&#39;16</span>
+<span class="go">        r4</span>
+<span class="go">        cs&#39;16</span>
+<span class="go">        r8.</span>
+<span class="go">        r2.</span>
+<span class="go">        f&#39;&#39;16</span>
+<span class="go">        r8.</span>
+<span class="go">        f&#39;&#39;4</span>
+<span class="go">        ~</span>
+<span class="go">        f&#39;&#39;16</span>
+<span class="go">        r16</span>
+<span class="go">        r16</span>
+<span class="go">        a&#39;&#39;16</span>
+<span class="go">        e&#39;&#39;4</span>
+<span class="go">        f&#39;&#39;16</span>
+<span class="go">        r8.</span>
+<span class="go">        r4..</span>
+<span class="go">        cs&#39;&#39;16</span>
+<span class="go">        r2</span>
+<span class="go">        r4..</span>
+<span class="go">        d&#39;&#39;16</span>
+<span class="go">        r2</span>
+<span class="go">        d&#39;&#39;4</span>
+<span class="go">        ~</span>
+<span class="go">        d&#39;&#39;16</span>
+<span class="go">        r4..</span>
+<span class="go">        a&#39;&#39;16</span>
+<span class="go">        r8.</span>
+<span class="go">        R1</span>
+<span class="go">    }</span>
+<span class="go">    \new Staff</span>
+<span class="go">    {</span>
+<span class="go">        r4..</span>
+<span class="go">        fs&#39;16</span>
+<span class="go">        r2</span>
+<span class="go">        r4..</span>
+<span class="go">        cs&#39;16</span>
+<span class="go">        ef&#39;4</span>
+<span class="go">        e&#39;16</span>
+<span class="go">        r8.</span>
+<span class="go">        r2</span>
+<span class="go">        c&#39;4</span>
+<span class="go">        r4</span>
+<span class="go">        r2</span>
+<span class="go">        cs&#39;&#39;4</span>
+<span class="go">        r4</span>
+<span class="go">        R1</span>
+<span class="go">        r2.</span>
+<span class="go">        f&#39;&#39;16</span>
+<span class="go">        r8.</span>
+<span class="go">        cs&#39;&#39;4</span>
+<span class="go">        ~</span>
+<span class="go">        cs&#39;&#39;16</span>
+<span class="go">        r8.</span>
+<span class="go">        d&#39;&#39;4</span>
+<span class="go">        r4</span>
+<span class="go">        r2</span>
+<span class="go">        d&#39;&#39;4</span>
+<span class="go">        r4</span>
+<span class="go">        d&#39;&#39;4</span>
+<span class="go">        ~</span>
+<span class="go">        d&#39;&#39;16</span>
+<span class="go">        r8.</span>
+<span class="go">        d&#39;&#39;4</span>
+<span class="go">        r4</span>
+<span class="go">    }</span>
+<span class="go">&gt;&gt;</span>
+</pre></div>
+</div>
+<div class="figure align-default">
+<img alt="../_images/image-example-4-hocket-with-random-pitches-5.png" src="../_images/image-example-4-hocket-with-random-pitches-5.png" />
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="example-5-shuffling-harmonics.html" class="btn btn-neutral float-right" title="Shuffling and fading harmonics" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="example-3-looping.html" class="btn btn-neutral float-left" title="Looping with WindowLooper" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2020, Gilberto Agostinho
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

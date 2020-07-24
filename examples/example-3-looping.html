@@ -1,0 +1,1060 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Looping with WindowLooper &mdash; auxjad 0.8.2 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Hocket with random pitches" href="example-4-hocket-with-random-pitches.html" />
+    <link rel="prev" title="Looping with LeafLooper" href="example-2-looping.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> auxjad
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.8
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../index.html">Welcome to auxjad’s documentation!</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Examples of usage</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="example-1-clapping-music.html">Steve Reich’s <em>Clapping Music</em></a></li>
+<li class="toctree-l2"><a class="reference internal" href="example-2-looping.html">Looping with <code class="docutils literal notranslate"><span class="pre">LeafLooper</span></code></a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Looping with <code class="docutils literal notranslate"><span class="pre">WindowLooper</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="example-4-hocket-with-random-pitches.html">Hocket with random pitches</a></li>
+<li class="toctree-l2"><a class="reference internal" href="example-5-shuffling-harmonics.html">Shuffling and fading harmonics</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../api/index.html">auxjad API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../score_gallery/index.html">Score gallery</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">auxjad</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="index.html">Examples of usage</a> &raquo;</li>
+        
+      <li>Looping with <code class="docutils literal notranslate"><span class="pre">WindowLooper</span></code></li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/examples/example-3-looping.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="looping-with-windowlooper">
+<h1>Looping with <code class="docutils literal notranslate"><span class="pre">WindowLooper</span></code><a class="headerlink" href="#looping-with-windowlooper" title="Permalink to this headline">¶</a></h1>
+<p>In this next example, we will use some of <code class="docutils literal notranslate"><span class="pre">auxjad</span></code>’s classes to generate
+a container of randomly selected material, and then use this material as input
+for the looping and shuffling classes.</p>
+<p>First, we start by importing both <code class="docutils literal notranslate"><span class="pre">abjad</span></code> and <code class="docutils literal notranslate"><span class="pre">auxjad</span></code>.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">abjad</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">auxjad</span>
+</pre></div>
+</div>
+<p>Let’s start by deciding what random selectors will be responsible for
+generating each parameter of our basic material. Let’s use
+<code class="docutils literal notranslate"><span class="pre">auxjad.TenneySelector</span></code> for pitches, which is an implementation of Tenney’s
+Dissonant Counterpoint Algorithm; at each call, this algorithm prioritises
+elements that haven’t been select for the longest time. For the durations,
+dynamics, and articulations, the example will use
+<code class="docutils literal notranslate"><span class="pre">auxjad.CartographySelector</span></code>. Each element input into this type of selector
+has a probability of being selected which is dependent on its index. By
+default, the probability of consecutive elements decay with a rate of 0.75. For
+more information on both of these classes, check the <code class="docutils literal notranslate"><span class="pre">auxjad</span></code> API page (link
+in the left panel).</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">pitch_selector</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">TenneySelector</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">10</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">duration_selector</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">CartographySelector</span><span class="p">([(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">8</span><span class="p">),</span>
+<span class="gp">... </span>                                                <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">8</span><span class="p">),</span>
+<span class="gp">... </span>                                                <span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">8</span><span class="p">),</span>
+<span class="gp">... </span>                                                <span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">dynamic_selector</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">CartographySelector</span><span class="p">([</span><span class="s1">&#39;p&#39;</span><span class="p">,</span> <span class="s1">&#39;mp&#39;</span><span class="p">,</span> <span class="s1">&#39;mf&#39;</span><span class="p">,</span> <span class="s1">&#39;f&#39;</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">articulation_selector</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">CartographySelector</span><span class="p">([</span><span class="kc">None</span><span class="p">,</span> <span class="s1">&#39;-&#39;</span><span class="p">,</span> <span class="s1">&#39;&gt;&#39;</span><span class="p">])</span>
+</pre></div>
+</div>
+<p>Let’s now create eight random notes, each with four parameters randomly
+selected by the classes above.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">pitches</span> <span class="o">=</span> <span class="p">[</span><span class="n">pitch_selector</span><span class="p">()</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">8</span><span class="p">)]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">durations</span> <span class="o">=</span> <span class="p">[</span><span class="n">duration_selector</span><span class="p">()</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">8</span><span class="p">)]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">dynamics</span> <span class="o">=</span> <span class="p">[</span><span class="n">dynamic_selector</span><span class="p">()</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">8</span><span class="p">)]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">articulations</span> <span class="o">=</span> <span class="p">[</span><span class="n">articulation_selector</span><span class="p">()</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">8</span><span class="p">)]</span>
+</pre></div>
+</div>
+<p>With these lists of pitches, durations, dynamics, and articulations, we can now
+use <code class="docutils literal notranslate"><span class="pre">auxjad.LeafDynMaker</span></code> to create the individual abjad leaves for us. It’s
+important to note that there is no time signature being imposed at this point,
+so LilyPond will fallback to a four by four when displaying the container
+below. This is not a problem since this will be used as the basic material for
+the looper, which will then automatically take care of time signatures.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">leaf_dyn_maker</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">LeafDynMaker</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">notes</span> <span class="o">=</span> <span class="n">leaf_dyn_maker</span><span class="p">(</span><span class="n">pitches</span><span class="p">,</span> <span class="n">durations</span><span class="p">,</span> <span class="n">dynamics</span><span class="p">,</span> <span class="n">articulations</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">container</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">(</span><span class="n">notes</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">f</span><span class="p">(</span><span class="n">container</span><span class="p">)</span>
+<span class="go">{</span>
+<span class="go">    bf&#39;4.</span>
+<span class="go">    \f</span>
+<span class="go">    g&#39;4.</span>
+<span class="go">    \f</span>
+<span class="go">    af&#39;4</span>
+<span class="go">    \mf</span>
+<span class="go">    c&#39;4.</span>
+<span class="go">    \mf</span>
+<span class="go">    - \tenuto</span>
+<span class="go">    g&#39;4</span>
+<span class="go">    \f</span>
+<span class="go">    ef&#39;4.</span>
+<span class="go">    \p</span>
+<span class="go">    bf&#39;2</span>
+<span class="go">    \p</span>
+<span class="go">    ~</span>
+<span class="go">    bf&#39;8</span>
+<span class="go">    af&#39;2</span>
+<span class="go">    \p</span>
+<span class="go">    - \tenuto</span>
+<span class="go">    ~</span>
+<span class="go">    af&#39;8</span>
+<span class="go">}</span>
+</pre></div>
+</div>
+<div class="figure align-default">
+<img alt="../_images/image-example-3-looping-1.png" src="../_images/image-example-3-looping-1.png" />
+</div>
+<p>Let’s now use <code class="docutils literal notranslate"><span class="pre">auxjad.WindowLooper</span></code> to output loops of windows of the
+material. By default, this class uses a window size of a 4/4 measure, and each
+step forward has the size of a semiquaver, but we will adjust those to a 5/4
+time signature and a crotchet for the step size. Please refer to this library’s
+API for more information.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">looper</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">WindowLooper</span><span class="p">(</span><span class="n">container</span><span class="p">,</span>
+<span class="gp">... </span>                             <span class="n">window_size</span><span class="o">=</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">4</span><span class="p">),</span>
+<span class="gp">... </span>                             <span class="n">step_size</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">),</span>
+<span class="gp">... </span>                             <span class="p">)</span>
+</pre></div>
+</div>
+<p>We can now use the <code class="docutils literal notranslate"><span class="pre">output_n()</span></code> to output several measures of the looping
+process for us. In this case, let’s output six measures.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">staff</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">notes</span> <span class="o">=</span> <span class="n">looper</span><span class="o">.</span><span class="n">output_n</span><span class="p">(</span><span class="mi">6</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">staff</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">notes</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">f</span><span class="p">(</span><span class="n">staff</span><span class="p">)</span>
+<span class="go">\new Staff</span>
+<span class="go">{</span>
+<span class="go">    \time 5/4</span>
+<span class="go">    bf&#39;4.</span>
+<span class="go">    \f</span>
+<span class="go">    g&#39;4.</span>
+<span class="go">    af&#39;4</span>
+<span class="go">    \mf</span>
+<span class="go">    c&#39;4</span>
+<span class="go">    - \tenuto</span>
+<span class="go">    bf&#39;8</span>
+<span class="go">    \f</span>
+<span class="go">    g&#39;4.</span>
+<span class="go">    af&#39;4</span>
+<span class="go">    \mf</span>
+<span class="go">    c&#39;4.</span>
+<span class="go">    - \tenuto</span>
+<span class="go">    g&#39;8</span>
+<span class="go">    \f</span>
+<span class="go">    g&#39;4</span>
+<span class="go">    af&#39;4</span>
+<span class="go">    \mf</span>
+<span class="go">    c&#39;4</span>
+<span class="go">    - \tenuto</span>
+<span class="go">    ~</span>
+<span class="go">    c&#39;8</span>
+<span class="go">    g&#39;8</span>
+<span class="go">    \f</span>
+<span class="go">    ~</span>
+<span class="go">    g&#39;8</span>
+<span class="go">    ef&#39;8</span>
+<span class="go">    \p</span>
+<span class="go">    af&#39;4</span>
+<span class="go">    \mf</span>
+<span class="go">    c&#39;4.</span>
+<span class="go">    - \tenuto</span>
+<span class="go">    g&#39;8</span>
+<span class="go">    \f</span>
+<span class="go">    ~</span>
+<span class="go">    g&#39;8</span>
+<span class="go">    ef&#39;4.</span>
+<span class="go">    \p</span>
+<span class="go">    c&#39;4.</span>
+<span class="go">    \mf</span>
+<span class="go">    - \tenuto</span>
+<span class="go">    g&#39;8</span>
+<span class="go">    \f</span>
+<span class="go">    ~</span>
+<span class="go">    g&#39;8</span>
+<span class="go">    ef&#39;8</span>
+<span class="go">    \p</span>
+<span class="go">    ~</span>
+<span class="go">    ef&#39;4</span>
+<span class="go">    bf&#39;4</span>
+<span class="go">    c&#39;8</span>
+<span class="go">    \mf</span>
+<span class="go">    - \tenuto</span>
+<span class="go">    g&#39;8</span>
+<span class="go">    \f</span>
+<span class="go">    ~</span>
+<span class="go">    g&#39;8</span>
+<span class="go">    ef&#39;4.</span>
+<span class="go">    \p</span>
+<span class="go">    bf&#39;2</span>
+<span class="go">}</span>
+</pre></div>
+</div>
+<div class="figure align-default">
+<img alt="../_images/image-example-3-looping-2.png" src="../_images/image-example-3-looping-2.png" />
+</div>
+<p>Let’s now change the value of <code class="docutils literal notranslate"><span class="pre">step_size</span></code> from a crotchet into a semiquaver
+and output six more measures.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">looper</span><span class="o">.</span><span class="n">step_size</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">16</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">notes</span> <span class="o">=</span> <span class="n">looper</span><span class="o">.</span><span class="n">output_n</span><span class="p">(</span><span class="mi">6</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">staff</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">notes</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">f</span><span class="p">(</span><span class="n">staff</span><span class="p">)</span>
+<span class="go">\new Staff</span>
+<span class="go">{</span>
+<span class="go">    \time 5/4</span>
+<span class="go">    bf&#39;4.</span>
+<span class="go">    \f</span>
+<span class="go">    g&#39;4.</span>
+<span class="go">    af&#39;4</span>
+<span class="go">    \mf</span>
+<span class="go">    c&#39;4</span>
+<span class="go">    - \tenuto</span>
+<span class="go">    bf&#39;8</span>
+<span class="go">    \f</span>
+<span class="go">    g&#39;4.</span>
+<span class="go">    af&#39;4</span>
+<span class="go">    \mf</span>
+<span class="go">    c&#39;4.</span>
+<span class="go">    - \tenuto</span>
+<span class="go">    g&#39;8</span>
+<span class="go">    \f</span>
+<span class="go">    g&#39;4</span>
+<span class="go">    af&#39;4</span>
+<span class="go">    \mf</span>
+<span class="go">    c&#39;4</span>
+<span class="go">    - \tenuto</span>
+<span class="go">    ~</span>
+<span class="go">    c&#39;8</span>
+<span class="go">    g&#39;8</span>
+<span class="go">    \f</span>
+<span class="go">    ~</span>
+<span class="go">    g&#39;8</span>
+<span class="go">    ef&#39;8</span>
+<span class="go">    \p</span>
+<span class="go">    af&#39;4</span>
+<span class="go">    \mf</span>
+<span class="go">    c&#39;4.</span>
+<span class="go">    - \tenuto</span>
+<span class="go">    g&#39;8</span>
+<span class="go">    \f</span>
+<span class="go">    ~</span>
+<span class="go">    g&#39;8</span>
+<span class="go">    ef&#39;4.</span>
+<span class="go">    \p</span>
+<span class="go">    c&#39;4.</span>
+<span class="go">    \mf</span>
+<span class="go">    - \tenuto</span>
+<span class="go">    g&#39;8</span>
+<span class="go">    \f</span>
+<span class="go">    ~</span>
+<span class="go">    g&#39;8</span>
+<span class="go">    ef&#39;8</span>
+<span class="go">    \p</span>
+<span class="go">    ~</span>
+<span class="go">    ef&#39;4</span>
+<span class="go">    bf&#39;4</span>
+<span class="go">    c&#39;8</span>
+<span class="go">    \mf</span>
+<span class="go">    - \tenuto</span>
+<span class="go">    g&#39;8</span>
+<span class="go">    \f</span>
+<span class="go">    ~</span>
+<span class="go">    g&#39;8</span>
+<span class="go">    ef&#39;4.</span>
+<span class="go">    \p</span>
+<span class="go">    bf&#39;2</span>
+<span class="go">}</span>
+<span class="go">\new Staff</span>
+<span class="go">{</span>
+<span class="go">    \time 5/4</span>
+<span class="go">    bf&#39;4.</span>
+<span class="go">    \f</span>
+<span class="go">    g&#39;4.</span>
+<span class="go">    af&#39;4</span>
+<span class="go">    \mf</span>
+<span class="go">    c&#39;4</span>
+<span class="go">    - \tenuto</span>
+<span class="go">    bf&#39;8</span>
+<span class="go">    \f</span>
+<span class="go">    g&#39;4.</span>
+<span class="go">    af&#39;4</span>
+<span class="go">    \mf</span>
+<span class="go">    c&#39;4.</span>
+<span class="go">    - \tenuto</span>
+<span class="go">    g&#39;8</span>
+<span class="go">    \f</span>
+<span class="go">    g&#39;4</span>
+<span class="go">    af&#39;4</span>
+<span class="go">    \mf</span>
+<span class="go">    c&#39;4</span>
+<span class="go">    - \tenuto</span>
+<span class="go">    ~</span>
+<span class="go">    c&#39;8</span>
+<span class="go">    g&#39;8</span>
+<span class="go">    \f</span>
+<span class="go">    ~</span>
+<span class="go">    g&#39;8</span>
+<span class="go">    ef&#39;8</span>
+<span class="go">    \p</span>
+<span class="go">    af&#39;4</span>
+<span class="go">    \mf</span>
+<span class="go">    c&#39;4.</span>
+<span class="go">    - \tenuto</span>
+<span class="go">    g&#39;8</span>
+<span class="go">    \f</span>
+<span class="go">    ~</span>
+<span class="go">    g&#39;8</span>
+<span class="go">    ef&#39;4.</span>
+<span class="go">    \p</span>
+<span class="go">    c&#39;4.</span>
+<span class="go">    \mf</span>
+<span class="go">    - \tenuto</span>
+<span class="go">    g&#39;8</span>
+<span class="go">    \f</span>
+<span class="go">    ~</span>
+<span class="go">    g&#39;8</span>
+<span class="go">    ef&#39;8</span>
+<span class="go">    \p</span>
+<span class="go">    ~</span>
+<span class="go">    ef&#39;4</span>
+<span class="go">    bf&#39;4</span>
+<span class="go">    c&#39;8</span>
+<span class="go">    \mf</span>
+<span class="go">    - \tenuto</span>
+<span class="go">    g&#39;8</span>
+<span class="go">    \f</span>
+<span class="go">    ~</span>
+<span class="go">    g&#39;8</span>
+<span class="go">    ef&#39;4.</span>
+<span class="go">    \p</span>
+<span class="go">    bf&#39;2</span>
+<span class="go">    \time 5/4</span>
+<span class="go">    c&#39;16</span>
+<span class="go">    \mf</span>
+<span class="go">    - \tenuto</span>
+<span class="go">    g&#39;8.</span>
+<span class="go">    \f</span>
+<span class="go">    ~</span>
+<span class="go">    g&#39;16</span>
+<span class="go">    ef&#39;8.</span>
+<span class="go">    \p</span>
+<span class="go">    ~</span>
+<span class="go">    ef&#39;8.</span>
+<span class="go">    bf&#39;16</span>
+<span class="go">    ~</span>
+<span class="go">    bf&#39;2</span>
+<span class="go">    g&#39;4</span>
+<span class="go">    \f</span>
+<span class="go">    ef&#39;4.</span>
+<span class="go">    \p</span>
+<span class="go">    bf&#39;8</span>
+<span class="go">    ~</span>
+<span class="go">    bf&#39;2</span>
+<span class="go">    g&#39;8.</span>
+<span class="go">    \f</span>
+<span class="go">    ef&#39;16</span>
+<span class="go">    \p</span>
+<span class="go">    ~</span>
+<span class="go">    ef&#39;4</span>
+<span class="go">    ~</span>
+<span class="go">    ef&#39;16</span>
+<span class="go">    bf&#39;8.</span>
+<span class="go">    ~</span>
+<span class="go">    bf&#39;4..</span>
+<span class="go">    af&#39;16</span>
+<span class="go">    - \tenuto</span>
+<span class="go">    g&#39;8</span>
+<span class="go">    \f</span>
+<span class="go">    ef&#39;4.</span>
+<span class="go">    \p</span>
+<span class="go">    bf&#39;4</span>
+<span class="go">    ~</span>
+<span class="go">    bf&#39;4.</span>
+<span class="go">    af&#39;8</span>
+<span class="go">    - \tenuto</span>
+<span class="go">    g&#39;16</span>
+<span class="go">    \f</span>
+<span class="go">    ef&#39;8.</span>
+<span class="go">    \p</span>
+<span class="go">    ~</span>
+<span class="go">    ef&#39;8.</span>
+<span class="go">    bf&#39;16</span>
+<span class="go">    ~</span>
+<span class="go">    bf&#39;4</span>
+<span class="go">    ~</span>
+<span class="go">    bf&#39;4</span>
+<span class="go">    ~</span>
+<span class="go">    bf&#39;16</span>
+<span class="go">    af&#39;8.</span>
+<span class="go">    - \tenuto</span>
+<span class="go">    ef&#39;4.</span>
+<span class="go">    bf&#39;4.</span>
+<span class="go">    ~</span>
+<span class="go">    bf&#39;4</span>
+<span class="go">    af&#39;4</span>
+<span class="go">    - \tenuto</span>
+<span class="go">}</span>
+</pre></div>
+</div>
+<div class="figure align-default">
+<img alt="../_images/image-example-3-looping-3.png" src="../_images/image-example-3-looping-3.png" />
+</div>
+<p>Notice that the time signature has been repeated. While the <code class="docutils literal notranslate"><span class="pre">output_n()</span></code>
+method takes care of repeated time signatures, dynamics, and clefs, consecutive
+calls may result in repetitions. But we can simply use
+<code class="docutils literal notranslate"><span class="pre">auxjad.remove_repeated_time_signatures()</span></code> to take care of that for us.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">auxjad</span><span class="o">.</span><span class="n">remove_repeated_time_signatures</span><span class="p">(</span><span class="n">staff</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">f</span><span class="p">(</span><span class="n">staff</span><span class="p">)</span>
+<span class="go">\new Staff</span>
+<span class="go">{</span>
+<span class="go">    \time 5/4</span>
+<span class="go">    bf&#39;4.</span>
+<span class="go">    \f</span>
+<span class="go">    g&#39;4.</span>
+<span class="go">    af&#39;4</span>
+<span class="go">    \mf</span>
+<span class="go">    c&#39;4</span>
+<span class="go">    - \tenuto</span>
+<span class="go">    bf&#39;8</span>
+<span class="go">    \f</span>
+<span class="go">    g&#39;4.</span>
+<span class="go">    af&#39;4</span>
+<span class="go">    \mf</span>
+<span class="go">    c&#39;4.</span>
+<span class="go">    - \tenuto</span>
+<span class="go">    g&#39;8</span>
+<span class="go">    \f</span>
+<span class="go">    g&#39;4</span>
+<span class="go">    af&#39;4</span>
+<span class="go">    \mf</span>
+<span class="go">    c&#39;4</span>
+<span class="go">    - \tenuto</span>
+<span class="go">    ~</span>
+<span class="go">    c&#39;8</span>
+<span class="go">    g&#39;8</span>
+<span class="go">    \f</span>
+<span class="go">    ~</span>
+<span class="go">    g&#39;8</span>
+<span class="go">    ef&#39;8</span>
+<span class="go">    \p</span>
+<span class="go">    af&#39;4</span>
+<span class="go">    \mf</span>
+<span class="go">    c&#39;4.</span>
+<span class="go">    - \tenuto</span>
+<span class="go">    g&#39;8</span>
+<span class="go">    \f</span>
+<span class="go">    ~</span>
+<span class="go">    g&#39;8</span>
+<span class="go">    ef&#39;4.</span>
+<span class="go">    \p</span>
+<span class="go">    c&#39;4.</span>
+<span class="go">    \mf</span>
+<span class="go">    - \tenuto</span>
+<span class="go">    g&#39;8</span>
+<span class="go">    \f</span>
+<span class="go">    ~</span>
+<span class="go">    g&#39;8</span>
+<span class="go">    ef&#39;8</span>
+<span class="go">    \p</span>
+<span class="go">    ~</span>
+<span class="go">    ef&#39;4</span>
+<span class="go">    bf&#39;4</span>
+<span class="go">    c&#39;8</span>
+<span class="go">    \mf</span>
+<span class="go">    - \tenuto</span>
+<span class="go">    g&#39;8</span>
+<span class="go">    \f</span>
+<span class="go">    ~</span>
+<span class="go">    g&#39;8</span>
+<span class="go">    ef&#39;4.</span>
+<span class="go">    \p</span>
+<span class="go">    bf&#39;2</span>
+<span class="go">    c&#39;16</span>
+<span class="go">    \mf</span>
+<span class="go">    - \tenuto</span>
+<span class="go">    g&#39;8.</span>
+<span class="go">    \f</span>
+<span class="go">    ~</span>
+<span class="go">    g&#39;16</span>
+<span class="go">    ef&#39;8.</span>
+<span class="go">    \p</span>
+<span class="go">    ~</span>
+<span class="go">    ef&#39;8.</span>
+<span class="go">    bf&#39;16</span>
+<span class="go">    ~</span>
+<span class="go">    bf&#39;2</span>
+<span class="go">    g&#39;4</span>
+<span class="go">    \f</span>
+<span class="go">    ef&#39;4.</span>
+<span class="go">    \p</span>
+<span class="go">    bf&#39;8</span>
+<span class="go">    ~</span>
+<span class="go">    bf&#39;2</span>
+<span class="go">    g&#39;8.</span>
+<span class="go">    \f</span>
+<span class="go">    ef&#39;16</span>
+<span class="go">    \p</span>
+<span class="go">    ~</span>
+<span class="go">    ef&#39;4</span>
+<span class="go">    ~</span>
+<span class="go">    ef&#39;16</span>
+<span class="go">    bf&#39;8.</span>
+<span class="go">    ~</span>
+<span class="go">    bf&#39;4..</span>
+<span class="go">    af&#39;16</span>
+<span class="go">    - \tenuto</span>
+<span class="go">    g&#39;8</span>
+<span class="go">    \f</span>
+<span class="go">    ef&#39;4.</span>
+<span class="go">    \p</span>
+<span class="go">    bf&#39;4</span>
+<span class="go">    ~</span>
+<span class="go">    bf&#39;4.</span>
+<span class="go">    af&#39;8</span>
+<span class="go">    - \tenuto</span>
+<span class="go">    g&#39;16</span>
+<span class="go">    \f</span>
+<span class="go">    ef&#39;8.</span>
+<span class="go">    \p</span>
+<span class="go">    ~</span>
+<span class="go">    ef&#39;8.</span>
+<span class="go">    bf&#39;16</span>
+<span class="go">    ~</span>
+<span class="go">    bf&#39;4</span>
+<span class="go">    ~</span>
+<span class="go">    bf&#39;4</span>
+<span class="go">    ~</span>
+<span class="go">    bf&#39;16</span>
+<span class="go">    af&#39;8.</span>
+<span class="go">    - \tenuto</span>
+<span class="go">    ef&#39;4.</span>
+<span class="go">    bf&#39;4.</span>
+<span class="go">    ~</span>
+<span class="go">    bf&#39;4</span>
+<span class="go">    af&#39;4</span>
+<span class="go">    - \tenuto</span>
+<span class="go">}</span>
+</pre></div>
+</div>
+<div class="figure align-default">
+<img alt="../_images/image-example-3-looping-4.png" src="../_images/image-example-3-looping-4.png" />
+</div>
+<p>Let’s now change the window size and output some more measures.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">looper</span><span class="o">.</span><span class="n">window_size</span> <span class="o">=</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">notes</span> <span class="o">=</span> <span class="n">looper</span><span class="o">.</span><span class="n">output_n</span><span class="p">(</span><span class="mi">6</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">staff</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">notes</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">f</span><span class="p">(</span><span class="n">staff</span><span class="p">)</span>
+<span class="go">\new Staff</span>
+<span class="go">{</span>
+<span class="go">    \time 5/4</span>
+<span class="go">    bf&#39;4.</span>
+<span class="go">    \f</span>
+<span class="go">    g&#39;4.</span>
+<span class="go">    af&#39;4</span>
+<span class="go">    \mf</span>
+<span class="go">    c&#39;4</span>
+<span class="go">    - \tenuto</span>
+<span class="go">    bf&#39;8</span>
+<span class="go">    \f</span>
+<span class="go">    g&#39;4.</span>
+<span class="go">    af&#39;4</span>
+<span class="go">    \mf</span>
+<span class="go">    c&#39;4.</span>
+<span class="go">    - \tenuto</span>
+<span class="go">    g&#39;8</span>
+<span class="go">    \f</span>
+<span class="go">    g&#39;4</span>
+<span class="go">    af&#39;4</span>
+<span class="go">    \mf</span>
+<span class="go">    c&#39;4</span>
+<span class="go">    - \tenuto</span>
+<span class="go">    ~</span>
+<span class="go">    c&#39;8</span>
+<span class="go">    g&#39;8</span>
+<span class="go">    \f</span>
+<span class="go">    ~</span>
+<span class="go">    g&#39;8</span>
+<span class="go">    ef&#39;8</span>
+<span class="go">    \p</span>
+<span class="go">    af&#39;4</span>
+<span class="go">    \mf</span>
+<span class="go">    c&#39;4.</span>
+<span class="go">    - \tenuto</span>
+<span class="go">    g&#39;8</span>
+<span class="go">    \f</span>
+<span class="go">    ~</span>
+<span class="go">    g&#39;8</span>
+<span class="go">    ef&#39;4.</span>
+<span class="go">    \p</span>
+<span class="go">    c&#39;4.</span>
+<span class="go">    \mf</span>
+<span class="go">    - \tenuto</span>
+<span class="go">    g&#39;8</span>
+<span class="go">    \f</span>
+<span class="go">    ~</span>
+<span class="go">    g&#39;8</span>
+<span class="go">    ef&#39;8</span>
+<span class="go">    \p</span>
+<span class="go">    ~</span>
+<span class="go">    ef&#39;4</span>
+<span class="go">    bf&#39;4</span>
+<span class="go">    c&#39;8</span>
+<span class="go">    \mf</span>
+<span class="go">    - \tenuto</span>
+<span class="go">    g&#39;8</span>
+<span class="go">    \f</span>
+<span class="go">    ~</span>
+<span class="go">    g&#39;8</span>
+<span class="go">    ef&#39;4.</span>
+<span class="go">    \p</span>
+<span class="go">    bf&#39;2</span>
+<span class="go">    c&#39;16</span>
+<span class="go">    \mf</span>
+<span class="go">    - \tenuto</span>
+<span class="go">    g&#39;8.</span>
+<span class="go">    \f</span>
+<span class="go">    ~</span>
+<span class="go">    g&#39;16</span>
+<span class="go">    ef&#39;8.</span>
+<span class="go">    \p</span>
+<span class="go">    ~</span>
+<span class="go">    ef&#39;8.</span>
+<span class="go">    bf&#39;16</span>
+<span class="go">    ~</span>
+<span class="go">    bf&#39;2</span>
+<span class="go">    g&#39;4</span>
+<span class="go">    \f</span>
+<span class="go">    ef&#39;4.</span>
+<span class="go">    \p</span>
+<span class="go">    bf&#39;8</span>
+<span class="go">    ~</span>
+<span class="go">    bf&#39;2</span>
+<span class="go">    g&#39;8.</span>
+<span class="go">    \f</span>
+<span class="go">    ef&#39;16</span>
+<span class="go">    \p</span>
+<span class="go">    ~</span>
+<span class="go">    ef&#39;4</span>
+<span class="go">    ~</span>
+<span class="go">    ef&#39;16</span>
+<span class="go">    bf&#39;8.</span>
+<span class="go">    ~</span>
+<span class="go">    bf&#39;4..</span>
+<span class="go">    af&#39;16</span>
+<span class="go">    - \tenuto</span>
+<span class="go">    g&#39;8</span>
+<span class="go">    \f</span>
+<span class="go">    ef&#39;4.</span>
+<span class="go">    \p</span>
+<span class="go">    bf&#39;4</span>
+<span class="go">    ~</span>
+<span class="go">    bf&#39;4.</span>
+<span class="go">    af&#39;8</span>
+<span class="go">    - \tenuto</span>
+<span class="go">    g&#39;16</span>
+<span class="go">    \f</span>
+<span class="go">    ef&#39;8.</span>
+<span class="go">    \p</span>
+<span class="go">    ~</span>
+<span class="go">    ef&#39;8.</span>
+<span class="go">    bf&#39;16</span>
+<span class="go">    ~</span>
+<span class="go">    bf&#39;4</span>
+<span class="go">    ~</span>
+<span class="go">    bf&#39;4</span>
+<span class="go">    ~</span>
+<span class="go">    bf&#39;16</span>
+<span class="go">    af&#39;8.</span>
+<span class="go">    - \tenuto</span>
+<span class="go">    ef&#39;4.</span>
+<span class="go">    bf&#39;4.</span>
+<span class="go">    ~</span>
+<span class="go">    bf&#39;4</span>
+<span class="go">    af&#39;4</span>
+<span class="go">    - \tenuto</span>
+<span class="go">    \time 3/4</span>
+<span class="go">    ef&#39;4</span>
+<span class="go">    \p</span>
+<span class="go">    ~</span>
+<span class="go">    ef&#39;16</span>
+<span class="go">    bf&#39;4..</span>
+<span class="go">    ef&#39;4</span>
+<span class="go">    bf&#39;2</span>
+<span class="go">    ef&#39;8.</span>
+<span class="go">    bf&#39;16</span>
+<span class="go">    ~</span>
+<span class="go">    bf&#39;2</span>
+<span class="go">    ef&#39;8</span>
+<span class="go">    bf&#39;8</span>
+<span class="go">    ~</span>
+<span class="go">    bf&#39;2</span>
+<span class="go">    ef&#39;16</span>
+<span class="go">    bf&#39;8.</span>
+<span class="go">    ~</span>
+<span class="go">    bf&#39;4..</span>
+<span class="go">    af&#39;16</span>
+<span class="go">    - \tenuto</span>
+<span class="go">    bf&#39;2</span>
+<span class="go">    ~</span>
+<span class="go">    bf&#39;8</span>
+<span class="go">    af&#39;8</span>
+<span class="go">    - \tenuto</span>
+<span class="go">}</span>
+</pre></div>
+</div>
+<div class="figure align-default">
+<img alt="../_images/image-example-3-looping-5.png" src="../_images/image-example-3-looping-5.png" />
+</div>
+<p>At this point, let’s use <code class="docutils literal notranslate"><span class="pre">auxjad.remove_repeated_dynamics</span></code> to remove all
+repeated dynamics. While the method <code class="docutils literal notranslate"><span class="pre">output_n()</span></code> removes repeated dynamics,
+clefs, and time signatures, this is necessary because our example invoked
+<code class="docutils literal notranslate"><span class="pre">output_n()</span></code> multiple times, and there is a repetition of a dynamic at that
+transition. The final result is shown below.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">auxjad</span><span class="o">.</span><span class="n">remove_repeated_dynamics</span><span class="p">(</span><span class="n">staff</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">f</span><span class="p">(</span><span class="n">staff</span><span class="p">)</span>
+<span class="go">\new Staff</span>
+<span class="go">{</span>
+<span class="go">    \time 5/4</span>
+<span class="go">    bf&#39;4.</span>
+<span class="go">    \f</span>
+<span class="go">    g&#39;4.</span>
+<span class="go">    af&#39;4</span>
+<span class="go">    \mf</span>
+<span class="go">    c&#39;4</span>
+<span class="go">    - \tenuto</span>
+<span class="go">    bf&#39;8</span>
+<span class="go">    \f</span>
+<span class="go">    g&#39;4.</span>
+<span class="go">    af&#39;4</span>
+<span class="go">    \mf</span>
+<span class="go">    c&#39;4.</span>
+<span class="go">    - \tenuto</span>
+<span class="go">    g&#39;8</span>
+<span class="go">    \f</span>
+<span class="go">    g&#39;4</span>
+<span class="go">    af&#39;4</span>
+<span class="go">    \mf</span>
+<span class="go">    c&#39;4</span>
+<span class="go">    - \tenuto</span>
+<span class="go">    ~</span>
+<span class="go">    c&#39;8</span>
+<span class="go">    g&#39;8</span>
+<span class="go">    \f</span>
+<span class="go">    ~</span>
+<span class="go">    g&#39;8</span>
+<span class="go">    ef&#39;8</span>
+<span class="go">    \p</span>
+<span class="go">    af&#39;4</span>
+<span class="go">    \mf</span>
+<span class="go">    c&#39;4.</span>
+<span class="go">    - \tenuto</span>
+<span class="go">    g&#39;8</span>
+<span class="go">    \f</span>
+<span class="go">    ~</span>
+<span class="go">    g&#39;8</span>
+<span class="go">    ef&#39;4.</span>
+<span class="go">    \p</span>
+<span class="go">    c&#39;4.</span>
+<span class="go">    \mf</span>
+<span class="go">    - \tenuto</span>
+<span class="go">    g&#39;8</span>
+<span class="go">    \f</span>
+<span class="go">    ~</span>
+<span class="go">    g&#39;8</span>
+<span class="go">    ef&#39;8</span>
+<span class="go">    \p</span>
+<span class="go">    ~</span>
+<span class="go">    ef&#39;4</span>
+<span class="go">    bf&#39;4</span>
+<span class="go">    c&#39;8</span>
+<span class="go">    \mf</span>
+<span class="go">    - \tenuto</span>
+<span class="go">    g&#39;8</span>
+<span class="go">    \f</span>
+<span class="go">    ~</span>
+<span class="go">    g&#39;8</span>
+<span class="go">    ef&#39;4.</span>
+<span class="go">    \p</span>
+<span class="go">    bf&#39;2</span>
+<span class="go">    c&#39;16</span>
+<span class="go">    \mf</span>
+<span class="go">    - \tenuto</span>
+<span class="go">    g&#39;8.</span>
+<span class="go">    \f</span>
+<span class="go">    ~</span>
+<span class="go">    g&#39;16</span>
+<span class="go">    ef&#39;8.</span>
+<span class="go">    \p</span>
+<span class="go">    ~</span>
+<span class="go">    ef&#39;8.</span>
+<span class="go">    bf&#39;16</span>
+<span class="go">    ~</span>
+<span class="go">    bf&#39;2</span>
+<span class="go">    g&#39;4</span>
+<span class="go">    \f</span>
+<span class="go">    ef&#39;4.</span>
+<span class="go">    \p</span>
+<span class="go">    bf&#39;8</span>
+<span class="go">    ~</span>
+<span class="go">    bf&#39;2</span>
+<span class="go">    g&#39;8.</span>
+<span class="go">    \f</span>
+<span class="go">    ef&#39;16</span>
+<span class="go">    \p</span>
+<span class="go">    ~</span>
+<span class="go">    ef&#39;4</span>
+<span class="go">    ~</span>
+<span class="go">    ef&#39;16</span>
+<span class="go">    bf&#39;8.</span>
+<span class="go">    ~</span>
+<span class="go">    bf&#39;4..</span>
+<span class="go">    af&#39;16</span>
+<span class="go">    - \tenuto</span>
+<span class="go">    g&#39;8</span>
+<span class="go">    \f</span>
+<span class="go">    ef&#39;4.</span>
+<span class="go">    \p</span>
+<span class="go">    bf&#39;4</span>
+<span class="go">    ~</span>
+<span class="go">    bf&#39;4.</span>
+<span class="go">    af&#39;8</span>
+<span class="go">    - \tenuto</span>
+<span class="go">    g&#39;16</span>
+<span class="go">    \f</span>
+<span class="go">    ef&#39;8.</span>
+<span class="go">    \p</span>
+<span class="go">    ~</span>
+<span class="go">    ef&#39;8.</span>
+<span class="go">    bf&#39;16</span>
+<span class="go">    ~</span>
+<span class="go">    bf&#39;4</span>
+<span class="go">    ~</span>
+<span class="go">    bf&#39;4</span>
+<span class="go">    ~</span>
+<span class="go">    bf&#39;16</span>
+<span class="go">    af&#39;8.</span>
+<span class="go">    - \tenuto</span>
+<span class="go">    ef&#39;4.</span>
+<span class="go">    bf&#39;4.</span>
+<span class="go">    ~</span>
+<span class="go">    bf&#39;4</span>
+<span class="go">    af&#39;4</span>
+<span class="go">    - \tenuto</span>
+<span class="go">    \time 3/4</span>
+<span class="go">    ef&#39;4</span>
+<span class="go">    ~</span>
+<span class="go">    ef&#39;16</span>
+<span class="go">    bf&#39;4..</span>
+<span class="go">    ef&#39;4</span>
+<span class="go">    bf&#39;2</span>
+<span class="go">    ef&#39;8.</span>
+<span class="go">    bf&#39;16</span>
+<span class="go">    ~</span>
+<span class="go">    bf&#39;2</span>
+<span class="go">    ef&#39;8</span>
+<span class="go">    bf&#39;8</span>
+<span class="go">    ~</span>
+<span class="go">    bf&#39;2</span>
+<span class="go">    ef&#39;16</span>
+<span class="go">    bf&#39;8.</span>
+<span class="go">    ~</span>
+<span class="go">    bf&#39;4..</span>
+<span class="go">    af&#39;16</span>
+<span class="go">    - \tenuto</span>
+<span class="go">    bf&#39;2</span>
+<span class="go">    ~</span>
+<span class="go">    bf&#39;8</span>
+<span class="go">    af&#39;8</span>
+<span class="go">    - \tenuto</span>
+<span class="go">}</span>
+</pre></div>
+</div>
+<div class="figure align-default">
+<img alt="../_images/image-example-3-looping-6.png" src="../_images/image-example-3-looping-6.png" />
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="example-4-hocket-with-random-pitches.html" class="btn btn-neutral float-right" title="Hocket with random pitches" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="example-2-looping.html" class="btn btn-neutral float-left" title="Looping with LeafLooper" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2020, Gilberto Agostinho
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

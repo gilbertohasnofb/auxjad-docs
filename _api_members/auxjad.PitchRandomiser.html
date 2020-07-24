@@ -1,0 +1,883 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>auxjad.PitchRandomiser &mdash; auxjad 0.8.2 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="auxjad.Shuffler" href="auxjad.Shuffler.html" />
+    <link rel="prev" title="auxjad.Phaser" href="auxjad.Phaser.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> auxjad
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.8
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../index.html">Welcome to auxjad’s documentation!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../examples/index.html">Examples of usage</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../api/index.html">auxjad API</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="../api/api-core.html">core</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="auxjad.CartographySelector.html">auxjad.CartographySelector</a></li>
+<li class="toctree-l3"><a class="reference internal" href="auxjad.Drifter.html">auxjad.Drifter</a></li>
+<li class="toctree-l3"><a class="reference internal" href="auxjad.Fader.html">auxjad.Fader</a></li>
+<li class="toctree-l3"><a class="reference internal" href="auxjad.Hocketer.html">auxjad.Hocketer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="auxjad.LeafDynMaker.html">auxjad.LeafDynMaker</a></li>
+<li class="toctree-l3"><a class="reference internal" href="auxjad.LeafLooper.html">auxjad.LeafLooper</a></li>
+<li class="toctree-l3"><a class="reference internal" href="auxjad.ListLooper.html">auxjad.ListLooper</a></li>
+<li class="toctree-l3"><a class="reference internal" href="auxjad.Phaser.html">auxjad.Phaser</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">auxjad.PitchRandomiser</a></li>
+<li class="toctree-l3"><a class="reference internal" href="auxjad.Shuffler.html">auxjad.Shuffler</a></li>
+<li class="toctree-l3"><a class="reference internal" href="auxjad.TenneySelector.html">auxjad.TenneySelector</a></li>
+<li class="toctree-l3"><a class="reference internal" href="auxjad.WindowLooper.html">auxjad.WindowLooper</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../api/api-score_components.html">score_components</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/api-utilities.html">utilities</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../score_gallery/index.html">Score gallery</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">auxjad</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../api/index.html">auxjad API</a> &raquo;</li>
+        
+          <li><a href="../api/api-core.html">core</a> &raquo;</li>
+        
+      <li>auxjad.PitchRandomiser</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/_api_members/auxjad.PitchRandomiser.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="auxjad-pitchrandomiser">
+<h1>auxjad.PitchRandomiser<a class="headerlink" href="#auxjad-pitchrandomiser" title="Permalink to this headline">¶</a></h1>
+<dl class="py class">
+<dt id="auxjad.PitchRandomiser">
+<em class="property">class </em><code class="sig-prename descclassname">auxjad.</code><code class="sig-name descname">PitchRandomiser</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">contents</span><span class="p">:</span> <span class="n">abjad.core.Container.Container</span></em>, <em class="sig-param"><span class="n">pitches</span><span class="p">:</span> <span class="n">Union<span class="p">[</span>list<span class="p">, </span>tuple<span class="p">, </span>str<span class="p">, </span>abjad.pitch.PitchSegment.PitchSegment<span class="p">]</span></span></em>, <em class="sig-param"><span class="o">*</span></em>, <em class="sig-param"><span class="n">weights</span><span class="p">:</span> <span class="n">Optional<span class="p">[</span>list<span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em>, <em class="sig-param"><span class="n">omit_time_signatures</span><span class="p">:</span> <span class="n">bool</span> <span class="o">=</span> <span class="default_value">False</span></em>, <em class="sig-param"><span class="n">processs_on_first_call</span><span class="p">:</span> <span class="n">bool</span> <span class="o">=</span> <span class="default_value">True</span></em>, <em class="sig-param"><span class="n">use_tenney_selector</span><span class="p">:</span> <span class="n">bool</span> <span class="o">=</span> <span class="default_value">False</span></em><span class="sig-paren">)</span><a class="headerlink" href="#auxjad.PitchRandomiser" title="Permalink to this definition">¶</a></dt>
+<dd><p><code class="docutils literal notranslate"><span class="pre">PitchRandomiser</span></code> takes an input <code class="docutils literal notranslate"><span class="pre">abjad.Container</span></code> (or child class)
+and a series of pitches and randomises the container’s pitches using that
+list. The pitches can be of type <code class="docutils literal notranslate"><span class="pre">list</span></code>, <code class="docutils literal notranslate"><span class="pre">tuple</span></code>, <code class="docutils literal notranslate"><span class="pre">str</span></code>, or
+<code class="docutils literal notranslate"><span class="pre">abjad.PitchSegment</span></code>.</p>
+<dl>
+<dt>Example:</dt><dd><p>Calling the object will output a selection of the input container with
+randomised pitches. Pitches are randomly selected from <code class="docutils literal notranslate"><span class="pre">pitches</span></code>.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">container</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;\time 4/4 c&#39;4 d&#39;4 e&#39;4 f&#39;4&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">pitches</span> <span class="o">=</span> <span class="sa">r</span><span class="s2">&quot;fs&#39; gs&#39; a&#39; b&#39; cs&#39;&#39;&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">randomiser</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">PitchRandomiser</span><span class="p">(</span><span class="n">container</span><span class="p">,</span>
+<span class="gp">... </span>                                    <span class="n">pitches</span><span class="p">,</span>
+<span class="gp">... </span>                                    <span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">notes</span> <span class="o">=</span> <span class="n">randomiser</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">staff</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span><span class="n">notes</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">f</span><span class="p">(</span><span class="n">staff</span><span class="p">)</span>
+<span class="go">\new Staff</span>
+<span class="go">{</span>
+<span class="go">    \time 4/4</span>
+<span class="go">    a&#39;4</span>
+<span class="go">    b&#39;4</span>
+<span class="go">    cs&#39;&#39;4</span>
+<span class="go">    fs&#39;4</span>
+<span class="go">}</span>
+</pre></div>
+</div>
+<div class="figure align-default">
+<img alt="../_images/image-PitchRandomiser-1.png" src="../_images/image-PitchRandomiser-1.png" />
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">notes</span> <span class="o">=</span> <span class="n">randomiser</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">staff</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span><span class="n">notes</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">f</span><span class="p">(</span><span class="n">staff</span><span class="p">)</span>
+<span class="go">\new Staff</span>
+<span class="go">{</span>
+<span class="go">    \time 4/4</span>
+<span class="go">    b&#39;4</span>
+<span class="go">    b&#39;4</span>
+<span class="go">    b&#39;4</span>
+<span class="go">    fs&#39;4</span>
+<span class="go">}</span>
+</pre></div>
+</div>
+<div class="figure align-default">
+<img alt="../_images/image-PitchRandomiser-2.png" src="../_images/image-PitchRandomiser-2.png" />
+</div>
+<p>To get the result of the last operation, use the property
+<code class="docutils literal notranslate"><span class="pre">current_window</span></code>.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">notes</span> <span class="o">=</span> <span class="n">randomiser</span><span class="o">.</span><span class="n">current_window</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">staff</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span><span class="n">notes</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">f</span><span class="p">(</span><span class="n">staff</span><span class="p">)</span>
+<span class="go">\new Staff</span>
+<span class="go">{</span>
+<span class="go">    \time 4/4</span>
+<span class="go">    b&#39;4</span>
+<span class="go">    b&#39;4</span>
+<span class="go">    b&#39;4</span>
+<span class="go">    fs&#39;4</span>
+<span class="go">}</span>
+</pre></div>
+</div>
+<div class="figure align-default">
+<img alt="../_images/image-PitchRandomiser-3.png" src="../_images/image-PitchRandomiser-3.png" />
+</div>
+</dd>
+</dl>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Unlike the other classes in auxjad, the very first call of
+<code class="docutils literal notranslate"><span class="pre">PitchRandomiser</span></code> will already process the initial container. To
+disable this behaviour and output the initial container once before
+randomising its pitches, initialise the class with the keyword argument
+<code class="docutils literal notranslate"><span class="pre">processs_on_first_call</span></code> set to <code class="docutils literal notranslate"><span class="pre">False</span></code>.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">container</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;c&#39;4 d&#39;4 e&#39;4 f&#39;4&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">pitches</span> <span class="o">=</span> <span class="sa">r</span><span class="s2">&quot;fs&#39; gs&#39; a&#39; b&#39;&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">randomiser</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">PitchRandomiser</span><span class="p">(</span><span class="n">container</span><span class="p">,</span>
+<span class="gp">... </span>                                    <span class="n">pitches</span><span class="p">,</span>
+<span class="gp">... </span>                                    <span class="n">processs_on_first_call</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+<span class="gp">... </span>                                    <span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">notes</span> <span class="o">=</span> <span class="n">randomiser</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">staff</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span><span class="n">notes</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">f</span><span class="p">(</span><span class="n">staff</span><span class="p">)</span>
+<span class="go">\new Staff</span>
+<span class="go">{</span>
+<span class="go">    c&#39;4</span>
+<span class="go">    d&#39;4</span>
+<span class="go">    e&#39;4</span>
+<span class="go">    f&#39;4</span>
+<span class="go">}</span>
+</pre></div>
+</div>
+<div class="figure align-default">
+<img alt="../_images/image-PitchRandomiser-4.png" src="../_images/image-PitchRandomiser-4.png" />
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">notes</span> <span class="o">=</span> <span class="n">randomiser</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">staff</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span><span class="n">notes</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">f</span><span class="p">(</span><span class="n">staff</span><span class="p">)</span>
+<span class="go">\new Staff</span>
+<span class="go">{</span>
+<span class="go">    b&#39;4</span>
+<span class="go">    fs&#39;4</span>
+<span class="go">    gs&#39;4</span>
+<span class="go">    fs&#39;4</span>
+<span class="go">}</span>
+</pre></div>
+</div>
+<div class="figure align-default">
+<img alt="../_images/image-PitchRandomiser-5.png" src="../_images/image-PitchRandomiser-5.png" />
+</div>
+</div>
+<dl>
+<dt>Example:</dt><dd><p>Applying the <code class="docutils literal notranslate"><span class="pre">len()</span></code> function to the randomiser will return the
+number of pitches in <code class="docutils literal notranslate"><span class="pre">pitches</span></code>.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">container</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;c&#39;4 d&#39;4 e&#39;4 f&#39;4&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">pitches</span> <span class="o">=</span> <span class="sa">r</span><span class="s2">&quot;fs&#39; gs&#39; a&#39; b&#39;&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">randomiser</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">PitchRandomiser</span><span class="p">(</span><span class="n">container</span><span class="p">,</span>
+<span class="gp">... </span>                                    <span class="n">pitches</span><span class="p">,</span>
+<span class="gp">... </span>                                    <span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">len</span><span class="p">(</span><span class="n">randomiser</span><span class="p">)</span>
+<span class="go">4</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">container</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;c&#39;4 d&#39;4 e&#39;4 f&#39;4&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">pitches</span> <span class="o">=</span> <span class="p">[</span><span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">11</span><span class="p">,</span> <span class="mi">12</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">randomiser</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">PitchRandomiser</span><span class="p">(</span><span class="n">container</span><span class="p">,</span>
+<span class="gp">... </span>                                    <span class="n">pitches</span><span class="p">,</span>
+<span class="gp">... </span>                                    <span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">len</span><span class="p">(</span><span class="n">randomiser</span><span class="p">)</span>
+<span class="go">7</span>
+</pre></div>
+</div>
+</dd>
+<dt>Example:</dt><dd><p>This class has many keyword arguments, all of which can be altered
+after instantiation using properties with the same names as shown
+below. <code class="docutils literal notranslate"><span class="pre">weights</span></code> takes a list of <code class="docutils literal notranslate"><span class="pre">int</span></code>’s or <code class="docutils literal notranslate"><span class="pre">float</span></code>’s
+representing the weight of each pitch from <code class="docutils literal notranslate"><span class="pre">pitches</span></code> (their lengthes
+must also match). <code class="docutils literal notranslate"><span class="pre">omit_time_signatures</span></code> will remove all time
+signatures from the output (both are <code class="docutils literal notranslate"><span class="pre">False</span></code> by default).
+<code class="docutils literal notranslate"><span class="pre">processs_on_first_call</span></code> to <code class="docutils literal notranslate"><span class="pre">True</span></code> and the random pitch process
+will be applied on the very first call. Setting <code class="docutils literal notranslate"><span class="pre">use_tenney_selector</span></code>
+to <code class="docutils literal notranslate"><span class="pre">True</span></code> will make the randomiser use <code class="docutils literal notranslate"><span class="pre">auxjad.TenneySelector</span></code> for
+the random selection instead of <code class="docutils literal notranslate"><span class="pre">random.choices()</span></code> (default is
+<code class="docutils literal notranslate"><span class="pre">False</span></code>).</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">container</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;c&#39;4 d&#39;4 e&#39;4 f&#39;4&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">randomiser</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">PitchRandomiser</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="n">container</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">pitches</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;a b cs&#39; ds&#39; e&#39;&quot;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">weights</span><span class="o">=</span><span class="p">[</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.5</span><span class="p">,</span> <span class="mf">1.3</span><span class="p">],</span>
+<span class="gp">... </span>    <span class="n">omit_time_signatures</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">processs_on_first_call</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">use_tenney_selector</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+<span class="gp">... </span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">randomiser</span><span class="o">.</span><span class="n">pitches</span>
+<span class="go">&lt;a b cs&#39; ds&#39; e&#39;&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">randomiser</span><span class="o">.</span><span class="n">weights</span>
+<span class="go">[1.0, 2.0, 1.0, 1.5, 1.3]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">randomiser</span><span class="o">.</span><span class="n">omit_time_signatures</span>
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">randomiser</span><span class="o">.</span><span class="n">processs_on_first_call</span>
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">randomiser</span><span class="o">.</span><span class="n">use_tenney_selector</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+<p>Use the properties below to change these values after initialisation.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">randomiser</span><span class="o">.</span><span class="n">pitches</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">PitchSegment</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;c&#39; d&#39; e&#39; f&#39;&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">randomiser</span><span class="o">.</span><span class="n">weights</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">8</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">randomiser</span><span class="o">.</span><span class="n">omit_time_signatures</span> <span class="o">=</span> <span class="kc">False</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">randomiser</span><span class="o">.</span><span class="n">processs_on_first_call</span> <span class="o">=</span> <span class="kc">False</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">randomiser</span><span class="o">.</span><span class="n">use_tenney_selector</span> <span class="o">=</span> <span class="kc">False</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">assert</span> <span class="n">randomiser</span><span class="o">.</span><span class="n">pitches</span>
+<span class="go">&lt;c&#39; d&#39; e&#39; f&#39;&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">assert</span> <span class="n">randomiser</span><span class="o">.</span><span class="n">weights</span>
+<span class="go">[1, 2, 5, 8]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">randomiser</span><span class="o">.</span><span class="n">omit_time_signatures</span>
+<span class="go">False</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">randomiser</span><span class="o">.</span><span class="n">processs_on_first_call</span>
+<span class="go">False</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">randomiser</span><span class="o">.</span><span class="n">use_tenney_selector</span>
+<span class="go">False</span>
+</pre></div>
+</div>
+</dd>
+<dt>Example:</dt><dd><p>Only pitched logical ties are randomised, rests are left untouched.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">container</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;c&#39;8. d&#39;4 r8 r8. e&#39;16 f&#39;8.&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">pitches</span> <span class="o">=</span> <span class="p">[</span><span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">11</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">randomiser</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">PitchRandomiser</span><span class="p">(</span><span class="n">container</span><span class="p">,</span>
+<span class="gp">... </span>                                    <span class="n">pitches</span><span class="p">,</span>
+<span class="gp">... </span>                                    <span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">notes</span> <span class="o">=</span> <span class="n">randomiser</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">staff</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span><span class="n">notes</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">f</span><span class="p">(</span><span class="n">staff</span><span class="p">)</span>
+<span class="go">\new Staff</span>
+<span class="go">{</span>
+<span class="go">    bf&#39;8.</span>
+<span class="go">    af&#39;4</span>
+<span class="go">    r8</span>
+<span class="go">    r8.</span>
+<span class="go">    bf&#39;16</span>
+<span class="go">    a&#39;8.</span>
+<span class="go">}</span>
+</pre></div>
+</div>
+<div class="figure align-default">
+<img alt="../_images/image-PitchRandomiser-6.png" src="../_images/image-PitchRandomiser-6.png" />
+</div>
+</dd>
+<dt>Example:</dt><dd><p>Each note of a chord is randomised too.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">container</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="sa">r</span><span class="s2">&quot;&lt;c&#39; e&#39; g&#39;&gt;8. d&#39;4 r8 r8. e&#39;16 &lt;f&#39; a&#39;&gt;8.&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">pitches</span> <span class="o">=</span> <span class="p">[</span><span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">11</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">randomiser</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">PitchRandomiser</span><span class="p">(</span><span class="n">container</span><span class="p">,</span>
+<span class="gp">... </span>                                    <span class="n">pitches</span><span class="p">,</span>
+<span class="gp">... </span>                                    <span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">notes</span> <span class="o">=</span> <span class="n">randomiser</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">staff</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span><span class="n">notes</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">f</span><span class="p">(</span><span class="n">staff</span><span class="p">)</span>
+<span class="go">\new Staff</span>
+<span class="go">{</span>
+<span class="go">    &lt;fs&#39; g&#39; bf&#39;&gt;8.</span>
+<span class="go">    b&#39;4</span>
+<span class="go">    r8</span>
+<span class="go">    r8.</span>
+<span class="go">    bf&#39;16</span>
+<span class="go">    &lt;fs&#39; bf&#39;&gt;8.</span>
+<span class="go">}</span>
+</pre></div>
+</div>
+<div class="figure align-default">
+<img alt="../_images/image-PitchRandomiser-7.png" src="../_images/image-PitchRandomiser-7.png" />
+</div>
+<p>The number of note heads in a chord stay the same unless there are
+fewer pitches available in <code class="docutils literal notranslate"><span class="pre">pitches</span></code>.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">container</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="sa">r</span><span class="s2">&quot;&lt;c&#39; e&#39; g&#39; a&#39;&gt;2 &lt;cs&#39; ds&#39; e&#39; f&#39; g&#39; a&#39; b&#39;&gt;2&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">pitches</span> <span class="o">=</span> <span class="p">[</span><span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">randomiser</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">PitchRandomiser</span><span class="p">(</span><span class="n">container</span><span class="p">,</span>
+<span class="gp">... </span>                                    <span class="n">pitches</span><span class="p">,</span>
+<span class="gp">... </span>                                    <span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">notes</span> <span class="o">=</span> <span class="n">randomiser</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">staff</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span><span class="n">notes</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">f</span><span class="p">(</span><span class="n">staff</span><span class="p">)</span>
+<span class="go">\new Staff</span>
+<span class="go">{</span>
+<span class="go">    &lt;fs&#39; g&#39; af&#39;&gt;2</span>
+<span class="go">    &lt;fs&#39; g&#39; af&#39;&gt;2</span>
+<span class="go">}</span>
+</pre></div>
+</div>
+<div class="figure align-default">
+<img alt="../_images/image-PitchRandomiser-8.png" src="../_images/image-PitchRandomiser-8.png" />
+</div>
+</dd>
+<dt>Example:</dt><dd><p>Setting <code class="docutils literal notranslate"><span class="pre">use_tenney_selector</span></code> to <code class="docutils literal notranslate"><span class="pre">True</span></code> will make the randomiser
+use <code class="docutils literal notranslate"><span class="pre">auxjad.TenneySelector</span></code> for the random selection instead of
+<code class="docutils literal notranslate"><span class="pre">random.choices()</span></code> (default is <code class="docutils literal notranslate"><span class="pre">False</span></code>). <code class="docutils literal notranslate"><span class="pre">TenneySelector</span></code> will
+raise the chance of a pitch being selected the longer it hasn’t been
+selected, and will forbid immediate repetitions of pitches. See its
+documentation for more information.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">container</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;c&#39;8 d&#39;8 e&#39;8 f&#39;8 g&#39;8 a&#39;8 b&#39;8 c&#39;8&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">pitches</span> <span class="o">=</span> <span class="sa">r</span><span class="s2">&quot;fs&#39; gs&#39; a&#39; b&#39;&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">randomiser</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">PitchRandomiser</span><span class="p">(</span><span class="n">container</span><span class="p">,</span>
+<span class="gp">... </span>                                    <span class="n">pitches</span><span class="p">,</span>
+<span class="gp">... </span>                                    <span class="n">use_tenney_selector</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+<span class="gp">... </span>                                    <span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">notes</span> <span class="o">=</span> <span class="n">randomiser</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">staff</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span><span class="n">notes</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">f</span><span class="p">(</span><span class="n">staff</span><span class="p">)</span>
+<span class="go">\new Staff</span>
+<span class="go">{</span>
+<span class="go">    fs&#39;8</span>
+<span class="go">    a&#39;8</span>
+<span class="go">    fs&#39;8</span>
+<span class="go">    gs&#39;8</span>
+<span class="go">    a&#39;8</span>
+<span class="go">    b&#39;8</span>
+<span class="go">    gs&#39;8</span>
+<span class="go">    fs&#39;8</span>
+<span class="go">}</span>
+</pre></div>
+</div>
+<div class="figure align-default">
+<img alt="../_images/image-PitchRandomiser-9.png" src="../_images/image-PitchRandomiser-9.png" />
+</div>
+</dd>
+<dt>Example:</dt><dd><p>Individual pitches can have different weights, defined by the
+<code class="docutils literal notranslate"><span class="pre">weights</span></code> property. It takes a <code class="docutils literal notranslate"><span class="pre">list</span></code> of <code class="docutils literal notranslate"><span class="pre">float</span></code>’s or <code class="docutils literal notranslate"><span class="pre">int</span></code>’s.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">container</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;c&#39;8 d&#39;8 e&#39;8 f&#39;8 g&#39;8 a&#39;8 b&#39;8 c&#39;8&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">pitches</span> <span class="o">=</span> <span class="sa">r</span><span class="s2">&quot;fs&#39; gs&#39; a&#39; b&#39;&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">randomiser</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">PitchRandomiser</span><span class="p">(</span><span class="n">container</span><span class="p">,</span>
+<span class="gp">... </span>                                    <span class="n">pitches</span><span class="p">,</span>
+<span class="gp">... </span>                                    <span class="n">weights</span><span class="o">=</span><span class="p">[</span><span class="mf">5.0</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">,</span> <span class="mf">1.5</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">],</span>
+<span class="gp">... </span>                                    <span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">notes</span> <span class="o">=</span> <span class="n">randomiser</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">staff</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span><span class="n">notes</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">f</span><span class="p">(</span><span class="n">staff</span><span class="p">)</span>
+<span class="go">\new Staff</span>
+<span class="go">{</span>
+<span class="go">    b&#39;8</span>
+<span class="go">    fs&#39;8</span>
+<span class="go">    gs&#39;8</span>
+<span class="go">    gs&#39;8</span>
+<span class="go">    gs&#39;8</span>
+<span class="go">    fs&#39;8</span>
+<span class="go">    fs&#39;8</span>
+<span class="go">    a&#39;8</span>
+<span class="go">}</span>
+</pre></div>
+</div>
+<div class="figure align-default">
+<img alt="../_images/image-PitchRandomiser-10.png" src="../_images/image-PitchRandomiser-10.png" />
+</div>
+</dd>
+<dt>Example:</dt><dd><p>Non-uniform <code class="docutils literal notranslate"><span class="pre">weights</span></code> can also be used when <code class="docutils literal notranslate"><span class="pre">use_tenney_selector</span></code>
+is set to <code class="docutils literal notranslate"><span class="pre">True</span></code>.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">container</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;c&#39;8 d&#39;8 e&#39;8 f&#39;8 g&#39;8 a&#39;8 b&#39;8 c&#39;8&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">pitches</span> <span class="o">=</span> <span class="sa">r</span><span class="s2">&quot;fs&#39; gs&#39; a&#39; b&#39;&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">randomiser</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">PitchRandomiser</span><span class="p">(</span><span class="n">container</span><span class="p">,</span>
+<span class="gp">... </span>                                    <span class="n">pitches</span><span class="p">,</span>
+<span class="gp">... </span>                                    <span class="n">weights</span><span class="o">=</span><span class="p">[</span><span class="mf">5.0</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">,</span> <span class="mf">1.5</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">],</span>
+<span class="gp">... </span>                                    <span class="n">use_tenney_selector</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+<span class="gp">... </span>                                    <span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">notes</span> <span class="o">=</span> <span class="n">randomiser</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">staff</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span><span class="n">notes</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">f</span><span class="p">(</span><span class="n">staff</span><span class="p">)</span>
+<span class="go">\new Staff</span>
+<span class="go">{</span>
+<span class="go">    fs&#39;8</span>
+<span class="go">    gs&#39;8</span>
+<span class="go">    a&#39;8</span>
+<span class="go">    fs&#39;8</span>
+<span class="go">    gs&#39;8</span>
+<span class="go">    a&#39;8</span>
+<span class="go">    gs&#39;8</span>
+<span class="go">    b&#39;8</span>
+<span class="go">}</span>
+</pre></div>
+</div>
+<div class="figure align-default">
+<img alt="../_images/image-PitchRandomiser-11.png" src="../_images/image-PitchRandomiser-11.png" />
+</div>
+</dd>
+<dt>Example:</dt><dd><p>Setting the weights to <code class="docutils literal notranslate"><span class="pre">None</span></code> will reset it back to a uniform
+distribution.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">container</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;c&#39;8 d&#39;8 e&#39;8 f&#39;8 g&#39;8 a&#39;8 b&#39;8 c&#39;8&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">pitches</span> <span class="o">=</span> <span class="sa">r</span><span class="s2">&quot;fs&#39; gs&#39; a&#39; b&#39;&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">randomiser</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">PitchRandomiser</span><span class="p">(</span><span class="n">container</span><span class="p">,</span>
+<span class="gp">... </span>                                    <span class="n">pitches</span><span class="p">,</span>
+<span class="gp">... </span>                                    <span class="n">weights</span><span class="o">=</span><span class="p">[</span><span class="mf">100.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">],</span>
+<span class="gp">... </span>                                    <span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">notes</span> <span class="o">=</span> <span class="n">randomiser</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">staff</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span><span class="n">notes</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">f</span><span class="p">(</span><span class="n">staff</span><span class="p">)</span>
+<span class="go">\new Staff</span>
+<span class="go">{</span>
+<span class="go">    fs&#39;8</span>
+<span class="go">    fs&#39;8</span>
+<span class="go">    fs&#39;8</span>
+<span class="go">    fs&#39;8</span>
+<span class="go">    fs&#39;8</span>
+<span class="go">    fs&#39;8</span>
+<span class="go">    fs&#39;8</span>
+<span class="go">    fs&#39;8</span>
+<span class="go">}</span>
+</pre></div>
+</div>
+<div class="figure align-default">
+<img alt="../_images/image-PitchRandomiser-12.png" src="../_images/image-PitchRandomiser-12.png" />
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">randomiser</span><span class="o">.</span><span class="n">weights</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">notes</span> <span class="o">=</span> <span class="n">randomiser</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">staff</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span><span class="n">notes</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">f</span><span class="p">(</span><span class="n">staff</span><span class="p">)</span>
+<span class="go">\new Staff</span>
+<span class="go">{</span>
+<span class="go">    fs&#39;8</span>
+<span class="go">    fs&#39;8</span>
+<span class="go">    b&#39;8</span>
+<span class="go">    gs&#39;8</span>
+<span class="go">    gs&#39;8</span>
+<span class="go">    a&#39;8</span>
+<span class="go">    fs&#39;8</span>
+<span class="go">    b&#39;8</span>
+<span class="go">}</span>
+</pre></div>
+</div>
+<div class="figure align-default">
+<img alt="../_images/image-PitchRandomiser-13.png" src="../_images/image-PitchRandomiser-13.png" />
+</div>
+</dd>
+<dt>Example:</dt><dd><p>When using a custom list of <code class="docutils literal notranslate"><span class="pre">weights</span></code>, changing the <code class="docutils literal notranslate"><span class="pre">pitches</span></code> to a
+series of new values with the same length will preserve the <code class="docutils literal notranslate"><span class="pre">weights</span></code>
+values. If on the other hand <code class="docutils literal notranslate"><span class="pre">pitches</span></code> changes in length, <code class="docutils literal notranslate"><span class="pre">weights</span></code>
+is reset to <code class="docutils literal notranslate"><span class="pre">None</span></code> (i.e. uniform distribution).</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">container</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;c&#39;8 d&#39;8 e&#39;8 f&#39;8 g&#39;8 a&#39;8 b&#39;8 c&#39;8&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">pitches</span> <span class="o">=</span> <span class="sa">r</span><span class="s2">&quot;fs&#39; gs&#39; a&#39; b&#39;&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">randomiser</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">PitchRandomiser</span><span class="p">(</span><span class="n">container</span><span class="p">,</span>
+<span class="gp">... </span>                                    <span class="n">pitches</span><span class="p">,</span>
+<span class="gp">... </span>                                    <span class="n">weights</span><span class="o">=</span><span class="p">[</span><span class="mf">100.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">],</span>
+<span class="gp">... </span>                                    <span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">randomiser</span><span class="o">.</span><span class="n">pitches</span> <span class="o">=</span> <span class="sa">r</span><span class="s2">&quot;c&#39;&#39; d&#39;&#39; e&#39;&#39; f&#39;&#39;&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">randomiser</span><span class="o">.</span><span class="n">pitches</span>
+<span class="go">&lt;c&#39;&#39; d&#39;&#39; e&#39;&#39; f&#39;&#39;&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">randomiser</span><span class="o">.</span><span class="n">weights</span>
+<span class="go">[100.0, 1.0, 1.0, 1.0]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">randomiser</span><span class="o">.</span><span class="n">pitches</span> <span class="o">=</span> <span class="sa">r</span><span class="s2">&quot;c&#39;&#39; d&#39;&#39; e&#39;&#39; f&#39;&#39; g&#39;&#39; a&#39;&#39; b&#39;&#39;&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">randomiser</span><span class="o">.</span><span class="n">pitches</span>
+<span class="go">&lt;c&#39;&#39; d&#39;&#39; e&#39;&#39; f&#39;&#39; g&#39;&#39; a&#39;&#39; b&#39;&#39;&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">randomiser</span><span class="o">.</span><span class="n">weights</span>
+<span class="go">None</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+<div class="admonition error">
+<p class="admonition-title">Error</p>
+<p>Note that <code class="docutils literal notranslate"><span class="pre">weights</span></code> must always have the same length as <code class="docutils literal notranslate"><span class="pre">pitches</span></code>.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">container</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;c&#39;4 d&#39;4 e&#39;4 f&#39;4&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">pitches</span> <span class="o">=</span> <span class="sa">r</span><span class="s2">&quot;fs&#39; gs&#39; a&#39; b&#39;&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">weights</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">8</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">auxjad</span><span class="o">.</span><span class="n">PitchRandomiser</span><span class="p">(</span><span class="n">container</span><span class="p">,</span> <span class="n">pitches</span><span class="p">,</span> <span class="n">weights</span><span class="o">=</span><span class="n">weights</span><span class="p">)</span>
+<span class="go">ValueError: &#39;weights&#39; must have the same length as &#39;pitches&#39;</span>
+</pre></div>
+</div>
+</div>
+<dl>
+<dt>Example:</dt><dd><p>To output several randomised containers at once, use the method
+<code class="docutils literal notranslate"><span class="pre">output_n()</span></code>, inputting the desired number of iterations.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">container</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;c&#39;4 ~ c&#39;16 r8. d&#39;4 e&#39;8. r16&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">pitches</span> <span class="o">=</span> <span class="p">[</span><span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">10</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">randomiser</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">PitchRandomiser</span><span class="p">(</span><span class="n">container</span><span class="p">,</span>
+<span class="gp">... </span>                                    <span class="n">pitches</span><span class="p">,</span>
+<span class="gp">... </span>                                    <span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">notes</span> <span class="o">=</span> <span class="n">randomiser</span><span class="o">.</span><span class="n">output_n</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">staff</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span><span class="n">notes</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">f</span><span class="p">(</span><span class="n">staff</span><span class="p">)</span>
+<span class="go">\new Staff</span>
+<span class="go">{</span>
+<span class="go">    a&#39;4</span>
+<span class="go">    ~</span>
+<span class="go">    a&#39;16</span>
+<span class="go">    r8.</span>
+<span class="go">    g&#39;4</span>
+<span class="go">    fs&#39;8.</span>
+<span class="go">    r16</span>
+<span class="go">    g&#39;4</span>
+<span class="go">    ~</span>
+<span class="go">    g&#39;16</span>
+<span class="go">    r8.</span>
+<span class="go">    g&#39;4</span>
+<span class="go">    fs&#39;8.</span>
+<span class="go">    r16</span>
+<span class="go">    bf&#39;4</span>
+<span class="go">    ~</span>
+<span class="go">    bf&#39;16</span>
+<span class="go">    r8.</span>
+<span class="go">    a&#39;4</span>
+<span class="go">    af&#39;8.</span>
+<span class="go">    r16</span>
+<span class="go">}</span>
+</pre></div>
+</div>
+<div class="figure align-default">
+<img alt="../_images/image-PitchRandomiser-14.png" src="../_images/image-PitchRandomiser-14.png" />
+</div>
+</dd>
+<dt>Example:</dt><dd><p>This class preserves indicators.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">container</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="sa">r</span><span class="s2">&quot;c&#39;4\p\&lt; ~ c&#39;8. d&#39;16-.\f e&#39;4--\pp f&#39;8.( g&#39;16)&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">pitches</span> <span class="o">=</span> <span class="p">[</span><span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">11</span><span class="p">,</span> <span class="mi">12</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">randomiser</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">PitchRandomiser</span><span class="p">(</span><span class="n">container</span><span class="p">,</span>
+<span class="gp">... </span>                                    <span class="n">pitches</span><span class="p">,</span>
+<span class="gp">... </span>                                    <span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">notes</span> <span class="o">=</span> <span class="n">randomiser</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">staff</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span><span class="n">notes</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">f</span><span class="p">(</span><span class="n">staff</span><span class="p">)</span>
+<span class="go">\new Staff</span>
+<span class="go">{</span>
+<span class="go">    a&#39;4</span>
+<span class="go">    \p</span>
+<span class="go">    \&lt;</span>
+<span class="go">    ~</span>
+<span class="go">    a&#39;8.</span>
+<span class="go">    c&#39;&#39;16</span>
+<span class="go">    \f</span>
+<span class="go">    - \staccato</span>
+<span class="go">    af&#39;4</span>
+<span class="go">    \pp</span>
+<span class="go">    - \tenuto</span>
+<span class="go">    a&#39;8.</span>
+<span class="go">    (</span>
+<span class="go">    bf&#39;16</span>
+<span class="go">    )</span>
+<span class="go">}</span>
+</pre></div>
+</div>
+<div class="figure align-default">
+<img alt="../_images/image-PitchRandomiser-15.png" src="../_images/image-PitchRandomiser-15.png" />
+</div>
+</dd>
+<dt>Example:</dt><dd><p>This class also preserves the time signature structure.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">container</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="sa">r</span><span class="s2">&quot;\time 3/4 c&#39;4 d&#39;2 \time 2/4 e&#39;8 f&#39;8 g&#39;8 a&#39;8&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">pitches</span> <span class="o">=</span> <span class="sa">r</span><span class="s2">&quot;fs&#39; gs&#39; a&#39; b&#39;&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">randomiser</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">PitchRandomiser</span><span class="p">(</span><span class="n">container</span><span class="p">,</span>
+<span class="gp">... </span>                                    <span class="n">pitches</span><span class="p">,</span>
+<span class="gp">... </span>                                    <span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">notes</span> <span class="o">=</span> <span class="n">randomiser</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">staff</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span><span class="n">notes</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">f</span><span class="p">(</span><span class="n">staff</span><span class="p">)</span>
+<span class="go">\new Staff</span>
+<span class="go">{</span>
+<span class="go">    \time 3/4</span>
+<span class="go">    a&#39;4</span>
+<span class="go">    fs&#39;2</span>
+<span class="go">    \time 2/4</span>
+<span class="go">    gs&#39;8</span>
+<span class="go">    gs&#39;8</span>
+<span class="go">    a&#39;8</span>
+<span class="go">    gs&#39;8</span>
+<span class="go">}</span>
+</pre></div>
+</div>
+<div class="figure align-default">
+<img alt="../_images/image-PitchRandomiser-16.png" src="../_images/image-PitchRandomiser-16.png" />
+</div>
+</dd>
+<dt>Example:</dt><dd><p>To omit time signatures altogether, set <code class="docutils literal notranslate"><span class="pre">omit_time_signatures</span></code> to
+<code class="docutils literal notranslate"><span class="pre">True</span></code> (default is <code class="docutils literal notranslate"><span class="pre">False</span></code>).</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">container</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="sa">r</span><span class="s2">&quot;\time 3/4 c&#39;4 d&#39;2 \time 2/4 e&#39;8 f&#39;8 g&#39;8 a&#39;8&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">pitches</span> <span class="o">=</span> <span class="sa">r</span><span class="s2">&quot;fs&#39; gs&#39; a&#39; b&#39;&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">randomiser</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">PitchRandomiser</span><span class="p">(</span><span class="n">container</span><span class="p">,</span>
+<span class="gp">... </span>                                    <span class="n">pitches</span><span class="p">,</span>
+<span class="gp">... </span>                                    <span class="n">omit_time_signatures</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+<span class="gp">... </span>                                    <span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">notes</span> <span class="o">=</span> <span class="n">randomiser</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">staff</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span><span class="n">notes</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">f</span><span class="p">(</span><span class="n">staff</span><span class="p">)</span>
+<span class="go">\new Staff</span>
+<span class="go">{</span>
+<span class="go">    a&#39;4</span>
+<span class="go">    fs&#39;2</span>
+<span class="go">    gs&#39;8</span>
+<span class="go">    gs&#39;8</span>
+<span class="go">    a&#39;8</span>
+<span class="go">    gs&#39;8</span>
+<span class="go">}</span>
+</pre></div>
+</div>
+<div class="figure align-default">
+<img alt="../_images/image-PitchRandomiser-17.png" src="../_images/image-PitchRandomiser-17.png" />
+</div>
+</dd>
+<dt>Example:</dt><dd><p>The instances of <code class="docutils literal notranslate"><span class="pre">PitchRandomiser</span></code> can also be used as an iterator,
+which can then be used in a for loop. Note that unlike the method
+<code class="docutils literal notranslate"><span class="pre">output_n()</span></code>, time signatures are added to each window returned by
+the randomiser. Use the function
+<code class="docutils literal notranslate"><span class="pre">auxjad.remove_repeated_time_signatures()</span></code> to clean the output when
+using <code class="docutils literal notranslate"><span class="pre">PitchRandomiser</span></code> in this way. It is also important to note
+that a <code class="docutils literal notranslate"><span class="pre">break</span></code> statement is needed when using <code class="docutils literal notranslate"><span class="pre">PitchRandomiser</span></code> as
+an iterator. The reason is that pitch randomisation is a process that
+can happen indefinitely (unlike some of the other classes in this
+library).</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">container</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;\time 3/4 c&#39;4 d&#39;4 e&#39;4&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">pitches</span> <span class="o">=</span> <span class="sa">r</span><span class="s2">&quot;fs&#39; gs&#39; a&#39; b&#39; cs&#39;&#39;&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">randomiser</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">PitchRandomiser</span><span class="p">(</span><span class="n">container</span><span class="p">,</span>
+<span class="gp">... </span>                                    <span class="n">pitches</span><span class="p">,</span>
+<span class="gp">... </span>                                    <span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">staff</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">window</span> <span class="ow">in</span> <span class="n">randomiser</span><span class="p">:</span>
+<span class="gp">... </span>    <span class="n">staff</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">window</span><span class="p">)</span>
+<span class="gp">... </span>    <span class="k">if</span> <span class="n">abjad</span><span class="o">.</span><span class="n">inspect</span><span class="p">(</span><span class="n">staff</span><span class="p">)</span><span class="o">.</span><span class="n">duration</span><span class="p">()</span> <span class="o">==</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Duration</span><span class="p">((</span><span class="mi">9</span><span class="p">,</span> <span class="mi">4</span><span class="p">)):</span>
+<span class="gp">... </span>        <span class="k">break</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">auxjad</span><span class="o">.</span><span class="n">remove_repeated_time_signatures</span><span class="p">(</span><span class="n">staff</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">f</span><span class="p">(</span><span class="n">staff</span><span class="p">)</span>
+<span class="go">\new Staff</span>
+<span class="go">{</span>
+<span class="go">    \time 3/4</span>
+<span class="go">    a&#39;4</span>
+<span class="go">    b&#39;4</span>
+<span class="go">    gs&#39;4</span>
+<span class="go">    fs&#39;4</span>
+<span class="go">    a&#39;4</span>
+<span class="go">    b&#39;4</span>
+<span class="go">    a&#39;4</span>
+<span class="go">    gs&#39;4</span>
+<span class="go">    cs&#39;&#39;4</span>
+<span class="go">}</span>
+</pre></div>
+</div>
+<div class="figure align-default">
+<img alt="../_images/image-PitchRandomiser-18.png" src="../_images/image-PitchRandomiser-18.png" />
+</div>
+</dd>
+</dl>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>The functions <code class="docutils literal notranslate"><span class="pre">auxjad.remove_repeated_dynamics()</span></code> and
+<code class="docutils literal notranslate"><span class="pre">auxjad.reposition_clefs()</span></code> can be used to clean the output and
+remove repeated dynamics and unnecessary clef changes.</p>
+</div>
+<p class="rubric">Methods</p>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">__init__</span></code>(contents, pitches, *[, weights, …])</p></td>
+<td><p>Initialises self.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">output_n</span></code>(n)</p></td>
+<td><p>Goes through <code class="docutils literal notranslate"><span class="pre">n</span></code> iterations of the pitch randomisation process and outputs a single <code class="docutils literal notranslate"><span class="pre">abjad.Selection</span></code>.</p></td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Attributes</p>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">contents</span></code></p></td>
+<td><p>The <code class="docutils literal notranslate"><span class="pre">abjad.Container</span></code> to be shuffled.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">current_window</span></code></p></td>
+<td><p>Read-only property, returns the result of the last operation.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">omit_time_signatures</span></code></p></td>
+<td><p>When <code class="docutils literal notranslate"><span class="pre">True</span></code>, the output will contain no time signatures.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">pitches</span></code></p></td>
+<td><p>Pitches available for the randomiser.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">processs_on_first_call</span></code></p></td>
+<td><p>If <code class="docutils literal notranslate"><span class="pre">True</span></code> then the <code class="docutils literal notranslate"><span class="pre">contents</span></code> will be processed in the very first call.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">use_tenney_selector</span></code></p></td>
+<td><p>If <code class="docutils literal notranslate"><span class="pre">True</span></code> then the pitches will be selected using <code class="docutils literal notranslate"><span class="pre">TenneySelector</span></code>, otherwise they are chosen using a uniform random distribution.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">weights</span></code></p></td>
+<td><p>The <code class="docutils literal notranslate"><span class="pre">list</span></code> with weights for each element of <code class="docutils literal notranslate"><span class="pre">pitches</span></code></p></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="auxjad.Shuffler.html" class="btn btn-neutral float-right" title="auxjad.Shuffler" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="auxjad.Phaser.html" class="btn btn-neutral float-left" title="auxjad.Phaser" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2020, Gilberto Agostinho
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>
