@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>auxjad.sync_containers &mdash; auxjad 0.8.2 documentation</title>
+  <title>auxjad.sync_containers &mdash; auxjad 0.8.4 documentation</title>
   
 
   
@@ -86,11 +86,12 @@
             
               <p class="caption"><span class="caption-text">Contents</span></p>
 <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="../index.html">Welcome to auxjad’s documentation!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../index.html">Welcome to Auxjad’s documentation!</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../examples/index.html">Examples of usage</a></li>
-<li class="toctree-l1 current"><a class="reference internal" href="../api/index.html">auxjad API</a><ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../score_gallery/index.html">Score gallery</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../api/index.html">Auxjad API</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="../api/api-core.html">core</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../api/api-score_components.html">score_components</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/api-score.html">score</a></li>
 <li class="toctree-l2 current"><a class="reference internal" href="../api/api-utilities.html">utilities</a><ul class="current">
 <li class="toctree-l3"><a class="reference internal" href="auxjad.close_container.html">auxjad.close_container</a></li>
 <li class="toctree-l3"><a class="reference internal" href="auxjad.container_is_full.html">auxjad.container_is_full</a></li>
@@ -117,7 +118,6 @@
 </li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="../score_gallery/index.html">Score gallery</a></li>
 </ul>
 
             
@@ -163,7 +163,7 @@
     
       <li><a href="../index.html">Docs</a> &raquo;</li>
         
-          <li><a href="../api/index.html">auxjad API</a> &raquo;</li>
+          <li><a href="../api/index.html">Auxjad API</a> &raquo;</li>
         
           <li><a href="../api/api-utilities.html">utilities</a> &raquo;</li>
         
@@ -190,7 +190,7 @@
 <h1>auxjad.sync_containers<a class="headerlink" href="#auxjad-sync-containers" title="Permalink to this headline">¶</a></h1>
 <dl class="py function">
 <dt id="auxjad.sync_containers">
-<code class="sig-prename descclassname">auxjad.</code><code class="sig-name descname">sync_containers</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">containers</span><span class="p">:</span> <span class="n">abjad.core.Container.Container</span></em>, <em class="sig-param"><span class="n">use_multimeasure_rests</span><span class="p">:</span> <span class="n">bool</span> <span class="o">=</span> <span class="default_value">True</span></em>, <em class="sig-param"><span class="n">adjust_last_time_signature</span><span class="p">:</span> <span class="n">bool</span> <span class="o">=</span> <span class="default_value">True</span></em><span class="sig-paren">)</span><a class="headerlink" href="#auxjad.sync_containers" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">auxjad.</code><code class="sig-name descname">sync_containers</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">containers</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://abjad.github.io/api/abjad/core/Container.html#abjad.core.Container.Container" title="(in Abjad v3.1)">abjad.core.Container.Container</a></span></em>, <em class="sig-param"><span class="n">use_multimeasure_rests</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)">bool</a></span> <span class="o">=</span> <span class="default_value">True</span></em>, <em class="sig-param"><span class="n">adjust_last_time_signature</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)">bool</a></span> <span class="o">=</span> <span class="default_value">True</span></em><span class="sig-paren">)</span><a class="headerlink" href="#auxjad.sync_containers" title="Permalink to this definition">¶</a></dt>
 <dd><p>Mutates two or more input containers (of type <code class="docutils literal notranslate"><span class="pre">abjad.Container</span></code> or
 child class) in place and has no return value; this function finds the
 longest container among the inputs and adds rests to all the shorter ones,
@@ -240,7 +240,12 @@ with either <code class="docutils literal notranslate"><span class="pre">abjad.C
 <span class="go">    g&#39;2.</span>
 <span class="go">    r4</span>
 <span class="go">}</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">staff</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">([</span><span class="n">container1</span><span class="p">])</span>
+</pre></div>
+</div>
+<div class="figure align-default">
+<img alt="../_images/image-close_container-3.png" src="../_images/image-close_container-3.png" />
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">staff</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">([</span><span class="n">container1</span><span class="p">])</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">f</span><span class="p">(</span><span class="n">container1</span><span class="p">)</span>
 <span class="go">{</span>
 <span class="go">    \time 4/4</span>
@@ -248,6 +253,9 @@ with either <code class="docutils literal notranslate"><span class="pre">abjad.C
 <span class="go">    r4</span>
 <span class="go">}</span>
 </pre></div>
+</div>
+<div class="figure align-default">
+<img alt="../_images/image-close_container-4.png" src="../_images/image-close_container-4.png" />
 </div>
 </div>
 <dl>

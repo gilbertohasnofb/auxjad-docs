@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Looping with WindowLooper &mdash; auxjad 0.8.2 documentation</title>
+  <title>Looping with auxjad.WindowLooper &mdash; auxjad 0.8.4 documentation</title>
   
 
   
@@ -36,7 +36,7 @@
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Hocket with random pitches" href="example-4-hocket-with-random-pitches.html" />
-    <link rel="prev" title="Looping with LeafLooper" href="example-2-looping.html" /> 
+    <link rel="prev" title="Looping with auxjad.LeafLooper" href="example-2-looping.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -86,17 +86,17 @@
             
               <p class="caption"><span class="caption-text">Contents</span></p>
 <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="../index.html">Welcome to auxjad’s documentation!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../index.html">Welcome to Auxjad’s documentation!</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="index.html">Examples of usage</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="example-1-clapping-music.html">Steve Reich’s <em>Clapping Music</em></a></li>
-<li class="toctree-l2"><a class="reference internal" href="example-2-looping.html">Looping with <code class="docutils literal notranslate"><span class="pre">LeafLooper</span></code></a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">Looping with <code class="docutils literal notranslate"><span class="pre">WindowLooper</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="example-2-looping.html">Looping with <code class="xref py py-class docutils literal notranslate"><span class="pre">auxjad.LeafLooper</span></code></a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Looping with <code class="xref py py-class docutils literal notranslate"><span class="pre">auxjad.WindowLooper</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="example-4-hocket-with-random-pitches.html">Hocket with random pitches</a></li>
 <li class="toctree-l2"><a class="reference internal" href="example-5-shuffling-harmonics.html">Shuffling and fading harmonics</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="../api/index.html">auxjad API</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../score_gallery/index.html">Score gallery</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../api/index.html">Auxjad API</a></li>
 </ul>
 
             
@@ -144,7 +144,7 @@
         
           <li><a href="index.html">Examples of usage</a> &raquo;</li>
         
-      <li>Looping with <code class="docutils literal notranslate"><span class="pre">WindowLooper</span></code></li>
+      <li>Looping with <code class="xref py py-class docutils literal notranslate"><span class="pre">auxjad.WindowLooper</span></code></li>
     
     
       <li class="wy-breadcrumbs-aside">
@@ -163,8 +163,8 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="looping-with-windowlooper">
-<h1>Looping with <code class="docutils literal notranslate"><span class="pre">WindowLooper</span></code><a class="headerlink" href="#looping-with-windowlooper" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="looping-with-auxjad-windowlooper">
+<h1>Looping with <a class="reference internal" href="../_api_members/auxjad.WindowLooper.html#auxjad.WindowLooper" title="auxjad.WindowLooper"><code class="xref py py-class docutils literal notranslate"><span class="pre">auxjad.WindowLooper</span></code></a><a class="headerlink" href="#looping-with-auxjad-windowlooper" title="Permalink to this headline">¶</a></h1>
 <p>In this next example, we will use some of <code class="docutils literal notranslate"><span class="pre">auxjad</span></code>’s classes to generate
 a container of randomly selected material, and then use this material as input
 for the looping and shuffling classes.</p>
@@ -175,15 +175,15 @@ for the looping and shuffling classes.</p>
 </div>
 <p>Let’s start by deciding what random selectors will be responsible for
 generating each parameter of our basic material. Let’s use
-<code class="docutils literal notranslate"><span class="pre">auxjad.TenneySelector</span></code> for pitches, which is an implementation of Tenney’s
-Dissonant Counterpoint Algorithm; at each call, this algorithm prioritises
-elements that haven’t been select for the longest time. For the durations,
-dynamics, and articulations, the example will use
-<code class="docutils literal notranslate"><span class="pre">auxjad.CartographySelector</span></code>. Each element input into this type of selector
-has a probability of being selected which is dependent on its index. By
-default, the probability of consecutive elements decay with a rate of 0.75. For
-more information on both of these classes, check the <code class="docutils literal notranslate"><span class="pre">auxjad</span></code> API page (link
-in the left panel).</p>
+<a class="reference internal" href="../_api_members/auxjad.TenneySelector.html#auxjad.TenneySelector" title="auxjad.TenneySelector"><code class="xref py py-class docutils literal notranslate"><span class="pre">auxjad.TenneySelector</span></code></a> for pitches, which is an implementation of
+Tenney’s Dissonant Counterpoint Algorithm; at each call, this algorithm
+prioritises elements that haven’t been select for the longest time. For the
+durations, dynamics, and articulations, the example will use
+<a class="reference internal" href="../_api_members/auxjad.CartographySelector.html#auxjad.CartographySelector" title="auxjad.CartographySelector"><code class="xref py py-class docutils literal notranslate"><span class="pre">auxjad.CartographySelector</span></code></a>. Each element input into this type of
+selector has a probability of being selected which is dependent on its index.
+By default, the probability of consecutive elements decay with a rate of 0.75.
+For more information on both of these classes, check the <code class="docutils literal notranslate"><span class="pre">auxjad</span></code> API page
+(link in the left panel).</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">pitch_selector</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">TenneySelector</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">10</span><span class="p">])</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">duration_selector</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">CartographySelector</span><span class="p">([(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">8</span><span class="p">),</span>
 <span class="gp">... </span>                                                <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">8</span><span class="p">),</span>
@@ -202,11 +202,12 @@ selected by the classes above.</p>
 </pre></div>
 </div>
 <p>With these lists of pitches, durations, dynamics, and articulations, we can now
-use <code class="docutils literal notranslate"><span class="pre">auxjad.LeafDynMaker</span></code> to create the individual abjad leaves for us. It’s
-important to note that there is no time signature being imposed at this point,
-so LilyPond will fallback to a four by four when displaying the container
-below. This is not a problem since this will be used as the basic material for
-the looper, which will then automatically take care of time signatures.</p>
+use <a class="reference internal" href="../_api_members/auxjad.LeafDynMaker.html#auxjad.LeafDynMaker" title="auxjad.LeafDynMaker"><code class="xref py py-class docutils literal notranslate"><span class="pre">auxjad.LeafDynMaker</span></code></a> to create the individual abjad leaves for us.
+It’s important to note that there is no time signature being imposed at this
+point, so LilyPond will fallback to a four by four when displaying the
+container below. This is not a problem since this will be used as the basic
+material for the looper, which will then automatically take care of time
+signatures.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">leaf_dyn_maker</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">LeafDynMaker</span><span class="p">()</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">notes</span> <span class="o">=</span> <span class="n">leaf_dyn_maker</span><span class="p">(</span><span class="n">pitches</span><span class="p">,</span> <span class="n">durations</span><span class="p">,</span> <span class="n">dynamics</span><span class="p">,</span> <span class="n">articulations</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">container</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">(</span><span class="n">notes</span><span class="p">)</span>
@@ -240,7 +241,7 @@ the looper, which will then automatically take care of time signatures.</p>
 <div class="figure align-default">
 <img alt="../_images/image-example-3-looping-1.png" src="../_images/image-example-3-looping-1.png" />
 </div>
-<p>Let’s now use <code class="docutils literal notranslate"><span class="pre">auxjad.WindowLooper</span></code> to output loops of windows of the
+<p>Let’s now use <a class="reference internal" href="../_api_members/auxjad.WindowLooper.html#auxjad.WindowLooper" title="auxjad.WindowLooper"><code class="xref py py-class docutils literal notranslate"><span class="pre">auxjad.WindowLooper</span></code></a> to output loops of windows of the
 material. By default, this class uses a window size of a 4/4 measure, and each
 step forward has the size of a semiquaver, but we will adjust those to a 5/4
 time signature and a crotchet for the step size. Please refer to this library’s
@@ -536,7 +537,7 @@ and output six more measures.</p>
 <p>Notice that the time signature has been repeated. While the <code class="docutils literal notranslate"><span class="pre">output_n()</span></code>
 method takes care of repeated time signatures, dynamics, and clefs, consecutive
 calls may result in repetitions. But we can simply use
-<code class="docutils literal notranslate"><span class="pre">auxjad.remove_repeated_time_signatures()</span></code> to take care of that for us.</p>
+<a class="reference internal" href="../_api_members/auxjad.remove_repeated_time_signatures.html#auxjad.remove_repeated_time_signatures" title="auxjad.remove_repeated_time_signatures"><code class="xref py py-func docutils literal notranslate"><span class="pre">auxjad.remove_repeated_time_signatures()</span></code></a> to take care of that for us.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">auxjad</span><span class="o">.</span><span class="n">remove_repeated_time_signatures</span><span class="p">(</span><span class="n">staff</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">f</span><span class="p">(</span><span class="n">staff</span><span class="p">)</span>
 <span class="go">\new Staff</span>
@@ -839,11 +840,11 @@ calls may result in repetitions. But we can simply use
 <div class="figure align-default">
 <img alt="../_images/image-example-3-looping-5.png" src="../_images/image-example-3-looping-5.png" />
 </div>
-<p>At this point, let’s use <code class="docutils literal notranslate"><span class="pre">auxjad.remove_repeated_dynamics</span></code> to remove all
-repeated dynamics. While the method <code class="docutils literal notranslate"><span class="pre">output_n()</span></code> removes repeated dynamics,
-clefs, and time signatures, this is necessary because our example invoked
-<code class="docutils literal notranslate"><span class="pre">output_n()</span></code> multiple times, and there is a repetition of a dynamic at that
-transition. The final result is shown below.</p>
+<p>At this point, let’s use <a class="reference internal" href="../_api_members/auxjad.remove_repeated_dynamics.html#auxjad.remove_repeated_dynamics" title="auxjad.remove_repeated_dynamics"><code class="xref py py-func docutils literal notranslate"><span class="pre">auxjad.remove_repeated_dynamics()</span></code></a> to remove
+all repeated dynamics. While the method <code class="docutils literal notranslate"><span class="pre">output_n()</span></code> removes repeated
+dynamics, clefs, and time signatures, this is necessary because our example
+invoked <code class="docutils literal notranslate"><span class="pre">output_n()</span></code> multiple times, and there is a repetition of a dynamic
+at that transition. The final result is shown below.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">auxjad</span><span class="o">.</span><span class="n">remove_repeated_dynamics</span><span class="p">(</span><span class="n">staff</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">f</span><span class="p">(</span><span class="n">staff</span><span class="p">)</span>
 <span class="go">\new Staff</span>
@@ -1019,7 +1020,7 @@ transition. The final result is shown below.</p>
         <a href="example-4-hocket-with-random-pitches.html" class="btn btn-neutral float-right" title="Hocket with random pitches" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="example-2-looping.html" class="btn btn-neutral float-left" title="Looping with LeafLooper" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="example-2-looping.html" class="btn btn-neutral float-left" title="Looping with auxjad.LeafLooper" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   

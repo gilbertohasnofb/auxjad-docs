@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Steve Reich’s Clapping Music &mdash; auxjad 0.8.2 documentation</title>
+  <title>Steve Reich’s Clapping Music &mdash; auxjad 0.8.4 documentation</title>
   
 
   
@@ -35,7 +35,7 @@
   <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Looping with LeafLooper" href="example-2-looping.html" />
+    <link rel="next" title="Looping with auxjad.LeafLooper" href="example-2-looping.html" />
     <link rel="prev" title="Examples of usage" href="index.html" /> 
 </head>
 
@@ -86,17 +86,17 @@
             
               <p class="caption"><span class="caption-text">Contents</span></p>
 <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="../index.html">Welcome to auxjad’s documentation!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../index.html">Welcome to Auxjad’s documentation!</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="index.html">Examples of usage</a><ul class="current">
 <li class="toctree-l2 current"><a class="current reference internal" href="#">Steve Reich’s <em>Clapping Music</em></a></li>
-<li class="toctree-l2"><a class="reference internal" href="example-2-looping.html">Looping with <code class="docutils literal notranslate"><span class="pre">LeafLooper</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="example-3-looping.html">Looping with <code class="docutils literal notranslate"><span class="pre">WindowLooper</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="example-2-looping.html">Looping with <code class="xref py py-class docutils literal notranslate"><span class="pre">auxjad.LeafLooper</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="example-3-looping.html">Looping with <code class="xref py py-class docutils literal notranslate"><span class="pre">auxjad.WindowLooper</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="example-4-hocket-with-random-pitches.html">Hocket with random pitches</a></li>
 <li class="toctree-l2"><a class="reference internal" href="example-5-shuffling-harmonics.html">Shuffling and fading harmonics</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="../api/index.html">auxjad API</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../score_gallery/index.html">Score gallery</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../api/index.html">Auxjad API</a></li>
 </ul>
 
             
@@ -200,9 +200,9 @@ initialise <code class="docutils literal notranslate"><span class="pre">abjad.St
 <div class="figure align-default">
 <img alt="../_images/image-example-1-clapping-music-1.png" src="../_images/image-example-1-clapping-music-1.png" />
 </div>
-<p>Next, we create an instance of <code class="docutils literal notranslate"><span class="pre">auxjad.Phaser</span></code> which will be used to create
-the phasing process of the initial material. We initialise it with <code class="docutils literal notranslate"><span class="pre">material</span></code>
-as well as a <code class="docutils literal notranslate"><span class="pre">step_size</span></code> of the length of a quaver.</p>
+<p>Next, we create an instance of <a class="reference internal" href="../_api_members/auxjad.Phaser.html#auxjad.Phaser" title="auxjad.Phaser"><code class="xref py py-class docutils literal notranslate"><span class="pre">auxjad.Phaser</span></code></a> which will be used to
+create the phasing process of the initial material. We initialise it with
+<code class="docutils literal notranslate"><span class="pre">material</span></code> as well as a <code class="docutils literal notranslate"><span class="pre">step_size</span></code> of the length of a quaver.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">phaser</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">Phaser</span><span class="p">(</span><span class="n">material</span><span class="p">,</span>
 <span class="gp">... </span>                       <span class="n">step_size</span><span class="o">=</span><span class="n">abjad</span><span class="o">.</span><span class="n">Duration</span><span class="p">((</span><span class="mi">1</span><span class="p">,</span> <span class="mi">8</span><span class="p">)),</span>
 <span class="gp">... </span>                       <span class="p">)</span>
@@ -383,8 +383,8 @@ measures of the bottom staff.</p>
 </div>
 <p>The upper staff of the composition consists of thirteen measures of the
 material being repeated. We can thus use the function
-<code class="docutils literal notranslate"><span class="pre">auxjad.repeat_container()</span></code> to generate these repetitions and take care of
-removing the time signatures of the repeated measures.</p>
+<a class="reference internal" href="../_api_members/auxjad.repeat_container.html#auxjad.repeat_container" title="auxjad.repeat_container"><code class="xref py py-func docutils literal notranslate"><span class="pre">auxjad.repeat_container()</span></code></a> to generate these repetitions and take care
+of removing the time signatures of the repeated measures.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">constant_staff</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">repeat_container</span><span class="p">(</span><span class="n">material</span><span class="p">,</span> <span class="mi">13</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">f</span><span class="p">(</span><span class="n">constant_staff</span><span class="p">)</span>
 <span class="go">\new RhythmicStaff</span>
@@ -1242,7 +1242,7 @@ score should have a single end repetition bar line.</p>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="example-2-looping.html" class="btn btn-neutral float-right" title="Looping with LeafLooper" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="example-2-looping.html" class="btn btn-neutral float-right" title="Looping with auxjad.LeafLooper" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
         <a href="index.html" class="btn btn-neutral float-left" title="Examples of usage" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>

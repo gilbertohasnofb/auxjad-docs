@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>auxjad.TenneySelector &mdash; auxjad 0.8.2 documentation</title>
+  <title>auxjad.TenneySelector &mdash; auxjad 0.8.4 documentation</title>
   
 
   
@@ -86,9 +86,10 @@
             
               <p class="caption"><span class="caption-text">Contents</span></p>
 <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="../index.html">Welcome to auxjad’s documentation!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../index.html">Welcome to Auxjad’s documentation!</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../examples/index.html">Examples of usage</a></li>
-<li class="toctree-l1 current"><a class="reference internal" href="../api/index.html">auxjad API</a><ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../score_gallery/index.html">Score gallery</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../api/index.html">Auxjad API</a><ul class="current">
 <li class="toctree-l2 current"><a class="reference internal" href="../api/api-core.html">core</a><ul class="current">
 <li class="toctree-l3"><a class="reference internal" href="auxjad.CartographySelector.html">auxjad.CartographySelector</a></li>
 <li class="toctree-l3"><a class="reference internal" href="auxjad.Drifter.html">auxjad.Drifter</a></li>
@@ -104,11 +105,10 @@
 <li class="toctree-l3"><a class="reference internal" href="auxjad.WindowLooper.html">auxjad.WindowLooper</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="../api/api-score_components.html">score_components</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/api-score.html">score</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../api/api-utilities.html">utilities</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="../score_gallery/index.html">Score gallery</a></li>
 </ul>
 
             
@@ -154,7 +154,7 @@
     
       <li><a href="../index.html">Docs</a> &raquo;</li>
         
-          <li><a href="../api/index.html">auxjad API</a> &raquo;</li>
+          <li><a href="../api/index.html">Auxjad API</a> &raquo;</li>
         
           <li><a href="../api/api-core.html">core</a> &raquo;</li>
         
@@ -181,12 +181,12 @@
 <h1>auxjad.TenneySelector<a class="headerlink" href="#auxjad-tenneyselector" title="Permalink to this headline">¶</a></h1>
 <dl class="py class">
 <dt id="auxjad.TenneySelector">
-<em class="property">class </em><code class="sig-prename descclassname">auxjad.</code><code class="sig-name descname">TenneySelector</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">contents</span><span class="p">:</span> <span class="n">list</span></em>, <em class="sig-param"><span class="o">*</span></em>, <em class="sig-param"><span class="n">weights</span><span class="p">:</span> <span class="n">Optional<span class="p">[</span>list<span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em>, <em class="sig-param"><span class="n">curvature</span><span class="p">:</span> <span class="n">float</span> <span class="o">=</span> <span class="default_value">1.0</span></em><span class="sig-paren">)</span><a class="headerlink" href="#auxjad.TenneySelector" title="Permalink to this definition">¶</a></dt>
-<dd><p><code class="docutils literal notranslate"><span class="pre">TenneySelector</span></code> is an implementation of the Dissonant Counterpoint
-Algorithm by James Tenney. This class can be used to randomly select
-elements from an input list, giving more weight to elements which have not
-been selected in recent iterations. In other words, Tenney’s algorithm uses
-feedback in order to lower the weight of recently selected elements.</p>
+<em class="property">class </em><code class="sig-prename descclassname">auxjad.</code><code class="sig-name descname">TenneySelector</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">contents</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.8)">list</a></span></em>, <em class="sig-param"><span class="o">*</span></em>, <em class="sig-param"><span class="n">weights</span><span class="p">:</span> <span class="n">Optional<span class="p">[</span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.8)">list</a><span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em>, <em class="sig-param"><span class="n">curvature</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)">float</a></span> <span class="o">=</span> <span class="default_value">1.0</span></em><span class="sig-paren">)</span><a class="headerlink" href="#auxjad.TenneySelector" title="Permalink to this definition">¶</a></dt>
+<dd><p>This class is an implementation of the Dissonant Counterpoint Algorithm
+by James Tenney. This class can be used to randomly select elements from an
+input list, giving more weight to elements which have not been selected in
+recent iterations. In other words, Tenney’s algorithm uses feedback in
+order to lower the weight of recently selected elements.</p>
 <p>This implementation is based on the paper: Polansky, L., A. Barnett, and
 M. Winter (2011). ‘A Few More Words About James Tenney: Dissonant
 Counterpoint and Statistical Feedback’. In: Journal of Mathematics and
@@ -199,8 +199,8 @@ of this list can be of any type.</p>
 <span class="go">[&#39;A&#39;, &#39;B&#39;, &#39;C&#39;, &#39;D&#39;, &#39;E&#39;, &#39;F&#39;]</span>
 </pre></div>
 </div>
-<p>Applying the <code class="docutils literal notranslate"><span class="pre">len()</span></code> function to the selector will return the length
-of the input list.</p>
+<p>Applying the <a class="reference external" href="https://docs.python.org/3/library/functions.html#len" title="(in Python v3.8)"><code class="xref py py-func docutils literal notranslate"><span class="pre">len()</span></code></a> function to the selector will return the
+length of the input list.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">len</span><span class="p">(</span><span class="n">selector</span><span class="p">)</span>
 <span class="go">6</span>
 </pre></div>
@@ -219,8 +219,8 @@ according to the current probability values.</p>
 <span class="go">C</span>
 </pre></div>
 </div>
-<p>Alternatively, use the <code class="docutils literal notranslate"><span class="pre">next()</span></code> function or <code class="docutils literal notranslate"><span class="pre">__next__()</span></code> method to
-get the next result.</p>
+<p>Alternatively, use the <a class="reference external" href="https://docs.python.org/3/library/functions.html#next" title="(in Python v3.8)"><code class="xref py py-func docutils literal notranslate"><span class="pre">next()</span></code></a> function or <code class="docutils literal notranslate"><span class="pre">__next__()</span></code> method
+to get the next result.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">selector</span><span class="o">.</span><span class="fm">__next__</span><span class="p">()</span>
 <span class="go">A</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">next</span><span class="p">(</span><span class="n">selector</span><span class="p">)</span>
@@ -534,10 +534,31 @@ property <code class="docutils literal notranslate"><span class="pre">contents</
 <col style="width: 90%" />
 </colgroup>
 <tbody>
-<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">__init__</span></code>(contents, *[, weights, curvature])</p></td>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">__call__</span></code>()</p></td>
+<td><p>Calls the selection process and outputs one element of <code class="docutils literal notranslate"><span class="pre">contents</span></code>.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">__delitem__</span></code>(key)</p></td>
+<td><p>Deletes one or more elements of <code class="docutils literal notranslate"><span class="pre">contents</span></code> through indexing or slicing.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">__getitem__</span></code>(key)</p></td>
+<td><p>Returns one or more elements of <code class="docutils literal notranslate"><span class="pre">contents</span></code> through indexing or slicing.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">__init__</span></code>(contents, *[, weights, curvature])</p></td>
 <td><p>Initialises self.</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">reset_probabilities</span></code>()</p></td>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">__len__</span></code>()</p></td>
+<td><p>Returns the length of <code class="docutils literal notranslate"><span class="pre">contents</span></code>.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">__next__</span></code>()</p></td>
+<td><p>Calls the selection process and outputs one element of <code class="docutils literal notranslate"><span class="pre">contents</span></code>.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">__repr__</span></code>()</p></td>
+<td><p>Returns interpreter representation of <code class="docutils literal notranslate"><span class="pre">contents</span></code>.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">__setitem__</span></code>(key, value)</p></td>
+<td><p>Assigns values to one or more elements of <code class="docutils literal notranslate"><span class="pre">contents</span></code> through indexing or slicing.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">reset_probabilities</span></code>()</p></td>
 <td><p>Resets the probability distribution of all elements to an uniform distribution.</p></td>
 </tr>
 </tbody>

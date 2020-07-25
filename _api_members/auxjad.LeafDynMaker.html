@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>auxjad.LeafDynMaker &mdash; auxjad 0.8.2 documentation</title>
+  <title>auxjad.LeafDynMaker &mdash; auxjad 0.8.4 documentation</title>
   
 
   
@@ -86,9 +86,10 @@
             
               <p class="caption"><span class="caption-text">Contents</span></p>
 <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="../index.html">Welcome to auxjad’s documentation!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../index.html">Welcome to Auxjad’s documentation!</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../examples/index.html">Examples of usage</a></li>
-<li class="toctree-l1 current"><a class="reference internal" href="../api/index.html">auxjad API</a><ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../score_gallery/index.html">Score gallery</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../api/index.html">Auxjad API</a><ul class="current">
 <li class="toctree-l2 current"><a class="reference internal" href="../api/api-core.html">core</a><ul class="current">
 <li class="toctree-l3"><a class="reference internal" href="auxjad.CartographySelector.html">auxjad.CartographySelector</a></li>
 <li class="toctree-l3"><a class="reference internal" href="auxjad.Drifter.html">auxjad.Drifter</a></li>
@@ -104,11 +105,10 @@
 <li class="toctree-l3"><a class="reference internal" href="auxjad.WindowLooper.html">auxjad.WindowLooper</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="../api/api-score_components.html">score_components</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/api-score.html">score</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../api/api-utilities.html">utilities</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="../score_gallery/index.html">Score gallery</a></li>
 </ul>
 
             
@@ -154,7 +154,7 @@
     
       <li><a href="../index.html">Docs</a> &raquo;</li>
         
-          <li><a href="../api/index.html">auxjad API</a> &raquo;</li>
+          <li><a href="../api/index.html">Auxjad API</a> &raquo;</li>
         
           <li><a href="../api/api-core.html">core</a> &raquo;</li>
         
@@ -181,9 +181,9 @@
 <h1>auxjad.LeafDynMaker<a class="headerlink" href="#auxjad-leafdynmaker" title="Permalink to this headline">¶</a></h1>
 <dl class="py class">
 <dt id="auxjad.LeafDynMaker">
-<em class="property">class </em><code class="sig-prename descclassname">auxjad.</code><code class="sig-name descname">LeafDynMaker</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span></em>, <em class="sig-param"><span class="n">increase_monotonic</span><span class="p">:</span> <span class="n">bool</span> <span class="o">=</span> <span class="default_value">None</span></em>, <em class="sig-param"><span class="n">forbidden_note_duration</span><span class="p">:</span> <span class="n">Union<span class="p">[</span>abjad.utilities.Duration.Duration<span class="p">, </span>Tuple<span class="p">[</span>int<span class="p">, </span>int<span class="p">]</span><span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em>, <em class="sig-param"><span class="n">forbidden_rest_duration</span><span class="p">:</span> <span class="n">Union<span class="p">[</span>abjad.utilities.Duration.Duration<span class="p">, </span>Tuple<span class="p">[</span>int<span class="p">, </span>int<span class="p">]</span><span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em>, <em class="sig-param"><span class="n">skips_instead_of_rests</span><span class="p">:</span> <span class="n">bool</span> <span class="o">=</span> <span class="default_value">None</span></em>, <em class="sig-param"><span class="n">tag</span><span class="p">:</span> <span class="n">abjad.system.Tag.Tag</span> <span class="o">=</span> <span class="default_value">None</span></em>, <em class="sig-param"><span class="n">use_multimeasure_rests</span><span class="p">:</span> <span class="n">bool</span> <span class="o">=</span> <span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#auxjad.LeafDynMaker" title="Permalink to this definition">¶</a></dt>
-<dd><p><code class="docutils literal notranslate"><span class="pre">LeafDynMaker</span></code> creates leaves and logical ties from input lists of
-pitches, durations, dynamics, and articulations. It is an extension of
+<em class="property">class </em><code class="sig-prename descclassname">auxjad.</code><code class="sig-name descname">LeafDynMaker</code><a class="headerlink" href="#auxjad.LeafDynMaker" title="Permalink to this definition">¶</a></dt>
+<dd><p>This class creates leaves and logical ties from input lists of pitches
+durations, dynamics, and articulations. It is an extension of
 <code class="docutils literal notranslate"><span class="pre">abjad.LeafMaker</span></code> which can take optional lists of dynamics and
 articulations.</p>
 <dl>
@@ -481,8 +481,14 @@ in its input lists:</p>
 <col style="width: 90%" />
 </colgroup>
 <tbody>
-<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">__init__</span></code>(*[, increase_monotonic, …])</p></td>
-<td><p>Initialize self.</p></td>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">__call__</span></code>(pitches, durations[, dynamics, …])</p></td>
+<td><p>Calls the leaf-maker on <code class="docutils literal notranslate"><span class="pre">pitches</span></code>, <code class="docutils literal notranslate"><span class="pre">durations</span></code>, <code class="docutils literal notranslate"><span class="pre">dynamics</span></code>, and <code class="docutils literal notranslate"><span class="pre">articulations</span></code>, returning an <code class="docutils literal notranslate"><span class="pre">abjad.Selection</span></code>.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">__init__</span></code>()</p></td>
+<td><p>Initialises self.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">__repr__</span></code>()</p></td>
+<td><p>Return repr(self).</p></td>
 </tr>
 </tbody>
 </table>

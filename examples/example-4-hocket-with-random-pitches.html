@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Hocket with random pitches &mdash; auxjad 0.8.2 documentation</title>
+  <title>Hocket with random pitches &mdash; auxjad 0.8.4 documentation</title>
   
 
   
@@ -36,7 +36,7 @@
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Shuffling and fading harmonics" href="example-5-shuffling-harmonics.html" />
-    <link rel="prev" title="Looping with WindowLooper" href="example-3-looping.html" /> 
+    <link rel="prev" title="Looping with auxjad.WindowLooper" href="example-3-looping.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -86,17 +86,17 @@
             
               <p class="caption"><span class="caption-text">Contents</span></p>
 <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="../index.html">Welcome to auxjad’s documentation!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../index.html">Welcome to Auxjad’s documentation!</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="index.html">Examples of usage</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="example-1-clapping-music.html">Steve Reich’s <em>Clapping Music</em></a></li>
-<li class="toctree-l2"><a class="reference internal" href="example-2-looping.html">Looping with <code class="docutils literal notranslate"><span class="pre">LeafLooper</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="example-3-looping.html">Looping with <code class="docutils literal notranslate"><span class="pre">WindowLooper</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="example-2-looping.html">Looping with <code class="xref py py-class docutils literal notranslate"><span class="pre">auxjad.LeafLooper</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="example-3-looping.html">Looping with <code class="xref py py-class docutils literal notranslate"><span class="pre">auxjad.WindowLooper</span></code></a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">Hocket with random pitches</a></li>
 <li class="toctree-l2"><a class="reference internal" href="example-5-shuffling-harmonics.html">Shuffling and fading harmonics</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="../api/index.html">auxjad API</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../score_gallery/index.html">Score gallery</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../api/index.html">Auxjad API</a></li>
 </ul>
 
             
@@ -191,9 +191,9 @@ matter at this point since we will randomise them shortly.</p>
 <div class="figure align-default">
 <img alt="../_images/image-example-4-hocket-with-random-pitches-1.png" src="../_images/image-example-4-hocket-with-random-pitches-1.png" />
 </div>
-<p>Next, let’s initialise <code class="docutils literal notranslate"><span class="pre">PitchRandomiser</span></code> with this container as well as a
-list representing pitches. This will be the source for the random pitches
-selected by this randomiser.</p>
+<p>Next, let’s initialise <a class="reference internal" href="../_api_members/auxjad.PitchRandomiser.html#auxjad.PitchRandomiser" title="auxjad.PitchRandomiser"><code class="xref py py-class docutils literal notranslate"><span class="pre">auxjad.PitchRandomiser</span></code></a> with this container as
+well as a list representing pitches. This will be the source for the random
+pitches selected by this randomiser.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">randomiser</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">PitchRandomiser</span><span class="p">(</span><span class="n">container</span><span class="p">,</span>
 <span class="gp">... </span>                                    <span class="n">pitches</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">],</span>
 <span class="gp">... </span>                                    <span class="p">)</span>
@@ -395,11 +395,11 @@ that this list has the same length as the number of pitches in <code class="docu
 <div class="figure align-default">
 <img alt="../_images/image-example-4-hocket-with-random-pitches-4.png" src="../_images/image-example-4-hocket-with-random-pitches-4.png" />
 </div>
-<p>Let’s now feed this staff of music into <code class="docutils literal notranslate"><span class="pre">auxjad.Hocketer</span></code>. This class will
-distribute each note to a different voice, each given their own staff. See its
-documentation for more information. For a basic usage with three voices, we
-simply initialise <code class="docutils literal notranslate"><span class="pre">Hocketer</span></code> with the staff we previously created as well as
-the desired number of voices.</p>
+<p>Let’s now feed this staff of music into <a class="reference internal" href="../_api_members/auxjad.Hocketer.html#auxjad.Hocketer" title="auxjad.Hocketer"><code class="xref py py-class docutils literal notranslate"><span class="pre">auxjad.Hocketer</span></code></a>. This class
+will distribute each note to a different voice, each given their own staff. See
+its documentation for more information. For a basic usage with three voices, we
+simply initialise <a class="reference internal" href="../_api_members/auxjad.Hocketer.html#auxjad.Hocketer" title="auxjad.Hocketer"><code class="xref py py-class docutils literal notranslate"><span class="pre">auxjad.Hocketer</span></code></a> with the staff we previously created
+as well as the desired number of voices.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">hocketer</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">Hocketer</span><span class="p">(</span><span class="n">staff</span><span class="p">,</span>
 <span class="gp">... </span>                           <span class="n">n_voices</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>
 <span class="gp">... </span>                           <span class="p">)</span>
@@ -548,7 +548,7 @@ the desired number of voices.</p>
         <a href="example-5-shuffling-harmonics.html" class="btn btn-neutral float-right" title="Shuffling and fading harmonics" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="example-3-looping.html" class="btn btn-neutral float-left" title="Looping with WindowLooper" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="example-3-looping.html" class="btn btn-neutral float-left" title="Looping with auxjad.WindowLooper" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
