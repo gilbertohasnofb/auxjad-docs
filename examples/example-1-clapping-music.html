@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Steve Reich’s Clapping Music &mdash; auxjad 0.8.6 documentation</title>
+  <title>Steve Reich’s Clapping Music &mdash; auxjad 0.8.7 documentation</title>
   
 
   
@@ -168,15 +168,15 @@
 <h1>Steve Reich’s <em>Clapping Music</em><a class="headerlink" href="#steve-reich-s-clapping-music" title="Permalink to this headline">¶</a></h1>
 <p>In this example, we will use some of <a class="reference external" href="../api/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">auxjad</span></code></a>’s classes and functions to
 generate the score of Steve Reich’s <em>Clapping Music</em>.</p>
-<p>First, we start by importing both <code class="xref py py-mod docutils literal notranslate"><span class="pre">abjad</span></code> and <a class="reference external" href="../api/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">auxjad</span></code></a>.</p>
+<p>First, we start by importing both <a class="reference external" href="https://abjad.github.io/api/abjad/index.html#module-abjad" title="(in Abjad v3.1)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">abjad</span></code></a> and <a class="reference external" href="../api/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">auxjad</span></code></a>.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">abjad</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">auxjad</span>
 </pre></div>
 </div>
 <p>Let’s now input the basic material that will be used to generate this
 composition. The original score is notated using a rhythmic staff, so we can
-initialise <code class="xref py py-class docutils literal notranslate"><span class="pre">abjad.Staff</span></code> with the property
-<code class="xref py py-attr docutils literal notranslate"><span class="pre">lilypond_type</span></code>. set to
+initialise <a class="reference external" href="https://abjad.github.io/api/abjad/core/Staff.html#abjad.core.Staff.Staff" title="(in Abjad v3.1)"><code class="xref py py-class docutils literal notranslate"><span class="pre">abjad.Staff</span></code></a> with the property
+<a class="reference external" href="https://abjad.github.io/api/abjad/core/Staff.html#abjad.core.Staff.Staff.lilypond_type" title="(in Abjad v3.1)"><code class="xref py py-attr docutils literal notranslate"><span class="pre">lilypond_type</span></code></a> set to
 <code class="docutils literal notranslate"><span class="pre">&quot;RhythmicStaff&quot;</span></code>.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">material</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;\time 12/8 c8 c c r c c r c r c c r&quot;</span><span class="p">,</span>
 <span class="gp">... </span>                       <span class="n">lilypond_type</span><span class="o">=</span><span class="s2">&quot;RhythmicStaff&quot;</span><span class="p">,</span>
@@ -205,15 +205,16 @@ initialise <code class="xref py py-class docutils literal notranslate"><span cla
 </div>
 <p>Next, we create an instance of <a class="reference internal" href="../_api_members/auxjad.Phaser.html#auxjad.Phaser" title="auxjad.Phaser"><code class="xref py py-class docutils literal notranslate"><span class="pre">auxjad.Phaser</span></code></a> which will be used to
 create the phasing process of the initial material. We initialise it with
-<code class="docutils literal notranslate"><span class="pre">material</span></code> as well as a <code class="docutils literal notranslate"><span class="pre">step_size</span></code> of the length of a quaver.</p>
+<code class="docutils literal notranslate"><span class="pre">material</span></code> as well as a <a class="reference internal" href="../_api_members/auxjad.Phaser.html#auxjad.Phaser.step_size" title="auxjad.Phaser.step_size"><code class="xref py py-attr docutils literal notranslate"><span class="pre">step_size</span></code></a> of the length of a
+quaver.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">phaser</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">Phaser</span><span class="p">(</span><span class="n">material</span><span class="p">,</span>
 <span class="gp">... </span>                       <span class="n">step_size</span><span class="o">=</span><span class="n">abjad</span><span class="o">.</span><span class="n">Duration</span><span class="p">((</span><span class="mi">1</span><span class="p">,</span> <span class="mi">8</span><span class="p">)),</span>
 <span class="gp">... </span>                       <span class="p">)</span>
 </pre></div>
 </div>
 <p>Since Reich’s composition phases the material until it is back at its initial
-position, we can use the method <code class="docutils literal notranslate"><span class="pre">output_all()</span></code> to generate all thirteen
-measures of the bottom staff.</p>
+position, we can use the method <a class="reference internal" href="../_api_members/auxjad.Phaser.html#auxjad.Phaser.output_all" title="auxjad.Phaser.output_all"><code class="xref py py-meth docutils literal notranslate"><span class="pre">output_all()</span></code></a> to generate
+all thirtee measures of the bottom staff.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">notes</span> <span class="o">=</span> <span class="n">phaser</span><span class="o">.</span><span class="n">output_all</span><span class="p">()</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">phased_staff</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span><span class="n">notes</span><span class="p">,</span>
 <span class="gp">... </span>                           <span class="n">lilypond_type</span><span class="o">=</span><span class="s2">&quot;RhythmicStaff&quot;</span><span class="p">,</span>

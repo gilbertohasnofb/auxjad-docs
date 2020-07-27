@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>auxjad.sync_containers &mdash; auxjad 0.8.6 documentation</title>
+  <title>auxjad.sync_containers &mdash; auxjad 0.8.7 documentation</title>
   
 
   
@@ -191,8 +191,8 @@
 <h1>auxjad.sync_containers<a class="headerlink" href="#auxjad-sync-containers" title="Permalink to this headline">¶</a></h1>
 <dl class="py function">
 <dt id="auxjad.sync_containers">
-<code class="sig-prename descclassname">auxjad.</code><code class="sig-name descname">sync_containers</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">containers</span><span class="p">:</span> <span class="n">abjad.core.Container.Container</span></em>, <em class="sig-param"><span class="n">use_multimeasure_rests</span><span class="p">:</span> <span class="n">bool</span> <span class="o">=</span> <span class="default_value">True</span></em>, <em class="sig-param"><span class="n">adjust_last_time_signature</span><span class="p">:</span> <span class="n">bool</span> <span class="o">=</span> <span class="default_value">True</span></em><span class="sig-paren">)</span><a class="headerlink" href="#auxjad.sync_containers" title="Permalink to this definition">¶</a></dt>
-<dd><p>Mutates two or more input containers (of type <code class="xref py py-class docutils literal notranslate"><span class="pre">abjad.Container</span></code> or
+<code class="sig-prename descclassname">auxjad.</code><code class="sig-name descname">sync_containers</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">containers</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://abjad.github.io/api/abjad/core/Container.html#abjad.core.Container.Container" title="(in Abjad v3.1)">abjad.core.Container.Container</a></span></em>, <em class="sig-param"><span class="n">use_multimeasure_rests</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)">bool</a></span> <span class="o">=</span> <span class="default_value">True</span></em>, <em class="sig-param"><span class="n">adjust_last_time_signature</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)">bool</a></span> <span class="o">=</span> <span class="default_value">True</span></em><span class="sig-paren">)</span><a class="headerlink" href="#auxjad.sync_containers" title="Permalink to this definition">¶</a></dt>
+<dd><p>Mutates two or more input containers (of type <a class="reference external" href="https://abjad.github.io/api/abjad/core/Container.html#abjad.core.Container.Container" title="(in Abjad v3.1)"><code class="xref py py-class docutils literal notranslate"><span class="pre">abjad.Container</span></code></a> or
 child class) in place and has no return value; this function finds the
 longest container among the inputs and adds rests to all the shorter ones,
 making them the same length. By default, it rewrites the last time
@@ -230,8 +230,8 @@ with rests ensuring all their lengths become the same.</p>
 <p class="admonition-title">Note</p>
 <p>Notice that the time signatures in the output are commented out with
 <code class="docutils literal notranslate"><span class="pre">%%%</span></code>. This is because Abjad only applies time signatures to
-containers that belong to a <code class="xref py py-class docutils literal notranslate"><span class="pre">abjad.Staff</span></code>. The present function works
-with either <code class="xref py py-class docutils literal notranslate"><span class="pre">abjad.Container</span></code> and <code class="xref py py-class docutils literal notranslate"><span class="pre">abjad.Staff</span></code>.</p>
+containers that belong to a <a class="reference external" href="https://abjad.github.io/api/abjad/core/Staff.html#abjad.core.Staff.Staff" title="(in Abjad v3.1)"><code class="xref py py-class docutils literal notranslate"><span class="pre">abjad.Staff</span></code></a>. The present function works
+with either <a class="reference external" href="https://abjad.github.io/api/abjad/core/Container.html#abjad.core.Container.Container" title="(in Abjad v3.1)"><code class="xref py py-class docutils literal notranslate"><span class="pre">abjad.Container</span></code></a> and <a class="reference external" href="https://abjad.github.io/api/abjad/core/Staff.html#abjad.core.Staff.Staff" title="(in Abjad v3.1)"><code class="xref py py-class docutils literal notranslate"><span class="pre">abjad.Staff</span></code></a>.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">container1</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;\time 4/4 g&#39;2.&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">container2</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;\time 4/4 c&#39;1&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">auxjad</span><span class="o">.</span><span class="n">sync_containers</span><span class="p">(</span><span class="n">container1</span><span class="p">,</span> <span class="n">container2</span><span class="p">)</span>
@@ -472,8 +472,8 @@ new one at the last measure if its duration is shorter.</p>
 <img alt="../_images/image-sync_containers-17.png" src="../_images/image-sync_containers-17.png" />
 </div>
 </dd>
-<dt>Single input <code class="xref py py-class docutils literal notranslate"><span class="pre">abjad.Score</span></code>:</dt><dd><p>This function can also take a single <code class="xref py py-class docutils literal notranslate"><span class="pre">abjad.Score</span></code> instead of
-multiple <code class="xref py py-class docutils literal notranslate"><span class="pre">abjad.Container</span></code>’s or <code class="xref py py-class docutils literal notranslate"><span class="pre">abjad.Staff</span></code>’s.</p>
+<dt>Single input <a class="reference external" href="https://abjad.github.io/api/abjad/core/Score.html#abjad.core.Score.Score" title="(in Abjad v3.1)"><code class="xref py py-class docutils literal notranslate"><span class="pre">abjad.Score</span></code></a>:</dt><dd><p>This function can also take a single <a class="reference external" href="https://abjad.github.io/api/abjad/core/Score.html#abjad.core.Score.Score" title="(in Abjad v3.1)"><code class="xref py py-class docutils literal notranslate"><span class="pre">abjad.Score</span></code></a> instead of
+multiple <a class="reference external" href="https://abjad.github.io/api/abjad/core/Container.html#abjad.core.Container.Container" title="(in Abjad v3.1)"><code class="xref py py-class docutils literal notranslate"><span class="pre">abjad.Container</span></code></a>’s or <a class="reference external" href="https://abjad.github.io/api/abjad/core/Staff.html#abjad.core.Staff.Staff" title="(in Abjad v3.1)"><code class="xref py py-class docutils literal notranslate"><span class="pre">abjad.Staff</span></code></a>’s.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">staff1</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;\time 3/8 c&#39;4. | d&#39;4&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">staff2</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;\time 3/8 c&#39;4. | d&#39;8&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">staff3</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;\time 3/8 c&#39;4. | d&#39;16&quot;</span><span class="p">)</span>
@@ -703,7 +703,7 @@ how this can be accomplished using Abjad.</p>
 <p class="admonition-title">Error</p>
 <p>If one or more containers is malformed, i.e. it has an underfilled
 measure before a time signature change, the function raises a
-<code class="xref py py-exc docutils literal notranslate"><span class="pre">ValueError</span></code> exception.</p>
+<a class="reference external" href="https://docs.python.org/3/library/exceptions.html#ValueError" title="(in Python v3.8)"><code class="xref py py-exc docutils literal notranslate"><span class="pre">ValueError</span></code></a> exception.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">container1</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;\time 4/4 g&#39;1 | f&#39;4&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">container2</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;\time 5/4 c&#39;1 | \time 4/4 d&#39;4&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">auxjad</span><span class="o">.</span><span class="n">sync_containers</span><span class="p">(</span><span class="n">container1</span><span class="p">,</span> <span class="n">container2</span><span class="p">)</span>

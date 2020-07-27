@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>auxjad.underfull_duration &mdash; auxjad 0.8.6 documentation</title>
+  <title>auxjad.underfull_duration &mdash; auxjad 0.8.7 documentation</title>
   
 
   
@@ -190,9 +190,9 @@
 <h1>auxjad.underfull_duration<a class="headerlink" href="#auxjad-underfull-duration" title="Permalink to this headline">¶</a></h1>
 <dl class="py function">
 <dt id="auxjad.underfull_duration">
-<code class="sig-prename descclassname">auxjad.</code><code class="sig-name descname">underfull_duration</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">container</span><span class="p">:</span> <span class="n">abjad.core.Container.Container</span></em><span class="sig-paren">)</span> &#x2192; abjad.utilities.Duration.Duration<a class="headerlink" href="#auxjad.underfull_duration" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns the missing <code class="xref py py-class docutils literal notranslate"><span class="pre">abjad.Duration</span></code> of an underfull container (of
-type <code class="xref py py-class docutils literal notranslate"><span class="pre">abjad.Container</span></code> or child class).</p>
+<code class="sig-prename descclassname">auxjad.</code><code class="sig-name descname">underfull_duration</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">container</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://abjad.github.io/api/abjad/core/Container.html#abjad.core.Container.Container" title="(in Abjad v3.1)">abjad.core.Container.Container</a></span></em><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://abjad.github.io/api/abjad/utilities/Duration.html#abjad.utilities.Duration.Duration" title="(in Abjad v3.1)">abjad.utilities.Duration.Duration</a><a class="headerlink" href="#auxjad.underfull_duration" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the missing <a class="reference external" href="https://abjad.github.io/api/abjad/utilities/Duration.html#abjad.utilities.Duration.Duration" title="(in Abjad v3.1)"><code class="xref py py-class docutils literal notranslate"><span class="pre">abjad.Duration</span></code></a> of an underfull container (of
+type <a class="reference external" href="https://abjad.github.io/api/abjad/core/Container.html#abjad.core.Container.Container" title="(in Abjad v3.1)"><code class="xref py py-class docutils literal notranslate"><span class="pre">abjad.Container</span></code></a> or child class).</p>
 <dl>
 <dt>Basic usage:</dt><dd><p>Returns the missing duration of the last measure of any container or
 child class. If no time signature is encountered, it uses LilyPond’s
@@ -257,7 +257,7 @@ convention and considers the container as in 4/4.</p>
 <div class="admonition error">
 <p class="admonition-title">Error</p>
 <p>If a container is malformed, i.e. it has an underfilled measure before
-a time signature change, the function raises a <code class="xref py py-exc docutils literal notranslate"><span class="pre">ValueError</span></code>
+a time signature change, the function raises a <a class="reference external" href="https://docs.python.org/3/library/exceptions.html#ValueError" title="(in Python v3.8)"><code class="xref py py-exc docutils literal notranslate"><span class="pre">ValueError</span></code></a>
 exception.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">container</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;\time 5/4 g&#39;&#39;1 \time 4/4 f&#39;1&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">auxjad</span><span class="o">.</span><span class="n">underfull_duration</span><span class="p">(</span><span class="n">container</span><span class="p">)</span>

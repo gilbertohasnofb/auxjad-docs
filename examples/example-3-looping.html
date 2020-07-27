@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Looping with auxjad.WindowLooper &mdash; auxjad 0.8.6 documentation</title>
+  <title>Looping with auxjad.WindowLooper &mdash; auxjad 0.8.7 documentation</title>
   
 
   
@@ -169,7 +169,7 @@
 <p>In this next example, we will use some of <a class="reference external" href="../api/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">auxjad</span></code></a>’s classes to generate
 a container of randomly selected material, and then use this material as input
 for the looping and shuffling classes.</p>
-<p>First, we start by importing both <code class="xref py py-mod docutils literal notranslate"><span class="pre">abjad</span></code> and <a class="reference external" href="../api/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">auxjad</span></code></a>.</p>
+<p>First, we start by importing both <a class="reference external" href="https://abjad.github.io/api/abjad/index.html#module-abjad" title="(in Abjad v3.1)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">abjad</span></code></a> and <a class="reference external" href="../api/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">auxjad</span></code></a>.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">abjad</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">auxjad</span>
 </pre></div>
@@ -202,7 +202,7 @@ selected by the classes above.</p>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">articulations</span> <span class="o">=</span> <span class="p">[</span><span class="n">articulation_selector</span><span class="p">()</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">8</span><span class="p">)]</span>
 </pre></div>
 </div>
-<p>With these <code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code>’s‘ of pitches, durations, dynamics, and articulations,
+<p>With these <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.8)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code></a>’s‘ of pitches, durations, dynamics, and articulations,
 we can now use <a class="reference internal" href="../_api_members/auxjad.LeafDynMaker.html#auxjad.LeafDynMaker" title="auxjad.LeafDynMaker"><code class="xref py py-class docutils literal notranslate"><span class="pre">auxjad.LeafDynMaker</span></code></a> to create the individual abjad
 leaves for us. It’s important to note that there is no time signature being
 imposed at this point, so LilyPond will fallback to a four by four when
@@ -253,8 +253,8 @@ API for more information.</p>
 <span class="gp">... </span>                             <span class="p">)</span>
 </pre></div>
 </div>
-<p>We can now use the <code class="docutils literal notranslate"><span class="pre">output_n()</span></code> to output several measures of the looping
-process for us. In this case, let’s output six measures.</p>
+<p>We can now use the <a class="reference internal" href="../_api_members/auxjad.WindowLooper.html#auxjad.WindowLooper.output_n" title="auxjad.WindowLooper.output_n"><code class="xref py py-meth docutils literal notranslate"><span class="pre">output_n()</span></code></a> to output several
+measures of the looping process for us. In this case, let’s output six measures.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">staff</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">()</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">notes</span> <span class="o">=</span> <span class="n">looper</span><span class="o">.</span><span class="n">output_n</span><span class="p">(</span><span class="mi">6</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">staff</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">notes</span><span class="p">)</span>
@@ -329,8 +329,8 @@ process for us. In this case, let’s output six measures.</p>
 <div class="figure align-default">
 <img alt="../_images/image-example-3-looping-2.png" src="../_images/image-example-3-looping-2.png" />
 </div>
-<p>Let’s now change the value of <code class="docutils literal notranslate"><span class="pre">step_size</span></code> from a crotchet into a semiquaver
-and output six more measures.</p>
+<p>Let’s now change the value of <a class="reference internal" href="../_api_members/auxjad.WindowLooper.html#auxjad.WindowLooper.step_size" title="auxjad.WindowLooper.step_size"><code class="xref py py-attr docutils literal notranslate"><span class="pre">step_size</span></code></a> from a
+crotchet into a semiquaver and output six more measures.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">looper</span><span class="o">.</span><span class="n">step_size</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">16</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">notes</span> <span class="o">=</span> <span class="n">looper</span><span class="o">.</span><span class="n">output_n</span><span class="p">(</span><span class="mi">6</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">staff</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">notes</span><span class="p">)</span>
@@ -535,10 +535,11 @@ and output six more measures.</p>
 <div class="figure align-default">
 <img alt="../_images/image-example-3-looping-3.png" src="../_images/image-example-3-looping-3.png" />
 </div>
-<p>Notice that the time signature has been repeated. While the <code class="docutils literal notranslate"><span class="pre">output_n()</span></code>
-method takes care of repeated time signatures, dynamics, and clefs, consecutive
-calls may result in repetitions. But we can simply use
-<a class="reference internal" href="../_api_members/auxjad.remove_repeated_time_signatures.html#auxjad.remove_repeated_time_signatures" title="auxjad.remove_repeated_time_signatures"><code class="xref py py-func docutils literal notranslate"><span class="pre">auxjad.remove_repeated_time_signatures()</span></code></a> to take care of that for us.</p>
+<p>Notice that the time signature has been repeated. While the method
+<a class="reference internal" href="../_api_members/auxjad.WindowLooper.html#auxjad.WindowLooper.output_n" title="auxjad.WindowLooper.output_n"><code class="xref py py-meth docutils literal notranslate"><span class="pre">output_n()</span></code></a> takes care of repeated time signatures,
+dynamics, and clefs, consecutive calls may result in repetitions. But we can
+simply use <a class="reference internal" href="../_api_members/auxjad.remove_repeated_time_signatures.html#auxjad.remove_repeated_time_signatures" title="auxjad.remove_repeated_time_signatures"><code class="xref py py-func docutils literal notranslate"><span class="pre">auxjad.remove_repeated_time_signatures()</span></code></a> to take care of
+that for us.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">auxjad</span><span class="o">.</span><span class="n">remove_repeated_time_signatures</span><span class="p">(</span><span class="n">staff</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">f</span><span class="p">(</span><span class="n">staff</span><span class="p">)</span>
 <span class="go">\new Staff</span>
@@ -675,7 +676,8 @@ calls may result in repetitions. But we can simply use
 <div class="figure align-default">
 <img alt="../_images/image-example-3-looping-4.png" src="../_images/image-example-3-looping-4.png" />
 </div>
-<p>Let’s now change the window size and output some more measures.</p>
+<p>Let’s now change the <a class="reference internal" href="../_api_members/auxjad.WindowLooper.html#auxjad.WindowLooper.window_size" title="auxjad.WindowLooper.window_size"><code class="xref py py-attr docutils literal notranslate"><span class="pre">window_size</span></code></a> and output some
+more measures.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">looper</span><span class="o">.</span><span class="n">window_size</span> <span class="o">=</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">notes</span> <span class="o">=</span> <span class="n">looper</span><span class="o">.</span><span class="n">output_n</span><span class="p">(</span><span class="mi">6</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">staff</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">notes</span><span class="p">)</span>
@@ -842,10 +844,11 @@ calls may result in repetitions. But we can simply use
 <img alt="../_images/image-example-3-looping-5.png" src="../_images/image-example-3-looping-5.png" />
 </div>
 <p>At this point, let’s use <a class="reference internal" href="../_api_members/auxjad.remove_repeated_dynamics.html#auxjad.remove_repeated_dynamics" title="auxjad.remove_repeated_dynamics"><code class="xref py py-func docutils literal notranslate"><span class="pre">auxjad.remove_repeated_dynamics()</span></code></a> to remove
-all repeated dynamics. While the method <code class="docutils literal notranslate"><span class="pre">output_n()</span></code> removes repeated
-dynamics, clefs, and time signatures, this is necessary because our example
-invoked <code class="docutils literal notranslate"><span class="pre">output_n()</span></code> multiple times, and there is a repetition of a dynamic
-at that transition. The final result is shown below.</p>
+all repeated dynamics. While the method <a class="reference internal" href="../_api_members/auxjad.WindowLooper.html#auxjad.WindowLooper.output_n" title="auxjad.WindowLooper.output_n"><code class="xref py py-meth docutils literal notranslate"><span class="pre">output_n()</span></code></a>
+removes repeated dynamics, clefs, and time signatures, this is necessary
+because our example invoked <a class="reference internal" href="../_api_members/auxjad.WindowLooper.html#auxjad.WindowLooper.output_n" title="auxjad.WindowLooper.output_n"><code class="xref py py-meth docutils literal notranslate"><span class="pre">output_n()</span></code></a> multiple
+times, and there is a repetition of a dynamic at that transition. The final
+result is shown below.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">auxjad</span><span class="o">.</span><span class="n">remove_repeated_dynamics</span><span class="p">(</span><span class="n">staff</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">f</span><span class="p">(</span><span class="n">staff</span><span class="p">)</span>
 <span class="go">\new Staff</span>

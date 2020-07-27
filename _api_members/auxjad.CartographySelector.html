@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>auxjad.CartographySelector &mdash; auxjad 0.8.6 documentation</title>
+  <title>auxjad.CartographySelector &mdash; auxjad 0.8.7 documentation</title>
   
 
   
@@ -182,13 +182,13 @@
 <h1>auxjad.CartographySelector<a class="headerlink" href="#auxjad-cartographyselector" title="Permalink to this headline">¶</a></h1>
 <dl class="py class">
 <dt id="auxjad.CartographySelector">
-<em class="property">class </em><code class="sig-prename descclassname">auxjad.</code><code class="sig-name descname">CartographySelector</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">contents</span><span class="p">:</span> <span class="n">list</span></em>, <em class="sig-param"><span class="o">*</span></em>, <em class="sig-param"><span class="n">decay_rate</span><span class="p">:</span> <span class="n">float</span> <span class="o">=</span> <span class="default_value">0.75</span></em><span class="sig-paren">)</span><a class="headerlink" href="#auxjad.CartographySelector" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">auxjad.</code><code class="sig-name descname">CartographySelector</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">contents</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.8)">list</a></span></em>, <em class="sig-param"><span class="o">*</span></em>, <em class="sig-param"><span class="n">decay_rate</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)">float</a></span> <span class="o">=</span> <span class="default_value">0.75</span></em><span class="sig-paren">)</span><a class="headerlink" href="#auxjad.CartographySelector" title="Permalink to this definition">¶</a></dt>
 <dd><p>A selector used to store, manipulate, and select objects using a
 weighted function constructed with a fixed decay rate. The decay rate
 represents the ratio of probabilities of any index given the probability of
 the preceeding one. For instance, if the decay rate is set to <code class="docutils literal notranslate"><span class="pre">0.75</span></code>
 (which is its default value), the probability of the element in index <code class="docutils literal notranslate"><span class="pre">1</span></code>
-of the input <code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code> being selected is <span class="math notranslate nohighlight">\(75\%\)</span> the probability of
+of the input <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.8)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code></a> being selected is <span class="math notranslate nohighlight">\(75\%\)</span> the probability of
 the element in index <code class="docutils literal notranslate"><span class="pre">0</span></code>, and the probability of the element in index
 <code class="docutils literal notranslate"><span class="pre">2</span></code> is <span class="math notranslate nohighlight">\(56.25\%\)</span> (i.e. <span class="math notranslate nohighlight">\(0.75^2\)</span>) the probability of the
 element in index <code class="docutils literal notranslate"><span class="pre">0</span></code>. The probability <span class="math notranslate nohighlight">\(P(n)\)</span> of the <span class="math notranslate nohighlight">\(n\)</span>-th
@@ -198,8 +198,8 @@ element <span class="math notranslate nohighlight">\(k\)</span> indexes apart us
 \[P(n) = (3/4)^k \times P(n-k)\]</div>
 <p>This is the selector used in my <em>Cartography</em> series of compositions.</p>
 <dl>
-<dt>Basic usage:</dt><dd><p>The selector should be initialised with a <code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code> of objects. The
-elements of this <code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code> can be of any type.</p>
+<dt>Basic usage:</dt><dd><p>The selector should be initialised with a <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.8)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code></a> of objects. The
+elements of this <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.8)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code></a> can be of any type.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">selector</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">CartographySelector</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">])</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">selector</span><span class="o">.</span><span class="n">contents</span>
 <span class="go">[0, 1, 2, 3, 4]</span>
@@ -230,15 +230,15 @@ repeated elements can appear, as shown below.</p>
 </pre></div>
 </div>
 </dd>
-<dt><code class="xref py py-func docutils literal notranslate"><span class="pre">len()</span></code> function:</dt><dd><p>Applying the <code class="xref py py-func docutils literal notranslate"><span class="pre">len()</span></code> function to the selector will return the
-length of the input <code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code>.</p>
+<dt><a class="reference external" href="https://docs.python.org/3/library/functions.html#len" title="(in Python v3.8)"><code class="xref py py-func docutils literal notranslate"><span class="pre">len()</span></code></a> function:</dt><dd><p>Applying the <a class="reference external" href="https://docs.python.org/3/library/functions.html#len" title="(in Python v3.8)"><code class="xref py py-func docutils literal notranslate"><span class="pre">len()</span></code></a> function to the selector will return the
+length of the input <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.8)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code></a>.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">selector</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">CartographySelector</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">])</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">len</span><span class="p">(</span><span class="n">selector</span><span class="p">)</span>
 <span class="go">5</span>
 </pre></div>
 </div>
 </dd>
-<dt><code class="xref py py-func docutils literal notranslate"><span class="pre">next()</span></code> function:</dt><dd><p>Alternatively, use the <code class="xref py py-func docutils literal notranslate"><span class="pre">next()</span></code> function or <a class="reference internal" href="#auxjad.CartographySelector.__next__" title="auxjad.CartographySelector.__next__"><code class="xref py py-meth docutils literal notranslate"><span class="pre">__next__()</span></code></a>
+<dt><a class="reference external" href="https://docs.python.org/3/library/functions.html#next" title="(in Python v3.8)"><code class="xref py py-func docutils literal notranslate"><span class="pre">next()</span></code></a> function:</dt><dd><p>Alternatively, use the <a class="reference external" href="https://docs.python.org/3/library/functions.html#next" title="(in Python v3.8)"><code class="xref py py-func docutils literal notranslate"><span class="pre">next()</span></code></a> function or <a class="reference internal" href="#auxjad.CartographySelector.__next__" title="auxjad.CartographySelector.__next__"><code class="xref py py-meth docutils literal notranslate"><span class="pre">__next__()</span></code></a>
 method to get the next result.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">selector</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">CartographySelector</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">])</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">selector</span><span class="o">.</span><span class="fm">__next__</span><span class="p">()</span>
@@ -523,7 +523,7 @@ assigning, or deleting values from <a class="reference internal" href="#auxjad.C
 </colgroup>
 <tbody>
 <tr class="row-odd"><td><p><a class="reference internal" href="#auxjad.CartographySelector.contents" title="auxjad.CartographySelector.contents"><code class="xref py py-obj docutils literal notranslate"><span class="pre">contents</span></code></a></p></td>
-<td><p>The <code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code> from which the selector picks elements.</p></td>
+<td><p>The <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.8)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code></a> from which the selector picks elements.</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="#auxjad.CartographySelector.decay_rate" title="auxjad.CartographySelector.decay_rate"><code class="xref py py-obj docutils literal notranslate"><span class="pre">decay_rate</span></code></a></p></td>
 <td><p>The decay rate represents the ratio of probabilities of any index given the probability of the preceeding one.</p></td>
@@ -541,7 +541,7 @@ assigning, or deleting values from <a class="reference internal" href="#auxjad.C
 </table>
 <dl class="py method">
 <dt id="auxjad.CartographySelector.__call__">
-<code class="sig-name descname">__call__</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span></em>, <em class="sig-param"><span class="n">no_repeat</span><span class="p">:</span> <span class="n">bool</span> <span class="o">=</span> <span class="default_value">False</span></em><span class="sig-paren">)</span> &#x2192; Any<a class="headerlink" href="#auxjad.CartographySelector.__call__" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">__call__</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span></em>, <em class="sig-param"><span class="n">no_repeat</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)">bool</a></span> <span class="o">=</span> <span class="default_value">False</span></em><span class="sig-paren">)</span> &#x2192; Any<a class="headerlink" href="#auxjad.CartographySelector.__call__" title="Permalink to this definition">¶</a></dt>
 <dd><p>Calls the selection process and outputs one element of
 <a class="reference internal" href="#auxjad.CartographySelector.contents" title="auxjad.CartographySelector.contents"><code class="xref py py-attr docutils literal notranslate"><span class="pre">contents</span></code></a>.</p>
 </dd></dl>
@@ -555,20 +555,20 @@ or slicing.</p>
 
 <dl class="py method">
 <dt id="auxjad.CartographySelector.__getitem__">
-<code class="sig-name descname">__getitem__</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">key</span><span class="p">:</span> <span class="n">int</span></em><span class="sig-paren">)</span> &#x2192; Any<a class="headerlink" href="#auxjad.CartographySelector.__getitem__" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">__getitem__</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">key</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)">int</a></span></em><span class="sig-paren">)</span> &#x2192; Any<a class="headerlink" href="#auxjad.CartographySelector.__getitem__" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns one or more elements of <a class="reference internal" href="#auxjad.CartographySelector.contents" title="auxjad.CartographySelector.contents"><code class="xref py py-attr docutils literal notranslate"><span class="pre">contents</span></code></a> through indexing
 or slicing.</p>
 </dd></dl>
 
 <dl class="py method">
 <dt id="auxjad.CartographySelector.__init__">
-<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">contents</span><span class="p">:</span> <span class="n">list</span></em>, <em class="sig-param"><span class="o">*</span></em>, <em class="sig-param"><span class="n">decay_rate</span><span class="p">:</span> <span class="n">float</span> <span class="o">=</span> <span class="default_value">0.75</span></em><span class="sig-paren">)</span><a class="headerlink" href="#auxjad.CartographySelector.__init__" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">contents</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.8)">list</a></span></em>, <em class="sig-param"><span class="o">*</span></em>, <em class="sig-param"><span class="n">decay_rate</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)">float</a></span> <span class="o">=</span> <span class="default_value">0.75</span></em><span class="sig-paren">)</span><a class="headerlink" href="#auxjad.CartographySelector.__init__" title="Permalink to this definition">¶</a></dt>
 <dd><p>Initialises self.</p>
 </dd></dl>
 
 <dl class="py method">
 <dt id="auxjad.CartographySelector.__len__">
-<code class="sig-name descname">__len__</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; int<a class="headerlink" href="#auxjad.CartographySelector.__len__" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">__len__</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)">int</a><a class="headerlink" href="#auxjad.CartographySelector.__len__" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns the length of <a class="reference internal" href="#auxjad.CartographySelector.contents" title="auxjad.CartographySelector.contents"><code class="xref py py-attr docutils literal notranslate"><span class="pre">contents</span></code></a>.</p>
 </dd></dl>
 
@@ -581,7 +581,7 @@ or slicing.</p>
 
 <dl class="py method">
 <dt id="auxjad.CartographySelector.__repr__">
-<code class="sig-name descname">__repr__</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; str<a class="headerlink" href="#auxjad.CartographySelector.__repr__" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">__repr__</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)">str</a><a class="headerlink" href="#auxjad.CartographySelector.__repr__" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns interpreter representation of <a class="reference internal" href="#auxjad.CartographySelector.contents" title="auxjad.CartographySelector.contents"><code class="xref py py-attr docutils literal notranslate"><span class="pre">contents</span></code></a>.</p>
 </dd></dl>
 
@@ -602,7 +602,7 @@ new element to the last index.</p>
 
 <dl class="py method">
 <dt id="auxjad.CartographySelector.append_keeping_n">
-<code class="sig-name descname">append_keeping_n</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">new_element</span></em>, <em class="sig-param"><span class="n">n</span><span class="p">:</span> <span class="n">int</span></em><span class="sig-paren">)</span><a class="headerlink" href="#auxjad.CartographySelector.append_keeping_n" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">append_keeping_n</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">new_element</span></em>, <em class="sig-param"><span class="n">n</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)">int</a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#auxjad.CartographySelector.append_keeping_n" title="Permalink to this definition">¶</a></dt>
 <dd><p>A type of content transformation similar to <a class="reference internal" href="#auxjad.CartographySelector.append" title="auxjad.CartographySelector.append"><code class="xref py py-meth docutils literal notranslate"><span class="pre">append()</span></code></a>, it
 keeps the first <code class="docutils literal notranslate"><span class="pre">n</span></code> elements of <a class="reference internal" href="#auxjad.CartographySelector.contents" title="auxjad.CartographySelector.contents"><code class="xref py py-attr docutils literal notranslate"><span class="pre">contents</span></code></a> untouched, it then
 discards the <span class="math notranslate nohighlight">\(n+1\)</span>-th element, shifts all the next elements one
@@ -613,7 +613,7 @@ index.</p>
 <dl class="py method">
 <dt id="auxjad.CartographySelector.contents">
 <em class="property">property </em><code class="sig-name descname">contents</code><a class="headerlink" href="#auxjad.CartographySelector.contents" title="Permalink to this definition">¶</a></dt>
-<dd><p>The <code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code> from which the selector picks elements.</p>
+<dd><p>The <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.8)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code></a> from which the selector picks elements.</p>
 </dd></dl>
 
 <dl class="py method">
@@ -622,7 +622,7 @@ index.</p>
 <dd><p>The decay rate represents the ratio of probabilities of any index
 given the probability of the preceeding one. For instance, if the decay
 rate is set to <code class="docutils literal notranslate"><span class="pre">0.75</span></code> (which is its default value), the probability
-of the element in index <code class="docutils literal notranslate"><span class="pre">1</span></code> of the input <code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code> being selected
+of the element in index <code class="docutils literal notranslate"><span class="pre">1</span></code> of the input <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.8)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code></a> being selected
 is <code class="docutils literal notranslate"><span class="pre">0.75</span></code> the probability of the element in index <code class="docutils literal notranslate"><span class="pre">0</span></code>, and the
 probability of the element in index <code class="docutils literal notranslate"><span class="pre">2</span></code> is <code class="docutils literal notranslate"><span class="pre">0.5625</span></code> (i.e. <code class="docutils literal notranslate"><span class="pre">0.75</span></code>
 squared) the probability of the element in index <code class="docutils literal notranslate"><span class="pre">0</span></code>.</p>
@@ -630,7 +630,7 @@ squared) the probability of the element in index <code class="docutils literal n
 
 <dl class="py method">
 <dt id="auxjad.CartographySelector.mirror">
-<code class="sig-name descname">mirror</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">index</span><span class="p">:</span> <span class="n">int</span></em><span class="sig-paren">)</span><a class="headerlink" href="#auxjad.CartographySelector.mirror" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">mirror</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">index</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)">int</a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#auxjad.CartographySelector.mirror" title="Permalink to this definition">¶</a></dt>
 <dd><p>A type of content transformation which swaps the element of the
 input index with its complementary element. Complementary elements are
 defined as the pair of elements which share the same distance from the
