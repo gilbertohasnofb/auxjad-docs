@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>auxjad.reposition_slurs &mdash; auxjad 0.8.4 documentation</title>
+  <title>auxjad.reposition_slurs &mdash; auxjad 0.8.6 documentation</title>
   
 
   
@@ -25,6 +25,7 @@
         <script src="../_static/underscore.js"></script>
         <script src="../_static/doctools.js"></script>
         <script src="../_static/language_data.js"></script>
+        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     
     <script type="text/javascript" src="../_static/js/theme.js"></script>
 
@@ -190,12 +191,12 @@
 <h1>auxjad.reposition_slurs<a class="headerlink" href="#auxjad-reposition-slurs" title="Permalink to this headline">¶</a></h1>
 <dl class="py function">
 <dt id="auxjad.reposition_slurs">
-<code class="sig-prename descclassname">auxjad.</code><code class="sig-name descname">reposition_slurs</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">container</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://abjad.github.io/api/abjad/core/Container.html#abjad.core.Container.Container" title="(in Abjad v3.1)">abjad.core.Container.Container</a></span></em>, <em class="sig-param"><span class="o">*</span></em>, <em class="sig-param"><span class="n">allow_slurs_under_rests</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)">bool</a></span> <span class="o">=</span> <span class="default_value">False</span></em>, <em class="sig-param"><span class="n">remove_unterminated_slurs</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)">bool</a></span> <span class="o">=</span> <span class="default_value">True</span></em><span class="sig-paren">)</span><a class="headerlink" href="#auxjad.reposition_slurs" title="Permalink to this definition">¶</a></dt>
-<dd><p>Mutates an input container (of type <code class="docutils literal notranslate"><span class="pre">abjad.Container</span></code> or child class)
+<code class="sig-prename descclassname">auxjad.</code><code class="sig-name descname">reposition_slurs</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">container</span><span class="p">:</span> <span class="n">abjad.core.Container.Container</span></em>, <em class="sig-param"><span class="o">*</span></em>, <em class="sig-param"><span class="n">allow_slurs_under_rests</span><span class="p">:</span> <span class="n">bool</span> <span class="o">=</span> <span class="default_value">False</span></em>, <em class="sig-param"><span class="n">remove_unterminated_slurs</span><span class="p">:</span> <span class="n">bool</span> <span class="o">=</span> <span class="default_value">True</span></em><span class="sig-paren">)</span><a class="headerlink" href="#auxjad.reposition_slurs" title="Permalink to this definition">¶</a></dt>
+<dd><p>Mutates an input container (of type <code class="xref py py-class docutils literal notranslate"><span class="pre">abjad.Container</span></code> or child class)
 in place and has no return value; this function repositions all slurs that
 starts or ends on rests.</p>
 <dl>
-<dt>Example:</dt><dd><p>This function will shift slurs that ends on rests to the previous
+<dt>Basic usage:</dt><dd><p>This function will shift slurs that ends on rests to the previous
 pitched leaf.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">staff</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;c&#39;1( d&#39;2 r2) r1 e&#39;1&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">f</span><span class="p">(</span><span class="n">staff</span><span class="p">)</span>
@@ -233,7 +234,7 @@ pitched leaf.</p>
 <img alt="../_images/image-reposition_slurs-2.png" src="../_images/image-reposition_slurs-2.png" />
 </div>
 </dd>
-<dt>Example:</dt><dd><p>Slurs starting on rests are shifted to the next pitched leaf.</p>
+<dt>Rests:</dt><dd><p>Slurs starting on rests are shifted to the next pitched leaf.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">staff</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;c&#39;1 r2( d&#39;2 e&#39;1)&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">f</span><span class="p">(</span><span class="n">staff</span><span class="p">)</span>
 <span class="go">\new Staff</span>
@@ -268,7 +269,7 @@ pitched leaf.</p>
 <img alt="../_images/image-reposition_slurs-4.png" src="../_images/image-reposition_slurs-4.png" />
 </div>
 </dd>
-<dt>Example:</dt><dd><p>This function also works when multiple rests are present.</p>
+<dt>Multiple rests:</dt><dd><p>This function also works when multiple rests are present.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">staff</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;c&#39;1( d&#39;2 r2 r1) e&#39;1&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">f</span><span class="p">(</span><span class="n">staff</span><span class="p">)</span>
 <span class="go">\new Staff</span>
@@ -305,7 +306,7 @@ pitched leaf.</p>
 <img alt="../_images/image-reposition_slurs-6.png" src="../_images/image-reposition_slurs-6.png" />
 </div>
 </dd>
-<dt>Example:</dt><dd><p>By default, a slur crossing a rest is broken into two.</p>
+<dt><code class="docutils literal notranslate"><span class="pre">allow_slurs_under_rests</span></code>:</dt><dd><p>By default, a slur crossing a rest is broken into two.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">staff</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;c&#39;1( d&#39;2 r2 e&#39;1 f&#39;1)&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">auxjad</span><span class="o">.</span><span class="n">reposition_slurs</span><span class="p">(</span><span class="n">staff</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">f</span><span class="p">(</span><span class="n">staff</span><span class="p">)</span>
@@ -347,7 +348,7 @@ pitched leaf.</p>
 <img alt="../_images/image-reposition_slurs-8.png" src="../_images/image-reposition_slurs-8.png" />
 </div>
 </dd>
-<dt>Example:</dt><dd><p>By default, unterminated slurs are removed.</p>
+<dt><code class="docutils literal notranslate"><span class="pre">remove_unterminated_slurs</span></code>:</dt><dd><p>By default, unterminated slurs are removed.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">staff</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;c&#39;1( d&#39;2 r2 e&#39;2 f&#39;2) g&#39;1(&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">auxjad</span><span class="o">.</span><span class="n">reposition_slurs</span><span class="p">(</span><span class="n">staff</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">f</span><span class="p">(</span><span class="n">staff</span><span class="p">)</span>

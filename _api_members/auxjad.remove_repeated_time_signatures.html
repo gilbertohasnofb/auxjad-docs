@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>auxjad.remove_repeated_time_signatures &mdash; auxjad 0.8.4 documentation</title>
+  <title>auxjad.remove_repeated_time_signatures &mdash; auxjad 0.8.6 documentation</title>
   
 
   
@@ -25,6 +25,7 @@
         <script src="../_static/underscore.js"></script>
         <script src="../_static/doctools.js"></script>
         <script src="../_static/language_data.js"></script>
+        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     
     <script type="text/javascript" src="../_static/js/theme.js"></script>
 
@@ -190,13 +191,13 @@
 <h1>auxjad.remove_repeated_time_signatures<a class="headerlink" href="#auxjad-remove-repeated-time-signatures" title="Permalink to this headline">¶</a></h1>
 <dl class="py function">
 <dt id="auxjad.remove_repeated_time_signatures">
-<code class="sig-prename descclassname">auxjad.</code><code class="sig-name descname">remove_repeated_time_signatures</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">container</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://abjad.github.io/api/abjad/core/Container.html#abjad.core.Container.Container" title="(in Abjad v3.1)">abjad.core.Container.Container</a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#auxjad.remove_repeated_time_signatures" title="Permalink to this definition">¶</a></dt>
-<dd><p>Mutates an input container (of type <code class="docutils literal notranslate"><span class="pre">abjad.Container</span></code> or child class)
+<code class="sig-prename descclassname">auxjad.</code><code class="sig-name descname">remove_repeated_time_signatures</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">container</span><span class="p">:</span> <span class="n">abjad.core.Container.Container</span></em><span class="sig-paren">)</span><a class="headerlink" href="#auxjad.remove_repeated_time_signatures" title="Permalink to this definition">¶</a></dt>
+<dd><p>Mutates an input container (of type <code class="xref py py-class docutils literal notranslate"><span class="pre">abjad.Container</span></code> or child class)
 in place and has no return value; this function removes all consecutive
 repeated time signatures.</p>
 <dl>
-<dt>Example:</dt><dd><p>When two consecutive bars have identical time signatures, the second
-one is removed:</p>
+<dt>Basic usage:</dt><dd><p>When two consecutive measures have identical time signatures, the
+second one is removed:</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">staff</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;c&#39;4 d&#39;8 | c&#39;4 d&#39;8&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">attach</span><span class="p">(</span><span class="n">abjad</span><span class="o">.</span><span class="n">TimeSignature</span><span class="p">((</span><span class="mi">3</span><span class="p">,</span> <span class="mi">8</span><span class="p">)),</span> <span class="n">staff</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">attach</span><span class="p">(</span><span class="n">abjad</span><span class="o">.</span><span class="n">TimeSignature</span><span class="p">((</span><span class="mi">3</span><span class="p">,</span> <span class="mi">8</span><span class="p">)),</span> <span class="n">staff</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
@@ -231,8 +232,8 @@ one is removed:</p>
 <img alt="../_images/image-remove_repeated_time_signatures-2.png" src="../_images/image-remove_repeated_time_signatures-2.png" />
 </div>
 </dd>
-<dt>Example:</dt><dd><p>The function also removes time signatures that are separated by an
-arbitrary number of bars without one:</p>
+<dt>Time signature structure:</dt><dd><p>The function also removes time signatures that are separated by an
+arbitrary number of measures without one:</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">staff</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;c&#39;4 d&#39;8 e&#39;4. c&#39;4 d&#39;8&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">attach</span><span class="p">(</span><span class="n">abjad</span><span class="o">.</span><span class="n">TimeSignature</span><span class="p">((</span><span class="mi">3</span><span class="p">,</span> <span class="mi">8</span><span class="p">)),</span> <span class="n">staff</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">attach</span><span class="p">(</span><span class="n">abjad</span><span class="o">.</span><span class="n">TimeSignature</span><span class="p">((</span><span class="mi">3</span><span class="p">,</span> <span class="mi">8</span><span class="p">)),</span> <span class="n">staff</span><span class="p">[</span><span class="mi">3</span><span class="p">])</span>
@@ -269,7 +270,7 @@ arbitrary number of bars without one:</p>
 <img alt="../_images/image-remove_repeated_time_signatures-4.png" src="../_images/image-remove_repeated_time_signatures-4.png" />
 </div>
 </dd>
-<dt>Example:</dt><dd><p>The input container can also handle subcontainers, including cases in
+<dt>Subcontainers:</dt><dd><p>The input container can also handle subcontainers, including cases in
 which the time signatures are attached to leaves of subcontainers:</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">staff</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">([</span><span class="n">abjad</span><span class="o">.</span><span class="n">Note</span><span class="p">(</span><span class="s2">&quot;c&#39;2&quot;</span><span class="p">),</span>
 <span class="gp">... </span>                     <span class="n">abjad</span><span class="o">.</span><span class="n">Chord</span><span class="p">(</span><span class="s2">&quot;&lt;d&#39; f&#39;&gt;2&quot;</span><span class="p">),</span>

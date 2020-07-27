@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>auxjad.sync_containers &mdash; auxjad 0.8.4 documentation</title>
+  <title>auxjad.sync_containers &mdash; auxjad 0.8.6 documentation</title>
   
 
   
@@ -25,6 +25,7 @@
         <script src="../_static/underscore.js"></script>
         <script src="../_static/doctools.js"></script>
         <script src="../_static/language_data.js"></script>
+        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     
     <script type="text/javascript" src="../_static/js/theme.js"></script>
 
@@ -190,14 +191,14 @@
 <h1>auxjad.sync_containers<a class="headerlink" href="#auxjad-sync-containers" title="Permalink to this headline">¶</a></h1>
 <dl class="py function">
 <dt id="auxjad.sync_containers">
-<code class="sig-prename descclassname">auxjad.</code><code class="sig-name descname">sync_containers</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">containers</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://abjad.github.io/api/abjad/core/Container.html#abjad.core.Container.Container" title="(in Abjad v3.1)">abjad.core.Container.Container</a></span></em>, <em class="sig-param"><span class="n">use_multimeasure_rests</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)">bool</a></span> <span class="o">=</span> <span class="default_value">True</span></em>, <em class="sig-param"><span class="n">adjust_last_time_signature</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)">bool</a></span> <span class="o">=</span> <span class="default_value">True</span></em><span class="sig-paren">)</span><a class="headerlink" href="#auxjad.sync_containers" title="Permalink to this definition">¶</a></dt>
-<dd><p>Mutates two or more input containers (of type <code class="docutils literal notranslate"><span class="pre">abjad.Container</span></code> or
+<code class="sig-prename descclassname">auxjad.</code><code class="sig-name descname">sync_containers</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">containers</span><span class="p">:</span> <span class="n">abjad.core.Container.Container</span></em>, <em class="sig-param"><span class="n">use_multimeasure_rests</span><span class="p">:</span> <span class="n">bool</span> <span class="o">=</span> <span class="default_value">True</span></em>, <em class="sig-param"><span class="n">adjust_last_time_signature</span><span class="p">:</span> <span class="n">bool</span> <span class="o">=</span> <span class="default_value">True</span></em><span class="sig-paren">)</span><a class="headerlink" href="#auxjad.sync_containers" title="Permalink to this definition">¶</a></dt>
+<dd><p>Mutates two or more input containers (of type <code class="xref py py-class docutils literal notranslate"><span class="pre">abjad.Container</span></code> or
 child class) in place and has no return value; this function finds the
 longest container among the inputs and adds rests to all the shorter ones,
 making them the same length. By default, it rewrites the last time
 signature if necessary, and uses multi-measure rests whenever possible.</p>
 <dl>
-<dt>Example:</dt><dd><p>Input two or more containers. This function will fill the shortest ones
+<dt>Basic usage:</dt><dd><p>Input two or more containers. This function will fill the shortest ones
 with rests ensuring all their lengths become the same.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">container1</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;\time 4/4 g&#39;2.&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">container2</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;\time 4/4 c&#39;1&quot;</span><span class="p">)</span>
@@ -229,8 +230,8 @@ with rests ensuring all their lengths become the same.</p>
 <p class="admonition-title">Note</p>
 <p>Notice that the time signatures in the output are commented out with
 <code class="docutils literal notranslate"><span class="pre">%%%</span></code>. This is because Abjad only applies time signatures to
-containers that belong to a <code class="docutils literal notranslate"><span class="pre">abjad.Staff</span></code>. The present function works
-with either <code class="docutils literal notranslate"><span class="pre">abjad.Container</span></code> and <code class="docutils literal notranslate"><span class="pre">abjad.Staff</span></code>.</p>
+containers that belong to a <code class="xref py py-class docutils literal notranslate"><span class="pre">abjad.Staff</span></code>. The present function works
+with either <code class="xref py py-class docutils literal notranslate"><span class="pre">abjad.Container</span></code> and <code class="xref py py-class docutils literal notranslate"><span class="pre">abjad.Staff</span></code>.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">container1</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;\time 4/4 g&#39;2.&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">container2</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;\time 4/4 c&#39;1&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">auxjad</span><span class="o">.</span><span class="n">sync_containers</span><span class="p">(</span><span class="n">container1</span><span class="p">,</span> <span class="n">container2</span><span class="p">)</span>
@@ -259,7 +260,7 @@ with either <code class="docutils literal notranslate"><span class="pre">abjad.C
 </div>
 </div>
 <dl>
-<dt>Example:</dt><dd><p>If all containers have the same size, no modification is applied.</p>
+<dt>Containers of same size:</dt><dd><p>If all containers have the same size, no modification is applied.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">container1</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;\time 3/4 g&#39;2.&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">container2</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;\time 3/4 c&#39;2.&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">auxjad</span><span class="o">.</span><span class="n">sync_containers</span><span class="p">(</span><span class="n">container1</span><span class="p">,</span> <span class="n">container2</span><span class="p">)</span>
@@ -286,9 +287,9 @@ with either <code class="docutils literal notranslate"><span class="pre">abjad.C
 <img alt="../_images/image-sync_containers-6.png" src="../_images/image-sync_containers-6.png" />
 </div>
 </dd>
-<dt>Example:</dt><dd><p>By default, this function closes the longest container by rewriting the
-time signature of its last bar if necessary (if it is underfull), and
-uses multi-measure rests whenever possible.</p>
+<dt>Underfull containers:</dt><dd><p>By default, this function closes the longest container by rewriting the
+time signature of its last measure if necessary (if it is underfull),
+and uses multi-measure rests whenever possible.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">container1</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;\time 4/4 g&#39;1 | f&#39;4&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">container2</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;\time 4/4 c&#39;1&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">auxjad</span><span class="o">.</span><span class="n">sync_containers</span><span class="p">(</span><span class="n">container1</span><span class="p">,</span> <span class="n">container2</span><span class="p">)</span>
@@ -319,7 +320,38 @@ uses multi-measure rests whenever possible.</p>
 <img alt="../_images/image-sync_containers-8.png" src="../_images/image-sync_containers-8.png" />
 </div>
 </dd>
-<dt>Example:</dt><dd><p>To disable multi-measure rests, set the keyword argument
+<dt><code class="docutils literal notranslate"><span class="pre">adjust_last_time_signature</span></code>:</dt><dd><p>To allow containers to be left open (with underfull measures), set the
+keyword argument <code class="docutils literal notranslate"><span class="pre">adjust_last_time_signature</span></code> to <code class="docutils literal notranslate"><span class="pre">False</span></code>.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">container1</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;\time 4/4 g&#39;1 | f&#39;4&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">container2</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;\time 4/4 c&#39;1&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">auxjad</span><span class="o">.</span><span class="n">sync_containers</span><span class="p">(</span><span class="n">container1</span><span class="p">,</span>
+<span class="gp">... </span>                       <span class="n">container2</span><span class="p">,</span>
+<span class="gp">... </span>                       <span class="n">adjust_last_time_signature</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+<span class="gp">... </span>                       <span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">f</span><span class="p">(</span><span class="n">container1</span><span class="p">)</span>
+<span class="go">{</span>
+<span class="go">    %%% \time 4/4 %%%</span>
+<span class="go">    g&#39;1</span>
+<span class="go">    f&#39;4</span>
+<span class="go">}</span>
+</pre></div>
+</div>
+<div class="figure align-default">
+<img alt="../_images/image-sync_containers-9.png" src="../_images/image-sync_containers-9.png" />
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">f</span><span class="p">(</span><span class="n">container2</span><span class="p">)</span>
+<span class="go">{</span>
+<span class="go">    %%% \time 4/4 %%%</span>
+<span class="go">    c&#39;1</span>
+<span class="go">    r4</span>
+<span class="go">}</span>
+</pre></div>
+</div>
+<div class="figure align-default">
+<img alt="../_images/image-sync_containers-10.png" src="../_images/image-sync_containers-10.png" />
+</div>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">use_multimeasure_rests</span></code>:</dt><dd><p>To disable multi-measure rests, set the keyword argument
 <code class="docutils literal notranslate"><span class="pre">use_multimeasure_rests</span></code> to <code class="docutils literal notranslate"><span class="pre">False</span></code>.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">container1</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;\time 4/4 g&#39;1 | f&#39;4&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">container2</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;\time 4/4 c&#39;1&quot;</span><span class="p">)</span>
@@ -338,7 +370,7 @@ uses multi-measure rests whenever possible.</p>
 </pre></div>
 </div>
 <div class="figure align-default">
-<img alt="../_images/image-sync_containers-9.png" src="../_images/image-sync_containers-9.png" />
+<img alt="../_images/image-sync_containers-11.png" src="../_images/image-sync_containers-11.png" />
 </div>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">f</span><span class="p">(</span><span class="n">container2</span><span class="p">)</span>
 <span class="go">\new Staff</span>
@@ -351,43 +383,12 @@ uses multi-measure rests whenever possible.</p>
 </pre></div>
 </div>
 <div class="figure align-default">
-<img alt="../_images/image-sync_containers-10.png" src="../_images/image-sync_containers-10.png" />
-</div>
-</dd>
-<dt>Example:</dt><dd><p>To allow containers to be left open (with underfull bars), set the
-keyword argument <code class="docutils literal notranslate"><span class="pre">adjust_last_time_signature</span></code> to <code class="docutils literal notranslate"><span class="pre">False</span></code>.</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">container1</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;\time 4/4 g&#39;1 | f&#39;4&quot;</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">container2</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;\time 4/4 c&#39;1&quot;</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">auxjad</span><span class="o">.</span><span class="n">sync_containers</span><span class="p">(</span><span class="n">container1</span><span class="p">,</span>
-<span class="gp">... </span>                       <span class="n">container2</span><span class="p">,</span>
-<span class="gp">... </span>                       <span class="n">adjust_last_time_signature</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
-<span class="gp">... </span>                       <span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">f</span><span class="p">(</span><span class="n">container1</span><span class="p">)</span>
-<span class="go">{</span>
-<span class="go">    %%% \time 4/4 %%%</span>
-<span class="go">    g&#39;1</span>
-<span class="go">    f&#39;4</span>
-<span class="go">}</span>
-</pre></div>
-</div>
-<div class="figure align-default">
-<img alt="../_images/image-sync_containers-11.png" src="../_images/image-sync_containers-11.png" />
-</div>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">f</span><span class="p">(</span><span class="n">container2</span><span class="p">)</span>
-<span class="go">{</span>
-<span class="go">    %%% \time 4/4 %%%</span>
-<span class="go">    c&#39;1</span>
-<span class="go">    r4</span>
-<span class="go">}</span>
-</pre></div>
-</div>
-<div class="figure align-default">
 <img alt="../_images/image-sync_containers-12.png" src="../_images/image-sync_containers-12.png" />
 </div>
 </dd>
-<dt>Example:</dt><dd><p>When adjusting the last time signature, this function will maintain the
+<dt>Adjusting last time signatures:</dt><dd><p>When adjusting the last time signature, this function will maintain the
 same time effective signature for as long as possible and only add a
-new one at the last bar if its duration is shorter.</p>
+new one at the last measure if its duration is shorter.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">container1</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;\time 7/4 a&#39;1 ~ a&#39;2.&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">container2</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;\time 3/4 c&#39;2.&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">auxjad</span><span class="o">.</span><span class="n">sync_containers</span><span class="p">(</span><span class="n">container1</span><span class="p">,</span> <span class="n">container2</span><span class="p">)</span>
@@ -406,7 +407,7 @@ new one at the last bar if its duration is shorter.</p>
 <img alt="../_images/image-sync_containers-13.png" src="../_images/image-sync_containers-13.png" />
 </div>
 </dd>
-<dt>Example:</dt><dd><p>This function can take an arbitrary number of containers.</p>
+<dt>Multiple input containers:</dt><dd><p>This function can take an arbitrary number of containers.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">container1</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;\time 4/4 c&#39;1 | g&#39;4&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">container2</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;\time 4/4 c&#39;1 | g&#39;2&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">container3</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;\time 4/4 c&#39;1 | g&#39;2.&quot;</span><span class="p">)</span>
@@ -471,8 +472,8 @@ new one at the last bar if its duration is shorter.</p>
 <img alt="../_images/image-sync_containers-17.png" src="../_images/image-sync_containers-17.png" />
 </div>
 </dd>
-<dt>Example:</dt><dd><p>This function can also receive an <code class="docutils literal notranslate"><span class="pre">abjad.Score</span></code> instead of multiple
-<code class="docutils literal notranslate"><span class="pre">abjad.Container</span></code>’s or <code class="docutils literal notranslate"><span class="pre">abjad.Staff</span></code>’s.</p>
+<dt>Single input <code class="xref py py-class docutils literal notranslate"><span class="pre">abjad.Score</span></code>:</dt><dd><p>This function can also take a single <code class="xref py py-class docutils literal notranslate"><span class="pre">abjad.Score</span></code> instead of
+multiple <code class="xref py py-class docutils literal notranslate"><span class="pre">abjad.Container</span></code>’s or <code class="xref py py-class docutils literal notranslate"><span class="pre">abjad.Staff</span></code>’s.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">staff1</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;\time 3/8 c&#39;4. | d&#39;4&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">staff2</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;\time 3/8 c&#39;4. | d&#39;8&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">staff3</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;\time 3/8 c&#39;4. | d&#39;16&quot;</span><span class="p">)</span>
@@ -523,7 +524,7 @@ new one at the last bar if its duration is shorter.</p>
 <img alt="../_images/image-sync_containers-18.png" src="../_images/image-sync_containers-18.png" />
 </div>
 </dd>
-<dt>Example:</dt><dd><p>The containers can be of different length, can have different time
+<dt>Time signature changes:</dt><dd><p>The containers can be of different length, can have different time
 signatures, and can contain time signature changes as well.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">container1</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;\time 4/4 c&#39;4 d&#39;4 e&#39;4 f&#39;4&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">container2</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;\time 3/4 a2. \time 4/4 c&#39;4&quot;</span><span class="p">)</span>
@@ -592,7 +593,7 @@ signatures, and can contain time signature changes as well.</p>
 <img alt="../_images/image-sync_containers-22.png" src="../_images/image-sync_containers-22.png" />
 </div>
 </dd>
-<dt>Example:</dt><dd><p>It’s important to note that LilyPond does not support simultanoues
+<dt>Polymetric notation:</dt><dd><p>It’s important to note that LilyPond does not support simultanoues
 staves with different time signatures (i.e. polymetric notation) by
 default. In order to enable it, the <code class="docutils literal notranslate"><span class="pre">&quot;Timing_translator&quot;</span></code> and
 <code class="docutils literal notranslate"><span class="pre">&quot;Default_bar_line_engraver&quot;</span></code> must be removed from the <code class="docutils literal notranslate"><span class="pre">Score</span></code>
@@ -700,14 +701,14 @@ how this can be accomplished using Abjad.</p>
 </dl>
 <div class="admonition error">
 <p class="admonition-title">Error</p>
-<p>If one or more containers is malformed, i.e. it has an underfilled bar
-before a time signature change, the function raises a <code class="docutils literal notranslate"><span class="pre">ValueError</span></code>
-exception.</p>
+<p>If one or more containers is malformed, i.e. it has an underfilled
+measure before a time signature change, the function raises a
+<code class="xref py py-exc docutils literal notranslate"><span class="pre">ValueError</span></code> exception.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">container1</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;\time 4/4 g&#39;1 | f&#39;4&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">container2</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;\time 5/4 c&#39;1 | \time 4/4 d&#39;4&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">auxjad</span><span class="o">.</span><span class="n">sync_containers</span><span class="p">(</span><span class="n">container1</span><span class="p">,</span> <span class="n">container2</span><span class="p">)</span>
 <span class="go">ValueError: at least one &#39;container&#39; is malformed, with an underfull</span>
-<span class="go">bar preceeding a time signature change</span>
+<span class="go">measure preceeding a time signature change</span>
 </pre></div>
 </div>
 </div>

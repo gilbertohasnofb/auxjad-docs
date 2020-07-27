@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>auxjad.time_signature_extractor &mdash; auxjad 0.8.4 documentation</title>
+  <title>auxjad.time_signature_extractor &mdash; auxjad 0.8.6 documentation</title>
   
 
   
@@ -25,6 +25,7 @@
         <script src="../_static/underscore.js"></script>
         <script src="../_static/doctools.js"></script>
         <script src="../_static/language_data.js"></script>
+        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     
     <script type="text/javascript" src="../_static/js/theme.js"></script>
 
@@ -190,11 +191,11 @@
 <h1>auxjad.time_signature_extractor<a class="headerlink" href="#auxjad-time-signature-extractor" title="Permalink to this headline">¶</a></h1>
 <dl class="py function">
 <dt id="auxjad.time_signature_extractor">
-<code class="sig-prename descclassname">auxjad.</code><code class="sig-name descname">time_signature_extractor</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">container</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://abjad.github.io/api/abjad/core/Container.html#abjad.core.Container.Container" title="(in Abjad v3.1)">abjad.core.Container.Container</a></span></em>, <em class="sig-param"><span class="o">*</span></em>, <em class="sig-param"><span class="n">do_not_use_none</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)">bool</a></span> <span class="o">=</span> <span class="default_value">False</span></em>, <em class="sig-param"><span class="n">implicit_common_time</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)">bool</a></span> <span class="o">=</span> <span class="default_value">True</span></em>, <em class="sig-param"><span class="n">omit_repeated</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)">bool</a></span> <span class="o">=</span> <span class="default_value">False</span></em><span class="sig-paren">)</span><a class="headerlink" href="#auxjad.time_signature_extractor" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns a <code class="docutils literal notranslate"><span class="pre">list</span></code> with the <code class="docutils literal notranslate"><span class="pre">abjad.TimeSignature</span></code> for all measures of
-an input <code class="docutils literal notranslate"><span class="pre">abjad.Container</span></code>.</p>
+<code class="sig-prename descclassname">auxjad.</code><code class="sig-name descname">time_signature_extractor</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">container</span><span class="p">:</span> <span class="n">abjad.core.Container.Container</span></em>, <em class="sig-param"><span class="o">*</span></em>, <em class="sig-param"><span class="n">do_not_use_none</span><span class="p">:</span> <span class="n">bool</span> <span class="o">=</span> <span class="default_value">False</span></em>, <em class="sig-param"><span class="n">implicit_common_time</span><span class="p">:</span> <span class="n">bool</span> <span class="o">=</span> <span class="default_value">True</span></em>, <em class="sig-param"><span class="n">omit_repeated</span><span class="p">:</span> <span class="n">bool</span> <span class="o">=</span> <span class="default_value">False</span></em><span class="sig-paren">)</span><a class="headerlink" href="#auxjad.time_signature_extractor" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a <code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code> with the <code class="xref py py-class docutils literal notranslate"><span class="pre">abjad.TimeSignature</span></code> for all measures
+of an input <code class="xref py py-class docutils literal notranslate"><span class="pre">abjad.Container</span></code>.</p>
 <dl>
-<dt>Example:</dt><dd><p>This function returns a list with one <code class="docutils literal notranslate"><span class="pre">abjad.TimeSignature</span></code> per
+<dt>Basic usage:</dt><dd><p>This function returns a <code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code> with one <code class="xref py py-class docutils literal notranslate"><span class="pre">abjad.TimeSignature</span></code> per
 measure.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">container</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;\time 3/4 c&#39;2. \time 4/4 e&#39;1&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">time_signatures</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">time_signature_extractor</span><span class="p">(</span><span class="n">container</span><span class="p">)</span>
@@ -203,7 +204,7 @@ measure.</p>
 </pre></div>
 </div>
 </dd>
-<dt>Example:</dt><dd><p>By default, the list will contain a <code class="docutils literal notranslate"><span class="pre">None</span></code> if a measure does
+<dt><code class="docutils literal notranslate"><span class="pre">do_not_use_none</span></code>:</dt><dd><p>By default, the <code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code> will contain a <code class="docutils literal notranslate"><span class="pre">None</span></code> if a measure does
 not have an explicit time signature.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">container</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">(</span>
 <span class="gp">... </span>    <span class="sa">r</span><span class="s2">&quot;\time 5/8 c&#39;4 ~ c&#39;16 \time 3/8 d&#39;4. e&#39;4.&quot;</span><span class="p">)</span>
@@ -223,7 +224,7 @@ behaviour.</p>
 </pre></div>
 </div>
 </dd>
-<dt>Example:</dt><dd><p>By default, time signatures are output according to the container, even
+<dt><code class="docutils literal notranslate"><span class="pre">omit_repeated</span></code>:</dt><dd><p>By default, time signatures are output according to the container, even
 if there are multiple instances of a same time signature.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">container</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">(</span>
 <span class="gp">... </span>    <span class="sa">r</span><span class="s2">&quot;\time 3/4 c&#39;2. d&#39;2. \time 3/4 e&#39;2. f&#39;2.&quot;</span><span class="p">)</span>
@@ -247,7 +248,7 @@ repeated time signatures with <code class="docutils literal notranslate"><span c
 <div class="admonition error">
 <p class="admonition-title">Error</p>
 <p>Setting both <code class="docutils literal notranslate"><span class="pre">do_not_use_none</span></code> and <code class="docutils literal notranslate"><span class="pre">omit_repeated</span></code> to <code class="docutils literal notranslate"><span class="pre">True</span></code>
-will raise an exception:</p>
+will raise a <code class="xref py py-exc docutils literal notranslate"><span class="pre">ValueError</span></code> exception:</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">container</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">(</span>
 <span class="gp">... </span>    <span class="sa">r</span><span class="s2">&quot;\time 3/4 c&#39;2. d&#39;2. \time 3/4 e&#39;2. f&#39;2.&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">time_signatures</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">time_signature_extractor</span><span class="p">(</span>
@@ -261,7 +262,7 @@ will raise an exception:</p>
 </div>
 </div>
 <dl>
-<dt>Example:</dt><dd><p>LilyPond uses an implicit time signature of 4/4 whenever a time
+<dt><code class="docutils literal notranslate"><span class="pre">implicit_common_time</span></code>:</dt><dd><p>LilyPond uses an implicit time signature of 4/4 whenever a time
 signature is not found. This function behaves the same way.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">container</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;c&#39;1 d&#39;1 e&#39;1 f&#39;1&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">time_signatures</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">time_signature_extractor</span><span class="p">(</span><span class="n">container</span><span class="p">)</span>
@@ -284,7 +285,7 @@ signature is not found. This function behaves the same way.</p>
 <p class="admonition-title">Error</p>
 <p>Setting <code class="docutils literal notranslate"><span class="pre">do_not_use_none</span></code> to <code class="docutils literal notranslate"><span class="pre">True</span></code> and <code class="docutils literal notranslate"><span class="pre">implicit_common_time</span></code> to
 <code class="docutils literal notranslate"><span class="pre">False</span></code> on a container that starts with no time signature will raise
-an exception:</p>
+a <code class="xref py py-exc docutils literal notranslate"><span class="pre">ValueError</span></code> exception:</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">container</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;c&#39;1 d&#39;1 e&#39;1 f&#39;1&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">time_signatures</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">time_signature_extractor</span><span class="p">(</span>
 <span class="gp">... </span>    <span class="n">container</span><span class="p">,</span>

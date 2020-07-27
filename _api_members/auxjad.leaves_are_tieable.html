@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>auxjad.leaves_are_tieable &mdash; auxjad 0.8.4 documentation</title>
+  <title>auxjad.leaves_are_tieable &mdash; auxjad 0.8.6 documentation</title>
   
 
   
@@ -25,6 +25,7 @@
         <script src="../_static/underscore.js"></script>
         <script src="../_static/doctools.js"></script>
         <script src="../_static/language_data.js"></script>
+        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     
     <script type="text/javascript" src="../_static/js/theme.js"></script>
 
@@ -190,12 +191,12 @@
 <h1>auxjad.leaves_are_tieable<a class="headerlink" href="#auxjad-leaves-are-tieable" title="Permalink to this headline">¶</a></h1>
 <dl class="py function">
 <dt id="auxjad.leaves_are_tieable">
-<code class="sig-prename descclassname">auxjad.</code><code class="sig-name descname">leaves_are_tieable</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">leaf1</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://abjad.github.io/api/abjad/core/Leaf.html#abjad.core.Leaf.Leaf" title="(in Abjad v3.1)">abjad.core.Leaf.Leaf</a></span></em>, <em class="sig-param"><span class="n">leaf2</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://abjad.github.io/api/abjad/core/Leaf.html#abjad.core.Leaf.Leaf" title="(in Abjad v3.1)">abjad.core.Leaf.Leaf</a></span></em><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)">bool</a><a class="headerlink" href="#auxjad.leaves_are_tieable" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns a <code class="docutils literal notranslate"><span class="pre">bool</span></code> representing whether or not two input leaves (of
-type <code class="docutils literal notranslate"><span class="pre">abjad.Leaf</span></code> or child class) have identical pitch(es) and thus can
+<code class="sig-prename descclassname">auxjad.</code><code class="sig-name descname">leaves_are_tieable</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">leaf1</span><span class="p">:</span> <span class="n">abjad.core.Leaf.Leaf</span></em>, <em class="sig-param"><span class="n">leaf2</span><span class="p">:</span> <span class="n">abjad.core.Leaf.Leaf</span></em><span class="sig-paren">)</span> &#x2192; bool<a class="headerlink" href="#auxjad.leaves_are_tieable" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a <code class="xref py py-obj docutils literal notranslate"><span class="pre">bool</span></code> representing whether or not two input leaves (of
+type <code class="xref py py-class docutils literal notranslate"><span class="pre">abjad.Leaf</span></code> or child class) have identical pitch(es) and thus can
 be tied.</p>
 <dl>
-<dt>Example:</dt><dd><p>When the pitches in both leaves are identical, this function returns
+<dt>Basic usage:</dt><dd><p>When the pitches in both leaves are identical, this function returns
 <code class="docutils literal notranslate"><span class="pre">True</span></code>:</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">Leaf1</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Note</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;c&#39;4&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">Leaf2</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Note</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;c&#39;4&quot;</span><span class="p">)</span>
@@ -204,7 +205,7 @@ be tied.</p>
 </pre></div>
 </div>
 </dd>
-<dt>Example:</dt><dd><p>Durations do not affect the comparison.</p>
+<dt>Durations:</dt><dd><p>Durations do not affect the comparison.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">Leaf1</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Note</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;c&#39;2.&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">Leaf2</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Note</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;c&#39;16&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">Leaf3</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Note</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;f&#39;&#39;&#39;16&quot;</span><span class="p">)</span>
@@ -217,7 +218,7 @@ be tied.</p>
 </pre></div>
 </div>
 </dd>
-<dt>Example:</dt><dd><p>Handles chords as well as pitches.</p>
+<dt>Chords:</dt><dd><p>Handles chords as well as pitches.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">chord1</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Chord</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;&lt;c&#39; e&#39; g&#39;&gt;4&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">chord2</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Chord</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;&lt;c&#39; e&#39; g&#39;&gt;16&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">chord3</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Chord</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;&lt;f&#39;&#39;&#39; fs&#39;&#39;&#39;&gt;16&quot;</span><span class="p">)</span>
@@ -230,14 +231,14 @@ be tied.</p>
 </pre></div>
 </div>
 </dd>
-<dt>Example:</dt><dd><p>Leaves can also be part of containers.</p>
+<dt>Parentage:</dt><dd><p>Leaves can also be part of containers.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">container</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;r4 &lt;c&#39; e&#39;&gt;4 &lt;c&#39; e&#39;&gt;2&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">auxjad</span><span class="o">.</span><span class="n">leaves_are_tieable</span><span class="p">(</span><span class="n">container</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">container</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
 <span class="go">True</span>
 </pre></div>
 </div>
 </dd>
-<dt>Example:</dt><dd><p>If rests are input, the return value is <code class="docutils literal notranslate"><span class="pre">False</span></code>.</p>
+<dt>Rests:</dt><dd><p>If rests are input, the return value is <code class="docutils literal notranslate"><span class="pre">False</span></code>.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">container</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;r4 g&#39;4 r2&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">auxjad</span><span class="o">.</span><span class="n">leaves_are_tieable</span><span class="p">(</span><span class="n">container</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">container</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
 <span class="go">False</span>

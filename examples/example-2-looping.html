@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Looping with auxjad.LeafLooper &mdash; auxjad 0.8.4 documentation</title>
+  <title>Looping with auxjad.LeafLooper &mdash; auxjad 0.8.6 documentation</title>
   
 
   
@@ -25,6 +25,7 @@
         <script src="../_static/underscore.js"></script>
         <script src="../_static/doctools.js"></script>
         <script src="../_static/language_data.js"></script>
+        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     
     <script type="text/javascript" src="../_static/js/theme.js"></script>
 
@@ -168,7 +169,7 @@
 <p>In this first example, we will use the class <a class="reference internal" href="../_api_members/auxjad.LeafLooper.html#auxjad.LeafLooper" title="auxjad.LeafLooper"><code class="xref py py-class docutils literal notranslate"><span class="pre">auxjad.LeafLooper</span></code></a> to loop
 through some musical material. This class creates subselections of logical
 ties and has a looping window of variable size.</p>
-<p>First, we start by importing both <code class="docutils literal notranslate"><span class="pre">abjad</span></code> and <code class="docutils literal notranslate"><span class="pre">auxjad</span></code>.</p>
+<p>First, we start by importing both <code class="xref py py-mod docutils literal notranslate"><span class="pre">abjad</span></code> and <a class="reference external" href="../api/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">auxjad</span></code></a>.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">abjad</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">auxjad</span>
 </pre></div>
@@ -177,9 +178,9 @@ ties and has a looping window of variable size.</p>
 by the looper. For that, let’s use <a class="reference internal" href="../_api_members/auxjad.TenneySelector.html#auxjad.TenneySelector" title="auxjad.TenneySelector"><code class="xref py py-class docutils literal notranslate"><span class="pre">auxjad.TenneySelector</span></code></a> to generate
 the random material. This class is an implementation of the Dissonant
 Counterpoint Algorithm by James Tenney. In a nutshell, this algorithm can be
-used to randomly select elements from a list, giving priority to elements that
-have not been chosen for the longest time. It also ensures that elements are
-not repeated.</p>
+used to randomly select elements from a <code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code>, giving priority to
+elements that have not been chosen for the longest time. It also ensures that
+elements are not repeated.</p>
 <p>To start, we create two selectors, one for pitches and one for durations.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">pitch_selector</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">TenneySelector</span><span class="p">([</span><span class="s2">&quot;c&#39;&quot;</span><span class="p">,</span> <span class="s2">&quot;fs&#39;&quot;</span><span class="p">,</span> <span class="s2">&quot;bf&#39;&quot;</span><span class="p">,</span>
 <span class="gp">... </span>                                        <span class="s2">&quot;e&#39;&#39;&quot;</span><span class="p">,</span> <span class="s2">&quot;a&#39;&#39;&quot;</span><span class="p">,</span> <span class="s2">&quot;d&#39;&#39;&#39;&quot;</span><span class="p">])</span>
@@ -201,14 +202,13 @@ as our basic material.</p>
 <span class="gp">... </span>    <span class="n">durations</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">duration_selector</span><span class="p">())</span>
 </pre></div>
 </div>
-<p>We can now use <code class="docutils literal notranslate"><span class="pre">abjad.LeafMaker</span></code> to convert those two lists of pitches and
-durations into Notes. It’s important to note that there is no time signature
-being imposed at this point, so LilyPond will fallback to a four by four when
-displaying the container below. This is not a problem since this will be used
-as the basic material for the looper, which will then automatically take care
-of time signatures.</p>
-<blockquote>
-<div><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">notes</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">LeafMaker</span><span class="p">()(</span><span class="n">pitches</span><span class="p">,</span> <span class="n">durations</span><span class="p">)</span>
+<p>We can now use <code class="xref py py-class docutils literal notranslate"><span class="pre">abjad.LeafMaker</span></code> to convert those two <code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code>’s of pitches
+and durations into notes. It’s important to note that there is no time
+signature being imposed at this point, so LilyPond will fallback to a four by
+four when displaying the container below. This is not a problem since this will
+be used as the basic material for the looper, which will then automatically
+take care of time signatures.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">notes</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">LeafMaker</span><span class="p">()(</span><span class="n">pitches</span><span class="p">,</span> <span class="n">durations</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">container</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">(</span><span class="n">notes</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">f</span><span class="p">(</span><span class="n">container</span><span class="p">)</span>
 <span class="go">{</span>
@@ -236,7 +236,6 @@ of time signatures.</p>
 <div class="figure align-default">
 <img alt="../_images/image-example-2-looping-1.png" src="../_images/image-example-2-looping-1.png" />
 </div>
-</div></blockquote>
 <p>At this point, we can create the <a class="reference internal" href="../_api_members/auxjad.LeafLooper.html#auxjad.LeafLooper" title="auxjad.LeafLooper"><code class="xref py py-class docutils literal notranslate"><span class="pre">auxjad.LeafLooper</span></code></a> and initialise it
 using the material we generated above. A <code class="docutils literal notranslate"><span class="pre">window_size</span></code> of size <code class="docutils literal notranslate"><span class="pre">4</span></code> will
 select four notes at each iteration.</p>
@@ -245,8 +244,7 @@ select four notes at each iteration.</p>
 </div>
 <p>We can now use the <code class="docutils literal notranslate"><span class="pre">output_n()</span></code> to output several measures of the looping
 process for us. In this case, let’s output seven measures.</p>
-<blockquote>
-<div><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">staff</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span><span class="n">looper</span><span class="o">.</span><span class="n">output_n</span><span class="p">(</span><span class="mi">7</span><span class="p">))</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">staff</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span><span class="n">looper</span><span class="o">.</span><span class="n">output_n</span><span class="p">(</span><span class="mi">7</span><span class="p">))</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">f</span><span class="p">(</span><span class="n">container</span><span class="p">)</span>
 <span class="go">\new Staff</span>
 <span class="go">{</span>
@@ -301,7 +299,6 @@ process for us. In this case, let’s output seven measures.</p>
 <div class="figure align-default">
 <img alt="../_images/image-example-2-looping-2.png" src="../_images/image-example-2-looping-2.png" />
 </div>
-</div></blockquote>
 <p>At this point, let’s change the <code class="docutils literal notranslate"><span class="pre">window_size</span></code> to a smaller value and output
 some more measures.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">looper</span><span class="o">.</span><span class="n">window_size</span> <span class="o">=</span> <span class="mi">2</span>
@@ -309,8 +306,7 @@ some more measures.</p>
 </pre></div>
 </div>
 <p>This is the final result.</p>
-<blockquote>
-<div><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">f</span><span class="p">(</span><span class="n">container</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">f</span><span class="p">(</span><span class="n">container</span><span class="p">)</span>
 <span class="go">\new Staff</span>
 <span class="go">{</span>
 <span class="go">    \time 11/16</span>
@@ -380,7 +376,6 @@ some more measures.</p>
 <div class="figure align-default">
 <img alt="../_images/image-example-2-looping-3.png" src="../_images/image-example-2-looping-3.png" />
 </div>
-</div></blockquote>
 </div>
 
 

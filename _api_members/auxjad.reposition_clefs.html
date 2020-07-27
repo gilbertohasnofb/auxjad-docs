@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>auxjad.reposition_clefs &mdash; auxjad 0.8.4 documentation</title>
+  <title>auxjad.reposition_clefs &mdash; auxjad 0.8.6 documentation</title>
   
 
   
@@ -25,6 +25,7 @@
         <script src="../_static/underscore.js"></script>
         <script src="../_static/doctools.js"></script>
         <script src="../_static/language_data.js"></script>
+        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     
     <script type="text/javascript" src="../_static/js/theme.js"></script>
 
@@ -190,13 +191,13 @@
 <h1>auxjad.reposition_clefs<a class="headerlink" href="#auxjad-reposition-clefs" title="Permalink to this headline">¶</a></h1>
 <dl class="py function">
 <dt id="auxjad.reposition_clefs">
-<code class="sig-prename descclassname">auxjad.</code><code class="sig-name descname">reposition_clefs</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">container</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://abjad.github.io/api/abjad/core/Container.html#abjad.core.Container.Container" title="(in Abjad v3.1)">abjad.core.Container.Container</a></span></em>, <em class="sig-param"><span class="o">*</span></em>, <em class="sig-param"><span class="n">shift_clef_to_notes</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)">bool</a></span> <span class="o">=</span> <span class="default_value">True</span></em>, <em class="sig-param"><span class="n">implicit_clef</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://abjad.github.io/api/abjad/indicators/Clef.html#abjad.indicators.Clef.Clef" title="(in Abjad v3.1)">abjad.indicators.Clef.Clef</a></span> <span class="o">=</span> <span class="default_value">Clef('treble')</span></em><span class="sig-paren">)</span><a class="headerlink" href="#auxjad.reposition_clefs" title="Permalink to this definition">¶</a></dt>
-<dd><p>Mutates an input container (of type <code class="docutils literal notranslate"><span class="pre">abjad.Container</span></code> or child class)
+<code class="sig-prename descclassname">auxjad.</code><code class="sig-name descname">reposition_clefs</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">container</span><span class="p">:</span> <span class="n">abjad.core.Container.Container</span></em>, <em class="sig-param"><span class="o">*</span></em>, <em class="sig-param"><span class="n">shift_clef_to_notes</span><span class="p">:</span> <span class="n">bool</span> <span class="o">=</span> <span class="default_value">True</span></em>, <em class="sig-param"><span class="n">implicit_clef</span><span class="p">:</span> <span class="n">abjad.indicators.Clef.Clef</span> <span class="o">=</span> <span class="default_value">Clef('treble')</span></em><span class="sig-paren">)</span><a class="headerlink" href="#auxjad.reposition_clefs" title="Permalink to this definition">¶</a></dt>
+<dd><p>Mutates an input container (of type <code class="xref py py-class docutils literal notranslate"><span class="pre">abjad.Container</span></code> or child class)
 in place and has no return value; this function removes all consecutive
 repeated clefs. It can also be used to shift clefs from rests to pitched
 leaves.</p>
 <dl>
-<dt>Example:</dt><dd><p>When consecutive clefs are the same, the second one is removed:</p>
+<dt>Basic usage:</dt><dd><p>When consecutive clefs are the same, the second one is removed:</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">staff</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;c&#39;1 | d&#39;1&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">attach</span><span class="p">(</span><span class="n">abjad</span><span class="o">.</span><span class="n">Clef</span><span class="p">(</span><span class="s1">&#39;treble&#39;</span><span class="p">),</span> <span class="n">staff</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">attach</span><span class="p">(</span><span class="n">abjad</span><span class="o">.</span><span class="n">Clef</span><span class="p">(</span><span class="s1">&#39;treble&#39;</span><span class="p">),</span> <span class="n">staff</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
@@ -227,7 +228,7 @@ leaves.</p>
 <img alt="../_images/image-reposition_clefs-2.png" src="../_images/image-reposition_clefs-2.png" />
 </div>
 </dd>
-<dt>Example:</dt><dd><p>As seen above, LilyPond automatically omits repeated clefs unless the
+<dt>LilyPond’s fallback clef:</dt><dd><p>As seen above, LilyPond automatically omits repeated clefs unless the
 first clef is omitted. In that case, it uses a treble clef as fallback,
 although it won’t then remove a subsequent repeated treble clef:</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">staff</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;c&#39;1 | d&#39;1&quot;</span><span class="p">)</span>
@@ -258,7 +259,7 @@ although it won’t then remove a subsequent repeated treble clef:</p>
 <img alt="../_images/image-reposition_clefs-4.png" src="../_images/image-reposition_clefs-4.png" />
 </div>
 </dd>
-<dt>Example:</dt><dd><p>The function also removes clefs that are separated by anarbitrary
+<dt>Clef structure:</dt><dd><p>The function also removes clefs that are separated by an arbitrary
 number of leaves without clefs:</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">staff</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;c&#39;1 | d&#39;2 e&#39;4 r4 | f&#39;1&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">attach</span><span class="p">(</span><span class="n">abjad</span><span class="o">.</span><span class="n">Clef</span><span class="p">(</span><span class="s1">&#39;treble&#39;</span><span class="p">),</span> <span class="n">staff</span><span class="p">[</span><span class="mi">4</span><span class="p">])</span>
@@ -293,7 +294,7 @@ number of leaves without clefs:</p>
 <img alt="../_images/image-reposition_clefs-6.png" src="../_images/image-reposition_clefs-6.png" />
 </div>
 </dd>
-<dt>Example:</dt><dd><p>The function will not alter the container if the clef changes are
+<dt>Inputs with optimal clef structure:</dt><dd><p>The function will not alter the container if the clef changes are
 already optimal.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">staff</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;c&#39;1 | a,2 bf,4 r4 | f&#39;1&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">attach</span><span class="p">(</span><span class="n">abjad</span><span class="o">.</span><span class="n">Clef</span><span class="p">(</span><span class="s1">&#39;bass&#39;</span><span class="p">),</span> <span class="n">staff</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
@@ -332,7 +333,7 @@ already optimal.</p>
 <img alt="../_images/image-reposition_clefs-8.png" src="../_images/image-reposition_clefs-8.png" />
 </div>
 </dd>
-<dt>Example:</dt><dd><p>The function handles rests and multi-measure rests.</p>
+<dt>Multi-measure rests:</dt><dd><p>The function handles rests and multi-measure rests.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">staff</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;c&#39;1 | d&#39;2 r2 | R1 | e&#39;1&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">attach</span><span class="p">(</span><span class="n">abjad</span><span class="o">.</span><span class="n">Clef</span><span class="p">(</span><span class="s1">&#39;treble&#39;</span><span class="p">),</span> <span class="n">staff</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">attach</span><span class="p">(</span><span class="n">abjad</span><span class="o">.</span><span class="n">Clef</span><span class="p">(</span><span class="s1">&#39;treble&#39;</span><span class="p">),</span> <span class="n">staff</span><span class="p">[</span><span class="mi">4</span><span class="p">])</span>
@@ -367,7 +368,7 @@ already optimal.</p>
 <img alt="../_images/image-reposition_clefs-10.png" src="../_images/image-reposition_clefs-10.png" />
 </div>
 </dd>
-<dt>Example:</dt><dd><p>By default, clefs attached to rests are shifted to the first pitched
+<dt><code class="docutils literal notranslate"><span class="pre">shift_clef_to_notes</span></code>:</dt><dd><p>By default, clefs attached to rests are shifted to the first pitched
 leaf.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">staff</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;c&#39;1 | d&#39;2 r2 | fs1&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">attach</span><span class="p">(</span><span class="n">abjad</span><span class="o">.</span><span class="n">Clef</span><span class="p">(</span><span class="s1">&#39;treble&#39;</span><span class="p">),</span> <span class="n">staff</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
@@ -424,7 +425,8 @@ leaf.</p>
 <img alt="../_images/image-reposition_clefs-13.png" src="../_images/image-reposition_clefs-13.png" />
 </div>
 </dd>
-<dt>Example:</dt><dd><p>Clefs are shifted even if the container has multi-measure rests.</p>
+<dt>Multiple multi-measure rests:</dt><dd><p>Clefs are shifted even if the container has multiple multi-measure
+rests.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">staff</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;\time 3/4 c&#39;2. | d&#39;4 r2 | R1 * 3/4 | e&#39;2.&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">attach</span><span class="p">(</span><span class="n">abjad</span><span class="o">.</span><span class="n">Clef</span><span class="p">(</span><span class="s1">&#39;treble&#39;</span><span class="p">),</span> <span class="n">staff</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">attach</span><span class="p">(</span><span class="n">abjad</span><span class="o">.</span><span class="n">Clef</span><span class="p">(</span><span class="s1">&#39;bass&#39;</span><span class="p">),</span> <span class="n">staff</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
@@ -464,7 +466,7 @@ leaf.</p>
 <img alt="../_images/image-reposition_clefs-15.png" src="../_images/image-reposition_clefs-15.png" />
 </div>
 </dd>
-<dt>Example:</dt><dd><p>The input container can also handle subcontainers, including cases in
+<dt>Subcontainers:</dt><dd><p>The input container can also handle subcontainers, including cases in
 which the clefs are attached to leaves of subcontainers:</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">staff</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">([</span><span class="n">abjad</span><span class="o">.</span><span class="n">Note</span><span class="p">(</span><span class="s2">&quot;c&#39;2&quot;</span><span class="p">),</span>
 <span class="gp">... </span>                     <span class="n">abjad</span><span class="o">.</span><span class="n">Chord</span><span class="p">(</span><span class="s2">&quot;&lt;d&#39; f&#39;&gt;2&quot;</span><span class="p">),</span>
@@ -506,7 +508,7 @@ which the clefs are attached to leaves of subcontainers:</p>
 <img alt="../_images/image-reposition_clefs-17.png" src="../_images/image-reposition_clefs-17.png" />
 </div>
 </dd>
-<dt>Example:</dt><dd><p>By default, when the first leaf doesn’t have a clef the function
+<dt><code class="docutils literal notranslate"><span class="pre">implicit_clef</span></code>:</dt><dd><p>By default, when the first leaf doesn’t have a clef the function
 assumes that the music is written in treble clef (which is the default
 fallback clef in LilyPond).</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">staff</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;c&#39;1 | d&#39;1&quot;</span><span class="p">)</span>
@@ -535,7 +537,7 @@ fallback clef in LilyPond).</p>
 <div class="figure align-default">
 <img alt="../_images/image-reposition_clefs-19.png" src="../_images/image-reposition_clefs-19.png" />
 </div>
-<p>Set the argument <code class="docutils literal notranslate"><span class="pre">implicit_clef</span></code> to a different <code class="docutils literal notranslate"><span class="pre">abjad.Clef</span></code> to
+<p>Set the argument <code class="docutils literal notranslate"><span class="pre">implicit_clef</span></code> to a different <code class="xref py py-class docutils literal notranslate"><span class="pre">abjad.Clef</span></code> to
 change the implicit clef.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">staff</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;c1 | d1&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">attach</span><span class="p">(</span><span class="n">abjad</span><span class="o">.</span><span class="n">Clef</span><span class="p">(</span><span class="s1">&#39;bass&#39;</span><span class="p">),</span> <span class="n">staff</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>

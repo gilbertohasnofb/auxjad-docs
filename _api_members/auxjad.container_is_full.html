@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>auxjad.container_is_full &mdash; auxjad 0.8.4 documentation</title>
+  <title>auxjad.container_is_full &mdash; auxjad 0.8.6 documentation</title>
   
 
   
@@ -25,6 +25,7 @@
         <script src="../_static/underscore.js"></script>
         <script src="../_static/doctools.js"></script>
         <script src="../_static/language_data.js"></script>
+        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     
     <script type="text/javascript" src="../_static/js/theme.js"></script>
 
@@ -190,14 +191,15 @@
 <h1>auxjad.container_is_full<a class="headerlink" href="#auxjad-container-is-full" title="Permalink to this headline">¶</a></h1>
 <dl class="py function">
 <dt id="auxjad.container_is_full">
-<code class="sig-prename descclassname">auxjad.</code><code class="sig-name descname">container_is_full</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">container</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://abjad.github.io/api/abjad/core/Container.html#abjad.core.Container.Container" title="(in Abjad v3.1)">abjad.core.Container.Container</a></span></em><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)">bool</a><a class="headerlink" href="#auxjad.container_is_full" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns a <code class="docutils literal notranslate"><span class="pre">bool</span></code> representing whether the last bar of an input
-container (of type <code class="docutils literal notranslate"><span class="pre">abjad.Container</span></code> or child class) is fully filled in
+<code class="sig-prename descclassname">auxjad.</code><code class="sig-name descname">container_is_full</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">container</span><span class="p">:</span> <span class="n">abjad.core.Container.Container</span></em><span class="sig-paren">)</span> &#x2192; bool<a class="headerlink" href="#auxjad.container_is_full" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a <code class="xref py py-obj docutils literal notranslate"><span class="pre">bool</span></code> representing whether the last measure of an input
+container (of type <code class="xref py py-class docutils literal notranslate"><span class="pre">abjad.Container</span></code> or child class) is fully filled in
 or not.</p>
 <dl>
-<dt>Example:</dt><dd><p>Returns <code class="docutils literal notranslate"><span class="pre">True</span></code> if the last bar of any container (or child class) is
-full, otherwise returns <code class="docutils literal notranslate"><span class="pre">False</span></code>. If no time signature is encountered,
-it uses LilyPond’s convention and considers the container as in 4/4.</p>
+<dt>Basic usage:</dt><dd><p>Returns <code class="docutils literal notranslate"><span class="pre">True</span></code> if the last measure of any container (or child class)
+is full, otherwise returns <code class="docutils literal notranslate"><span class="pre">False</span></code>. If no time signature is
+encountered, it uses LilyPond’s convention and considers the container
+as in 4/4.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">container1</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;c&#39;4 d&#39;4 e&#39;4 f&#39;4&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">container2</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;c&#39;4 d&#39;4 e&#39;4&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">container3</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;c&#39;4 d&#39;4 e&#39;4 f&#39;4 | c&#39;4&quot;</span><span class="p">)</span>
@@ -213,7 +215,7 @@ it uses LilyPond’s convention and considers the container as in 4/4.</p>
 </pre></div>
 </div>
 </dd>
-<dt>Example:</dt><dd><p>Handles any time signatures as well as changes of time signature.</p>
+<dt>Time signature changes:</dt><dd><p>Handles any time signatures as well as changes of time signature.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">container1</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;\time 4/4 c&#39;4 d&#39;4 e&#39;4 f&#39;4&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">container2</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;\time 3/4 a2. \time 2/4 r2&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">container3</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;\time 5/4 g1 ~ g4 \time 4/4 af&#39;2&quot;</span><span class="p">)</span>
@@ -229,7 +231,7 @@ it uses LilyPond’s convention and considers the container as in 4/4.</p>
 </pre></div>
 </div>
 </dd>
-<dt>Example:</dt><dd><p>Correctly handles partial time signatures.</p>
+<dt>Partial time signatures:</dt><dd><p>Correctly handles partial time signatures.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">container</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;c&#39;4 d&#39;4 e&#39;4 f&#39;4&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">time_signature</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">TimeSignature</span><span class="p">((</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">),</span> <span class="n">partial</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">attach</span><span class="p">(</span><span class="n">time_signature</span><span class="p">,</span> <span class="n">container</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
@@ -238,7 +240,7 @@ it uses LilyPond’s convention and considers the container as in 4/4.</p>
 </pre></div>
 </div>
 </dd>
-<dt>Example:</dt><dd><p>It also handles multi-measure rests.</p>
+<dt>Multi-measure rests:</dt><dd><p>It also handles multi-measure rests.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">container1</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;R1&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">container2</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;\time 3/4 R1*3/4 \time 2/4 r2&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">container3</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;\time 5/4 R1*5/4 \time 4/4 g&#39;&#39;4&quot;</span><span class="p">)</span>
@@ -257,12 +259,13 @@ it uses LilyPond’s convention and considers the container as in 4/4.</p>
 </dl>
 <div class="admonition error">
 <p class="admonition-title">Error</p>
-<p>If a container is malformed, i.e. it has an underfilled bar before a
-time signature change, the function raises a <code class="docutils literal notranslate"><span class="pre">ValueError</span></code> exception.</p>
+<p>If a container is malformed, i.e. it has an underfilled measure before
+a time signature change, the function raises a <code class="xref py py-exc docutils literal notranslate"><span class="pre">ValueError</span></code>
+exception.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">container</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;\time 5/4 g&#39;&#39;1 \time 4/4 f&#39;1&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">auxjad</span><span class="o">.</span><span class="n">container_is_full</span><span class="p">(</span><span class="n">container</span><span class="p">)</span>
-<span class="go">ValueError: &#39;container&#39; is malformed, with an underfull bar preceeding</span>
-<span class="go">a time signature change</span>
+<span class="go">ValueError: &#39;container&#39; is malformed, with an underfull measure</span>
+<span class="go">preceeding a time signature change</span>
 </pre></div>
 </div>
 </div>

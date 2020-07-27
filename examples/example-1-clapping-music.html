@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Steve Reich’s Clapping Music &mdash; auxjad 0.8.4 documentation</title>
+  <title>Steve Reich’s Clapping Music &mdash; auxjad 0.8.6 documentation</title>
   
 
   
@@ -25,6 +25,7 @@
         <script src="../_static/underscore.js"></script>
         <script src="../_static/doctools.js"></script>
         <script src="../_static/language_data.js"></script>
+        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     
     <script type="text/javascript" src="../_static/js/theme.js"></script>
 
@@ -165,16 +166,18 @@
             
   <div class="section" id="steve-reich-s-clapping-music">
 <h1>Steve Reich’s <em>Clapping Music</em><a class="headerlink" href="#steve-reich-s-clapping-music" title="Permalink to this headline">¶</a></h1>
-<p>In this example, we will use some of <code class="docutils literal notranslate"><span class="pre">auxjad</span></code>’s classes and functions to
+<p>In this example, we will use some of <a class="reference external" href="../api/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">auxjad</span></code></a>’s classes and functions to
 generate the score of Steve Reich’s <em>Clapping Music</em>.</p>
-<p>First, we start by importing both <code class="docutils literal notranslate"><span class="pre">abjad</span></code> and <code class="docutils literal notranslate"><span class="pre">auxjad</span></code>.</p>
+<p>First, we start by importing both <code class="xref py py-mod docutils literal notranslate"><span class="pre">abjad</span></code> and <a class="reference external" href="../api/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">auxjad</span></code></a>.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">abjad</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">auxjad</span>
 </pre></div>
 </div>
 <p>Let’s now input the basic material that will be used to generate this
 composition. The original score is notated using a rhythmic staff, so we can
-initialise <code class="docutils literal notranslate"><span class="pre">abjad.Staff</span></code> with the option <code class="docutils literal notranslate"><span class="pre">lilypond_type=&quot;RhythmicStaff&quot;</span></code>.</p>
+initialise <code class="xref py py-class docutils literal notranslate"><span class="pre">abjad.Staff</span></code> with the property
+<code class="xref py py-attr docutils literal notranslate"><span class="pre">lilypond_type</span></code>. set to
+<code class="docutils literal notranslate"><span class="pre">&quot;RhythmicStaff&quot;</span></code>.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">material</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;\time 12/8 c8 c c r c c r c r c c r&quot;</span><span class="p">,</span>
 <span class="gp">... </span>                       <span class="n">lilypond_type</span><span class="o">=</span><span class="s2">&quot;RhythmicStaff&quot;</span><span class="p">,</span>
 <span class="gp">... </span>                       <span class="p">)</span>

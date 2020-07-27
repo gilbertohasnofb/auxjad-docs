@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>auxjad.reposition_dynamics &mdash; auxjad 0.8.4 documentation</title>
+  <title>auxjad.reposition_dynamics &mdash; auxjad 0.8.6 documentation</title>
   
 
   
@@ -25,6 +25,7 @@
         <script src="../_static/underscore.js"></script>
         <script src="../_static/doctools.js"></script>
         <script src="../_static/language_data.js"></script>
+        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     
     <script type="text/javascript" src="../_static/js/theme.js"></script>
 
@@ -190,13 +191,13 @@
 <h1>auxjad.reposition_dynamics<a class="headerlink" href="#auxjad-reposition-dynamics" title="Permalink to this headline">¶</a></h1>
 <dl class="py function">
 <dt id="auxjad.reposition_dynamics">
-<code class="sig-prename descclassname">auxjad.</code><code class="sig-name descname">reposition_dynamics</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">container</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://abjad.github.io/api/abjad/core/Container.html#abjad.core.Container.Container" title="(in Abjad v3.1)">abjad.core.Container.Container</a></span></em>, <em class="sig-param"><span class="o">*</span></em>, <em class="sig-param"><span class="n">allow_hairpins_under_rests</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)">bool</a></span> <span class="o">=</span> <span class="default_value">False</span></em>, <em class="sig-param"><span class="n">check_hairpin_trends</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)">bool</a></span> <span class="o">=</span> <span class="default_value">True</span></em>, <em class="sig-param"><span class="n">remove_repeated_dynamics</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)">bool</a></span> <span class="o">=</span> <span class="default_value">True</span></em>, <em class="sig-param"><span class="n">allow_rests_with_dynamics_after_hairpins</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)">bool</a></span> <span class="o">=</span> <span class="default_value">True</span></em><span class="sig-paren">)</span><a class="headerlink" href="#auxjad.reposition_dynamics" title="Permalink to this definition">¶</a></dt>
-<dd><p>Mutates an input container (of type <code class="docutils literal notranslate"><span class="pre">abjad.Container</span></code> or child class)
+<code class="sig-prename descclassname">auxjad.</code><code class="sig-name descname">reposition_dynamics</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">container</span><span class="p">:</span> <span class="n">abjad.core.Container.Container</span></em>, <em class="sig-param"><span class="o">*</span></em>, <em class="sig-param"><span class="n">allow_hairpins_under_rests</span><span class="p">:</span> <span class="n">bool</span> <span class="o">=</span> <span class="default_value">False</span></em>, <em class="sig-param"><span class="n">check_hairpin_trends</span><span class="p">:</span> <span class="n">bool</span> <span class="o">=</span> <span class="default_value">True</span></em>, <em class="sig-param"><span class="n">remove_repeated_dynamics</span><span class="p">:</span> <span class="n">bool</span> <span class="o">=</span> <span class="default_value">True</span></em>, <em class="sig-param"><span class="n">allow_rests_with_dynamics_after_hairpins</span><span class="p">:</span> <span class="n">bool</span> <span class="o">=</span> <span class="default_value">True</span></em><span class="sig-paren">)</span><a class="headerlink" href="#auxjad.reposition_dynamics" title="Permalink to this definition">¶</a></dt>
+<dd><p>Mutates an input container (of type <code class="xref py py-class docutils literal notranslate"><span class="pre">abjad.Container</span></code> or child class)
 in place and has no return value; this function shifts all dynamics from
 rests to the next pitched leaves. It will also adjust hairpins if
 necessary.</p>
 <dl>
-<dt>Example:</dt><dd><p>This function will shift dynamics under rests to the next pitched leaf.</p>
+<dt>Basic usage:</dt><dd><p>This function will shift dynamics under rests to the next pitched leaf.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">staff</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;c&#39;1\p d&#39;2 r2\f r1 e&#39;1&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">f</span><span class="p">(</span><span class="n">staff</span><span class="p">)</span>
 <span class="go">\new Staff</span>
@@ -233,7 +234,7 @@ necessary.</p>
 <img alt="../_images/image-reposition_dynamics-2.png" src="../_images/image-reposition_dynamics-2.png" />
 </div>
 </dd>
-<dt>Example:</dt><dd><p>If the next pitched leaf already contain a dynamic, this function will
+<dt>Removing dynamics:</dt><dd><p>If the next pitched leaf already contain a dynamic, this function will
 simply remove the dynamic under the rest.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">staff</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;c&#39;1\p d&#39;2 r2\f r1\mf e&#39;1\pp&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">f</span><span class="p">(</span><span class="n">staff</span><span class="p">)</span>
@@ -273,7 +274,7 @@ simply remove the dynamic under the rest.</p>
 <img alt="../_images/image-reposition_dynamics-4.png" src="../_images/image-reposition_dynamics-4.png" />
 </div>
 </dd>
-<dt>Example:</dt><dd><p>By default indentical repeated dynamics are omitted.</p>
+<dt><code class="docutils literal notranslate"><span class="pre">remove_repeated_dynamics</span></code>:</dt><dd><p>By default indentical repeated dynamics are omitted.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">staff</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;c&#39;1\p d&#39;1 r1\f e&#39;1\p&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">auxjad</span><span class="o">.</span><span class="n">reposition_dynamics</span><span class="p">(</span><span class="n">staff</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">f</span><span class="p">(</span><span class="n">staff</span><span class="p">)</span>
@@ -310,7 +311,7 @@ simply remove the dynamic under the rest.</p>
 <img alt="../_images/image-reposition_dynamics-6.png" src="../_images/image-reposition_dynamics-6.png" />
 </div>
 </dd>
-<dt>Example:</dt><dd><p>This function will shorten hairpins until rests by default.</p>
+<dt><code class="docutils literal notranslate"><span class="pre">allow_hairpins_under_rests</span></code>:</dt><dd><p>This function will shorten hairpins until rests by default.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">staff</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;c&#39;1\p\&lt; d&#39;2 r2 r1\f e&#39;1&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">f</span><span class="p">(</span><span class="n">staff</span><span class="p">)</span>
 <span class="go">\new Staff</span>
@@ -371,7 +372,7 @@ simply remove the dynamic under the rest.</p>
 <img alt="../_images/image-reposition_dynamics-9.png" src="../_images/image-reposition_dynamics-9.png" />
 </div>
 </dd>
-<dt>Example:</dt><dd><p>Notice that if a hairpin leads to a rest with dynamic, that one is not
+<dt><code class="docutils literal notranslate"><span class="pre">allow_rests_with_dynamics_after_hairpins</span></code>:</dt><dd><p>Notice that if a hairpin leads to a rest with dynamic, that one is not
 removed.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">staff</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;c&#39;1\p\&lt; d&#39;2 r2\f r1 e&#39;1&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">auxjad</span><span class="o">.</span><span class="n">reposition_dynamics</span><span class="p">(</span><span class="n">staff</span><span class="p">)</span>
@@ -418,7 +419,7 @@ removed.</p>
 <img alt="../_images/image-reposition_dynamics-11.png" src="../_images/image-reposition_dynamics-11.png" />
 </div>
 </dd>
-<dt>Example:</dt><dd><p>This function will remove any hairpins connecting dynamics that grow in
+<dt><code class="docutils literal notranslate"><span class="pre">check_hairpin_trends</span></code>:</dt><dd><p>This function will remove any hairpins connecting dynamics that grow in
 the opposite direction to the hairpin’s trend, such as a diminuendo
 hairpin from piano to forte.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">staff</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;c&#39;1\p\&gt; d&#39;1\f\&gt; e&#39;1\p&quot;</span><span class="p">)</span>
@@ -491,7 +492,7 @@ to be connecting dynamics of the opposite trend.</p>
 </div>
 </div>
 <dl>
-<dt>Example:</dt><dd><p>This function can handle multiple types of hairpins as well as niente
+<dt>Types of hairpins:</dt><dd><p>This function can handle multiple types of hairpins as well as niente
 dynamics.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">staff</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;c&#39;1 d&#39;1 e&#39;1 r1\mf r1\ff f&#39;1 r1 g&#39;1&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">attach</span><span class="p">(</span><span class="n">abjad</span><span class="o">.</span><span class="n">Dynamic</span><span class="p">(</span><span class="s1">&#39;niente&#39;</span><span class="p">,</span> <span class="n">hide</span><span class="o">=</span><span class="kc">True</span><span class="p">),</span> <span class="n">staff</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
@@ -554,7 +555,7 @@ dynamics.</p>
 <img alt="../_images/image-reposition_dynamics-16.png" src="../_images/image-reposition_dynamics-16.png" />
 </div>
 </dd>
-<dt>Example:</dt><dd><p>Multi-measure rests are also supported.</p>
+<dt>Multi-measure rests:</dt><dd><p>Multi-measure rests are also supported.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">staff</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;c&#39;1\p R1\f d&#39;1&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">f</span><span class="p">(</span><span class="n">staff</span><span class="p">)</span>
 <span class="go">\new Staff</span>

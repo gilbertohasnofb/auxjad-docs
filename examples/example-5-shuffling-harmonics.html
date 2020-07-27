@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Shuffling and fading harmonics &mdash; auxjad 0.8.4 documentation</title>
+  <title>Shuffling and fading harmonics &mdash; auxjad 0.8.6 documentation</title>
   
 
   
@@ -25,6 +25,7 @@
         <script src="../_static/underscore.js"></script>
         <script src="../_static/doctools.js"></script>
         <script src="../_static/language_data.js"></script>
+        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     
     <script type="text/javascript" src="../_static/js/theme.js"></script>
 
@@ -165,10 +166,10 @@
             
   <div class="section" id="shuffling-and-fading-harmonics">
 <h1>Shuffling and fading harmonics<a class="headerlink" href="#shuffling-and-fading-harmonics" title="Permalink to this headline">¶</a></h1>
-<p>In this example, we will use some of <code class="docutils literal notranslate"><span class="pre">auxjad</span></code>’s classes to manipulate
+<p>In this example, we will use some of <a class="reference external" href="../api/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">auxjad</span></code></a>’s classes to manipulate
 some musical material using the <a class="reference internal" href="../_api_members/auxjad.Shuffler.html#auxjad.Shuffler" title="auxjad.Shuffler"><code class="xref py py-class docutils literal notranslate"><span class="pre">auxjad.Shuffler</span></code></a> and
 <a class="reference internal" href="../_api_members/auxjad.Fader.html#auxjad.Fader" title="auxjad.Fader"><code class="xref py py-class docutils literal notranslate"><span class="pre">auxjad.Fader</span></code></a> classes.</p>
-<p>First, we start by importing both <code class="docutils literal notranslate"><span class="pre">abjad</span></code> and <code class="docutils literal notranslate"><span class="pre">auxjad</span></code>.</p>
+<p>First, we start by importing both <code class="xref py py-mod docutils literal notranslate"><span class="pre">abjad</span></code> and <a class="reference external" href="../api/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">auxjad</span></code></a>.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">abjad</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">auxjad</span>
 </pre></div>
@@ -797,12 +798,13 @@ container of a <a class="reference internal" href="../_api_members/auxjad.Fader.
 <img alt="../_images/image-example-5-shuffling-harmonics-4.png" src="../_images/image-example-5-shuffling-harmonics-4.png" />
 </div>
 <p>To finalise the score, let’s improve the spelling of some rhythms. Most classes
-and functions in this library use Abjad’s <code class="docutils literal notranslate"><span class="pre">rewrite_meter()</span></code> mutation to
-adjust the spelling of rhythms according to a meter. Unfortunately, this
+and functions in this library use <code class="xref py py-meth docutils literal notranslate"><span class="pre">abjad.mutate().rewrite_meter()</span></code> mutation
+to adjust the spelling of rhythms according to a meter. Unfortunately, this
 mutation sometimes uses ties within a single beat, resulting in rhythms that
 are less ideally notated than they could.
 <a class="reference internal" href="../_api_members/auxjad.prettify_rewrite_meter.html#auxjad.prettify_rewrite_meter" title="auxjad.prettify_rewrite_meter"><code class="xref py py-func docutils literal notranslate"><span class="pre">auxjad.prettify_rewrite_meter()</span></code></a> fuses pitched leaves according to some
-specific list of rules, improving the default output of <code class="docutils literal notranslate"><span class="pre">rewrite_meter()</span></code>.</p>
+specific rules, improving the default output of
+<code class="xref py py-meth docutils literal notranslate"><span class="pre">abjad.mutate().rewrite_meter()</span></code>.</p>
 <p>Notice that the time signature has been repeated. While the <code class="docutils literal notranslate"><span class="pre">output_n()</span></code>
 method takes care of repeated time signatures, dynamics, and clefs, consecutive
 calls may result in repetitions. But we can simply use

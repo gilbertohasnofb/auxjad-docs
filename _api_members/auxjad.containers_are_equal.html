@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>auxjad.containers_are_equal &mdash; auxjad 0.8.4 documentation</title>
+  <title>auxjad.containers_are_equal &mdash; auxjad 0.8.6 documentation</title>
   
 
   
@@ -25,6 +25,7 @@
         <script src="../_static/underscore.js"></script>
         <script src="../_static/doctools.js"></script>
         <script src="../_static/language_data.js"></script>
+        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     
     <script type="text/javascript" src="../_static/js/theme.js"></script>
 
@@ -190,11 +191,11 @@
 <h1>auxjad.containers_are_equal<a class="headerlink" href="#auxjad-containers-are-equal" title="Permalink to this headline">¶</a></h1>
 <dl class="py function">
 <dt id="auxjad.containers_are_equal">
-<code class="sig-prename descclassname">auxjad.</code><code class="sig-name descname">containers_are_equal</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">container1</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://abjad.github.io/api/abjad/core/Container.html#abjad.core.Container.Container" title="(in Abjad v3.1)">abjad.core.Container.Container</a></span></em>, <em class="sig-param"><span class="n">container2</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://abjad.github.io/api/abjad/core/Container.html#abjad.core.Container.Container" title="(in Abjad v3.1)">abjad.core.Container.Container</a></span></em>, <em class="sig-param"><span class="o">*</span></em>, <em class="sig-param"><span class="n">include_indicators</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)">bool</a></span> <span class="o">=</span> <span class="default_value">False</span></em><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)">bool</a><a class="headerlink" href="#auxjad.containers_are_equal" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns a <code class="docutils literal notranslate"><span class="pre">bool</span></code> representing whether two input containers (of type
-<code class="docutils literal notranslate"><span class="pre">abjad.Container</span></code> or child class) are identical or not.</p>
+<code class="sig-prename descclassname">auxjad.</code><code class="sig-name descname">containers_are_equal</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">container1</span><span class="p">:</span> <span class="n">abjad.core.Container.Container</span></em>, <em class="sig-param"><span class="n">container2</span><span class="p">:</span> <span class="n">abjad.core.Container.Container</span></em>, <em class="sig-param"><span class="o">*</span></em>, <em class="sig-param"><span class="n">include_indicators</span><span class="p">:</span> <span class="n">bool</span> <span class="o">=</span> <span class="default_value">False</span></em><span class="sig-paren">)</span> &#x2192; bool<a class="headerlink" href="#auxjad.containers_are_equal" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a <code class="xref py py-obj docutils literal notranslate"><span class="pre">bool</span></code> representing whether two input containers (of
+type <code class="xref py py-class docutils literal notranslate"><span class="pre">abjad.Container</span></code> or child class) are identical or not.</p>
 <dl>
-<dt>Example:</dt><dd><p>When the pitches and effective durations of all leaves in both
+<dt>Basic usage:</dt><dd><p>When the pitches and effective durations of all leaves in both
 containers are identical, this function returns <code class="docutils literal notranslate"><span class="pre">True</span></code>:</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">container1</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;c&#39;4 d&#39;4 e&#39;4 f&#39;4 &lt;g&#39; a&#39;&gt;2 r2&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">container2</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;c&#39;4 d&#39;4 e&#39;4 f&#39;4 &lt;g&#39; a&#39;&gt;2 r2&quot;</span><span class="p">)</span>
@@ -203,7 +204,7 @@ containers are identical, this function returns <code class="docutils literal no
 </pre></div>
 </div>
 </dd>
-<dt>Example:</dt><dd><p>Even if all leaves of both containers are identical in relation to both
+<dt>Effective durations:</dt><dd><p>Even if all leaves of both containers are identical in relation to both
 pitches and written durations, the function considers the effective
 durations. This means that situations like the one below do not yield a
 false positive:</p>
@@ -215,7 +216,7 @@ false positive:</p>
 </pre></div>
 </div>
 </dd>
-<dt>Example:</dt><dd><p>By default, this function ignores indicators, so the containers in the
+<dt><code class="docutils literal notranslate"><span class="pre">include_indicators</span></code>:</dt><dd><p>By default, this function ignores indicators, so the containers in the
 example below are understood to be identical:</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">container1</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;c&#39;4\pp d&#39;4 e&#39;4-. f&#39;4 &lt;g&#39; a&#39;&gt;2-&gt; r2&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">container2</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;c&#39;4 d&#39;4 e&#39;4 f&#39;4 &lt;g&#39; a&#39;&gt;2 r2&quot;</span><span class="p">)</span>
@@ -223,8 +224,7 @@ example below are understood to be identical:</p>
 <span class="go">True</span>
 </pre></div>
 </div>
-</dd>
-<dt>Example:</dt><dd><p>Setting the argument <code class="docutils literal notranslate"><span class="pre">include_indicators</span></code> to <code class="docutils literal notranslate"><span class="pre">True</span></code> forces the
+<p>Setting the argument <code class="docutils literal notranslate"><span class="pre">include_indicators</span></code> to <code class="docutils literal notranslate"><span class="pre">True</span></code> forces the
 function to include indicators in its comparison. In that case, the
 containers in the example above are not considered identical any
 longer:</p>
@@ -238,7 +238,7 @@ longer:</p>
 </pre></div>
 </div>
 </dd>
-<dt>Example:</dt><dd><p>This function also handles grace notes:</p>
+<dt>Grace notes:</dt><dd><p>This function also handles grace notes:</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">container1</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;c&#39;4 d&#39;4 e&#39;4 f&#39;4&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">container2</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;c&#39;4 \grace{d&#39;4} d&#39;4 e&#39;4 f&#39;4&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">auxjad</span><span class="o">.</span><span class="n">containers_are_equal</span><span class="p">(</span><span class="n">container1</span><span class="p">,</span> <span class="n">container2</span><span class="p">)</span>

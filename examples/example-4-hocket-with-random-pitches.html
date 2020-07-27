@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Hocket with random pitches &mdash; auxjad 0.8.4 documentation</title>
+  <title>Hocket with random pitches &mdash; auxjad 0.8.6 documentation</title>
   
 
   
@@ -25,6 +25,7 @@
         <script src="../_static/underscore.js"></script>
         <script src="../_static/doctools.js"></script>
         <script src="../_static/language_data.js"></script>
+        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     
     <script type="text/javascript" src="../_static/js/theme.js"></script>
 
@@ -165,9 +166,9 @@
             
   <div class="section" id="hocket-with-random-pitches">
 <h1>Hocket with random pitches<a class="headerlink" href="#hocket-with-random-pitches" title="Permalink to this headline">¶</a></h1>
-<p>In this example, we will use some of <code class="docutils literal notranslate"><span class="pre">auxjad</span></code>’s classes to generate a hocket
+<p>In this example, we will use some of <a class="reference external" href="../api/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">auxjad</span></code></a>’s classes to generate a hocket
 with random pitches.</p>
-<p>First, we start by importing both <code class="docutils literal notranslate"><span class="pre">abjad</span></code> and <code class="docutils literal notranslate"><span class="pre">auxjad</span></code>.</p>
+<p>First, we start by importing both <code class="xref py py-mod docutils literal notranslate"><span class="pre">abjad</span></code> and <a class="reference external" href="../api/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">auxjad</span></code></a>.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">abjad</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">auxjad</span>
 </pre></div>
@@ -192,8 +193,8 @@ matter at this point since we will randomise them shortly.</p>
 <img alt="../_images/image-example-4-hocket-with-random-pitches-1.png" src="../_images/image-example-4-hocket-with-random-pitches-1.png" />
 </div>
 <p>Next, let’s initialise <a class="reference internal" href="../_api_members/auxjad.PitchRandomiser.html#auxjad.PitchRandomiser" title="auxjad.PitchRandomiser"><code class="xref py py-class docutils literal notranslate"><span class="pre">auxjad.PitchRandomiser</span></code></a> with this container as
-well as a list representing pitches. This will be the source for the random
-pitches selected by this randomiser.</p>
+well as a <code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code> representing pitches. This will be the source for the
+random pitches selected by this randomiser.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">randomiser</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">PitchRandomiser</span><span class="p">(</span><span class="n">container</span><span class="p">,</span>
 <span class="gp">... </span>                                    <span class="n">pitches</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">],</span>
 <span class="gp">... </span>                                    <span class="p">)</span>
@@ -237,7 +238,7 @@ method.</p>
 <div class="figure align-default">
 <img alt="../_images/image-example-4-hocket-with-random-pitches-2.png" src="../_images/image-example-4-hocket-with-random-pitches-2.png" />
 </div>
-<p>Let’s now change the pitch list using the property <code class="docutils literal notranslate"><span class="pre">pitches</span></code> of the
+<p>Let’s now change the pitch <code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code> using the property <code class="docutils literal notranslate"><span class="pre">pitches</span></code> of the
 randomiser.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">randomiser</span><span class="o">.</span><span class="n">pitches</span> <span class="o">=</span> <span class="p">[</span><span class="mi">13</span><span class="p">,</span> <span class="mi">14</span><span class="p">,</span> <span class="mi">16</span><span class="p">,</span> <span class="mi">17</span><span class="p">,</span> <span class="mi">21</span><span class="p">]</span>
 </pre></div>
@@ -303,9 +304,10 @@ randomiser.</p>
 <img alt="../_images/image-example-4-hocket-with-random-pitches-3.png" src="../_images/image-example-4-hocket-with-random-pitches-3.png" />
 </div>
 <p>Up to now, the pitches were being selected with equal weight (i.e. an uniform
-distribution). Changing the <code class="docutils literal notranslate"><span class="pre">weights</span></code> property to a list of <code class="docutils literal notranslate"><span class="pre">int</span></code>’s or
-<code class="docutils literal notranslate"><span class="pre">float</span></code>’s allow us to give more weight to certain pitches. It’s important
-that this list has the same length as the number of pitches in <code class="docutils literal notranslate"><span class="pre">pitches</span></code>.</p>
+distribution). Changing the <code class="docutils literal notranslate"><span class="pre">weights</span></code> property to a <code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code> of
+<code class="xref py py-obj docutils literal notranslate"><span class="pre">int</span></code>’s or <code class="xref py py-obj docutils literal notranslate"><span class="pre">float</span></code>’s allow us to give more weight to certain pitches.
+It’s important that this <code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code> has the same length as the number of
+pitches in <code class="docutils literal notranslate"><span class="pre">pitches</span></code>.</p>
 <blockquote>
 <div><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">randomiser</span><span class="o">.</span><span class="n">weights</span> <span class="o">=</span> <span class="p">[</span><span class="mi">6</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
 </pre></div>
@@ -406,7 +408,7 @@ as well as the desired number of voices.</p>
 </pre></div>
 </div>
 <p>To create the final score, we can simply assign its return value to an
-<code class="docutils literal notranslate"><span class="pre">abjad.Score</span></code>.</p>
+<code class="xref py py-class docutils literal notranslate"><span class="pre">abjad.Score</span></code>.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">music</span> <span class="o">=</span> <span class="n">hocketer</span><span class="p">()</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">score</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Score</span><span class="p">(</span><span class="n">music</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">f</span><span class="p">(</span><span class="n">score</span><span class="p">)</span>

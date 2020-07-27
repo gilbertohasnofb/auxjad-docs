@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>auxjad.prettify_rewrite_meter &mdash; auxjad 0.8.4 documentation</title>
+  <title>auxjad.prettify_rewrite_meter &mdash; auxjad 0.8.6 documentation</title>
   
 
   
@@ -25,6 +25,7 @@
         <script src="../_static/underscore.js"></script>
         <script src="../_static/doctools.js"></script>
         <script src="../_static/language_data.js"></script>
+        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     
     <script type="text/javascript" src="../_static/js/theme.js"></script>
 
@@ -190,15 +191,15 @@
 <h1>auxjad.prettify_rewrite_meter<a class="headerlink" href="#auxjad-prettify-rewrite-meter" title="Permalink to this headline">¶</a></h1>
 <dl class="py function">
 <dt id="auxjad.prettify_rewrite_meter">
-<code class="sig-prename descclassname">auxjad.</code><code class="sig-name descname">prettify_rewrite_meter</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">container</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://abjad.github.io/api/abjad/core/Container.html#abjad.core.Container.Container" title="(in Abjad v3.1)">abjad.core.Container.Container</a></span></em>, <em class="sig-param"><span class="n">meter</span><span class="p">:</span> <span class="n">Union<span class="p">[</span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.8)">tuple</a><span class="p">, </span><a class="reference external" href="https://abjad.github.io/api/abjad/meter.html#abjad.meter.Meter" title="(in Abjad v3.1)">abjad.meter.Meter</a><span class="p">, </span><a class="reference external" href="https://abjad.github.io/api/abjad/indicators/TimeSignature.html#abjad.indicators.TimeSignature.TimeSignature" title="(in Abjad v3.1)">abjad.indicators.TimeSignature.TimeSignature</a><span class="p">, </span><a class="reference external" href="https://abjad.github.io/api/abjad/utilities/Duration.html#abjad.utilities.Duration.Duration" title="(in Abjad v3.1)">abjad.utilities.Duration.Duration</a><span class="p">]</span></span></em>, <em class="sig-param"><span class="o">*</span></em>, <em class="sig-param"><span class="n">fuse_across_groups_of_beats</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)">bool</a></span> <span class="o">=</span> <span class="default_value">True</span></em>, <em class="sig-param"><span class="n">fuse_quadruple_meter</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)">bool</a></span> <span class="o">=</span> <span class="default_value">True</span></em>, <em class="sig-param"><span class="n">fuse_triple_meter</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)">bool</a></span> <span class="o">=</span> <span class="default_value">True</span></em><span class="sig-paren">)</span><a class="headerlink" href="#auxjad.prettify_rewrite_meter" title="Permalink to this definition">¶</a></dt>
-<dd><p>Mutates an input container (of type <code class="docutils literal notranslate"><span class="pre">abjad.Container</span></code> or child class)
+<code class="sig-prename descclassname">auxjad.</code><code class="sig-name descname">prettify_rewrite_meter</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">container</span><span class="p">:</span> <span class="n">abjad.core.Container.Container</span></em>, <em class="sig-param"><span class="n">meter</span><span class="p">:</span> <span class="n">Union<span class="p">[</span>tuple<span class="p">, </span>abjad.meter.Meter<span class="p">, </span>abjad.indicators.TimeSignature.TimeSignature<span class="p">, </span>abjad.utilities.Duration.Duration<span class="p">]</span></span></em>, <em class="sig-param"><span class="o">*</span></em>, <em class="sig-param"><span class="n">fuse_across_groups_of_beats</span><span class="p">:</span> <span class="n">bool</span> <span class="o">=</span> <span class="default_value">True</span></em>, <em class="sig-param"><span class="n">fuse_quadruple_meter</span><span class="p">:</span> <span class="n">bool</span> <span class="o">=</span> <span class="default_value">True</span></em>, <em class="sig-param"><span class="n">fuse_triple_meter</span><span class="p">:</span> <span class="n">bool</span> <span class="o">=</span> <span class="default_value">True</span></em><span class="sig-paren">)</span><a class="headerlink" href="#auxjad.prettify_rewrite_meter" title="Permalink to this definition">¶</a></dt>
+<dd><p>Mutates an input container (of type <code class="xref py py-class docutils literal notranslate"><span class="pre">abjad.Container</span></code> or child class)
 in place and has no return value; this function fuses pitched leaves
 according to the rules shown below, improving the default output of
-<code class="docutils literal notranslate"><span class="pre">abjad.mutate().rewrite_meter()</span></code>.</p>
+<code class="xref py py-meth docutils literal notranslate"><span class="pre">abjad.mutate().rewrite_meter()</span></code>.</p>
 <dl>
-<dt>Example:</dt><dd><p>Meters whose denominators are a crotchet or longer get tied notes
-within a beat after <code class="docutils literal notranslate"><span class="pre">rewrite_meter()</span></code> when they are at an offset
-<code class="docutils literal notranslate"><span class="pre">denominator</span> <span class="pre">/</span> <span class="pre">4</span></code>, so a rhythm such as  <code class="docutils literal notranslate"><span class="pre">denominator</span> <span class="pre">/</span> <span class="pre">4</span></code>
+<dt>Basic usage:</dt><dd><p>Meters whose denominators are a crotchet or longer get tied notes
+within a beat after <code class="xref py py-meth docutils literal notranslate"><span class="pre">abjad.mutate().rewrite_meter()</span></code> when they are at
+an offset <code class="docutils literal notranslate"><span class="pre">denominator</span> <span class="pre">/</span> <span class="pre">4</span></code>, so a rhythm such as  <code class="docutils literal notranslate"><span class="pre">denominator</span> <span class="pre">/</span> <span class="pre">4</span></code>
 <code class="docutils literal notranslate"><span class="pre">denominator</span> <span class="pre">/</span> <span class="pre">2</span></code> <code class="docutils literal notranslate"><span class="pre">denominator</span> <span class="pre">/</span> <span class="pre">4</span></code> becomes <code class="docutils literal notranslate"><span class="pre">denominator</span> <span class="pre">/</span> <span class="pre">4</span></code>
 <code class="docutils literal notranslate"><span class="pre">denominator</span> <span class="pre">/</span> <span class="pre">4</span></code> <code class="docutils literal notranslate"><span class="pre">~</span></code> <code class="docutils literal notranslate"><span class="pre">denominator</span> <span class="pre">/</span> <span class="pre">4</span></code> <code class="docutils literal notranslate"><span class="pre">denominator</span> <span class="pre">/</span> <span class="pre">4</span></code>. This
 function looks for those specific cases and fuses them, generating an
@@ -249,7 +250,7 @@ output which is often more readable.</p>
 <img alt="../_images/image-prettify_rewrite_meter-2.png" src="../_images/image-prettify_rewrite_meter-2.png" />
 </div>
 </dd>
-<dt>Example:</dt><dd><p>The rhythm of the leaves just before and after the two leaves to be
+<dt>Other examples:</dt><dd><p>The rhythm of the leaves just before and after the two leaves to be
 fused can be different than <code class="docutils literal notranslate"><span class="pre">denominator</span> <span class="pre">/</span> <span class="pre">4</span></code>, as the function
 searches for logical ties of specific length and offset, and its
 surroundings do not matter.</p>
@@ -319,7 +320,7 @@ surroundings do not matter.</p>
 <img alt="../_images/image-prettify_rewrite_meter-4.png" src="../_images/image-prettify_rewrite_meter-4.png" />
 </div>
 </dd>
-<dt>Example:</dt><dd><p>By default, this function also fuses rhythms of type
+<dt><code class="docutils literal notranslate"><span class="pre">fuse_across_groups_of_beats</span></code>:</dt><dd><p>By default, this function also fuses rhythms of type
 <code class="docutils literal notranslate"><span class="pre">denominator</span> <span class="pre">/</span> <span class="pre">2</span></code> <code class="docutils literal notranslate"><span class="pre">denominator</span> <span class="pre">/</span> <span class="pre">2</span></code> <code class="docutils literal notranslate"><span class="pre">~</span></code> <code class="docutils literal notranslate"><span class="pre">denominator</span> <span class="pre">/</span> <span class="pre">2</span></code>
 <code class="docutils literal notranslate"><span class="pre">denominator</span> <span class="pre">/</span> <span class="pre">2</span></code>, becoming <code class="docutils literal notranslate"><span class="pre">denominator</span> <span class="pre">/</span> <span class="pre">2</span></code> <code class="docutils literal notranslate"><span class="pre">denominator</span></code>
 <code class="docutils literal notranslate"><span class="pre">denominator</span> <span class="pre">/</span> <span class="pre">2</span></code>. This is only applied when the meter’s structure
@@ -412,7 +413,7 @@ or larger than <code class="docutils literal notranslate"><span class="pre">5</s
 <img alt="../_images/image-prettify_rewrite_meter-7.png" src="../_images/image-prettify_rewrite_meter-7.png" />
 </div>
 </dd>
-<dt>Example:</dt><dd><p>The fused notes will respect the beat structures of such meters, even
+<dt><code class="xref py py-class docutils literal notranslate"><span class="pre">abjad.Meter</span></code> with <code class="docutils literal notranslate"><span class="pre">increase_monotonic=True</span></code>:</dt><dd><p>The fused notes will respect the beat structures of such meters, even
 when <code class="docutils literal notranslate"><span class="pre">increase_monotonic</span></code> is set to the non-default value <code class="docutils literal notranslate"><span class="pre">True</span></code>.
 Compare the outputs below.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">staff</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;\time 7/4 c&#39;8 d&#39;4 e&#39;4 f&#39;4 g&#39;4 a&#39;4 b&#39;4 c&#39;&#39;8&quot;</span><span class="p">)</span>
@@ -468,8 +469,8 @@ Compare the outputs below.</p>
 <img alt="../_images/image-prettify_rewrite_meter-9.png" src="../_images/image-prettify_rewrite_meter-9.png" />
 </div>
 </dd>
-<dt>Example:</dt><dd><p>This function can take handle multiple bars at once, as long as they
-share the same meter.</p>
+<dt>Multiple measures:</dt><dd><p>This function can take handle multiple measures at once, as long as
+they share the same meter.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">staff</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;\time 5/8 c&#39;16 d&#39;8 e&#39;8 f&#39;8 g&#39;8 a&#39;16 ~ &quot;</span>
 <span class="gp">... </span>                    <span class="sa">r</span><span class="s2">&quot;a&#39;16 b&#39;8 c&#39;&#39;8 d&#39;&#39;8 e&#39;&#39;8 f&#39;&#39;16&quot;</span>
 <span class="gp">... </span>                    <span class="p">)</span>
@@ -544,7 +545,7 @@ share the same meter.</p>
 <img alt="../_images/image-prettify_rewrite_meter-11.png" src="../_images/image-prettify_rewrite_meter-11.png" />
 </div>
 </dd>
-<dt>Example:</dt><dd><p>This function also takes care of two special cases, namely quadruple
+<dt><code class="docutils literal notranslate"><span class="pre">fuse_quadruple_meter</span></code>:</dt><dd><p>This function also takes care of two special cases, namely quadruple
 and triple meters. By default, it will fuse leaves in quadruple meters
 across beats 1 and 2, and across beats 3 and 4 (as long as they fulfil
 the other requirements of duration and offset).</p>
@@ -599,7 +600,7 @@ the other requirements of duration and offset).</p>
 <img alt="../_images/image-prettify_rewrite_meter-13.png" src="../_images/image-prettify_rewrite_meter-13.png" />
 </div>
 </dd>
-<dt>Example:</dt><dd><p>In the case of triple meters, it will fuse leaves across any beat as
+<dt><code class="docutils literal notranslate"><span class="pre">fuse_triple_meter</span></code>:</dt><dd><p>In the case of triple meters, it will fuse leaves across any beat as
 long as the previously mentioned conditions of offset and duration are
 met.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">staff</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;\time 3/4 c&#39;8 d&#39;4 e&#39;4 f&#39;8&quot;</span><span class="p">)</span>
