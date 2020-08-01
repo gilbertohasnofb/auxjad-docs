@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>auxjad.HarmonicNote &mdash; auxjad 0.8.7 documentation</title>
+  <title>auxjad.HarmonicNote &mdash; auxjad 0.8.8 documentation</title>
   
 
   
@@ -36,7 +36,7 @@
   <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="utilities" href="../api/api-utilities.html" />
+    <link rel="next" title="auxjad.LeafDynMaker" href="auxjad.LeafDynMaker.html" />
     <link rel="prev" title="auxjad.ArtificialHarmonic" href="auxjad.ArtificialHarmonic.html" /> 
 </head>
 
@@ -95,6 +95,7 @@
 <li class="toctree-l2 current"><a class="reference internal" href="../api/api-score.html">score</a><ul class="current">
 <li class="toctree-l3"><a class="reference internal" href="auxjad.ArtificialHarmonic.html">auxjad.ArtificialHarmonic</a></li>
 <li class="toctree-l3 current"><a class="current reference internal" href="#">auxjad.HarmonicNote</a></li>
+<li class="toctree-l3"><a class="reference internal" href="auxjad.LeafDynMaker.html">auxjad.LeafDynMaker</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../api/api-utilities.html">utilities</a></li>
@@ -285,10 +286,10 @@ circle above it, use the style <code class="docutils literal notranslate"><span 
 <img alt="../_images/image-HarmonicNote-5.png" src="../_images/image-HarmonicNote-5.png" />
 </div>
 </dd>
-<dt><code class="docutils literal notranslate"><span class="pre">markup</span></code>:</dt><dd><p>To add a markup expression to the harmonic note, use the <code class="docutils literal notranslate"><span class="pre">markup</span></code>
+<dt><a class="reference internal" href="#auxjad.HarmonicNote.markup" title="auxjad.HarmonicNote.markup"><code class="xref py py-attr docutils literal notranslate"><span class="pre">markup</span></code></a>:</dt><dd><p>To add a markup expression to the harmonic note, use the <a class="reference internal" href="#auxjad.HarmonicNote.markup" title="auxjad.HarmonicNote.markup"><code class="xref py py-attr docutils literal notranslate"><span class="pre">markup</span></code></a>
 optional keyword argument, which takes strings. By default, the markup
 position is above the harmonic note, but this can be overridden using
-the keyword <code class="docutils literal notranslate"><span class="pre">direction</span></code>, which can take strings as well as
+the keyword <a class="reference internal" href="#auxjad.HarmonicNote.direction" title="auxjad.HarmonicNote.direction"><code class="xref py py-attr docutils literal notranslate"><span class="pre">direction</span></code></a>, which can take strings as well as
 <a class="reference external" href="https://abjad.github.io/api/abjad/markups.html#abjad.markups.Markup.direction" title="(in Abjad v3.1)"><code class="xref py py-attr docutils literal notranslate"><span class="pre">abjad.Up</span></code></a> and <a class="reference external" href="https://abjad.github.io/api/abjad/markups.html#abjad.markups.Markup.direction" title="(in Abjad v3.1)"><code class="xref py py-attr docutils literal notranslate"><span class="pre">abjad.Down</span></code></a>:</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">harm1</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">HarmonicNote</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;d&#39;&#39;1&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">harm2</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">HarmonicNote</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;d&#39;&#39;1&quot;</span><span class="p">,</span>
@@ -315,7 +316,8 @@ the keyword <code class="docutils literal notranslate"><span class="pre">directi
 <div class="figure align-default">
 <img alt="../_images/image-HarmonicNote-6.png" src="../_images/image-HarmonicNote-6.png" />
 </div>
-<p>Setting <code class="docutils literal notranslate"><span class="pre">markup</span></code> to <code class="docutils literal notranslate"><span class="pre">None</span></code> will remove the markup from the note.</p>
+<p>Setting <a class="reference internal" href="#auxjad.HarmonicNote.markup" title="auxjad.HarmonicNote.markup"><code class="xref py py-attr docutils literal notranslate"><span class="pre">markup</span></code></a> to <code class="docutils literal notranslate"><span class="pre">None</span></code> will remove the markup from the
+note.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">harm</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">HarmonicNote</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;d&#39;&#39;1&quot;</span><span class="p">,</span>
 <span class="gp">... </span>                           <span class="n">markup</span><span class="o">=</span><span class="s1">&#39;III.&#39;</span><span class="p">,</span>
 <span class="gp">... </span>                           <span class="p">)</span>
@@ -333,7 +335,7 @@ the keyword <code class="docutils literal notranslate"><span class="pre">directi
 <div class="admonition error">
 <p class="admonition-title">Error</p>
 <p>If another markup is attached to the harmonic note, trying to set the
-<code class="docutils literal notranslate"><span class="pre">markup</span></code> to <code class="docutils literal notranslate"><span class="pre">None</span></code> will raise an <a class="reference external" href="https://docs.python.org/3/library/exceptions.html#Exception" title="(in Python v3.8)"><code class="xref py py-exc docutils literal notranslate"><span class="pre">Exception</span></code></a>:</p>
+<a class="reference internal" href="#auxjad.HarmonicNote.markup" title="auxjad.HarmonicNote.markup"><code class="xref py py-attr docutils literal notranslate"><span class="pre">markup</span></code></a> to <code class="docutils literal notranslate"><span class="pre">None</span></code> will raise an <a class="reference external" href="https://docs.python.org/3/library/exceptions.html#Exception" title="(in Python v3.8)"><code class="xref py py-exc docutils literal notranslate"><span class="pre">Exception</span></code></a>:</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">harm</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">HarmonicNote</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;d&#39;&#39;1&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">attach</span><span class="p">(</span><span class="n">abjad</span><span class="o">.</span><span class="n">Markup</span><span class="p">(</span><span class="s1">&#39;test&#39;</span><span class="p">),</span> <span class="n">harm</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">harm</span><span class="o">.</span><span class="n">markup</span> <span class="o">=</span> <span class="s1">&#39;III.&#39;</span>
@@ -531,7 +533,7 @@ the keyword <code class="docutils literal notranslate"><span class="pre">directi
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="../api/api-utilities.html" class="btn btn-neutral float-right" title="utilities" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="auxjad.LeafDynMaker.html" class="btn btn-neutral float-right" title="auxjad.LeafDynMaker" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
         <a href="auxjad.ArtificialHarmonic.html" class="btn btn-neutral float-left" title="auxjad.ArtificialHarmonic" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
