@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>auxjad.Shuffler &mdash; auxjad 0.8.8 documentation</title>
+  <title>auxjad.Shuffler &mdash; auxjad 0.8.10 documentation</title>
   
 
   
@@ -37,7 +37,7 @@
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="auxjad.TenneySelector" href="auxjad.TenneySelector.html" />
-    <link rel="prev" title="auxjad.PitchRandomiser" href="auxjad.PitchRandomiser.html" /> 
+    <link rel="prev" title="auxjad.Repeater" href="auxjad.Repeater.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -100,6 +100,7 @@
 <li class="toctree-l3"><a class="reference internal" href="auxjad.ListLooper.html">auxjad.ListLooper</a></li>
 <li class="toctree-l3"><a class="reference internal" href="auxjad.Phaser.html">auxjad.Phaser</a></li>
 <li class="toctree-l3"><a class="reference internal" href="auxjad.PitchRandomiser.html">auxjad.PitchRandomiser</a></li>
+<li class="toctree-l3"><a class="reference internal" href="auxjad.Repeater.html">auxjad.Repeater</a></li>
 <li class="toctree-l3 current"><a class="current reference internal" href="#">auxjad.Shuffler</a></li>
 <li class="toctree-l3"><a class="reference internal" href="auxjad.TenneySelector.html">auxjad.TenneySelector</a></li>
 <li class="toctree-l3"><a class="reference internal" href="auxjad.WindowLooper.html">auxjad.WindowLooper</a></li>
@@ -181,7 +182,7 @@
 <h1>auxjad.Shuffler<a class="headerlink" href="#auxjad-shuffler" title="Permalink to this headline">¶</a></h1>
 <dl class="py class">
 <dt id="auxjad.Shuffler">
-<em class="property">class </em><code class="sig-prename descclassname">auxjad.</code><code class="sig-name descname">Shuffler</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">contents</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://abjad.github.io/api/abjad/core/Container.html#abjad.core.Container.Container" title="(in Abjad v3.1)">abjad.core.Container.Container</a></span></em>, <em class="sig-param"><span class="o">*</span></em>, <em class="sig-param"><span class="n">pitch_only</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)">bool</a></span> <span class="o">=</span> <span class="default_value">False</span></em>, <em class="sig-param"><span class="n">preserve_rest_position</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)">bool</a></span> <span class="o">=</span> <span class="default_value">False</span></em>, <em class="sig-param"><span class="n">disable_rewrite_meter</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)">bool</a></span> <span class="o">=</span> <span class="default_value">False</span></em>, <em class="sig-param"><span class="n">omit_time_signatures</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)">bool</a></span> <span class="o">=</span> <span class="default_value">False</span></em>, <em class="sig-param"><span class="n">boundary_depth</span><span class="p">:</span> <span class="n">Optional<span class="p">[</span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)">int</a><span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em>, <em class="sig-param"><span class="n">maximum_dot_count</span><span class="p">:</span> <span class="n">Optional<span class="p">[</span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)">int</a><span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em>, <em class="sig-param"><span class="n">rewrite_tuplets</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)">bool</a></span> <span class="o">=</span> <span class="default_value">True</span></em>, <em class="sig-param"><span class="n">process_on_first_call</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)">bool</a></span> <span class="o">=</span> <span class="default_value">True</span></em><span class="sig-paren">)</span><a class="headerlink" href="#auxjad.Shuffler" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">auxjad.</code><code class="sig-name descname">Shuffler</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">contents</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://abjad.github.io/api/abjad/core/Container.html#abjad.core.Container.Container" title="(in Abjad v3.1)">abjad.core.Container.Container</a></span></em>, <em class="sig-param"><span class="o">*</span></em>, <em class="sig-param"><span class="n">pitch_only</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)">bool</a></span> <span class="o">=</span> <span class="default_value">False</span></em>, <em class="sig-param"><span class="n">preserve_rest_position</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)">bool</a></span> <span class="o">=</span> <span class="default_value">False</span></em>, <em class="sig-param"><span class="n">disable_rewrite_meter</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)">bool</a></span> <span class="o">=</span> <span class="default_value">False</span></em>, <em class="sig-param"><span class="n">omit_time_signatures</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)">bool</a></span> <span class="o">=</span> <span class="default_value">False</span></em>, <em class="sig-param"><span class="n">boundary_depth</span><span class="p">:</span> <span class="n">Optional<span class="p">[</span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)">int</a><span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em>, <em class="sig-param"><span class="n">maximum_dot_count</span><span class="p">:</span> <span class="n">Optional<span class="p">[</span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)">int</a><span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em>, <em class="sig-param"><span class="n">rewrite_tuplets</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)">bool</a></span> <span class="o">=</span> <span class="default_value">True</span></em>, <em class="sig-param"><span class="n">process_on_first_call</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)">bool</a></span> <span class="o">=</span> <span class="default_value">True</span></em>, <em class="sig-param"><span class="n">prettify_rewrite_meter</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)">bool</a></span> <span class="o">=</span> <span class="default_value">True</span></em>, <em class="sig-param"><span class="n">extract_trivial_tuplets</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)">bool</a></span> <span class="o">=</span> <span class="default_value">True</span></em>, <em class="sig-param"><span class="n">fuse_across_groups_of_beats</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)">bool</a></span> <span class="o">=</span> <span class="default_value">True</span></em>, <em class="sig-param"><span class="n">fuse_quadruple_meter</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)">bool</a></span> <span class="o">=</span> <span class="default_value">True</span></em>, <em class="sig-param"><span class="n">fuse_triple_meter</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)">bool</a></span> <span class="o">=</span> <span class="default_value">True</span></em><span class="sig-paren">)</span><a class="headerlink" href="#auxjad.Shuffler" title="Permalink to this definition">¶</a></dt>
 <dd><p>This class takes an input <a class="reference external" href="https://abjad.github.io/api/abjad/core/Container.html#abjad.core.Container.Container" title="(in Abjad v3.1)"><code class="xref py py-class docutils literal notranslate"><span class="pre">abjad.Container</span></code></a> (or child class) and
 shuffles or rotates its logical ties or pitches. When shuffling or rotating
 pitches only, tuplets are supported, otherwise tuplets are not supported.</p>
@@ -204,7 +205,7 @@ container.</p>
 </pre></div>
 </div>
 <div class="figure align-default">
-<img alt="../_images/image-Shuffler-1.png" src="../_images/image-Shuffler-1.png" />
+<img alt="../_images/Shuffler-z2om98675v.png" src="../_images/Shuffler-z2om98675v.png" />
 </div>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">notes</span> <span class="o">=</span> <span class="n">shuffler</span><span class="p">()</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">staff</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span><span class="n">notes</span><span class="p">)</span>
@@ -220,7 +221,7 @@ container.</p>
 </pre></div>
 </div>
 <div class="figure align-default">
-<img alt="../_images/image-Shuffler-2.png" src="../_images/image-Shuffler-2.png" />
+<img alt="../_images/Shuffler-xu7sln4vt7n.png" src="../_images/Shuffler-xu7sln4vt7n.png" />
 </div>
 <p>To get the result of the last operation, use the property
 <a class="reference internal" href="#auxjad.Shuffler.current_window" title="auxjad.Shuffler.current_window"><code class="xref py py-attr docutils literal notranslate"><span class="pre">current_window</span></code></a>.</p>
@@ -238,7 +239,7 @@ container.</p>
 </pre></div>
 </div>
 <div class="figure align-default">
-<img alt="../_images/image-Shuffler-3.png" src="../_images/image-Shuffler-3.png" />
+<img alt="../_images/Shuffler-gphtpqn9jb.png" src="../_images/Shuffler-gphtpqn9jb.png" />
 </div>
 <p>Calling the object outputs the same result as using the method
 <a class="reference internal" href="#auxjad.Shuffler.shuffle" title="auxjad.Shuffler.shuffle"><code class="xref py py-meth docutils literal notranslate"><span class="pre">shuffle()</span></code></a>.</p>
@@ -256,7 +257,7 @@ container.</p>
 </pre></div>
 </div>
 <div class="figure align-default">
-<img alt="../_images/image-Shuffler-4.png" src="../_images/image-Shuffler-4.png" />
+<img alt="../_images/Shuffler-g965k0d03if.png" src="../_images/Shuffler-g965k0d03if.png" />
 </div>
 </dd>
 </dl>
@@ -285,7 +286,7 @@ or rotating it, initialise the class with the keyword argument
 </pre></div>
 </div>
 <div class="figure align-default">
-<img alt="../_images/image-Shuffler-5.png" src="../_images/image-Shuffler-5.png" />
+<img alt="../_images/Shuffler-76039tn5b9k.png" src="../_images/Shuffler-76039tn5b9k.png" />
 </div>
 </div>
 <dl>
@@ -329,7 +330,8 @@ the original container and subsequent calls will process it; set
 <a class="reference internal" href="#auxjad.Shuffler.process_on_first_call" title="auxjad.Shuffler.process_on_first_call"><code class="xref py py-attr docutils literal notranslate"><span class="pre">process_on_first_call</span></code></a> to <code class="docutils literal notranslate"><span class="pre">True</span></code> and the shuffling process
 will be applied on the very first call.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">container</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">(</span>
-<span class="gp">... </span>    <span class="sa">r</span><span class="s2">&quot;\time 3/4 c&#39;4 d&#39;4 e&#39;4 \time 2/4 f&#39;4 g&#39;4&quot;</span><span class="p">)</span>
+<span class="gp">... </span>    <span class="sa">r</span><span class="s2">&quot;\time 3/4 c&#39;4 d&#39;4 e&#39;4 \time 2/4 f&#39;4 g&#39;4&quot;</span>
+<span class="gp">... </span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">shuffler</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">Shuffler</span><span class="p">(</span><span class="n">container</span><span class="p">,</span>
 <span class="gp">... </span>                           <span class="n">pitch_only</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
 <span class="gp">... </span>                           <span class="n">preserve_rest_position</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
@@ -409,7 +411,7 @@ will be applied on the very first call.</p>
 </pre></div>
 </div>
 <div class="figure align-default">
-<img alt="../_images/image-Shuffler-6.png" src="../_images/image-Shuffler-6.png" />
+<img alt="../_images/Shuffler-5j79m0wuxu.png" src="../_images/Shuffler-5j79m0wuxu.png" />
 </div>
 <p>Setting <a class="reference internal" href="#auxjad.Shuffler.pitch_only" title="auxjad.Shuffler.pitch_only"><code class="xref py py-attr docutils literal notranslate"><span class="pre">pitch_only</span></code></a> to <code class="docutils literal notranslate"><span class="pre">True</span></code> enables pitch mode, so only
 pitches are shuffled (and not durations). Note how in the example below
@@ -434,15 +436,63 @@ the duration of each leaf is the same as the input container.</p>
 </pre></div>
 </div>
 <div class="figure align-default">
-<img alt="../_images/image-Shuffler-7.png" src="../_images/image-Shuffler-7.png" />
+<img alt="../_images/Shuffler-f9jbzqkrkdf.png" src="../_images/Shuffler-f9jbzqkrkdf.png" />
 </div>
 </dd>
+</dl>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Altering the value of <a class="reference internal" href="#auxjad.Shuffler.pitch_only" title="auxjad.Shuffler.pitch_only"><code class="xref py py-attr docutils literal notranslate"><span class="pre">pitch_only</span></code></a>: will replace the original
+<a class="reference internal" href="#auxjad.Shuffler.contents" title="auxjad.Shuffler.contents"><code class="xref py py-attr docutils literal notranslate"><span class="pre">contents</span></code></a>: with the contents of <a class="reference internal" href="#auxjad.Shuffler.current_window" title="auxjad.Shuffler.current_window"><code class="xref py py-attr docutils literal notranslate"><span class="pre">current_window</span></code></a>. Note how
+in the example below, the shuffled leaves in measure 3 comes from the
+previous measure and not from the initial <a class="reference internal" href="#auxjad.Shuffler.contents" title="auxjad.Shuffler.contents"><code class="xref py py-attr docutils literal notranslate"><span class="pre">contents</span></code></a>:.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">container</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;c&#39;4.. d&#39;16 e&#39;4. f&#39;8&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">shuffler</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">Shuffler</span><span class="p">(</span><span class="n">container</span><span class="p">,</span> <span class="n">pitch_only</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">notes</span> <span class="o">=</span> <span class="n">shuffler</span><span class="o">.</span><span class="n">shuffle_n</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">staff</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span><span class="n">notes</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">shuffler</span><span class="o">.</span><span class="n">pitch_only</span> <span class="o">=</span> <span class="kc">False</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">notes</span> <span class="o">=</span> <span class="n">shuffler</span><span class="o">.</span><span class="n">shuffle_n</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">staff</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">notes</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">auxjad</span><span class="o">.</span><span class="n">mutate</span><span class="p">(</span><span class="n">staff</span><span class="p">[:])</span><span class="o">.</span><span class="n">remove_repeated_time_signatures</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">f</span><span class="p">(</span><span class="n">staff</span><span class="p">)</span>
+<span class="go">\new Staff</span>
+<span class="go">{</span>
+<span class="go">    \time 4/4</span>
+<span class="go">    d&#39;4..</span>
+<span class="go">    c&#39;16</span>
+<span class="go">    f&#39;4.</span>
+<span class="go">    e&#39;8</span>
+<span class="go">    d&#39;4..</span>
+<span class="go">    f&#39;16</span>
+<span class="go">    c&#39;4.</span>
+<span class="go">    e&#39;8</span>
+<span class="go">    f&#39;16</span>
+<span class="go">    d&#39;4..</span>
+<span class="go">    e&#39;8</span>
+<span class="go">    c&#39;4.</span>
+<span class="go">    c&#39;4.</span>
+<span class="go">    d&#39;8</span>
+<span class="go">    ~</span>
+<span class="go">    d&#39;4</span>
+<span class="go">    ~</span>
+<span class="go">    d&#39;16</span>
+<span class="go">    e&#39;8</span>
+<span class="go">    f&#39;16</span>
+<span class="go">}</span>
+</pre></div>
+</div>
+<div class="figure align-default">
+<img alt="../_images/Shuffler-tyq8y6q8zr9.png" src="../_images/Shuffler-tyq8y6q8zr9.png" />
+</div>
+</div>
+<dl>
 <dt><a class="reference internal" href="#auxjad.Shuffler.rotate" title="auxjad.Shuffler.rotate"><code class="xref py py-meth docutils literal notranslate"><span class="pre">rotate()</span></code></a>:</dt><dd><p>Besides shuffling, logical ties and pitches can also be rotated using
 the <a class="reference internal" href="#auxjad.Shuffler.rotate" title="auxjad.Shuffler.rotate"><code class="xref py py-meth docutils literal notranslate"><span class="pre">rotate()</span></code></a> method. Similarly to shuffling, it can be applied to
 logical ties or pitches only depending on the property
 <a class="reference internal" href="#auxjad.Shuffler.pitch_only" title="auxjad.Shuffler.pitch_only"><code class="xref py py-attr docutils literal notranslate"><span class="pre">pitch_only</span></code></a>.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">container</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">(</span>
-<span class="gp">... </span>    <span class="sa">r</span><span class="s2">&quot;\time 3/4 c&#39;16 d&#39;8. ~ d&#39;4 e&#39;4 r4 f&#39;4 ~ f&#39;8.. g&#39;32&quot;</span><span class="p">)</span>
+<span class="gp">... </span>    <span class="sa">r</span><span class="s2">&quot;\time 3/4 c&#39;16 d&#39;8. ~ d&#39;4 e&#39;4 r4 f&#39;4 ~ f&#39;8.. g&#39;32&quot;</span>
+<span class="gp">... </span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">shuffler</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">Shuffler</span><span class="p">(</span><span class="n">container</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">notes</span> <span class="o">=</span> <span class="n">shuffler</span><span class="o">.</span><span class="n">rotate</span><span class="p">()</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">staff</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span><span class="n">notes</span><span class="p">)</span>
@@ -469,10 +519,11 @@ logical ties or pitches only depending on the property
 </pre></div>
 </div>
 <div class="figure align-default">
-<img alt="../_images/image-Shuffler-8.png" src="../_images/image-Shuffler-8.png" />
+<img alt="../_images/Shuffler-7vamgsxlr6.png" src="../_images/Shuffler-7vamgsxlr6.png" />
 </div>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">container</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">(</span>
-<span class="gp">... </span>    <span class="sa">r</span><span class="s2">&quot;\time 3/4 c&#39;16 d&#39;8. ~ d&#39;4 e&#39;4 r4 f&#39;4 ~ f&#39;8.. g&#39;32&quot;</span><span class="p">)</span>
+<span class="gp">... </span>    <span class="sa">r</span><span class="s2">&quot;\time 3/4 c&#39;16 d&#39;8. ~ d&#39;4 e&#39;4 r4 f&#39;4 ~ f&#39;8.. g&#39;32&quot;</span>
+<span class="gp">... </span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">shuffler</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">Shuffler</span><span class="p">(</span><span class="n">container</span><span class="p">,</span> <span class="n">pitch_only</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">notes</span> <span class="o">=</span> <span class="n">shuffler</span><span class="o">.</span><span class="n">rotate</span><span class="p">()</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">staff</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span><span class="n">notes</span><span class="p">)</span>
@@ -494,14 +545,15 @@ logical ties or pitches only depending on the property
 </pre></div>
 </div>
 <div class="figure align-default">
-<img alt="../_images/image-Shuffler-9.png" src="../_images/image-Shuffler-9.png" />
+<img alt="../_images/Shuffler-89cx79bjji8.png" src="../_images/Shuffler-89cx79bjji8.png" />
 </div>
 <p>This method can also take the optional parameters <code class="docutils literal notranslate"><span class="pre">n_rotations</span></code> and
 <code class="docutils literal notranslate"><span class="pre">anticlockwise</span></code>. The first is an <a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">int</span></code></a> setting the number of
 rotations applied to the material, and the second is a <a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">bool</span></code></a>
 setting the direction of the rotation (default <code class="docutils literal notranslate"><span class="pre">False</span></code>).</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">container</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">(</span>
-<span class="gp">... </span>    <span class="sa">r</span><span class="s2">&quot;\time 3/4 c&#39;16 d&#39;8. ~ d&#39;4 e&#39;4 r4 f&#39;4 ~ f&#39;8.. g&#39;32&quot;</span><span class="p">)</span>
+<span class="gp">... </span>    <span class="sa">r</span><span class="s2">&quot;\time 3/4 c&#39;16 d&#39;8. ~ d&#39;4 e&#39;4 r4 f&#39;4 ~ f&#39;8.. g&#39;32&quot;</span>
+<span class="gp">... </span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">shuffler</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">Shuffler</span><span class="p">(</span><span class="n">container</span><span class="p">,</span> <span class="n">pitch_only</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">notes</span> <span class="o">=</span> <span class="n">shuffler</span><span class="o">.</span><span class="n">rotate</span><span class="p">(</span><span class="n">n_rotations</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">anticlockwise</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">staff</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span><span class="n">notes</span><span class="p">)</span>
@@ -523,7 +575,7 @@ setting the direction of the rotation (default <code class="docutils literal not
 </pre></div>
 </div>
 <div class="figure align-default">
-<img alt="../_images/image-Shuffler-10.png" src="../_images/image-Shuffler-10.png" />
+<img alt="../_images/Shuffler-g6v6wjm12ub.png" src="../_images/Shuffler-g6v6wjm12ub.png" />
 </div>
 </dd>
 <dt><a class="reference internal" href="#auxjad.Shuffler.preserve_rest_position" title="auxjad.Shuffler.preserve_rest_position"><code class="xref py py-attr docutils literal notranslate"><span class="pre">preserve_rest_position</span></code></a>:</dt><dd><p>If <a class="reference internal" href="#auxjad.Shuffler.preserve_rest_position" title="auxjad.Shuffler.preserve_rest_position"><code class="xref py py-attr docutils literal notranslate"><span class="pre">preserve_rest_position</span></code></a> is set to <code class="docutils literal notranslate"><span class="pre">True</span></code>, the positions of
@@ -552,12 +604,12 @@ rests remain in the exact same place.</p>
 </pre></div>
 </div>
 <div class="figure align-default">
-<img alt="../_images/image-Shuffler-11.png" src="../_images/image-Shuffler-11.png" />
+<img alt="../_images/Shuffler-pmou83f7rlj.png" src="../_images/Shuffler-pmou83f7rlj.png" />
 </div>
 <p>In logical ties mode, the rests will remain at the same index and will
 have the same total duration as before, but their position in the
 measure might vary since the duration of the pitched logical ties
-preceeding it might change.</p>
+preceding it might change.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">container</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;c&#39;8. d&#39;4 r8 r8. e&#39;16 f&#39;8.&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">shuffler</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">Shuffler</span><span class="p">(</span><span class="n">container</span><span class="p">,</span> <span class="n">preserve_rest_position</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">notes</span> <span class="o">=</span> <span class="n">shuffler</span><span class="p">()</span>
@@ -578,7 +630,7 @@ preceeding it might change.</p>
 </pre></div>
 </div>
 <div class="figure align-default">
-<img alt="../_images/image-Shuffler-12.png" src="../_images/image-Shuffler-12.png" />
+<img alt="../_images/Shuffler-7hbp2kdpqof.png" src="../_images/Shuffler-7hbp2kdpqof.png" />
 </div>
 </dd>
 <dt><a class="reference internal" href="#auxjad.Shuffler.disable_rewrite_meter" title="auxjad.Shuffler.disable_rewrite_meter"><code class="xref py py-attr docutils literal notranslate"><span class="pre">disable_rewrite_meter</span></code></a>:</dt><dd><p>If <a class="reference internal" href="#auxjad.Shuffler.disable_rewrite_meter" title="auxjad.Shuffler.disable_rewrite_meter"><code class="xref py py-attr docutils literal notranslate"><span class="pre">disable_rewrite_meter</span></code></a> is set to <code class="docutils literal notranslate"><span class="pre">True</span></code>, then the automatic
@@ -601,7 +653,7 @@ behaviour of rewriting the leaves according to the meter is disabled.</p>
 </pre></div>
 </div>
 <div class="figure align-default">
-<img alt="../_images/image-Shuffler-13.png" src="../_images/image-Shuffler-13.png" />
+<img alt="../_images/Shuffler-tb78izpzvjp.png" src="../_images/Shuffler-tb78izpzvjp.png" />
 </div>
 </dd>
 <dt><a class="reference internal" href="#auxjad.Shuffler.shuffle_n" title="auxjad.Shuffler.shuffle_n"><code class="xref py py-meth docutils literal notranslate"><span class="pre">shuffle_n()</span></code></a> and <a class="reference internal" href="#auxjad.Shuffler.rotate_n" title="auxjad.Shuffler.rotate_n"><code class="xref py py-meth docutils literal notranslate"><span class="pre">rotate_n()</span></code></a>:</dt><dd><p>To output several shuffled containers at once, use the methods
@@ -628,15 +680,13 @@ iterations. <a class="reference internal" href="#auxjad.Shuffler.rotate_n" title
 <span class="go">    g&#39;16</span>
 <span class="go">    f&#39;8.</span>
 <span class="go">    e&#39;4.</span>
-<span class="go">    c&#39;8</span>
-<span class="go">    ~</span>
-<span class="go">    c&#39;8</span>
+<span class="go">    c&#39;4</span>
 <span class="go">    d&#39;8</span>
 <span class="go">}</span>
 </pre></div>
 </div>
 <div class="figure align-default">
-<img alt="../_images/image-Shuffler-14.png" src="../_images/image-Shuffler-14.png" />
+<img alt="../_images/Shuffler-vtia65lbk5.png" src="../_images/Shuffler-vtia65lbk5.png" />
 </div>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">container</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;c&#39;4 d&#39;8 e&#39;4. f&#39;8. g&#39;16&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">shuffler</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">Shuffler</span><span class="p">(</span><span class="n">container</span><span class="p">)</span>
@@ -656,15 +706,13 @@ iterations. <a class="reference internal" href="#auxjad.Shuffler.rotate_n" title
 <span class="go">    ~</span>
 <span class="go">    f&#39;16</span>
 <span class="go">    g&#39;16</span>
-<span class="go">    c&#39;8</span>
-<span class="go">    ~</span>
-<span class="go">    c&#39;8</span>
+<span class="go">    c&#39;4</span>
 <span class="go">    d&#39;8</span>
 <span class="go">}</span>
 </pre></div>
 </div>
 <div class="figure align-default">
-<img alt="../_images/image-Shuffler-15.png" src="../_images/image-Shuffler-15.png" />
+<img alt="../_images/Shuffler-3dqhy8eoiez.png" src="../_images/Shuffler-3dqhy8eoiez.png" />
 </div>
 </dd>
 <dt><a class="reference internal" href="#auxjad.Shuffler.omit_time_signatures" title="auxjad.Shuffler.omit_time_signatures"><code class="xref py py-attr docutils literal notranslate"><span class="pre">omit_time_signatures</span></code></a>:</dt><dd><p>To disable time signatures altogether, initialise this class with the
@@ -695,7 +743,7 @@ after initialisation.</p>
 </pre></div>
 </div>
 <div class="figure align-default">
-<img alt="../_images/image-Shuffler-16.png" src="../_images/image-Shuffler-16.png" />
+<img alt="../_images/Shuffler-1v3lwhj430b.png" src="../_images/Shuffler-1v3lwhj430b.png" />
 </div>
 </dd>
 </dl>
@@ -705,14 +753,15 @@ after initialisation.</p>
 signature to it. The <a class="reference internal" href="#auxjad.Shuffler.shuffle_n" title="auxjad.Shuffler.shuffle_n"><code class="xref py py-meth docutils literal notranslate"><span class="pre">shuffle_n()</span></code></a> and <a class="reference internal" href="#auxjad.Shuffler.rotate_n" title="auxjad.Shuffler.rotate_n"><code class="xref py py-meth docutils literal notranslate"><span class="pre">rotate_n()</span></code></a> methods
 automatically remove repeated time signatures. When joining selections
 output by multiple method calls, use
-<a class="reference internal" href="auxjad.remove_repeated_time_signatures.html#auxjad.remove_repeated_time_signatures" title="auxjad.remove_repeated_time_signatures"><code class="xref py py-func docutils literal notranslate"><span class="pre">auxjad.remove_repeated_time_signatures()</span></code></a> on the whole container
-after fusing the selections to remove any unecessary time signature
-changes.</p>
+<a class="reference internal" href="auxjad.Mutation.html#auxjad.Mutation.remove_repeated_time_signatures" title="auxjad.Mutation.remove_repeated_time_signatures"><code class="xref py py-meth docutils literal notranslate"><span class="pre">auxjad.mutate().remove_repeated_time_signatures()</span></code></a> on the whole
+container after fusing the selections to remove any unecessary time
+signature changes.</p>
 </div>
 <dl>
 <dt>Time signature changes:</dt><dd><p>This class handles time signature changes too:</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">container</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">(</span>
-<span class="gp">... </span>    <span class="sa">r</span><span class="s2">&quot;\time 3/4 c&#39;8. d&#39;4 r8 r8. \time 2/4 e&#39;16 f&#39;4..&quot;</span><span class="p">)</span>
+<span class="gp">... </span>    <span class="sa">r</span><span class="s2">&quot;\time 3/4 c&#39;8. d&#39;4 r8 r8. \time 2/4 e&#39;16 f&#39;4..&quot;</span>
+<span class="gp">... </span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">shuffler</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">Shuffler</span><span class="p">(</span><span class="n">container</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">notes</span> <span class="o">=</span> <span class="n">shuffler</span><span class="o">.</span><span class="n">shuffle_n</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">staff</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span><span class="n">notes</span><span class="p">)</span>
@@ -745,13 +794,14 @@ changes.</p>
 </pre></div>
 </div>
 <div class="figure align-default">
-<img alt="../_images/image-Shuffler-17.png" src="../_images/image-Shuffler-17.png" />
+<img alt="../_images/Shuffler-yx11u6o14v.png" src="../_images/Shuffler-yx11u6o14v.png" />
 </div>
 </dd>
 <dt>Tuplet support:</dt><dd><p>Tuplets are supported when <a class="reference internal" href="#auxjad.Shuffler.pitch_only" title="auxjad.Shuffler.pitch_only"><code class="xref py py-attr docutils literal notranslate"><span class="pre">pitch_only</span></code></a> is <code class="docutils literal notranslate"><span class="pre">True</span></code> (pitch-only
 mode).</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">container</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">(</span>
-<span class="gp">... </span>    <span class="sa">r</span><span class="s2">&quot;\time 5/4 r4 \times 2/3 {c&#39;4 d&#39;2} e&#39;4. f&#39;8&quot;</span><span class="p">)</span>
+<span class="gp">... </span>    <span class="sa">r</span><span class="s2">&quot;\time 5/4 r4 \times 2/3 {c&#39;4 d&#39;2} e&#39;4. f&#39;8&quot;</span>
+<span class="gp">... </span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">shuffler</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">Shuffler</span><span class="p">(</span><span class="n">container</span><span class="p">,</span> <span class="n">pitch_only</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">notes</span> <span class="o">=</span> <span class="n">shuffler</span><span class="p">()</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">staff</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span><span class="n">notes</span><span class="p">)</span>
@@ -770,7 +820,7 @@ mode).</p>
 </pre></div>
 </div>
 <div class="figure align-default">
-<img alt="../_images/image-Shuffler-18.png" src="../_images/image-Shuffler-18.png" />
+<img alt="../_images/Shuffler-mjxubkel8y.png" src="../_images/Shuffler-mjxubkel8y.png" />
 </div>
 </dd>
 </dl>
@@ -780,7 +830,8 @@ mode).</p>
 tie mode). Using a container with tuplets and <a class="reference internal" href="#auxjad.Shuffler.pitch_only" title="auxjad.Shuffler.pitch_only"><code class="xref py py-attr docutils literal notranslate"><span class="pre">pitch_only</span></code></a> set to
 <code class="docutils literal notranslate"><span class="pre">True</span></code> will raise a <a class="reference external" href="https://docs.python.org/3/library/exceptions.html#TypeError" title="(in Python v3.8)"><code class="xref py py-exc docutils literal notranslate"><span class="pre">TypeError</span></code></a> exception.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">container</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">(</span>
-<span class="gp">... </span>    <span class="sa">r</span><span class="s2">&quot;\time 5/4 r4 \times 2/3 {c&#39;4 d&#39;2} e&#39;4. f&#39;8&quot;</span><span class="p">)</span>
+<span class="gp">... </span>    <span class="sa">r</span><span class="s2">&quot;\time 5/4 r4 \times 2/3 {c&#39;4 d&#39;2} e&#39;4. f&#39;8&quot;</span>
+<span class="gp">... </span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">shuffler</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">Shuffler</span><span class="p">(</span><span class="n">container</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">notes</span> <span class="o">=</span> <span class="n">shuffler</span><span class="p">()</span>
 <span class="go">TypeError: &#39;contents&#39; contain one ore more tuplets, which are not</span>
@@ -791,7 +842,8 @@ tie mode). Using a container with tuplets and <a class="reference internal" href
 <dl>
 <dt>Indicators:</dt><dd><p>This class can also handle dynamics and articulations.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">container</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">(</span>
-<span class="gp">... </span>    <span class="sa">r</span><span class="s2">&quot;&lt;c&#39; e&#39; g&#39;&gt;4--\p d&#39;8-. e&#39;8-. f&#39;4-^\f r4&quot;</span><span class="p">)</span>
+<span class="gp">... </span>    <span class="sa">r</span><span class="s2">&quot;&lt;c&#39; e&#39; g&#39;&gt;4--\p d&#39;8-. e&#39;8-. f&#39;4-^\f r4&quot;</span>
+<span class="gp">... </span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">shuffler</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">Shuffler</span><span class="p">(</span><span class="n">container</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">notes</span> <span class="o">=</span> <span class="n">shuffler</span><span class="o">.</span><span class="n">shuffle_n</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">staff</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span><span class="n">notes</span><span class="p">)</span>
@@ -819,11 +871,9 @@ tie mode). Using a container with tuplets and <a class="reference internal" href
 <span class="go">    - \marcato</span>
 <span class="go">    ~</span>
 <span class="go">    f&#39;8</span>
-<span class="go">    &lt;c&#39; e&#39; g&#39;&gt;8</span>
+<span class="go">    &lt;c&#39; e&#39; g&#39;&gt;4</span>
 <span class="go">    \p</span>
 <span class="go">    - \tenuto</span>
-<span class="go">    ~</span>
-<span class="go">    &lt;c&#39; e&#39; g&#39;&gt;8</span>
 <span class="go">    e&#39;8</span>
 <span class="go">    - \staccato</span>
 <span class="go">    f&#39;4</span>
@@ -843,15 +893,15 @@ tie mode). Using a container with tuplets and <a class="reference internal" href
 </pre></div>
 </div>
 <div class="figure align-default">
-<img alt="../_images/image-Shuffler-19.png" src="../_images/image-Shuffler-19.png" />
+<img alt="../_images/Shuffler-2ibui58pj8w.png" src="../_images/Shuffler-2ibui58pj8w.png" />
 </div>
 </dd>
 </dl>
 <div class="admonition tip">
 <p class="admonition-title">Tip</p>
-<p>The functions <a class="reference internal" href="auxjad.remove_repeated_dynamics.html#auxjad.remove_repeated_dynamics" title="auxjad.remove_repeated_dynamics"><code class="xref py py-func docutils literal notranslate"><span class="pre">auxjad.remove_repeated_dynamics()</span></code></a> and
-<a class="reference internal" href="auxjad.reposition_clefs.html#auxjad.reposition_clefs" title="auxjad.reposition_clefs"><code class="xref py py-func docutils literal notranslate"><span class="pre">auxjad.reposition_clefs()</span></code></a> can be used to clean the output and
-remove repeated dynamics and unnecessary clef changes.</p>
+<p>The functions <a class="reference internal" href="auxjad.Mutation.html#auxjad.Mutation.remove_repeated_dynamics" title="auxjad.Mutation.remove_repeated_dynamics"><code class="xref py py-meth docutils literal notranslate"><span class="pre">auxjad.mutate().remove_repeated_dynamics()</span></code></a> and
+<a class="reference internal" href="auxjad.Mutation.html#auxjad.Mutation.reposition_clefs" title="auxjad.Mutation.reposition_clefs"><code class="xref py py-meth docutils literal notranslate"><span class="pre">auxjad.mutate().reposition_clefs()</span></code></a> can be used to clean the output
+and remove repeated dynamics and unnecessary clef changes.</p>
 </div>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
@@ -882,7 +932,7 @@ to change the <a class="reference external" href="https://abjad.github.io/api/ab
 </pre></div>
 </div>
 <div class="figure align-default">
-<img alt="../_images/image-Shuffler-20.png" src="../_images/image-Shuffler-20.png" />
+<img alt="../_images/Shuffler-qsee7chymo.png" src="../_images/Shuffler-qsee7chymo.png" />
 </div>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">shuffler</span><span class="p">()</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">f</span><span class="p">(</span><span class="n">shuffler</span><span class="o">.</span><span class="n">contents</span><span class="p">)</span>
@@ -895,7 +945,7 @@ to change the <a class="reference external" href="https://abjad.github.io/api/ab
 </pre></div>
 </div>
 <div class="figure align-default">
-<img alt="../_images/image-Shuffler-21.png" src="../_images/image-Shuffler-21.png" />
+<img alt="../_images/Shuffler-ii3fxe001ki.png" src="../_images/Shuffler-ii3fxe001ki.png" />
 </div>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">shuffler</span><span class="o">.</span><span class="n">contents</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;cs2 ds2&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">f</span><span class="p">(</span><span class="n">shuffler</span><span class="o">.</span><span class="n">contents</span><span class="p">)</span>
@@ -906,7 +956,7 @@ to change the <a class="reference external" href="https://abjad.github.io/api/ab
 </pre></div>
 </div>
 <div class="figure align-default">
-<img alt="../_images/image-Shuffler-22.png" src="../_images/image-Shuffler-22.png" />
+<img alt="../_images/Shuffler-p2vd4mfvucp.png" src="../_images/Shuffler-p2vd4mfvucp.png" />
 </div>
 </dd>
 <dt>Tweaking <a class="reference external" href="https://abjad.github.io/api/abjad/core/Mutation.html#abjad.core.Mutation.Mutation.rewrite_meter" title="(in Abjad v3.1)"><code class="xref py py-meth docutils literal notranslate"><span class="pre">abjad.mutate().rewrite_meter()</span></code></a>:</dt><dd><p>This function uses the default logical tie splitting algorithm from
@@ -926,7 +976,7 @@ to change the <a class="reference external" href="https://abjad.github.io/api/ab
 </pre></div>
 </div>
 <div class="figure align-default">
-<img alt="../_images/image-Shuffler-23.png" src="../_images/image-Shuffler-23.png" />
+<img alt="../_images/Shuffler-t4lsqxg18ab.png" src="../_images/Shuffler-t4lsqxg18ab.png" />
 </div>
 <p>Set <a class="reference internal" href="#auxjad.Shuffler.boundary_depth" title="auxjad.Shuffler.boundary_depth"><code class="xref py py-attr docutils literal notranslate"><span class="pre">boundary_depth</span></code></a> to a different number to change its
 behaviour.</p>
@@ -948,12 +998,18 @@ behaviour.</p>
 </pre></div>
 </div>
 <div class="figure align-default">
-<img alt="../_images/image-Shuffler-24.png" src="../_images/image-Shuffler-24.png" />
+<img alt="../_images/Shuffler-7na5znnhhwe.png" src="../_images/Shuffler-7na5znnhhwe.png" />
 </div>
 <p>Other arguments available for tweaking the output of
 <a class="reference external" href="https://abjad.github.io/api/abjad/core/Mutation.html#abjad.core.Mutation.Mutation.rewrite_meter" title="(in Abjad v3.1)"><code class="xref py py-meth docutils literal notranslate"><span class="pre">abjad.mutate().rewrite_meter()</span></code></a> are <a class="reference internal" href="#auxjad.Shuffler.maximum_dot_count" title="auxjad.Shuffler.maximum_dot_count"><code class="xref py py-attr docutils literal notranslate"><span class="pre">maximum_dot_count</span></code></a> and
 <a class="reference internal" href="#auxjad.Shuffler.rewrite_tuplets" title="auxjad.Shuffler.rewrite_tuplets"><code class="xref py py-attr docutils literal notranslate"><span class="pre">rewrite_tuplets</span></code></a>, which work exactly as the identically named
 arguments of <a class="reference external" href="https://abjad.github.io/api/abjad/core/Mutation.html#abjad.core.Mutation.Mutation.rewrite_meter" title="(in Abjad v3.1)"><code class="xref py py-meth docutils literal notranslate"><span class="pre">abjad.mutate().rewrite_meter()</span></code></a>.</p>
+<p>This class also accepts the arguments <code class="docutils literal notranslate"><span class="pre">fuse_across_groups_of_beats</span></code>,
+<code class="docutils literal notranslate"><span class="pre">fuse_quadruple_meter</span></code>, <code class="docutils literal notranslate"><span class="pre">fuse_triple_meter</span></code>, and
+<code class="docutils literal notranslate"><span class="pre">extract_trivial_tuplets</span></code>, which are passed on to
+<a class="reference internal" href="auxjad.Mutation.html#auxjad.Mutation.prettify_rewrite_meter" title="auxjad.Mutation.prettify_rewrite_meter"><code class="xref py py-meth docutils literal notranslate"><span class="pre">auxjad.mutate().prettify_rewrite_meter()</span></code></a> (the latter can be disabled
+by setting <code class="docutils literal notranslate"><span class="pre">prettify_rewrite_meter</span></code> to <code class="docutils literal notranslate"><span class="pre">False</span></code>). See the
+documentation of this function for more details on these arguments.</p>
 </dd>
 <dt><a class="reference internal" href="#auxjad.Shuffler.disable_rewrite_meter" title="auxjad.Shuffler.disable_rewrite_meter"><code class="xref py py-attr docutils literal notranslate"><span class="pre">disable_rewrite_meter</span></code></a>:</dt><dd><p>By default, this class uses the <a class="reference external" href="https://abjad.github.io/api/abjad/core/Mutation.html#abjad.core.Mutation.Mutation.rewrite_meter" title="(in Abjad v3.1)"><code class="xref py py-meth docutils literal notranslate"><span class="pre">abjad.mutate().rewrite_meter()</span></code></a>
 mutation.</p>
@@ -977,12 +1033,32 @@ mutation.</p>
 </pre></div>
 </div>
 <div class="figure align-default">
-<img alt="../_images/image-Shuffler-25.png" src="../_images/image-Shuffler-25.png" />
+<img alt="../_images/Shuffler-7cfnxx7shci.png" src="../_images/Shuffler-7cfnxx7shci.png" />
 </div>
 <p>Set <a class="reference internal" href="#auxjad.Shuffler.disable_rewrite_meter" title="auxjad.Shuffler.disable_rewrite_meter"><code class="xref py py-attr docutils literal notranslate"><span class="pre">disable_rewrite_meter</span></code></a> to <code class="docutils literal notranslate"><span class="pre">True</span></code> in order to disable this
 behaviour.</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">container</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;c&#39;4 d&#39;8 e&#39;8 f&#39;2&quot;</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">shuffler</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">Shuffler</span><span class="p">(</span><span class="n">container</span><span class="p">,</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">container</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;c&#39;4 d&#39;8. e&#39;16 f&#39;2&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">f</span><span class="p">(</span><span class="n">container</span><span class="p">)</span>
+<span class="go">\new Staff</span>
+<span class="go">{</span>
+<span class="go">    \time 4/4</span>
+<span class="go">    e&#39;16</span>
+<span class="go">    f&#39;8.</span>
+<span class="go">    ~</span>
+<span class="go">    f&#39;4</span>
+<span class="go">    ~</span>
+<span class="go">    f&#39;16</span>
+<span class="go">    c&#39;8.</span>
+<span class="go">    ~</span>
+<span class="go">    c&#39;16</span>
+<span class="go">    d&#39;8.</span>
+<span class="go">}</span>
+</pre></div>
+</div>
+<div class="figure align-default">
+<img alt="../_images/Shuffler-6gm4ev48j9k.png" src="../_images/Shuffler-6gm4ev48j9k.png" />
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">shuffler</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">Shuffler</span><span class="p">(</span><span class="n">container</span><span class="p">,</span>
 <span class="gp">... </span>                           <span class="n">disable_rewrite_meter</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
 <span class="gp">... </span>                           <span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">notes</span> <span class="o">=</span> <span class="n">shuffler</span><span class="p">()</span>
@@ -991,22 +1067,22 @@ behaviour.</p>
 <span class="go">\new Staff</span>
 <span class="go">{</span>
 <span class="go">    \time 4/4</span>
-<span class="go">    e&#39;8</span>
+<span class="go">    e&#39;16</span>
 <span class="go">    f&#39;2</span>
 <span class="go">    c&#39;4</span>
-<span class="go">    d&#39;8</span>
+<span class="go">    d&#39;8.</span>
 <span class="go">}</span>
 </pre></div>
 </div>
 <div class="figure align-default">
-<img alt="../_images/image-Shuffler-26.png" src="../_images/image-Shuffler-26.png" />
+<img alt="../_images/Shuffler-xlr4x3bhj6n.png" src="../_images/Shuffler-xlr4x3bhj6n.png" />
 </div>
 </dd>
 <dt>Using as iterator:</dt><dd><p>The instances of this class can also be used as an iterator, which can
 then be used in a for loop. Note that unlike the methods
 <a class="reference internal" href="#auxjad.Shuffler.shuffle_n" title="auxjad.Shuffler.shuffle_n"><code class="xref py py-meth docutils literal notranslate"><span class="pre">shuffle_n()</span></code></a> and <a class="reference internal" href="#auxjad.Shuffler.rotate_n" title="auxjad.Shuffler.rotate_n"><code class="xref py py-meth docutils literal notranslate"><span class="pre">rotate_n()</span></code></a>, time signatures are added to
 each window returned by the shuffler. Use the function
-<a class="reference internal" href="auxjad.remove_repeated_time_signatures.html#auxjad.remove_repeated_time_signatures" title="auxjad.remove_repeated_time_signatures"><code class="xref py py-func docutils literal notranslate"><span class="pre">auxjad.remove_repeated_time_signatures()</span></code></a> to clean the output
+<a class="reference internal" href="auxjad.Mutation.html#auxjad.Mutation.remove_repeated_time_signatures" title="auxjad.Mutation.remove_repeated_time_signatures"><code class="xref py py-meth docutils literal notranslate"><span class="pre">auxjad.mutate().remove_repeated_time_signatures()</span></code></a> to clean the output
 when using this class in this way. It is also important to note that a
 <code class="docutils literal notranslate"><span class="pre">break</span></code> statement is needed when using this class as an iterator. The
 reason is that shuffling is a process that can happen indefinitely
@@ -1018,7 +1094,7 @@ reason is that shuffling is a process that can happen indefinitely
 <span class="gp">... </span>    <span class="n">staff</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">window</span><span class="p">)</span>
 <span class="gp">... </span>    <span class="k">if</span> <span class="n">abjad</span><span class="o">.</span><span class="n">inspect</span><span class="p">(</span><span class="n">staff</span><span class="p">)</span><span class="o">.</span><span class="n">duration</span><span class="p">()</span> <span class="o">==</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Duration</span><span class="p">((</span><span class="mi">9</span><span class="p">,</span> <span class="mi">4</span><span class="p">)):</span>
 <span class="gp">... </span>        <span class="k">break</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">auxjad</span><span class="o">.</span><span class="n">remove_repeated_time_signatures</span><span class="p">(</span><span class="n">staff</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">auxjad</span><span class="o">.</span><span class="n">mutate</span><span class="p">(</span><span class="n">staff</span><span class="p">[:])</span><span class="o">.</span><span class="n">remove_repeated_time_signatures</span><span class="p">()</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">f</span><span class="p">(</span><span class="n">staff</span><span class="p">)</span>
 <span class="go">\new Staff</span>
 <span class="go">{</span>
@@ -1036,7 +1112,7 @@ reason is that shuffling is a process that can happen indefinitely
 </pre></div>
 </div>
 <div class="figure align-default">
-<img alt="../_images/image-Shuffler-27.png" src="../_images/image-Shuffler-27.png" />
+<img alt="../_images/Shuffler-3gyz7atvemx.png" src="../_images/Shuffler-3gyz7atvemx.png" />
 </div>
 </dd>
 </dl>
@@ -1098,6 +1174,18 @@ reason is that shuffling is a process that can happen indefinitely
 <tr class="row-even"><td><p><a class="reference internal" href="#auxjad.Shuffler.disable_rewrite_meter" title="auxjad.Shuffler.disable_rewrite_meter"><code class="xref py py-obj docutils literal notranslate"><span class="pre">disable_rewrite_meter</span></code></a></p></td>
 <td><p>When <code class="docutils literal notranslate"><span class="pre">True</span></code>, the durations of the notes in the output will not be rewritten by the <a class="reference external" href="https://abjad.github.io/api/abjad/core/Mutation.html#abjad.core.Mutation.Mutation.rewrite_meter" title="(in Abjad v3.1)"><code class="xref py py-meth docutils literal notranslate"><span class="pre">abjad.mutate().rewrite_meter()</span></code></a> mutation.</p></td>
 </tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#auxjad.Shuffler.extract_trivial_tuplets" title="auxjad.Shuffler.extract_trivial_tuplets"><code class="xref py py-obj docutils literal notranslate"><span class="pre">extract_trivial_tuplets</span></code></a></p></td>
+<td><p>Sets the argument <code class="docutils literal notranslate"><span class="pre">extract_trivial_tuplets</span></code> of <a class="reference internal" href="auxjad.Mutation.html#auxjad.Mutation.prettify_rewrite_meter" title="auxjad.Mutation.prettify_rewrite_meter"><code class="xref py py-meth docutils literal notranslate"><span class="pre">auxjad.mutate().prettify_rewrite_meter()</span></code></a>.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#auxjad.Shuffler.fuse_across_groups_of_beats" title="auxjad.Shuffler.fuse_across_groups_of_beats"><code class="xref py py-obj docutils literal notranslate"><span class="pre">fuse_across_groups_of_beats</span></code></a></p></td>
+<td><p>Sets the argument <code class="docutils literal notranslate"><span class="pre">fuse_across_groups_of_beats</span></code> of <a class="reference internal" href="auxjad.Mutation.html#auxjad.Mutation.prettify_rewrite_meter" title="auxjad.Mutation.prettify_rewrite_meter"><code class="xref py py-meth docutils literal notranslate"><span class="pre">auxjad.mutate().prettify_rewrite_meter()</span></code></a>.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#auxjad.Shuffler.fuse_quadruple_meter" title="auxjad.Shuffler.fuse_quadruple_meter"><code class="xref py py-obj docutils literal notranslate"><span class="pre">fuse_quadruple_meter</span></code></a></p></td>
+<td><p>Sets the argument <code class="docutils literal notranslate"><span class="pre">fuse_quadruple_meter</span></code> of <a class="reference internal" href="auxjad.Mutation.html#auxjad.Mutation.prettify_rewrite_meter" title="auxjad.Mutation.prettify_rewrite_meter"><code class="xref py py-meth docutils literal notranslate"><span class="pre">auxjad.mutate().prettify_rewrite_meter()</span></code></a>.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#auxjad.Shuffler.fuse_triple_meter" title="auxjad.Shuffler.fuse_triple_meter"><code class="xref py py-obj docutils literal notranslate"><span class="pre">fuse_triple_meter</span></code></a></p></td>
+<td><p>Sets the argument <code class="docutils literal notranslate"><span class="pre">fuse_triple_meter</span></code> of <a class="reference internal" href="auxjad.Mutation.html#auxjad.Mutation.prettify_rewrite_meter" title="auxjad.Mutation.prettify_rewrite_meter"><code class="xref py py-meth docutils literal notranslate"><span class="pre">auxjad.mutate().prettify_rewrite_meter()</span></code></a>.</p></td>
+</tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="#auxjad.Shuffler.maximum_dot_count" title="auxjad.Shuffler.maximum_dot_count"><code class="xref py py-obj docutils literal notranslate"><span class="pre">maximum_dot_count</span></code></a></p></td>
 <td><p>Sets the argument <code class="docutils literal notranslate"><span class="pre">maximum_dot_count</span></code> of <a class="reference external" href="https://abjad.github.io/api/abjad/core/Mutation.html#abjad.core.Mutation.Mutation.rewrite_meter" title="(in Abjad v3.1)"><code class="xref py py-meth docutils literal notranslate"><span class="pre">abjad.mutate().rewrite_meter()</span></code></a>.</p></td>
 </tr>
@@ -1110,10 +1198,13 @@ reason is that shuffling is a process that can happen indefinitely
 <tr class="row-even"><td><p><a class="reference internal" href="#auxjad.Shuffler.preserve_rest_position" title="auxjad.Shuffler.preserve_rest_position"><code class="xref py py-obj docutils literal notranslate"><span class="pre">preserve_rest_position</span></code></a></p></td>
 <td><p>When <code class="docutils literal notranslate"><span class="pre">True</span></code>, shuffle operations will preserve rest positions and durations.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#auxjad.Shuffler.process_on_first_call" title="auxjad.Shuffler.process_on_first_call"><code class="xref py py-obj docutils literal notranslate"><span class="pre">process_on_first_call</span></code></a></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#auxjad.Shuffler.prettify_rewrite_meter" title="auxjad.Shuffler.prettify_rewrite_meter"><code class="xref py py-obj docutils literal notranslate"><span class="pre">prettify_rewrite_meter</span></code></a></p></td>
+<td><p>Used to enable or disable the mutation <a class="reference internal" href="auxjad.Mutation.html#auxjad.Mutation.prettify_rewrite_meter" title="auxjad.Mutation.prettify_rewrite_meter"><code class="xref py py-meth docutils literal notranslate"><span class="pre">auxjad.mutate().prettify_rewrite_meter()</span></code></a> (default <code class="docutils literal notranslate"><span class="pre">True</span></code>).</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#auxjad.Shuffler.process_on_first_call" title="auxjad.Shuffler.process_on_first_call"><code class="xref py py-obj docutils literal notranslate"><span class="pre">process_on_first_call</span></code></a></p></td>
 <td><p>If <code class="docutils literal notranslate"><span class="pre">True</span></code> then <a class="reference internal" href="#auxjad.Shuffler.contents" title="auxjad.Shuffler.contents"><code class="xref py py-attr docutils literal notranslate"><span class="pre">contents</span></code></a> will be processed in the very first call.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#auxjad.Shuffler.rewrite_tuplets" title="auxjad.Shuffler.rewrite_tuplets"><code class="xref py py-obj docutils literal notranslate"><span class="pre">rewrite_tuplets</span></code></a></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#auxjad.Shuffler.rewrite_tuplets" title="auxjad.Shuffler.rewrite_tuplets"><code class="xref py py-obj docutils literal notranslate"><span class="pre">rewrite_tuplets</span></code></a></p></td>
 <td><p>Sets the argument <code class="docutils literal notranslate"><span class="pre">rewrite_tuplets</span></code> of <a class="reference external" href="https://abjad.github.io/api/abjad/core/Mutation.html#abjad.core.Mutation.Mutation.rewrite_meter" title="(in Abjad v3.1)"><code class="xref py py-meth docutils literal notranslate"><span class="pre">abjad.mutate().rewrite_meter()</span></code></a>.</p></td>
 </tr>
 </tbody>
@@ -1126,7 +1217,7 @@ reason is that shuffling is a process that can happen indefinitely
 
 <dl class="py method">
 <dt id="auxjad.Shuffler.__init__">
-<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">contents</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://abjad.github.io/api/abjad/core/Container.html#abjad.core.Container.Container" title="(in Abjad v3.1)">abjad.core.Container.Container</a></span></em>, <em class="sig-param"><span class="o">*</span></em>, <em class="sig-param"><span class="n">pitch_only</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)">bool</a></span> <span class="o">=</span> <span class="default_value">False</span></em>, <em class="sig-param"><span class="n">preserve_rest_position</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)">bool</a></span> <span class="o">=</span> <span class="default_value">False</span></em>, <em class="sig-param"><span class="n">disable_rewrite_meter</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)">bool</a></span> <span class="o">=</span> <span class="default_value">False</span></em>, <em class="sig-param"><span class="n">omit_time_signatures</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)">bool</a></span> <span class="o">=</span> <span class="default_value">False</span></em>, <em class="sig-param"><span class="n">boundary_depth</span><span class="p">:</span> <span class="n">Optional<span class="p">[</span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)">int</a><span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em>, <em class="sig-param"><span class="n">maximum_dot_count</span><span class="p">:</span> <span class="n">Optional<span class="p">[</span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)">int</a><span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em>, <em class="sig-param"><span class="n">rewrite_tuplets</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)">bool</a></span> <span class="o">=</span> <span class="default_value">True</span></em>, <em class="sig-param"><span class="n">process_on_first_call</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)">bool</a></span> <span class="o">=</span> <span class="default_value">True</span></em><span class="sig-paren">)</span><a class="headerlink" href="#auxjad.Shuffler.__init__" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">contents</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://abjad.github.io/api/abjad/core/Container.html#abjad.core.Container.Container" title="(in Abjad v3.1)">abjad.core.Container.Container</a></span></em>, <em class="sig-param"><span class="o">*</span></em>, <em class="sig-param"><span class="n">pitch_only</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)">bool</a></span> <span class="o">=</span> <span class="default_value">False</span></em>, <em class="sig-param"><span class="n">preserve_rest_position</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)">bool</a></span> <span class="o">=</span> <span class="default_value">False</span></em>, <em class="sig-param"><span class="n">disable_rewrite_meter</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)">bool</a></span> <span class="o">=</span> <span class="default_value">False</span></em>, <em class="sig-param"><span class="n">omit_time_signatures</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)">bool</a></span> <span class="o">=</span> <span class="default_value">False</span></em>, <em class="sig-param"><span class="n">boundary_depth</span><span class="p">:</span> <span class="n">Optional<span class="p">[</span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)">int</a><span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em>, <em class="sig-param"><span class="n">maximum_dot_count</span><span class="p">:</span> <span class="n">Optional<span class="p">[</span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)">int</a><span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em>, <em class="sig-param"><span class="n">rewrite_tuplets</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)">bool</a></span> <span class="o">=</span> <span class="default_value">True</span></em>, <em class="sig-param"><span class="n">process_on_first_call</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)">bool</a></span> <span class="o">=</span> <span class="default_value">True</span></em>, <em class="sig-param"><span class="n">prettify_rewrite_meter</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)">bool</a></span> <span class="o">=</span> <span class="default_value">True</span></em>, <em class="sig-param"><span class="n">extract_trivial_tuplets</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)">bool</a></span> <span class="o">=</span> <span class="default_value">True</span></em>, <em class="sig-param"><span class="n">fuse_across_groups_of_beats</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)">bool</a></span> <span class="o">=</span> <span class="default_value">True</span></em>, <em class="sig-param"><span class="n">fuse_quadruple_meter</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)">bool</a></span> <span class="o">=</span> <span class="default_value">True</span></em>, <em class="sig-param"><span class="n">fuse_triple_meter</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)">bool</a></span> <span class="o">=</span> <span class="default_value">True</span></em><span class="sig-paren">)</span><a class="headerlink" href="#auxjad.Shuffler.__init__" title="Permalink to this definition">¶</a></dt>
 <dd><p>Initialises self.</p>
 </dd></dl>
 
@@ -1182,6 +1273,34 @@ rewritten by the <a class="reference external" href="https://abjad.github.io/api
 </dd></dl>
 
 <dl class="py method">
+<dt id="auxjad.Shuffler.extract_trivial_tuplets">
+<em class="property">property </em><code class="sig-name descname">extract_trivial_tuplets</code><a class="headerlink" href="#auxjad.Shuffler.extract_trivial_tuplets" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sets the argument <code class="docutils literal notranslate"><span class="pre">extract_trivial_tuplets</span></code> of
+<a class="reference internal" href="auxjad.Mutation.html#auxjad.Mutation.prettify_rewrite_meter" title="auxjad.Mutation.prettify_rewrite_meter"><code class="xref py py-meth docutils literal notranslate"><span class="pre">auxjad.mutate().prettify_rewrite_meter()</span></code></a>.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="auxjad.Shuffler.fuse_across_groups_of_beats">
+<em class="property">property </em><code class="sig-name descname">fuse_across_groups_of_beats</code><a class="headerlink" href="#auxjad.Shuffler.fuse_across_groups_of_beats" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sets the argument <code class="docutils literal notranslate"><span class="pre">fuse_across_groups_of_beats</span></code> of
+<a class="reference internal" href="auxjad.Mutation.html#auxjad.Mutation.prettify_rewrite_meter" title="auxjad.Mutation.prettify_rewrite_meter"><code class="xref py py-meth docutils literal notranslate"><span class="pre">auxjad.mutate().prettify_rewrite_meter()</span></code></a>.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="auxjad.Shuffler.fuse_quadruple_meter">
+<em class="property">property </em><code class="sig-name descname">fuse_quadruple_meter</code><a class="headerlink" href="#auxjad.Shuffler.fuse_quadruple_meter" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sets the argument <code class="docutils literal notranslate"><span class="pre">fuse_quadruple_meter</span></code> of
+<a class="reference internal" href="auxjad.Mutation.html#auxjad.Mutation.prettify_rewrite_meter" title="auxjad.Mutation.prettify_rewrite_meter"><code class="xref py py-meth docutils literal notranslate"><span class="pre">auxjad.mutate().prettify_rewrite_meter()</span></code></a>.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="auxjad.Shuffler.fuse_triple_meter">
+<em class="property">property </em><code class="sig-name descname">fuse_triple_meter</code><a class="headerlink" href="#auxjad.Shuffler.fuse_triple_meter" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sets the argument <code class="docutils literal notranslate"><span class="pre">fuse_triple_meter</span></code> of
+<a class="reference internal" href="auxjad.Mutation.html#auxjad.Mutation.prettify_rewrite_meter" title="auxjad.Mutation.prettify_rewrite_meter"><code class="xref py py-meth docutils literal notranslate"><span class="pre">auxjad.mutate().prettify_rewrite_meter()</span></code></a>.</p>
+</dd></dl>
+
+<dl class="py method">
 <dt id="auxjad.Shuffler.maximum_dot_count">
 <em class="property">property </em><code class="sig-name descname">maximum_dot_count</code><a class="headerlink" href="#auxjad.Shuffler.maximum_dot_count" title="Permalink to this definition">¶</a></dt>
 <dd><p>Sets the argument <code class="docutils literal notranslate"><span class="pre">maximum_dot_count</span></code> of
@@ -1206,6 +1325,13 @@ the durations remain the same.</p>
 <em class="property">property </em><code class="sig-name descname">preserve_rest_position</code><a class="headerlink" href="#auxjad.Shuffler.preserve_rest_position" title="Permalink to this definition">¶</a></dt>
 <dd><p>When <code class="docutils literal notranslate"><span class="pre">True</span></code>, shuffle operations will preserve rest positions and
 durations.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="auxjad.Shuffler.prettify_rewrite_meter">
+<em class="property">property </em><code class="sig-name descname">prettify_rewrite_meter</code><a class="headerlink" href="#auxjad.Shuffler.prettify_rewrite_meter" title="Permalink to this definition">¶</a></dt>
+<dd><p>Used to enable or disable the mutation
+<a class="reference internal" href="auxjad.Mutation.html#auxjad.Mutation.prettify_rewrite_meter" title="auxjad.Mutation.prettify_rewrite_meter"><code class="xref py py-meth docutils literal notranslate"><span class="pre">auxjad.mutate().prettify_rewrite_meter()</span></code></a> (default <code class="docutils literal notranslate"><span class="pre">True</span></code>).</p>
 </dd></dl>
 
 <dl class="py method">
@@ -1263,7 +1389,7 @@ a single <a class="reference external" href="https://abjad.github.io/api/abjad/c
         <a href="auxjad.TenneySelector.html" class="btn btn-neutral float-right" title="auxjad.TenneySelector" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="auxjad.PitchRandomiser.html" class="btn btn-neutral float-left" title="auxjad.PitchRandomiser" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="auxjad.Repeater.html" class="btn btn-neutral float-left" title="auxjad.Repeater" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   

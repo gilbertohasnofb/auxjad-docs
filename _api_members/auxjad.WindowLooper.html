@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>auxjad.WindowLooper &mdash; auxjad 0.8.8 documentation</title>
+  <title>auxjad.WindowLooper &mdash; auxjad 0.8.10 documentation</title>
   
 
   
@@ -100,6 +100,7 @@
 <li class="toctree-l3"><a class="reference internal" href="auxjad.ListLooper.html">auxjad.ListLooper</a></li>
 <li class="toctree-l3"><a class="reference internal" href="auxjad.Phaser.html">auxjad.Phaser</a></li>
 <li class="toctree-l3"><a class="reference internal" href="auxjad.PitchRandomiser.html">auxjad.PitchRandomiser</a></li>
+<li class="toctree-l3"><a class="reference internal" href="auxjad.Repeater.html">auxjad.Repeater</a></li>
 <li class="toctree-l3"><a class="reference internal" href="auxjad.Shuffler.html">auxjad.Shuffler</a></li>
 <li class="toctree-l3"><a class="reference internal" href="auxjad.TenneySelector.html">auxjad.TenneySelector</a></li>
 <li class="toctree-l3 current"><a class="current reference internal" href="#">auxjad.WindowLooper</a></li>
@@ -181,7 +182,7 @@
 <h1>auxjad.WindowLooper<a class="headerlink" href="#auxjad-windowlooper" title="Permalink to this headline">¶</a></h1>
 <dl class="py class">
 <dt id="auxjad.WindowLooper">
-<em class="property">class </em><code class="sig-prename descclassname">auxjad.</code><code class="sig-name descname">WindowLooper</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">contents</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://abjad.github.io/api/abjad/core/Container.html#abjad.core.Container.Container" title="(in Abjad v3.1)">abjad.core.Container.Container</a></span></em>, <em class="sig-param"><span class="o">*</span></em>, <em class="sig-param"><span class="n">window_size</span><span class="p">:</span> <span class="n">Union<span class="p">[</span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.8)">tuple</a><span class="p">, </span><a class="reference external" href="https://abjad.github.io/api/abjad/meter.html#abjad.meter.Meter" title="(in Abjad v3.1)">abjad.meter.Meter</a><span class="p">]</span></span> <span class="o">=</span> <span class="default_value">4, 4</span></em>, <em class="sig-param"><span class="n">step_size</span><span class="p">:</span> <span class="n">Union<span class="p">[</span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)">int</a><span class="p">, </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)">float</a><span class="p">, </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.8)">tuple</a><span class="p">, </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)">str</a><span class="p">, </span><a class="reference external" href="https://abjad.github.io/api/abjad/utilities/Duration.html#abjad.utilities.Duration.Duration" title="(in Abjad v3.1)">abjad.utilities.Duration.Duration</a><span class="p">]</span></span> <span class="o">=</span> <span class="default_value">1, 16</span></em>, <em class="sig-param"><span class="n">max_steps</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)">int</a></span> <span class="o">=</span> <span class="default_value">1</span></em>, <em class="sig-param"><span class="n">repetition_chance</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)">float</a></span> <span class="o">=</span> <span class="default_value">0.0</span></em>, <em class="sig-param"><span class="n">forward_bias</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)">float</a></span> <span class="o">=</span> <span class="default_value">1.0</span></em>, <em class="sig-param"><span class="n">head_position</span><span class="p">:</span> <span class="n">Union<span class="p">[</span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)">int</a><span class="p">, </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)">float</a><span class="p">, </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.8)">tuple</a><span class="p">, </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)">str</a><span class="p">, </span><a class="reference external" href="https://abjad.github.io/api/abjad/utilities/Duration.html#abjad.utilities.Duration.Duration" title="(in Abjad v3.1)">abjad.utilities.Duration.Duration</a><span class="p">]</span></span> <span class="o">=</span> <span class="default_value">0</span></em>, <em class="sig-param"><span class="n">omit_time_signatures</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)">bool</a></span> <span class="o">=</span> <span class="default_value">False</span></em>, <em class="sig-param"><span class="n">process_on_first_call</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)">bool</a></span> <span class="o">=</span> <span class="default_value">False</span></em>, <em class="sig-param"><span class="n">fill_with_rests</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)">bool</a></span> <span class="o">=</span> <span class="default_value">True</span></em>, <em class="sig-param"><span class="n">boundary_depth</span><span class="p">:</span> <span class="n">Optional<span class="p">[</span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)">int</a><span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em>, <em class="sig-param"><span class="n">maximum_dot_count</span><span class="p">:</span> <span class="n">Optional<span class="p">[</span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)">int</a><span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em>, <em class="sig-param"><span class="n">rewrite_tuplets</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)">bool</a></span> <span class="o">=</span> <span class="default_value">True</span></em><span class="sig-paren">)</span><a class="headerlink" href="#auxjad.WindowLooper" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">auxjad.</code><code class="sig-name descname">WindowLooper</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">contents</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://abjad.github.io/api/abjad/core/Container.html#abjad.core.Container.Container" title="(in Abjad v3.1)">abjad.core.Container.Container</a></span></em>, <em class="sig-param"><span class="o">*</span></em>, <em class="sig-param"><span class="n">window_size</span><span class="p">:</span> <span class="n">Union<span class="p">[</span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.8)">tuple</a><span class="p">, </span><a class="reference external" href="https://abjad.github.io/api/abjad/meter.html#abjad.meter.Meter" title="(in Abjad v3.1)">abjad.meter.Meter</a><span class="p">]</span></span> <span class="o">=</span> <span class="default_value">4, 4</span></em>, <em class="sig-param"><span class="n">step_size</span><span class="p">:</span> <span class="n">Union<span class="p">[</span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)">int</a><span class="p">, </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)">float</a><span class="p">, </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.8)">tuple</a><span class="p">, </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)">str</a><span class="p">, </span><a class="reference external" href="https://abjad.github.io/api/abjad/utilities/Duration.html#abjad.utilities.Duration.Duration" title="(in Abjad v3.1)">abjad.utilities.Duration.Duration</a><span class="p">]</span></span> <span class="o">=</span> <span class="default_value">1, 16</span></em>, <em class="sig-param"><span class="n">max_steps</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)">int</a></span> <span class="o">=</span> <span class="default_value">1</span></em>, <em class="sig-param"><span class="n">repetition_chance</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)">float</a></span> <span class="o">=</span> <span class="default_value">0.0</span></em>, <em class="sig-param"><span class="n">forward_bias</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)">float</a></span> <span class="o">=</span> <span class="default_value">1.0</span></em>, <em class="sig-param"><span class="n">head_position</span><span class="p">:</span> <span class="n">Union<span class="p">[</span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)">int</a><span class="p">, </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)">float</a><span class="p">, </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.8)">tuple</a><span class="p">, </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)">str</a><span class="p">, </span><a class="reference external" href="https://abjad.github.io/api/abjad/utilities/Duration.html#abjad.utilities.Duration.Duration" title="(in Abjad v3.1)">abjad.utilities.Duration.Duration</a><span class="p">]</span></span> <span class="o">=</span> <span class="default_value">0</span></em>, <em class="sig-param"><span class="n">omit_time_signatures</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)">bool</a></span> <span class="o">=</span> <span class="default_value">False</span></em>, <em class="sig-param"><span class="n">process_on_first_call</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)">bool</a></span> <span class="o">=</span> <span class="default_value">False</span></em>, <em class="sig-param"><span class="n">fill_with_rests</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)">bool</a></span> <span class="o">=</span> <span class="default_value">True</span></em>, <em class="sig-param"><span class="n">boundary_depth</span><span class="p">:</span> <span class="n">Optional<span class="p">[</span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)">int</a><span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em>, <em class="sig-param"><span class="n">maximum_dot_count</span><span class="p">:</span> <span class="n">Optional<span class="p">[</span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)">int</a><span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em>, <em class="sig-param"><span class="n">rewrite_tuplets</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)">bool</a></span> <span class="o">=</span> <span class="default_value">True</span></em>, <em class="sig-param"><span class="n">prettify_rewrite_meter</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)">bool</a></span> <span class="o">=</span> <span class="default_value">True</span></em>, <em class="sig-param"><span class="n">extract_trivial_tuplets</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)">bool</a></span> <span class="o">=</span> <span class="default_value">True</span></em>, <em class="sig-param"><span class="n">fuse_across_groups_of_beats</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)">bool</a></span> <span class="o">=</span> <span class="default_value">True</span></em>, <em class="sig-param"><span class="n">fuse_quadruple_meter</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)">bool</a></span> <span class="o">=</span> <span class="default_value">True</span></em>, <em class="sig-param"><span class="n">fuse_triple_meter</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)">bool</a></span> <span class="o">=</span> <span class="default_value">True</span></em><span class="sig-paren">)</span><a class="headerlink" href="#auxjad.WindowLooper" title="Permalink to this definition">¶</a></dt>
 <dd><p>This class outputs slices of an <a class="reference external" href="https://abjad.github.io/api/abjad/core/Container.html#abjad.core.Container.Container" title="(in Abjad v3.1)"><code class="xref py py-class docutils literal notranslate"><span class="pre">abjad.Container</span></code></a> using the metaphor
 of a looping window of a constant size (given by an <a class="reference external" href="https://abjad.github.io/api/abjad/utilities/Duration.html#abjad.utilities.Duration.Duration" title="(in Abjad v3.1)"><code class="xref py py-class docutils literal notranslate"><span class="pre">abjad.Duration</span></code></a>).</p>
 <dl>
@@ -207,7 +208,7 @@ of a sixteenth-note.</p>
 </pre></div>
 </div>
 <div class="figure align-default">
-<img alt="../_images/image-WindowLooper-1.png" src="../_images/image-WindowLooper-1.png" />
+<img alt="../_images/WindowLooper-a9k9q8xy1j.png" src="../_images/WindowLooper-a9k9q8xy1j.png" />
 </div>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">notes</span> <span class="o">=</span> <span class="n">looper</span><span class="p">()</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">staff</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span><span class="n">notes</span><span class="p">)</span>
@@ -227,7 +228,7 @@ of a sixteenth-note.</p>
 </pre></div>
 </div>
 <div class="figure align-default">
-<img alt="../_images/image-WindowLooper-2.png" src="../_images/image-WindowLooper-2.png" />
+<img alt="../_images/WindowLooper-oori8gjer9s.png" src="../_images/WindowLooper-oori8gjer9s.png" />
 </div>
 <p>The property <a class="reference internal" href="#auxjad.WindowLooper.current_window" title="auxjad.WindowLooper.current_window"><code class="xref py py-attr docutils literal notranslate"><span class="pre">current_window</span></code></a> can be used to access the current
 window without moving the head forwards.</p>
@@ -249,7 +250,7 @@ window without moving the head forwards.</p>
 </pre></div>
 </div>
 <div class="figure align-default">
-<img alt="../_images/image-WindowLooper-3.png" src="../_images/image-WindowLooper-3.png" />
+<img alt="../_images/WindowLooper-7zc9e7o3dlr.png" src="../_images/WindowLooper-7zc9e7o3dlr.png" />
 </div>
 </dd>
 <dt><a class="reference internal" href="#auxjad.WindowLooper.process_on_first_call" title="auxjad.WindowLooper.process_on_first_call"><code class="xref py py-attr docutils literal notranslate"><span class="pre">process_on_first_call</span></code></a>:</dt><dd><p>The very first call will output the input container without processing
@@ -278,7 +279,7 @@ very first call, initialise the class with the keyword argument
 </pre></div>
 </div>
 <div class="figure align-default">
-<img alt="../_images/image-WindowLooper-4.png" src="../_images/image-WindowLooper-4.png" />
+<img alt="../_images/WindowLooper-dual73tnheq.png" src="../_images/WindowLooper-dual73tnheq.png" />
 </div>
 </dd>
 <dt><a class="reference internal" href="#auxjad.WindowLooper.window_size" title="auxjad.WindowLooper.window_size"><code class="xref py py-attr docutils literal notranslate"><span class="pre">window_size</span></code></a> and <a class="reference internal" href="#auxjad.WindowLooper.step_size" title="auxjad.WindowLooper.step_size"><code class="xref py py-attr docutils literal notranslate"><span class="pre">step_size</span></code></a>:</dt><dd><p>The optional arguments <a class="reference internal" href="#auxjad.WindowLooper.window_size" title="auxjad.WindowLooper.window_size"><code class="xref py py-attr docutils literal notranslate"><span class="pre">window_size</span></code></a> and <a class="reference internal" href="#auxjad.WindowLooper.step_size" title="auxjad.WindowLooper.step_size"><code class="xref py py-attr docutils literal notranslate"><span class="pre">step_size</span></code></a> can be
@@ -302,7 +303,7 @@ take a <a class="reference external" href="https://docs.python.org/3/library/std
 </pre></div>
 </div>
 <div class="figure align-default">
-<img alt="../_images/image-WindowLooper-5.png" src="../_images/image-WindowLooper-5.png" />
+<img alt="../_images/WindowLooper-0wh7ajyal0qj.png" src="../_images/WindowLooper-0wh7ajyal0qj.png" />
 </div>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">notes</span> <span class="o">=</span> <span class="n">looper</span><span class="p">()</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">staff</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span><span class="n">notes</span><span class="p">)</span>
@@ -319,7 +320,7 @@ take a <a class="reference external" href="https://docs.python.org/3/library/std
 </pre></div>
 </div>
 <div class="figure align-default">
-<img alt="../_images/image-WindowLooper-6.png" src="../_images/image-WindowLooper-6.png" />
+<img alt="../_images/WindowLooper-tt90u6gg2tp.png" src="../_images/WindowLooper-tt90u6gg2tp.png" />
 </div>
 </dd>
 <dt>Using as iterator:</dt><dd><p>The instances of this class can also be used as an iterator, which can
@@ -328,7 +329,7 @@ appends rests at the end of the container, until it is totally
 exhausted. Note that unlike the methods <a class="reference internal" href="#auxjad.WindowLooper.output_n" title="auxjad.WindowLooper.output_n"><code class="xref py py-meth docutils literal notranslate"><span class="pre">output_n()</span></code></a> and
 <a class="reference internal" href="#auxjad.WindowLooper.output_all" title="auxjad.WindowLooper.output_all"><code class="xref py py-meth docutils literal notranslate"><span class="pre">output_all()</span></code></a>, time signatures are added to each window returned
 by the shuffler. Use the function
-<a class="reference internal" href="auxjad.remove_repeated_time_signatures.html#auxjad.remove_repeated_time_signatures" title="auxjad.remove_repeated_time_signatures"><code class="xref py py-func docutils literal notranslate"><span class="pre">auxjad.remove_repeated_time_signatures()</span></code></a> to clean the output
+<a class="reference internal" href="auxjad.Mutation.html#auxjad.Mutation.remove_repeated_time_signatures" title="auxjad.Mutation.remove_repeated_time_signatures"><code class="xref py py-meth docutils literal notranslate"><span class="pre">auxjad.mutate().remove_repeated_time_signatures()</span></code></a> to clean the output
 when using this class in this way.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">container</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;c&#39;4 d&#39;2 e&#39;4&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">looper</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">WindowLooper</span><span class="p">(</span><span class="n">container</span><span class="p">,</span>
@@ -338,7 +339,7 @@ when using this class in this way.</p>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">staff</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">()</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">window</span> <span class="ow">in</span> <span class="n">looper</span><span class="p">:</span>
 <span class="gp">... </span>    <span class="n">staff</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">window</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">auxjad</span><span class="o">.</span><span class="n">remove_repeated_time_signatures</span><span class="p">(</span><span class="n">staff</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">auxjad</span><span class="o">.</span><span class="n">mutate</span><span class="p">(</span><span class="n">staff</span><span class="p">[:])</span><span class="o">.</span><span class="n">remove_repeated_time_signatures</span><span class="p">()</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">f</span><span class="p">(</span><span class="n">staff</span><span class="p">)</span>
 <span class="go">\new Staff</span>
 <span class="go">{</span>
@@ -353,17 +354,13 @@ when using this class in this way.</p>
 <span class="go">    d&#39;2</span>
 <span class="go">    e&#39;4</span>
 <span class="go">    d&#39;4.</span>
-<span class="go">    e&#39;8</span>
-<span class="go">    ~</span>
-<span class="go">    e&#39;8</span>
+<span class="go">    e&#39;4</span>
 <span class="go">    r8</span>
 <span class="go">    d&#39;4</span>
 <span class="go">    e&#39;4</span>
 <span class="go">    r4</span>
 <span class="go">    d&#39;8</span>
-<span class="go">    e&#39;8</span>
-<span class="go">    ~</span>
-<span class="go">    e&#39;8</span>
+<span class="go">    e&#39;4</span>
 <span class="go">    r4.</span>
 <span class="go">    e&#39;4</span>
 <span class="go">    r2</span>
@@ -374,12 +371,12 @@ when using this class in this way.</p>
 </pre></div>
 </div>
 <div class="figure align-default">
-<img alt="../_images/image-WindowLooper-7.png" src="../_images/image-WindowLooper-7.png" />
+<img alt="../_images/WindowLooper-9sldax4dumb.png" src="../_images/WindowLooper-9sldax4dumb.png" />
 </div>
 </dd>
-<dt><a class="reference internal" href="auxjad.fill_with_rests.html#auxjad.fill_with_rests" title="auxjad.fill_with_rests"><code class="xref py py-attr docutils literal notranslate"><span class="pre">fill_with_rests</span></code></a>:</dt><dd><p>In order to stop the process when the end of the looping window matches
+<dt><a class="reference internal" href="#auxjad.WindowLooper.fill_with_rests" title="auxjad.WindowLooper.fill_with_rests"><code class="xref py py-attr docutils literal notranslate"><span class="pre">fill_with_rests</span></code></a>:</dt><dd><p>In order to stop the process when the end of the looping window matches
 the end of the <a class="reference internal" href="#auxjad.WindowLooper.contents" title="auxjad.WindowLooper.contents"><code class="xref py py-attr docutils literal notranslate"><span class="pre">contents</span></code></a> (and thus appending rests to the
-output), set the optional keyword argument <a class="reference internal" href="auxjad.fill_with_rests.html#auxjad.fill_with_rests" title="auxjad.fill_with_rests"><code class="xref py py-attr docutils literal notranslate"><span class="pre">fill_with_rests</span></code></a> to
+output), set the optional keyword argument <a class="reference internal" href="#auxjad.WindowLooper.fill_with_rests" title="auxjad.WindowLooper.fill_with_rests"><code class="xref py py-attr docutils literal notranslate"><span class="pre">fill_with_rests</span></code></a> to
 <code class="docutils literal notranslate"><span class="pre">True</span></code>. Compare the two approaches below.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">container</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;c&#39;4 d&#39;4 e&#39;4 f&#39;4&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">looper</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">WindowLooper</span><span class="p">(</span><span class="n">container</span><span class="p">,</span>
@@ -408,7 +405,7 @@ output), set the optional keyword argument <a class="reference internal" href="a
 </pre></div>
 </div>
 <div class="figure align-default">
-<img alt="../_images/image-WindowLooper-8.png" src="../_images/image-WindowLooper-8.png" />
+<img alt="../_images/WindowLooper-4l025g7ycxr.png" src="../_images/WindowLooper-4l025g7ycxr.png" />
 </div>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">container</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;c&#39;4 d&#39;4 e&#39;4 f&#39;4&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">looper</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">WindowLooper</span><span class="p">(</span><span class="n">container</span><span class="p">,</span>
@@ -433,7 +430,7 @@ output), set the optional keyword argument <a class="reference internal" href="a
 </pre></div>
 </div>
 <div class="figure align-default">
-<img alt="../_images/image-WindowLooper-9.png" src="../_images/image-WindowLooper-9.png" />
+<img alt="../_images/WindowLooper-lq4cwlzlpp.png" src="../_images/WindowLooper-lq4cwlzlpp.png" />
 </div>
 </dd>
 <dt>Arguments and properties:</dt><dd><p>This class can take many optional keyword arguments during its
@@ -449,12 +446,12 @@ range from <code class="docutils literal notranslate"><span class="pre">0.0</spa
 can only move forwards. A value of <code class="docutils literal notranslate"><span class="pre">0.5</span></code> gives 50% chance of moving
 forwards while a value of <code class="docutils literal notranslate"><span class="pre">0.0</span></code> will move the window only backwards).
 <a class="reference internal" href="#auxjad.WindowLooper.head_position" title="auxjad.WindowLooper.head_position"><code class="xref py py-attr docutils literal notranslate"><span class="pre">head_position</span></code></a> can be used to offset the starting position of
-the  looping window. It must be a <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.8)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">tuple</span></code></a> or an <a class="reference external" href="https://abjad.github.io/api/abjad/utilities/Duration.html#abjad.utilities.Duration.Duration" title="(in Abjad v3.1)"><code class="xref py py-class docutils literal notranslate"><span class="pre">abjad.Duration</span></code></a>,
+the looping window. It must be a <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.8)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">tuple</span></code></a> or an <a class="reference external" href="https://abjad.github.io/api/abjad/utilities/Duration.html#abjad.utilities.Duration.Duration" title="(in Abjad v3.1)"><code class="xref py py-class docutils literal notranslate"><span class="pre">abjad.Duration</span></code></a>,
 and its default value is <code class="docutils literal notranslate"><span class="pre">0</span></code>. The properties <a class="reference internal" href="#auxjad.WindowLooper.boundary_depth" title="auxjad.WindowLooper.boundary_depth"><code class="xref py py-attr docutils literal notranslate"><span class="pre">boundary_depth</span></code></a>,
 <a class="reference internal" href="#auxjad.WindowLooper.maximum_dot_count" title="auxjad.WindowLooper.maximum_dot_count"><code class="xref py py-attr docutils literal notranslate"><span class="pre">maximum_dot_count</span></code></a>, and <a class="reference internal" href="#auxjad.WindowLooper.rewrite_tuplets" title="auxjad.WindowLooper.rewrite_tuplets"><code class="xref py py-attr docutils literal notranslate"><span class="pre">rewrite_tuplets</span></code></a> are passed as
 arguments to <a class="reference external" href="https://abjad.github.io/api/abjad/core/Mutation.html#abjad.core.Mutation.Mutation.rewrite_meter" title="(in Abjad v3.1)"><code class="xref py py-meth docutils literal notranslate"><span class="pre">abjad.mutate().rewrite_meter()</span></code></a>, see its documentation
 for more information. By default, calling the object will first return
-the original container and subsequent  calls will process it; set
+the original container and subsequent calls will process it; set
 <a class="reference internal" href="#auxjad.WindowLooper.process_on_first_call" title="auxjad.WindowLooper.process_on_first_call"><code class="xref py py-attr docutils literal notranslate"><span class="pre">process_on_first_call</span></code></a> to <code class="docutils literal notranslate"><span class="pre">True</span></code> and the looping process will
 be applied on the very first call.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">container</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;c&#39;4 d&#39;2 e&#39;4 f&#39;2 ~ f&#39;8 g&#39;1&quot;</span><span class="p">)</span>
@@ -572,7 +569,7 @@ from that position).</p>
 </pre></div>
 </div>
 <div class="figure align-default">
-<img alt="../_images/image-WindowLooper-10.png" src="../_images/image-WindowLooper-10.png" />
+<img alt="../_images/WindowLooper-ty5vqw6qk9d.png" src="../_images/WindowLooper-ty5vqw6qk9d.png" />
 </div>
 </dd>
 <dt><a class="reference internal" href="#auxjad.WindowLooper.forward_bias" title="auxjad.WindowLooper.forward_bias"><code class="xref py py-attr docutils literal notranslate"><span class="pre">forward_bias</span></code></a> between <code class="docutils literal notranslate"><span class="pre">0.0</span></code> and <code class="docutils literal notranslate"><span class="pre">1.0</span></code>:</dt><dd><p>Setingt <a class="reference internal" href="#auxjad.WindowLooper.forward_bias" title="auxjad.WindowLooper.forward_bias"><code class="xref py py-attr docutils literal notranslate"><span class="pre">forward_bias</span></code></a> to a value in between <code class="docutils literal notranslate"><span class="pre">0.0</span></code> and <code class="docutils literal notranslate"><span class="pre">1.0</span></code>
@@ -613,7 +610,7 @@ looper attempts to move backwards after reaching the head position
 </pre></div>
 </div>
 <div class="figure align-default">
-<img alt="../_images/image-WindowLooper-11.png" src="../_images/image-WindowLooper-11.png" />
+<img alt="../_images/WindowLooper-p91xgsnmp3o.png" src="../_images/WindowLooper-p91xgsnmp3o.png" />
 </div>
 </dd>
 <dt><a class="reference internal" href="#auxjad.WindowLooper.max_steps" title="auxjad.WindowLooper.max_steps"><code class="xref py py-attr docutils literal notranslate"><span class="pre">max_steps</span></code></a>:</dt><dd><p>Setting the keyword argument <a class="reference internal" href="#auxjad.WindowLooper.max_steps" title="auxjad.WindowLooper.max_steps"><code class="xref py py-attr docutils literal notranslate"><span class="pre">max_steps</span></code></a> to a value larger than
@@ -639,7 +636,7 @@ looper attempts to move backwards after reaching the head position
 </pre></div>
 </div>
 <div class="figure align-default">
-<img alt="../_images/image-WindowLooper-12.png" src="../_images/image-WindowLooper-12.png" />
+<img alt="../_images/WindowLooper-81mbjuesmbr.png" src="../_images/WindowLooper-81mbjuesmbr.png" />
 </div>
 </dd>
 <dt><a class="reference external" href="https://docs.python.org/3/library/functions.html#len" title="(in Python v3.8)"><code class="xref py py-func docutils literal notranslate"><span class="pre">len()</span></code></a>:</dt><dd><p>The function <a class="reference external" href="https://docs.python.org/3/library/functions.html#len" title="(in Python v3.8)"><code class="xref py py-func docutils literal notranslate"><span class="pre">len()</span></code></a> can be used to get the total number of steps
@@ -667,7 +664,7 @@ in the contents (always rounded up).</p>
 <dt><a class="reference internal" href="#auxjad.WindowLooper.output_all" title="auxjad.WindowLooper.output_all"><code class="xref py py-meth docutils literal notranslate"><span class="pre">output_all()</span></code></a>:</dt><dd><p>To run through the whole process and output it as a single container,
 from the initial head position until the process outputs the single
 last element, use the method <a class="reference internal" href="#auxjad.WindowLooper.output_all" title="auxjad.WindowLooper.output_all"><code class="xref py py-meth docutils literal notranslate"><span class="pre">output_all()</span></code></a>. As shown above, set
-the optional keyword argument <a class="reference internal" href="auxjad.fill_with_rests.html#auxjad.fill_with_rests" title="auxjad.fill_with_rests"><code class="xref py py-attr docutils literal notranslate"><span class="pre">fill_with_rests</span></code></a> to <code class="docutils literal notranslate"><span class="pre">False</span></code> if
+the optional keyword argument <a class="reference internal" href="#auxjad.WindowLooper.fill_with_rests" title="auxjad.WindowLooper.fill_with_rests"><code class="xref py py-attr docutils literal notranslate"><span class="pre">fill_with_rests</span></code></a> to <code class="docutils literal notranslate"><span class="pre">False</span></code> if
 the process is to be stopped when the end of the looping window reaches
 the end of the contents (thus not appending rests).</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">container</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;c&#39;4 d&#39;4 e&#39;4 f&#39;4&quot;</span><span class="p">)</span>
@@ -696,7 +693,7 @@ the end of the contents (thus not appending rests).</p>
 </pre></div>
 </div>
 <div class="figure align-default">
-<img alt="../_images/image-WindowLooper-13.png" src="../_images/image-WindowLooper-13.png" />
+<img alt="../_images/WindowLooper-y734t07uio.png" src="../_images/WindowLooper-y734t07uio.png" />
 </div>
 </dd>
 <dt><code class="docutils literal notranslate"><span class="pre">tie_identical_pitches</span></code>:</dt><dd><p>When using <a class="reference internal" href="#auxjad.WindowLooper.output_all" title="auxjad.WindowLooper.output_all"><code class="xref py py-meth docutils literal notranslate"><span class="pre">output_all()</span></code></a>, set the keyword argument
@@ -734,14 +731,14 @@ or chords at the end and beginning of consecutive windows.</p>
 </pre></div>
 </div>
 <div class="figure align-default">
-<img alt="../_images/image-WindowLooper-14.png" src="../_images/image-WindowLooper-14.png" />
+<img alt="../_images/WindowLooper-1giyp118geth.png" src="../_images/WindowLooper-1giyp118geth.png" />
 </div>
 </dd>
 <dt><a class="reference internal" href="#auxjad.WindowLooper.output_n" title="auxjad.WindowLooper.output_n"><code class="xref py py-meth docutils literal notranslate"><span class="pre">output_n()</span></code></a>:</dt><dd><p>To run through just part of the process and output it as a single
 container, starting from the initial head position, use the method
 <a class="reference internal" href="#auxjad.WindowLooper.output_n" title="auxjad.WindowLooper.output_n"><code class="xref py py-meth docutils literal notranslate"><span class="pre">output_n()</span></code></a> and pass the number of iterations as argument.
 Similarly to <a class="reference internal" href="#auxjad.WindowLooper.output_all" title="auxjad.WindowLooper.output_all"><code class="xref py py-meth docutils literal notranslate"><span class="pre">output_all()</span></code></a>, the optional keyword arguments
-<code class="docutils literal notranslate"><span class="pre">tie_identical_pitches</span></code> and <a class="reference internal" href="auxjad.fill_with_rests.html#auxjad.fill_with_rests" title="auxjad.fill_with_rests"><code class="xref py py-attr docutils literal notranslate"><span class="pre">fill_with_rests</span></code></a> are available.</p>
+<code class="docutils literal notranslate"><span class="pre">tie_identical_pitches</span></code> and <a class="reference internal" href="#auxjad.WindowLooper.fill_with_rests" title="auxjad.WindowLooper.fill_with_rests"><code class="xref py py-attr docutils literal notranslate"><span class="pre">fill_with_rests</span></code></a> are available.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">container</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;c&#39;4 d&#39;4 e&#39;4 f&#39;4&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">looper</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">WindowLooper</span><span class="p">(</span><span class="n">container</span><span class="p">,</span>
 <span class="gp">... </span>                             <span class="n">window_size</span><span class="o">=</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">),</span>
@@ -763,7 +760,7 @@ Similarly to <a class="reference internal" href="#auxjad.WindowLooper.output_all
 </pre></div>
 </div>
 <div class="figure align-default">
-<img alt="../_images/image-WindowLooper-15.png" src="../_images/image-WindowLooper-15.png" />
+<img alt="../_images/WindowLooper-uikg5s4t26.png" src="../_images/WindowLooper-uikg5s4t26.png" />
 </div>
 </dd>
 <dt><a class="reference internal" href="#auxjad.WindowLooper.omit_time_signatures" title="auxjad.WindowLooper.omit_time_signatures"><code class="xref py py-attr docutils literal notranslate"><span class="pre">omit_time_signatures</span></code></a>:</dt><dd><p>To disable time signatures altogether, initialise this class with the
@@ -786,7 +783,7 @@ initialisation.</p>
 </pre></div>
 </div>
 <div class="figure align-default">
-<img alt="../_images/image-WindowLooper-16.png" src="../_images/image-WindowLooper-16.png" />
+<img alt="../_images/WindowLooper-24ipt4uf4x8.png" src="../_images/WindowLooper-24ipt4uf4x8.png" />
 </div>
 </dd>
 </dl>
@@ -796,9 +793,9 @@ initialisation.</p>
 signature to it. The <a class="reference internal" href="#auxjad.WindowLooper.output_n" title="auxjad.WindowLooper.output_n"><code class="xref py py-meth docutils literal notranslate"><span class="pre">output_n()</span></code></a> and <a class="reference internal" href="#auxjad.WindowLooper.output_all" title="auxjad.WindowLooper.output_all"><code class="xref py py-meth docutils literal notranslate"><span class="pre">output_all()</span></code></a> methods
 automatically remove repeated time signatures. When joining selections
 output by multiple method calls, use
-<a class="reference internal" href="auxjad.remove_repeated_time_signatures.html#auxjad.remove_repeated_time_signatures" title="auxjad.remove_repeated_time_signatures"><code class="xref py py-func docutils literal notranslate"><span class="pre">auxjad.remove_repeated_time_signatures()</span></code></a> on the whole container
-after fusing the selections to remove any unecessary time signature
-changes.</p>
+<a class="reference internal" href="auxjad.Mutation.html#auxjad.Mutation.remove_repeated_time_signatures" title="auxjad.Mutation.remove_repeated_time_signatures"><code class="xref py py-meth docutils literal notranslate"><span class="pre">auxjad.mutate().remove_repeated_time_signatures()</span></code></a> on the whole
+container after fusing the selections to remove any unecessary time
+signature changes.</p>
 </div>
 <dl>
 <dt><a class="reference internal" href="#auxjad.WindowLooper.window_size" title="auxjad.WindowLooper.window_size"><code class="xref py py-attr docutils literal notranslate"><span class="pre">window_size</span></code></a>:</dt><dd><p>To change the size of the looping window after instantiation, use the
@@ -827,15 +824,13 @@ is of size <code class="docutils literal notranslate"><span class="pre">(4,</spa
 <span class="go">    d&#39;8</span>
 <span class="go">    ~</span>
 <span class="go">    d&#39;4.</span>
-<span class="go">    e&#39;8</span>
-<span class="go">    ~</span>
-<span class="go">    e&#39;8</span>
+<span class="go">    e&#39;4</span>
 <span class="go">    f&#39;8</span>
 <span class="go">}</span>
 </pre></div>
 </div>
 <div class="figure align-default">
-<img alt="../_images/image-WindowLooper-17.png" src="../_images/image-WindowLooper-17.png" />
+<img alt="../_images/WindowLooper-52p5g0hqnep.png" src="../_images/WindowLooper-52p5g0hqnep.png" />
 </div>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">looper</span><span class="o">.</span><span class="n">window_size</span> <span class="o">=</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">8</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">notes</span> <span class="o">=</span> <span class="n">looper</span><span class="o">.</span><span class="n">output_n</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
@@ -854,7 +849,7 @@ is of size <code class="docutils literal notranslate"><span class="pre">(4,</spa
 </pre></div>
 </div>
 <div class="figure align-default">
-<img alt="../_images/image-WindowLooper-18.png" src="../_images/image-WindowLooper-18.png" />
+<img alt="../_images/WindowLooper-kzrb0fwup2.png" src="../_images/WindowLooper-kzrb0fwup2.png" />
 </div>
 </dd>
 <dt><a class="reference internal" href="#auxjad.WindowLooper.contents" title="auxjad.WindowLooper.contents"><code class="xref py py-attr docutils literal notranslate"><span class="pre">contents</span></code></a>:</dt><dd><p>Use the <a class="reference internal" href="#auxjad.WindowLooper.contents" title="auxjad.WindowLooper.contents"><code class="xref py py-attr docutils literal notranslate"><span class="pre">contents</span></code></a> property to read as well as overwrite the
@@ -876,7 +871,7 @@ required.</p>
 </pre></div>
 </div>
 <div class="figure align-default">
-<img alt="../_images/image-WindowLooper-19.png" src="../_images/image-WindowLooper-19.png" />
+<img alt="../_images/WindowLooper-hx2wjkgko3j.png" src="../_images/WindowLooper-hx2wjkgko3j.png" />
 </div>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">notes</span> <span class="o">=</span> <span class="n">looper</span><span class="p">()</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">staff</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span><span class="n">notes</span><span class="p">)</span>
@@ -896,7 +891,7 @@ required.</p>
 </pre></div>
 </div>
 <div class="figure align-default">
-<img alt="../_images/image-WindowLooper-20.png" src="../_images/image-WindowLooper-20.png" />
+<img alt="../_images/WindowLooper-bjabk27oapb.png" src="../_images/WindowLooper-bjabk27oapb.png" />
 </div>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">looper</span><span class="o">.</span><span class="n">contents</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;c&#39;16 d&#39;16 e&#39;16 f&#39;16 g&#39;2. a&#39;1&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">notes</span> <span class="o">=</span> <span class="n">looper</span><span class="p">()</span>
@@ -918,7 +913,7 @@ required.</p>
 </pre></div>
 </div>
 <div class="figure align-default">
-<img alt="../_images/image-WindowLooper-21.png" src="../_images/image-WindowLooper-21.png" />
+<img alt="../_images/WindowLooper-fdioda2e2ed.png" src="../_images/WindowLooper-fdioda2e2ed.png" />
 </div>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">looper</span><span class="o">.</span><span class="n">head_position</span> <span class="o">=</span> <span class="mi">0</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">notes</span> <span class="o">=</span> <span class="n">looper</span><span class="p">()</span>
@@ -936,14 +931,15 @@ required.</p>
 </pre></div>
 </div>
 <div class="figure align-default">
-<img alt="../_images/image-WindowLooper-22.png" src="../_images/image-WindowLooper-22.png" />
+<img alt="../_images/WindowLooper-vh12q82nw0e.png" src="../_images/WindowLooper-vh12q82nw0e.png" />
 </div>
 </dd>
 <dt>Indicators:</dt><dd><p>This class can handle dynamics, articulations and slurs. When a leaf is
 shortened by the looping window’s movement, the dynamics and
 articulations are still applied to it.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">container</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">(</span>
-<span class="gp">... </span>    <span class="sa">r</span><span class="s2">&quot;c&#39;4-.\p\&lt; d&#39;2--\f e&#39;4-&gt;\ppp f&#39;2 ~ f&#39;8&quot;</span><span class="p">)</span>
+<span class="gp">... </span>    <span class="sa">r</span><span class="s2">&quot;c&#39;4-.\p\&lt; d&#39;2--\f e&#39;4-&gt;\ppp f&#39;2 ~ f&#39;8&quot;</span>
+<span class="gp">... </span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">looper</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">WindowLooper</span><span class="p">(</span><span class="n">container</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">notes</span> <span class="o">=</span> <span class="n">looper</span><span class="o">.</span><span class="n">output_n</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">staff</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span><span class="n">notes</span><span class="p">)</span>
@@ -980,15 +976,15 @@ articulations are still applied to it.</p>
 </pre></div>
 </div>
 <div class="figure align-default">
-<img alt="../_images/image-WindowLooper-23.png" src="../_images/image-WindowLooper-23.png" />
+<img alt="../_images/WindowLooper-23jcqhmpqfm.png" src="../_images/WindowLooper-23jcqhmpqfm.png" />
 </div>
 </dd>
 </dl>
 <div class="admonition tip">
 <p class="admonition-title">Tip</p>
-<p>The functions <a class="reference internal" href="auxjad.remove_repeated_dynamics.html#auxjad.remove_repeated_dynamics" title="auxjad.remove_repeated_dynamics"><code class="xref py py-func docutils literal notranslate"><span class="pre">auxjad.remove_repeated_dynamics()</span></code></a> and
-<a class="reference internal" href="auxjad.reposition_clefs.html#auxjad.reposition_clefs" title="auxjad.reposition_clefs"><code class="xref py py-func docutils literal notranslate"><span class="pre">auxjad.reposition_clefs()</span></code></a> can be used to clean the output and
-remove repeated dynamics and unnecessary clef changes.</p>
+<p>The functions <a class="reference internal" href="auxjad.Mutation.html#auxjad.Mutation.remove_repeated_dynamics" title="auxjad.Mutation.remove_repeated_dynamics"><code class="xref py py-meth docutils literal notranslate"><span class="pre">auxjad.mutate().remove_repeated_dynamics()</span></code></a> and
+<a class="reference internal" href="auxjad.Mutation.html#auxjad.Mutation.reposition_clefs" title="auxjad.Mutation.reposition_clefs"><code class="xref py py-meth docutils literal notranslate"><span class="pre">auxjad.mutate().reposition_clefs()</span></code></a> can be used to clean the output
+and remove repeated dynamics and unnecessary clef changes.</p>
 </div>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
@@ -1015,7 +1011,7 @@ better to attach those to the music after the fading process has ended.</p>
 </pre></div>
 </div>
 <div class="figure align-default">
-<img alt="../_images/image-WindowLooper-24.png" src="../_images/image-WindowLooper-24.png" />
+<img alt="../_images/WindowLooper-5iew8d28rqj.png" src="../_images/WindowLooper-5iew8d28rqj.png" />
 </div>
 <p>Set <a class="reference internal" href="#auxjad.WindowLooper.boundary_depth" title="auxjad.WindowLooper.boundary_depth"><code class="xref py py-attr docutils literal notranslate"><span class="pre">boundary_depth</span></code></a> to a different number to change its
 behaviour.</p>
@@ -1037,12 +1033,18 @@ behaviour.</p>
 </pre></div>
 </div>
 <div class="figure align-default">
-<img alt="../_images/image-WindowLooper-25.png" src="../_images/image-WindowLooper-25.png" />
+<img alt="../_images/WindowLooper-hzetruc3kz4.png" src="../_images/WindowLooper-hzetruc3kz4.png" />
 </div>
 <p>Other arguments available for tweaking the output of
 <a class="reference external" href="https://abjad.github.io/api/abjad/core/Mutation.html#abjad.core.Mutation.Mutation.rewrite_meter" title="(in Abjad v3.1)"><code class="xref py py-meth docutils literal notranslate"><span class="pre">abjad.mutate().rewrite_meter()</span></code></a> are <a class="reference internal" href="#auxjad.WindowLooper.maximum_dot_count" title="auxjad.WindowLooper.maximum_dot_count"><code class="xref py py-attr docutils literal notranslate"><span class="pre">maximum_dot_count</span></code></a> and
 <a class="reference internal" href="#auxjad.WindowLooper.rewrite_tuplets" title="auxjad.WindowLooper.rewrite_tuplets"><code class="xref py py-attr docutils literal notranslate"><span class="pre">rewrite_tuplets</span></code></a>, which work exactly as the identically named
 arguments of <a class="reference external" href="https://abjad.github.io/api/abjad/core/Mutation.html#abjad.core.Mutation.Mutation.rewrite_meter" title="(in Abjad v3.1)"><code class="xref py py-meth docutils literal notranslate"><span class="pre">abjad.mutate().rewrite_meter()</span></code></a>.</p>
+<p>This class also accepts the arguments <code class="docutils literal notranslate"><span class="pre">fuse_across_groups_of_beats</span></code>,
+<code class="docutils literal notranslate"><span class="pre">fuse_quadruple_meter</span></code>, <code class="docutils literal notranslate"><span class="pre">fuse_triple_meter</span></code>, and
+<code class="docutils literal notranslate"><span class="pre">extract_trivial_tuplets</span></code>, which are passed on to
+<a class="reference internal" href="auxjad.Mutation.html#auxjad.Mutation.prettify_rewrite_meter" title="auxjad.Mutation.prettify_rewrite_meter"><code class="xref py py-meth docutils literal notranslate"><span class="pre">auxjad.mutate().prettify_rewrite_meter()</span></code></a> (the latter can be disabled
+by setting <code class="docutils literal notranslate"><span class="pre">prettify_rewrite_meter</span></code> to <code class="docutils literal notranslate"><span class="pre">False</span></code>). See the
+documentation of this function for more details on these arguments.</p>
 </dd>
 </dl>
 <div class="admonition warning">
@@ -1088,7 +1090,7 @@ functionality should be considered experimental.</p>
 </pre></div>
 </div>
 <div class="figure align-default">
-<img alt="../_images/image-WindowLooper-26.png" src="../_images/image-WindowLooper-26.png" />
+<img alt="../_images/WindowLooper-cevvf9c9a9.png" src="../_images/WindowLooper-cevvf9c9a9.png" />
 </div>
 </div>
 <p class="rubric">Methods</p>
@@ -1140,11 +1142,23 @@ functionality should be considered experimental.</p>
 <tr class="row-odd"><td><p><a class="reference internal" href="#auxjad.WindowLooper.current_window" title="auxjad.WindowLooper.current_window"><code class="xref py py-obj docutils literal notranslate"><span class="pre">current_window</span></code></a></p></td>
 <td><p>Read-only property, returns the window at the current head position.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#auxjad.WindowLooper.fill_with_rests" title="auxjad.WindowLooper.fill_with_rests"><code class="xref py py-obj docutils literal notranslate"><span class="pre">fill_with_rests</span></code></a></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#auxjad.WindowLooper.extract_trivial_tuplets" title="auxjad.WindowLooper.extract_trivial_tuplets"><code class="xref py py-obj docutils literal notranslate"><span class="pre">extract_trivial_tuplets</span></code></a></p></td>
+<td><p>Sets the argument <code class="docutils literal notranslate"><span class="pre">extract_trivial_tuplets</span></code> of <a class="reference internal" href="auxjad.Mutation.html#auxjad.Mutation.prettify_rewrite_meter" title="auxjad.Mutation.prettify_rewrite_meter"><code class="xref py py-meth docutils literal notranslate"><span class="pre">auxjad.mutate().prettify_rewrite_meter()</span></code></a>.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#auxjad.WindowLooper.fill_with_rests" title="auxjad.WindowLooper.fill_with_rests"><code class="xref py py-obj docutils literal notranslate"><span class="pre">fill_with_rests</span></code></a></p></td>
 <td><p>When <code class="docutils literal notranslate"><span class="pre">True</span></code>, the output will contain no time signatures.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#auxjad.WindowLooper.forward_bias" title="auxjad.WindowLooper.forward_bias"><code class="xref py py-obj docutils literal notranslate"><span class="pre">forward_bias</span></code></a></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#auxjad.WindowLooper.forward_bias" title="auxjad.WindowLooper.forward_bias"><code class="xref py py-obj docutils literal notranslate"><span class="pre">forward_bias</span></code></a></p></td>
 <td><p>The chance of the window moving forward instead of backwards.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#auxjad.WindowLooper.fuse_across_groups_of_beats" title="auxjad.WindowLooper.fuse_across_groups_of_beats"><code class="xref py py-obj docutils literal notranslate"><span class="pre">fuse_across_groups_of_beats</span></code></a></p></td>
+<td><p>Sets the argument <code class="docutils literal notranslate"><span class="pre">fuse_across_groups_of_beats</span></code> of <a class="reference internal" href="auxjad.Mutation.html#auxjad.Mutation.prettify_rewrite_meter" title="auxjad.Mutation.prettify_rewrite_meter"><code class="xref py py-meth docutils literal notranslate"><span class="pre">auxjad.mutate().prettify_rewrite_meter()</span></code></a>.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#auxjad.WindowLooper.fuse_quadruple_meter" title="auxjad.WindowLooper.fuse_quadruple_meter"><code class="xref py py-obj docutils literal notranslate"><span class="pre">fuse_quadruple_meter</span></code></a></p></td>
+<td><p>Sets the argument <code class="docutils literal notranslate"><span class="pre">fuse_quadruple_meter</span></code> of <a class="reference internal" href="auxjad.Mutation.html#auxjad.Mutation.prettify_rewrite_meter" title="auxjad.Mutation.prettify_rewrite_meter"><code class="xref py py-meth docutils literal notranslate"><span class="pre">auxjad.mutate().prettify_rewrite_meter()</span></code></a>.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#auxjad.WindowLooper.fuse_triple_meter" title="auxjad.WindowLooper.fuse_triple_meter"><code class="xref py py-obj docutils literal notranslate"><span class="pre">fuse_triple_meter</span></code></a></p></td>
+<td><p>Sets the argument <code class="docutils literal notranslate"><span class="pre">fuse_triple_meter</span></code> of <a class="reference internal" href="auxjad.Mutation.html#auxjad.Mutation.prettify_rewrite_meter" title="auxjad.Mutation.prettify_rewrite_meter"><code class="xref py py-meth docutils literal notranslate"><span class="pre">auxjad.mutate().prettify_rewrite_meter()</span></code></a>.</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="#auxjad.WindowLooper.head_position" title="auxjad.WindowLooper.head_position"><code class="xref py py-obj docutils literal notranslate"><span class="pre">head_position</span></code></a></p></td>
 <td><p>The position of the head at the start of a looping window.</p></td>
@@ -1158,19 +1172,22 @@ functionality should be considered experimental.</p>
 <tr class="row-odd"><td><p><a class="reference internal" href="#auxjad.WindowLooper.omit_time_signatures" title="auxjad.WindowLooper.omit_time_signatures"><code class="xref py py-obj docutils literal notranslate"><span class="pre">omit_time_signatures</span></code></a></p></td>
 <td><p>When <code class="docutils literal notranslate"><span class="pre">True</span></code>, the output will contain no time signatures.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#auxjad.WindowLooper.process_on_first_call" title="auxjad.WindowLooper.process_on_first_call"><code class="xref py py-obj docutils literal notranslate"><span class="pre">process_on_first_call</span></code></a></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#auxjad.WindowLooper.prettify_rewrite_meter" title="auxjad.WindowLooper.prettify_rewrite_meter"><code class="xref py py-obj docutils literal notranslate"><span class="pre">prettify_rewrite_meter</span></code></a></p></td>
+<td><p>Used to enable or disable the mutation <a class="reference internal" href="auxjad.Mutation.html#auxjad.Mutation.prettify_rewrite_meter" title="auxjad.Mutation.prettify_rewrite_meter"><code class="xref py py-meth docutils literal notranslate"><span class="pre">auxjad.mutate().prettify_rewrite_meter()</span></code></a> (default <code class="docutils literal notranslate"><span class="pre">True</span></code>).</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#auxjad.WindowLooper.process_on_first_call" title="auxjad.WindowLooper.process_on_first_call"><code class="xref py py-obj docutils literal notranslate"><span class="pre">process_on_first_call</span></code></a></p></td>
 <td><p>If <code class="docutils literal notranslate"><span class="pre">True</span></code> then <a class="reference internal" href="#auxjad.WindowLooper.contents" title="auxjad.WindowLooper.contents"><code class="xref py py-attr docutils literal notranslate"><span class="pre">contents</span></code></a> will be processed in the very first call.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#auxjad.WindowLooper.repetition_chance" title="auxjad.WindowLooper.repetition_chance"><code class="xref py py-obj docutils literal notranslate"><span class="pre">repetition_chance</span></code></a></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#auxjad.WindowLooper.repetition_chance" title="auxjad.WindowLooper.repetition_chance"><code class="xref py py-obj docutils literal notranslate"><span class="pre">repetition_chance</span></code></a></p></td>
 <td><p>The chance of the head not moving, thus repeating the output.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#auxjad.WindowLooper.rewrite_tuplets" title="auxjad.WindowLooper.rewrite_tuplets"><code class="xref py py-obj docutils literal notranslate"><span class="pre">rewrite_tuplets</span></code></a></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#auxjad.WindowLooper.rewrite_tuplets" title="auxjad.WindowLooper.rewrite_tuplets"><code class="xref py py-obj docutils literal notranslate"><span class="pre">rewrite_tuplets</span></code></a></p></td>
 <td><p>Sets the argument <code class="docutils literal notranslate"><span class="pre">rewrite_tuplets</span></code> of <a class="reference external" href="https://abjad.github.io/api/abjad/core/Mutation.html#abjad.core.Mutation.Mutation.rewrite_meter" title="(in Abjad v3.1)"><code class="xref py py-meth docutils literal notranslate"><span class="pre">abjad.mutate().rewrite_meter()</span></code></a>.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#auxjad.WindowLooper.step_size" title="auxjad.WindowLooper.step_size"><code class="xref py py-obj docutils literal notranslate"><span class="pre">step_size</span></code></a></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#auxjad.WindowLooper.step_size" title="auxjad.WindowLooper.step_size"><code class="xref py py-obj docutils literal notranslate"><span class="pre">step_size</span></code></a></p></td>
 <td><p>The size of each step when moving the head.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#auxjad.WindowLooper.window_size" title="auxjad.WindowLooper.window_size"><code class="xref py py-obj docutils literal notranslate"><span class="pre">window_size</span></code></a></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#auxjad.WindowLooper.window_size" title="auxjad.WindowLooper.window_size"><code class="xref py py-obj docutils literal notranslate"><span class="pre">window_size</span></code></a></p></td>
 <td><p>The length of the looping window.</p></td>
 </tr>
 </tbody>
@@ -1184,7 +1201,7 @@ functionality should be considered experimental.</p>
 
 <dl class="py method">
 <dt id="auxjad.WindowLooper.__init__">
-<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">contents</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://abjad.github.io/api/abjad/core/Container.html#abjad.core.Container.Container" title="(in Abjad v3.1)">abjad.core.Container.Container</a></span></em>, <em class="sig-param"><span class="o">*</span></em>, <em class="sig-param"><span class="n">window_size</span><span class="p">:</span> <span class="n">Union<span class="p">[</span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.8)">tuple</a><span class="p">, </span><a class="reference external" href="https://abjad.github.io/api/abjad/meter.html#abjad.meter.Meter" title="(in Abjad v3.1)">abjad.meter.Meter</a><span class="p">]</span></span> <span class="o">=</span> <span class="default_value">4, 4</span></em>, <em class="sig-param"><span class="n">step_size</span><span class="p">:</span> <span class="n">Union<span class="p">[</span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)">int</a><span class="p">, </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)">float</a><span class="p">, </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.8)">tuple</a><span class="p">, </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)">str</a><span class="p">, </span><a class="reference external" href="https://abjad.github.io/api/abjad/utilities/Duration.html#abjad.utilities.Duration.Duration" title="(in Abjad v3.1)">abjad.utilities.Duration.Duration</a><span class="p">]</span></span> <span class="o">=</span> <span class="default_value">1, 16</span></em>, <em class="sig-param"><span class="n">max_steps</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)">int</a></span> <span class="o">=</span> <span class="default_value">1</span></em>, <em class="sig-param"><span class="n">repetition_chance</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)">float</a></span> <span class="o">=</span> <span class="default_value">0.0</span></em>, <em class="sig-param"><span class="n">forward_bias</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)">float</a></span> <span class="o">=</span> <span class="default_value">1.0</span></em>, <em class="sig-param"><span class="n">head_position</span><span class="p">:</span> <span class="n">Union<span class="p">[</span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)">int</a><span class="p">, </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)">float</a><span class="p">, </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.8)">tuple</a><span class="p">, </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)">str</a><span class="p">, </span><a class="reference external" href="https://abjad.github.io/api/abjad/utilities/Duration.html#abjad.utilities.Duration.Duration" title="(in Abjad v3.1)">abjad.utilities.Duration.Duration</a><span class="p">]</span></span> <span class="o">=</span> <span class="default_value">0</span></em>, <em class="sig-param"><span class="n">omit_time_signatures</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)">bool</a></span> <span class="o">=</span> <span class="default_value">False</span></em>, <em class="sig-param"><span class="n">process_on_first_call</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)">bool</a></span> <span class="o">=</span> <span class="default_value">False</span></em>, <em class="sig-param"><span class="n">fill_with_rests</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)">bool</a></span> <span class="o">=</span> <span class="default_value">True</span></em>, <em class="sig-param"><span class="n">boundary_depth</span><span class="p">:</span> <span class="n">Optional<span class="p">[</span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)">int</a><span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em>, <em class="sig-param"><span class="n">maximum_dot_count</span><span class="p">:</span> <span class="n">Optional<span class="p">[</span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)">int</a><span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em>, <em class="sig-param"><span class="n">rewrite_tuplets</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)">bool</a></span> <span class="o">=</span> <span class="default_value">True</span></em><span class="sig-paren">)</span><a class="headerlink" href="#auxjad.WindowLooper.__init__" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">contents</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://abjad.github.io/api/abjad/core/Container.html#abjad.core.Container.Container" title="(in Abjad v3.1)">abjad.core.Container.Container</a></span></em>, <em class="sig-param"><span class="o">*</span></em>, <em class="sig-param"><span class="n">window_size</span><span class="p">:</span> <span class="n">Union<span class="p">[</span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.8)">tuple</a><span class="p">, </span><a class="reference external" href="https://abjad.github.io/api/abjad/meter.html#abjad.meter.Meter" title="(in Abjad v3.1)">abjad.meter.Meter</a><span class="p">]</span></span> <span class="o">=</span> <span class="default_value">4, 4</span></em>, <em class="sig-param"><span class="n">step_size</span><span class="p">:</span> <span class="n">Union<span class="p">[</span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)">int</a><span class="p">, </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)">float</a><span class="p">, </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.8)">tuple</a><span class="p">, </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)">str</a><span class="p">, </span><a class="reference external" href="https://abjad.github.io/api/abjad/utilities/Duration.html#abjad.utilities.Duration.Duration" title="(in Abjad v3.1)">abjad.utilities.Duration.Duration</a><span class="p">]</span></span> <span class="o">=</span> <span class="default_value">1, 16</span></em>, <em class="sig-param"><span class="n">max_steps</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)">int</a></span> <span class="o">=</span> <span class="default_value">1</span></em>, <em class="sig-param"><span class="n">repetition_chance</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)">float</a></span> <span class="o">=</span> <span class="default_value">0.0</span></em>, <em class="sig-param"><span class="n">forward_bias</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)">float</a></span> <span class="o">=</span> <span class="default_value">1.0</span></em>, <em class="sig-param"><span class="n">head_position</span><span class="p">:</span> <span class="n">Union<span class="p">[</span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)">int</a><span class="p">, </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)">float</a><span class="p">, </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.8)">tuple</a><span class="p">, </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)">str</a><span class="p">, </span><a class="reference external" href="https://abjad.github.io/api/abjad/utilities/Duration.html#abjad.utilities.Duration.Duration" title="(in Abjad v3.1)">abjad.utilities.Duration.Duration</a><span class="p">]</span></span> <span class="o">=</span> <span class="default_value">0</span></em>, <em class="sig-param"><span class="n">omit_time_signatures</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)">bool</a></span> <span class="o">=</span> <span class="default_value">False</span></em>, <em class="sig-param"><span class="n">process_on_first_call</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)">bool</a></span> <span class="o">=</span> <span class="default_value">False</span></em>, <em class="sig-param"><span class="n">fill_with_rests</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)">bool</a></span> <span class="o">=</span> <span class="default_value">True</span></em>, <em class="sig-param"><span class="n">boundary_depth</span><span class="p">:</span> <span class="n">Optional<span class="p">[</span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)">int</a><span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em>, <em class="sig-param"><span class="n">maximum_dot_count</span><span class="p">:</span> <span class="n">Optional<span class="p">[</span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)">int</a><span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em>, <em class="sig-param"><span class="n">rewrite_tuplets</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)">bool</a></span> <span class="o">=</span> <span class="default_value">True</span></em>, <em class="sig-param"><span class="n">prettify_rewrite_meter</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)">bool</a></span> <span class="o">=</span> <span class="default_value">True</span></em>, <em class="sig-param"><span class="n">extract_trivial_tuplets</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)">bool</a></span> <span class="o">=</span> <span class="default_value">True</span></em>, <em class="sig-param"><span class="n">fuse_across_groups_of_beats</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)">bool</a></span> <span class="o">=</span> <span class="default_value">True</span></em>, <em class="sig-param"><span class="n">fuse_quadruple_meter</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)">bool</a></span> <span class="o">=</span> <span class="default_value">True</span></em>, <em class="sig-param"><span class="n">fuse_triple_meter</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)">bool</a></span> <span class="o">=</span> <span class="default_value">True</span></em><span class="sig-paren">)</span><a class="headerlink" href="#auxjad.WindowLooper.__init__" title="Permalink to this definition">¶</a></dt>
 <dd><p>Initialises self.</p>
 </dd></dl>
 
@@ -1233,6 +1250,13 @@ functionality should be considered experimental.</p>
 </dd></dl>
 
 <dl class="py method">
+<dt id="auxjad.WindowLooper.extract_trivial_tuplets">
+<em class="property">property </em><code class="sig-name descname">extract_trivial_tuplets</code><a class="headerlink" href="#auxjad.WindowLooper.extract_trivial_tuplets" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sets the argument <code class="docutils literal notranslate"><span class="pre">extract_trivial_tuplets</span></code> of
+<a class="reference internal" href="auxjad.Mutation.html#auxjad.Mutation.prettify_rewrite_meter" title="auxjad.Mutation.prettify_rewrite_meter"><code class="xref py py-meth docutils literal notranslate"><span class="pre">auxjad.mutate().prettify_rewrite_meter()</span></code></a>.</p>
+</dd></dl>
+
+<dl class="py method">
 <dt id="auxjad.WindowLooper.fill_with_rests">
 <em class="property">property </em><code class="sig-name descname">fill_with_rests</code><a class="headerlink" href="#auxjad.WindowLooper.fill_with_rests" title="Permalink to this definition">¶</a></dt>
 <dd><p>When <code class="docutils literal notranslate"><span class="pre">True</span></code>, the output will contain no time signatures.</p>
@@ -1246,6 +1270,27 @@ should range from <code class="docutils literal notranslate"><span class="pre">0
 window can only move forwards. A value of <code class="docutils literal notranslate"><span class="pre">0.5</span></code> gives <span class="math notranslate nohighlight">\(50\%\)</span>
 chance of moving forwards while a value of <code class="docutils literal notranslate"><span class="pre">0.0</span></code> will move the window
 only backwards).</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="auxjad.WindowLooper.fuse_across_groups_of_beats">
+<em class="property">property </em><code class="sig-name descname">fuse_across_groups_of_beats</code><a class="headerlink" href="#auxjad.WindowLooper.fuse_across_groups_of_beats" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sets the argument <code class="docutils literal notranslate"><span class="pre">fuse_across_groups_of_beats</span></code> of
+<a class="reference internal" href="auxjad.Mutation.html#auxjad.Mutation.prettify_rewrite_meter" title="auxjad.Mutation.prettify_rewrite_meter"><code class="xref py py-meth docutils literal notranslate"><span class="pre">auxjad.mutate().prettify_rewrite_meter()</span></code></a>.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="auxjad.WindowLooper.fuse_quadruple_meter">
+<em class="property">property </em><code class="sig-name descname">fuse_quadruple_meter</code><a class="headerlink" href="#auxjad.WindowLooper.fuse_quadruple_meter" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sets the argument <code class="docutils literal notranslate"><span class="pre">fuse_quadruple_meter</span></code> of
+<a class="reference internal" href="auxjad.Mutation.html#auxjad.Mutation.prettify_rewrite_meter" title="auxjad.Mutation.prettify_rewrite_meter"><code class="xref py py-meth docutils literal notranslate"><span class="pre">auxjad.mutate().prettify_rewrite_meter()</span></code></a>.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="auxjad.WindowLooper.fuse_triple_meter">
+<em class="property">property </em><code class="sig-name descname">fuse_triple_meter</code><a class="headerlink" href="#auxjad.WindowLooper.fuse_triple_meter" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sets the argument <code class="docutils literal notranslate"><span class="pre">fuse_triple_meter</span></code> of
+<a class="reference internal" href="auxjad.Mutation.html#auxjad.Mutation.prettify_rewrite_meter" title="auxjad.Mutation.prettify_rewrite_meter"><code class="xref py py-meth docutils literal notranslate"><span class="pre">auxjad.mutate().prettify_rewrite_meter()</span></code></a>.</p>
 </dd></dl>
 
 <dl class="py method">
@@ -1285,6 +1330,13 @@ only backwards).</p>
 <code class="sig-name descname">output_n</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">n</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)">int</a></span></em>, <em class="sig-param"><span class="o">*</span></em>, <em class="sig-param"><span class="n">tie_identical_pitches</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)">bool</a></span> <span class="o">=</span> <span class="default_value">False</span></em><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://abjad.github.io/api/abjad/core/Selection.html#abjad.core.Selection.Selection" title="(in Abjad v3.1)">abjad.core.Selection.Selection</a><a class="headerlink" href="#auxjad.WindowLooper.output_n" title="Permalink to this definition">¶</a></dt>
 <dd><p>Goes through <code class="docutils literal notranslate"><span class="pre">n</span></code> iterations of the looping process and outputs a
 single <a class="reference external" href="https://abjad.github.io/api/abjad/core/Selection.html#abjad.core.Selection.Selection" title="(in Abjad v3.1)"><code class="xref py py-class docutils literal notranslate"><span class="pre">abjad.Selection</span></code></a>.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="auxjad.WindowLooper.prettify_rewrite_meter">
+<em class="property">property </em><code class="sig-name descname">prettify_rewrite_meter</code><a class="headerlink" href="#auxjad.WindowLooper.prettify_rewrite_meter" title="Permalink to this definition">¶</a></dt>
+<dd><p>Used to enable or disable the mutation
+<a class="reference internal" href="auxjad.Mutation.html#auxjad.Mutation.prettify_rewrite_meter" title="auxjad.Mutation.prettify_rewrite_meter"><code class="xref py py-meth docutils literal notranslate"><span class="pre">auxjad.mutate().prettify_rewrite_meter()</span></code></a> (default <code class="docutils literal notranslate"><span class="pre">True</span></code>).</p>
 </dd></dl>
 
 <dl class="py method">

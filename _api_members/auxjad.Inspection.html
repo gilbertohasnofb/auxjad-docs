@@ -1,0 +1,883 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>auxjad.Inspection &mdash; auxjad 0.8.10 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="auxjad.mutate" href="auxjad.mutate.html" />
+    <link rel="prev" title="auxjad.inspect" href="auxjad.inspect.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> auxjad
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.8
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../index.html">Welcome to Auxjad’s documentation!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../examples/index.html">Examples of usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../score_gallery/index.html">Score gallery</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../api/index.html">Auxjad API</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../api/api-core.html">core</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/api-score.html">score</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../api/api-utilities.html">utilities</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="auxjad.inspect.html">auxjad.inspect</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">auxjad.Inspection</a></li>
+<li class="toctree-l3"><a class="reference internal" href="auxjad.mutate.html">auxjad.mutate</a></li>
+<li class="toctree-l3"><a class="reference internal" href="auxjad.Mutation.html">auxjad.Mutation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="auxjad.simplify_time_signature_ratio.html">auxjad.simplify_time_signature_ratio</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">auxjad</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../api/index.html">Auxjad API</a> &raquo;</li>
+        
+          <li><a href="../api/api-utilities.html">utilities</a> &raquo;</li>
+        
+      <li>auxjad.Inspection</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/_api_members/auxjad.Inspection.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="auxjad-inspection">
+<h1>auxjad.Inspection<a class="headerlink" href="#auxjad-inspection" title="Permalink to this headline">¶</a></h1>
+<dl class="py class">
+<dt id="auxjad.Inspection">
+<em class="property">class </em><code class="sig-prename descclassname">auxjad.</code><code class="sig-name descname">Inspection</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">client</span><span class="p">:</span> <span class="n">Union<span class="p">[</span><a class="reference external" href="https://abjad.github.io/api/abjad/core/Component.html#abjad.core.Component.Component" title="(in Abjad v3.1)">abjad.core.Component.Component</a><span class="p">, </span>Iterable<span class="p">[</span><a class="reference external" href="https://abjad.github.io/api/abjad/core/Component.html#abjad.core.Component.Component" title="(in Abjad v3.1)">abjad.core.Component.Component</a><span class="p">]</span><span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#auxjad.Inspection" title="Permalink to this definition">¶</a></dt>
+<dd><p>Inspection class containing all of Auxjad’s inspection methods.</p>
+<p>Example:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">staff</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span><span class="s2">&quot;c&#39;4 e&#39;4 d&#39;4 f&#39;4&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">auxjad</span><span class="o">.</span><span class="n">inspect</span><span class="p">(</span><span class="n">staff</span><span class="p">[</span><span class="mi">2</span><span class="p">:])</span>
+<span class="go">Inspection(client=Selection([Note(&quot;d&#39;4&quot;), Note(&quot;f&#39;4&quot;)]))</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Auxjad automatically adds all methods of <a class="reference internal" href="#auxjad.Inspection" title="auxjad.Inspection"><code class="xref py py-class docutils literal notranslate"><span class="pre">Inspection</span></code></a> as
+extension methods to <a class="reference external" href="https://abjad.github.io/api/abjad/core/Inspection.html#abjad.core.Inspection.Inspection" title="(in Abjad v3.1)"><code class="xref py py-class docutils literal notranslate"><span class="pre">abjad.inspect()</span></code></a>. Therefore they can be used from
+either <a class="reference internal" href="auxjad.inspect.html#auxjad.inspect" title="auxjad.inspect"><code class="xref py py-func docutils literal notranslate"><span class="pre">auxjad.inspect()</span></code></a> or <a class="reference external" href="https://abjad.github.io/api/abjad/core/Inspection.html#abjad.core.Inspection.Inspection" title="(in Abjad v3.1)"><code class="xref py py-class docutils literal notranslate"><span class="pre">abjad.inspect()</span></code></a>, as shown below:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">container</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;c&#39;4 d&#39;4 e&#39;4 f&#39;4&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">auxjad</span><span class="o">.</span><span class="n">inspect</span><span class="p">(</span><span class="n">container</span><span class="p">[:])</span><span class="o">.</span><span class="n">selection_is_full</span><span class="p">()</span>
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">inspect</span><span class="p">(</span><span class="n">container</span><span class="p">[:])</span><span class="o">.</span><span class="n">selection_is_full</span><span class="p">()</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+</div>
+<p class="rubric">Methods</p>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#auxjad.Inspection.__init__" title="auxjad.Inspection.__init__"><code class="xref py py-obj docutils literal notranslate"><span class="pre">__init__</span></code></a>([client])</p></td>
+<td><p>Initialises self.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#auxjad.Inspection.__repr__" title="auxjad.Inspection.__repr__"><code class="xref py py-obj docutils literal notranslate"><span class="pre">__repr__</span></code></a>()</p></td>
+<td><p>Gets interpreter representation.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#auxjad.Inspection.leaves_are_tieable" title="auxjad.Inspection.leaves_are_tieable"><code class="xref py py-obj docutils literal notranslate"><span class="pre">leaves_are_tieable</span></code></a>()</p></td>
+<td><p>Returns a <a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">bool</span></code></a> representing whether or not two or more input leaves have identical pitch(es) and thus can be tied.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#auxjad.Inspection.selection_is_full" title="auxjad.Inspection.selection_is_full"><code class="xref py py-obj docutils literal notranslate"><span class="pre">selection_is_full</span></code></a>()</p></td>
+<td><p>Returns a <a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">bool</span></code></a> representing whether the last measure of an input <a class="reference external" href="https://abjad.github.io/api/abjad/core/Selection.html#abjad.core.Selection.Selection" title="(in Abjad v3.1)"><code class="xref py py-class docutils literal notranslate"><span class="pre">abjad.Selection</span></code></a> is fully filled in or not.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#auxjad.Inspection.selections_are_equal" title="auxjad.Inspection.selections_are_equal"><code class="xref py py-obj docutils literal notranslate"><span class="pre">selections_are_equal</span></code></a>(*[, include_indicators])</p></td>
+<td><p>Returns a <a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">bool</span></code></a> representing whether two or more selections are identical or not.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#auxjad.Inspection.time_signature_extractor" title="auxjad.Inspection.time_signature_extractor"><code class="xref py py-obj docutils literal notranslate"><span class="pre">time_signature_extractor</span></code></a>(*[, …])</p></td>
+<td><p>Returns a <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.8)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code></a> with the <a class="reference external" href="https://abjad.github.io/api/abjad/indicators/TimeSignature.html#abjad.indicators.TimeSignature.TimeSignature" title="(in Abjad v3.1)"><code class="xref py py-class docutils literal notranslate"><span class="pre">abjad.TimeSignature</span></code></a> for all measures of an input <a class="reference external" href="https://abjad.github.io/api/abjad/core/Container.html#abjad.core.Container.Container" title="(in Abjad v3.1)"><code class="xref py py-class docutils literal notranslate"><span class="pre">abjad.Container</span></code></a>.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#auxjad.Inspection.underfull_duration" title="auxjad.Inspection.underfull_duration"><code class="xref py py-obj docutils literal notranslate"><span class="pre">underfull_duration</span></code></a>()</p></td>
+<td><p>Returns a <a class="reference external" href="https://abjad.github.io/api/abjad/utilities/Duration.html#abjad.utilities.Duration.Duration" title="(in Abjad v3.1)"><code class="xref py py-class docutils literal notranslate"><span class="pre">abjad.Duration</span></code></a> representing the duration missing in the last measure of an input <a class="reference external" href="https://abjad.github.io/api/abjad/core/Selection.html#abjad.core.Selection.Selection" title="(in Abjad v3.1)"><code class="xref py py-class docutils literal notranslate"><span class="pre">abjad.Selection</span></code></a> which is not fully filled in.</p></td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Attributes</p>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#auxjad.Inspection.client" title="auxjad.Inspection.client"><code class="xref py py-obj docutils literal notranslate"><span class="pre">client</span></code></a></p></td>
+<td><p>Gets client.</p></td>
+</tr>
+</tbody>
+</table>
+<dl class="py method">
+<dt id="auxjad.Inspection.__init__">
+<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">client</span><span class="p">:</span> <span class="n">Union<span class="p">[</span><a class="reference external" href="https://abjad.github.io/api/abjad/core/Component.html#abjad.core.Component.Component" title="(in Abjad v3.1)">abjad.core.Component.Component</a><span class="p">, </span>Iterable<span class="p">[</span><a class="reference external" href="https://abjad.github.io/api/abjad/core/Component.html#abjad.core.Component.Component" title="(in Abjad v3.1)">abjad.core.Component.Component</a><span class="p">]</span><span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#auxjad.Inspection.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Initialises self.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="auxjad.Inspection.__repr__">
+<code class="sig-name descname">__repr__</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)">str</a><a class="headerlink" href="#auxjad.Inspection.__repr__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets interpreter representation.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="auxjad.Inspection.client">
+<em class="property">property </em><code class="sig-name descname">client</code><a class="headerlink" href="#auxjad.Inspection.client" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets client. Returns component.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="auxjad.Inspection.leaves_are_tieable">
+<code class="sig-name descname">leaves_are_tieable</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)">bool</a><a class="headerlink" href="#auxjad.Inspection.leaves_are_tieable" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a <a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">bool</span></code></a> representing whether or not two or more input
+leaves have identical pitch(es) and thus can be tied. Input argument can
+be a single <a class="reference external" href="https://abjad.github.io/api/abjad/core/Selection.html#abjad.core.Selection.Selection" title="(in Abjad v3.1)"><code class="xref py py-class docutils literal notranslate"><span class="pre">abjad.Selection</span></code></a> with multiple leaves, or an iterable with
+elements of type <a class="reference external" href="https://abjad.github.io/api/abjad/core/Leaf.html#abjad.core.Leaf.Leaf" title="(in Abjad v3.1)"><code class="xref py py-class docutils literal notranslate"><span class="pre">abjad.Leaf</span></code></a> or child classes.</p>
+<dl>
+<dt>Basic usage:</dt><dd><p>When the pitches in both leaves are identical, this function returns
+<code class="docutils literal notranslate"><span class="pre">True</span></code>:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">leaf1</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Note</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;c&#39;4&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">leaf2</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Note</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;c&#39;4&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">auxjad</span><span class="o">.</span><span class="n">inspect</span><span class="p">([</span><span class="n">leaf1</span><span class="p">,</span> <span class="n">leaf2</span><span class="p">])</span><span class="o">.</span><span class="n">leaves_are_tieable</span><span class="p">()</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Auxjad automatically adds this function as an extension method to
+<a class="reference external" href="https://abjad.github.io/api/abjad/core/Inspection.html#abjad.core.Inspection.Inspection" title="(in Abjad v3.1)"><code class="xref py py-class docutils literal notranslate"><span class="pre">abjad.inspect()</span></code></a>. Therefore it can be used from either
+<a class="reference internal" href="auxjad.inspect.html#auxjad.inspect" title="auxjad.inspect"><code class="xref py py-func docutils literal notranslate"><span class="pre">auxjad.inspect()</span></code></a> or <a class="reference external" href="https://abjad.github.io/api/abjad/core/Inspection.html#abjad.core.Inspection.Inspection" title="(in Abjad v3.1)"><code class="xref py py-class docutils literal notranslate"><span class="pre">abjad.inspect()</span></code></a>, as shown below:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">leaf1</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Note</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;c&#39;4&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">leaf2</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Note</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;c&#39;4&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">auxjad</span><span class="o">.</span><span class="n">inspect</span><span class="p">([</span><span class="n">leaf1</span><span class="p">,</span> <span class="n">leaf2</span><span class="p">])</span><span class="o">.</span><span class="n">leaves_are_tieable</span><span class="p">()</span>
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">inspect</span><span class="p">([</span><span class="n">leaf1</span><span class="p">,</span> <span class="n">leaf2</span><span class="p">])</span><span class="o">.</span><span class="n">leaves_are_tieable</span><span class="p">()</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+</div>
+<dl>
+<dt>Durations:</dt><dd><p>Durations do not affect the comparison.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">leaf1</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Note</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;c&#39;2.&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">leaf2</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Note</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;c&#39;16&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">leaf3</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Note</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;f&#39;&#39;&#39;16&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">auxjad</span><span class="o">.</span><span class="n">inspect</span><span class="p">([</span><span class="n">leaf1</span><span class="p">,</span> <span class="n">leaf2</span><span class="p">])</span><span class="o">.</span><span class="n">leaves_are_tieable</span><span class="p">()</span>
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">auxjad</span><span class="o">.</span><span class="n">inspect</span><span class="p">([</span><span class="n">leaf1</span><span class="p">,</span> <span class="n">leaf3</span><span class="p">])</span><span class="o">.</span><span class="n">leaves_are_tieable</span><span class="p">()</span>
+<span class="go">False</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">auxjad</span><span class="o">.</span><span class="n">inspect</span><span class="p">([</span><span class="n">leaf2</span><span class="p">,</span> <span class="n">leaf3</span><span class="p">])</span><span class="o">.</span><span class="n">leaves_are_tieable</span><span class="p">()</span>
+<span class="go">False</span>
+</pre></div>
+</div>
+</dd>
+<dt>Chords:</dt><dd><p>Handles chords as well as pitches.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">chord1</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Chord</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;&lt;c&#39; e&#39; g&#39;&gt;4&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">chord2</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Chord</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;&lt;c&#39; e&#39; g&#39;&gt;16&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">chord3</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Chord</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;&lt;f&#39;&#39;&#39; fs&#39;&#39;&#39;&gt;16&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">auxjad</span><span class="o">.</span><span class="n">inspect</span><span class="p">([</span><span class="n">chord1</span><span class="p">,</span> <span class="n">chord2</span><span class="p">])</span><span class="o">.</span><span class="n">leaves_are_tieable</span><span class="p">()</span>
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">auxjad</span><span class="o">.</span><span class="n">inspect</span><span class="p">([</span><span class="n">chord1</span><span class="p">,</span> <span class="n">chord3</span><span class="p">])</span><span class="o">.</span><span class="n">leaves_are_tieable</span><span class="p">()</span>
+<span class="go">False</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">auxjad</span><span class="o">.</span><span class="n">inspect</span><span class="p">([</span><span class="n">chord2</span><span class="p">,</span> <span class="n">chord3</span><span class="p">])</span><span class="o">.</span><span class="n">leaves_are_tieable</span><span class="p">()</span>
+<span class="go">False</span>
+</pre></div>
+</div>
+</dd>
+<dt>Parentage:</dt><dd><p>Leaves can also be part of <a class="reference external" href="https://abjad.github.io/api/abjad/core/Container.html#abjad.core.Container.Container" title="(in Abjad v3.1)"><code class="xref py py-class docutils literal notranslate"><span class="pre">abjad.Container</span></code></a>’s or child classes.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">container</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;r4 &lt;c&#39; e&#39;&gt;4 &lt;c&#39; e&#39;&gt;2&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">auxjad</span><span class="o">.</span><span class="n">inspect</span><span class="p">([</span><span class="n">container</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">container</span><span class="p">[</span><span class="mi">2</span><span class="p">]])</span><span class="o">.</span><span class="n">leaves_are_tieable</span><span class="p">()</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+</dd>
+<dt>Rests:</dt><dd><p>If rests are input, the return value is <code class="docutils literal notranslate"><span class="pre">False</span></code>.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">container</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;r4 g&#39;4 r2&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">auxjad</span><span class="o">.</span><span class="n">inspect</span><span class="p">(</span><span class="n">leaves</span><span class="p">)</span><span class="o">.</span><span class="n">leaves_are_tieable</span><span class="p">()</span>
+<span class="go">False</span>
+</pre></div>
+</div>
+</dd>
+<dt>Multiple leaves:</dt><dd><p>Accepts more than two notes:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">leaf1</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Note</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;c&#39;4&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">leaf2</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Note</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;c&#39;4&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">leaf3</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Note</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;c&#39;2.&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">auxjad</span><span class="o">.</span><span class="n">inspect</span><span class="p">([</span><span class="n">leaf1</span><span class="p">,</span> <span class="n">leaf2</span><span class="p">,</span> <span class="n">leaf3</span><span class="p">])</span><span class="o">.</span><span class="n">leaves_are_tieable</span><span class="p">()</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+</dd>
+<dt>Logical ties:</dt><dd><p>Accepts leaves as well as <a class="reference external" href="https://abjad.github.io/api/abjad/core/LogicalTie.html#abjad.core.LogicalTie.LogicalTie" title="(in Abjad v3.1)"><code class="xref py py-class docutils literal notranslate"><span class="pre">abjad.LogicalTie</span></code></a>’s:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">leaf</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Note</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;c&#39;2.&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">staff</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;c&#39;4 ~ c&#39;16&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">logical_tie</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="n">staff</span><span class="p">)</span><span class="o">.</span><span class="n">logical_tie</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">auxjad</span><span class="o">.</span><span class="n">inspect</span><span class="p">([</span><span class="n">leaf</span><span class="p">,</span> <span class="n">logical_tie</span><span class="p">])</span><span class="o">.</span><span class="n">leaves_are_tieable</span><span class="p">()</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+</dd>
+<dt>Selections:</dt><dd><p>Accepts a single <a class="reference external" href="https://abjad.github.io/api/abjad/core/Selection.html#abjad.core.Selection.Selection" title="(in Abjad v3.1)"><code class="xref py py-class docutils literal notranslate"><span class="pre">abjad.Selection</span></code></a> as input. It will consider all of
+its leaves.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">staff</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;c&#39;2 c&#39;4. c&#39;8&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">auxjad</span><span class="o">.</span><span class="n">inspect</span><span class="p">(</span><span class="n">staff</span><span class="p">[:])</span><span class="o">.</span><span class="n">leaves_are_tieable</span><span class="p">()</span>
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">staff</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;c&#39;2 c&#39;4. d&#39;8&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">auxjad</span><span class="o">.</span><span class="n">inspect</span><span class="p">(</span><span class="n">staff</span><span class="p">[:])</span><span class="o">.</span><span class="n">leaves_are_tieable</span><span class="p">()</span>
+<span class="go">False</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="auxjad.Inspection.selection_is_full">
+<code class="sig-name descname">selection_is_full</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)">bool</a><a class="headerlink" href="#auxjad.Inspection.selection_is_full" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a <a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">bool</span></code></a> representing whether the last measure of an input
+<a class="reference external" href="https://abjad.github.io/api/abjad/core/Selection.html#abjad.core.Selection.Selection" title="(in Abjad v3.1)"><code class="xref py py-class docutils literal notranslate"><span class="pre">abjad.Selection</span></code></a> is fully filled in or not.</p>
+<dl>
+<dt>Basic usage:</dt><dd><p>Returns <code class="docutils literal notranslate"><span class="pre">True</span></code> if the last measure of a selection is full, otherwise
+returns <code class="docutils literal notranslate"><span class="pre">False</span></code>. If no time signature is encountered at the
+beginning, it uses LilyPond’s convention and considers the container
+as in 4/4.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">container1</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;c&#39;4 d&#39;4 e&#39;4 f&#39;4&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">container2</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;c&#39;4 d&#39;4 e&#39;4&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">container3</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;c&#39;4 d&#39;4 e&#39;4 f&#39;4 | c&#39;4&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">container4</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;c&#39;4 d&#39;4 e&#39;4 f&#39;4 | c&#39;4 d&#39;4 e&#39;4 f&#39;4&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">auxjad</span><span class="o">.</span><span class="n">inspect</span><span class="p">(</span><span class="n">container1</span><span class="p">[:])</span><span class="o">.</span><span class="n">selection_is_full</span><span class="p">()</span>
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">auxjad</span><span class="o">.</span><span class="n">inspect</span><span class="p">(</span><span class="n">container2</span><span class="p">[:])</span><span class="o">.</span><span class="n">selection_is_full</span><span class="p">()</span>
+<span class="go">False</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">auxjad</span><span class="o">.</span><span class="n">inspect</span><span class="p">(</span><span class="n">container3</span><span class="p">[:])</span><span class="o">.</span><span class="n">selection_is_full</span><span class="p">()</span>
+<span class="go">False</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">auxjad</span><span class="o">.</span><span class="n">inspect</span><span class="p">(</span><span class="n">container4</span><span class="p">[:])</span><span class="o">.</span><span class="n">selection_is_full</span><span class="p">()</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Auxjad automatically adds this function as an extension method to
+<a class="reference external" href="https://abjad.github.io/api/abjad/core/Inspection.html#abjad.core.Inspection.Inspection" title="(in Abjad v3.1)"><code class="xref py py-class docutils literal notranslate"><span class="pre">abjad.inspect()</span></code></a>. Therefore it can be used from either
+<a class="reference internal" href="auxjad.inspect.html#auxjad.inspect" title="auxjad.inspect"><code class="xref py py-func docutils literal notranslate"><span class="pre">auxjad.inspect()</span></code></a> or <a class="reference external" href="https://abjad.github.io/api/abjad/core/Inspection.html#abjad.core.Inspection.Inspection" title="(in Abjad v3.1)"><code class="xref py py-class docutils literal notranslate"><span class="pre">abjad.inspect()</span></code></a>, as shown below:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">container</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;c&#39;4 d&#39;4 e&#39;4 f&#39;4&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">auxjad</span><span class="o">.</span><span class="n">inspect</span><span class="p">(</span><span class="n">container</span><span class="p">[:])</span><span class="o">.</span><span class="n">selection_is_full</span><span class="p">()</span>
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">inspect</span><span class="p">(</span><span class="n">container</span><span class="p">[:])</span><span class="o">.</span><span class="n">selection_is_full</span><span class="p">()</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+</div>
+<dl>
+<dt>Time signature changes:</dt><dd><p>Handles any time signatures as well as changes of time signature.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">container1</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;\time 4/4 c&#39;4 d&#39;4 e&#39;4 f&#39;4&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">container2</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;\time 3/4 a2. \time 2/4 r2&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">container3</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;\time 5/4 g1 ~ g4 \time 4/4 af&#39;2&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">container4</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;\time 6/8 c&#39;2 ~ c&#39;8&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">auxjad</span><span class="o">.</span><span class="n">inspect</span><span class="p">(</span><span class="n">container1</span><span class="p">[:])</span><span class="o">.</span><span class="n">selection_is_full</span><span class="p">()</span>
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">auxjad</span><span class="o">.</span><span class="n">inspect</span><span class="p">(</span><span class="n">container2</span><span class="p">[:])</span><span class="o">.</span><span class="n">selection_is_full</span><span class="p">()</span>
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">auxjad</span><span class="o">.</span><span class="n">inspect</span><span class="p">(</span><span class="n">container3</span><span class="p">[:])</span><span class="o">.</span><span class="n">selection_is_full</span><span class="p">()</span>
+<span class="go">False</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">auxjad</span><span class="o">.</span><span class="n">inspect</span><span class="p">(</span><span class="n">container4</span><span class="p">[:])</span><span class="o">.</span><span class="n">selection_is_full</span><span class="p">()</span>
+<span class="go">False</span>
+</pre></div>
+</div>
+</dd>
+<dt>Partial time signatures:</dt><dd><p>Correctly handles partial time signatures.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">container</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;c&#39;4 d&#39;4 e&#39;4 f&#39;4&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">time_signature</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">TimeSignature</span><span class="p">((</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">),</span> <span class="n">partial</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">attach</span><span class="p">(</span><span class="n">time_signature</span><span class="p">,</span> <span class="n">container</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">auxjad</span><span class="o">.</span><span class="n">inspect</span><span class="p">(</span><span class="n">container</span><span class="p">[:])</span><span class="o">.</span><span class="n">selection_is_full</span><span class="p">()</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+</dd>
+<dt>Multi-measure rests:</dt><dd><p>It also handles multi-measure rests.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">container1</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;R1&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">container2</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;\time 3/4 R1*3/4 \time 2/4 r2&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">container3</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;\time 5/4 R1*5/4 \time 4/4 g&#39;&#39;4&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">container4</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;\time 6/8 R1*1/2&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">auxjad</span><span class="o">.</span><span class="n">inspect</span><span class="p">(</span><span class="n">container1</span><span class="p">[:])</span><span class="o">.</span><span class="n">selection_is_full</span><span class="p">()</span>
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">auxjad</span><span class="o">.</span><span class="n">inspect</span><span class="p">(</span><span class="n">container2</span><span class="p">[:])</span><span class="o">.</span><span class="n">selection_is_full</span><span class="p">()</span>
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">auxjad</span><span class="o">.</span><span class="n">inspect</span><span class="p">(</span><span class="n">container3</span><span class="p">[:])</span><span class="o">.</span><span class="n">selection_is_full</span><span class="p">()</span>
+<span class="go">False</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">auxjad</span><span class="o">.</span><span class="n">inspect</span><span class="p">(</span><span class="n">container4</span><span class="p">[:])</span><span class="o">.</span><span class="n">selection_is_full</span><span class="p">()</span>
+<span class="go">False</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+<div class="admonition error">
+<p class="admonition-title">Error</p>
+<p>If a selection is malformed, i.e. it has an underfilled measure before
+a time signature change, the function raises a <a class="reference external" href="https://docs.python.org/3/library/exceptions.html#ValueError" title="(in Python v3.8)"><code class="xref py py-exc docutils literal notranslate"><span class="pre">ValueError</span></code></a>
+exception. This is also the case when a selection starts in the middle
+of a measure.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">container</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;\time 5/4 g&#39;&#39;1 \time 4/4 f&#39;1&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">auxjad</span><span class="o">.</span><span class="n">inspect</span><span class="p">(</span><span class="n">container</span><span class="p">[:])</span><span class="o">.</span><span class="n">selection_is_full</span><span class="p">()</span>
+<span class="go">ValueError: &#39;selection&#39; is malformed, with an underfull measure</span>
+<span class="go">preceding a time signature change</span>
+</pre></div>
+</div>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>The input selection must be a contiguous logical voice. When dealing
+with a container with multiple subcontainers (e.g. a score containing
+multiple staves), the best approach is to cycle through these
+subcontainers, applying this function to them individually.</p>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt id="auxjad.Inspection.selections_are_equal">
+<code class="sig-name descname">selections_are_equal</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span></em>, <em class="sig-param"><span class="n">include_indicators</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)">bool</a></span> <span class="o">=</span> <span class="default_value">True</span></em><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)">bool</a><a class="headerlink" href="#auxjad.Inspection.selections_are_equal" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a <a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">bool</span></code></a> representing whether two or more selections are
+identical or not. Input argument must be an iterable made of two or more
+<a class="reference external" href="https://abjad.github.io/api/abjad/core/Selection.html#abjad.core.Selection.Selection" title="(in Abjad v3.1)"><code class="xref py py-class docutils literal notranslate"><span class="pre">abjad.Selection</span></code></a>’s.</p>
+<dl>
+<dt>Basic usage:</dt><dd><p>When the pitches and effective durations of all leaves in all
+selections are identical, this function returns <code class="docutils literal notranslate"><span class="pre">True</span></code>:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">container1</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;c&#39;4 d&#39;4 e&#39;4 f&#39;4 &lt;g&#39; a&#39;&gt;2 r2&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">container2</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;c&#39;4 d&#39;4 e&#39;4 f&#39;4 &lt;g&#39; a&#39;&gt;2 r2&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">selections</span> <span class="o">=</span> <span class="p">[</span><span class="n">container1</span><span class="p">[:],</span> <span class="n">container2</span><span class="p">[:]]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">auxjad</span><span class="o">.</span><span class="n">inspect</span><span class="p">(</span><span class="n">selections</span><span class="p">)</span><span class="o">.</span><span class="n">selections_are_equal</span><span class="p">()</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Auxjad automatically adds this function as an extension method to
+<a class="reference external" href="https://abjad.github.io/api/abjad/core/Inspection.html#abjad.core.Inspection.Inspection" title="(in Abjad v3.1)"><code class="xref py py-class docutils literal notranslate"><span class="pre">abjad.inspect()</span></code></a>. Therefore it can be used from either
+<a class="reference internal" href="auxjad.inspect.html#auxjad.inspect" title="auxjad.inspect"><code class="xref py py-func docutils literal notranslate"><span class="pre">auxjad.inspect()</span></code></a> or <a class="reference external" href="https://abjad.github.io/api/abjad/core/Inspection.html#abjad.core.Inspection.Inspection" title="(in Abjad v3.1)"><code class="xref py py-class docutils literal notranslate"><span class="pre">abjad.inspect()</span></code></a>, as shown below:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">container1</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;c&#39;4 d&#39;4 e&#39;4 f&#39;4 &lt;g&#39; a&#39;&gt;2 r2&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">container2</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;c&#39;4 d&#39;4 e&#39;4 f&#39;4 &lt;g&#39; a&#39;&gt;2 r2&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">selections</span> <span class="o">=</span> <span class="p">[</span><span class="n">container1</span><span class="p">[:],</span> <span class="n">container2</span><span class="p">[:]]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">auxjad</span><span class="o">.</span><span class="n">inspect</span><span class="p">(</span><span class="n">selections</span><span class="p">)</span><span class="o">.</span><span class="n">selections_are_equal</span><span class="p">()</span>
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">inspect</span><span class="p">(</span><span class="n">selections</span><span class="p">)</span><span class="o">.</span><span class="n">selections_are_equal</span><span class="p">()</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+</div>
+<dl>
+<dt>Effective durations:</dt><dd><p>Even if all leaves of both selections are identical in relation to both
+pitches and written durations, the function considers the effective
+durations. This means that situations like the one below do not yield a
+false positive:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">container1</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;c&#39;4 d&#39;4 e&#39;4 f&#39;4 &lt;g&#39; a&#39;&gt;2 r2&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">container2</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;\times 3/2 {c&#39;4 d&#39;4 e&#39;4} &quot;</span>
+<span class="gp">... </span>                         <span class="s2">&quot;f&#39;4 &lt;g&#39; a&#39;&gt;2 r2&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">selections</span> <span class="o">=</span> <span class="p">[</span><span class="n">container1</span><span class="p">[:],</span> <span class="n">container2</span><span class="p">[:]]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">auxjad</span><span class="o">.</span><span class="n">inspect</span><span class="p">(</span><span class="n">selections</span><span class="p">)</span><span class="o">.</span><span class="n">selections_are_equal</span><span class="p">()</span>
+<span class="go">False</span>
+</pre></div>
+</div>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">include_indicators</span></code>:</dt><dd><p>By default, this function includes indicators in the comparison, so the
+containers in the example below are understood to be different:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">container1</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;c&#39;4\pp d&#39;4 e&#39;4-. f&#39;4 &lt;g&#39; a&#39;&gt;2-&gt; r2&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">container2</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;c&#39;4 d&#39;4 e&#39;4 f&#39;4 &lt;g&#39; a&#39;&gt;2 r2&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">selections</span> <span class="o">=</span> <span class="p">[</span><span class="n">container1</span><span class="p">[:],</span> <span class="n">container2</span><span class="p">[:]]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">auxjad</span><span class="o">.</span><span class="n">inspect</span><span class="p">(</span><span class="n">selections</span><span class="p">)</span><span class="o">.</span><span class="n">selections_are_equal</span><span class="p">()</span>
+<span class="go">False</span>
+</pre></div>
+</div>
+<p>Set the argument <code class="docutils literal notranslate"><span class="pre">include_indicators</span></code> to <code class="docutils literal notranslate"><span class="pre">False</span></code> to ignore
+indicators when comparison selections. In that case, the containers
+in the example above are then considered identical:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">container1</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;c&#39;4\pp d&#39;4 e&#39;4-. f&#39;4 &lt;g&#39; a&#39;&gt;2-&gt; r2&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">container2</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;c&#39;4 d&#39;4 e&#39;4 f&#39;4 &lt;g&#39; a&#39;&gt;2 r2&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">selections</span> <span class="o">=</span> <span class="p">[</span><span class="n">container1</span><span class="p">[:],</span> <span class="n">container2</span><span class="p">[:]]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">auxjad</span><span class="o">.</span><span class="n">inspect</span><span class="p">(</span><span class="n">selections</span><span class="p">)</span><span class="o">.</span><span class="n">selections_are_equal</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="n">include_indicators</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+<span class="gp">... </span><span class="p">)</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+</dd>
+<dt>Grace notes:</dt><dd><p>This function also handles grace notes.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">container1</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;c&#39;4 d&#39;4 e&#39;4 f&#39;4&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">container2</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;c&#39;4 \grace{d&#39;4} d&#39;4 e&#39;4 f&#39;4&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">selection1</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="n">container1</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">selection2</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="n">container2</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">selections</span> <span class="o">=</span> <span class="p">[</span><span class="n">selection1</span><span class="p">,</span> <span class="n">selection2</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">auxjad</span><span class="o">.</span><span class="n">inspect</span><span class="p">(</span><span class="n">selections</span><span class="p">)</span><span class="o">.</span><span class="n">selections_are_equal</span><span class="p">()</span>
+<span class="go">False</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">container1</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;c&#39;4 d&#39;4 e&#39;4 f&#39;4 &lt;g&#39; a&#39;&gt;2 r2&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">container2</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;c&#39;4 \grace{c&#39;&#39;4} d&#39;4 e&#39;4 &quot;</span>
+<span class="gp">... </span>                         <span class="sa">r</span><span class="s2">&quot;f&#39;4 &lt;g&#39; a&#39;&gt;2 r2&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">selection1</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="n">container1</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">selection2</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="n">container2</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">selections</span> <span class="o">=</span> <span class="p">[</span><span class="n">selection1</span><span class="p">,</span> <span class="n">selection2</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">auxjad</span><span class="o">.</span><span class="n">inspect</span><span class="p">(</span><span class="n">selections</span><span class="p">)</span><span class="o">.</span><span class="n">selections_are_equal</span><span class="p">()</span>
+<span class="go">False</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">container1</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;c&#39;4 \grace{c&#39;&#39;4} d&#39;4 e&#39;4 &quot;</span>
+<span class="gp">... </span>                         <span class="sa">r</span><span class="s2">&quot;f&#39;4 &lt;g&#39; a&#39;&gt;2 r2&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">container2</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;c&#39;4 \grace{c&#39;&#39;8} d&#39;4 e&#39;4 &quot;</span>
+<span class="gp">... </span>                         <span class="sa">r</span><span class="s2">&quot;f&#39;4 &lt;g&#39; a&#39;&gt;2 r2&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">selection1</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="n">container1</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">selection2</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="n">container2</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">selections</span> <span class="o">=</span> <span class="p">[</span><span class="n">selection1</span><span class="p">,</span> <span class="n">selection2</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">auxjad</span><span class="o">.</span><span class="n">inspect</span><span class="p">(</span><span class="n">selections</span><span class="p">)</span><span class="o">.</span><span class="n">selections_are_equal</span><span class="p">()</span>
+<span class="go">False</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">container1</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;c&#39;4 \grace{c&#39;&#39;16} d&#39;4 e&#39;4 &quot;</span>
+<span class="gp">... </span>                         <span class="sa">r</span><span class="s2">&quot;f&#39;4 &lt;g&#39; a&#39;&gt;2 r2&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">container2</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;c&#39;4 \grace{c&#39;&#39;16} d&#39;4 e&#39;4 &quot;</span>
+<span class="gp">... </span>                         <span class="sa">r</span><span class="s2">&quot;f&#39;4 &lt;g&#39; a&#39;&gt;2 r2&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">selection1</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="n">container1</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">selection2</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="n">container2</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">selections</span> <span class="o">=</span> <span class="p">[</span><span class="n">selection1</span><span class="p">,</span> <span class="n">selection2</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">auxjad</span><span class="o">.</span><span class="n">inspect</span><span class="p">(</span><span class="n">selections</span><span class="p">)</span><span class="o">.</span><span class="n">selections_are_equal</span><span class="p">()</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>It is important though to create selections using <a class="reference external" href="https://abjad.github.io/api/abjad/core/Selection.html#abjad.core.Selection.Selection" title="(in Abjad v3.1)"><code class="xref py py-class docutils literal notranslate"><span class="pre">abjad.select()</span></code></a> as
+shown in the example above instead of using the syntax
+<code class="docutils literal notranslate"><span class="pre">container[:]</span></code>, since the latter selects only leaves which are not
+grace notes.</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>It is important to note it is the contents of the containers which are
+compared, so containers of different classes can still return a
+<code class="docutils literal notranslate"><span class="pre">True</span></code> value.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">container1</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;c&#39;4 d&#39;4 e&#39;4 f&#39;4&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">container2</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;c&#39;4 d&#39;4 e&#39;4 f&#39;4&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">selections</span> <span class="o">=</span> <span class="p">[</span><span class="n">container1</span><span class="p">[:],</span> <span class="n">container2</span><span class="p">[:]]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">auxjad</span><span class="o">.</span><span class="n">inspect</span><span class="p">(</span><span class="n">selections</span><span class="p">)</span><span class="o">.</span><span class="n">selections_are_equal</span><span class="p">()</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt id="auxjad.Inspection.time_signature_extractor">
+<code class="sig-name descname">time_signature_extractor</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span></em>, <em class="sig-param"><span class="n">do_not_use_none</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)">bool</a></span> <span class="o">=</span> <span class="default_value">False</span></em>, <em class="sig-param"><span class="n">implicit_common_time</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)">bool</a></span> <span class="o">=</span> <span class="default_value">True</span></em>, <em class="sig-param"><span class="n">omit_repeated</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)">bool</a></span> <span class="o">=</span> <span class="default_value">False</span></em><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.8)">list</a><a class="headerlink" href="#auxjad.Inspection.time_signature_extractor" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.8)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code></a> with the <a class="reference external" href="https://abjad.github.io/api/abjad/indicators/TimeSignature.html#abjad.indicators.TimeSignature.TimeSignature" title="(in Abjad v3.1)"><code class="xref py py-class docutils literal notranslate"><span class="pre">abjad.TimeSignature</span></code></a> for all measures
+of an input <a class="reference external" href="https://abjad.github.io/api/abjad/core/Container.html#abjad.core.Container.Container" title="(in Abjad v3.1)"><code class="xref py py-class docutils literal notranslate"><span class="pre">abjad.Container</span></code></a>.</p>
+<dl>
+<dt>Basic usage:</dt><dd><p>This function returns a <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.8)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code></a> with one <a class="reference external" href="https://abjad.github.io/api/abjad/indicators/TimeSignature.html#abjad.indicators.TimeSignature.TimeSignature" title="(in Abjad v3.1)"><code class="xref py py-class docutils literal notranslate"><span class="pre">abjad.TimeSignature</span></code></a> per
+measure.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">container</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;\time 3/4 c&#39;2. \time 4/4 e&#39;1&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">time_sigs</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">inspect</span><span class="p">(</span><span class="n">container</span><span class="p">)</span><span class="o">.</span><span class="n">time_signature_extractor</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">time_sigs</span>
+<span class="go">[TimeSignature((3, 4)), TimeSignature((4, 4))]</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Auxjad automatically adds this function as an extension method to
+<a class="reference external" href="https://abjad.github.io/api/abjad/core/Inspection.html#abjad.core.Inspection.Inspection" title="(in Abjad v3.1)"><code class="xref py py-class docutils literal notranslate"><span class="pre">abjad.inspect()</span></code></a>. Therefore it can be used from either
+<a class="reference internal" href="auxjad.inspect.html#auxjad.inspect" title="auxjad.inspect"><code class="xref py py-func docutils literal notranslate"><span class="pre">auxjad.inspect()</span></code></a> or <a class="reference external" href="https://abjad.github.io/api/abjad/core/Inspection.html#abjad.core.Inspection.Inspection" title="(in Abjad v3.1)"><code class="xref py py-class docutils literal notranslate"><span class="pre">abjad.inspect()</span></code></a>, as shown below:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">container</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;\time 3/4 c&#39;2. \time 4/4 e&#39;1&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">auxjad</span><span class="o">.</span><span class="n">inspect</span><span class="p">(</span><span class="n">container</span><span class="p">)</span><span class="o">.</span><span class="n">time_signature_extractor</span><span class="p">()</span>
+<span class="go">[TimeSignature((3, 4)), TimeSignature((4, 4))]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">inspect</span><span class="p">(</span><span class="n">container</span><span class="p">)</span><span class="o">.</span><span class="n">time_signature_extractor</span><span class="p">()</span>
+<span class="go">[TimeSignature((3, 4)), TimeSignature((4, 4))]</span>
+</pre></div>
+</div>
+</div>
+<dl>
+<dt><code class="docutils literal notranslate"><span class="pre">do_not_use_none</span></code>:</dt><dd><p>By default, the <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.8)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code></a> will contain a <code class="docutils literal notranslate"><span class="pre">None</span></code> if a measure does
+not have an explicit time signature.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">container</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="sa">r</span><span class="s2">&quot;\time 5/8 c&#39;4 ~ c&#39;16 \time 3/8 d&#39;4. e&#39;4.&quot;</span>
+<span class="gp">... </span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">time_sigs</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">inspect</span><span class="p">(</span><span class="n">container</span><span class="p">)</span><span class="o">.</span><span class="n">time_signature_extractor</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">time_sigs</span>
+<span class="go">[TimeSignature((5, 8)), TimeSignature((3, 8)), None]</span>
+</pre></div>
+</div>
+<p>Set the keyword argument <code class="docutils literal notranslate"><span class="pre">do_not_use_none</span></code> to <code class="docutils literal notranslate"><span class="pre">True</span></code> to change this
+behaviour.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">time_sigs</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">inspect</span><span class="p">(</span><span class="n">container</span><span class="p">)</span><span class="o">.</span><span class="n">time_signature_extractor</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="n">do_not_use_none</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+<span class="gp">... </span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">time_sigs</span>
+<span class="go">[TimeSignature((5, 8)), TimeSignature((3, 8)), TimeSignature((3, 8))]</span>
+</pre></div>
+</div>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">omit_repeated</span></code>:</dt><dd><p>By default, time signatures are output according to the container, even
+if there are multiple instances of a same time signature.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">container</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="sa">r</span><span class="s2">&quot;\time 3/4 c&#39;2. d&#39;2. \time 3/4 e&#39;2. f&#39;2.&quot;</span>
+<span class="gp">... </span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">time_sigs</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">inspect</span><span class="p">(</span><span class="n">container</span><span class="p">)</span><span class="o">.</span><span class="n">time_signature_extractor</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">time_sigs</span>
+<span class="go">[abjad.TimeSignature((3, 4)), None, abjad.TimeSignature((3, 4)), None]</span>
+</pre></div>
+</div>
+<p>Set the keyword argument <code class="docutils literal notranslate"><span class="pre">omit_repeated</span></code> to <code class="docutils literal notranslate"><span class="pre">True</span></code> to replace
+repeated time signatures with <code class="docutils literal notranslate"><span class="pre">None</span></code>.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">time_sigs</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">inspect</span><span class="p">(</span><span class="n">container</span><span class="p">)</span><span class="o">.</span><span class="n">time_signature_extractor</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="n">omit_repeated</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+<span class="gp">... </span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">time_sigs</span>
+<span class="go">[abjad.TimeSignature((3, 4)), None, None, None]</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+<div class="admonition error">
+<p class="admonition-title">Error</p>
+<p>Setting both <code class="docutils literal notranslate"><span class="pre">do_not_use_none</span></code> and <code class="docutils literal notranslate"><span class="pre">omit_repeated</span></code> to <code class="docutils literal notranslate"><span class="pre">True</span></code>
+will raise a <a class="reference external" href="https://docs.python.org/3/library/exceptions.html#ValueError" title="(in Python v3.8)"><code class="xref py py-exc docutils literal notranslate"><span class="pre">ValueError</span></code></a> exception:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">container</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="sa">r</span><span class="s2">&quot;\time 3/4 c&#39;2. d&#39;2. \time 3/4 e&#39;2. f&#39;2.&quot;</span>
+<span class="gp">... </span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">time_sigs</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">inspect</span><span class="p">(</span><span class="n">container</span><span class="p">)</span><span class="o">.</span><span class="n">time_signature_extractor</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="n">do_not_use_none</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">omit_repeated</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+<span class="gp">... </span><span class="p">)</span>
+<span class="go">ValueError: &#39;omit_repeated&#39; and &#39;do_not_use_none&#39; cannot be both set to</span>
+<span class="go">&#39;True&#39;</span>
+</pre></div>
+</div>
+</div>
+<dl>
+<dt><code class="docutils literal notranslate"><span class="pre">implicit_common_time</span></code>:</dt><dd><p>LilyPond uses an implicit time signature of 4/4 whenever a time
+signature is not found. This function behaves the same way.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">container</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;c&#39;1 d&#39;1 e&#39;1 f&#39;1&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">time_sigs</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">inspect</span><span class="p">(</span><span class="n">container</span><span class="p">)</span><span class="o">.</span><span class="n">time_signature_extractor</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">time_sigs</span>
+<span class="go">[TimeSignature((4, 4)), None, None, None]</span>
+</pre></div>
+</div>
+<p>To disable this behaviour, set <code class="docutils literal notranslate"><span class="pre">implicit_common_time</span></code> to <code class="docutils literal notranslate"><span class="pre">False</span></code>.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">time_sigs</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">inspect</span><span class="p">(</span><span class="n">container</span><span class="p">)</span><span class="o">.</span><span class="n">time_signature_extractor</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="n">implicit_common_time</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+<span class="gp">... </span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">time_sigs</span>
+<span class="go">[None, None, None, None]</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+<div class="admonition error">
+<p class="admonition-title">Error</p>
+<p>Setting <code class="docutils literal notranslate"><span class="pre">do_not_use_none</span></code> to <code class="docutils literal notranslate"><span class="pre">True</span></code> and <code class="docutils literal notranslate"><span class="pre">implicit_common_time</span></code> to
+<code class="docutils literal notranslate"><span class="pre">False</span></code> on a container that starts with no time signature will raise
+a <a class="reference external" href="https://docs.python.org/3/library/exceptions.html#ValueError" title="(in Python v3.8)"><code class="xref py py-exc docutils literal notranslate"><span class="pre">ValueError</span></code></a> exception:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">container</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;c&#39;1 d&#39;1 e&#39;1 f&#39;1&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">time_sigs</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">inspect</span><span class="p">(</span><span class="n">container</span><span class="p">)</span><span class="o">.</span><span class="n">time_signature_extractor</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="n">do_not_use_none</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">implicit_common_time</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+<span class="gp">... </span><span class="p">)</span>
+<span class="go">ValueError: container does not have a time signature attached to its</span>
+<span class="go">first leaf, with &#39;implicit_common_time&#39; set to &#39;False&#39; and</span>
+<span class="go">&#39;omit_repeated&#39; set to &#39;True&#39;</span>
+</pre></div>
+</div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt id="auxjad.Inspection.underfull_duration">
+<code class="sig-name descname">underfull_duration</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://abjad.github.io/api/abjad/utilities/Duration.html#abjad.utilities.Duration.Duration" title="(in Abjad v3.1)">abjad.utilities.Duration.Duration</a><a class="headerlink" href="#auxjad.Inspection.underfull_duration" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a <a class="reference external" href="https://abjad.github.io/api/abjad/utilities/Duration.html#abjad.utilities.Duration.Duration" title="(in Abjad v3.1)"><code class="xref py py-class docutils literal notranslate"><span class="pre">abjad.Duration</span></code></a> representing the duration missing in the
+last measure of an input <a class="reference external" href="https://abjad.github.io/api/abjad/core/Selection.html#abjad.core.Selection.Selection" title="(in Abjad v3.1)"><code class="xref py py-class docutils literal notranslate"><span class="pre">abjad.Selection</span></code></a> which is not fully filled in.</p>
+<dl>
+<dt>Basic usage:</dt><dd><p>Returns the missing duration of the last measure of an
+<a class="reference external" href="https://abjad.github.io/api/abjad/core/Selection.html#abjad.core.Selection.Selection" title="(in Abjad v3.1)"><code class="xref py py-class docutils literal notranslate"><span class="pre">abjad.Selection</span></code></a>. If no time signature is encountered, it uses
+LilyPond’s fallback time signature of <code class="docutils literal notranslate"><span class="pre">4/4</span></code>.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">container1</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;c&#39;4 d&#39;4 e&#39;4 f&#39;4&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">container2</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;c&#39;4 d&#39;4 e&#39;4&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">container3</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;c&#39;4 d&#39;4 e&#39;4 f&#39;4 | c&#39;4&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">container4</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;c&#39;4 d&#39;4 e&#39;4 f&#39;4 | c&#39;4 d&#39;4 e&#39;4 f&#39;4&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">auxjad</span><span class="o">.</span><span class="n">inspect</span><span class="p">(</span><span class="n">container1</span><span class="p">[:])</span><span class="o">.</span><span class="n">underfull_duration</span><span class="p">()</span>
+<span class="go">0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">auxjad</span><span class="o">.</span><span class="n">inspect</span><span class="p">(</span><span class="n">container2</span><span class="p">[:])</span><span class="o">.</span><span class="n">underfull_duration</span><span class="p">()</span>
+<span class="go">1/4</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">auxjad</span><span class="o">.</span><span class="n">inspect</span><span class="p">(</span><span class="n">container3</span><span class="p">[:])</span><span class="o">.</span><span class="n">underfull_duration</span><span class="p">()</span>
+<span class="go">3/4</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">auxjad</span><span class="o">.</span><span class="n">inspect</span><span class="p">(</span><span class="n">container4</span><span class="p">[:])</span><span class="o">.</span><span class="n">underfull_duration</span><span class="p">()</span>
+<span class="go">0</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Auxjad automatically adds this function as an extension method to
+<a class="reference external" href="https://abjad.github.io/api/abjad/core/Inspection.html#abjad.core.Inspection.Inspection" title="(in Abjad v3.1)"><code class="xref py py-class docutils literal notranslate"><span class="pre">abjad.inspect()</span></code></a>. Therefore it can be used from either
+<a class="reference internal" href="auxjad.inspect.html#auxjad.inspect" title="auxjad.inspect"><code class="xref py py-func docutils literal notranslate"><span class="pre">auxjad.inspect()</span></code></a> or <a class="reference external" href="https://abjad.github.io/api/abjad/core/Inspection.html#abjad.core.Inspection.Inspection" title="(in Abjad v3.1)"><code class="xref py py-class docutils literal notranslate"><span class="pre">abjad.inspect()</span></code></a>, as shown below:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">container</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;c&#39;4 d&#39;4 e&#39;4&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">auxjad</span><span class="o">.</span><span class="n">inspect</span><span class="p">(</span><span class="n">container</span><span class="p">[:])</span><span class="o">.</span><span class="n">underfull_duration</span><span class="p">()</span>
+<span class="go">1/4</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">inspect</span><span class="p">(</span><span class="n">container</span><span class="p">[:])</span><span class="o">.</span><span class="n">underfull_duration</span><span class="p">()</span>
+<span class="go">1/4</span>
+</pre></div>
+</div>
+</div>
+<dl>
+<dt>Time signature changes:</dt><dd><p>Handles any time signatures as well as changes of time signature.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">container1</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;\time 4/4 c&#39;4 d&#39;4 e&#39;4 f&#39;4&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">container2</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;\time 3/4 a2. \time 2/4 r2&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">container3</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;\time 5/4 g1 ~ g4 \time 4/4 af&#39;2&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">container4</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;\time 6/8 c&#39;2 ~ c&#39;8&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">auxjad</span><span class="o">.</span><span class="n">inspect</span><span class="p">(</span><span class="n">container1</span><span class="p">[:])</span><span class="o">.</span><span class="n">underfull_duration</span><span class="p">()</span>
+<span class="go">0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">auxjad</span><span class="o">.</span><span class="n">inspect</span><span class="p">(</span><span class="n">container2</span><span class="p">[:])</span><span class="o">.</span><span class="n">underfull_duration</span><span class="p">()</span>
+<span class="go">0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">auxjad</span><span class="o">.</span><span class="n">inspect</span><span class="p">(</span><span class="n">container3</span><span class="p">[:])</span><span class="o">.</span><span class="n">underfull_duration</span><span class="p">()</span>
+<span class="go">1/2</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">auxjad</span><span class="o">.</span><span class="n">inspect</span><span class="p">(</span><span class="n">container4</span><span class="p">[:])</span><span class="o">.</span><span class="n">underfull_duration</span><span class="p">()</span>
+<span class="go">1/8</span>
+</pre></div>
+</div>
+</dd>
+<dt>Partial time signatures:</dt><dd><p>Correctly handles partial time signatures.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">container</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;c&#39;4 d&#39;4 e&#39;4 f&#39;4&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">time_signature</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">TimeSignature</span><span class="p">((</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">),</span> <span class="n">partial</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">attach</span><span class="p">(</span><span class="n">time_signature</span><span class="p">,</span> <span class="n">container</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">auxjad</span><span class="o">.</span><span class="n">inspect</span><span class="p">(</span><span class="n">container</span><span class="p">[:])</span><span class="o">.</span><span class="n">underfull_duration</span><span class="p">()</span>
+<span class="go">0</span>
+</pre></div>
+</div>
+</dd>
+<dt>Multi-measure rests:</dt><dd><p>It also handles multi-measure rests.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">container1</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;R1&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">container2</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;\time 3/4 R1*3/4 \time 2/4 r2&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">container3</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;\time 5/4 R1*5/4 \time 4/4 g&#39;&#39;4&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">container4</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;\time 6/8 R1*1/2&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">auxjad</span><span class="o">.</span><span class="n">inspect</span><span class="p">(</span><span class="n">container1</span><span class="p">[:])</span><span class="o">.</span><span class="n">underfull_duration</span><span class="p">()</span>
+<span class="go">0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">auxjad</span><span class="o">.</span><span class="n">inspect</span><span class="p">(</span><span class="n">container2</span><span class="p">[:])</span><span class="o">.</span><span class="n">underfull_duration</span><span class="p">()</span>
+<span class="go">0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">auxjad</span><span class="o">.</span><span class="n">inspect</span><span class="p">(</span><span class="n">container3</span><span class="p">[:])</span><span class="o">.</span><span class="n">underfull_duration</span><span class="p">()</span>
+<span class="go">3/4</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">auxjad</span><span class="o">.</span><span class="n">inspect</span><span class="p">(</span><span class="n">container4</span><span class="p">[:])</span><span class="o">.</span><span class="n">underfull_duration</span><span class="p">()</span>
+<span class="go">1/4</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+<div class="admonition error">
+<p class="admonition-title">Error</p>
+<p>If a selection is malformed, i.e. it has an underfilled measure before
+a time signature change, the function raises a <a class="reference external" href="https://docs.python.org/3/library/exceptions.html#ValueError" title="(in Python v3.8)"><code class="xref py py-exc docutils literal notranslate"><span class="pre">ValueError</span></code></a>
+exception. This is also the case when a selection starts in the middle
+of a measure.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">container</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;\time 5/4 g&#39;&#39;1 \time 4/4 f&#39;1&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">auxjad</span><span class="o">.</span><span class="n">inspect</span><span class="p">(</span><span class="n">container</span><span class="p">[:])</span><span class="o">.</span><span class="n">underfull_duration</span><span class="p">()</span>
+<span class="go">ValueError: &#39;selection&#39; is malformed, with an underfull measure</span>
+<span class="go">preceding a time signature change</span>
+</pre></div>
+</div>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>The input container must be a contiguous logical voice. When dealing
+with a container with multiple subcontainers (e.g. a score containing
+multiple staves), the best approach is to cycle through these
+subcontainers, applying this function to them individually.</p>
+</div>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="auxjad.mutate.html" class="btn btn-neutral float-right" title="auxjad.mutate" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="auxjad.inspect.html" class="btn btn-neutral float-left" title="auxjad.inspect" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2020, Gilberto Agostinho
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

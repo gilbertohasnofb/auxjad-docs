@@ -1,46 +1,51 @@
 utilities
 =========
 
-The |utilities|_ subpackage contains utility functions which include mutation
-functions (e.g. to adjust indicators of a container in place) and :obj:`bool`
-functions (e.g. to check whether a container satisfy some condition).
+The |utilities|_ subpackage contains mutation and inspection methods as well
+as a couple of utility functions. Mutations and inspections act on an input
+|abjad.Selection|, |abjad.Container|, or |abjad.Leaf| (depending on the
+function). Mutations transform the input in place, having no return value.
+Inspections do not alter the input and return a value (normally a :obj:`bool`).
+Auxjad automatically adds them as extension methods to |abjad.mutate()| and
+|abjad.inspect()|, respectivelly.
 
-..  note::
+.. note::
 
     These functions are imported directly into the |auxjad|_ namespace.
-    Therefore, to use a function such as :func:`auxjad.close_container()` you
-    only need to import |auxjad|_ and invoke the function from its namespace:
+    Therefore, to use a function such as
+    :func:`auxjad.simplify_time_signature_ratio()` you only need to import
+    |auxjad|_ and invoke the function from its namespace. The same is true for
+    :func:`auxjad.mutate()` and :func:`auxjad.inspect()`:
 
     >>> import auxjad
-    >>> auxjad.close_container(container)
+    >>> auxjad.simplify_time_signature_ratio(pair)
+    >>> auxjad.mutate(container[:]).rests_to_multimeasure_rest()
+    >>> auxjad.inspect(container[:]).selection_is_full()
+    True
+
+    Regarding mutations and inspections, these methods are also added as
+    extension methods to |abjad.mutate()| and |abjad.inspect()|, so it is
+    possible to use |abjad.mutate()| and |abjad.inspect()| instead of
+    :func:`auxjad.mutate()` and :func:`auxjad.inspect()`:
+
+    >>> import abjad
+    >>> import auxjad
+    >>> abjad.mutate(container[:]).rests_to_multimeasure_rest()
+    >>> abjad.inspect(container[:]).selection_is_full()
+    True
 
 Below is the full list of functions included in |utilities|_. Click on their
-names for their individual documentation.
+names for their individual documentation. :class:`auxjad.Inspection` and
+:class:`auxjad.Mutation` will contain the documentaion of all of their methods.
 
 .. autosummary::
     :toctree: ../_api_members
 
-    auxjad.close_container
-    auxjad.container_is_full
-    auxjad.containers_are_equal
-    auxjad.enforce_time_signature
-    auxjad.fill_with_rests
-    auxjad.leaves_are_tieable
-    auxjad.prettify_rewrite_meter
-    auxjad.remove_empty_tuplets
-    auxjad.remove_repeated_dynamics
-    auxjad.remove_repeated_time_signatures
-    auxjad.repeat_container
-    auxjad.reposition_clefs
-    auxjad.reposition_dynamics
-    auxjad.reposition_slurs
-    auxjad.respell_chord
-    auxjad.respell_container
-    auxjad.rests_to_multimeasure_rest
-    auxjad.simplified_time_signature_ratio
-    auxjad.sync_containers
-    auxjad.time_signature_extractor
-    auxjad.underfull_duration
+    auxjad.inspect
+    auxjad.Inspection
+    auxjad.mutate
+    auxjad.Mutation
+    auxjad.simplify_time_signature_ratio
 
 .. |auxjad| replace:: :mod:`auxjad`
 .. _auxjad: index.html
@@ -48,3 +53,4 @@ names for their individual documentation.
 .. _utilities: api-utilities.html
 
 .. include:: abjad-targets.rst
+.. include:: auxjad-targets.rst

@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>auxjad.CartographySelector &mdash; auxjad 0.8.8 documentation</title>
+  <title>auxjad.CartographySelector &mdash; auxjad 0.8.10 documentation</title>
   
 
   
@@ -100,6 +100,7 @@
 <li class="toctree-l3"><a class="reference internal" href="auxjad.ListLooper.html">auxjad.ListLooper</a></li>
 <li class="toctree-l3"><a class="reference internal" href="auxjad.Phaser.html">auxjad.Phaser</a></li>
 <li class="toctree-l3"><a class="reference internal" href="auxjad.PitchRandomiser.html">auxjad.PitchRandomiser</a></li>
+<li class="toctree-l3"><a class="reference internal" href="auxjad.Repeater.html">auxjad.Repeater</a></li>
 <li class="toctree-l3"><a class="reference internal" href="auxjad.Shuffler.html">auxjad.Shuffler</a></li>
 <li class="toctree-l3"><a class="reference internal" href="auxjad.TenneySelector.html">auxjad.TenneySelector</a></li>
 <li class="toctree-l3"><a class="reference internal" href="auxjad.WindowLooper.html">auxjad.WindowLooper</a></li>
@@ -185,7 +186,7 @@
 <dd><p>A selector used to store, manipulate, and select objects using a
 weighted function constructed with a fixed decay rate. The decay rate
 represents the ratio of probabilities of any index given the probability of
-the preceeding one. For instance, if the decay rate is set to <code class="docutils literal notranslate"><span class="pre">0.75</span></code>
+the preceding one. For instance, if the decay rate is set to <code class="docutils literal notranslate"><span class="pre">0.75</span></code>
 (which is its default value), the probability of the element in index <code class="docutils literal notranslate"><span class="pre">1</span></code>
 of the input <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.8)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code></a> being selected is <span class="math notranslate nohighlight">\(75\%\)</span> the probability of
 the element in index <code class="docutils literal notranslate"><span class="pre">0</span></code>, and the probability of the element in index
@@ -247,7 +248,7 @@ method to get the next result.</p>
 </pre></div>
 </div>
 </dd>
-<dt><code class="docutils literal notranslate"><span class="pre">no_repeat</span></code>:</dt><dd><p>Calling the selector with the optional keyword argument <code class="docutils literal notranslate"><span class="pre">no_repeat</span></code>
+<dt><a class="reference internal" href="#auxjad.CartographySelector.__call__" title="auxjad.CartographySelector.__call__"><code class="xref py py-meth docutils literal notranslate"><span class="pre">__call__()</span></code></a> and argument <code class="docutils literal notranslate"><span class="pre">no_repeat</span></code>:</dt><dd><p>Calling the selector with the optional keyword argument <code class="docutils literal notranslate"><span class="pre">no_repeat</span></code>
 set to <code class="docutils literal notranslate"><span class="pre">True</span></code> will forbid immediate repetitions among consecutive
 calls.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">selector</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">CartographySelector</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">])</span>
@@ -283,45 +284,44 @@ the property <a class="reference internal" href="#auxjad.CartographySelector.dec
 </pre></div>
 </div>
 </dd>
-<dt><a class="reference internal" href="#auxjad.CartographySelector.append" title="auxjad.CartographySelector.append"><code class="xref py py-meth docutils literal notranslate"><span class="pre">append()</span></code></a>:</dt><dd><p>Appending is a type of content transformation. It discards the first
-element of the selector’s <a class="reference internal" href="#auxjad.CartographySelector.contents" title="auxjad.CartographySelector.contents"><code class="xref py py-attr docutils literal notranslate"><span class="pre">contents</span></code></a>, shifts all others
-leftwards, and then appends the new element to the last index.</p>
+<dt><a class="reference internal" href="#auxjad.CartographySelector.drop_first_and_append" title="auxjad.CartographySelector.drop_first_and_append"><code class="xref py py-meth docutils literal notranslate"><span class="pre">drop_first_and_append()</span></code></a>:</dt><dd><p>This is a type of content transformation, it drops the first element of
+<a class="reference internal" href="#auxjad.CartographySelector.contents" title="auxjad.CartographySelector.contents"><code class="xref py py-attr docutils literal notranslate"><span class="pre">contents</span></code></a>, shifts all others leftwards, and appends the new
+element to the last index.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">selector</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">CartographySelector</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">])</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">selector</span><span class="o">.</span><span class="n">contents</span>
 <span class="go">[0, 1, 2, 3, 4]</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">selector</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">selector</span><span class="o">.</span><span class="n">drop_first_and_append</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">selector</span><span class="o">.</span><span class="n">contents</span>
 <span class="go">[1, 2, 3, 4, 5]</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">selector</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="mi">42</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">selector</span><span class="o">.</span><span class="n">drop_first_and_append</span><span class="p">(</span><span class="mi">42</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">selector</span><span class="o">.</span><span class="n">contents</span>
 <span class="go">[2, 3, 4, 5, 42]</span>
 </pre></div>
 </div>
 </dd>
-<dt><a class="reference internal" href="#auxjad.CartographySelector.append_keeping_n" title="auxjad.CartographySelector.append_keeping_n"><code class="xref py py-meth docutils literal notranslate"><span class="pre">append_keeping_n()</span></code></a>:</dt><dd><p>The method <a class="reference internal" href="#auxjad.CartographySelector.append_keeping_n" title="auxjad.CartographySelector.append_keeping_n"><code class="xref py py-meth docutils literal notranslate"><span class="pre">append_keeping_n()</span></code></a> is similar to <a class="reference internal" href="#auxjad.CartographySelector.append" title="auxjad.CartographySelector.append"><code class="xref py py-meth docutils literal notranslate"><span class="pre">append()</span></code></a>, but
-it keeps the first <code class="docutils literal notranslate"><span class="pre">n</span></code> elements of <a class="reference internal" href="#auxjad.CartographySelector.contents" title="auxjad.CartographySelector.contents"><code class="xref py py-attr docutils literal notranslate"><span class="pre">contents</span></code></a> untouched. It
-thus discards the <span class="math notranslate nohighlight">\(n+1\)</span>-th element, shifts all the next elements
-one position lefwards, and finally appends the new element at the last
-index.</p>
+<dt><a class="reference internal" href="#auxjad.CartographySelector.drop_n_and_append" title="auxjad.CartographySelector.drop_n_and_append"><code class="xref py py-meth docutils literal notranslate"><span class="pre">drop_n_and_append()</span></code></a>:</dt><dd><p>This is a type of content transformation similar to
+<a class="reference internal" href="#auxjad.CartographySelector.drop_first_and_append" title="auxjad.CartographySelector.drop_first_and_append"><code class="xref py py-meth docutils literal notranslate"><span class="pre">drop_first_and_append()</span></code></a>, it drops the element at index <code class="docutils literal notranslate"><span class="pre">n</span></code> of
+<a class="reference internal" href="#auxjad.CartographySelector.contents" title="auxjad.CartographySelector.contents"><code class="xref py py-attr docutils literal notranslate"><span class="pre">contents</span></code></a>, shifts all the next elements one position lefwards,
+and appends the new element at the last index.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">selector</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">CartographySelector</span><span class="p">([</span><span class="mi">10</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">14</span><span class="p">,</span> <span class="mi">31</span><span class="p">,</span> <span class="mi">98</span><span class="p">])</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">selector</span><span class="o">.</span><span class="n">contents</span>
 <span class="go">[10, 7, 14, 31, 98]</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">selector</span><span class="o">.</span><span class="n">append_keeping_n</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">selector</span><span class="o">.</span><span class="n">drop_n_and_append</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">selector</span><span class="o">.</span><span class="n">contents</span>
 <span class="go">[10, 7, 31, 98, 100]</span>
 </pre></div>
 </div>
 </dd>
-<dt><a class="reference internal" href="#auxjad.CartographySelector.prepend" title="auxjad.CartographySelector.prepend"><code class="xref py py-meth docutils literal notranslate"><span class="pre">prepend()</span></code></a>:</dt><dd><p>Prepending is another type of content transformation. It discards the
-last element of <a class="reference internal" href="#auxjad.CartographySelector.contents" title="auxjad.CartographySelector.contents"><code class="xref py py-attr docutils literal notranslate"><span class="pre">contents</span></code></a>, shifts all others rightwards, and
-then prepends the new element to the first index.</p>
+<dt><a class="reference internal" href="#auxjad.CartographySelector.drop_last_and_prepend" title="auxjad.CartographySelector.drop_last_and_prepend"><code class="xref py py-meth docutils literal notranslate"><span class="pre">drop_last_and_prepend()</span></code></a>:</dt><dd><p>A type of content transformation, it drops the last element of
+<a class="reference internal" href="#auxjad.CartographySelector.contents" title="auxjad.CartographySelector.contents"><code class="xref py py-attr docutils literal notranslate"><span class="pre">contents</span></code></a>, shifts all others rightwards, and then prepends
+the new element to the first index.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">selector</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">CartographySelector</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">])</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">selector</span><span class="o">.</span><span class="n">contents</span>
 <span class="go">[0, 1, 2, 3, 4]</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">selector</span><span class="o">.</span><span class="n">prepend</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">selector</span><span class="o">.</span><span class="n">drop_last_and_prepend</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">selector</span><span class="o">.</span><span class="n">contents</span>
 <span class="go">[-1, 0, 1, 2, 3]</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">selector</span><span class="o">.</span><span class="n">prepend</span><span class="p">(</span><span class="mi">71</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">selector</span><span class="o">.</span><span class="n">drop_last_and_prepend</span><span class="p">(</span><span class="mi">71</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">selector</span><span class="o">.</span><span class="n">contents</span>
 <span class="go">[71, -1, 0, 1, 2]</span>
 </pre></div>
@@ -346,43 +346,44 @@ rotation will be in the opposite direction.</p>
 </pre></div>
 </div>
 </dd>
-<dt><a class="reference internal" href="#auxjad.CartographySelector.mirror" title="auxjad.CartographySelector.mirror"><code class="xref py py-meth docutils literal notranslate"><span class="pre">mirror()</span></code></a>:</dt><dd><p>The mirror transformation swaps the element of the input index with its
-complementary element. Complementary elements are defined as the pair
-of elements which share the same distance from the centre of the
-<a class="reference internal" href="#auxjad.CartographySelector.contents" title="auxjad.CartographySelector.contents"><code class="xref py py-attr docutils literal notranslate"><span class="pre">contents</span></code></a> (in terms of number of indeces), and are located at
-either side.</p>
+<dt><a class="reference internal" href="#auxjad.CartographySelector.mirror_swap" title="auxjad.CartographySelector.mirror_swap"><code class="xref py py-meth docutils literal notranslate"><span class="pre">mirror_swap()</span></code></a>:</dt><dd><p>The mirror swap transformation swaps takes an input index and swaps the
+element at tit with its complementary element. Complementary elements
+are defined as the pair of elements which share the same distance from
+the centre of the <a class="reference internal" href="#auxjad.CartographySelector.contents" title="auxjad.CartographySelector.contents"><code class="xref py py-attr docutils literal notranslate"><span class="pre">contents</span></code></a> (in terms of number of indeces), and
+are located at either side of this centre.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">selector</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">CartographySelector</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">])</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">selector</span><span class="o">.</span><span class="n">contents</span>
 <span class="go">[0, 1, 2, 3, 4]</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">selector</span><span class="o">.</span><span class="n">mirror</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">selector</span><span class="o">.</span><span class="n">mirror_swap</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">selector</span><span class="o">.</span><span class="n">contents</span>
 <span class="go">[4, 1, 2, 3, 0]</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">selector</span><span class="o">.</span><span class="n">mirror</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">selector</span><span class="o">.</span><span class="n">mirror_swap</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">selector</span><span class="o">.</span><span class="n">contents</span>
 <span class="go">[0, 1, 2, 3, 4]</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">selector</span><span class="o">.</span><span class="n">mirror</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">selector</span><span class="o">.</span><span class="n">mirror_swap</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">selector</span><span class="o">.</span><span class="n">contents</span>
 <span class="go">[0, 3, 2, 1, 4]</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">selector</span><span class="o">.</span><span class="n">mirror</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">selector</span><span class="o">.</span><span class="n">mirror_swap</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">selector</span><span class="o">.</span><span class="n">contents</span>
 <span class="go">[0, 3, 2, 1, 4]</span>
 </pre></div>
 </div>
 </dd>
-<dt><a class="reference internal" href="#auxjad.CartographySelector.mirror_random" title="auxjad.CartographySelector.mirror_random"><code class="xref py py-meth docutils literal notranslate"><span class="pre">mirror_random()</span></code></a>:</dt><dd><p>To mirror a random pair of complementary elements, use the
-<a class="reference internal" href="#auxjad.CartographySelector.mirror_random" title="auxjad.CartographySelector.mirror_random"><code class="xref py py-meth docutils literal notranslate"><span class="pre">mirror_random()</span></code></a> method. In case of a selector with an odd number
-of elements, this method will never pick an element at the pivot point
-since the operation would not change the contents.</p>
+<dt><a class="reference internal" href="#auxjad.CartographySelector.mirror_random_swap" title="auxjad.CartographySelector.mirror_random_swap"><code class="xref py py-meth docutils literal notranslate"><span class="pre">mirror_random_swap()</span></code></a>:</dt><dd><p>A type of content transformation which will apply  <a class="reference internal" href="#auxjad.CartographySelector.mirror_swap" title="auxjad.CartographySelector.mirror_swap"><code class="xref py py-meth docutils literal notranslate"><span class="pre">mirror_swap()</span></code></a>
+to a random pair of complementary elements. In case of a selector with
+an odd number of elements, this method will never pick the element at
+the central index since that is the pivot point of the operation and it
+would not result in any changes.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">selector</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">CartographySelector</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">])</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">selector</span><span class="o">.</span><span class="n">contents</span>
 <span class="go">[0, 1, 2, 3, 4]</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">selector</span><span class="o">.</span><span class="n">mirror_random</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">selector</span><span class="o">.</span><span class="n">mirror_random_swap</span><span class="p">()</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">selector</span><span class="o">.</span><span class="n">contents</span>
 <span class="go">[4, 1, 2, 3, 0]</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">selector</span><span class="o">.</span><span class="n">mirror_random</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">selector</span><span class="o">.</span><span class="n">mirror_random_swap</span><span class="p">()</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">selector</span><span class="o">.</span><span class="n">contents</span>
 <span class="go">[4, 3, 2, 1, 0]</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">selector</span><span class="o">.</span><span class="n">mirror_random</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">selector</span><span class="o">.</span><span class="n">mirror_random_swap</span><span class="p">()</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">selector</span><span class="o">.</span><span class="n">contents</span>
 <span class="go">[4, 1, 2, 3, 0]</span>
 </pre></div>
@@ -491,20 +492,20 @@ assigning, or deleting values from <a class="reference internal" href="#auxjad.C
 <tr class="row-even"><td><p><a class="reference internal" href="#auxjad.CartographySelector.__setitem__" title="auxjad.CartographySelector.__setitem__"><code class="xref py py-obj docutils literal notranslate"><span class="pre">__setitem__</span></code></a>(key, value)</p></td>
 <td><p>Assigns values to one or more elements of <a class="reference internal" href="#auxjad.CartographySelector.contents" title="auxjad.CartographySelector.contents"><code class="xref py py-attr docutils literal notranslate"><span class="pre">contents</span></code></a> through indexing or slicing.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#auxjad.CartographySelector.append" title="auxjad.CartographySelector.append"><code class="xref py py-obj docutils literal notranslate"><span class="pre">append</span></code></a>(new_element)</p></td>
-<td><p>A type of content transformation, it discards the first element of the <a class="reference internal" href="#auxjad.CartographySelector.contents" title="auxjad.CartographySelector.contents"><code class="xref py py-attr docutils literal notranslate"><span class="pre">contents</span></code></a>, shifts all others leftwards, and then appends the new element to the last index.</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#auxjad.CartographySelector.drop_first_and_append" title="auxjad.CartographySelector.drop_first_and_append"><code class="xref py py-obj docutils literal notranslate"><span class="pre">drop_first_and_append</span></code></a>(new_element)</p></td>
+<td><p>A type of content transformation, it drops the first element of <a class="reference internal" href="#auxjad.CartographySelector.contents" title="auxjad.CartographySelector.contents"><code class="xref py py-attr docutils literal notranslate"><span class="pre">contents</span></code></a>, shifts all others leftwards, and appends the new element to the last index.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#auxjad.CartographySelector.append_keeping_n" title="auxjad.CartographySelector.append_keeping_n"><code class="xref py py-obj docutils literal notranslate"><span class="pre">append_keeping_n</span></code></a>(new_element, n)</p></td>
-<td><p>A type of content transformation similar to <a class="reference internal" href="#auxjad.CartographySelector.append" title="auxjad.CartographySelector.append"><code class="xref py py-meth docutils literal notranslate"><span class="pre">append()</span></code></a>, it keeps the first <code class="docutils literal notranslate"><span class="pre">n</span></code> elements of <a class="reference internal" href="#auxjad.CartographySelector.contents" title="auxjad.CartographySelector.contents"><code class="xref py py-attr docutils literal notranslate"><span class="pre">contents</span></code></a> untouched, it then discards the <span class="math notranslate nohighlight">\(n+1\)</span>-th element, shifts all the next elements one position lefwards, and finally appends the new element at the last index.</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#auxjad.CartographySelector.drop_last_and_prepend" title="auxjad.CartographySelector.drop_last_and_prepend"><code class="xref py py-obj docutils literal notranslate"><span class="pre">drop_last_and_prepend</span></code></a>(new_element)</p></td>
+<td><p>A type of content transformation, it drops the last element of <a class="reference internal" href="#auxjad.CartographySelector.contents" title="auxjad.CartographySelector.contents"><code class="xref py py-attr docutils literal notranslate"><span class="pre">contents</span></code></a>, shifts all others rightwards, and then prepends the new element to the first index.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#auxjad.CartographySelector.mirror" title="auxjad.CartographySelector.mirror"><code class="xref py py-obj docutils literal notranslate"><span class="pre">mirror</span></code></a>(index)</p></td>
-<td><p>A type of content transformation which swaps the element of the input index with its complementary element.</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#auxjad.CartographySelector.drop_n_and_append" title="auxjad.CartographySelector.drop_n_and_append"><code class="xref py py-obj docutils literal notranslate"><span class="pre">drop_n_and_append</span></code></a>(new_element, n)</p></td>
+<td><p>A type of content transformation similar to <a class="reference internal" href="#auxjad.CartographySelector.drop_first_and_append" title="auxjad.CartographySelector.drop_first_and_append"><code class="xref py py-meth docutils literal notranslate"><span class="pre">drop_first_and_append()</span></code></a>, it drops the element at index <code class="docutils literal notranslate"><span class="pre">n</span></code> of <a class="reference internal" href="#auxjad.CartographySelector.contents" title="auxjad.CartographySelector.contents"><code class="xref py py-attr docutils literal notranslate"><span class="pre">contents</span></code></a>, shifts all the next elements one position lefwards, and appends the new element at the last index.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#auxjad.CartographySelector.mirror_random" title="auxjad.CartographySelector.mirror_random"><code class="xref py py-obj docutils literal notranslate"><span class="pre">mirror_random</span></code></a>()</p></td>
-<td><p>A type of content transformation which swaps the element of a random index with its complementary element.</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#auxjad.CartographySelector.mirror_random_swap" title="auxjad.CartographySelector.mirror_random_swap"><code class="xref py py-obj docutils literal notranslate"><span class="pre">mirror_random_swap</span></code></a>()</p></td>
+<td><p>A type of content transformation which will apply <a class="reference internal" href="#auxjad.CartographySelector.mirror_swap" title="auxjad.CartographySelector.mirror_swap"><code class="xref py py-meth docutils literal notranslate"><span class="pre">mirror_swap()</span></code></a> to a random pair of complementary elements.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#auxjad.CartographySelector.prepend" title="auxjad.CartographySelector.prepend"><code class="xref py py-obj docutils literal notranslate"><span class="pre">prepend</span></code></a>(new_element)</p></td>
-<td><p>A type of content transformation, it discards the last element of the <a class="reference internal" href="#auxjad.CartographySelector.contents" title="auxjad.CartographySelector.contents"><code class="xref py py-attr docutils literal notranslate"><span class="pre">contents</span></code></a>, shifts all others rightwards, and then prepends the new element to the first index.</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#auxjad.CartographySelector.mirror_swap" title="auxjad.CartographySelector.mirror_swap"><code class="xref py py-obj docutils literal notranslate"><span class="pre">mirror_swap</span></code></a>(index)</p></td>
+<td><p>A type of content transformation which swaps takes an input index and swaps the element at tit with its complementary element.</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="#auxjad.CartographySelector.rotate" title="auxjad.CartographySelector.rotate"><code class="xref py py-obj docutils literal notranslate"><span class="pre">rotate</span></code></a>([anticlockwise])</p></td>
 <td><p>A type of content transformation, it rotates all elements rightwards, moving the last element to the first index.</p></td>
@@ -525,7 +526,7 @@ assigning, or deleting values from <a class="reference internal" href="#auxjad.C
 <td><p>The <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.8)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code></a> from which the selector picks elements.</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="#auxjad.CartographySelector.decay_rate" title="auxjad.CartographySelector.decay_rate"><code class="xref py py-obj docutils literal notranslate"><span class="pre">decay_rate</span></code></a></p></td>
-<td><p>The decay rate represents the ratio of probabilities of any index given the probability of the preceeding one.</p></td>
+<td><p>The decay rate represents the ratio of probabilities of any index given the probability of the preceding one.</p></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="#auxjad.CartographySelector.previous_index" title="auxjad.CartographySelector.previous_index"><code class="xref py py-obj docutils literal notranslate"><span class="pre">previous_index</span></code></a></p></td>
 <td><p>Read-only property, returns the index of the previously output element.</p></td>
@@ -592,24 +593,6 @@ indexing or slicing.</p>
 </dd></dl>
 
 <dl class="py method">
-<dt id="auxjad.CartographySelector.append">
-<code class="sig-name descname">append</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">new_element</span></em><span class="sig-paren">)</span><a class="headerlink" href="#auxjad.CartographySelector.append" title="Permalink to this definition">¶</a></dt>
-<dd><p>A type of content transformation, it discards the first element of
-the <a class="reference internal" href="#auxjad.CartographySelector.contents" title="auxjad.CartographySelector.contents"><code class="xref py py-attr docutils literal notranslate"><span class="pre">contents</span></code></a>, shifts all others leftwards, and then appends the
-new element to the last index.</p>
-</dd></dl>
-
-<dl class="py method">
-<dt id="auxjad.CartographySelector.append_keeping_n">
-<code class="sig-name descname">append_keeping_n</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">new_element</span></em>, <em class="sig-param"><span class="n">n</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)">int</a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#auxjad.CartographySelector.append_keeping_n" title="Permalink to this definition">¶</a></dt>
-<dd><p>A type of content transformation similar to <a class="reference internal" href="#auxjad.CartographySelector.append" title="auxjad.CartographySelector.append"><code class="xref py py-meth docutils literal notranslate"><span class="pre">append()</span></code></a>, it
-keeps the first <code class="docutils literal notranslate"><span class="pre">n</span></code> elements of <a class="reference internal" href="#auxjad.CartographySelector.contents" title="auxjad.CartographySelector.contents"><code class="xref py py-attr docutils literal notranslate"><span class="pre">contents</span></code></a> untouched, it then
-discards the <span class="math notranslate nohighlight">\(n+1\)</span>-th element, shifts all the next elements one
-position lefwards, and finally appends the new element at the last
-index.</p>
-</dd></dl>
-
-<dl class="py method">
 <dt id="auxjad.CartographySelector.contents">
 <em class="property">property </em><code class="sig-name descname">contents</code><a class="headerlink" href="#auxjad.CartographySelector.contents" title="Permalink to this definition">¶</a></dt>
 <dd><p>The <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.8)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code></a> from which the selector picks elements.</p>
@@ -619,7 +602,7 @@ index.</p>
 <dt id="auxjad.CartographySelector.decay_rate">
 <em class="property">property </em><code class="sig-name descname">decay_rate</code><a class="headerlink" href="#auxjad.CartographySelector.decay_rate" title="Permalink to this definition">¶</a></dt>
 <dd><p>The decay rate represents the ratio of probabilities of any index
-given the probability of the preceeding one. For instance, if the decay
+given the probability of the preceding one. For instance, if the decay
 rate is set to <code class="docutils literal notranslate"><span class="pre">0.75</span></code> (which is its default value), the probability
 of the element in index <code class="docutils literal notranslate"><span class="pre">1</span></code> of the input <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.8)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code></a> being selected
 is <code class="docutils literal notranslate"><span class="pre">0.75</span></code> the probability of the element in index <code class="docutils literal notranslate"><span class="pre">0</span></code>, and the
@@ -628,31 +611,48 @@ squared) the probability of the element in index <code class="docutils literal n
 </dd></dl>
 
 <dl class="py method">
-<dt id="auxjad.CartographySelector.mirror">
-<code class="sig-name descname">mirror</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">index</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)">int</a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#auxjad.CartographySelector.mirror" title="Permalink to this definition">¶</a></dt>
-<dd><p>A type of content transformation which swaps the element of the
-input index with its complementary element. Complementary elements are
-defined as the pair of elements which share the same distance from the
-centre of the <a class="reference internal" href="#auxjad.CartographySelector.contents" title="auxjad.CartographySelector.contents"><code class="xref py py-attr docutils literal notranslate"><span class="pre">contents</span></code></a> (in terms of number of indeces), and are
-located at either side.</p>
+<dt id="auxjad.CartographySelector.drop_first_and_append">
+<code class="sig-name descname">drop_first_and_append</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">new_element</span></em><span class="sig-paren">)</span><a class="headerlink" href="#auxjad.CartographySelector.drop_first_and_append" title="Permalink to this definition">¶</a></dt>
+<dd><p>A type of content transformation, it drops the first element of
+<a class="reference internal" href="#auxjad.CartographySelector.contents" title="auxjad.CartographySelector.contents"><code class="xref py py-attr docutils literal notranslate"><span class="pre">contents</span></code></a>, shifts all others leftwards, and appends the new
+element to the last index.</p>
 </dd></dl>
 
 <dl class="py method">
-<dt id="auxjad.CartographySelector.mirror_random">
-<code class="sig-name descname">mirror_random</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#auxjad.CartographySelector.mirror_random" title="Permalink to this definition">¶</a></dt>
-<dd><p>A type of content transformation which swaps the element of a
-random index with its complementary element. Complementary elements are
-defined as the pair of elements which share the same distance from the
-centre of the <a class="reference internal" href="#auxjad.CartographySelector.contents" title="auxjad.CartographySelector.contents"><code class="xref py py-attr docutils literal notranslate"><span class="pre">contents</span></code></a> (in terms of number of indeces), and are
-located at either side.</p>
-</dd></dl>
-
-<dl class="py method">
-<dt id="auxjad.CartographySelector.prepend">
-<code class="sig-name descname">prepend</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">new_element</span></em><span class="sig-paren">)</span><a class="headerlink" href="#auxjad.CartographySelector.prepend" title="Permalink to this definition">¶</a></dt>
-<dd><p>A type of content transformation, it discards the last element of
-the <a class="reference internal" href="#auxjad.CartographySelector.contents" title="auxjad.CartographySelector.contents"><code class="xref py py-attr docutils literal notranslate"><span class="pre">contents</span></code></a>, shifts all others rightwards, and then prepends
+<dt id="auxjad.CartographySelector.drop_last_and_prepend">
+<code class="sig-name descname">drop_last_and_prepend</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">new_element</span></em><span class="sig-paren">)</span><a class="headerlink" href="#auxjad.CartographySelector.drop_last_and_prepend" title="Permalink to this definition">¶</a></dt>
+<dd><p>A type of content transformation, it drops the last element of
+<a class="reference internal" href="#auxjad.CartographySelector.contents" title="auxjad.CartographySelector.contents"><code class="xref py py-attr docutils literal notranslate"><span class="pre">contents</span></code></a>, shifts all others rightwards, and then prepends
 the new element to the first index.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="auxjad.CartographySelector.drop_n_and_append">
+<code class="sig-name descname">drop_n_and_append</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">new_element</span></em>, <em class="sig-param"><span class="n">n</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)">int</a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#auxjad.CartographySelector.drop_n_and_append" title="Permalink to this definition">¶</a></dt>
+<dd><p>A type of content transformation similar to
+<a class="reference internal" href="#auxjad.CartographySelector.drop_first_and_append" title="auxjad.CartographySelector.drop_first_and_append"><code class="xref py py-meth docutils literal notranslate"><span class="pre">drop_first_and_append()</span></code></a>, it drops the element at index <code class="docutils literal notranslate"><span class="pre">n</span></code> of
+<a class="reference internal" href="#auxjad.CartographySelector.contents" title="auxjad.CartographySelector.contents"><code class="xref py py-attr docutils literal notranslate"><span class="pre">contents</span></code></a>, shifts all the next elements one position lefwards,
+and appends the new element at the last index.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="auxjad.CartographySelector.mirror_random_swap">
+<code class="sig-name descname">mirror_random_swap</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#auxjad.CartographySelector.mirror_random_swap" title="Permalink to this definition">¶</a></dt>
+<dd><p>A type of content transformation which will apply
+<a class="reference internal" href="#auxjad.CartographySelector.mirror_swap" title="auxjad.CartographySelector.mirror_swap"><code class="xref py py-meth docutils literal notranslate"><span class="pre">mirror_swap()</span></code></a> to a random pair of complementary elements. In case
+of a selector with an odd number of elements, this method will never
+pick the element at the central index since that is the pivot point of
+the operation and it would not result in any changes.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="auxjad.CartographySelector.mirror_swap">
+<code class="sig-name descname">mirror_swap</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">index</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)">int</a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#auxjad.CartographySelector.mirror_swap" title="Permalink to this definition">¶</a></dt>
+<dd><p>A type of content transformation which swaps takes an input index
+and swaps the element at tit with its complementary element.
+Complementary elements are defined as the pair of elements which share
+the same distance from the centre of the <a class="reference internal" href="#auxjad.CartographySelector.contents" title="auxjad.CartographySelector.contents"><code class="xref py py-attr docutils literal notranslate"><span class="pre">contents</span></code></a> (in terms of
+number of indeces), and are located at either side of this centre.</p>
 </dd></dl>
 
 <dl class="py method">
