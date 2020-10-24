@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Looping with auxjad.WindowLooper &mdash; auxjad 0.8.12 documentation</title>
+  <title>Looping with auxjad.WindowLooper &mdash; auxjad 0.8.14 documentation</title>
   
 
   
@@ -166,10 +166,10 @@
             
   <div class="section" id="looping-with-auxjad-windowlooper">
 <h1>Looping with <a class="reference internal" href="../_api_members/auxjad.WindowLooper.html#auxjad.WindowLooper" title="auxjad.WindowLooper"><code class="xref py py-class docutils literal notranslate"><span class="pre">auxjad.WindowLooper</span></code></a><a class="headerlink" href="#looping-with-auxjad-windowlooper" title="Permalink to this headline">¶</a></h1>
-<p>In this next example, we will use some of <a class="reference external" href="../api/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">auxjad</span></code></a>’s classes to generate
+<p>In this next example, we will use some of <a class="reference external" href="index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">auxjad</span></code></a>’s classes to generate
 a container of randomly selected material, and then use this material as input
 for the looping and shuffling classes.</p>
-<p>First, we start by importing both <a class="reference external" href="https://abjad.github.io/api/abjad/index.html#module-abjad" title="(in Abjad v3.1)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">abjad</span></code></a> and <a class="reference external" href="../api/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">auxjad</span></code></a>.</p>
+<p>First, we start by importing both <a class="reference external" href="https://abjad.github.io/api/abjad/index.html#module-abjad" title="(in Abjad v3.1)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">abjad</span></code></a> and <a class="reference external" href="index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">auxjad</span></code></a>.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">abjad</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">auxjad</span>
 </pre></div>
@@ -183,8 +183,8 @@ durations, dynamics, and articulations, the example will use
 <a class="reference internal" href="../_api_members/auxjad.CartographySelector.html#auxjad.CartographySelector" title="auxjad.CartographySelector"><code class="xref py py-class docutils literal notranslate"><span class="pre">auxjad.CartographySelector</span></code></a>. Each element input into this type of
 selector has a probability of being selected which is dependent on its index.
 By default, the probability of consecutive elements decay with a rate of
-<code class="docutils literal notranslate"><span class="pre">0.75</span></code>. For more information on both of these classes, check the <a class="reference external" href="../api/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">auxjad</span></code></a>
-API page (link in the left panel).</p>
+<code class="docutils literal notranslate"><span class="pre">0.75</span></code>. For more information on both of these classes, check <a class="reference external" href="index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">auxjad</span></code></a>’s API
+page (link in the left panel).</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">pitch_selector</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">TenneySelector</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">10</span><span class="p">])</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">duration_selector</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">CartographySelector</span><span class="p">([(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">8</span><span class="p">),</span>
 <span class="gp">... </span>                                                <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">8</span><span class="p">),</span>
@@ -202,7 +202,7 @@ selected by the classes above.</p>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">articulations</span> <span class="o">=</span> <span class="p">[</span><span class="n">articulation_selector</span><span class="p">()</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">8</span><span class="p">)]</span>
 </pre></div>
 </div>
-<p>With these <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.8)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code></a>’s‘ of pitches, durations, dynamics, and articulations,
+<p>With these <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.9)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code></a>’s‘ of pitches, durations, dynamics, and articulations,
 we can now use <a class="reference internal" href="../_api_members/auxjad.LeafDynMaker.html#auxjad.LeafDynMaker" title="auxjad.LeafDynMaker"><code class="xref py py-class docutils literal notranslate"><span class="pre">auxjad.LeafDynMaker</span></code></a> to create the individual abjad
 leaves for us. It’s important to note that there is no time signature being
 imposed at this point, so LilyPond will fallback to a four by four when
