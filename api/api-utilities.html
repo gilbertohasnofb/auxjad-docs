@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>utilities &mdash; auxjad 0.8.18 documentation</title>
+  <title>utilities &mdash; auxjad 0.8.20 documentation</title>
   
 
   
@@ -38,7 +38,7 @@
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="inspect" href="../_api_members/auxjad.inspect.html" />
-    <link rel="prev" title="LeafDynMaker" href="../_api_members/auxjad.LeafDynMaker.html" /> 
+    <link rel="prev" title="piano_pedal" href="../_api_members/auxjad.piano_pedal.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -96,6 +96,7 @@
 <li class="toctree-l2"><a class="reference internal" href="api-core.html">core</a></li>
 <li class="toctree-l2"><a class="reference internal" href="api-indicators.html">indicators</a></li>
 <li class="toctree-l2"><a class="reference internal" href="api-score.html">score</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-spanners.html">spanners</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">utilities</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="../_api_members/auxjad.inspect.html">inspect</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../_api_members/auxjad.Inspection.html">Inspection</a></li>
@@ -213,16 +214,16 @@ names for their individual documentation. <a class="reference internal" href="..
 <col style="width: 90%" />
 </colgroup>
 <tbody>
-<tr class="row-odd"><td><p><a class="reference internal" href="../_api_members/auxjad.inspect.html#auxjad.inspect" title="auxjad.inspect"><code class="xref py py-obj docutils literal notranslate"><span class="pre">inspect</span></code></a>(client)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="../_api_members/auxjad.inspect.html#auxjad.inspect" title="auxjad.inspect"><code class="xref py py-obj docutils literal notranslate"><span class="pre">inspect</span></code></a>([client])</p></td>
 <td><p>Makes an inspection agent.</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="../_api_members/auxjad.Inspection.html#auxjad.Inspection" title="auxjad.Inspection"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Inspection</span></code></a>(client, …)</p></td>
 <td><p>Inspection class containing all of Auxjad’s inspection methods.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="../_api_members/auxjad.mutate.html#auxjad.mutate" title="auxjad.mutate"><code class="xref py py-obj docutils literal notranslate"><span class="pre">mutate</span></code></a>(client)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="../_api_members/auxjad.mutate.html#auxjad.mutate" title="auxjad.mutate"><code class="xref py py-obj docutils literal notranslate"><span class="pre">mutate</span></code></a>([client])</p></td>
 <td><p>Makes a mutation agent.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="../_api_members/auxjad.Mutation.html#auxjad.Mutation" title="auxjad.Mutation"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Mutation</span></code></a>([client])</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="../_api_members/auxjad.Mutation.html#auxjad.Mutation" title="auxjad.Mutation"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Mutation</span></code></a>(client, …)</p></td>
 <td><p>Mutation class containing all of Auxjad’s mutation methods.</p></td>
 </tr>
 </tbody>
@@ -258,46 +259,49 @@ documentation pages of <a class="reference internal" href="../_api_members/auxja
 <tr class="row-odd"><td><p><a class="reference internal" href="../_api_members/auxjad.Mutation.html#auxjad.Mutation.close_container" title="auxjad.Mutation.close_container"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Mutation.close_container</span></code></a>()</p></td>
 <td><p>Mutates an input container (of type <a class="reference external" href="https://abjad.github.io/api/abjad/core/Container.html#abjad.core.Container.Container" title="(in Abjad v3.1)"><code class="xref py py-class docutils literal notranslate"><span class="pre">abjad.Container</span></code></a> or child class) in place and has no return value; this function changes the time signature of the last measure of an underfull in order to make it full.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="../_api_members/auxjad.Mutation.html#auxjad.Mutation.enforce_time_signature" title="auxjad.Mutation.enforce_time_signature"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Mutation.enforce_time_signature</span></code></a>(…[, …])</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="../_api_members/auxjad.Mutation.html#auxjad.Mutation.double_barlines_before_time_signatures" title="auxjad.Mutation.double_barlines_before_time_signatures"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Mutation.double_barlines_before_time_signatures</span></code></a>(*)</p></td>
+<td><p>Mutates an input <a class="reference external" href="https://abjad.github.io/api/abjad/core/Selection.html#abjad.core.Selection.Selection" title="(in Abjad v3.1)"><code class="xref py py-class docutils literal notranslate"><span class="pre">abjad.Selection</span></code></a> in place and has no return value; this function adds double bar lines before all time signatures.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="../_api_members/auxjad.Mutation.html#auxjad.Mutation.enforce_time_signature" title="auxjad.Mutation.enforce_time_signature"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Mutation.enforce_time_signature</span></code></a>(…[, …])</p></td>
 <td><p>Mutates an input container (of type <a class="reference external" href="https://abjad.github.io/api/abjad/core/Container.html#abjad.core.Container.Container" title="(in Abjad v3.1)"><code class="xref py py-class docutils literal notranslate"><span class="pre">abjad.Container</span></code></a> or child class) in place and has no return value; this function applies a time signature (or a <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.9)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code></a> of time signatures) to the input container.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="../_api_members/auxjad.Mutation.html#auxjad.Mutation.extract_trivial_tuplets" title="auxjad.Mutation.extract_trivial_tuplets"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Mutation.extract_trivial_tuplets</span></code></a>()</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="../_api_members/auxjad.Mutation.html#auxjad.Mutation.extract_trivial_tuplets" title="auxjad.Mutation.extract_trivial_tuplets"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Mutation.extract_trivial_tuplets</span></code></a>()</p></td>
 <td><p>Mutates an input <a class="reference external" href="https://abjad.github.io/api/abjad/core/Selection.html#abjad.core.Selection.Selection" title="(in Abjad v3.1)"><code class="xref py py-class docutils literal notranslate"><span class="pre">abjad.Selection</span></code></a> in place and has no return value; this function looks for tuplets filled with rests or with tied notes or chords and replaces them with a single leaf.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="../_api_members/auxjad.Mutation.html#auxjad.Mutation.fill_with_rests" title="auxjad.Mutation.fill_with_rests"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Mutation.fill_with_rests</span></code></a>(*[, …])</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="../_api_members/auxjad.Mutation.html#auxjad.Mutation.fill_with_rests" title="auxjad.Mutation.fill_with_rests"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Mutation.fill_with_rests</span></code></a>(*[, …])</p></td>
 <td><p>Mutates an input container (of type <a class="reference external" href="https://abjad.github.io/api/abjad/core/Container.html#abjad.core.Container.Container" title="(in Abjad v3.1)"><code class="xref py py-class docutils literal notranslate"><span class="pre">abjad.Container</span></code></a> or child class) in place and has no return value; this function fills a container with rests in order to make it full.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="../_api_members/auxjad.Mutation.html#auxjad.Mutation.merge_partial_tuplets" title="auxjad.Mutation.merge_partial_tuplets"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Mutation.merge_partial_tuplets</span></code></a>(*[, …])</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="../_api_members/auxjad.Mutation.html#auxjad.Mutation.merge_partial_tuplets" title="auxjad.Mutation.merge_partial_tuplets"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Mutation.merge_partial_tuplets</span></code></a>(*[, …])</p></td>
 <td><p>Mutates an input <a class="reference external" href="https://abjad.github.io/api/abjad/core/Selection.html#abjad.core.Selection.Selection" title="(in Abjad v3.1)"><code class="xref py py-class docutils literal notranslate"><span class="pre">abjad.Selection</span></code></a> in place and has no return value; this function merges all consecutive partial tuplets with the same ratio and which sum up to an assignable duration.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="../_api_members/auxjad.Mutation.html#auxjad.Mutation.prettify_rewrite_meter" title="auxjad.Mutation.prettify_rewrite_meter"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Mutation.prettify_rewrite_meter</span></code></a>(meter, *[, …])</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="../_api_members/auxjad.Mutation.html#auxjad.Mutation.prettify_rewrite_meter" title="auxjad.Mutation.prettify_rewrite_meter"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Mutation.prettify_rewrite_meter</span></code></a>(meter, *[, …])</p></td>
 <td><p>Mutates an input <a class="reference external" href="https://abjad.github.io/api/abjad/core/Selection.html#abjad.core.Selection.Selection" title="(in Abjad v3.1)"><code class="xref py py-class docutils literal notranslate"><span class="pre">abjad.Selection</span></code></a> in place and has no return value; this function fuses pitched leaves according to the rules shown below, improving the default output of <a class="reference external" href="https://abjad.github.io/api/abjad/core/Mutation.html#abjad.core.Mutation.Mutation.rewrite_meter" title="(in Abjad v3.1)"><code class="xref py py-meth docutils literal notranslate"><span class="pre">abjad.mutate().rewrite_meter()</span></code></a>.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="../_api_members/auxjad.Mutation.html#auxjad.Mutation.remove_repeated_dynamics" title="auxjad.Mutation.remove_repeated_dynamics"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Mutation.remove_repeated_dynamics</span></code></a>(*[, …])</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="../_api_members/auxjad.Mutation.html#auxjad.Mutation.remove_repeated_dynamics" title="auxjad.Mutation.remove_repeated_dynamics"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Mutation.remove_repeated_dynamics</span></code></a>(*[, …])</p></td>
 <td><p>Mutates an input <a class="reference external" href="https://abjad.github.io/api/abjad/core/Selection.html#abjad.core.Selection.Selection" title="(in Abjad v3.1)"><code class="xref py py-class docutils literal notranslate"><span class="pre">abjad.Selection</span></code></a> in place and has no return value; this function removes all consecutive repeated dynamic markings.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="../_api_members/auxjad.Mutation.html#auxjad.Mutation.remove_repeated_time_signatures" title="auxjad.Mutation.remove_repeated_time_signatures"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Mutation.remove_repeated_time_signatures</span></code></a>()</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="../_api_members/auxjad.Mutation.html#auxjad.Mutation.remove_repeated_time_signatures" title="auxjad.Mutation.remove_repeated_time_signatures"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Mutation.remove_repeated_time_signatures</span></code></a>()</p></td>
 <td><p>Mutates an input <a class="reference external" href="https://abjad.github.io/api/abjad/core/Selection.html#abjad.core.Selection.Selection" title="(in Abjad v3.1)"><code class="xref py py-class docutils literal notranslate"><span class="pre">abjad.Selection</span></code></a> in place and has no return value; this function removes all consecutive repeated time signatures.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="../_api_members/auxjad.Mutation.html#auxjad.Mutation.reposition_clefs" title="auxjad.Mutation.reposition_clefs"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Mutation.reposition_clefs</span></code></a>(*[, …])</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="../_api_members/auxjad.Mutation.html#auxjad.Mutation.reposition_clefs" title="auxjad.Mutation.reposition_clefs"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Mutation.reposition_clefs</span></code></a>(*[, …])</p></td>
 <td><p>Mutates an input <a class="reference external" href="https://abjad.github.io/api/abjad/core/Selection.html#abjad.core.Selection.Selection" title="(in Abjad v3.1)"><code class="xref py py-class docutils literal notranslate"><span class="pre">abjad.Selection</span></code></a> in place and has no return value; this function removes all consecutive repeated clefs.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="../_api_members/auxjad.Mutation.html#auxjad.Mutation.reposition_dynamics" title="auxjad.Mutation.reposition_dynamics"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Mutation.reposition_dynamics</span></code></a>(*[, …])</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="../_api_members/auxjad.Mutation.html#auxjad.Mutation.reposition_dynamics" title="auxjad.Mutation.reposition_dynamics"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Mutation.reposition_dynamics</span></code></a>(*[, …])</p></td>
 <td><p>Mutates an input <a class="reference external" href="https://abjad.github.io/api/abjad/core/Selection.html#abjad.core.Selection.Selection" title="(in Abjad v3.1)"><code class="xref py py-class docutils literal notranslate"><span class="pre">abjad.Selection</span></code></a> in place and has no return value; this function shifts all dynamics from rests to the next pitched leaves.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="../_api_members/auxjad.Mutation.html#auxjad.Mutation.reposition_slurs" title="auxjad.Mutation.reposition_slurs"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Mutation.reposition_slurs</span></code></a>(*[, …])</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="../_api_members/auxjad.Mutation.html#auxjad.Mutation.reposition_slurs" title="auxjad.Mutation.reposition_slurs"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Mutation.reposition_slurs</span></code></a>(*[, …])</p></td>
 <td><p>Mutates an input <a class="reference external" href="https://abjad.github.io/api/abjad/core/Selection.html#abjad.core.Selection.Selection" title="(in Abjad v3.1)"><code class="xref py py-class docutils literal notranslate"><span class="pre">abjad.Selection</span></code></a> in place and has no return value; this function repositions all slurs that starts or ends on rests.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="../_api_members/auxjad.Mutation.html#auxjad.Mutation.respell_accidentals" title="auxjad.Mutation.respell_accidentals"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Mutation.respell_accidentals</span></code></a>(*[, …])</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="../_api_members/auxjad.Mutation.html#auxjad.Mutation.respell_accidentals" title="auxjad.Mutation.respell_accidentals"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Mutation.respell_accidentals</span></code></a>(*[, …])</p></td>
 <td><p>Mutates an input <a class="reference external" href="https://abjad.github.io/api/abjad/core/Selection.html#abjad.core.Selection.Selection" title="(in Abjad v3.1)"><code class="xref py py-class docutils literal notranslate"><span class="pre">abjad.Selection</span></code></a> in place and has no return value; this function changes the accidentals of individual pitches of all chords in a container in order to avoid augmented unisons.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="../_api_members/auxjad.Mutation.html#auxjad.Mutation.rests_to_multimeasure_rest" title="auxjad.Mutation.rests_to_multimeasure_rest"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Mutation.rests_to_multimeasure_rest</span></code></a>()</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="../_api_members/auxjad.Mutation.html#auxjad.Mutation.rests_to_multimeasure_rest" title="auxjad.Mutation.rests_to_multimeasure_rest"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Mutation.rests_to_multimeasure_rest</span></code></a>(*[, …])</p></td>
 <td><p>Mutates an input <a class="reference external" href="https://abjad.github.io/api/abjad/core/Selection.html#abjad.core.Selection.Selection" title="(in Abjad v3.1)"><code class="xref py py-class docutils literal notranslate"><span class="pre">abjad.Selection</span></code></a> in place and has no return value; this function looks for measures filled with regular rests and converts them into an <a class="reference external" href="https://abjad.github.io/api/abjad/core/MultimeasureRest.html#abjad.core.MultimeasureRest.MultimeasureRest" title="(in Abjad v3.1)"><code class="xref py py-class docutils literal notranslate"><span class="pre">abjad.MultimeasureRest</span></code></a>.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="../_api_members/auxjad.Mutation.html#auxjad.Mutation.sustain_notes" title="auxjad.Mutation.sustain_notes"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Mutation.sustain_notes</span></code></a>()</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="../_api_members/auxjad.Mutation.html#auxjad.Mutation.sustain_notes" title="auxjad.Mutation.sustain_notes"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Mutation.sustain_notes</span></code></a>(*[, …])</p></td>
 <td><p>Mutates an input container (of type <a class="reference external" href="https://abjad.github.io/api/abjad/core/Container.html#abjad.core.Container.Container" title="(in Abjad v3.1)"><code class="xref py py-class docutils literal notranslate"><span class="pre">abjad.Container</span></code></a> or child class) in place and has no return value; this function will sustain all pitched leaves until the next pitched leaf, thus replacing all rests in between them.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="../_api_members/auxjad.Mutation.html#auxjad.Mutation.sync_containers" title="auxjad.Mutation.sync_containers"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Mutation.sync_containers</span></code></a>(*[, …])</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="../_api_members/auxjad.Mutation.html#auxjad.Mutation.sync_containers" title="auxjad.Mutation.sync_containers"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Mutation.sync_containers</span></code></a>(*[, …])</p></td>
 <td><p>Mutates two or more input containers in place and has no return value; this function finds the longest container among the inputs and adds rests to all the shorter ones, making them the same length.</p></td>
 </tr>
 </tbody>
@@ -315,7 +319,7 @@ documentation pages of <a class="reference internal" href="../_api_members/auxja
         <a href="../_api_members/auxjad.inspect.html" class="btn btn-neutral float-right" title="inspect" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="../_api_members/auxjad.LeafDynMaker.html" class="btn btn-neutral float-left" title="LeafDynMaker" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="../_api_members/auxjad.piano_pedal.html" class="btn btn-neutral float-left" title="piano_pedal" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   

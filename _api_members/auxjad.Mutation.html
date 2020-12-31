@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Mutation &mdash; auxjad 0.8.18 documentation</title>
+  <title>Mutation &mdash; auxjad 0.8.20 documentation</title>
   
 
   
@@ -95,6 +95,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../api/api-core.html">core</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../api/api-indicators.html">indicators</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../api/api-score.html">score</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/api-spanners.html">spanners</a></li>
 <li class="toctree-l2 current"><a class="reference internal" href="../api/api-utilities.html">utilities</a><ul class="current">
 <li class="toctree-l3"><a class="reference internal" href="auxjad.inspect.html">inspect</a></li>
 <li class="toctree-l3"><a class="reference internal" href="auxjad.Inspection.html">Inspection</a></li>
@@ -177,7 +178,7 @@
 <h1>Mutation<a class="headerlink" href="#mutation" title="Permalink to this headline">¶</a></h1>
 <dl class="py class">
 <dt id="auxjad.Mutation">
-<em class="property">class </em><code class="sig-prename descclassname">auxjad.</code><code class="sig-name descname">Mutation</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">client</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#auxjad.Mutation" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">auxjad.</code><code class="sig-name descname">Mutation</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">client</span><span class="p">:</span> <span class="n">Optional<span class="p">[</span>Union<span class="p">[</span><a class="reference external" href="https://abjad.github.io/api/abjad/core/Component.html#abjad.core.Component.Component" title="(in Abjad v3.1)">abjad.core.Component.Component</a><span class="p">, </span><a class="reference external" href="https://docs.python.org/3/library/collections.abc.html#collections.abc.Iterable" title="(in Python v3.9)">collections.abc.Iterable</a><span class="p">[</span><a class="reference external" href="https://abjad.github.io/api/abjad/core/Component.html#abjad.core.Component.Component" title="(in Abjad v3.1)">abjad.core.Component.Component</a><span class="p">]</span><span class="p">]</span><span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#auxjad.Mutation" title="Permalink to this definition">¶</a></dt>
 <dd><p>Mutation class containing all of Auxjad’s mutation methods.</p>
 <p>Example:</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">staff</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span><span class="s2">&quot;c&#39;4 e&#39;4 d&#39;4 f&#39;4&quot;</span><span class="p">)</span>
@@ -218,46 +219,49 @@ either <a class="reference internal" href="auxjad.mutate.html#auxjad.mutate" tit
 <tr class="row-even"><td><p><a class="reference internal" href="#auxjad.Mutation.close_container" title="auxjad.Mutation.close_container"><code class="xref py py-obj docutils literal notranslate"><span class="pre">close_container</span></code></a>()</p></td>
 <td><p>Mutates an input container (of type <a class="reference external" href="https://abjad.github.io/api/abjad/core/Container.html#abjad.core.Container.Container" title="(in Abjad v3.1)"><code class="xref py py-class docutils literal notranslate"><span class="pre">abjad.Container</span></code></a> or child class) in place and has no return value; this function changes the time signature of the last measure of an underfull in order to make it full.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#auxjad.Mutation.enforce_time_signature" title="auxjad.Mutation.enforce_time_signature"><code class="xref py py-obj docutils literal notranslate"><span class="pre">enforce_time_signature</span></code></a>(time_signatures, *[, …])</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#auxjad.Mutation.double_barlines_before_time_signatures" title="auxjad.Mutation.double_barlines_before_time_signatures"><code class="xref py py-obj docutils literal notranslate"><span class="pre">double_barlines_before_time_signatures</span></code></a>(*[, …])</p></td>
+<td><p>Mutates an input <a class="reference external" href="https://abjad.github.io/api/abjad/core/Selection.html#abjad.core.Selection.Selection" title="(in Abjad v3.1)"><code class="xref py py-class docutils literal notranslate"><span class="pre">abjad.Selection</span></code></a> in place and has no return value; this function adds double bar lines before all time signatures.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#auxjad.Mutation.enforce_time_signature" title="auxjad.Mutation.enforce_time_signature"><code class="xref py py-obj docutils literal notranslate"><span class="pre">enforce_time_signature</span></code></a>(time_signatures, *[, …])</p></td>
 <td><p>Mutates an input container (of type <a class="reference external" href="https://abjad.github.io/api/abjad/core/Container.html#abjad.core.Container.Container" title="(in Abjad v3.1)"><code class="xref py py-class docutils literal notranslate"><span class="pre">abjad.Container</span></code></a> or child class) in place and has no return value; this function applies a time signature (or a <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.9)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code></a> of time signatures) to the input container.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#auxjad.Mutation.extract_trivial_tuplets" title="auxjad.Mutation.extract_trivial_tuplets"><code class="xref py py-obj docutils literal notranslate"><span class="pre">extract_trivial_tuplets</span></code></a>()</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#auxjad.Mutation.extract_trivial_tuplets" title="auxjad.Mutation.extract_trivial_tuplets"><code class="xref py py-obj docutils literal notranslate"><span class="pre">extract_trivial_tuplets</span></code></a>()</p></td>
 <td><p>Mutates an input <a class="reference external" href="https://abjad.github.io/api/abjad/core/Selection.html#abjad.core.Selection.Selection" title="(in Abjad v3.1)"><code class="xref py py-class docutils literal notranslate"><span class="pre">abjad.Selection</span></code></a> in place and has no return value; this function looks for tuplets filled with rests or with tied notes or chords and replaces them with a single leaf.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#auxjad.Mutation.fill_with_rests" title="auxjad.Mutation.fill_with_rests"><code class="xref py py-obj docutils literal notranslate"><span class="pre">fill_with_rests</span></code></a>(*[, disable_rewrite_meter, …])</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#auxjad.Mutation.fill_with_rests" title="auxjad.Mutation.fill_with_rests"><code class="xref py py-obj docutils literal notranslate"><span class="pre">fill_with_rests</span></code></a>(*[, disable_rewrite_meter, …])</p></td>
 <td><p>Mutates an input container (of type <a class="reference external" href="https://abjad.github.io/api/abjad/core/Container.html#abjad.core.Container.Container" title="(in Abjad v3.1)"><code class="xref py py-class docutils literal notranslate"><span class="pre">abjad.Container</span></code></a> or child class) in place and has no return value; this function fills a container with rests in order to make it full.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#auxjad.Mutation.merge_partial_tuplets" title="auxjad.Mutation.merge_partial_tuplets"><code class="xref py py-obj docutils literal notranslate"><span class="pre">merge_partial_tuplets</span></code></a>(*[, merge_across_barlines])</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#auxjad.Mutation.merge_partial_tuplets" title="auxjad.Mutation.merge_partial_tuplets"><code class="xref py py-obj docutils literal notranslate"><span class="pre">merge_partial_tuplets</span></code></a>(*[, merge_across_barlines])</p></td>
 <td><p>Mutates an input <a class="reference external" href="https://abjad.github.io/api/abjad/core/Selection.html#abjad.core.Selection.Selection" title="(in Abjad v3.1)"><code class="xref py py-class docutils literal notranslate"><span class="pre">abjad.Selection</span></code></a> in place and has no return value; this function merges all consecutive partial tuplets with the same ratio and which sum up to an assignable duration.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#auxjad.Mutation.prettify_rewrite_meter" title="auxjad.Mutation.prettify_rewrite_meter"><code class="xref py py-obj docutils literal notranslate"><span class="pre">prettify_rewrite_meter</span></code></a>(meter, *[, …])</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#auxjad.Mutation.prettify_rewrite_meter" title="auxjad.Mutation.prettify_rewrite_meter"><code class="xref py py-obj docutils literal notranslate"><span class="pre">prettify_rewrite_meter</span></code></a>(meter, *[, …])</p></td>
 <td><p>Mutates an input <a class="reference external" href="https://abjad.github.io/api/abjad/core/Selection.html#abjad.core.Selection.Selection" title="(in Abjad v3.1)"><code class="xref py py-class docutils literal notranslate"><span class="pre">abjad.Selection</span></code></a> in place and has no return value; this function fuses pitched leaves according to the rules shown below, improving the default output of <a class="reference external" href="https://abjad.github.io/api/abjad/core/Mutation.html#abjad.core.Mutation.Mutation.rewrite_meter" title="(in Abjad v3.1)"><code class="xref py py-meth docutils literal notranslate"><span class="pre">abjad.mutate().rewrite_meter()</span></code></a>.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#auxjad.Mutation.remove_repeated_dynamics" title="auxjad.Mutation.remove_repeated_dynamics"><code class="xref py py-obj docutils literal notranslate"><span class="pre">remove_repeated_dynamics</span></code></a>(*[, …])</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#auxjad.Mutation.remove_repeated_dynamics" title="auxjad.Mutation.remove_repeated_dynamics"><code class="xref py py-obj docutils literal notranslate"><span class="pre">remove_repeated_dynamics</span></code></a>(*[, …])</p></td>
 <td><p>Mutates an input <a class="reference external" href="https://abjad.github.io/api/abjad/core/Selection.html#abjad.core.Selection.Selection" title="(in Abjad v3.1)"><code class="xref py py-class docutils literal notranslate"><span class="pre">abjad.Selection</span></code></a> in place and has no return value; this function removes all consecutive repeated dynamic markings.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#auxjad.Mutation.remove_repeated_time_signatures" title="auxjad.Mutation.remove_repeated_time_signatures"><code class="xref py py-obj docutils literal notranslate"><span class="pre">remove_repeated_time_signatures</span></code></a>()</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#auxjad.Mutation.remove_repeated_time_signatures" title="auxjad.Mutation.remove_repeated_time_signatures"><code class="xref py py-obj docutils literal notranslate"><span class="pre">remove_repeated_time_signatures</span></code></a>()</p></td>
 <td><p>Mutates an input <a class="reference external" href="https://abjad.github.io/api/abjad/core/Selection.html#abjad.core.Selection.Selection" title="(in Abjad v3.1)"><code class="xref py py-class docutils literal notranslate"><span class="pre">abjad.Selection</span></code></a> in place and has no return value; this function removes all consecutive repeated time signatures.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#auxjad.Mutation.reposition_clefs" title="auxjad.Mutation.reposition_clefs"><code class="xref py py-obj docutils literal notranslate"><span class="pre">reposition_clefs</span></code></a>(*[, shift_clef_to_notes, …])</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#auxjad.Mutation.reposition_clefs" title="auxjad.Mutation.reposition_clefs"><code class="xref py py-obj docutils literal notranslate"><span class="pre">reposition_clefs</span></code></a>(*[, shift_clef_to_notes, …])</p></td>
 <td><p>Mutates an input <a class="reference external" href="https://abjad.github.io/api/abjad/core/Selection.html#abjad.core.Selection.Selection" title="(in Abjad v3.1)"><code class="xref py py-class docutils literal notranslate"><span class="pre">abjad.Selection</span></code></a> in place and has no return value; this function removes all consecutive repeated clefs.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#auxjad.Mutation.reposition_dynamics" title="auxjad.Mutation.reposition_dynamics"><code class="xref py py-obj docutils literal notranslate"><span class="pre">reposition_dynamics</span></code></a>(*[, …])</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#auxjad.Mutation.reposition_dynamics" title="auxjad.Mutation.reposition_dynamics"><code class="xref py py-obj docutils literal notranslate"><span class="pre">reposition_dynamics</span></code></a>(*[, …])</p></td>
 <td><p>Mutates an input <a class="reference external" href="https://abjad.github.io/api/abjad/core/Selection.html#abjad.core.Selection.Selection" title="(in Abjad v3.1)"><code class="xref py py-class docutils literal notranslate"><span class="pre">abjad.Selection</span></code></a> in place and has no return value; this function shifts all dynamics from rests to the next pitched leaves.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#auxjad.Mutation.reposition_slurs" title="auxjad.Mutation.reposition_slurs"><code class="xref py py-obj docutils literal notranslate"><span class="pre">reposition_slurs</span></code></a>(*[, …])</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#auxjad.Mutation.reposition_slurs" title="auxjad.Mutation.reposition_slurs"><code class="xref py py-obj docutils literal notranslate"><span class="pre">reposition_slurs</span></code></a>(*[, …])</p></td>
 <td><p>Mutates an input <a class="reference external" href="https://abjad.github.io/api/abjad/core/Selection.html#abjad.core.Selection.Selection" title="(in Abjad v3.1)"><code class="xref py py-class docutils literal notranslate"><span class="pre">abjad.Selection</span></code></a> in place and has no return value; this function repositions all slurs that starts or ends on rests.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#auxjad.Mutation.respell_accidentals" title="auxjad.Mutation.respell_accidentals"><code class="xref py py-obj docutils literal notranslate"><span class="pre">respell_accidentals</span></code></a>(*[, include_multiples, …])</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#auxjad.Mutation.respell_accidentals" title="auxjad.Mutation.respell_accidentals"><code class="xref py py-obj docutils literal notranslate"><span class="pre">respell_accidentals</span></code></a>(*[, include_multiples, …])</p></td>
 <td><p>Mutates an input <a class="reference external" href="https://abjad.github.io/api/abjad/core/Selection.html#abjad.core.Selection.Selection" title="(in Abjad v3.1)"><code class="xref py py-class docutils literal notranslate"><span class="pre">abjad.Selection</span></code></a> in place and has no return value; this function changes the accidentals of individual pitches of all chords in a container in order to avoid augmented unisons.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#auxjad.Mutation.rests_to_multimeasure_rest" title="auxjad.Mutation.rests_to_multimeasure_rest"><code class="xref py py-obj docutils literal notranslate"><span class="pre">rests_to_multimeasure_rest</span></code></a>()</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#auxjad.Mutation.rests_to_multimeasure_rest" title="auxjad.Mutation.rests_to_multimeasure_rest"><code class="xref py py-obj docutils literal notranslate"><span class="pre">rests_to_multimeasure_rest</span></code></a>(*[, ignore_clefs])</p></td>
 <td><p>Mutates an input <a class="reference external" href="https://abjad.github.io/api/abjad/core/Selection.html#abjad.core.Selection.Selection" title="(in Abjad v3.1)"><code class="xref py py-class docutils literal notranslate"><span class="pre">abjad.Selection</span></code></a> in place and has no return value; this function looks for measures filled with regular rests and converts them into an <a class="reference external" href="https://abjad.github.io/api/abjad/core/MultimeasureRest.html#abjad.core.MultimeasureRest.MultimeasureRest" title="(in Abjad v3.1)"><code class="xref py py-class docutils literal notranslate"><span class="pre">abjad.MultimeasureRest</span></code></a>.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#auxjad.Mutation.sustain_notes" title="auxjad.Mutation.sustain_notes"><code class="xref py py-obj docutils literal notranslate"><span class="pre">sustain_notes</span></code></a>()</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#auxjad.Mutation.sustain_notes" title="auxjad.Mutation.sustain_notes"><code class="xref py py-obj docutils literal notranslate"><span class="pre">sustain_notes</span></code></a>(*[, …])</p></td>
 <td><p>Mutates an input container (of type <a class="reference external" href="https://abjad.github.io/api/abjad/core/Container.html#abjad.core.Container.Container" title="(in Abjad v3.1)"><code class="xref py py-class docutils literal notranslate"><span class="pre">abjad.Container</span></code></a> or child class) in place and has no return value; this function will sustain all pitched leaves until the next pitched leaf, thus replacing all rests in between them.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#auxjad.Mutation.sync_containers" title="auxjad.Mutation.sync_containers"><code class="xref py py-obj docutils literal notranslate"><span class="pre">sync_containers</span></code></a>(*[, use_multimeasure_rests, …])</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#auxjad.Mutation.sync_containers" title="auxjad.Mutation.sync_containers"><code class="xref py py-obj docutils literal notranslate"><span class="pre">sync_containers</span></code></a>(*[, use_multimeasure_rests, …])</p></td>
 <td><p>Mutates two or more input containers in place and has no return value; this function finds the longest container among the inputs and adds rests to all the shorter ones, making them the same length.</p></td>
 </tr>
 </tbody>
@@ -276,7 +280,7 @@ either <a class="reference internal" href="auxjad.mutate.html#auxjad.mutate" tit
 </table>
 <dl class="py method">
 <dt id="auxjad.Mutation.__init__">
-<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">client</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#auxjad.Mutation.__init__" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">client</span><span class="p">:</span> <span class="n">Optional<span class="p">[</span>Union<span class="p">[</span><a class="reference external" href="https://abjad.github.io/api/abjad/core/Component.html#abjad.core.Component.Component" title="(in Abjad v3.1)">abjad.core.Component.Component</a><span class="p">, </span><a class="reference external" href="https://docs.python.org/3/library/collections.abc.html#collections.abc.Iterable" title="(in Python v3.9)">collections.abc.Iterable</a><span class="p">[</span><a class="reference external" href="https://abjad.github.io/api/abjad/core/Component.html#abjad.core.Component.Component" title="(in Abjad v3.1)">abjad.core.Component.Component</a><span class="p">]</span><span class="p">]</span><span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)">None</a><a class="headerlink" href="#auxjad.Mutation.__init__" title="Permalink to this definition">¶</a></dt>
 <dd><p>Initialises self.</p>
 </dd></dl>
 
@@ -288,7 +292,7 @@ either <a class="reference internal" href="auxjad.mutate.html#auxjad.mutate" tit
 
 <dl class="py method">
 <dt id="auxjad.Mutation.auto_rewrite_meter">
-<code class="sig-name descname">auto_rewrite_meter</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">meter_list</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.9)">list</a></span> <span class="o">=</span> <span class="default_value">None</span></em>, <em class="sig-param"><span class="o">*</span></em>, <em class="sig-param"><span class="n">prettify_rewrite_meter</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)">bool</a></span> <span class="o">=</span> <span class="default_value">True</span></em>, <em class="sig-param"><span class="n">extract_trivial_tuplets</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)">bool</a></span> <span class="o">=</span> <span class="default_value">True</span></em>, <em class="sig-param"><span class="n">fuse_across_groups_of_beats</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)">bool</a></span> <span class="o">=</span> <span class="default_value">True</span></em>, <em class="sig-param"><span class="n">fuse_quadruple_meter</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)">bool</a></span> <span class="o">=</span> <span class="default_value">True</span></em>, <em class="sig-param"><span class="n">fuse_triple_meter</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)">bool</a></span> <span class="o">=</span> <span class="default_value">True</span></em>, <em class="sig-param"><span class="n">boundary_depth</span><span class="p">:</span> <span class="n">Optional<span class="p">[</span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)">int</a><span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em>, <em class="sig-param"><span class="n">maximum_dot_count</span><span class="p">:</span> <span class="n">Optional<span class="p">[</span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)">int</a><span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em>, <em class="sig-param"><span class="n">rewrite_tuplets</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)">bool</a></span> <span class="o">=</span> <span class="default_value">True</span></em>, <em class="sig-param"><span class="n">merge_partial_tuplets</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)">bool</a></span> <span class="o">=</span> <span class="default_value">True</span></em>, <em class="sig-param"><span class="n">split_quadruple_meter</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)">bool</a></span> <span class="o">=</span> <span class="default_value">True</span></em><span class="sig-paren">)</span><a class="headerlink" href="#auxjad.Mutation.auto_rewrite_meter" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">auto_rewrite_meter</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">meter_list</span><span class="p">:</span> <span class="n">Optional<span class="p">[</span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.9)">list</a><span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em>, <em class="sig-param"><span class="o">*</span></em>, <em class="sig-param"><span class="n">prettify_rewrite_meter</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)">bool</a></span> <span class="o">=</span> <span class="default_value">True</span></em>, <em class="sig-param"><span class="n">extract_trivial_tuplets</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)">bool</a></span> <span class="o">=</span> <span class="default_value">True</span></em>, <em class="sig-param"><span class="n">fuse_across_groups_of_beats</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)">bool</a></span> <span class="o">=</span> <span class="default_value">True</span></em>, <em class="sig-param"><span class="n">fuse_quadruple_meter</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)">bool</a></span> <span class="o">=</span> <span class="default_value">True</span></em>, <em class="sig-param"><span class="n">fuse_triple_meter</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)">bool</a></span> <span class="o">=</span> <span class="default_value">True</span></em>, <em class="sig-param"><span class="n">boundary_depth</span><span class="p">:</span> <span class="n">Optional<span class="p">[</span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)">int</a><span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em>, <em class="sig-param"><span class="n">maximum_dot_count</span><span class="p">:</span> <span class="n">Optional<span class="p">[</span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)">int</a><span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em>, <em class="sig-param"><span class="n">rewrite_tuplets</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)">bool</a></span> <span class="o">=</span> <span class="default_value">True</span></em>, <em class="sig-param"><span class="n">merge_partial_tuplets</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)">bool</a></span> <span class="o">=</span> <span class="default_value">True</span></em>, <em class="sig-param"><span class="n">split_quadruple_meter</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)">bool</a></span> <span class="o">=</span> <span class="default_value">True</span></em><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)">None</a><a class="headerlink" href="#auxjad.Mutation.auto_rewrite_meter" title="Permalink to this definition">¶</a></dt>
 <dd><p>Mutates an input container (of type <a class="reference external" href="https://abjad.github.io/api/abjad/core/Container.html#abjad.core.Container.Container" title="(in Abjad v3.1)"><code class="xref py py-class docutils literal notranslate"><span class="pre">abjad.Container</span></code></a> or child class)
 in place and has no return value; this function takes every measure of a
 container, detects its time signature, and apply both
@@ -837,7 +841,7 @@ not fuse those leaves against the required boundary depth.</p>
 
 <dl class="py method">
 <dt id="auxjad.Mutation.close_container">
-<code class="sig-name descname">close_container</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#auxjad.Mutation.close_container" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">close_container</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)">None</a><a class="headerlink" href="#auxjad.Mutation.close_container" title="Permalink to this definition">¶</a></dt>
 <dd><p>Mutates an input container (of type <a class="reference external" href="https://abjad.github.io/api/abjad/core/Container.html#abjad.core.Container.Container" title="(in Abjad v3.1)"><code class="xref py py-class docutils literal notranslate"><span class="pre">abjad.Container</span></code></a> or child class)
 in place and has no return value; this function changes the time signature
 of the last measure of an underfull in order to make it full.</p>
@@ -1058,8 +1062,227 @@ subcontainers, applying this function to them individually.</p>
 </dd></dl>
 
 <dl class="py method">
+<dt id="auxjad.Mutation.double_barlines_before_time_signatures">
+<code class="sig-name descname">double_barlines_before_time_signatures</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span></em>, <em class="sig-param"><span class="n">context</span><span class="p">:</span> <span class="n">Optional<span class="p">[</span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)">str</a><span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)">None</a><a class="headerlink" href="#auxjad.Mutation.double_barlines_before_time_signatures" title="Permalink to this definition">¶</a></dt>
+<dd><p>Mutates an input <a class="reference external" href="https://abjad.github.io/api/abjad/core/Selection.html#abjad.core.Selection.Selection" title="(in Abjad v3.1)"><code class="xref py py-class docutils literal notranslate"><span class="pre">abjad.Selection</span></code></a> in place and has no return value;
+this function adds double bar lines before all time signatures.</p>
+<dl>
+<dt>Basic usage:</dt><dd><p>Whenever a new time signature appears, the function adds a double bar
+line before it:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">staff</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="sa">r</span><span class="s2">&quot;\time 3/4 c&#39;2. \time 4/4 d&#39;1 e&#39;1 \time 6/4 f&#39;2. g&#39;2.&quot;</span>
+<span class="gp">... </span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">auxjad</span><span class="o">.</span><span class="n">mutate</span><span class="p">(</span><span class="n">staff</span><span class="p">[:])</span><span class="o">.</span><span class="n">double_barlines_before_time_signatures</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">f</span><span class="p">(</span><span class="n">staff</span><span class="p">)</span>
+<span class="go">\new Staff</span>
+<span class="go">{</span>
+<span class="go">    \time 3/4</span>
+<span class="go">    c&#39;2.</span>
+<span class="go">    \bar &quot;||&quot;</span>
+<span class="go">    \time 4/4</span>
+<span class="go">    d&#39;1</span>
+<span class="go">    e&#39;1</span>
+<span class="go">    \bar &quot;||&quot;</span>
+<span class="go">    \time 6/4</span>
+<span class="go">    f&#39;2.</span>
+<span class="go">    g&#39;2.</span>
+<span class="go">}</span>
+</pre></div>
+</div>
+<div class="figure align-default">
+<img alt="../_images/remove_repeated_time_signatures-2O7JyxN1CS.png" src="../_images/remove_repeated_time_signatures-2O7JyxN1CS.png" />
+</div>
+</dd>
+<dt>Multi-measure rests:</dt><dd><p>This function can handle multi-measure rests too.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">staff</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="sa">r</span><span class="s2">&quot;\time 3/4 R1 * 3/4 &quot;</span>
+<span class="gp">... </span>    <span class="sa">r</span><span class="s2">&quot;\time 4/4 R1 * 2 &quot;</span>
+<span class="gp">... </span>    <span class="sa">r</span><span class="s2">&quot;\time 6/4 R1 * 6/4 &quot;</span>
+<span class="gp">... </span>    <span class="sa">r</span><span class="s2">&quot;\time 4/4 R1&quot;</span>
+<span class="gp">... </span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">auxjad</span><span class="o">.</span><span class="n">mutate</span><span class="p">(</span><span class="n">staff</span><span class="p">[:])</span><span class="o">.</span><span class="n">double_barlines_before_time_signatures</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">f</span><span class="p">(</span><span class="n">staff</span><span class="p">)</span>
+<span class="go">\new Staff</span>
+<span class="go">{</span>
+<span class="go">    \time 3/4</span>
+<span class="go">    R1 * 3/4</span>
+<span class="go">    \bar &quot;||&quot;</span>
+<span class="go">    \time 4/4</span>
+<span class="go">    R1 * 2</span>
+<span class="go">    \bar &quot;||&quot;</span>
+<span class="go">    \time 6/4</span>
+<span class="go">    R1 * 3/2</span>
+<span class="go">    \bar &quot;||&quot;</span>
+<span class="go">    \time 4/4</span>
+<span class="go">    R1</span>
+<span class="go">}</span>
+</pre></div>
+</div>
+<div class="figure align-default">
+<img alt="../_images/remove_repeated_time_signatures-aYmnnFDdRh.png" src="../_images/remove_repeated_time_signatures-aYmnnFDdRh.png" />
+</div>
+</dd>
+<dt>Input with bar lines:</dt><dd><p>If the input selection already contains bar lines at poinst where a
+time signature change, the function will only replace those of type
+<code class="docutils literal notranslate"><span class="pre">&quot;|&quot;</span></code> or <code class="docutils literal notranslate"><span class="pre">&quot;&quot;</span></code>, keeping all others as they were.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">staff</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="sa">r</span><span class="s2">&quot;R1 &quot;</span>
+<span class="gp">... </span>    <span class="sa">r</span><span class="s2">&quot;\time 3/4 c&#39;2. &quot;</span>
+<span class="gp">... </span>    <span class="sa">r</span><span class="s2">&quot;\time 4/4 d&#39;1 &quot;</span>
+<span class="gp">... </span>    <span class="sa">r</span><span class="s2">&quot;e&#39;1 &quot;</span>
+<span class="gp">... </span>    <span class="sa">r</span><span class="s2">&quot;\time 6/4 f&#39;2. g&#39;2. &quot;</span>
+<span class="gp">... </span>    <span class="sa">r</span><span class="s2">&quot;\time 2/4 a&#39;2&quot;</span>
+<span class="gp">... </span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">attach</span><span class="p">(</span><span class="n">abjad</span><span class="o">.</span><span class="n">BarLine</span><span class="p">(</span><span class="s1">&#39;.|:&#39;</span><span class="p">),</span> <span class="n">staff</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">attach</span><span class="p">(</span><span class="n">abjad</span><span class="o">.</span><span class="n">BarLine</span><span class="p">(</span><span class="s1">&#39;:|.&#39;</span><span class="p">),</span> <span class="n">staff</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">attach</span><span class="p">(</span><span class="n">abjad</span><span class="o">.</span><span class="n">BarLine</span><span class="p">(</span><span class="s1">&#39;|&#39;</span><span class="p">),</span> <span class="n">staff</span><span class="p">[</span><span class="mi">3</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">attach</span><span class="p">(</span><span class="n">abjad</span><span class="o">.</span><span class="n">BarLine</span><span class="p">(</span><span class="s1">&#39;!&#39;</span><span class="p">),</span> <span class="n">staff</span><span class="p">[</span><span class="mi">5</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">auxjad</span><span class="o">.</span><span class="n">mutate</span><span class="p">(</span><span class="n">staff</span><span class="p">[:])</span><span class="o">.</span><span class="n">double_barlines_before_time_signatures</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">f</span><span class="p">(</span><span class="n">staff</span><span class="p">)</span>
+<span class="go">\new Staff</span>
+<span class="go">{</span>
+<span class="go">    R1</span>
+<span class="go">    \bar &quot;.|:&quot;</span>
+<span class="go">    \time 3/4</span>
+<span class="go">    c&#39;2.</span>
+<span class="go">    \bar &quot;:|.&quot;</span>
+<span class="go">    \time 4/4</span>
+<span class="go">    d&#39;1</span>
+<span class="go">    e&#39;1</span>
+<span class="go">    \bar &quot;||&quot;</span>
+<span class="go">    \time 6/4</span>
+<span class="go">    f&#39;2.</span>
+<span class="go">    g&#39;2.</span>
+<span class="go">    \bar &quot;!&quot;</span>
+<span class="go">    \time 2/4</span>
+<span class="go">    a&#39;2</span>
+<span class="go">}</span>
+</pre></div>
+</div>
+<div class="figure align-default">
+<img alt="../_images/remove_repeated_time_signatures-jUymJWLdR7.png" src="../_images/remove_repeated_time_signatures-jUymJWLdR7.png" />
+</div>
+</dd>
+</dl>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Attempting to add barlines to multiple staves in an <a class="reference external" href="https://abjad.github.io/api/abjad/core/Score.html#abjad.core.Score.Score" title="(in Abjad v3.1)"><code class="xref py py-class docutils literal notranslate"><span class="pre">abjad.Score</span></code></a> at
+the same point in the score will raise an exception:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">up</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;\time 4/4 c&#39;1 d&#39;1 \time 6/4 e&#39;1.&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">down</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="sa">r</span><span class="s2">&quot;\time 4/4 \clef bass c1 d1 \time 6/4 e1.&quot;</span>
+<span class="gp">... </span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">score</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Score</span><span class="p">([</span><span class="n">up</span><span class="p">,</span> <span class="n">down</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">auxjad</span><span class="o">.</span><span class="n">mutate</span><span class="p">(</span><span class="n">up</span><span class="p">[:])</span><span class="o">.</span><span class="n">double_barlines_before_time_signatures</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">auxjad</span><span class="o">.</span><span class="n">mutate</span><span class="p">(</span><span class="n">down</span><span class="p">[:])</span><span class="o">.</span><span class="n">double_barlines_before_time_signatures</span><span class="p">()</span>
+<span class="go">abjad.exceptions.PersistentIndicatorError:</span>
+
+<span class="go">Can not attach ...</span>
+
+<span class="go">abjad.Wrapper(</span>
+<span class="go">    context=&#39;Score&#39;,</span>
+<span class="go">    indicator=abjad.BarLine(&#39;||&#39;, format_slot=&#39;after&#39;, ),</span>
+<span class="go">    tag=abjad.Tag(),</span>
+<span class="go">    )</span>
+
+<span class="gp">... </span><span class="n">to</span> <span class="n">Note</span><span class="p">(</span><span class="s1">&#39;d1&#39;</span><span class="p">)</span> <span class="ow">in</span> <span class="kc">None</span> <span class="n">because</span> <span class="o">...</span>
+
+<span class="go">abjad.Wrapper(</span>
+<span class="go">    context=&#39;Score&#39;,</span>
+<span class="go">    indicator=abjad.BarLine(&#39;||&#39;, format_slot=&#39;after&#39;, ),</span>
+<span class="go">    tag=abjad.Tag(),</span>
+<span class="go">    )</span>
+
+<span class="gp">... </span><span class="ow">is</span> <span class="n">already</span> <span class="n">attached</span> <span class="n">to</span> <span class="n">Note</span><span class="p">(</span><span class="s2">&quot;d&#39;1&quot;</span><span class="p">)</span> <span class="ow">in</span> <span class="kc">None</span><span class="o">.</span>
+</pre></div>
+</div>
+<p>This is because, by default, bar lines belong to the score scope. In
+order to have bar lines on both staves (e.g. for easier part
+extraction), invoke this mutation with the argument <code class="docutils literal notranslate"><span class="pre">context</span></code> set to
+<code class="docutils literal notranslate"><span class="pre">'Staff'</span></code> so that the double bar lines become scoped to the staff
+instead of the score:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">up</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;\time 4/4 c&#39;1 d&#39;1 \time 6/4 e&#39;1.&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">down</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;\time 4/4 \clef bass c1 d1 \time 6/4 e1.&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">score</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Score</span><span class="p">([</span><span class="n">up</span><span class="p">,</span> <span class="n">down</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">auxjad</span><span class="o">.</span><span class="n">mutate</span><span class="p">(</span><span class="n">up</span><span class="p">[:])</span><span class="o">.</span><span class="n">double_barlines_before_time_signatures</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="n">context</span><span class="o">=</span><span class="s1">&#39;Staff&#39;</span><span class="p">,</span>
+<span class="gp">... </span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">auxjad</span><span class="o">.</span><span class="n">mutate</span><span class="p">(</span><span class="n">down</span><span class="p">[:])</span><span class="o">.</span><span class="n">double_barlines_before_time_signatures</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="n">context</span><span class="o">=</span><span class="s1">&#39;Staff&#39;</span><span class="p">,</span>
+<span class="gp">... </span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">f</span><span class="p">(</span><span class="n">score</span><span class="p">)</span>
+<span class="go">\new Score</span>
+<span class="go">&lt;&lt;</span>
+<span class="go">    \new Staff</span>
+<span class="go">    {</span>
+<span class="go">        \time 4/4</span>
+<span class="go">        c&#39;1</span>
+<span class="go">        d&#39;1</span>
+<span class="go">        \bar &quot;||&quot;</span>
+<span class="go">        \time 6/4</span>
+<span class="go">        e&#39;1.</span>
+<span class="go">    }</span>
+<span class="go">    \new Staff</span>
+<span class="go">    {</span>
+<span class="go">        \time 4/4</span>
+<span class="go">        \clef &quot;bass&quot;</span>
+<span class="go">        c1</span>
+<span class="go">        d1</span>
+<span class="go">        \bar &quot;||&quot;</span>
+<span class="go">        \time 6/4</span>
+<span class="go">        e1.</span>
+<span class="go">    }</span>
+<span class="go">&gt;&gt;</span>
+</pre></div>
+</div>
+<div class="figure align-default">
+<img alt="../_images/remove_repeated_time_signatures-yD6KL6xbrV.png" src="../_images/remove_repeated_time_signatures-yD6KL6xbrV.png" />
+</div>
+<p>In this case, both individual staves will also have the bar lines:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">f</span><span class="p">(</span><span class="n">up</span><span class="p">)</span>
+<span class="go">\new Staff</span>
+<span class="go">{</span>
+<span class="go">    \time 4/4</span>
+<span class="go">    c&#39;1</span>
+<span class="go">    d&#39;1</span>
+<span class="go">    \bar &quot;||&quot;</span>
+<span class="go">    \time 6/4</span>
+<span class="go">    e&#39;1.</span>
+<span class="go">}</span>
+</pre></div>
+</div>
+<div class="figure align-default">
+<img alt="../_images/remove_repeated_time_signatures-Zs1hSq2uwY.png" src="../_images/remove_repeated_time_signatures-Zs1hSq2uwY.png" />
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">f</span><span class="p">(</span><span class="n">down</span><span class="p">)</span>
+<span class="go">\new Staff</span>
+<span class="go">{</span>
+<span class="go">    \time 4/4</span>
+<span class="go">    \clef &quot;bass&quot;</span>
+<span class="go">    c1</span>
+<span class="go">    d1</span>
+<span class="go">    \bar &quot;||&quot;</span>
+<span class="go">    \time 6/4</span>
+<span class="go">    e1.</span>
+<span class="go">}</span>
+</pre></div>
+</div>
+<div class="figure align-default">
+<img alt="../_images/remove_repeated_time_signatures-QYOgyhLJ2f.png" src="../_images/remove_repeated_time_signatures-QYOgyhLJ2f.png" />
+</div>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>The input selection must be a contiguous logical voice. When dealing
+with a container with multiple subcontainers (e.g. a score containing
+multiple staves), the best approach is to cycle through these
+subcontainers, applying this function to them individually.</p>
+</div>
+</dd></dl>
+
+<dl class="py method">
 <dt id="auxjad.Mutation.enforce_time_signature">
-<code class="sig-name descname">enforce_time_signature</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">time_signatures</span><span class="p">:</span> <span class="n">Union<span class="p">[</span><a class="reference external" href="https://abjad.github.io/api/abjad/indicators/TimeSignature.html#abjad.indicators.TimeSignature.TimeSignature" title="(in Abjad v3.1)">abjad.indicators.TimeSignature.TimeSignature</a><span class="p">, </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.9)">tuple</a><span class="p">, </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.9)">list</a><span class="p">]</span></span></em>, <em class="sig-param"><span class="o">*</span></em>, <em class="sig-param"><span class="n">cyclic</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)">bool</a></span> <span class="o">=</span> <span class="default_value">False</span></em>, <em class="sig-param"><span class="n">fill_with_rests</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)">bool</a></span> <span class="o">=</span> <span class="default_value">True</span></em>, <em class="sig-param"><span class="n">close_container</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)">bool</a></span> <span class="o">=</span> <span class="default_value">False</span></em>, <em class="sig-param"><span class="n">disable_rewrite_meter</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)">bool</a></span> <span class="o">=</span> <span class="default_value">False</span></em>, <em class="sig-param"><span class="n">prettify_rewrite_meter</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)">bool</a></span> <span class="o">=</span> <span class="default_value">True</span></em>, <em class="sig-param"><span class="n">boundary_depth</span><span class="p">:</span> <span class="n">Optional<span class="p">[</span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)">int</a><span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em>, <em class="sig-param"><span class="n">maximum_dot_count</span><span class="p">:</span> <span class="n">Optional<span class="p">[</span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)">int</a><span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em>, <em class="sig-param"><span class="n">rewrite_tuplets</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)">bool</a></span> <span class="o">=</span> <span class="default_value">True</span></em>, <em class="sig-param"><span class="n">extract_trivial_tuplets</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)">bool</a></span> <span class="o">=</span> <span class="default_value">True</span></em>, <em class="sig-param"><span class="n">fuse_across_groups_of_beats</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)">bool</a></span> <span class="o">=</span> <span class="default_value">True</span></em>, <em class="sig-param"><span class="n">fuse_quadruple_meter</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)">bool</a></span> <span class="o">=</span> <span class="default_value">True</span></em>, <em class="sig-param"><span class="n">fuse_triple_meter</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)">bool</a></span> <span class="o">=</span> <span class="default_value">True</span></em>, <em class="sig-param"><span class="n">split_quadruple_meter</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)">bool</a></span> <span class="o">=</span> <span class="default_value">True</span></em><span class="sig-paren">)</span><a class="headerlink" href="#auxjad.Mutation.enforce_time_signature" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">enforce_time_signature</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">time_signatures</span><span class="p">:</span> <span class="n">Union<span class="p">[</span><a class="reference external" href="https://abjad.github.io/api/abjad/indicators/TimeSignature.html#abjad.indicators.TimeSignature.TimeSignature" title="(in Abjad v3.1)">abjad.indicators.TimeSignature.TimeSignature</a><span class="p">, </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.9)">tuple</a><span class="p">, </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.9)">list</a><span class="p">]</span></span></em>, <em class="sig-param"><span class="o">*</span></em>, <em class="sig-param"><span class="n">cyclic</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)">bool</a></span> <span class="o">=</span> <span class="default_value">False</span></em>, <em class="sig-param"><span class="n">fill_with_rests</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)">bool</a></span> <span class="o">=</span> <span class="default_value">True</span></em>, <em class="sig-param"><span class="n">close_container</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)">bool</a></span> <span class="o">=</span> <span class="default_value">False</span></em>, <em class="sig-param"><span class="n">disable_rewrite_meter</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)">bool</a></span> <span class="o">=</span> <span class="default_value">False</span></em>, <em class="sig-param"><span class="n">prettify_rewrite_meter</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)">bool</a></span> <span class="o">=</span> <span class="default_value">True</span></em>, <em class="sig-param"><span class="n">boundary_depth</span><span class="p">:</span> <span class="n">Optional<span class="p">[</span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)">int</a><span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em>, <em class="sig-param"><span class="n">maximum_dot_count</span><span class="p">:</span> <span class="n">Optional<span class="p">[</span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)">int</a><span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em>, <em class="sig-param"><span class="n">rewrite_tuplets</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)">bool</a></span> <span class="o">=</span> <span class="default_value">True</span></em>, <em class="sig-param"><span class="n">extract_trivial_tuplets</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)">bool</a></span> <span class="o">=</span> <span class="default_value">True</span></em>, <em class="sig-param"><span class="n">fuse_across_groups_of_beats</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)">bool</a></span> <span class="o">=</span> <span class="default_value">True</span></em>, <em class="sig-param"><span class="n">fuse_quadruple_meter</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)">bool</a></span> <span class="o">=</span> <span class="default_value">True</span></em>, <em class="sig-param"><span class="n">fuse_triple_meter</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)">bool</a></span> <span class="o">=</span> <span class="default_value">True</span></em>, <em class="sig-param"><span class="n">split_quadruple_meter</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)">bool</a></span> <span class="o">=</span> <span class="default_value">True</span></em><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)">None</a><a class="headerlink" href="#auxjad.Mutation.enforce_time_signature" title="Permalink to this definition">¶</a></dt>
 <dd><p>Mutates an input container (of type <a class="reference external" href="https://abjad.github.io/api/abjad/core/Container.html#abjad.core.Container.Container" title="(in Abjad v3.1)"><code class="xref py py-class docutils literal notranslate"><span class="pre">abjad.Container</span></code></a> or child class)
 in place and has no return value; this function applies a time signature
 (or a <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.9)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code></a> of time signatures) to the input container.</p>
@@ -1690,7 +1913,7 @@ subcontainers, applying this function to them individually.</p>
 
 <dl class="py method">
 <dt id="auxjad.Mutation.extract_trivial_tuplets">
-<code class="sig-name descname">extract_trivial_tuplets</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#auxjad.Mutation.extract_trivial_tuplets" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">extract_trivial_tuplets</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)">None</a><a class="headerlink" href="#auxjad.Mutation.extract_trivial_tuplets" title="Permalink to this definition">¶</a></dt>
 <dd><p>Mutates an input <a class="reference external" href="https://abjad.github.io/api/abjad/core/Selection.html#abjad.core.Selection.Selection" title="(in Abjad v3.1)"><code class="xref py py-class docutils literal notranslate"><span class="pre">abjad.Selection</span></code></a> in place and has no return value;
 this function looks for tuplets filled with rests or with tied notes or
 chords and replaces them with a single leaf.</p>
@@ -1950,7 +2173,7 @@ subcontainers, applying this function to them individually.</p>
 
 <dl class="py method">
 <dt id="auxjad.Mutation.fill_with_rests">
-<code class="sig-name descname">fill_with_rests</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span></em>, <em class="sig-param"><span class="n">disable_rewrite_meter</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)">bool</a></span> <span class="o">=</span> <span class="default_value">False</span></em>, <em class="sig-param"><span class="n">prettify_rewrite_meter</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)">bool</a></span> <span class="o">=</span> <span class="default_value">True</span></em>, <em class="sig-param"><span class="n">boundary_depth</span><span class="p">:</span> <span class="n">Optional<span class="p">[</span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)">int</a><span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em>, <em class="sig-param"><span class="n">maximum_dot_count</span><span class="p">:</span> <span class="n">Optional<span class="p">[</span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)">int</a><span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em>, <em class="sig-param"><span class="n">rewrite_tuplets</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)">bool</a></span> <span class="o">=</span> <span class="default_value">True</span></em>, <em class="sig-param"><span class="n">extract_trivial_tuplets</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)">bool</a></span> <span class="o">=</span> <span class="default_value">True</span></em>, <em class="sig-param"><span class="n">fuse_across_groups_of_beats</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)">bool</a></span> <span class="o">=</span> <span class="default_value">True</span></em>, <em class="sig-param"><span class="n">fuse_quadruple_meter</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)">bool</a></span> <span class="o">=</span> <span class="default_value">True</span></em>, <em class="sig-param"><span class="n">fuse_triple_meter</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)">bool</a></span> <span class="o">=</span> <span class="default_value">True</span></em>, <em class="sig-param"><span class="n">split_quadruple_meter</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)">bool</a></span> <span class="o">=</span> <span class="default_value">True</span></em><span class="sig-paren">)</span><a class="headerlink" href="#auxjad.Mutation.fill_with_rests" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">fill_with_rests</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span></em>, <em class="sig-param"><span class="n">disable_rewrite_meter</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)">bool</a></span> <span class="o">=</span> <span class="default_value">False</span></em>, <em class="sig-param"><span class="n">prettify_rewrite_meter</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)">bool</a></span> <span class="o">=</span> <span class="default_value">True</span></em>, <em class="sig-param"><span class="n">boundary_depth</span><span class="p">:</span> <span class="n">Optional<span class="p">[</span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)">int</a><span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em>, <em class="sig-param"><span class="n">maximum_dot_count</span><span class="p">:</span> <span class="n">Optional<span class="p">[</span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)">int</a><span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em>, <em class="sig-param"><span class="n">rewrite_tuplets</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)">bool</a></span> <span class="o">=</span> <span class="default_value">True</span></em>, <em class="sig-param"><span class="n">extract_trivial_tuplets</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)">bool</a></span> <span class="o">=</span> <span class="default_value">True</span></em>, <em class="sig-param"><span class="n">fuse_across_groups_of_beats</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)">bool</a></span> <span class="o">=</span> <span class="default_value">True</span></em>, <em class="sig-param"><span class="n">fuse_quadruple_meter</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)">bool</a></span> <span class="o">=</span> <span class="default_value">True</span></em>, <em class="sig-param"><span class="n">fuse_triple_meter</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)">bool</a></span> <span class="o">=</span> <span class="default_value">True</span></em>, <em class="sig-param"><span class="n">split_quadruple_meter</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)">bool</a></span> <span class="o">=</span> <span class="default_value">True</span></em><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)">None</a><a class="headerlink" href="#auxjad.Mutation.fill_with_rests" title="Permalink to this definition">¶</a></dt>
 <dd><p>Mutates an input container (of type <a class="reference external" href="https://abjad.github.io/api/abjad/core/Container.html#abjad.core.Container.Container" title="(in Abjad v3.1)"><code class="xref py py-class docutils literal notranslate"><span class="pre">abjad.Container</span></code></a> or child class)
 in place and has no return value; this function fills a container with
 rests in order to make it full.</p>
@@ -2218,7 +2441,7 @@ subcontainers, applying this function to them individually.</p>
 
 <dl class="py method">
 <dt id="auxjad.Mutation.merge_partial_tuplets">
-<code class="sig-name descname">merge_partial_tuplets</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span></em>, <em class="sig-param"><span class="n">merge_across_barlines</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)">bool</a></span> <span class="o">=</span> <span class="default_value">False</span></em><span class="sig-paren">)</span><a class="headerlink" href="#auxjad.Mutation.merge_partial_tuplets" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">merge_partial_tuplets</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span></em>, <em class="sig-param"><span class="n">merge_across_barlines</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)">bool</a></span> <span class="o">=</span> <span class="default_value">False</span></em><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)">None</a><a class="headerlink" href="#auxjad.Mutation.merge_partial_tuplets" title="Permalink to this definition">¶</a></dt>
 <dd><p>Mutates an input <a class="reference external" href="https://abjad.github.io/api/abjad/core/Selection.html#abjad.core.Selection.Selection" title="(in Abjad v3.1)"><code class="xref py py-class docutils literal notranslate"><span class="pre">abjad.Selection</span></code></a> in place and has no return value;
 this function merges all consecutive partial tuplets with the same ratio
 and which sum up to an assignable duration. Partial tuplets can result from
@@ -2515,7 +2738,7 @@ subcontainers, applying this function to them individually.</p>
 
 <dl class="py method">
 <dt id="auxjad.Mutation.prettify_rewrite_meter">
-<code class="sig-name descname">prettify_rewrite_meter</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">meter</span><span class="p">:</span> <span class="n">Union<span class="p">[</span><a class="reference external" href="https://abjad.github.io/api/abjad/meter.html#abjad.meter.Meter" title="(in Abjad v3.1)">abjad.meter.Meter</a><span class="p">, </span><a class="reference external" href="https://abjad.github.io/api/abjad/indicators/TimeSignature.html#abjad.indicators.TimeSignature.TimeSignature" title="(in Abjad v3.1)">abjad.indicators.TimeSignature.TimeSignature</a><span class="p">]</span></span></em>, <em class="sig-param"><span class="o">*</span></em>, <em class="sig-param"><span class="n">fuse_across_groups_of_beats</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)">bool</a></span> <span class="o">=</span> <span class="default_value">True</span></em>, <em class="sig-param"><span class="n">fuse_quadruple_meter</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)">bool</a></span> <span class="o">=</span> <span class="default_value">True</span></em>, <em class="sig-param"><span class="n">fuse_triple_meter</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)">bool</a></span> <span class="o">=</span> <span class="default_value">True</span></em>, <em class="sig-param"><span class="n">extract_trivial_tuplets</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)">bool</a></span> <span class="o">=</span> <span class="default_value">True</span></em>, <em class="sig-param"><span class="n">split_quadruple_meter</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)">bool</a></span> <span class="o">=</span> <span class="default_value">True</span></em><span class="sig-paren">)</span><a class="headerlink" href="#auxjad.Mutation.prettify_rewrite_meter" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">prettify_rewrite_meter</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">meter</span><span class="p">:</span> <span class="n">Union<span class="p">[</span><a class="reference external" href="https://abjad.github.io/api/abjad/meter.html#abjad.meter.Meter" title="(in Abjad v3.1)">abjad.meter.Meter</a><span class="p">, </span><a class="reference external" href="https://abjad.github.io/api/abjad/indicators/TimeSignature.html#abjad.indicators.TimeSignature.TimeSignature" title="(in Abjad v3.1)">abjad.indicators.TimeSignature.TimeSignature</a><span class="p">]</span></span></em>, <em class="sig-param"><span class="o">*</span></em>, <em class="sig-param"><span class="n">fuse_across_groups_of_beats</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)">bool</a></span> <span class="o">=</span> <span class="default_value">True</span></em>, <em class="sig-param"><span class="n">fuse_quadruple_meter</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)">bool</a></span> <span class="o">=</span> <span class="default_value">True</span></em>, <em class="sig-param"><span class="n">fuse_triple_meter</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)">bool</a></span> <span class="o">=</span> <span class="default_value">True</span></em>, <em class="sig-param"><span class="n">extract_trivial_tuplets</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)">bool</a></span> <span class="o">=</span> <span class="default_value">True</span></em>, <em class="sig-param"><span class="n">split_quadruple_meter</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)">bool</a></span> <span class="o">=</span> <span class="default_value">True</span></em><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)">None</a><a class="headerlink" href="#auxjad.Mutation.prettify_rewrite_meter" title="Permalink to this definition">¶</a></dt>
 <dd><p>Mutates an input <a class="reference external" href="https://abjad.github.io/api/abjad/core/Selection.html#abjad.core.Selection.Selection" title="(in Abjad v3.1)"><code class="xref py py-class docutils literal notranslate"><span class="pre">abjad.Selection</span></code></a> in place and has no return value;
 this function fuses pitched leaves according to the rules shown below,
 improving the default output of <a class="reference external" href="https://abjad.github.io/api/abjad/core/Mutation.html#abjad.core.Mutation.Mutation.rewrite_meter" title="(in Abjad v3.1)"><code class="xref py py-meth docutils literal notranslate"><span class="pre">abjad.mutate().rewrite_meter()</span></code></a>.</p>
@@ -3314,7 +3537,7 @@ subcontainers, applying this function to them individually.</p>
 
 <dl class="py method">
 <dt id="auxjad.Mutation.remove_repeated_dynamics">
-<code class="sig-name descname">remove_repeated_dynamics</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span></em>, <em class="sig-param"><span class="n">ignore_hairpins</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)">bool</a></span> <span class="o">=</span> <span class="default_value">False</span></em>, <em class="sig-param"><span class="n">reset_after_rests</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)">bool</a></span> <span class="o">=</span> <span class="default_value">False</span></em><span class="sig-paren">)</span><a class="headerlink" href="#auxjad.Mutation.remove_repeated_dynamics" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">remove_repeated_dynamics</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span></em>, <em class="sig-param"><span class="n">ignore_hairpins</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)">bool</a></span> <span class="o">=</span> <span class="default_value">False</span></em>, <em class="sig-param"><span class="n">reset_after_rests</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)">bool</a></span> <span class="o">=</span> <span class="default_value">False</span></em><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)">None</a><a class="headerlink" href="#auxjad.Mutation.remove_repeated_dynamics" title="Permalink to this definition">¶</a></dt>
 <dd><p>Mutates an input <a class="reference external" href="https://abjad.github.io/api/abjad/core/Selection.html#abjad.core.Selection.Selection" title="(in Abjad v3.1)"><code class="xref py py-class docutils literal notranslate"><span class="pre">abjad.Selection</span></code></a> in place and has no return value;
 this function removes all consecutive repeated dynamic markings.</p>
 <dl>
@@ -3668,7 +3891,7 @@ subcontainers, applying this function to them individually.</p>
 
 <dl class="py method">
 <dt id="auxjad.Mutation.remove_repeated_time_signatures">
-<code class="sig-name descname">remove_repeated_time_signatures</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#auxjad.Mutation.remove_repeated_time_signatures" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">remove_repeated_time_signatures</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)">None</a><a class="headerlink" href="#auxjad.Mutation.remove_repeated_time_signatures" title="Permalink to this definition">¶</a></dt>
 <dd><p>Mutates an input <a class="reference external" href="https://abjad.github.io/api/abjad/core/Selection.html#abjad.core.Selection.Selection" title="(in Abjad v3.1)"><code class="xref py py-class docutils literal notranslate"><span class="pre">abjad.Selection</span></code></a> in place and has no return value;
 this function removes all consecutive repeated time signatures.</p>
 <dl>
@@ -3817,7 +4040,7 @@ subcontainers, applying this function to them individually.</p>
 
 <dl class="py method">
 <dt id="auxjad.Mutation.reposition_clefs">
-<code class="sig-name descname">reposition_clefs</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span></em>, <em class="sig-param"><span class="n">shift_clef_to_notes</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)">bool</a></span> <span class="o">=</span> <span class="default_value">True</span></em>, <em class="sig-param"><span class="n">implicit_clef</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://abjad.github.io/api/abjad/indicators/Clef.html#abjad.indicators.Clef.Clef" title="(in Abjad v3.1)">abjad.indicators.Clef.Clef</a></span> <span class="o">=</span> <span class="default_value">Clef('treble')</span></em><span class="sig-paren">)</span><a class="headerlink" href="#auxjad.Mutation.reposition_clefs" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">reposition_clefs</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span></em>, <em class="sig-param"><span class="n">shift_clef_to_notes</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)">bool</a></span> <span class="o">=</span> <span class="default_value">True</span></em>, <em class="sig-param"><span class="n">implicit_clef</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://abjad.github.io/api/abjad/indicators/Clef.html#abjad.indicators.Clef.Clef" title="(in Abjad v3.1)">abjad.indicators.Clef.Clef</a></span> <span class="o">=</span> <span class="default_value">Clef('treble')</span></em><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)">None</a><a class="headerlink" href="#auxjad.Mutation.reposition_clefs" title="Permalink to this definition">¶</a></dt>
 <dd><p>Mutates an input <a class="reference external" href="https://abjad.github.io/api/abjad/core/Selection.html#abjad.core.Selection.Selection" title="(in Abjad v3.1)"><code class="xref py py-class docutils literal notranslate"><span class="pre">abjad.Selection</span></code></a> in place and has no return value;
 this function removes all consecutive repeated clefs. It can also be used
 to shift clefs from rests to pitched leaves.</p>
@@ -4239,7 +4462,7 @@ subcontainers, applying this function to them individually.</p>
 
 <dl class="py method">
 <dt id="auxjad.Mutation.reposition_dynamics">
-<code class="sig-name descname">reposition_dynamics</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span></em>, <em class="sig-param"><span class="n">allow_hairpins_under_rests</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)">bool</a></span> <span class="o">=</span> <span class="default_value">False</span></em>, <em class="sig-param"><span class="n">check_hairpin_trends</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)">bool</a></span> <span class="o">=</span> <span class="default_value">True</span></em>, <em class="sig-param"><span class="n">remove_repeated_dynamics</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)">bool</a></span> <span class="o">=</span> <span class="default_value">True</span></em>, <em class="sig-param"><span class="n">allow_hairpin_to_rest_with_dynamic</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)">bool</a></span> <span class="o">=</span> <span class="default_value">True</span></em><span class="sig-paren">)</span><a class="headerlink" href="#auxjad.Mutation.reposition_dynamics" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">reposition_dynamics</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span></em>, <em class="sig-param"><span class="n">allow_hairpins_under_rests</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)">bool</a></span> <span class="o">=</span> <span class="default_value">False</span></em>, <em class="sig-param"><span class="n">check_hairpin_trends</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)">bool</a></span> <span class="o">=</span> <span class="default_value">True</span></em>, <em class="sig-param"><span class="n">remove_repeated_dynamics</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)">bool</a></span> <span class="o">=</span> <span class="default_value">True</span></em>, <em class="sig-param"><span class="n">allow_hairpin_to_rest_with_dynamic</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)">bool</a></span> <span class="o">=</span> <span class="default_value">True</span></em><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)">None</a><a class="headerlink" href="#auxjad.Mutation.reposition_dynamics" title="Permalink to this definition">¶</a></dt>
 <dd><p>Mutates an input <a class="reference external" href="https://abjad.github.io/api/abjad/core/Selection.html#abjad.core.Selection.Selection" title="(in Abjad v3.1)"><code class="xref py py-class docutils literal notranslate"><span class="pre">abjad.Selection</span></code></a> in place and has no return value;
 this function shifts all dynamics from rests to the next pitched leaves. It
 will also adjust hairpins if necessary.</p>
@@ -4666,7 +4889,7 @@ subcontainers, applying this function to them individually.</p>
 
 <dl class="py method">
 <dt id="auxjad.Mutation.reposition_slurs">
-<code class="sig-name descname">reposition_slurs</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span></em>, <em class="sig-param"><span class="n">allow_slurs_under_rests</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)">bool</a></span> <span class="o">=</span> <span class="default_value">False</span></em>, <em class="sig-param"><span class="n">close_unterminated_final_slur</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)">bool</a></span> <span class="o">=</span> <span class="default_value">True</span></em><span class="sig-paren">)</span><a class="headerlink" href="#auxjad.Mutation.reposition_slurs" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">reposition_slurs</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span></em>, <em class="sig-param"><span class="n">allow_slurs_under_rests</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)">bool</a></span> <span class="o">=</span> <span class="default_value">False</span></em>, <em class="sig-param"><span class="n">close_unterminated_final_slur</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)">bool</a></span> <span class="o">=</span> <span class="default_value">True</span></em><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)">None</a><a class="headerlink" href="#auxjad.Mutation.reposition_slurs" title="Permalink to this definition">¶</a></dt>
 <dd><p>Mutates an input <a class="reference external" href="https://abjad.github.io/api/abjad/core/Selection.html#abjad.core.Selection.Selection" title="(in Abjad v3.1)"><code class="xref py py-class docutils literal notranslate"><span class="pre">abjad.Selection</span></code></a> in place and has no return value;
 this function repositions all slurs that starts or ends on rests.</p>
 <dl>
@@ -4954,7 +5177,7 @@ subcontainers, applying this function to them individually.</p>
 
 <dl class="py method">
 <dt id="auxjad.Mutation.respell_accidentals">
-<code class="sig-name descname">respell_accidentals</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span></em>, <em class="sig-param"><span class="n">include_multiples</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)">bool</a></span> <span class="o">=</span> <span class="default_value">False</span></em>, <em class="sig-param"><span class="n">respell_by_pitch_class</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)">bool</a></span> <span class="o">=</span> <span class="default_value">False</span></em><span class="sig-paren">)</span><a class="headerlink" href="#auxjad.Mutation.respell_accidentals" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">respell_accidentals</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span></em>, <em class="sig-param"><span class="n">include_multiples</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)">bool</a></span> <span class="o">=</span> <span class="default_value">False</span></em>, <em class="sig-param"><span class="n">respell_by_pitch_class</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)">bool</a></span> <span class="o">=</span> <span class="default_value">False</span></em><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)">None</a><a class="headerlink" href="#auxjad.Mutation.respell_accidentals" title="Permalink to this definition">¶</a></dt>
 <dd><p>Mutates an input <a class="reference external" href="https://abjad.github.io/api/abjad/core/Selection.html#abjad.core.Selection.Selection" title="(in Abjad v3.1)"><code class="xref py py-class docutils literal notranslate"><span class="pre">abjad.Selection</span></code></a> in place and has no return value;
 this function changes the accidentals of individual pitches of all chords
 in a container in order to avoid augmented unisons.</p>
@@ -5185,7 +5408,7 @@ argument <code class="docutils literal notranslate"><span class="pre">respell_by
 
 <dl class="py method">
 <dt id="auxjad.Mutation.rests_to_multimeasure_rest">
-<code class="sig-name descname">rests_to_multimeasure_rest</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#auxjad.Mutation.rests_to_multimeasure_rest" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">rests_to_multimeasure_rest</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span></em>, <em class="sig-param"><span class="n">ignore_clefs</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)">bool</a></span> <span class="o">=</span> <span class="default_value">False</span></em><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)">None</a><a class="headerlink" href="#auxjad.Mutation.rests_to_multimeasure_rest" title="Permalink to this definition">¶</a></dt>
 <dd><p>Mutates an input <a class="reference external" href="https://abjad.github.io/api/abjad/core/Selection.html#abjad.core.Selection.Selection" title="(in Abjad v3.1)"><code class="xref py py-class docutils literal notranslate"><span class="pre">abjad.Selection</span></code></a> in place and has no return value;
 this function looks for measures filled with regular rests and converts
 them into an <a class="reference external" href="https://abjad.github.io/api/abjad/core/MultimeasureRest.html#abjad.core.MultimeasureRest.MultimeasureRest" title="(in Abjad v3.1)"><code class="xref py py-class docutils literal notranslate"><span class="pre">abjad.MultimeasureRest</span></code></a>.</p>
@@ -5366,6 +5589,78 @@ well as notes.</p>
 <img alt="../_images/rests_to_multimeasure_rest-f647t5j3jgw.png" src="../_images/rests_to_multimeasure_rest-f647t5j3jgw.png" />
 </div>
 </dd>
+<dt><code class="docutils literal notranslate"><span class="pre">ignore_clefs</span></code></dt><dd><p>By default, the last clef of an empty measure is preserved when
+replacing it with a multi-measure rest:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">staff</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;\clef bass r4 r4 \times 2/3 {r4 r8} r4 &quot;</span>
+<span class="gp">... </span>                    <span class="sa">r</span><span class="s2">&quot;\time 3/4 \clef treble r2. &quot;</span>
+<span class="gp">... </span>                    <span class="sa">r</span><span class="s2">&quot;\time 5/4 r2 \clef bass r2.&quot;</span>
+<span class="gp">... </span>                    <span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">f</span><span class="p">(</span><span class="n">staff</span><span class="p">)</span>
+<span class="go">\new Staff</span>
+<span class="go">{</span>
+<span class="go">    \clef &quot;bass&quot;</span>
+<span class="go">    r4</span>
+<span class="go">    r4</span>
+<span class="go">    \times 2/3 {</span>
+<span class="go">        r4</span>
+<span class="go">        r8</span>
+<span class="go">    }</span>
+<span class="go">    r4</span>
+<span class="go">    \time 3/4</span>
+<span class="go">    \clef &quot;treble&quot;</span>
+<span class="go">    r2.</span>
+<span class="go">    \time 5/4</span>
+<span class="go">    r2</span>
+<span class="go">    \clef &quot;bass&quot;</span>
+<span class="go">    r2.</span>
+<span class="go">}</span>
+</pre></div>
+</div>
+<div class="figure align-default">
+<img alt="../_images/rests_to_multimeasure_rest-6GMRGmYkEQ.png" src="../_images/rests_to_multimeasure_rest-6GMRGmYkEQ.png" />
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">mutate</span><span class="p">(</span><span class="n">staff</span><span class="p">[:])</span><span class="o">.</span><span class="n">rests_to_multimeasure_rest</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">f</span><span class="p">(</span><span class="n">staff</span><span class="p">)</span>
+<span class="go">\new Staff</span>
+<span class="go">{</span>
+<span class="go">    \clef &quot;bass&quot;</span>
+<span class="go">    R1</span>
+<span class="go">    \time 3/4</span>
+<span class="go">    \clef &quot;treble&quot;</span>
+<span class="go">    R1 * 3/4</span>
+<span class="go">    \time 5/4</span>
+<span class="go">    \clef &quot;bass&quot;</span>
+<span class="go">    R1 * 5/4</span>
+<span class="go">}</span>
+</pre></div>
+</div>
+<div class="figure align-default">
+<img alt="../_images/rests_to_multimeasure_rest-UnL6ZoFoDC.png" src="../_images/rests_to_multimeasure_rest-UnL6ZoFoDC.png" />
+</div>
+<p>Invoke the mutation with <code class="docutils literal notranslate"><span class="pre">ignore_clefs</span></code> set to <code class="docutils literal notranslate"><span class="pre">True</span></code> to disable
+this behaviour and ignore all clefs:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">staff</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;\clef bass r4 r4 \times 2/3 {r4 r8} r4 &quot;</span>
+<span class="gp">... </span>                    <span class="sa">r</span><span class="s2">&quot;\time 3/4 \clef treble r2. &quot;</span>
+<span class="gp">... </span>                    <span class="sa">r</span><span class="s2">&quot;\time 5/4 r2 \clef bass r2.&quot;</span>
+<span class="gp">... </span>                    <span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">mutate</span><span class="p">(</span><span class="n">staff</span><span class="p">[:])</span><span class="o">.</span><span class="n">rests_to_multimeasure_rest</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="n">ignore_clefs</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+<span class="gp">... </span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">f</span><span class="p">(</span><span class="n">staff</span><span class="p">)</span>
+<span class="go">\new Staff</span>
+<span class="go">{</span>
+<span class="go">    R1</span>
+<span class="go">    \time 3/4</span>
+<span class="go">    R1 * 3/4</span>
+<span class="go">    \time 5/4</span>
+<span class="go">    R1 * 5/4</span>
+<span class="go">}</span>
+</pre></div>
+</div>
+<div class="figure align-default">
+<img alt="../_images/rests_to_multimeasure_rest-KGRZJ8fvQF.png" src="../_images/rests_to_multimeasure_rest-KGRZJ8fvQF.png" />
+</div>
+</dd>
 </dl>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
@@ -5378,7 +5673,7 @@ subcontainers, applying this function to them individually.</p>
 
 <dl class="py method">
 <dt id="auxjad.Mutation.sustain_notes">
-<code class="sig-name descname">sustain_notes</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#auxjad.Mutation.sustain_notes" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">sustain_notes</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span></em>, <em class="sig-param"><span class="n">sustain_multimeasure_rests</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)">bool</a></span> <span class="o">=</span> <span class="default_value">True</span></em>, <em class="sig-param"><span class="n">rewrite_meter</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)">bool</a></span> <span class="o">=</span> <span class="default_value">True</span></em><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)">None</a><a class="headerlink" href="#auxjad.Mutation.sustain_notes" title="Permalink to this definition">¶</a></dt>
 <dd><p>Mutates an input container (of type <a class="reference external" href="https://abjad.github.io/api/abjad/core/Container.html#abjad.core.Container.Container" title="(in Abjad v3.1)"><code class="xref py py-class docutils literal notranslate"><span class="pre">abjad.Container</span></code></a> or child class)
 in place and has no return value; this function will sustain all pitched
 leaves until the next pitched leaf, thus replacing all rests in between
@@ -5628,6 +5923,211 @@ and rests, as well as tuplets.</p>
 <img alt="../_images/sustain_notes-z8t2jwxsvar.png" src="../_images/sustain_notes-z8t2jwxsvar.png" />
 </div>
 </dd>
+<dt>Multi-measure rests:</dt><dd><p>This mutation also handles multi-measure rests, including ones with
+non-assignable durations:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">staff</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;r4 c&#39;16 r8. d&#39;16 r4.. &quot;</span>
+<span class="gp">... </span>                    <span class="sa">r</span><span class="s2">&quot;R1&quot;</span>
+<span class="gp">... </span>                    <span class="sa">r</span><span class="s2">&quot;r4 e&#39;4 r2&quot;</span>
+<span class="gp">... </span>                    <span class="sa">r</span><span class="s2">&quot;\time 5/8 r8 f&#39;4 r4&quot;</span>
+<span class="gp">... </span>                    <span class="sa">r</span><span class="s2">&quot;R1 * 5/8 &quot;</span>
+<span class="gp">... </span>                    <span class="sa">r</span><span class="s2">&quot;r8 g&#39;8 a&#39;8 r4&quot;</span>
+<span class="gp">... </span>                    <span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">f</span><span class="p">(</span><span class="n">staff</span><span class="p">)</span>
+<span class="go">\new Staff</span>
+<span class="go">{</span>
+<span class="go">    r4</span>
+<span class="go">    c&#39;16</span>
+<span class="go">    r8.</span>
+<span class="go">    d&#39;16</span>
+<span class="go">    r4..</span>
+<span class="go">    R1</span>
+<span class="go">    r4</span>
+<span class="go">    e&#39;4</span>
+<span class="go">    r2</span>
+<span class="go">    \time 5/8</span>
+<span class="go">    r8</span>
+<span class="go">    f&#39;4</span>
+<span class="go">    r4</span>
+<span class="go">    R1 * 5/8</span>
+<span class="go">    r8</span>
+<span class="go">    g&#39;8</span>
+<span class="go">    a&#39;8</span>
+<span class="go">    r4</span>
+<span class="go">}</span>
+</pre></div>
+</div>
+<div class="figure align-default">
+<img alt="../_images/sustain_notes-mJOOARIUAp.png" src="../_images/sustain_notes-mJOOARIUAp.png" />
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">auxjad</span><span class="o">.</span><span class="n">mutate</span><span class="p">(</span><span class="n">staff</span><span class="p">)</span><span class="o">.</span><span class="n">sustain_notes</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">f</span><span class="p">(</span><span class="n">staff</span><span class="p">)</span>
+<span class="go">\new Staff</span>
+<span class="go">{</span>
+<span class="go">    r4</span>
+<span class="go">    c&#39;4</span>
+<span class="go">    d&#39;2</span>
+<span class="go">    ~</span>
+<span class="go">    d&#39;1</span>
+<span class="go">    ~</span>
+<span class="go">    d&#39;4</span>
+<span class="go">    e&#39;2.</span>
+<span class="go">    ~</span>
+<span class="go">    \time 5/8</span>
+<span class="go">    e&#39;8</span>
+<span class="go">    f&#39;2</span>
+<span class="go">    ~</span>
+<span class="go">    f&#39;4.</span>
+<span class="go">    ~</span>
+<span class="go">    f&#39;4</span>
+<span class="go">    f&#39;8</span>
+<span class="go">    g&#39;4</span>
+<span class="go">    a&#39;4</span>
+<span class="go">}</span>
+</pre></div>
+</div>
+<div class="figure align-default">
+<img alt="../_images/sustain_notes-iLTiWERSvO.png" src="../_images/sustain_notes-iLTiWERSvO.png" />
+</div>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">sustain_multimeasure_rests</span></code>:</dt><dd><p>By default, notes are tied across multi-measure rests.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">staff</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;r4 c&#39;16 r8. d&#39;16 r4.. &quot;</span>
+<span class="gp">... </span>                    <span class="sa">r</span><span class="s2">&quot;R1&quot;</span>
+<span class="gp">... </span>                    <span class="sa">r</span><span class="s2">&quot;r4 e&#39;4 r2&quot;</span>
+<span class="gp">... </span>                    <span class="sa">r</span><span class="s2">&quot;\time 5/8 r8 f&#39;4 r4&quot;</span>
+<span class="gp">... </span>                    <span class="sa">r</span><span class="s2">&quot;R1 * 5/8 &quot;</span>
+<span class="gp">... </span>                    <span class="sa">r</span><span class="s2">&quot;r8 g&#39;8 a&#39;8 r4&quot;</span>
+<span class="gp">... </span>                    <span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">f</span><span class="p">(</span><span class="n">staff</span><span class="p">)</span>
+<span class="go">\new Staff</span>
+<span class="go">{</span>
+<span class="go">    r4</span>
+<span class="go">    c&#39;16</span>
+<span class="go">    r8.</span>
+<span class="go">    d&#39;16</span>
+<span class="go">    r4..</span>
+<span class="go">    R1</span>
+<span class="go">    r4</span>
+<span class="go">    e&#39;4</span>
+<span class="go">    r2</span>
+<span class="go">    \time 5/8</span>
+<span class="go">    r8</span>
+<span class="go">    f&#39;4</span>
+<span class="go">    r4</span>
+<span class="go">    R1 * 5/8</span>
+<span class="go">    r8</span>
+<span class="go">    g&#39;8</span>
+<span class="go">    a&#39;8</span>
+<span class="go">    r4</span>
+<span class="go">}</span>
+</pre></div>
+</div>
+<div class="figure align-default">
+<img alt="../_images/sustain_notes-P2CLdKi6Cs.png" src="../_images/sustain_notes-P2CLdKi6Cs.png" />
+</div>
+<p>To disable sustaining across those, set <code class="docutils literal notranslate"><span class="pre">sustain_multimeasure_rests</span></code>
+to  <code class="docutils literal notranslate"><span class="pre">False</span></code>:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">auxjad</span><span class="o">.</span><span class="n">mutate</span><span class="p">(</span><span class="n">staff</span><span class="p">)</span><span class="o">.</span><span class="n">sustain_notes</span><span class="p">(</span><span class="n">sustain_multimeasure_rests</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">f</span><span class="p">(</span><span class="n">staff</span><span class="p">)</span>
+<span class="go">\new Staff</span>
+<span class="go">{</span>
+<span class="go">    r4</span>
+<span class="go">    c&#39;4</span>
+<span class="go">    d&#39;2</span>
+<span class="go">    R1</span>
+<span class="go">    r4</span>
+<span class="go">    e&#39;2.</span>
+<span class="go">    ~</span>
+<span class="go">    \time 5/8</span>
+<span class="go">    e&#39;8</span>
+<span class="go">    f&#39;2</span>
+<span class="go">    R1 * 5/8</span>
+<span class="go">    r8</span>
+<span class="go">    g&#39;8</span>
+<span class="go">    a&#39;4.</span>
+<span class="go">}</span>
+</pre></div>
+</div>
+<div class="figure align-default">
+<img alt="../_images/sustain_notes-9WeilArLex.png" src="../_images/sustain_notes-9WeilArLex.png" />
+</div>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">rewrite_meter</span></code>:</dt><dd><p>By default, <a class="reference internal" href="#auxjad.Mutation.auto_rewrite_meter" title="auxjad.Mutation.auto_rewrite_meter"><code class="xref py py-meth docutils literal notranslate"><span class="pre">auxjad.mutate().auto_rewrite_meter()</span></code></a> is summoned after
+notes are sustained.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">staff</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;r4 c&#39;16 r8. d&#39;16 r4.. &quot;</span>
+<span class="gp">... </span>                    <span class="sa">r</span><span class="s2">&quot;R1&quot;</span>
+<span class="gp">... </span>                    <span class="sa">r</span><span class="s2">&quot;r4 e&#39;4 r2&quot;</span>
+<span class="gp">... </span>                    <span class="sa">r</span><span class="s2">&quot;\time 5/8 r8 f&#39;4 r4&quot;</span>
+<span class="gp">... </span>                    <span class="sa">r</span><span class="s2">&quot;R1 * 5/8 &quot;</span>
+<span class="gp">... </span>                    <span class="sa">r</span><span class="s2">&quot;r8 g&#39;8 a&#39;8 r4&quot;</span>
+<span class="gp">... </span>                    <span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">f</span><span class="p">(</span><span class="n">staff</span><span class="p">)</span>
+<span class="go">\new Staff</span>
+<span class="go">{</span>
+<span class="go">    r4</span>
+<span class="go">    c&#39;16</span>
+<span class="go">    r8.</span>
+<span class="go">    d&#39;16</span>
+<span class="go">    r4..</span>
+<span class="go">    R1</span>
+<span class="go">    r4</span>
+<span class="go">    e&#39;4</span>
+<span class="go">    r2</span>
+<span class="go">    \time 5/8</span>
+<span class="go">    r8</span>
+<span class="go">    f&#39;4</span>
+<span class="go">    r4</span>
+<span class="go">    R1 * 5/8</span>
+<span class="go">    r8</span>
+<span class="go">    g&#39;8</span>
+<span class="go">    a&#39;8</span>
+<span class="go">    r4</span>
+<span class="go">}</span>
+</pre></div>
+</div>
+<div class="figure align-default">
+<img alt="../_images/sustain_notes-P2CLdKi6Cs.png" src="../_images/sustain_notes-P2CLdKi6Cs.png" />
+</div>
+<p>To disable this behaviour, set <code class="docutils literal notranslate"><span class="pre">rewrite_meter</span></code> to <code class="docutils literal notranslate"><span class="pre">False</span></code>:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">auxjad</span><span class="o">.</span><span class="n">mutate</span><span class="p">(</span><span class="n">staff</span><span class="p">)</span><span class="o">.</span><span class="n">sustain_notes</span><span class="p">(</span><span class="n">rewrite_meter</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">f</span><span class="p">(</span><span class="n">staff</span><span class="p">)</span>
+<span class="go">\new Staff</span>
+<span class="go">{</span>
+<span class="go">    r4</span>
+<span class="go">    c&#39;16</span>
+<span class="go">    ~</span>
+<span class="go">    c&#39;8.</span>
+<span class="go">    d&#39;16</span>
+<span class="go">    ~</span>
+<span class="go">    d&#39;4..</span>
+<span class="go">    ~</span>
+<span class="go">    d&#39;1</span>
+<span class="go">    ~</span>
+<span class="go">    d&#39;4</span>
+<span class="go">    e&#39;4</span>
+<span class="go">    ~</span>
+<span class="go">    e&#39;2</span>
+<span class="go">    ~</span>
+<span class="go">    \time 5/8</span>
+<span class="go">    e&#39;8</span>
+<span class="go">    f&#39;4</span>
+<span class="go">    ~</span>
+<span class="go">    f&#39;4</span>
+<span class="go">    ~</span>
+<span class="go">    f&#39;2</span>
+<span class="go">    ~</span>
+<span class="go">    f&#39;8</span>
+<span class="go">    f&#39;8</span>
+<span class="go">    g&#39;8</span>
+<span class="go">    ~</span>
+<span class="go">    a&#39;8</span>
+<span class="go">    a&#39;4</span>
+<span class="go">}</span>
+</pre></div>
+</div>
+<div class="figure align-default">
+<img alt="../_images/sustain_notes-9WeilArLex.png" src="../_images/sustain_notes-9WeilArLex.png" />
+</div>
+</dd>
 </dl>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
@@ -5640,7 +6140,7 @@ subcontainers, applying this function to them individually.</p>
 
 <dl class="py method">
 <dt id="auxjad.Mutation.sync_containers">
-<code class="sig-name descname">sync_containers</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span></em>, <em class="sig-param"><span class="n">use_multimeasure_rests</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)">bool</a></span> <span class="o">=</span> <span class="default_value">True</span></em>, <em class="sig-param"><span class="n">adjust_last_time_signature</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)">bool</a></span> <span class="o">=</span> <span class="default_value">True</span></em><span class="sig-paren">)</span><a class="headerlink" href="#auxjad.Mutation.sync_containers" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">sync_containers</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span></em>, <em class="sig-param"><span class="n">use_multimeasure_rests</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)">bool</a></span> <span class="o">=</span> <span class="default_value">True</span></em>, <em class="sig-param"><span class="n">adjust_last_time_signature</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)">bool</a></span> <span class="o">=</span> <span class="default_value">True</span></em><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)">None</a><a class="headerlink" href="#auxjad.Mutation.sync_containers" title="Permalink to this definition">¶</a></dt>
 <dd><p>Mutates two or more input containers in place and has no return value;
 this function finds the longest container among the inputs and adds rests
 to all the shorter ones, making them the same length. Input argument can

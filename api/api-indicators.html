@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>indicators &mdash; auxjad 0.8.18 documentation</title>
+  <title>indicators &mdash; auxjad 0.8.20 documentation</title>
   
 
   
@@ -37,7 +37,7 @@
     
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="TimeSignature.simplify_ratio" href="../_api_members/auxjad.TimeSignature.simplify_ratio.html" />
+    <link rel="next" title="NumericOttava" href="../_api_members/auxjad.NumericOttava.html" />
     <link rel="prev" title="WindowLooper" href="../_api_members/auxjad.WindowLooper.html" /> 
 </head>
 
@@ -95,10 +95,12 @@
 <li class="toctree-l1 current"><a class="reference internal" href="index.html">Auxjad API</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="api-core.html">core</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">indicators</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../_api_members/auxjad.NumericOttava.html">NumericOttava</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../_api_members/auxjad.TimeSignature.simplify_ratio.html">TimeSignature.simplify_ratio</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="api-score.html">score</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-spanners.html">spanners</a></li>
 <li class="toctree-l2"><a class="reference internal" href="api-utilities.html">utilities</a></li>
 </ul>
 </li>
@@ -171,9 +173,8 @@
             
   <div class="section" id="indicators">
 <h1>indicators<a class="headerlink" href="#indicators" title="Permalink to this headline">¶</a></h1>
-<p>The <a class="reference external" href="api-indicators.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">indicators</span></code></a> subpackage contains extension methods for Abjad’s indicator
-classes. Currently this subpackage contains only the method
-<a class="reference internal" href="../_api_members/auxjad.TimeSignature.simplify_ratio.html#auxjad.TimeSignature.simplify_ratio" title="auxjad.TimeSignature.simplify_ratio"><code class="xref py py-meth docutils literal notranslate"><span class="pre">simplify_ratio()</span></code></a> for <a class="reference external" href="https://abjad.github.io/api/abjad/indicators/TimeSignature.html#abjad.indicators.TimeSignature.TimeSignature" title="(in Abjad v3.1)"><code class="xref py py-class docutils literal notranslate"><span class="pre">abjad.TimeSignature</span></code></a>.</p>
+<p>The <a class="reference external" href="api-indicators.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">indicators</span></code></a> subpackage contains derived classes and extension
+methods for Abjad’s indicator classes.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>The extension methods are added to Abjad’s own classes, and therefore usage
@@ -184,16 +185,26 @@ is as follows:</p>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">time_signature</span><span class="o">.</span><span class="n">simplify_ratio</span><span class="p">()</span>
 </pre></div>
 </div>
+<p>The derived classes are imported directly into the <a class="reference external" href="index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">auxjad</span></code></a> namespace.
+Therefore, to use a class such as <a class="reference internal" href="../_api_members/auxjad.NumericOttava.html#auxjad.NumericOttava" title="auxjad.NumericOttava"><code class="xref py py-class docutils literal notranslate"><span class="pre">auxjad.NumericOttava</span></code></a> you only
+need to import <a class="reference external" href="index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">auxjad</span></code></a> and instantiate the class from its namespace:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">auxjad</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ottava</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">NumericOttava</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+</pre></div>
 </div>
-<p>Below is the full list of extension methods included in <a class="reference external" href="api-indicators.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">indicators</span></code></a>.
-Click on their names for their individual documentation.</p>
+</div>
+<p>Below is the full list of derived classes and extension methods included in
+<a class="reference external" href="api-indicators.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">indicators</span></code></a>. Click on their names for their individual documentation.</p>
 <table class="longtable docutils align-default">
 <colgroup>
 <col style="width: 10%" />
 <col style="width: 90%" />
 </colgroup>
 <tbody>
-<tr class="row-odd"><td><p><a class="reference internal" href="../_api_members/auxjad.TimeSignature.simplify_ratio.html#auxjad.TimeSignature.simplify_ratio" title="auxjad.TimeSignature.simplify_ratio"><code class="xref py py-obj docutils literal notranslate"><span class="pre">TimeSignature.simplify_ratio</span></code></a>(*[, …])</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="../_api_members/auxjad.NumericOttava.html#auxjad.NumericOttava" title="auxjad.NumericOttava"><code class="xref py py-obj docutils literal notranslate"><span class="pre">NumericOttava</span></code></a>(n, *, format_slot)</p></td>
+<td><p>LilyPond’s <code class="docutils literal notranslate"><span class="pre">\ottava</span></code> command tweaked to output numeric ottavation (e.g.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="../_api_members/auxjad.TimeSignature.simplify_ratio.html#auxjad.TimeSignature.simplify_ratio" title="auxjad.TimeSignature.simplify_ratio"><code class="xref py py-obj docutils literal notranslate"><span class="pre">TimeSignature.simplify_ratio</span></code></a>(*[, …])</p></td>
 <td><p>Simplifies the ratio of an <a class="reference external" href="https://abjad.github.io/api/abjad/indicators/TimeSignature.html#abjad.indicators.TimeSignature.TimeSignature" title="(in Abjad v3.1)"><code class="xref py py-class docutils literal notranslate"><span class="pre">abjad.TimeSignature</span></code></a> according to a minimum denominator value.</p></td>
 </tr>
 </tbody>
@@ -208,7 +219,7 @@ Click on their names for their individual documentation.</p>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="../_api_members/auxjad.TimeSignature.simplify_ratio.html" class="btn btn-neutral float-right" title="TimeSignature.simplify_ratio" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="../_api_members/auxjad.NumericOttava.html" class="btn btn-neutral float-right" title="NumericOttava" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
         <a href="../_api_members/auxjad.WindowLooper.html" class="btn btn-neutral float-left" title="WindowLooper" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>

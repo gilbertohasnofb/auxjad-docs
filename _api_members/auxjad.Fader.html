@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Fader &mdash; auxjad 0.8.18 documentation</title>
+  <title>Fader &mdash; auxjad 0.8.20 documentation</title>
   
 
   
@@ -110,6 +110,7 @@
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../api/api-indicators.html">indicators</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../api/api-score.html">score</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/api-spanners.html">spanners</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../api/api-utilities.html">utilities</a></li>
 </ul>
 </li>
@@ -194,8 +195,8 @@ gradually removes or adds notes one by one.</p>
 fading process. Each call of the object will apply the fading process
 to the previous result. By default, the container will be faded out
 (that is, its notes will be gradually removed one by one).</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">container</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;c&#39;4 ~ c&#39;16 d&#39;8. e&#39;8 f&#39;8 ~ f&#39;4&quot;</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">fader</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">Fader</span><span class="p">(</span><span class="n">container</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">staff</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;c&#39;4 ~ c&#39;16 d&#39;8. e&#39;8 f&#39;8 ~ f&#39;4&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">fader</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">Fader</span><span class="p">(</span><span class="n">staff</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">notes</span> <span class="o">=</span> <span class="n">fader</span><span class="p">()</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">staff</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span><span class="n">notes</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">f</span><span class="p">(</span><span class="n">staff</span><span class="p">)</span>
@@ -1454,6 +1455,45 @@ better to attach those to the music after the fading process has ended.</p>
 <img alt="../_images/Fader-888tqk73kw3.png" src="../_images/Fader-888tqk73kw3.png" />
 </div>
 </dd>
+<dt>Time signature changes:</dt><dd><p>This class can handle time signature changes.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">container</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;\time 4/4 c&#39;2( d&#39;2 \time 3/4 e&#39;2.)&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">fader</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">Fader</span><span class="p">(</span><span class="n">container</span><span class="p">,</span> <span class="n">fader_type</span><span class="o">=</span><span class="s1">&#39;in&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">notes</span> <span class="o">=</span> <span class="n">fader</span><span class="o">.</span><span class="n">output_all</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">staff</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span><span class="n">notes</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">f</span><span class="p">(</span><span class="n">staff</span><span class="p">)</span>
+<span class="go">\new Staff</span>
+<span class="go">{</span>
+<span class="go">    \time 4/4</span>
+<span class="go">    R1</span>
+<span class="go">    \time 3/4</span>
+<span class="go">    R1 * 3/4</span>
+<span class="go">    \time 4/4</span>
+<span class="go">    c&#39;2</span>
+<span class="go">    r2</span>
+<span class="go">    )</span>
+<span class="go">    \time 3/4</span>
+<span class="go">    R1 * 3/4</span>
+<span class="go">    \time 4/4</span>
+<span class="go">    c&#39;2</span>
+<span class="go">    (</span>
+<span class="go">    d&#39;2</span>
+<span class="go">    )</span>
+<span class="go">    \time 3/4</span>
+<span class="go">    R1 * 3/4</span>
+<span class="go">    \time 4/4</span>
+<span class="go">    c&#39;2</span>
+<span class="go">    (</span>
+<span class="go">    d&#39;2</span>
+<span class="go">    \time 3/4</span>
+<span class="go">    e&#39;2.</span>
+<span class="go">    )</span>
+<span class="go">}</span>
+</pre></div>
+</div>
+<div class="figure align-default">
+<img alt="../_images/Fader-lkhKFVuUgx.png" src="../_images/Fader-lkhKFVuUgx.png" />
+</div>
+</dd>
 </dl>
 <p class="rubric">Methods</p>
 <table class="longtable docutils align-default">
@@ -1572,13 +1612,13 @@ better to attach those to the music after the fading process has ended.</p>
 
 <dl class="py method">
 <dt id="auxjad.Fader.__init__">
-<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">contents</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://abjad.github.io/api/abjad/core/Container.html#abjad.core.Container.Container" title="(in Abjad v3.1)">abjad.core.Container.Container</a></span></em>, <em class="sig-param"><span class="o">*</span></em>, <em class="sig-param"><span class="n">fader_type</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)">str</a></span> <span class="o">=</span> <span class="default_value">'out'</span></em>, <em class="sig-param"><span class="n">max_steps</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)">int</a></span> <span class="o">=</span> <span class="default_value">1</span></em>, <em class="sig-param"><span class="n">repetition_chance</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.9)">float</a></span> <span class="o">=</span> <span class="default_value">0.0</span></em>, <em class="sig-param"><span class="n">process_on_first_call</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)">bool</a></span> <span class="o">=</span> <span class="default_value">False</span></em>, <em class="sig-param"><span class="n">disable_rewrite_meter</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)">bool</a></span> <span class="o">=</span> <span class="default_value">False</span></em>, <em class="sig-param"><span class="n">omit_time_signatures</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)">bool</a></span> <span class="o">=</span> <span class="default_value">False</span></em>, <em class="sig-param"><span class="n">use_multimeasure_rests</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)">bool</a></span> <span class="o">=</span> <span class="default_value">True</span></em>, <em class="sig-param"><span class="n">mask</span><span class="p">:</span> <span class="n">Optional<span class="p">[</span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.9)">list</a><span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em>, <em class="sig-param"><span class="n">boundary_depth</span><span class="p">:</span> <span class="n">Optional<span class="p">[</span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)">int</a><span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em>, <em class="sig-param"><span class="n">maximum_dot_count</span><span class="p">:</span> <span class="n">Optional<span class="p">[</span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)">int</a><span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em>, <em class="sig-param"><span class="n">rewrite_tuplets</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)">bool</a></span> <span class="o">=</span> <span class="default_value">True</span></em>, <em class="sig-param"><span class="n">include_empty_measures</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)">bool</a></span> <span class="o">=</span> <span class="default_value">True</span></em>, <em class="sig-param"><span class="n">prettify_rewrite_meter</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)">bool</a></span> <span class="o">=</span> <span class="default_value">True</span></em>, <em class="sig-param"><span class="n">extract_trivial_tuplets</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)">bool</a></span> <span class="o">=</span> <span class="default_value">True</span></em>, <em class="sig-param"><span class="n">fuse_across_groups_of_beats</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)">bool</a></span> <span class="o">=</span> <span class="default_value">True</span></em>, <em class="sig-param"><span class="n">fuse_quadruple_meter</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)">bool</a></span> <span class="o">=</span> <span class="default_value">True</span></em>, <em class="sig-param"><span class="n">fuse_triple_meter</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)">bool</a></span> <span class="o">=</span> <span class="default_value">True</span></em><span class="sig-paren">)</span><a class="headerlink" href="#auxjad.Fader.__init__" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">contents</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://abjad.github.io/api/abjad/core/Container.html#abjad.core.Container.Container" title="(in Abjad v3.1)">abjad.core.Container.Container</a></span></em>, <em class="sig-param"><span class="o">*</span></em>, <em class="sig-param"><span class="n">fader_type</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)">str</a></span> <span class="o">=</span> <span class="default_value">'out'</span></em>, <em class="sig-param"><span class="n">max_steps</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)">int</a></span> <span class="o">=</span> <span class="default_value">1</span></em>, <em class="sig-param"><span class="n">repetition_chance</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.9)">float</a></span> <span class="o">=</span> <span class="default_value">0.0</span></em>, <em class="sig-param"><span class="n">process_on_first_call</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)">bool</a></span> <span class="o">=</span> <span class="default_value">False</span></em>, <em class="sig-param"><span class="n">disable_rewrite_meter</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)">bool</a></span> <span class="o">=</span> <span class="default_value">False</span></em>, <em class="sig-param"><span class="n">omit_time_signatures</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)">bool</a></span> <span class="o">=</span> <span class="default_value">False</span></em>, <em class="sig-param"><span class="n">use_multimeasure_rests</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)">bool</a></span> <span class="o">=</span> <span class="default_value">True</span></em>, <em class="sig-param"><span class="n">mask</span><span class="p">:</span> <span class="n">Optional<span class="p">[</span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.9)">list</a><span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em>, <em class="sig-param"><span class="n">boundary_depth</span><span class="p">:</span> <span class="n">Optional<span class="p">[</span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)">int</a><span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em>, <em class="sig-param"><span class="n">maximum_dot_count</span><span class="p">:</span> <span class="n">Optional<span class="p">[</span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)">int</a><span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em>, <em class="sig-param"><span class="n">rewrite_tuplets</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)">bool</a></span> <span class="o">=</span> <span class="default_value">True</span></em>, <em class="sig-param"><span class="n">include_empty_measures</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)">bool</a></span> <span class="o">=</span> <span class="default_value">True</span></em>, <em class="sig-param"><span class="n">prettify_rewrite_meter</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)">bool</a></span> <span class="o">=</span> <span class="default_value">True</span></em>, <em class="sig-param"><span class="n">extract_trivial_tuplets</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)">bool</a></span> <span class="o">=</span> <span class="default_value">True</span></em>, <em class="sig-param"><span class="n">fuse_across_groups_of_beats</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)">bool</a></span> <span class="o">=</span> <span class="default_value">True</span></em>, <em class="sig-param"><span class="n">fuse_quadruple_meter</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)">bool</a></span> <span class="o">=</span> <span class="default_value">True</span></em>, <em class="sig-param"><span class="n">fuse_triple_meter</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)">bool</a></span> <span class="o">=</span> <span class="default_value">True</span></em><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)">None</a><a class="headerlink" href="#auxjad.Fader.__init__" title="Permalink to this definition">¶</a></dt>
 <dd><p>Initialises self.</p>
 </dd></dl>
 
 <dl class="py method">
 <dt id="auxjad.Fader.__iter__">
-<code class="sig-name descname">__iter__</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#auxjad.Fader.__iter__" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">__iter__</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)">None</a><a class="headerlink" href="#auxjad.Fader.__iter__" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns an iterator, allowing instances to be used as iterators.</p>
 </dd></dl>
 
@@ -1724,7 +1764,7 @@ first call.</p>
 
 <dl class="py method">
 <dt id="auxjad.Fader.random_mask">
-<code class="sig-name descname">random_mask</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#auxjad.Fader.random_mask" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">random_mask</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)">None</a><a class="headerlink" href="#auxjad.Fader.random_mask" title="Permalink to this definition">¶</a></dt>
 <dd><p>Creates a mask randomly filled with <code class="docutils literal notranslate"><span class="pre">1</span></code>’s and <code class="docutils literal notranslate"><span class="pre">0</span></code>’s.</p>
 </dd></dl>
 
@@ -1737,7 +1777,7 @@ repeating the previous output.</p>
 
 <dl class="py method">
 <dt id="auxjad.Fader.reset_mask">
-<code class="sig-name descname">reset_mask</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#auxjad.Fader.reset_mask" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">reset_mask</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)">None</a><a class="headerlink" href="#auxjad.Fader.reset_mask" title="Permalink to this definition">¶</a></dt>
 <dd><p>Creates a mask filled with a default value for the notes.</p>
 </dd></dl>
 
@@ -1750,7 +1790,7 @@ repeating the previous output.</p>
 
 <dl class="py method">
 <dt id="auxjad.Fader.shuffle_mask">
-<code class="sig-name descname">shuffle_mask</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#auxjad.Fader.shuffle_mask" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">shuffle_mask</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)">None</a><a class="headerlink" href="#auxjad.Fader.shuffle_mask" title="Permalink to this definition">¶</a></dt>
 <dd><p>Shuffles the current mask.</p>
 </dd></dl>
 
