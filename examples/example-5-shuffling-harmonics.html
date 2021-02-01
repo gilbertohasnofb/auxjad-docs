@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Shuffling and fading harmonics &mdash; auxjad 0.8.20 documentation</title>
+  <title>Shuffling and fading harmonics &mdash; auxjad 0.8.22 documentation</title>
   
 
   
@@ -172,7 +172,7 @@
 <p>In this example, we will use some of <a class="reference external" href="index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">auxjad</span></code></a>’s classes to manipulate
 some musical material using the <a class="reference internal" href="../_api_members/auxjad.Shuffler.html#auxjad.Shuffler" title="auxjad.Shuffler"><code class="xref py py-class docutils literal notranslate"><span class="pre">auxjad.Shuffler</span></code></a> and
 <a class="reference internal" href="../_api_members/auxjad.Fader.html#auxjad.Fader" title="auxjad.Fader"><code class="xref py py-class docutils literal notranslate"><span class="pre">auxjad.Fader</span></code></a> classes.</p>
-<p>First, we start by importing both <a class="reference external" href="https://abjad.github.io/api/abjad/index.html#module-abjad" title="(in Abjad v3.1)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">abjad</span></code></a> and <a class="reference external" href="index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">auxjad</span></code></a>.</p>
+<p>First, we start by importing both <a class="reference external" href="https://abjad.github.io/api/abjad/index.html#module-abjad" title="(in Abjad v3.2)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">abjad</span></code></a> and <a class="reference external" href="index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">auxjad</span></code></a>.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">abjad</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">auxjad</span>
 </pre></div>
@@ -224,7 +224,7 @@ and rests.</p>
 </div>
 <p>The spelling of the chord <code class="docutils literal notranslate"><span class="pre">&lt;d'</span> <span class="pre">af'</span> <span class="pre">a'&gt;</span></code> could be improved. This can be done
 by using either <a class="reference internal" href="../_api_members/auxjad.Mutation.html#auxjad.Mutation.respell_accidentals" title="auxjad.Mutation.respell_accidentals"><code class="xref py py-meth docutils literal notranslate"><span class="pre">auxjad.mutate().respell_accidentals()</span></code></a> on a selection. Auxjad
-automatically adds this mutation as an extension method to <a class="reference external" href="https://abjad.github.io/api/abjad/core/Mutation.html#abjad.core.Mutation.Mutation" title="(in Abjad v3.1)"><code class="xref py py-class docutils literal notranslate"><span class="pre">abjad.mutate()</span></code></a> so
+automatically adds this mutation as an extension method to <code class="xref py py-class docutils literal notranslate"><span class="pre">abjad.mutate()</span></code> so
 it can also be accessed using <a class="reference internal" href="../_api_members/auxjad.Mutation.html#auxjad.Mutation.respell_accidentals" title="auxjad.Mutation.respell_accidentals"><code class="xref py py-meth docutils literal notranslate"><span class="pre">abjad.mutate().respell_accidentals()</span></code></a>.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">mutate</span><span class="p">(</span><span class="n">container</span><span class="p">[:])</span><span class="o">.</span><span class="n">respell_accidentals</span><span class="p">()</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">f</span><span class="p">(</span><span class="n">container</span><span class="p">)</span>
@@ -803,22 +803,22 @@ as a single note.</p>
 <img alt="../_images/example-5-shuffling-harmonics-1rxgv2my0lr.png" src="../_images/example-5-shuffling-harmonics-1rxgv2my0lr.png" />
 </div>
 <p>To finalise the score, let’s improve the spelling of some rhythms. Most classes
-and functions in this library use <a class="reference external" href="https://abjad.github.io/api/abjad/core/Mutation.html#abjad.core.Mutation.Mutation.rewrite_meter" title="(in Abjad v3.1)"><code class="xref py py-meth docutils literal notranslate"><span class="pre">abjad.mutate().rewrite_meter()</span></code></a> mutation
+and functions in this library use <code class="xref py py-meth docutils literal notranslate"><span class="pre">abjad.mutate().rewrite_meter()</span></code> mutation
 to adjust the spelling of rhythms according to a meter. Unfortunately, this
 mutation sometimes uses ties within a single beat, resulting in rhythms that
 are less ideally notated than they could.
 <a class="reference internal" href="../_api_members/auxjad.Mutation.html#auxjad.Mutation.prettify_rewrite_meter" title="auxjad.Mutation.prettify_rewrite_meter"><code class="xref py py-meth docutils literal notranslate"><span class="pre">auxjad.mutate().prettify_rewrite_meter()</span></code></a> fuses pitched leaves according to
 some specific rules, improving the default output of
-<a class="reference external" href="https://abjad.github.io/api/abjad/core/Mutation.html#abjad.core.Mutation.Mutation.rewrite_meter" title="(in Abjad v3.1)"><code class="xref py py-meth docutils literal notranslate"><span class="pre">abjad.mutate().rewrite_meter()</span></code></a>. This function is also available as the method
+<code class="xref py py-meth docutils literal notranslate"><span class="pre">abjad.mutate().rewrite_meter()</span></code>. This function is also available as the method
 <a class="reference internal" href="../_api_members/auxjad.Mutation.html#auxjad.Mutation.prettify_rewrite_meter" title="auxjad.Mutation.prettify_rewrite_meter"><code class="xref py py-meth docutils literal notranslate"><span class="pre">abjad.mutate().prettify_rewrite_meter()</span></code></a>, which Auxjad automatically adds as
-an extension method to <a class="reference external" href="https://abjad.github.io/api/abjad/core/Mutation.html#abjad.core.Mutation.Mutation" title="(in Abjad v3.1)"><code class="xref py py-class docutils literal notranslate"><span class="pre">abjad.mutate()</span></code></a>.</p>
+an extension method to <code class="xref py py-class docutils literal notranslate"><span class="pre">abjad.mutate()</span></code>.</p>
 <p>Notice that the time signature has been repeated. While the method
 <a class="reference internal" href="../_api_members/auxjad.Fader.html#auxjad.Fader.output_all" title="auxjad.Fader.output_all"><code class="xref py py-meth docutils literal notranslate"><span class="pre">output_all()</span></code></a> takes care of repeated time signatures,
 dynamics, and clefs, consecutive calls may result in repetitions. But we can
 simply use <a class="reference internal" href="../_api_members/auxjad.Mutation.html#auxjad.Mutation.remove_repeated_time_signatures" title="auxjad.Mutation.remove_repeated_time_signatures"><code class="xref py py-meth docutils literal notranslate"><span class="pre">auxjad.mutate().remove_repeated_time_signatures()</span></code></a> to take care of
 that for us. This function is also available as the extension method
 <a class="reference internal" href="../_api_members/auxjad.Mutation.html#auxjad.Mutation.remove_repeated_time_signatures" title="auxjad.Mutation.remove_repeated_time_signatures"><code class="xref py py-meth docutils literal notranslate"><span class="pre">abjad.mutate().remove_repeated_time_signatures()</span></code></a>, which Auxjad automatically
-adds to <a class="reference external" href="https://abjad.github.io/api/abjad/core/Mutation.html#abjad.core.Mutation.Mutation" title="(in Abjad v3.1)"><code class="xref py py-class docutils literal notranslate"><span class="pre">abjad.mutate()</span></code></a>.</p>
+adds to <code class="xref py py-class docutils literal notranslate"><span class="pre">abjad.mutate()</span></code>.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">mutate</span><span class="p">(</span><span class="n">staff</span><span class="p">[:])</span><span class="o">.</span><span class="n">prettify_rewrite_meter</span><span class="p">(</span><span class="n">abjad</span><span class="o">.</span><span class="n">Meter</span><span class="p">((</span><span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">)))</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">mutate</span><span class="p">(</span><span class="n">staff</span><span class="p">[:])</span><span class="o">.</span><span class="n">remove_repeated_time_signatures</span><span class="p">()</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">f</span><span class="p">(</span><span class="n">staff</span><span class="p">)</span>
