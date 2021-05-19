@@ -1,0 +1,441 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>auxjad.spanners.piano_pedal &mdash; auxjad 0.8.24 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+        <script src="../../../_static/jquery.js"></script>
+        <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/doctools.js"></script>
+        <script src="../../../_static/language_data.js"></script>
+        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    <script type="text/javascript" src="../../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../../index.html" class="icon icon-home" alt="Documentation Home"> auxjad
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.8
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../index.html">Welcome to Auxjad’s documentation!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../examples/index.html">Examples of usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../score_gallery/index.html">Score gallery</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../api/index.html">Auxjad API</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">auxjad</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../../index.html">Module code</a> &raquo;</li>
+        
+      <li>auxjad.spanners.piano_pedal</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for auxjad.spanners.piano_pedal</h1><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">textwrap</span> <span class="kn">import</span> <span class="n">dedent</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Union</span>
+
+<span class="kn">import</span> <span class="nn">abjad</span>
+<span class="kn">from</span> <span class="nn">abjad</span> <span class="kn">import</span> <span class="n">piano_pedal</span> <span class="k">as</span> <span class="n">piano_pedal_</span>
+
+
+<div class="viewcode-block" id="piano_pedal"><a class="viewcode-back" href="../../../_api_members/auxjad.piano_pedal.html#auxjad.piano_pedal">[docs]</a><span class="k">def</span> <span class="nf">piano_pedal</span><span class="p">(</span><span class="n">argument</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">abjad</span><span class="o">.</span><span class="n">Component</span><span class="p">,</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Selection</span><span class="p">],</span>
+                <span class="o">*</span><span class="p">,</span>
+                <span class="n">until_the_end</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+                <span class="n">omit_raise_pedal_glyph</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+                <span class="n">selector</span><span class="p">:</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Expression</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">select</span><span class="p">()</span><span class="o">.</span><span class="n">leaves</span><span class="p">(),</span>
+                <span class="n">start_piano_pedal</span><span class="p">:</span> <span class="n">abjad</span><span class="o">.</span><span class="n">StartPianoPedal</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+                <span class="n">stop_piano_pedal</span><span class="p">:</span> <span class="n">abjad</span><span class="o">.</span><span class="n">StopPianoPedal</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+                <span class="n">tag</span><span class="p">:</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Tag</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+                <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="sa">r</span><span class="sd">&quot;&quot;&quot;Attaches piano pedal indicators. This function extends the capabilities</span>
+<span class="sd">    of Abjad&#39;s built-in |abjad.piano_pedal()|.</span>
+
+<span class="sd">    Basic usage:</span>
+<span class="sd">        Basic usage is identical to Abjad&#39;s built-ind |abjad.piano_pedal()|:</span>
+
+<span class="sd">        &gt;&gt;&gt; staff = abjad.Staff(r&quot;c&#39;4 d&#39;4 e&#39;4 f&#39;4&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; auxjad.piano_pedal(staff[:])</span>
+<span class="sd">        &gt;&gt;&gt; abjad.f(staff)</span>
+<span class="sd">        \new Staff</span>
+<span class="sd">        {</span>
+<span class="sd">            c&#39;4</span>
+<span class="sd">            \sustainOn</span>
+<span class="sd">            d&#39;4</span>
+<span class="sd">            e&#39;4</span>
+<span class="sd">            f&#39;4</span>
+<span class="sd">            \sustainOff</span>
+<span class="sd">        }</span>
+
+<span class="sd">        .. figure:: ../_images/piano_pedal-KaleXflNvL.png</span>
+
+<span class="sd">    .. note::</span>
+
+<span class="sd">        Auxjad automatically replaces its built-in |abjad.piano_pedal()| with</span>
+<span class="sd">        this function. Therefore it can be used either as</span>
+<span class="sd">        :func:`auxjad.piano_pedal()` or |abjad.piano_pedal()|, as shown below:</span>
+
+<span class="sd">        &gt;&gt;&gt; staff1 = abjad.Staff(r&quot;c&#39;4 d&#39;4 e&#39;4 f&#39;4&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; staff2 = abjad.Staff(r&quot;c&#39;4 d&#39;4 e&#39;4 f&#39;4&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; auxjad.piano_pedal(staff1[:])</span>
+<span class="sd">        &gt;&gt;&gt; abjad.piano_pedal(staff2[:])</span>
+<span class="sd">        &gt;&gt;&gt; selections = [staff1[:], staff2[:]]</span>
+<span class="sd">        &gt;&gt;&gt; auxjad.inspect(selections).selections_are_identical()</span>
+<span class="sd">        True</span>
+
+<span class="sd">    ``until_the_end``:</span>
+<span class="sd">        Call the function with ``until_the_end`` set to ``True`` to add an</span>
+<span class="sd">        arrow to the initial pedal glyph:</span>
+
+<span class="sd">        &gt;&gt;&gt; staff = abjad.Staff(r&quot;c&#39;4 d&#39;4 e&#39;4 f&#39;4&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; auxjad.piano_pedal(staff[:],</span>
+<span class="sd">        ...                    until_the_end=True,</span>
+<span class="sd">        ...                    )</span>
+<span class="sd">        &gt;&gt;&gt; abjad.f(staff)</span>
+<span class="sd">        \new Staff</span>
+<span class="sd">        {</span>
+<span class="sd">            \once \override Staff.SustainPedal.stencil =</span>
+<span class="sd">                #(lambda (grob) (grob-interpret-markup grob</span>
+<span class="sd">                    #{</span>
+<span class="sd">                        \markup {</span>
+<span class="sd">                            \concat {</span>
+<span class="sd">                                \musicglyph &quot;pedal.Ped&quot;</span>
+<span class="sd">                                \musicglyph &quot;pedal..&quot;</span>
+<span class="sd">                            }</span>
+<span class="sd">                            \raise #-0.3 &quot;→&quot;</span>
+<span class="sd">                        }</span>
+<span class="sd">                    #}))</span>
+<span class="sd">            c&#39;4</span>
+<span class="sd">            \sustainOn</span>
+<span class="sd">            d&#39;4</span>
+<span class="sd">            e&#39;4</span>
+<span class="sd">            f&#39;4</span>
+<span class="sd">            \sustainOff</span>
+<span class="sd">        }</span>
+
+<span class="sd">        .. figure:: ../_images/piano_pedal-rA7ZHeMrjf.png</span>
+
+<span class="sd">    ``omit_raise_pedal_glyph``:</span>
+<span class="sd">        Call the function with ``omit_raise_pedal_glyph`` set to ``False`` to</span>
+<span class="sd">        remove the raise pedal glyph:</span>
+
+<span class="sd">        &gt;&gt;&gt; staff = abjad.Staff(r&quot;c&#39;4 d&#39;4 e&#39;4 f&#39;4&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; auxjad.piano_pedal(staff[:],</span>
+<span class="sd">        ...                    omit_raise_pedal_glyph=True,</span>
+<span class="sd">        ...                    )</span>
+<span class="sd">        &gt;&gt;&gt; abjad.f(staff)</span>
+<span class="sd">        \new Staff</span>
+<span class="sd">        {</span>
+<span class="sd">            c&#39;4</span>
+<span class="sd">            \sustainOn</span>
+<span class="sd">            d&#39;4</span>
+<span class="sd">            e&#39;4</span>
+<span class="sd">            \once \override Staff.SustainPedal.stencil = ##f</span>
+<span class="sd">            f&#39;4</span>
+<span class="sd">            \sustainOff</span>
+<span class="sd">        }</span>
+
+<span class="sd">        .. figure:: ../_images/piano_pedal-p8S1KwHLIx.png</span>
+
+<span class="sd">        Combined with ``until_the_end=True``:</span>
+
+<span class="sd">        &gt;&gt;&gt; staff = abjad.Staff(r&quot;c&#39;4 d&#39;4 e&#39;4 f&#39;4&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; auxjad.piano_pedal(staff[:],</span>
+<span class="sd">        ...                    until_the_end=True,</span>
+<span class="sd">        ...                    omit_raise_pedal_glyph=True,</span>
+<span class="sd">        ...                    )</span>
+<span class="sd">        &gt;&gt;&gt; abjad.f(staff)</span>
+<span class="sd">        \new Staff</span>
+<span class="sd">        {</span>
+<span class="sd">            \once \override Staff.SustainPedal.stencil =</span>
+<span class="sd">                #(lambda (grob) (grob-interpret-markup grob</span>
+<span class="sd">                    #{</span>
+<span class="sd">                        \markup {</span>
+<span class="sd">                            \concat {</span>
+<span class="sd">                                \musicglyph &quot;pedal.Ped&quot;</span>
+<span class="sd">                                \musicglyph &quot;pedal..&quot;</span>
+<span class="sd">                            }</span>
+<span class="sd">                            \raise #-0.3 &quot;→&quot;</span>
+<span class="sd">                        }</span>
+<span class="sd">                    #}))</span>
+<span class="sd">            c&#39;4</span>
+<span class="sd">            \sustainOn</span>
+<span class="sd">            d&#39;4</span>
+<span class="sd">            e&#39;4</span>
+<span class="sd">            \once \override Staff.SustainPedal.stencil = ##f</span>
+<span class="sd">            f&#39;4</span>
+<span class="sd">            \sustainOff</span>
+<span class="sd">        }</span>
+
+<span class="sd">        .. figure:: ../_images/piano_pedal-Fb5rE6QB1f.png</span>
+
+<span class="sd">    Pedal style:</span>
+<span class="sd">        The style of the sustain pedal can be tweaked using |abjad.setting()|</span>
+<span class="sd">        as shown below:</span>
+
+<span class="sd">        &gt;&gt;&gt; staff = abjad.Staff(r&quot;c&#39;4 d&#39;4 e&#39;4 f&#39;4&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; auxjad.piano_pedal(staff[:])</span>
+<span class="sd">        &gt;&gt;&gt; abjad.setting(staff).pedal_sustain_style = &quot;#&#39;mixed&quot;</span>
+<span class="sd">        &gt;&gt;&gt; abjad.f(staff)</span>
+<span class="sd">        \new Staff</span>
+<span class="sd">        \with</span>
+<span class="sd">        {</span>
+<span class="sd">            pedalSustainStyle = #&#39;mixed</span>
+<span class="sd">        }</span>
+<span class="sd">        {</span>
+<span class="sd">            c&#39;4</span>
+<span class="sd">            \sustainOn</span>
+<span class="sd">            d&#39;4</span>
+<span class="sd">            e&#39;4</span>
+<span class="sd">            f&#39;4</span>
+<span class="sd">            \sustainOff</span>
+<span class="sd">        }</span>
+
+<span class="sd">        .. figure:: ../_images/piano_pedal-6q9Swb2elq.png</span>
+
+<span class="sd">        This tweak also works with ``until_the_end=True`` if desired:</span>
+
+<span class="sd">        &gt;&gt;&gt; staff = abjad.Staff(r&quot;c&#39;4 d&#39;4 e&#39;4 f&#39;4&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; auxjad.piano_pedal(staff[:],</span>
+<span class="sd">        ...                    until_the_end=True,</span>
+<span class="sd">        ...                    )</span>
+<span class="sd">        &gt;&gt;&gt; abjad.setting(staff).pedal_sustain_style = &quot;#&#39;mixed&quot;</span>
+<span class="sd">        &gt;&gt;&gt; abjad.f(staff)</span>
+<span class="sd">        \new Staff</span>
+<span class="sd">        \with</span>
+<span class="sd">        {</span>
+<span class="sd">            pedalSustainStyle = #&#39;mixed</span>
+<span class="sd">        }</span>
+<span class="sd">        {</span>
+<span class="sd">            \once \override Staff.SustainPedal.stencil =</span>
+<span class="sd">                #(lambda (grob) (grob-interpret-markup grob</span>
+<span class="sd">                    #{</span>
+<span class="sd">                        \markup {</span>
+<span class="sd">                            \concat {</span>
+<span class="sd">                                \musicglyph &quot;pedal.Ped&quot;</span>
+<span class="sd">                                \musicglyph &quot;pedal..&quot;</span>
+<span class="sd">                            }</span>
+<span class="sd">                            \raise #-0.3 &quot;→&quot;</span>
+<span class="sd">                        }</span>
+<span class="sd">                    #}))</span>
+<span class="sd">            c&#39;4</span>
+<span class="sd">            \sustainOn</span>
+<span class="sd">            d&#39;4</span>
+<span class="sd">            e&#39;4</span>
+<span class="sd">            f&#39;4</span>
+<span class="sd">            \sustainOff</span>
+<span class="sd">        }</span>
+
+<span class="sd">        .. figure:: ../_images/piano_pedal-cYyRwFvnFH.png</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">selector</span><span class="p">,</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Expression</span><span class="p">)</span>
+    <span class="n">argument</span> <span class="o">=</span> <span class="n">selector</span><span class="p">(</span><span class="n">argument</span><span class="p">)</span>
+    <span class="n">leaves</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Selection</span><span class="p">(</span><span class="n">argument</span><span class="p">)</span><span class="o">.</span><span class="n">leaves</span><span class="p">()</span>
+    <span class="n">start_leaf</span> <span class="o">=</span> <span class="n">leaves</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">stop_leaf</span> <span class="o">=</span> <span class="n">leaves</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+    <span class="k">if</span> <span class="n">until_the_end</span><span class="p">:</span>
+        <span class="n">string</span> <span class="o">=</span> <span class="sa">r</span><span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">            \once \override Staff.SustainPedal.stencil =</span>
+<span class="s2">                #(lambda (grob) (grob-interpret-markup grob</span>
+<span class="s2">                    #{</span>
+<span class="s2">                        \markup {</span>
+<span class="s2">                            \concat {</span>
+<span class="s2">                                \musicglyph &quot;pedal.Ped&quot;</span>
+<span class="s2">                                \musicglyph &quot;pedal..&quot;</span>
+<span class="s2">                            }</span>
+<span class="s2">                            \raise #-0.3 &quot;→&quot;</span>
+<span class="s2">                        }</span>
+<span class="s2">                    #}))</span>
+<span class="s2">            &quot;&quot;&quot;</span>
+        <span class="n">string</span> <span class="o">=</span> <span class="n">dedent</span><span class="p">(</span><span class="n">string</span><span class="p">)</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+        <span class="n">pedal_tweak</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">LilyPondLiteral</span><span class="p">(</span><span class="n">string</span><span class="p">)</span>
+        <span class="n">abjad</span><span class="o">.</span><span class="n">attach</span><span class="p">(</span><span class="n">pedal_tweak</span><span class="p">,</span> <span class="n">start_leaf</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">omit_raise_pedal_glyph</span><span class="p">:</span>
+        <span class="n">omit_raise_pedal_glyph_tweak</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">LilyPondLiteral</span><span class="p">(</span>
+            <span class="sa">r</span><span class="s2">&quot;\once \override Staff.SustainPedal.stencil = ##f&quot;</span>
+        <span class="p">)</span>
+        <span class="n">abjad</span><span class="o">.</span><span class="n">attach</span><span class="p">(</span><span class="n">omit_raise_pedal_glyph_tweak</span><span class="p">,</span> <span class="n">stop_leaf</span><span class="p">)</span>
+    <span class="n">piano_pedal_</span><span class="p">(</span><span class="n">argument</span><span class="o">=</span><span class="n">argument</span><span class="p">,</span>
+                 <span class="n">selector</span><span class="o">=</span><span class="n">selector</span><span class="p">,</span>
+                 <span class="n">start_piano_pedal</span><span class="o">=</span><span class="n">start_piano_pedal</span><span class="p">,</span>
+                 <span class="n">stop_piano_pedal</span><span class="o">=</span><span class="n">stop_piano_pedal</span><span class="p">,</span>
+                 <span class="n">tag</span><span class="o">=</span><span class="n">tag</span><span class="p">,</span>
+                 <span class="p">)</span></div>
+
+
+<span class="c1">### MONKEY PATCHING ###</span>
+
+<span class="n">abjad</span><span class="o">.</span><span class="n">spanners</span><span class="o">.</span><span class="n">piano_pedal</span> <span class="o">=</span> <span class="n">piano_pedal</span>
+<span class="n">abjad</span><span class="o">.</span><span class="n">piano_pedal</span> <span class="o">=</span> <span class="n">piano_pedal</span>
+</pre></div>
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 2020, Gilberto Agostinho
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

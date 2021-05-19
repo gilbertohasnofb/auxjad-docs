@@ -1,0 +1,2224 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>auxjad.core.CrossFader &mdash; auxjad 0.8.24 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+        <script src="../../../_static/jquery.js"></script>
+        <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/doctools.js"></script>
+        <script src="../../../_static/language_data.js"></script>
+        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    <script type="text/javascript" src="../../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../../index.html" class="icon icon-home" alt="Documentation Home"> auxjad
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.8
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../index.html">Welcome to Auxjad’s documentation!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../examples/index.html">Examples of usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../score_gallery/index.html">Score gallery</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../api/index.html">Auxjad API</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">auxjad</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../../index.html">Module code</a> &raquo;</li>
+        
+      <li>auxjad.core.CrossFader</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for auxjad.core.CrossFader</h1><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">random</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Union</span>
+
+<span class="kn">import</span> <span class="nn">abjad</span>
+
+<span class="kn">from</span> <span class="nn">..utilities.mutate</span> <span class="kn">import</span> <span class="n">mutate</span>
+<span class="kn">from</span> <span class="nn">.Fader</span> <span class="kn">import</span> <span class="n">Fader</span>
+
+
+<div class="viewcode-block" id="CrossFader"><a class="viewcode-back" href="../../../_api_members/auxjad.CrossFader.html#auxjad.CrossFader">[docs]</a><span class="k">class</span> <span class="nc">CrossFader</span><span class="p">():</span>
+    <span class="sa">r</span><span class="sd">&quot;&quot;&quot;This class takes two |abjad.Container|&#39;s and gradually cross fades from</span>
+<span class="sd">    one into the other, by fading out the first while fading in the</span>
+<span class="sd">    second. It makes use of two :class:`auxjad.Fader` for that.</span>
+
+<span class="sd">    Basic usage:</span>
+<span class="sd">        Calling the object will return a :obj:`tuple` of two</span>
+<span class="sd">        |abjad.Selection|&#39;s generated by the fading process. Each call of the</span>
+<span class="sd">        object will apply the fading process to one of the two containers of</span>
+<span class="sd">        the previous results. That is, either a note of the first container is</span>
+<span class="sd">        removed or a note of the second container is added.</span>
+
+<span class="sd">        &gt;&gt;&gt; fade_out_container = abjad.Container(r&quot;fs&#39;4 g&#39;2 bf&#39;4&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; fade_in_container = abjad.Container(r&quot;\times 4/5 {cs&#39;&#39;4 d&#39;&#39;1}&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; fader = auxjad.CrossFader(fade_out_container, fade_in_container)</span>
+<span class="sd">        &gt;&gt;&gt; selection_a, selection_b = fader()</span>
+<span class="sd">        &gt;&gt;&gt; score = abjad.Score([</span>
+<span class="sd">        ...     abjad.Staff(selection_a),</span>
+<span class="sd">        ...     abjad.Staff(selection_b),</span>
+<span class="sd">        ... ])</span>
+<span class="sd">        &gt;&gt;&gt; abjad.f(score)</span>
+<span class="sd">        \new Score</span>
+<span class="sd">        &lt;&lt;</span>
+<span class="sd">            \new Staff</span>
+<span class="sd">            {</span>
+<span class="sd">                \time 4/4</span>
+<span class="sd">                fs&#39;4</span>
+<span class="sd">                g&#39;2</span>
+<span class="sd">                bf&#39;4</span>
+<span class="sd">            }</span>
+<span class="sd">            \new Staff</span>
+<span class="sd">            {</span>
+<span class="sd">                \time 4/4</span>
+<span class="sd">                R1</span>
+<span class="sd">            }</span>
+<span class="sd">        &gt;&gt;</span>
+
+<span class="sd">        .. figure:: ../_images/CrossFader-gdofr6vtutv.png</span>
+
+<span class="sd">        &gt;&gt;&gt; selection_a, selection_b = fader()</span>
+<span class="sd">        &gt;&gt;&gt; score = abjad.Score([</span>
+<span class="sd">        ...     abjad.Staff(selection_a),</span>
+<span class="sd">        ...     abjad.Staff(selection_b),</span>
+<span class="sd">        ... ])</span>
+<span class="sd">        &gt;&gt;&gt; abjad.f(score)</span>
+<span class="sd">        \new Score</span>
+<span class="sd">        &lt;&lt;</span>
+<span class="sd">            \new Staff</span>
+<span class="sd">            {</span>
+<span class="sd">                \time 4/4</span>
+<span class="sd">                fs&#39;4</span>
+<span class="sd">                g&#39;2</span>
+<span class="sd">                bf&#39;4</span>
+<span class="sd">            }</span>
+<span class="sd">            \new Staff</span>
+<span class="sd">            {</span>
+<span class="sd">                \times 4/5 {</span>
+<span class="sd">                    \time 4/4</span>
+<span class="sd">                    r4</span>
+<span class="sd">                    d&#39;&#39;1</span>
+<span class="sd">                }</span>
+<span class="sd">            }</span>
+<span class="sd">        &gt;&gt;</span>
+
+<span class="sd">        .. figure:: ../_images/CrossFader-ge0qzrwa7fr.png</span>
+
+<span class="sd">        &gt;&gt;&gt; selection_a, selection_b = fader()</span>
+<span class="sd">        &gt;&gt;&gt; score = abjad.Score([</span>
+<span class="sd">        ...     abjad.Staff(selection_a),</span>
+<span class="sd">        ...     abjad.Staff(selection_b),</span>
+<span class="sd">        ... ])</span>
+<span class="sd">        &gt;&gt;&gt; abjad.f(score)</span>
+<span class="sd">        \new Score</span>
+<span class="sd">        &lt;&lt;</span>
+<span class="sd">            \new Staff</span>
+<span class="sd">            {</span>
+<span class="sd">                \time 4/4</span>
+<span class="sd">                fs&#39;4</span>
+<span class="sd">                r2</span>
+<span class="sd">                bf&#39;4</span>
+<span class="sd">            }</span>
+<span class="sd">            \new Staff</span>
+<span class="sd">            {</span>
+<span class="sd">                \times 4/5 {</span>
+<span class="sd">                    \time 4/4</span>
+<span class="sd">                    r4</span>
+<span class="sd">                    d&#39;&#39;1</span>
+<span class="sd">                }</span>
+<span class="sd">            }</span>
+<span class="sd">        &gt;&gt;</span>
+
+<span class="sd">        .. figure:: ../_images/CrossFader-0iynx7xenvmp.png</span>
+
+<span class="sd">        The property :attr:`current_window` can be used to access the current</span>
+<span class="sd">        window without processing it.</span>
+
+<span class="sd">        &gt;&gt;&gt; notes = fader.current_window()</span>
+<span class="sd">        &gt;&gt;&gt; score = abjad.Score([</span>
+<span class="sd">        ...     abjad.Staff(selection_a),</span>
+<span class="sd">        ...     abjad.Staff(selection_b),</span>
+<span class="sd">        ... ])</span>
+<span class="sd">        &gt;&gt;&gt; abjad.f(score)</span>
+<span class="sd">        \new Score</span>
+<span class="sd">        &lt;&lt;</span>
+<span class="sd">            \new Staff</span>
+<span class="sd">            {</span>
+<span class="sd">                \time 4/4</span>
+<span class="sd">                fs&#39;4</span>
+<span class="sd">                r2</span>
+<span class="sd">                bf&#39;4</span>
+<span class="sd">            }</span>
+<span class="sd">            \new Staff</span>
+<span class="sd">            {</span>
+<span class="sd">                \times 4/5 {</span>
+<span class="sd">                    \time 4/4</span>
+<span class="sd">                    r4</span>
+<span class="sd">                    d&#39;&#39;1</span>
+<span class="sd">                }</span>
+<span class="sd">            }</span>
+<span class="sd">        &gt;&gt;</span>
+
+<span class="sd">        .. figure:: ../_images/CrossFader-kinei9zncl.png</span>
+
+<span class="sd">    :meth:`output_all`:</span>
+<span class="sd">        To run through the whole process and output it as a :obj:`tuple` of two</span>
+<span class="sd">        |abjad.Selection|&#39;s, use the method :meth:`output_all`.</span>
+
+<span class="sd">        &gt;&gt;&gt; fade_out_container = abjad.Container(r&quot;fs&#39;4 g&#39;2 bf&#39;4&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; fade_in_container = abjad.Container(r&quot;\times 4/5 {cs&#39;&#39;4 d&#39;1}&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; fader = auxjad.CrossFader(fade_out_container, fade_in_container)</span>
+<span class="sd">        &gt;&gt;&gt; selection_a, selection_b = fader.output_all()</span>
+<span class="sd">        &gt;&gt;&gt; score = abjad.Score([</span>
+<span class="sd">        ...     abjad.Staff(selection_a),</span>
+<span class="sd">        ...     abjad.Staff(selection_b),</span>
+<span class="sd">        ... ])</span>
+<span class="sd">        &gt;&gt;&gt; abjad.f(score)</span>
+<span class="sd">        \new Score</span>
+<span class="sd">        &lt;&lt;</span>
+<span class="sd">            \new Staff</span>
+<span class="sd">            {</span>
+<span class="sd">                \time 4/4</span>
+<span class="sd">                fs&#39;4</span>
+<span class="sd">                g&#39;2</span>
+<span class="sd">                bf&#39;4</span>
+<span class="sd">                fs&#39;4</span>
+<span class="sd">                g&#39;2</span>
+<span class="sd">                bf&#39;4</span>
+<span class="sd">                fs&#39;4</span>
+<span class="sd">                r2</span>
+<span class="sd">                bf&#39;4</span>
+<span class="sd">                fs&#39;4</span>
+<span class="sd">                r2</span>
+<span class="sd">                bf&#39;4</span>
+<span class="sd">                r2.</span>
+<span class="sd">                bf&#39;4</span>
+<span class="sd">                R1</span>
+<span class="sd">            }</span>
+<span class="sd">            \new Staff</span>
+<span class="sd">            {</span>
+<span class="sd">                \time 4/4</span>
+<span class="sd">                R1</span>
+<span class="sd">                \times 4/5 {</span>
+<span class="sd">                    cs&#39;&#39;4</span>
+<span class="sd">                    r1</span>
+<span class="sd">                }</span>
+<span class="sd">                \times 4/5 {</span>
+<span class="sd">                    cs&#39;&#39;4</span>
+<span class="sd">                    r1</span>
+<span class="sd">                }</span>
+<span class="sd">                \times 4/5 {</span>
+<span class="sd">                    cs&#39;&#39;4</span>
+<span class="sd">                    d&#39;1</span>
+<span class="sd">                }</span>
+<span class="sd">                \times 4/5 {</span>
+<span class="sd">                    cs&#39;&#39;4</span>
+<span class="sd">                    d&#39;1</span>
+<span class="sd">                }</span>
+<span class="sd">                \times 4/5 {</span>
+<span class="sd">                    cs&#39;&#39;4</span>
+<span class="sd">                    d&#39;1</span>
+<span class="sd">                }</span>
+<span class="sd">            }</span>
+<span class="sd">        &gt;&gt;</span>
+
+<span class="sd">        .. figure:: ../_images/CrossFader-0t206fb4ycne.png</span>
+
+<span class="sd">    :meth:`output_n`:</span>
+<span class="sd">        To run through just part of the process and output it as a :obj:`tuple`</span>
+<span class="sd">        of two |abjad.Selection|&#39;s, use the method :meth:`output_n` and pass</span>
+<span class="sd">        the number of iterations as argument.</span>
+
+<span class="sd">        &gt;&gt;&gt; fade_out_container = abjad.Container(r&quot;e&#39;8 fs&#39;4. r2&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; fade_in_container = abjad.Container(r&quot;c&#39;&#39;2 ~ c&#39;&#39;8 d&#39;&#39;4.&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; fader = auxjad.CrossFader(fade_out_container, fade_in_container)</span>
+<span class="sd">        &gt;&gt;&gt; selection_a, selection_b = fader.output_n(3)</span>
+<span class="sd">        &gt;&gt;&gt; score = abjad.Score([</span>
+<span class="sd">        ...     abjad.Staff(selection_a),</span>
+<span class="sd">        ...     abjad.Staff(selection_b),</span>
+<span class="sd">        ... ])</span>
+<span class="sd">        &gt;&gt;&gt; abjad.f(score)</span>
+<span class="sd">        \new Score</span>
+<span class="sd">        &lt;&lt;</span>
+<span class="sd">            \new Staff</span>
+<span class="sd">            {</span>
+<span class="sd">                \time 4/4</span>
+<span class="sd">                e&#39;8</span>
+<span class="sd">                fs&#39;4.</span>
+<span class="sd">                r2</span>
+<span class="sd">                e&#39;8</span>
+<span class="sd">                fs&#39;4.</span>
+<span class="sd">                r2</span>
+<span class="sd">                e&#39;8</span>
+<span class="sd">                r2..</span>
+<span class="sd">            }</span>
+<span class="sd">            \new Staff</span>
+<span class="sd">            {</span>
+<span class="sd">                \time 4/4</span>
+<span class="sd">                R1</span>
+<span class="sd">                c&#39;&#39;2</span>
+<span class="sd">                ~</span>
+<span class="sd">                c&#39;&#39;8</span>
+<span class="sd">                r4.</span>
+<span class="sd">                c&#39;&#39;2</span>
+<span class="sd">                ~</span>
+<span class="sd">                c&#39;&#39;8</span>
+<span class="sd">                r4.</span>
+<span class="sd">            }</span>
+<span class="sd">        &gt;&gt;</span>
+
+<span class="sd">        .. figure:: ../_images/CrossFader-8o5fjalw1px.png</span>
+
+<span class="sd">    Using as iterator:</span>
+<span class="sd">        The instances of this class can also be used as an iterator, which can</span>
+<span class="sd">        then be used in a for loop to run through the whole process. Note that</span>
+<span class="sd">        unlike the methods :meth:`output_n` and :meth:`output_all`, time</span>
+<span class="sd">        signatures are added to each window returned by the fader. Use the</span>
+<span class="sd">        function |auxjad.mutate().remove_repeated_time_signatures()| to clean</span>
+<span class="sd">        the output when using this class in this way.</span>
+
+<span class="sd">        &gt;&gt;&gt; fade_out_container = abjad.Container(r&quot;e&#39;8 fs&#39;4. r2&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; fade_in_container = abjad.Container(r&quot;c&#39;&#39;2 ~ c&#39;&#39;8 d&#39;&#39;4.&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; fader = auxjad.CrossFader(fade_out_container, fade_in_container)</span>
+<span class="sd">        &gt;&gt;&gt; staff_a = abjad.Staff()</span>
+<span class="sd">        &gt;&gt;&gt; staff_b = abjad.Staff()</span>
+<span class="sd">        &gt;&gt;&gt; for selection_a, selection_b in fader:</span>
+<span class="sd">        ...     staff_a.extend(selection_a)</span>
+<span class="sd">        ...     staff_b.extend(selection_b)</span>
+<span class="sd">        &gt;&gt;&gt; auxjad.mutate(staff_a).remove_repeated_time_signatures()</span>
+<span class="sd">        &gt;&gt;&gt; auxjad.mutate(staff_b).remove_repeated_time_signatures()</span>
+<span class="sd">        &gt;&gt;&gt; score = abjad.Score([staff_a, staff_b])</span>
+<span class="sd">        &gt;&gt;&gt; abjad.f(score)</span>
+<span class="sd">        \new Score</span>
+<span class="sd">        &lt;&lt;</span>
+<span class="sd">            \new Staff</span>
+<span class="sd">            {</span>
+<span class="sd">                \time 4/4</span>
+<span class="sd">                e&#39;8</span>
+<span class="sd">                fs&#39;4.</span>
+<span class="sd">                r2</span>
+<span class="sd">                e&#39;8</span>
+<span class="sd">                fs&#39;4.</span>
+<span class="sd">                r2</span>
+<span class="sd">                e&#39;8</span>
+<span class="sd">                r2..</span>
+<span class="sd">                e&#39;8</span>
+<span class="sd">                r2..</span>
+<span class="sd">                R1</span>
+<span class="sd">            }</span>
+<span class="sd">            \new Staff</span>
+<span class="sd">            {</span>
+<span class="sd">                \time 4/4</span>
+<span class="sd">                R1</span>
+<span class="sd">                c&#39;&#39;2</span>
+<span class="sd">                ~</span>
+<span class="sd">                c&#39;&#39;8</span>
+<span class="sd">                r4.</span>
+<span class="sd">                c&#39;&#39;2</span>
+<span class="sd">                ~</span>
+<span class="sd">                c&#39;&#39;8</span>
+<span class="sd">                r4.</span>
+<span class="sd">                c&#39;&#39;2</span>
+<span class="sd">                ~</span>
+<span class="sd">                c&#39;&#39;8</span>
+<span class="sd">                d&#39;&#39;4.</span>
+<span class="sd">                c&#39;&#39;2</span>
+<span class="sd">                ~</span>
+<span class="sd">                c&#39;&#39;8</span>
+<span class="sd">                d&#39;&#39;4.</span>
+<span class="sd">            }</span>
+<span class="sd">        &gt;&gt;</span>
+
+<span class="sd">        .. figure:: ../_images/CrossFader-3g9fv4ew4h9.png</span>
+
+<span class="sd">    Arguments and properties:</span>
+<span class="sd">        This class can take many optional keyword arguments during its</span>
+<span class="sd">        creation. Setting :attr:`fade_in_first` to ``True`` will ensure that a</span>
+<span class="sd">        note from the second container must be faded in before any notes of the</span>
+<span class="sd">        first container are removed (default ``False``). Setting</span>
+<span class="sd">        :attr:`fade_out_last` to ``True`` will ensure that all notes from the</span>
+<span class="sd">        second container must be faded in before the very last note of the</span>
+<span class="sd">        first container is removed (default ``False``). The arguments</span>
+<span class="sd">        :attr:`initial_repetitions` and :attr:`final_repetitions` set the</span>
+<span class="sd">        number of repetitions of the initial and final measures (default ``1``</span>
+<span class="sd">        for both). :attr:`repetition_chance` sets the chance of a window</span>
+<span class="sd">        repeating itself, from ``0.0`` to ``1.0`` (default is ``0.0``, i.e. no</span>
+<span class="sd">        repetitions). Setting :attr:`weighted_duration` to ``True`` will give</span>
+<span class="sd">        more weight to the larger container (considering both its number of</span>
+<span class="sd">        notes as well its length), making it more likely that both will fade in</span>
+<span class="sd">        and out at a similar rate (default value is ``False``).</span>
+<span class="sd">        :attr:`disable_rewrite_meter` disables the</span>
+<span class="sd">        |abjad.mutate().rewrite_meter()| mutation which is applied to the</span>
+<span class="sd">        container after every call, and :attr:`omit_time_signatures` will</span>
+<span class="sd">        remove all time signatures from the output (both are ``False`` by</span>
+<span class="sd">        default). Any measure filled with rests will be rewritten using a</span>
+<span class="sd">        multi-measure rest; set the :attr:`use_multimeasure_rests` to ``False``</span>
+<span class="sd">        to disable this behaviour. The properties :attr:`boundary_depth`,</span>
+<span class="sd">        :attr:`maximum_dot_count`, and :attr:`rewrite_tuplets` are passed as</span>
+<span class="sd">        arguments to |abjad.mutate().rewrite_meter()|, see its documentation</span>
+<span class="sd">        for more information.</span>
+
+<span class="sd">        &gt;&gt;&gt; fade_out_container = abjad.Container(r&quot;fs&#39;4 g&#39;2 bf&#39;4&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; fade_in_container = abjad.Container(r&quot;\times 4/5 {cs&#39;&#39;4 d&#39;&#39;1}&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; fader = auxjad.CrossFader(fade_out_container,</span>
+<span class="sd">        ...                           fade_in_container,</span>
+<span class="sd">        ...                           fade_in_first=True,</span>
+<span class="sd">        ...                           fade_out_last=True,</span>
+<span class="sd">        ...                           initial_repetitions=3,</span>
+<span class="sd">        ...                           final_repetitions=3,</span>
+<span class="sd">        ...                           repetition_chance=0.7,</span>
+<span class="sd">        ...                           weighted_duration=True,</span>
+<span class="sd">        ...                           disable_rewrite_meter=True,</span>
+<span class="sd">        ...                           omit_time_signatures=True,</span>
+<span class="sd">        ...                           use_multimeasure_rests=True,</span>
+<span class="sd">        ...                           boundary_depth=True,</span>
+<span class="sd">        ...                           maximum_dot_count=True,</span>
+<span class="sd">        ...                           rewrite_tuplets=True,</span>
+<span class="sd">        ...                           )</span>
+<span class="sd">        &gt;&gt;&gt; fader.fade_in_first</span>
+<span class="sd">        True</span>
+<span class="sd">        &gt;&gt;&gt; fader.fade_out_last</span>
+<span class="sd">        True</span>
+<span class="sd">        &gt;&gt;&gt; fader.initial_repetitions</span>
+<span class="sd">        3</span>
+<span class="sd">        &gt;&gt;&gt; fader.final_repetitions</span>
+<span class="sd">        3</span>
+<span class="sd">        &gt;&gt;&gt; fader.repetition_chance</span>
+<span class="sd">        0.7</span>
+<span class="sd">        &gt;&gt;&gt; fader.weighted_duration</span>
+<span class="sd">        True</span>
+<span class="sd">        &gt;&gt;&gt; fader.disable_rewrite_meter</span>
+<span class="sd">        True</span>
+<span class="sd">        &gt;&gt;&gt; fader.omit_time_signatures</span>
+<span class="sd">        True</span>
+<span class="sd">        &gt;&gt;&gt; fader.use_multimeasure_rests</span>
+<span class="sd">        True</span>
+<span class="sd">        &gt;&gt;&gt; fader.boundary_depth</span>
+<span class="sd">        True</span>
+<span class="sd">        &gt;&gt;&gt; fader.maximum_dot_count</span>
+<span class="sd">        True</span>
+<span class="sd">        &gt;&gt;&gt; fader.rewrite_tuplets</span>
+<span class="sd">        True</span>
+
+<span class="sd">        Use the properties below to change these values after initialisation.</span>
+
+<span class="sd">        &gt;&gt;&gt; fader.fade_in_first = False</span>
+<span class="sd">        &gt;&gt;&gt; fader.fade_out_last = False</span>
+<span class="sd">        &gt;&gt;&gt; fader.initial_repetitions = 4</span>
+<span class="sd">        &gt;&gt;&gt; fader.final_repetitions = 7</span>
+<span class="sd">        &gt;&gt;&gt; fader.repetition_chance = 0.23</span>
+<span class="sd">        &gt;&gt;&gt; fader.weighted_duration = False</span>
+<span class="sd">        &gt;&gt;&gt; fader.disable_rewrite_meter = False</span>
+<span class="sd">        &gt;&gt;&gt; fader.omit_time_signatures = False</span>
+<span class="sd">        &gt;&gt;&gt; fader.use_multimeasure_rests = False</span>
+<span class="sd">        &gt;&gt;&gt; fader.boundary_depth = False</span>
+<span class="sd">        &gt;&gt;&gt; fader.maximum_dot_count = False</span>
+<span class="sd">        &gt;&gt;&gt; fader.rewrite_tuplets = False</span>
+<span class="sd">        &gt;&gt;&gt; fader.fade_in_first</span>
+<span class="sd">        False</span>
+<span class="sd">        &gt;&gt;&gt; fader.fade_out_last</span>
+<span class="sd">        False</span>
+<span class="sd">        &gt;&gt;&gt; fader.initial_repetitions</span>
+<span class="sd">        4</span>
+<span class="sd">        &gt;&gt;&gt; fader.final_repetitions</span>
+<span class="sd">        7</span>
+<span class="sd">        &gt;&gt;&gt; fader.repetition_chance</span>
+<span class="sd">        0.23</span>
+<span class="sd">        &gt;&gt;&gt; fader.weighted_duration</span>
+<span class="sd">        False</span>
+<span class="sd">        &gt;&gt;&gt; fader.disable_rewrite_meter</span>
+<span class="sd">        False</span>
+<span class="sd">        &gt;&gt;&gt; fader.omit_time_signatures</span>
+<span class="sd">        False</span>
+<span class="sd">        &gt;&gt;&gt; fader.use_multimeasure_rests</span>
+<span class="sd">        False</span>
+<span class="sd">        &gt;&gt;&gt; fader.boundary_depth</span>
+<span class="sd">        False</span>
+<span class="sd">        &gt;&gt;&gt; fader.maximum_dot_count</span>
+<span class="sd">        False</span>
+<span class="sd">        &gt;&gt;&gt; fader.rewrite_tuplets</span>
+<span class="sd">        False</span>
+
+<span class="sd">    :meth:`reset`:</span>
+<span class="sd">        Use the :meth:`reset` method to reset the fader to its initial state.</span>
+<span class="sd">        This can be used to restart the process at any time.</span>
+
+<span class="sd">        &gt;&gt;&gt; fade_out_container = abjad.Container(r&quot;fs&#39;4 g&#39;2 bf&#39;4&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; fade_in_container = abjad.Container(r&quot;\times 4/5 {cs&#39;&#39;4 d&#39;1}&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; fader = auxjad.CrossFader(fade_out_container, fade_in_container)</span>
+<span class="sd">        &gt;&gt;&gt; staff_a = abjad.Staff()</span>
+<span class="sd">        &gt;&gt;&gt; staff_b = abjad.Staff()</span>
+<span class="sd">        &gt;&gt;&gt; for _ in range(3):</span>
+<span class="sd">        ...     selection_a, selection_b = fader()</span>
+<span class="sd">        ...     staff_a.extend(selection_a)</span>
+<span class="sd">        ...     staff_b.extend(selection_b)</span>
+<span class="sd">        &gt;&gt;&gt; fader.reset()</span>
+<span class="sd">        &gt;&gt;&gt; selection_a, selection_b = fader()</span>
+<span class="sd">        &gt;&gt;&gt; staff_a.extend(selection_a)</span>
+<span class="sd">        &gt;&gt;&gt; staff_b.extend(selection_b)</span>
+<span class="sd">        &gt;&gt;&gt; auxjad.mutate(staff_a).remove_repeated_time_signatures()</span>
+<span class="sd">        &gt;&gt;&gt; auxjad.mutate(staff_b).remove_repeated_time_signatures()</span>
+<span class="sd">        &gt;&gt;&gt; score = abjad.Score([staff_a, staff_b])</span>
+<span class="sd">        &gt;&gt;&gt; abjad.f(score)</span>
+<span class="sd">        \new Score</span>
+<span class="sd">        &lt;&lt;</span>
+<span class="sd">            \new Staff</span>
+<span class="sd">            {</span>
+<span class="sd">                \time 4/4</span>
+<span class="sd">                fs&#39;4</span>
+<span class="sd">                g&#39;2</span>
+<span class="sd">                bf&#39;4</span>
+<span class="sd">                fs&#39;4</span>
+<span class="sd">                g&#39;2</span>
+<span class="sd">                bf&#39;4</span>
+<span class="sd">                fs&#39;4</span>
+<span class="sd">                r2</span>
+<span class="sd">                bf&#39;4</span>
+<span class="sd">                fs&#39;4</span>
+<span class="sd">                g&#39;2</span>
+<span class="sd">                bf&#39;4</span>
+<span class="sd">            }</span>
+<span class="sd">            \new Staff</span>
+<span class="sd">            {</span>
+<span class="sd">                \time 4/4</span>
+<span class="sd">                R1</span>
+<span class="sd">                \times 4/5 {</span>
+<span class="sd">                    cs&#39;&#39;4</span>
+<span class="sd">                    r1</span>
+<span class="sd">                }</span>
+<span class="sd">                \times 4/5 {</span>
+<span class="sd">                    cs&#39;&#39;4</span>
+<span class="sd">                    r1</span>
+<span class="sd">                }</span>
+<span class="sd">                R1</span>
+<span class="sd">            }</span>
+<span class="sd">        &gt;&gt;</span>
+
+<span class="sd">        .. figure:: ../_images/CrossFader-pauqe26ke8e.png</span>
+
+<span class="sd">    Chords:</span>
+<span class="sd">        This class also support chords. Each of their individual notes are</span>
+<span class="sd">        removed or added one by one.</span>
+
+<span class="sd">        &gt;&gt;&gt; fade_out_container = abjad.Container(r&quot;\times 2/3 {&lt;c&#39; e&#39;&gt;2 g&#39;1}&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; fade_in_container = abjad.Container(r&quot;&lt;d&#39; ef&#39;&gt;2. &lt;bf a&#39;&gt;4&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; fader = auxjad.CrossFader(fade_out_container,</span>
+<span class="sd">        ...                           fade_in_container,</span>
+<span class="sd">        ...                           fade_in_first=True,</span>
+<span class="sd">        ...                           fade_out_last=True,</span>
+<span class="sd">        ...                           )</span>
+<span class="sd">        &gt;&gt;&gt; selection_a, selection_b = fader.output_all()</span>
+<span class="sd">        &gt;&gt;&gt; score = abjad.Score([</span>
+<span class="sd">        ...     abjad.Staff(selection_a),</span>
+<span class="sd">        ...     abjad.Staff(selection_b),</span>
+<span class="sd">        ... ])</span>
+<span class="sd">        &gt;&gt;&gt; abjad.f(score)</span>
+<span class="sd">        \new Score</span>
+<span class="sd">        &lt;&lt;</span>
+<span class="sd">            \new Staff</span>
+<span class="sd">            {</span>
+<span class="sd">                \times 2/3 {</span>
+<span class="sd">                    \time 4/4</span>
+<span class="sd">                    &lt;c&#39; e&#39;&gt;2</span>
+<span class="sd">                    g&#39;1</span>
+<span class="sd">                }</span>
+<span class="sd">                \times 2/3 {</span>
+<span class="sd">                    &lt;c&#39; e&#39;&gt;2</span>
+<span class="sd">                    g&#39;1</span>
+<span class="sd">                }</span>
+<span class="sd">                \times 2/3 {</span>
+<span class="sd">                    &lt;c&#39; e&#39;&gt;2</span>
+<span class="sd">                    g&#39;1</span>
+<span class="sd">                }</span>
+<span class="sd">                \times 2/3 {</span>
+<span class="sd">                    &lt;c&#39; e&#39;&gt;2</span>
+<span class="sd">                    g&#39;1</span>
+<span class="sd">                }</span>
+<span class="sd">                \times 2/3 {</span>
+<span class="sd">                    c&#39;2</span>
+<span class="sd">                    g&#39;1</span>
+<span class="sd">                }</span>
+<span class="sd">                \times 2/3 {</span>
+<span class="sd">                    c&#39;2</span>
+<span class="sd">                    g&#39;1</span>
+<span class="sd">                }</span>
+<span class="sd">                \times 2/3 {</span>
+<span class="sd">                    c&#39;2</span>
+<span class="sd">                    r1</span>
+<span class="sd">                }</span>
+<span class="sd">                R1</span>
+<span class="sd">            }</span>
+<span class="sd">            \new Staff</span>
+<span class="sd">            {</span>
+<span class="sd">                \time 4/4</span>
+<span class="sd">                R1</span>
+<span class="sd">                ef&#39;2.</span>
+<span class="sd">                r4</span>
+<span class="sd">                &lt;d&#39; ef&#39;&gt;2.</span>
+<span class="sd">                r4</span>
+<span class="sd">                &lt;d&#39; ef&#39;&gt;2.</span>
+<span class="sd">                bf4</span>
+<span class="sd">                &lt;d&#39; ef&#39;&gt;2.</span>
+<span class="sd">                bf4</span>
+<span class="sd">                &lt;d&#39; ef&#39;&gt;2.</span>
+<span class="sd">                &lt;bf a&#39;&gt;4</span>
+<span class="sd">                &lt;d&#39; ef&#39;&gt;2.</span>
+<span class="sd">                &lt;bf a&#39;&gt;4</span>
+<span class="sd">                &lt;d&#39; ef&#39;&gt;2.</span>
+<span class="sd">                &lt;bf a&#39;&gt;4</span>
+<span class="sd">            }</span>
+<span class="sd">        &gt;&gt;</span>
+
+<span class="sd">        .. figure:: ../_images/CrossFader-lm8byjxoayn.png</span>
+
+<span class="sd">    :func:`len()`:</span>
+<span class="sd">        The function :func:`len()` returns the sum of the number of notes of</span>
+<span class="sd">        both :attr:`fade_in_contents` and :attr:`fade_out_contents`.</span>
+
+<span class="sd">        &gt;&gt;&gt; fade_out_container = abjad.Container(r&quot;c&#39;4 d&#39;4 ~ d&#39;4 r4&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; fade_in_container = abjad.Container(r&quot;r2 c&#39;&#39;2&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; fader = auxjad.CrossFader(fade_out_container, fade_in_container)</span>
+<span class="sd">        &gt;&gt;&gt; len(fader)</span>
+<span class="sd">        3</span>
+<span class="sd">        &gt;&gt;&gt; fade_out_container = abjad.Container(r&quot;fs&#39;4 g&#39;2 bf&#39;4&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; fade_in_container = abjad.Container(r&quot;\times 4/5 {cs&#39;&#39;4 d&#39;&#39;1}&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; fader = auxjad.CrossFader(fade_out_container, fade_in_container)</span>
+<span class="sd">        &gt;&gt;&gt; len(fader)</span>
+<span class="sd">        5</span>
+<span class="sd">        &gt;&gt;&gt; fade_out_container = abjad.Container(r&quot;c&#39;4 d&#39;4 ~ d&#39;4 r4&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; fade_in_container = abjad.Container(r&quot;r2 &lt;c&#39;&#39; e&#39;&#39; g&#39;&#39;&gt;2&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; fader = auxjad.CrossFader(fade_out_container, fade_in_container)</span>
+<span class="sd">        &gt;&gt;&gt; len(fader)</span>
+<span class="sd">        5</span>
+
+<span class="sd">    :attr:`fade_in_first` and :attr:`fade_out_last`:</span>
+<span class="sd">        Setting the property :attr:`fade_in_first` to ``True`` will ensure that</span>
+<span class="sd">        a note from second container must be faded in before any note of the</span>
+<span class="sd">        first container is removed (default ``False``). Setting</span>
+<span class="sd">        :attr:`fade_out_last` to ``True`` will ensure that all notes from the</span>
+<span class="sd">        second container must be faded in before the very last note of first</span>
+<span class="sd">        container is removed (default ``False``).</span>
+
+<span class="sd">        &gt;&gt;&gt; fade_out_container = abjad.Container(r&quot;\time 3/4 r4 c&#39;4 d&#39;4&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; fade_in_container = abjad.Container(r&quot;\time 3/4 a&#39;&#39;4 g&#39;&#39;2&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; fader = auxjad.CrossFader(fade_out_container, fade_in_container)</span>
+<span class="sd">        &gt;&gt;&gt; selection_a, selection_b = fader.output_all()</span>
+<span class="sd">        &gt;&gt;&gt; score = abjad.Score([</span>
+<span class="sd">        ...     abjad.Staff(selection_a),</span>
+<span class="sd">        ...     abjad.Staff(selection_b),</span>
+<span class="sd">        ... ])</span>
+<span class="sd">        &gt;&gt;&gt; abjad.f(score)</span>
+<span class="sd">        \new Score</span>
+<span class="sd">        &lt;&lt;</span>
+<span class="sd">            \new Staff</span>
+<span class="sd">            {</span>
+<span class="sd">                \time 3/4</span>
+<span class="sd">                r4</span>
+<span class="sd">                c&#39;4</span>
+<span class="sd">                d&#39;4</span>
+<span class="sd">                r2</span>
+<span class="sd">                d&#39;4</span>
+<span class="sd">                r2</span>
+<span class="sd">                d&#39;4</span>
+<span class="sd">                R1 * 3/4</span>
+<span class="sd">                R1 * 3/4</span>
+<span class="sd">            }</span>
+<span class="sd">            \new Staff</span>
+<span class="sd">            {</span>
+<span class="sd">                \time 3/4</span>
+<span class="sd">                R1 * 3/4</span>
+<span class="sd">                R1 * 3/4</span>
+<span class="sd">                a&#39;&#39;4</span>
+<span class="sd">                r2</span>
+<span class="sd">                a&#39;&#39;4</span>
+<span class="sd">                r2</span>
+<span class="sd">                a&#39;&#39;4</span>
+<span class="sd">                g&#39;&#39;2</span>
+<span class="sd">            }</span>
+<span class="sd">        &gt;&gt;</span>
+
+<span class="sd">        .. figure:: ../_images/CrossFader-sm9qcruxat.png</span>
+
+<span class="sd">        &gt;&gt;&gt; fader = auxjad.CrossFader(fade_out_container,</span>
+<span class="sd">        ...                           fade_in_container,</span>
+<span class="sd">        ...                           fade_out_last=True,</span>
+<span class="sd">        ...                           )</span>
+<span class="sd">        &gt;&gt;&gt; selection_a, selection_b = fader.output_all()</span>
+<span class="sd">        &gt;&gt;&gt; score = abjad.Score([</span>
+<span class="sd">        ...     abjad.Staff(selection_a),</span>
+<span class="sd">        ...     abjad.Staff(selection_b),</span>
+<span class="sd">        ... ])</span>
+<span class="sd">        &gt;&gt;&gt; abjad.f(score)</span>
+<span class="sd">        \new Score</span>
+<span class="sd">        &lt;&lt;</span>
+<span class="sd">            \new Staff</span>
+<span class="sd">            {</span>
+<span class="sd">                \time 3/4</span>
+<span class="sd">                r4</span>
+<span class="sd">                c&#39;4</span>
+<span class="sd">                d&#39;4</span>
+<span class="sd">                r2</span>
+<span class="sd">                d&#39;4</span>
+<span class="sd">                r2</span>
+<span class="sd">                d&#39;4</span>
+<span class="sd">                r2</span>
+<span class="sd">                d&#39;4</span>
+<span class="sd">                R1 * 3/4</span>
+<span class="sd">            }</span>
+<span class="sd">            \new Staff</span>
+<span class="sd">            {</span>
+<span class="sd">                \time 3/4</span>
+<span class="sd">                R1 * 3/4</span>
+<span class="sd">                R1 * 3/4</span>
+<span class="sd">                a&#39;&#39;4</span>
+<span class="sd">                r2</span>
+<span class="sd">                a&#39;&#39;4</span>
+<span class="sd">                g&#39;&#39;2</span>
+<span class="sd">                a&#39;&#39;4</span>
+<span class="sd">                g&#39;&#39;2</span>
+<span class="sd">            }</span>
+<span class="sd">        &gt;&gt;</span>
+
+<span class="sd">        .. figure:: ../_images/CrossFader-2a4cyxsyxrg.png</span>
+
+<span class="sd">        &gt;&gt;&gt; fader = auxjad.CrossFader(fade_out_container,</span>
+<span class="sd">        ...                           fade_in_container,</span>
+<span class="sd">        ...                           fade_in_first=True,</span>
+<span class="sd">        ...                           fade_out_last=True,</span>
+<span class="sd">        ...                           )</span>
+<span class="sd">        &gt;&gt;&gt; selection_a, selection_b = fader.output_all()</span>
+<span class="sd">        &gt;&gt;&gt; score = abjad.Score([</span>
+<span class="sd">        ...     abjad.Staff(selection_a),</span>
+<span class="sd">        ...     abjad.Staff(selection_b),</span>
+<span class="sd">        ... ])</span>
+<span class="sd">        &gt;&gt;&gt; abjad.f(score)</span>
+<span class="sd">        \new Score</span>
+<span class="sd">        &lt;&lt;</span>
+<span class="sd">            \new Staff</span>
+<span class="sd">            {</span>
+<span class="sd">                \time 3/4</span>
+<span class="sd">                r4</span>
+<span class="sd">                c&#39;4</span>
+<span class="sd">                d&#39;4</span>
+<span class="sd">                r4</span>
+<span class="sd">                c&#39;4</span>
+<span class="sd">                d&#39;4</span>
+<span class="sd">                r4</span>
+<span class="sd">                c&#39;4</span>
+<span class="sd">                d&#39;4</span>
+<span class="sd">                r2</span>
+<span class="sd">                d&#39;4</span>
+<span class="sd">                R1 * 3/4</span>
+<span class="sd">            }</span>
+<span class="sd">            \new Staff</span>
+<span class="sd">            {</span>
+<span class="sd">                \time 3/4</span>
+<span class="sd">                R1 * 3/4</span>
+<span class="sd">                a&#39;&#39;4</span>
+<span class="sd">                r2</span>
+<span class="sd">                a&#39;&#39;4</span>
+<span class="sd">                g&#39;&#39;2</span>
+<span class="sd">                a&#39;&#39;4</span>
+<span class="sd">                g&#39;&#39;2</span>
+<span class="sd">                a&#39;&#39;4</span>
+<span class="sd">                g&#39;&#39;2</span>
+<span class="sd">            }</span>
+<span class="sd">        &gt;&gt;</span>
+
+<span class="sd">        .. figure:: ../_images/CrossFader-oap1pnwrfqc.png</span>
+
+<span class="sd">    :attr:`weighted_duration`:</span>
+<span class="sd">        Setting :attr:`weighted_duration` to ``True`` will give more weight to</span>
+<span class="sd">        the larger container (considering both its number of notes as well its</span>
+<span class="sd">        length), making it more likely that both will fade in and out at a</span>
+<span class="sd">        similar rate (default value is ``False``).</span>
+
+<span class="sd">        &gt;&gt;&gt; fade_out_container = abjad.Container(r&quot;e&#39;2 c&#39;2&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; fade_in_container = abjad.Container(</span>
+<span class="sd">        ...     r&quot;c&#39;&#39;8 d&#39;&#39;8 e&#39;&#39;8 f&#39;&#39;8 g&#39;&#39;8 a&#39;&#39;8 b&#39;&#39;8 c&#39;&#39;&#39;8&quot;</span>
+<span class="sd">        ... )</span>
+<span class="sd">        &gt;&gt;&gt; fader = auxjad.CrossFader(fade_out_container, fade_in_container)</span>
+<span class="sd">        &gt;&gt;&gt; selection_a, selection_b = fader.output_all()</span>
+<span class="sd">        &gt;&gt;&gt; score = abjad.Score([</span>
+<span class="sd">        ...     abjad.Staff(selection_a),</span>
+<span class="sd">        ...     abjad.Staff(selection_b),</span>
+<span class="sd">        ... ])</span>
+<span class="sd">        &gt;&gt;&gt; abjad.f(score)</span>
+<span class="sd">        \new Score</span>
+<span class="sd">        &lt;&lt;</span>
+<span class="sd">            \new Staff</span>
+<span class="sd">            {</span>
+<span class="sd">                \time 4/4</span>
+<span class="sd">                e&#39;2</span>
+<span class="sd">                c&#39;2</span>
+<span class="sd">                e&#39;2</span>
+<span class="sd">                c&#39;2</span>
+<span class="sd">                r2</span>
+<span class="sd">                c&#39;2</span>
+<span class="sd">                r2</span>
+<span class="sd">                c&#39;2</span>
+<span class="sd">                r2</span>
+<span class="sd">                c&#39;2</span>
+<span class="sd">                R1</span>
+<span class="sd">                R1</span>
+<span class="sd">                R1</span>
+<span class="sd">                R1</span>
+<span class="sd">                R1</span>
+<span class="sd">                R1</span>
+<span class="sd">            }</span>
+<span class="sd">            \new Staff</span>
+<span class="sd">            {</span>
+<span class="sd">                \time 4/4</span>
+<span class="sd">                R1</span>
+<span class="sd">                r4.</span>
+<span class="sd">                f&#39;&#39;8</span>
+<span class="sd">                r2</span>
+<span class="sd">                r4.</span>
+<span class="sd">                f&#39;&#39;8</span>
+<span class="sd">                r2</span>
+<span class="sd">                r4.</span>
+<span class="sd">                f&#39;&#39;8</span>
+<span class="sd">                r8</span>
+<span class="sd">                a&#39;&#39;8</span>
+<span class="sd">                r4</span>
+<span class="sd">                r4.</span>
+<span class="sd">                f&#39;&#39;8</span>
+<span class="sd">                r8</span>
+<span class="sd">                a&#39;&#39;8</span>
+<span class="sd">                b&#39;&#39;8</span>
+<span class="sd">                r8</span>
+<span class="sd">                r4.</span>
+<span class="sd">                f&#39;&#39;8</span>
+<span class="sd">                r8</span>
+<span class="sd">                a&#39;&#39;8</span>
+<span class="sd">                b&#39;&#39;8</span>
+<span class="sd">                r8</span>
+<span class="sd">                r4.</span>
+<span class="sd">                f&#39;&#39;8</span>
+<span class="sd">                r8</span>
+<span class="sd">                a&#39;&#39;8</span>
+<span class="sd">                b&#39;&#39;8</span>
+<span class="sd">                c&#39;&#39;&#39;8</span>
+<span class="sd">                r4</span>
+<span class="sd">                e&#39;&#39;8</span>
+<span class="sd">                f&#39;&#39;8</span>
+<span class="sd">                r8</span>
+<span class="sd">                a&#39;&#39;8</span>
+<span class="sd">                b&#39;&#39;8</span>
+<span class="sd">                c&#39;&#39;&#39;8</span>
+<span class="sd">                r8</span>
+<span class="sd">                d&#39;&#39;8</span>
+<span class="sd">                e&#39;&#39;8</span>
+<span class="sd">                f&#39;&#39;8</span>
+<span class="sd">                r8</span>
+<span class="sd">                a&#39;&#39;8</span>
+<span class="sd">                b&#39;&#39;8</span>
+<span class="sd">                c&#39;&#39;&#39;8</span>
+<span class="sd">                c&#39;&#39;8</span>
+<span class="sd">                d&#39;&#39;8</span>
+<span class="sd">                e&#39;&#39;8</span>
+<span class="sd">                f&#39;&#39;8</span>
+<span class="sd">                r8</span>
+<span class="sd">                a&#39;&#39;8</span>
+<span class="sd">                b&#39;&#39;8</span>
+<span class="sd">                c&#39;&#39;&#39;8</span>
+<span class="sd">                c&#39;&#39;8</span>
+<span class="sd">                d&#39;&#39;8</span>
+<span class="sd">                e&#39;&#39;8</span>
+<span class="sd">                f&#39;&#39;8</span>
+<span class="sd">                g&#39;&#39;8</span>
+<span class="sd">                a&#39;&#39;8</span>
+<span class="sd">                b&#39;&#39;8</span>
+<span class="sd">                c&#39;&#39;&#39;8</span>
+<span class="sd">            }</span>
+<span class="sd">        &gt;&gt;</span>
+
+<span class="sd">        .. figure:: ../_images/CrossFader-o58h79ijsdf.png</span>
+
+<span class="sd">        &gt;&gt;&gt; fader = auxjad.CrossFader(fade_out_container,</span>
+<span class="sd">        ...                           fade_in_container,</span>
+<span class="sd">        ...                           weighted_duration=True,</span>
+<span class="sd">        ...                           )</span>
+<span class="sd">        &gt;&gt;&gt; selection_a, selection_b = fader.output_all()</span>
+<span class="sd">        &gt;&gt;&gt; score = abjad.Score([</span>
+<span class="sd">        ...     abjad.Staff(selection_a),</span>
+<span class="sd">        ...     abjad.Staff(selection_b),</span>
+<span class="sd">        ... ])</span>
+<span class="sd">        &gt;&gt;&gt; abjad.f(score)</span>
+<span class="sd">        \new Score</span>
+<span class="sd">        &lt;&lt;</span>
+<span class="sd">            \new Staff</span>
+<span class="sd">            {</span>
+<span class="sd">                \time 4/4</span>
+<span class="sd">                e&#39;2</span>
+<span class="sd">                c&#39;2</span>
+<span class="sd">                e&#39;2</span>
+<span class="sd">                c&#39;2</span>
+<span class="sd">                r2</span>
+<span class="sd">                c&#39;2</span>
+<span class="sd">                r2</span>
+<span class="sd">                c&#39;2</span>
+<span class="sd">                r2</span>
+<span class="sd">                c&#39;2</span>
+<span class="sd">                r2</span>
+<span class="sd">                c&#39;2</span>
+<span class="sd">                r2</span>
+<span class="sd">                c&#39;2</span>
+<span class="sd">                r2</span>
+<span class="sd">                c&#39;2</span>
+<span class="sd">                r2</span>
+<span class="sd">                c&#39;2</span>
+<span class="sd">                r2</span>
+<span class="sd">                c&#39;2</span>
+<span class="sd">                R1</span>
+<span class="sd">            }</span>
+<span class="sd">            \new Staff</span>
+<span class="sd">            {</span>
+<span class="sd">                \time 4/4</span>
+<span class="sd">                R1</span>
+<span class="sd">                r4.</span>
+<span class="sd">                f&#39;&#39;8</span>
+<span class="sd">                r2</span>
+<span class="sd">                r4.</span>
+<span class="sd">                f&#39;&#39;8</span>
+<span class="sd">                r2</span>
+<span class="sd">                r4.</span>
+<span class="sd">                f&#39;&#39;8</span>
+<span class="sd">                r8</span>
+<span class="sd">                a&#39;&#39;8</span>
+<span class="sd">                r4</span>
+<span class="sd">                r4.</span>
+<span class="sd">                f&#39;&#39;8</span>
+<span class="sd">                r8</span>
+<span class="sd">                a&#39;&#39;8</span>
+<span class="sd">                b&#39;&#39;8</span>
+<span class="sd">                r8</span>
+<span class="sd">                r4</span>
+<span class="sd">                e&#39;&#39;8</span>
+<span class="sd">                f&#39;&#39;8</span>
+<span class="sd">                r8</span>
+<span class="sd">                a&#39;&#39;8</span>
+<span class="sd">                b&#39;&#39;8</span>
+<span class="sd">                r8</span>
+<span class="sd">                r4</span>
+<span class="sd">                e&#39;&#39;8</span>
+<span class="sd">                f&#39;&#39;8</span>
+<span class="sd">                g&#39;&#39;8</span>
+<span class="sd">                a&#39;&#39;8</span>
+<span class="sd">                b&#39;&#39;8</span>
+<span class="sd">                r8</span>
+<span class="sd">                c&#39;&#39;8</span>
+<span class="sd">                r8</span>
+<span class="sd">                e&#39;&#39;8</span>
+<span class="sd">                f&#39;&#39;8</span>
+<span class="sd">                g&#39;&#39;8</span>
+<span class="sd">                a&#39;&#39;8</span>
+<span class="sd">                b&#39;&#39;8</span>
+<span class="sd">                r8</span>
+<span class="sd">                c&#39;&#39;8</span>
+<span class="sd">                r8</span>
+<span class="sd">                e&#39;&#39;8</span>
+<span class="sd">                f&#39;&#39;8</span>
+<span class="sd">                g&#39;&#39;8</span>
+<span class="sd">                a&#39;&#39;8</span>
+<span class="sd">                b&#39;&#39;8</span>
+<span class="sd">                c&#39;&#39;&#39;8</span>
+<span class="sd">                c&#39;&#39;8</span>
+<span class="sd">                d&#39;&#39;8</span>
+<span class="sd">                e&#39;&#39;8</span>
+<span class="sd">                f&#39;&#39;8</span>
+<span class="sd">                g&#39;&#39;8</span>
+<span class="sd">                a&#39;&#39;8</span>
+<span class="sd">                b&#39;&#39;8</span>
+<span class="sd">                c&#39;&#39;&#39;8</span>
+<span class="sd">                c&#39;&#39;8</span>
+<span class="sd">                d&#39;&#39;8</span>
+<span class="sd">                e&#39;&#39;8</span>
+<span class="sd">                f&#39;&#39;8</span>
+<span class="sd">                g&#39;&#39;8</span>
+<span class="sd">                a&#39;&#39;8</span>
+<span class="sd">                b&#39;&#39;8</span>
+<span class="sd">                c&#39;&#39;&#39;8</span>
+<span class="sd">            }</span>
+<span class="sd">        &gt;&gt;</span>
+
+<span class="sd">        .. figure:: ../_images/CrossFader-l3dc3vxfpdnsxdym4gql.png</span>
+
+<span class="sd">    :attr:`initial_repetitions` and :attr:`final_repetitions`:</span>
+<span class="sd">        The properties :attr:`initial_repetitions` and</span>
+<span class="sd">        :attr:`final_repetitions` set the number of repetitions of the initial</span>
+<span class="sd">        and final measures (default is ``1`` for both).</span>
+
+<span class="sd">        &gt;&gt;&gt; fade_out_container = abjad.Container(r&quot;a&#39;4 bf&#39;2 r4&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; fade_in_container = abjad.Container(r&quot;c&#39;&#39;2 d&#39;&#39;2&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; fader = auxjad.CrossFader(fade_out_container,</span>
+<span class="sd">        ...                           fade_in_container,</span>
+<span class="sd">        ...                           initial_repetitions=2,</span>
+<span class="sd">        ...                           final_repetitions=3,</span>
+<span class="sd">        ...                           )</span>
+<span class="sd">        &gt;&gt;&gt; selection_a, selection_b = fader.output_all()</span>
+<span class="sd">        &gt;&gt;&gt; score = abjad.Score([</span>
+<span class="sd">        ...     abjad.Staff(selection_a),</span>
+<span class="sd">        ...     abjad.Staff(selection_b),</span>
+<span class="sd">        ... ])</span>
+<span class="sd">        &gt;&gt;&gt; abjad.f(score)</span>
+<span class="sd">        \new Score</span>
+<span class="sd">        &lt;&lt;</span>
+<span class="sd">            \new Staff</span>
+<span class="sd">            {</span>
+<span class="sd">                \time 4/4</span>
+<span class="sd">                a&#39;4</span>
+<span class="sd">                bf&#39;2</span>
+<span class="sd">                r4</span>
+<span class="sd">                a&#39;4</span>
+<span class="sd">                bf&#39;2</span>
+<span class="sd">                r4</span>
+<span class="sd">                r4</span>
+<span class="sd">                bf&#39;2</span>
+<span class="sd">                r4</span>
+<span class="sd">                r4</span>
+<span class="sd">                bf&#39;2</span>
+<span class="sd">                r4</span>
+<span class="sd">                r4</span>
+<span class="sd">                bf&#39;2</span>
+<span class="sd">                r4</span>
+<span class="sd">                R1</span>
+<span class="sd">                R1</span>
+<span class="sd">                R1</span>
+<span class="sd">            }</span>
+<span class="sd">            \new Staff</span>
+<span class="sd">            {</span>
+<span class="sd">                \time 4/4</span>
+<span class="sd">                R1</span>
+<span class="sd">                R1</span>
+<span class="sd">                R1</span>
+<span class="sd">                r2</span>
+<span class="sd">                d&#39;&#39;2</span>
+<span class="sd">                c&#39;&#39;2</span>
+<span class="sd">                d&#39;&#39;2</span>
+<span class="sd">                c&#39;&#39;2</span>
+<span class="sd">                d&#39;&#39;2</span>
+<span class="sd">                c&#39;&#39;2</span>
+<span class="sd">                d&#39;&#39;2</span>
+<span class="sd">                c&#39;&#39;2</span>
+<span class="sd">                d&#39;&#39;2</span>
+<span class="sd">            }</span>
+<span class="sd">        &gt;&gt;</span>
+
+<span class="sd">        .. figure:: ../_images/CrossFader-e480tbrvwg.png</span>
+
+<span class="sd">    :attr:`repetition_chance`:</span>
+<span class="sd">        Use :attr:`repetition_chance` to set the chance of a measure repeating</span>
+<span class="sd">        itself, ranging from ``0.0`` to ``1.0`` (default is ``0.0``,</span>
+<span class="sd">        i.e. no repetitions).</span>
+
+<span class="sd">        &gt;&gt;&gt; fade_out_container = abjad.Container(r&quot;a&#39;4 bf&#39;2 r4&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; fade_in_container = abjad.Container(r&quot;c&#39;&#39;2 d&#39;&#39;2&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; fader = auxjad.CrossFader(fade_out_container,</span>
+<span class="sd">        ...                           fade_in_container,</span>
+<span class="sd">        ...                           repetition_chance=0.8,</span>
+<span class="sd">        ...                           )</span>
+<span class="sd">        &gt;&gt;&gt; selection_a, selection_b = fader.output_n(4)</span>
+<span class="sd">        &gt;&gt;&gt; score = abjad.Score([</span>
+<span class="sd">        ...     abjad.Staff(selection_a),</span>
+<span class="sd">        ...     abjad.Staff(selection_b),</span>
+<span class="sd">        ... ])</span>
+<span class="sd">        &gt;&gt;&gt; abjad.f(score)</span>
+<span class="sd">        \new Score</span>
+<span class="sd">        &lt;&lt;</span>
+<span class="sd">            \new Staff</span>
+<span class="sd">            {</span>
+<span class="sd">                \time 4/4</span>
+<span class="sd">                a&#39;4</span>
+<span class="sd">                bf&#39;2</span>
+<span class="sd">                r4</span>
+<span class="sd">                a&#39;4</span>
+<span class="sd">                bf&#39;2</span>
+<span class="sd">                r4</span>
+<span class="sd">                a&#39;4</span>
+<span class="sd">                bf&#39;2</span>
+<span class="sd">                r4</span>
+<span class="sd">                a&#39;4</span>
+<span class="sd">                bf&#39;2</span>
+<span class="sd">                r4</span>
+<span class="sd">            }</span>
+<span class="sd">            \new Staff</span>
+<span class="sd">            {</span>
+<span class="sd">                \time 4/4</span>
+<span class="sd">                R1</span>
+<span class="sd">                r2</span>
+<span class="sd">                d&#39;&#39;2</span>
+<span class="sd">                r2</span>
+<span class="sd">                d&#39;&#39;2</span>
+<span class="sd">                r2</span>
+<span class="sd">                d&#39;&#39;2</span>
+<span class="sd">            }</span>
+<span class="sd">        &gt;&gt;</span>
+
+<span class="sd">        .. figure:: ../_images/CrossFader-743rxr2n02o.png</span>
+
+<span class="sd">    :attr:`omit_time_signatures`:</span>
+<span class="sd">        To disable time signatures altogether, initialise this class with the</span>
+<span class="sd">        keyword argument :attr:`omit_time_signatures` set to ``True`` (default</span>
+<span class="sd">        is ``False``), or use the :attr:`omit_time_signatures` property after</span>
+<span class="sd">        initialisation.</span>
+
+<span class="sd">        &gt;&gt;&gt; fade_out_container = abjad.Container(r&quot;fs&#39;4 g&#39;2 bf&#39;4&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; fade_in_container = abjad.Container(r&quot;\times 4/5 {cs&#39;&#39;4 d&#39;&#39;1}&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; fader = auxjad.CrossFader(fade_out_container,</span>
+<span class="sd">        ...                           fade_in_container,</span>
+<span class="sd">        ...                           omit_time_signatures=True,</span>
+<span class="sd">        ...                           )</span>
+<span class="sd">        &gt;&gt;&gt; selection_a, selection_b = fader.output_n(3)</span>
+<span class="sd">        &gt;&gt;&gt; score = abjad.Score([</span>
+<span class="sd">        ...     abjad.Staff(selection_a),</span>
+<span class="sd">        ...     abjad.Staff(selection_b),</span>
+<span class="sd">        ... ])</span>
+<span class="sd">        &gt;&gt;&gt; abjad.f(score)</span>
+<span class="sd">        \new Score</span>
+<span class="sd">        &lt;&lt;</span>
+<span class="sd">            \new Staff</span>
+<span class="sd">            {</span>
+<span class="sd">                fs&#39;4</span>
+<span class="sd">                g&#39;2</span>
+<span class="sd">                bf&#39;4</span>
+<span class="sd">                fs&#39;4</span>
+<span class="sd">                g&#39;2</span>
+<span class="sd">                r4</span>
+<span class="sd">                fs&#39;4</span>
+<span class="sd">                g&#39;2</span>
+<span class="sd">                r4</span>
+<span class="sd">            }</span>
+<span class="sd">            \new Staff</span>
+<span class="sd">            {</span>
+<span class="sd">                R1</span>
+<span class="sd">                R1</span>
+<span class="sd">                \times 4/5 {</span>
+<span class="sd">                    cs&#39;&#39;4</span>
+<span class="sd">                    r1</span>
+<span class="sd">                }</span>
+<span class="sd">            }</span>
+<span class="sd">        &gt;&gt;</span>
+
+<span class="sd">        .. figure:: ../_images/CrossFader-aypzofmynwe.png</span>
+
+<span class="sd">    .. tip::</span>
+
+<span class="sd">        All methods that return an |abjad.Selection| will add an initial time</span>
+<span class="sd">        signature to it. The :meth:`output_n` and :meth:`output_all` methods</span>
+<span class="sd">        automatically remove repeated time signatures. When joining selections</span>
+<span class="sd">        output by multiple method calls, use</span>
+<span class="sd">        |auxjad.mutate().remove_repeated_time_signatures()| on the whole</span>
+<span class="sd">        container after fusing the selections to remove any unecessary time</span>
+<span class="sd">        signature changes.</span>
+
+<span class="sd">    Tweaking or disabling |abjad.mutate().rewrite_meter()|:</span>
+<span class="sd">        This function uses the default logical tie splitting algorithm from</span>
+<span class="sd">        |abjad.mutate().rewrite_meter()|. It can be disabled with the property</span>
+<span class="sd">        :attr:`disable_rewrite_meter`.</span>
+
+<span class="sd">        &gt;&gt;&gt; fade_out_container = abjad.Container(r&quot;c&#39;8 d&#39;4 e&#39;8 ~ e&#39;2&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; fade_in_container = abjad.Container(r&quot;c&#39;2 d&#39;2&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; fader = auxjad.CrossFader(fade_out_container,</span>
+<span class="sd">        ...                           fade_in_container,</span>
+<span class="sd">        ...                           disable_rewrite_meter=True,</span>
+<span class="sd">        ...                           )</span>
+<span class="sd">        &gt;&gt;&gt; selection_a, selection_b = fader.output_n(3)</span>
+<span class="sd">        &gt;&gt;&gt; score = abjad.Score([</span>
+<span class="sd">        ...     abjad.Staff(selection_a),</span>
+<span class="sd">        ...     abjad.Staff(selection_b),</span>
+<span class="sd">        ... ])</span>
+<span class="sd">        &gt;&gt;&gt; abjad.f(score)</span>
+<span class="sd">        \new Score</span>
+<span class="sd">        &lt;&lt;</span>
+<span class="sd">            \new Staff</span>
+<span class="sd">            {</span>
+<span class="sd">                \time 4/4</span>
+<span class="sd">                c&#39;8</span>
+<span class="sd">                d&#39;4</span>
+<span class="sd">                e&#39;8</span>
+<span class="sd">                ~</span>
+<span class="sd">                e&#39;2</span>
+<span class="sd">                r8</span>
+<span class="sd">                d&#39;4</span>
+<span class="sd">                e&#39;8</span>
+<span class="sd">                ~</span>
+<span class="sd">                e&#39;2</span>
+<span class="sd">                r8</span>
+<span class="sd">                d&#39;4</span>
+<span class="sd">                e&#39;8</span>
+<span class="sd">                ~</span>
+<span class="sd">                e&#39;2</span>
+<span class="sd">            }</span>
+<span class="sd">            \new Staff</span>
+<span class="sd">            {</span>
+<span class="sd">                \time 4/4</span>
+<span class="sd">                R1</span>
+<span class="sd">                R1</span>
+<span class="sd">                r2</span>
+<span class="sd">                d&#39;2</span>
+<span class="sd">            }</span>
+<span class="sd">        &gt;&gt;</span>
+
+<span class="sd">        .. figure:: ../_images/CrossFader-vprhoh84quk.png</span>
+
+<span class="sd">        Arguments available for tweaking the output of</span>
+<span class="sd">        |abjad.mutate().rewrite_meter()| are :attr:`boundary_depth`,</span>
+<span class="sd">        :attr:`maximum_dot_count` and :attr:`rewrite_tuplets`, which work</span>
+<span class="sd">        exactly as the identically named arguments of</span>
+<span class="sd">        |abjad.mutate().rewrite_meter()|.</span>
+
+<span class="sd">    :attr:`fade_in_contents` and :attr:`fade_out_contents`:</span>
+<span class="sd">        Containers can be switched after initialisation by overwriting the</span>
+<span class="sd">        properties :attr:`fade_in_contents` or :attr:`fade_out_contents`. This</span>
+<span class="sd">        will reset the process.</span>
+
+<span class="sd">        &gt;&gt;&gt; fade_out_container = abjad.Container(</span>
+<span class="sd">        ...     r&quot;\time 3/4 e2 \times 2/3 {fs8 gs4}&quot;</span>
+<span class="sd">        ... )</span>
+<span class="sd">        &gt;&gt;&gt; fade_in_container = abjad.Container(</span>
+<span class="sd">        ...     r&quot;\time 3/4 c&#39;8 d&#39; e&#39; f&#39; g&#39; a&#39;&quot;</span>
+<span class="sd">        ... )</span>
+<span class="sd">        &gt;&gt;&gt; fader = auxjad.CrossFader(fade_out_container, fade_in_container)</span>
+<span class="sd">        &gt;&gt;&gt; fader.fade_out_contents = abjad.Container(r&quot;\time 3/4 a4. bf4.&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; print(fader)</span>
+<span class="sd">        {</span>
+<span class="sd">            %%% \time 3/4 %%%</span>
+<span class="sd">            a4.</span>
+<span class="sd">            bf4.</span>
+<span class="sd">        }</span>
+<span class="sd">        {</span>
+<span class="sd">            %%% \time 3/4 %%%</span>
+<span class="sd">            c&#39;8</span>
+<span class="sd">            d&#39;8</span>
+<span class="sd">            e&#39;8</span>
+<span class="sd">            f&#39;8</span>
+<span class="sd">            g&#39;8</span>
+<span class="sd">            a&#39;8</span>
+<span class="sd">        }</span>
+
+<span class="sd">    Time signature changes:</span>
+<span class="sd">        This class can handle time signature changes.</span>
+
+<span class="sd">        &gt;&gt;&gt; fade_out_container = abjad.Container(</span>
+<span class="sd">        ...     r&quot;\time 3/4 a&#39;4 bf&#39;2 ~ \time 2/4 bf&#39;4 f&#39;4&quot;</span>
+<span class="sd">        ... )</span>
+<span class="sd">        &gt;&gt;&gt; fade_in_container = abjad.Container(</span>
+<span class="sd">        ...     r&quot;\time 3/4 r16 cs&#39;&#39;4.. e&#39;&#39;4 \time 2/4 d&#39;&#39;2&quot;</span>
+<span class="sd">        ... )</span>
+<span class="sd">        &gt;&gt;&gt; fader = auxjad.CrossFader(fade_out_container, fade_in_container)</span>
+<span class="sd">        &gt;&gt;&gt; selection_a, selection_b = fader.output_n(3)</span>
+<span class="sd">        &gt;&gt;&gt; score = abjad.Score([</span>
+<span class="sd">        ...     abjad.Staff(selection_a),</span>
+<span class="sd">        ...     abjad.Staff(selection_b),</span>
+<span class="sd">        ... ])</span>
+<span class="sd">        &gt;&gt;&gt; abjad.f(score)</span>
+<span class="sd">        \new Score</span>
+<span class="sd">        &lt;&lt;</span>
+<span class="sd">            \new Staff</span>
+<span class="sd">            {</span>
+<span class="sd">                \time 3/4</span>
+<span class="sd">                a&#39;4</span>
+<span class="sd">                bf&#39;2</span>
+<span class="sd">                ~</span>
+<span class="sd">                \time 2/4</span>
+<span class="sd">                bf&#39;4</span>
+<span class="sd">                f&#39;4</span>
+<span class="sd">                \time 3/4</span>
+<span class="sd">                a&#39;4</span>
+<span class="sd">                bf&#39;2</span>
+<span class="sd">                ~</span>
+<span class="sd">                \time 2/4</span>
+<span class="sd">                bf&#39;4</span>
+<span class="sd">                f&#39;4</span>
+<span class="sd">                \time 3/4</span>
+<span class="sd">                a&#39;4</span>
+<span class="sd">                bf&#39;2</span>
+<span class="sd">                ~</span>
+<span class="sd">                \time 2/4</span>
+<span class="sd">                bf&#39;4</span>
+<span class="sd">                r4</span>
+<span class="sd">            }</span>
+<span class="sd">            \new Staff</span>
+<span class="sd">            {</span>
+<span class="sd">                \time 3/4</span>
+<span class="sd">                R1 * 3/4</span>
+<span class="sd">                \time 2/4</span>
+<span class="sd">                R1 * 1/2</span>
+<span class="sd">                \time 3/4</span>
+<span class="sd">                r16</span>
+<span class="sd">                cs&#39;&#39;4..</span>
+<span class="sd">                r4</span>
+<span class="sd">                \time 2/4</span>
+<span class="sd">                R1 * 1/2</span>
+<span class="sd">                \time 3/4</span>
+<span class="sd">                r16</span>
+<span class="sd">                cs&#39;&#39;4..</span>
+<span class="sd">                r4</span>
+<span class="sd">                \time 2/4</span>
+<span class="sd">                R1 * 1/2</span>
+<span class="sd">            }</span>
+<span class="sd">        &gt;&gt;</span>
+
+<span class="sd">        .. figure:: ../_images/CrossFader-w99zcui5rj.png</span>
+
+<span class="sd">    Indicators:</span>
+<span class="sd">        This class can also handle dynamics, articulations, chords, and</span>
+<span class="sd">        tuplets. Hairpins might need manual tweaking if the leaf under which</span>
+<span class="sd">        they terminate is removed.</span>
+
+<span class="sd">        &gt;&gt;&gt; fade_out_container = abjad.Container(r&quot;c&#39;4.\p e&#39;8--\f ~ e&#39;2&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; fade_in_container = abjad.Container(</span>
+<span class="sd">        ...     r&quot;\times 2/3 {f&#39;4-.\pp r4 d&#39;4-&gt;\f ~ } d&#39;2&quot;</span>
+<span class="sd">        ... )</span>
+<span class="sd">        &gt;&gt;&gt; fader = auxjad.CrossFader(fade_out_container,</span>
+<span class="sd">        ...                           fade_in_container,</span>
+<span class="sd">        ...                           fade_in_first=True,</span>
+<span class="sd">        ...                           fade_out_last=True,</span>
+<span class="sd">        ...                           )</span>
+<span class="sd">        &gt;&gt;&gt; selection_a, selection_b = fader.output_all()</span>
+<span class="sd">        &gt;&gt;&gt; score = abjad.Score([</span>
+<span class="sd">        ...     abjad.Staff(selection_a),</span>
+<span class="sd">        ...     abjad.Staff(selection_b),</span>
+<span class="sd">        ... ])</span>
+<span class="sd">        &gt;&gt;&gt; abjad.f(score)</span>
+<span class="sd">        \new Score</span>
+<span class="sd">        &lt;&lt;</span>
+<span class="sd">            \new Staff</span>
+<span class="sd">            {</span>
+<span class="sd">                \time 4/4</span>
+<span class="sd">                c&#39;4.</span>
+<span class="sd">                \p</span>
+<span class="sd">                e&#39;8</span>
+<span class="sd">                \f</span>
+<span class="sd">                - \tenuto</span>
+<span class="sd">                ~</span>
+<span class="sd">                e&#39;2</span>
+<span class="sd">                c&#39;4.</span>
+<span class="sd">                \p</span>
+<span class="sd">                e&#39;8</span>
+<span class="sd">                \f</span>
+<span class="sd">                - \tenuto</span>
+<span class="sd">                ~</span>
+<span class="sd">                e&#39;2</span>
+<span class="sd">                r4.</span>
+<span class="sd">                e&#39;8</span>
+<span class="sd">                - \tenuto</span>
+<span class="sd">                ~</span>
+<span class="sd">                e&#39;2</span>
+<span class="sd">                r4.</span>
+<span class="sd">                e&#39;8</span>
+<span class="sd">                - \tenuto</span>
+<span class="sd">                ~</span>
+<span class="sd">                e&#39;2</span>
+<span class="sd">                R1</span>
+<span class="sd">            }</span>
+<span class="sd">            \new Staff</span>
+<span class="sd">            {</span>
+<span class="sd">                \time 4/4</span>
+<span class="sd">                R1</span>
+<span class="sd">                \times 2/3 {</span>
+<span class="sd">                    f&#39;4</span>
+<span class="sd">                    \pp</span>
+<span class="sd">                    - \staccato</span>
+<span class="sd">                    r2</span>
+<span class="sd">                }</span>
+<span class="sd">                r2</span>
+<span class="sd">                \times 2/3 {</span>
+<span class="sd">                    f&#39;4</span>
+<span class="sd">                    - \staccato</span>
+<span class="sd">                    r2</span>
+<span class="sd">                }</span>
+<span class="sd">                r2</span>
+<span class="sd">                \times 2/3 {</span>
+<span class="sd">                    f&#39;4</span>
+<span class="sd">                    - \staccato</span>
+<span class="sd">                    r4</span>
+<span class="sd">                    d&#39;4</span>
+<span class="sd">                    \f</span>
+<span class="sd">                    - \accent</span>
+<span class="sd">                    ~</span>
+<span class="sd">                }</span>
+<span class="sd">                d&#39;2</span>
+<span class="sd">                \times 2/3 {</span>
+<span class="sd">                    f&#39;4</span>
+<span class="sd">                    \pp</span>
+<span class="sd">                    - \staccato</span>
+<span class="sd">                    r4</span>
+<span class="sd">                    d&#39;4</span>
+<span class="sd">                    \f</span>
+<span class="sd">                    - \accent</span>
+<span class="sd">                    ~</span>
+<span class="sd">                }</span>
+<span class="sd">                d&#39;2</span>
+<span class="sd">            }</span>
+<span class="sd">        &gt;&gt;</span>
+
+<span class="sd">        .. figure:: ../_images/CrossFader-o0yetbq5wqj.png</span>
+
+<span class="sd">    .. tip::</span>
+
+<span class="sd">        The functions |auxjad.mutate().remove_repeated_dynamics()| and</span>
+<span class="sd">        |auxjad.mutate().reposition_clefs()| can be used to clean the output</span>
+<span class="sd">        and remove repeated dynamics and unnecessary clef changes.</span>
+
+<span class="sd">    .. warning::</span>
+
+<span class="sd">        Do note that some elements that span multiple notes (such as ottava</span>
+<span class="sd">        indicators, manual beams, etc.) can become problematic when notes</span>
+<span class="sd">        containing them are split into two. As a rule of thumb, it is always</span>
+<span class="sd">        better to attach those to the music after the fading process has ended.</span>
+
+<span class="sd">    Using multiple voices:</span>
+<span class="sd">        The selections output by the fader can also be assigned to</span>
+<span class="sd">        |abjad.Voice| containers, which can then be displayed simultaneously on</span>
+<span class="sd">        a single |abjad.Staff|.</span>
+
+<span class="sd">        &gt;&gt;&gt; fade_out_container = abjad.Container(r&quot;b&#39;8 c&#39;&#39;8 e&#39;&#39;2 g&#39;&#39;4&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; fade_in_container = abjad.Container(r&quot;\times 2/3 {e&#39;2 d&#39;2 c&#39;2}&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; fader = auxjad.CrossFader(fade_out_container, fade_in_container)</span>
+<span class="sd">        &gt;&gt;&gt; selection_a, selection_b = fader.output_all()</span>
+<span class="sd">        &gt;&gt;&gt; literal_voice_one = abjad.LilyPondLiteral(r&#39;\voiceOne&#39;)</span>
+<span class="sd">        &gt;&gt;&gt; literal_voice_two = abjad.LilyPondLiteral(r&#39;\voiceTwo&#39;)</span>
+<span class="sd">        &gt;&gt;&gt; abjad.attach(literal_voice_one, selection_a[0])</span>
+<span class="sd">        &gt;&gt;&gt; abjad.attach(literal_voice_two, selection_b[0])</span>
+<span class="sd">        &gt;&gt;&gt; staff = abjad.Staff(</span>
+<span class="sd">        ...     [abjad.Voice(selection_a), abjad.Voice(selection_b)],</span>
+<span class="sd">        ...     simultaneous=True,</span>
+<span class="sd">        ... )</span>
+<span class="sd">        &gt;&gt;&gt; abjad.f(staff)</span>
+<span class="sd">        \new Staff</span>
+<span class="sd">        &lt;&lt;</span>
+<span class="sd">            \new Voice</span>
+<span class="sd">            {</span>
+<span class="sd">                \time 4/4</span>
+<span class="sd">                \voiceOne</span>
+<span class="sd">                b&#39;8</span>
+<span class="sd">                c&#39;&#39;8</span>
+<span class="sd">                e&#39;&#39;2</span>
+<span class="sd">                g&#39;&#39;4</span>
+<span class="sd">                b&#39;8</span>
+<span class="sd">                c&#39;&#39;8</span>
+<span class="sd">                e&#39;&#39;2</span>
+<span class="sd">                r4</span>
+<span class="sd">                b&#39;8</span>
+<span class="sd">                c&#39;&#39;8</span>
+<span class="sd">                e&#39;&#39;2</span>
+<span class="sd">                r4</span>
+<span class="sd">                b&#39;8</span>
+<span class="sd">                c&#39;&#39;8</span>
+<span class="sd">                e&#39;&#39;2</span>
+<span class="sd">                r4</span>
+<span class="sd">                b&#39;8</span>
+<span class="sd">                c&#39;&#39;8</span>
+<span class="sd">                e&#39;&#39;2</span>
+<span class="sd">                r4</span>
+<span class="sd">                b&#39;8</span>
+<span class="sd">                c&#39;&#39;8</span>
+<span class="sd">                r2.</span>
+<span class="sd">                b&#39;8</span>
+<span class="sd">                r2..</span>
+<span class="sd">                R1</span>
+<span class="sd">            }</span>
+<span class="sd">            \new Voice</span>
+<span class="sd">            {</span>
+<span class="sd">                \time 4/4</span>
+<span class="sd">                \voiceTwo</span>
+<span class="sd">                R1</span>
+<span class="sd">                R1</span>
+<span class="sd">                \times 2/3 {</span>
+<span class="sd">                    r1</span>
+<span class="sd">                    c&#39;2</span>
+<span class="sd">                }</span>
+<span class="sd">                \times 2/3 {</span>
+<span class="sd">                    e&#39;2</span>
+<span class="sd">                    r2</span>
+<span class="sd">                    c&#39;2</span>
+<span class="sd">                }</span>
+<span class="sd">                \times 2/3 {</span>
+<span class="sd">                    e&#39;2</span>
+<span class="sd">                    d&#39;2</span>
+<span class="sd">                    c&#39;2</span>
+<span class="sd">                }</span>
+<span class="sd">                \times 2/3 {</span>
+<span class="sd">                    e&#39;2</span>
+<span class="sd">                    d&#39;2</span>
+<span class="sd">                    c&#39;2</span>
+<span class="sd">                }</span>
+<span class="sd">                \times 2/3 {</span>
+<span class="sd">                    e&#39;2</span>
+<span class="sd">                    d&#39;2</span>
+<span class="sd">                    c&#39;2</span>
+<span class="sd">                }</span>
+<span class="sd">                \times 2/3 {</span>
+<span class="sd">                    e&#39;2</span>
+<span class="sd">                    d&#39;2</span>
+<span class="sd">                    c&#39;2</span>
+<span class="sd">                }</span>
+<span class="sd">            }</span>
+<span class="sd">        &gt;&gt;</span>
+
+<span class="sd">        .. figure:: ../_images/CrossFader-rZLSa2kyqM.png</span>
+
+<span class="sd">    Using containers of different lengths:</span>
+<span class="sd">        It is possible to use this class with containers of different lengths</span>
+<span class="sd">        and time signatures, although this feature is not fully implemented and</span>
+<span class="sd">        should be considered experimental. LilyPond must be set up to allow</span>
+<span class="sd">        different simultaneous time signatures, and</span>
+<span class="sd">        |auxjad.mutate().sync_containers()| can be used to add rests to the end</span>
+<span class="sd">        of the shorter staff.</span>
+
+<span class="sd">        &gt;&gt;&gt; fade_out_container = abjad.Container(r&quot;\time 3/4 c&#39;4 d&#39;4 e&#39;4&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; fade_in_container = abjad.Container(r&quot;\time 4/4 g&#39;2 a&#39;2&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; fader = auxjad.CrossFader(fade_out_container,</span>
+<span class="sd">        ...                           fade_in_container,</span>
+<span class="sd">        ...                           fade_in_first=True,</span>
+<span class="sd">        ...                           fade_out_last=True,</span>
+<span class="sd">        ...                           weighted_duration=True,</span>
+<span class="sd">        ...                           )</span>
+<span class="sd">        &gt;&gt;&gt; selection_a, selection_b = fader.output_all()</span>
+<span class="sd">        &gt;&gt;&gt; staff_a = abjad.Staff(selection_a)</span>
+<span class="sd">        &gt;&gt;&gt; staff_b = abjad.Staff(selection_b)</span>
+<span class="sd">        &gt;&gt;&gt; abjad.mutate([staff_a, staff_b]).sync_containers()</span>
+<span class="sd">        &gt;&gt;&gt; score = abjad.Score([staff_a, staff_b])</span>
+<span class="sd">        &gt;&gt;&gt; lilypond_file = abjad.LilyPondFile.new()</span>
+<span class="sd">        &gt;&gt;&gt; score_block = abjad.Block(name=&#39;score&#39;)</span>
+<span class="sd">        &gt;&gt;&gt; layout_block = abjad.Block(name=&#39;layout&#39;)</span>
+<span class="sd">        &gt;&gt;&gt; score_block.items.append(score)</span>
+<span class="sd">        &gt;&gt;&gt; score_block.items.append(layout_block)</span>
+<span class="sd">        &gt;&gt;&gt; lilypond_file.items.append(score_block)</span>
+<span class="sd">        &gt;&gt;&gt; layout_block.items.append(</span>
+<span class="sd">        ...     r&#39;&#39;&#39;\context {</span>
+<span class="sd">        ...         \Score</span>
+<span class="sd">        ...         \remove &quot;Timing_translator&quot;</span>
+<span class="sd">        ...         \remove &quot;Default_bar_line_engraver&quot;</span>
+<span class="sd">        ...     }</span>
+<span class="sd">        ...     \context {</span>
+<span class="sd">        ...         \Staff</span>
+<span class="sd">        ...         \consists &quot;Timing_translator&quot;</span>
+<span class="sd">        ...         \consists &quot;Default_bar_line_engraver&quot;</span>
+<span class="sd">        ...     }&#39;&#39;&#39;</span>
+<span class="sd">        ... )</span>
+<span class="sd">        &gt;&gt;&gt; abjad.f(score)</span>
+<span class="sd">        \version &quot;2.19.82&quot;  %! abjad.LilyPondFile._get_format_pieces()</span>
+<span class="sd">        \language &quot;english&quot; %! abjad.LilyPondFile._get_format_pieces()</span>
+<span class="sd">        \header { %! abjad.LilyPondFile._get_formatted_blocks()</span>
+<span class="sd">            tagline = ##f</span>
+<span class="sd">        } %! abjad.LilyPondFile._get_formatted_blocks()</span>
+<span class="sd">        \layout {}</span>
+<span class="sd">        \paper {}</span>
+<span class="sd">        \score { %! abjad.LilyPondFile._get_formatted_blocks()</span>
+<span class="sd">            \new Score</span>
+<span class="sd">            &lt;&lt;</span>
+<span class="sd">                \new Staff</span>
+<span class="sd">                {</span>
+<span class="sd">                    \time 3/4</span>
+<span class="sd">                    c&#39;4</span>
+<span class="sd">                    d&#39;4</span>
+<span class="sd">                    e&#39;4</span>
+<span class="sd">                    c&#39;4</span>
+<span class="sd">                    d&#39;4</span>
+<span class="sd">                    e&#39;4</span>
+<span class="sd">                    c&#39;4</span>
+<span class="sd">                    r4</span>
+<span class="sd">                    e&#39;4</span>
+<span class="sd">                    c&#39;4</span>
+<span class="sd">                    r2</span>
+<span class="sd">                    c&#39;4</span>
+<span class="sd">                    r2</span>
+<span class="sd">                    R1 * 3/4</span>
+<span class="sd">                    R1 * 3/4</span>
+<span class="sd">                    R1 * 3/4</span>
+<span class="sd">                }</span>
+<span class="sd">                \new Staff</span>
+<span class="sd">                {</span>
+<span class="sd">                    \time 4/4</span>
+<span class="sd">                    R1</span>
+<span class="sd">                    r2</span>
+<span class="sd">                    a&#39;2</span>
+<span class="sd">                    r2</span>
+<span class="sd">                    a&#39;2</span>
+<span class="sd">                    r2</span>
+<span class="sd">                    a&#39;2</span>
+<span class="sd">                    g&#39;2</span>
+<span class="sd">                    a&#39;2</span>
+<span class="sd">                    g&#39;2</span>
+<span class="sd">                    a&#39;2</span>
+<span class="sd">                }</span>
+<span class="sd">            &gt;&gt;</span>
+<span class="sd">            \layout {</span>
+<span class="sd">                \context {</span>
+<span class="sd">                    \Score</span>
+<span class="sd">                    \remove &quot;Timing_translator&quot;</span>
+<span class="sd">                    \remove &quot;Default_bar_line_engraver&quot;</span>
+<span class="sd">                }</span>
+<span class="sd">                \context {</span>
+<span class="sd">                    \Staff</span>
+<span class="sd">                    \consists &quot;Timing_translator&quot;</span>
+<span class="sd">                    \consists &quot;Default_bar_line_engraver&quot;</span>
+<span class="sd">                }</span>
+<span class="sd">            }</span>
+<span class="sd">        } %! abjad.LilyPondFile._get_formatted_blocks()</span>
+
+<span class="sd">        .. figure:: ../_images/CrossFader-5qvaan79w8p.png</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="c1">### CLASS VARIABLES ###</span>
+
+    <span class="vm">__slots__</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;_fade_out_contents&#39;</span><span class="p">,</span>
+                 <span class="s1">&#39;_fade_in_contents&#39;</span><span class="p">,</span>
+                 <span class="s1">&#39;_fader_in&#39;</span><span class="p">,</span>
+                 <span class="s1">&#39;_fader_out&#39;</span><span class="p">,</span>
+                 <span class="s1">&#39;_faders&#39;</span><span class="p">,</span>
+                 <span class="s1">&#39;_weights&#39;</span><span class="p">,</span>
+                 <span class="s1">&#39;_weighted_duration&#39;</span><span class="p">,</span>
+                 <span class="s1">&#39;_is_first_window&#39;</span><span class="p">,</span>
+                 <span class="s1">&#39;_is_first_process&#39;</span><span class="p">,</span>
+                 <span class="s1">&#39;_repetition_chance&#39;</span><span class="p">,</span>
+                 <span class="s1">&#39;_initial_repetitions&#39;</span><span class="p">,</span>
+                 <span class="s1">&#39;_final_repetitions&#39;</span><span class="p">,</span>
+                 <span class="s1">&#39;_initial_repetitions_counter&#39;</span><span class="p">,</span>
+                 <span class="s1">&#39;_final_repetitions_counter&#39;</span><span class="p">,</span>
+                 <span class="s1">&#39;_disable_rewrite_meter&#39;</span><span class="p">,</span>
+                 <span class="s1">&#39;_omit_time_signatures&#39;</span><span class="p">,</span>
+                 <span class="s1">&#39;_use_multimeasure_rests&#39;</span><span class="p">,</span>
+                 <span class="s1">&#39;_boundary_depth&#39;</span><span class="p">,</span>
+                 <span class="s1">&#39;_maximum_dot_count&#39;</span><span class="p">,</span>
+                 <span class="s1">&#39;_rewrite_tuplets&#39;</span><span class="p">,</span>
+                 <span class="s1">&#39;_fade_in_first&#39;</span><span class="p">,</span>
+                 <span class="s1">&#39;_fade_out_last&#39;</span><span class="p">,</span>
+                 <span class="p">)</span>
+
+    <span class="c1">### INITIALISER ###</span>
+
+<div class="viewcode-block" id="CrossFader.__init__"><a class="viewcode-back" href="../../../_api_members/auxjad.CrossFader.html#auxjad.CrossFader.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+                 <span class="n">fade_out_contents</span><span class="p">:</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">,</span>
+                 <span class="n">fade_in_contents</span><span class="p">:</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">,</span>
+                 <span class="o">*</span><span class="p">,</span>
+                 <span class="n">fade_in_first</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+                 <span class="n">fade_out_last</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+                 <span class="n">initial_repetitions</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span>
+                 <span class="n">final_repetitions</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span>
+                 <span class="n">repetition_chance</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.0</span><span class="p">,</span>
+                 <span class="n">weighted_duration</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+                 <span class="n">disable_rewrite_meter</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+                 <span class="n">omit_time_signatures</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+                 <span class="n">use_multimeasure_rests</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+                 <span class="n">boundary_depth</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+                 <span class="n">maximum_dot_count</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+                 <span class="n">rewrite_tuplets</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+                 <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sa">r</span><span class="s1">&#39;Initialises self.&#39;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">fade_out_contents</span><span class="p">,</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;&#39;fade_out_contents&#39; must be &#39;abjad.Container&#39; or &quot;</span>
+                            <span class="s2">&quot;child class&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">fade_in_contents</span><span class="p">,</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;&#39;fade_in_contents&#39; must be &#39;abjad.Container&#39; or &quot;</span>
+                            <span class="s2">&quot;child class&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_fade_out_contents</span> <span class="o">=</span> <span class="n">fade_out_contents</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_fade_in_contents</span> <span class="o">=</span> <span class="n">fade_in_contents</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_fader_out</span> <span class="o">=</span> <span class="n">Fader</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_fade_out_contents</span><span class="p">,</span> <span class="n">fader_type</span><span class="o">=</span><span class="s1">&#39;out&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_fader_in</span> <span class="o">=</span> <span class="n">Fader</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_fade_in_contents</span><span class="p">,</span> <span class="n">fader_type</span><span class="o">=</span><span class="s1">&#39;in&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_faders</span> <span class="o">=</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_fader_in</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_fader_out</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_is_first_window</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_is_first_process</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_initial_repetitions_counter</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_final_repetitions_counter</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">fade_in_first</span> <span class="o">=</span> <span class="n">fade_in_first</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">fade_out_last</span> <span class="o">=</span> <span class="n">fade_out_last</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">disable_rewrite_meter</span> <span class="o">=</span> <span class="n">disable_rewrite_meter</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">omit_time_signatures</span> <span class="o">=</span> <span class="n">omit_time_signatures</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">use_multimeasure_rests</span> <span class="o">=</span> <span class="n">use_multimeasure_rests</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">boundary_depth</span> <span class="o">=</span> <span class="n">boundary_depth</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">maximum_dot_count</span> <span class="o">=</span> <span class="n">maximum_dot_count</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">rewrite_tuplets</span> <span class="o">=</span> <span class="n">rewrite_tuplets</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">initial_repetitions</span> <span class="o">=</span> <span class="n">initial_repetitions</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">final_repetitions</span> <span class="o">=</span> <span class="n">final_repetitions</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">repetition_chance</span> <span class="o">=</span> <span class="n">repetition_chance</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">weighted_duration</span> <span class="o">=</span> <span class="n">weighted_duration</span></div>
+
+    <span class="c1">### SPECIAL METHODS ###</span>
+
+<div class="viewcode-block" id="CrossFader.__repr__"><a class="viewcode-back" href="../../../_api_members/auxjad.CrossFader.html#auxjad.CrossFader.__repr__">[docs]</a>    <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="sa">r</span><span class="s1">&#39;Returns interpreter representation of both contents.&#39;</span>
+        <span class="k">return</span> <span class="nb">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_fader_out</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">+</span> <span class="nb">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_fader_in</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="CrossFader.__len__"><a class="viewcode-back" href="../../../_api_members/auxjad.CrossFader.html#auxjad.CrossFader.__len__">[docs]</a>    <span class="k">def</span> <span class="fm">__len__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+        <span class="sa">r</span><span class="s1">&#39;Returns the sum of the number of notes of both contents.&#39;</span>
+        <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_fader_in</span><span class="p">)</span> <span class="o">+</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_fader_out</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="CrossFader.__call__"><a class="viewcode-back" href="../../../_api_members/auxjad.CrossFader.html#auxjad.CrossFader.__call__">[docs]</a>    <span class="k">def</span> <span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="n">abjad</span><span class="o">.</span><span class="n">Selection</span><span class="p">]:</span>
+        <span class="sa">r</span><span class="sd">&quot;&quot;&quot;Calls the cross fading process, returning a :obj:`tuple` of</span>
+<span class="sd">        |abjad.Selection| objects.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_cross_fade_process</span><span class="p">()</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">current_window</span></div>
+
+<div class="viewcode-block" id="CrossFader.__next__"><a class="viewcode-back" href="../../../_api_members/auxjad.CrossFader.html#auxjad.CrossFader.__next__">[docs]</a>    <span class="k">def</span> <span class="fm">__next__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="n">abjad</span><span class="o">.</span><span class="n">Selection</span><span class="p">]:</span>
+        <span class="sa">r</span><span class="sd">&quot;&quot;&quot;Calls the cross fading process for one iteration, returning a</span>
+<span class="sd">        :obj:`tuple` of |abjad.Selection| objects.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="fm">__call__</span><span class="p">()</span>
+        <span class="k">except</span> <span class="ne">RuntimeError</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">StopIteration</span></div>
+
+<div class="viewcode-block" id="CrossFader.__iter__"><a class="viewcode-back" href="../../../_api_members/auxjad.CrossFader.html#auxjad.CrossFader.__iter__">[docs]</a>    <span class="k">def</span> <span class="fm">__iter__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sa">r</span><span class="s1">&#39;Returns an iterator, allowing instances to be used as iterators.&#39;</span>
+        <span class="k">return</span> <span class="bp">self</span></div>
+
+    <span class="c1">### PUBLIC METHODS ###</span>
+
+<div class="viewcode-block" id="CrossFader.output_all"><a class="viewcode-back" href="../../../_api_members/auxjad.CrossFader.html#auxjad.CrossFader.output_all">[docs]</a>    <span class="k">def</span> <span class="nf">output_all</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="n">abjad</span><span class="o">.</span><span class="n">Selection</span><span class="p">]:</span>
+        <span class="sa">r</span><span class="sd">&quot;&quot;&quot;Goes through the whole fading process and outputs a tuple of two</span>
+<span class="sd">        |abjad.Selection| objects.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">reset</span><span class="p">()</span>
+        <span class="n">dummy_container_a</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">()</span>
+        <span class="n">dummy_container_b</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">()</span>
+        <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">result_a</span><span class="p">,</span> <span class="n">result_b</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="fm">__call__</span><span class="p">()</span>
+                <span class="n">dummy_container_a</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">result_a</span><span class="p">)</span>
+                <span class="n">dummy_container_b</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">result_b</span><span class="p">)</span>
+            <span class="k">except</span> <span class="ne">RuntimeError</span><span class="p">:</span>
+                <span class="k">break</span>
+        <span class="n">mutate</span><span class="p">(</span><span class="n">dummy_container_a</span><span class="p">[:])</span><span class="o">.</span><span class="n">remove_repeated_time_signatures</span><span class="p">()</span>
+        <span class="n">mutate</span><span class="p">(</span><span class="n">dummy_container_b</span><span class="p">[:])</span><span class="o">.</span><span class="n">remove_repeated_time_signatures</span><span class="p">()</span>
+        <span class="n">mutate</span><span class="p">(</span><span class="n">dummy_container_a</span><span class="p">[:])</span><span class="o">.</span><span class="n">remove_repeated_dynamics</span><span class="p">()</span>
+        <span class="n">mutate</span><span class="p">(</span><span class="n">dummy_container_b</span><span class="p">[:])</span><span class="o">.</span><span class="n">remove_repeated_dynamics</span><span class="p">()</span>
+        <span class="n">output</span> <span class="o">=</span> <span class="p">(</span><span class="n">dummy_container_a</span><span class="p">[:],</span> <span class="n">dummy_container_b</span><span class="p">[:])</span>
+        <span class="n">dummy_container_a</span><span class="p">[:]</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">dummy_container_b</span><span class="p">[:]</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">return</span> <span class="n">output</span></div>
+
+<div class="viewcode-block" id="CrossFader.output_n"><a class="viewcode-back" href="../../../_api_members/auxjad.CrossFader.html#auxjad.CrossFader.output_n">[docs]</a>    <span class="k">def</span> <span class="nf">output_n</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+                 <span class="n">n</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+                 <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="n">abjad</span><span class="o">.</span><span class="n">Selection</span><span class="p">]:</span>
+        <span class="sa">r</span><span class="sd">&quot;&quot;&quot;Goes through ``n`` iterations of the fading process and outputs a</span>
+<span class="sd">        tuple of two |abjad.Selection| objects.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="nb">int</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;first positional argument must be &#39;int&#39;&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">n</span> <span class="o">&lt;</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;first positional argument must be a positive &quot;</span>
+                             <span class="s2">&quot;&#39;int&#39;&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">reset</span><span class="p">()</span>
+        <span class="n">dummy_container_a</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">()</span>
+        <span class="n">dummy_container_b</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">result_a</span><span class="p">,</span> <span class="n">result_b</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="fm">__call__</span><span class="p">()</span>
+                <span class="n">dummy_container_a</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">result_a</span><span class="p">)</span>
+                <span class="n">dummy_container_b</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">result_b</span><span class="p">)</span>
+            <span class="k">except</span> <span class="ne">RuntimeError</span><span class="p">:</span>
+                <span class="k">break</span>
+        <span class="n">mutate</span><span class="p">(</span><span class="n">dummy_container_a</span><span class="p">[:])</span><span class="o">.</span><span class="n">remove_repeated_time_signatures</span><span class="p">()</span>
+        <span class="n">mutate</span><span class="p">(</span><span class="n">dummy_container_b</span><span class="p">[:])</span><span class="o">.</span><span class="n">remove_repeated_time_signatures</span><span class="p">()</span>
+        <span class="n">mutate</span><span class="p">(</span><span class="n">dummy_container_a</span><span class="p">[:])</span><span class="o">.</span><span class="n">remove_repeated_dynamics</span><span class="p">()</span>
+        <span class="n">mutate</span><span class="p">(</span><span class="n">dummy_container_b</span><span class="p">[:])</span><span class="o">.</span><span class="n">remove_repeated_dynamics</span><span class="p">()</span>
+        <span class="n">output</span> <span class="o">=</span> <span class="p">(</span><span class="n">dummy_container_a</span><span class="p">[:],</span> <span class="n">dummy_container_b</span><span class="p">[:])</span>
+        <span class="n">dummy_container_a</span><span class="p">[:]</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">dummy_container_b</span><span class="p">[:]</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">return</span> <span class="n">output</span></div>
+
+<div class="viewcode-block" id="CrossFader.reset"><a class="viewcode-back" href="../../../_api_members/auxjad.CrossFader.html#auxjad.CrossFader.reset">[docs]</a>    <span class="k">def</span> <span class="nf">reset</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sa">r</span><span class="s1">&#39;Resets to the initial state.&#39;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_is_first_window</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_is_first_process</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_initial_repetitions_counter</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_final_repetitions_counter</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_fader_in</span><span class="o">.</span><span class="n">reset_mask</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_fader_out</span><span class="o">.</span><span class="n">reset_mask</span><span class="p">()</span></div>
+
+    <span class="c1">### PRIVATE METHODS ###</span>
+
+    <span class="k">def</span> <span class="nf">_cross_fade_process</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sa">r</span><span class="s1">&#39;Processes both faders according to the cross fade process.&#39;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_is_first_window</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_fader_out</span><span class="p">()</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_fader_in</span><span class="p">()</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_initial_repetitions_counter</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_is_first_window</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">_initial_repetitions_counter</span> <span class="o">&lt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">_initial_repetitions</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_initial_repetitions_counter</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">_done</span><span class="p">:</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_final_repetitions_counter</span> <span class="o">&lt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">_final_repetitions</span> <span class="o">-</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_final_repetitions_counter</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s2">&quot;both faders have been exhausted&quot;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">if</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_is_first_process</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">_repetition_chance</span> <span class="o">==</span> <span class="mf">0.0</span>
+                    <span class="ow">or</span> <span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">()</span> <span class="o">&gt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">_repetition_chance</span><span class="p">):</span>
+                <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_fade_in_first</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">_is_first_process</span><span class="p">:</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">_fader_in</span><span class="p">()</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">_is_first_process</span> <span class="o">=</span> <span class="kc">False</span>
+                <span class="k">elif</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_fade_out_last</span> <span class="ow">and</span> <span class="nb">sum</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_fader_out</span><span class="o">.</span><span class="n">_mask</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span>
+                        <span class="ow">and</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_fader_in</span><span class="o">.</span><span class="n">_done</span><span class="p">):</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">_fader_in</span><span class="p">()</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="k">try</span><span class="p">:</span>
+                        <span class="n">random_fader</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">choices</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_faders</span><span class="p">,</span>
+                                                      <span class="n">weights</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_weights</span><span class="p">,</span>
+                                                      <span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+                        <span class="n">random_fader</span><span class="p">()</span>
+                    <span class="k">except</span> <span class="ne">RuntimeError</span><span class="p">:</span>
+                        <span class="n">other_fader</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_faders</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+                        <span class="k">if</span> <span class="n">other_fader</span> <span class="ow">is</span> <span class="n">random_fader</span><span class="p">:</span>
+                            <span class="n">other_fader</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_faders</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+                        <span class="n">other_fader</span><span class="p">()</span>
+                    <span class="k">finally</span><span class="p">:</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">_is_first_process</span> <span class="o">=</span> <span class="kc">False</span>
+
+    <span class="c1">### PUBLIC PROPERTIES ###</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">fade_out_contents</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">:</span>
+        <span class="sa">r</span><span class="s1">&#39;The |abjad.Container| to be faded out.&#39;</span>
+        <span class="k">return</span> <span class="n">abjad</span><span class="o">.</span><span class="n">mutate</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_fade_out_contents</span><span class="p">)</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+
+    <span class="nd">@fade_out_contents</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">fade_out_contents</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+                          <span class="n">fade_out_contents</span><span class="p">:</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">,</span>
+                          <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">fade_out_contents</span><span class="p">,</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;&#39;fade_out_contents&#39; must be &#39;abjad.Container&#39; or &quot;</span>
+                            <span class="s2">&quot;child class&quot;</span><span class="p">)</span>
+        <span class="n">leaves</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="n">fade_out_contents</span><span class="p">)</span><span class="o">.</span><span class="n">leaves</span><span class="p">()</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">leaves</span><span class="o">.</span><span class="n">are_contiguous_logical_voice</span><span class="p">():</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;&#39;fade_out_contents&#39; must be contiguous logical &quot;</span>
+                             <span class="s2">&quot; voice&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_fade_out_contents</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">mutate</span><span class="p">(</span><span class="n">fade_out_contents</span><span class="p">)</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_fader_out</span><span class="o">.</span><span class="n">contents</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_fade_out_contents</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">reset</span><span class="p">()</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">fade_in_contents</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">:</span>
+        <span class="sa">r</span><span class="s1">&#39;The |abjad.Container| to be faded in.&#39;</span>
+        <span class="k">return</span> <span class="n">abjad</span><span class="o">.</span><span class="n">mutate</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_fade_in_contents</span><span class="p">)</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+
+    <span class="nd">@fade_in_contents</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">fade_in_contents</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+                         <span class="n">fade_in_contents</span><span class="p">:</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">,</span>
+                         <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">fade_in_contents</span><span class="p">,</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;&#39;fade_in_contents&#39; must be &#39;abjad.Container&#39; or &quot;</span>
+                            <span class="s2">&quot;child class&quot;</span><span class="p">)</span>
+        <span class="n">leaves</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="n">fade_in_contents</span><span class="p">)</span><span class="o">.</span><span class="n">leaves</span><span class="p">()</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">leaves</span><span class="o">.</span><span class="n">are_contiguous_logical_voice</span><span class="p">():</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;&#39;fade_in_contents&#39; must be contiguous logical &quot;</span>
+                             <span class="s2">&quot; voice&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_fade_in_contents</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">mutate</span><span class="p">(</span><span class="n">fade_in_contents</span><span class="p">)</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_fader_in</span><span class="o">.</span><span class="n">contents</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_fade_in_contents</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">reset</span><span class="p">()</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">current_window</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="n">abjad</span><span class="o">.</span><span class="n">Selection</span><span class="p">]:</span>
+        <span class="sa">r</span><span class="sd">&quot;&quot;&quot;Read-only property, returns the result of the last operation as a</span>
+<span class="sd">        :obj:`tuple` of |abjad.Selection| objects.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_fader_out</span><span class="o">.</span><span class="n">current_window</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_fader_in</span><span class="o">.</span><span class="n">current_window</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">weighted_duration</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+        <span class="sa">r</span><span class="sd">&quot;&quot;&quot;Weights the choice of fader according to its number of notes and</span>
+<span class="sd">        total duration.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_weighted_duration</span>
+
+    <span class="nd">@weighted_duration</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">weighted_duration</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+                          <span class="n">weighted_duration</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
+                          <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">weighted_duration</span><span class="p">,</span> <span class="nb">bool</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;&#39;weighted_duration&#39; must be &#39;bool&#39;&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_weighted_duration</span> <span class="o">=</span> <span class="n">weighted_duration</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_weighted_duration</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_weights</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="k">for</span> <span class="n">container</span> <span class="ow">in</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">_fade_in_contents</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_fade_out_contents</span><span class="p">]:</span>
+                <span class="n">notes</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="n">container</span><span class="p">)</span><span class="o">.</span><span class="n">logical_ties</span><span class="p">(</span><span class="n">pitched</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+                <span class="n">duration</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">inspect</span><span class="p">(</span><span class="n">container</span><span class="p">)</span><span class="o">.</span><span class="n">duration</span><span class="p">()</span>
+                <span class="n">value</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">notes</span><span class="p">)</span> <span class="o">*</span> <span class="nb">float</span><span class="p">(</span><span class="n">duration</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_weights</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_weights</span> <span class="o">=</span> <span class="p">[</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">]</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">repetition_chance</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+        <span class="sa">r</span><span class="sd">&quot;&quot;&quot;The chance of not processing neither :attr:`fade_in_contents` not</span>
+<span class="sd">        :attr:`fade_out_contents` on a call, thus repeating the previous</span>
+<span class="sd">        output.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_repetition_chance</span>
+
+    <span class="nd">@repetition_chance</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">repetition_chance</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+                          <span class="n">repetition_chance</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
+                          <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">repetition_chance</span><span class="p">,</span> <span class="nb">float</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;&#39;repetition_chance&#39; must be &#39;float&#39;&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">repetition_chance</span> <span class="o">&lt;</span> <span class="mf">0.0</span> <span class="ow">or</span> <span class="n">repetition_chance</span> <span class="o">&gt;</span> <span class="mf">1.0</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;&#39;repetition_chance&#39; must be between 0.0 and 1.0&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_repetition_chance</span> <span class="o">=</span> <span class="n">repetition_chance</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">initial_repetitions</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+        <span class="sa">r</span><span class="sd">&quot;&quot;&quot;The number of times the initial containers are repeated before the</span>
+<span class="sd">        cross fade process starts.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_initial_repetitions</span>
+
+    <span class="nd">@initial_repetitions</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">initial_repetitions</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+                            <span class="n">initial_repetitions</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+                            <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">initial_repetitions</span><span class="p">,</span> <span class="nb">int</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;&#39;initial_repetitions&#39; must be &#39;int&#39;&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">initial_repetitions</span> <span class="o">&lt;</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;&#39;initial_repetitions&#39; must be greater than zero&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_initial_repetitions</span> <span class="o">=</span> <span class="n">initial_repetitions</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">final_repetitions</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+        <span class="sa">r</span><span class="sd">&quot;&quot;&quot;The number of times the final containers are repeated after the</span>
+<span class="sd">        cross fade process ends.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_final_repetitions</span>
+
+    <span class="nd">@final_repetitions</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">final_repetitions</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+                          <span class="n">final_repetitions</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+                          <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">final_repetitions</span><span class="p">,</span> <span class="nb">int</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;&#39;final_repetitions&#39; must be &#39;int&#39;&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">final_repetitions</span> <span class="o">&lt;</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;&#39;final_repetitions&#39; must be greater than zero&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_final_repetitions</span> <span class="o">=</span> <span class="n">final_repetitions</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">initial_repetitions_counter</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+        <span class="sa">r</span><span class="sd">&quot;&quot;&quot;Read-only property, returns the counter of</span>
+<span class="sd">        :attr:`initial_repetitions`.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_initial_repetitions_counter</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">final_repetitions_counter</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+        <span class="sa">r</span><span class="sd">&quot;&quot;&quot;Read-only property, returns the counter of</span>
+<span class="sd">        :attr:`final_repetitions`.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_final_repetitions_counter</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">fade_in_first</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+        <span class="sa">r</span><span class="sd">&quot;&quot;&quot;When ``True``, the first note of the fade in content will be added</span>
+<span class="sd">        before a note from the fade out content is removed.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_fade_in_first</span>
+
+    <span class="nd">@fade_in_first</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">fade_in_first</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+                      <span class="n">fade_in_first</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
+                      <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">fade_in_first</span><span class="p">,</span> <span class="nb">bool</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;&#39;fade_in_first&#39; must be &#39;bool&#39;&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_fade_in_first</span> <span class="o">=</span> <span class="n">fade_in_first</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">fade_out_last</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+        <span class="sa">r</span><span class="sd">&quot;&quot;&quot;When ``True``, the last note of the fade out content will be</span>
+<span class="sd">        removed only after the full fade in content is added.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_fade_out_last</span>
+
+    <span class="nd">@fade_out_last</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">fade_out_last</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+                      <span class="n">fade_out_last</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
+                      <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">fade_out_last</span><span class="p">,</span> <span class="nb">bool</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;&#39;fade_out_last&#39; must be &#39;bool&#39;&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_fade_out_last</span> <span class="o">=</span> <span class="n">fade_out_last</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">disable_rewrite_meter</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+        <span class="sa">r</span><span class="sd">&quot;&quot;&quot;When ``True``, the durations of the notes in the output will not be</span>
+<span class="sd">        rewritten by the |abjad.mutate().rewrite_meter()| mutation.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_disable_rewrite_meter</span>
+
+    <span class="nd">@disable_rewrite_meter</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">disable_rewrite_meter</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+                              <span class="n">disable_rewrite_meter</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
+                              <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">disable_rewrite_meter</span><span class="p">,</span> <span class="nb">bool</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;&#39;disable_rewrite_meter&#39; must be &#39;bool&#39;&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_disable_rewrite_meter</span> <span class="o">=</span> <span class="n">disable_rewrite_meter</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_fader_in</span><span class="o">.</span><span class="n">disable_rewrite_meter</span> <span class="o">=</span> <span class="n">disable_rewrite_meter</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_fader_out</span><span class="o">.</span><span class="n">disable_rewrite_meter</span> <span class="o">=</span> <span class="n">disable_rewrite_meter</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">omit_time_signatures</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+        <span class="sa">r</span><span class="s1">&#39;When ``True``, all time signatures will be omitted from the output.&#39;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_omit_time_signatures</span>
+
+    <span class="nd">@omit_time_signatures</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">omit_time_signatures</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+                             <span class="n">omit_time_signatures</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
+                             <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">omit_time_signatures</span><span class="p">,</span> <span class="nb">bool</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;&#39;omit_time_signatures&#39; must be &#39;bool&#39;&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_omit_time_signatures</span> <span class="o">=</span> <span class="n">omit_time_signatures</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_fader_in</span><span class="o">.</span><span class="n">omit_time_signatures</span> <span class="o">=</span> <span class="n">omit_time_signatures</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_fader_out</span><span class="o">.</span><span class="n">omit_time_signatures</span> <span class="o">=</span> <span class="n">omit_time_signatures</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">use_multimeasure_rests</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+        <span class="sa">r</span><span class="s1">&#39;When ``True``, multi-measure rests will be used for silent measures.&#39;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_use_multimeasure_rests</span>
+
+    <span class="nd">@use_multimeasure_rests</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">use_multimeasure_rests</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+                               <span class="n">use_multimeasure_rests</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
+                               <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">use_multimeasure_rests</span><span class="p">,</span> <span class="nb">bool</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;&#39;use_multimeasure_rests&#39; must be &#39;bool&#39;&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_use_multimeasure_rests</span> <span class="o">=</span> <span class="n">use_multimeasure_rests</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_fader_in</span><span class="o">.</span><span class="n">use_multimeasure_rests</span> <span class="o">=</span> <span class="n">use_multimeasure_rests</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_fader_out</span><span class="o">.</span><span class="n">use_multimeasure_rests</span> <span class="o">=</span> <span class="n">use_multimeasure_rests</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">boundary_depth</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Union</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="kc">None</span><span class="p">]:</span>
+        <span class="sa">r</span><span class="sd">&quot;&quot;&quot;Sets the argument ``boundary_depth`` of</span>
+<span class="sd">        |abjad.mutate().rewrite_meter()|.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_boundary_depth</span>
+
+    <span class="nd">@boundary_depth</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">boundary_depth</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+                       <span class="n">boundary_depth</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">],</span>
+                       <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">boundary_depth</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">boundary_depth</span><span class="p">,</span> <span class="nb">int</span><span class="p">):</span>
+                <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;&#39;boundary_depth&#39; must be &#39;int&#39;&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_boundary_depth</span> <span class="o">=</span> <span class="n">boundary_depth</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_fader_in</span><span class="o">.</span><span class="n">boundary_depth</span> <span class="o">=</span> <span class="n">boundary_depth</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_fader_out</span><span class="o">.</span><span class="n">boundary_depth</span> <span class="o">=</span> <span class="n">boundary_depth</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">maximum_dot_count</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Union</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="kc">None</span><span class="p">]:</span>
+        <span class="sa">r</span><span class="sd">&quot;&quot;&quot;Sets the argument ``maximum_dot_count`` of</span>
+<span class="sd">        |abjad.mutate().rewrite_meter()|.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_maximum_dot_count</span>
+
+    <span class="nd">@maximum_dot_count</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">maximum_dot_count</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+                          <span class="n">maximum_dot_count</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">],</span>
+                          <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">maximum_dot_count</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">maximum_dot_count</span><span class="p">,</span> <span class="nb">int</span><span class="p">):</span>
+                <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;&#39;maximum_dot_count&#39; must be &#39;int&#39;&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_maximum_dot_count</span> <span class="o">=</span> <span class="n">maximum_dot_count</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_fader_in</span><span class="o">.</span><span class="n">maximum_dot_count</span> <span class="o">=</span> <span class="n">maximum_dot_count</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_fader_out</span><span class="o">.</span><span class="n">maximum_dot_count</span> <span class="o">=</span> <span class="n">maximum_dot_count</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">rewrite_tuplets</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+        <span class="sa">r</span><span class="sd">&quot;&quot;&quot;Sets the argument ``rewrite_tuplets`` of</span>
+<span class="sd">        |abjad.mutate().rewrite_meter()|.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_rewrite_tuplets</span>
+
+    <span class="nd">@rewrite_tuplets</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">rewrite_tuplets</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+                        <span class="n">rewrite_tuplets</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
+                        <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">rewrite_tuplets</span><span class="p">,</span> <span class="nb">bool</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;&#39;rewrite_tuplets&#39; must be &#39;bool&#39;&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_rewrite_tuplets</span> <span class="o">=</span> <span class="n">rewrite_tuplets</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_fader_in</span><span class="o">.</span><span class="n">rewrite_tuplets</span> <span class="o">=</span> <span class="n">rewrite_tuplets</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_fader_out</span><span class="o">.</span><span class="n">rewrite_tuplets</span> <span class="o">=</span> <span class="n">rewrite_tuplets</span>
+
+    <span class="c1">### PRIVATE PROPERTIES ###</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">_done</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+        <span class="sa">r</span><span class="sd">&quot;&quot;&quot;:obj:`bool` indicating whether the process is done, which is when</span>
+<span class="sd">        both faders are done.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="nb">all</span><span class="p">(</span><span class="n">fader</span><span class="o">.</span><span class="n">_done</span> <span class="k">for</span> <span class="n">fader</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_faders</span><span class="p">)</span></div>
+</pre></div>
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 2020, Gilberto Agostinho
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

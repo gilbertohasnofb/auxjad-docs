@@ -1,0 +1,533 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>auxjad.core._LooperParent &mdash; auxjad 0.8.24 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+        <script src="../../../_static/jquery.js"></script>
+        <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/doctools.js"></script>
+        <script src="../../../_static/language_data.js"></script>
+        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    <script type="text/javascript" src="../../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../../index.html" class="icon icon-home" alt="Documentation Home"> auxjad
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.8
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../index.html">Welcome to Auxjad’s documentation!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../examples/index.html">Examples of usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../score_gallery/index.html">Score gallery</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../api/index.html">Auxjad API</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">auxjad</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../../index.html">Module code</a> &raquo;</li>
+        
+      <li>auxjad.core._LooperParent</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for auxjad.core._LooperParent</h1><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">random</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Union</span>
+
+<span class="kn">import</span> <span class="nn">abjad</span>
+
+<span class="kn">from</span> <span class="nn">..utilities.inspect</span> <span class="kn">import</span> <span class="n">inspect</span>
+<span class="kn">from</span> <span class="nn">..utilities.mutate</span> <span class="kn">import</span> <span class="n">mutate</span>
+
+
+<span class="k">class</span> <span class="nc">_LooperParent</span><span class="p">():</span>
+    <span class="sa">r</span><span class="sd">&quot;&quot;&quot;This is the parent class of all Looper classes. It implements all</span>
+<span class="sd">    common methods and properties, and initialises those using their @setter</span>
+<span class="sd">    methods.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="c1">### CLASS VARIABLES ###</span>
+
+    <span class="vm">__slots__</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;_contents&#39;</span><span class="p">,</span>
+                 <span class="s1">&#39;_head_position&#39;</span><span class="p">,</span>
+                 <span class="s1">&#39;_window_size&#39;</span><span class="p">,</span>
+                 <span class="s1">&#39;_step_size&#39;</span><span class="p">,</span>
+                 <span class="s1">&#39;_max_steps&#39;</span><span class="p">,</span>
+                 <span class="s1">&#39;_repetition_chance&#39;</span><span class="p">,</span>
+                 <span class="s1">&#39;_forward_bias&#39;</span><span class="p">,</span>
+                 <span class="s1">&#39;_current_window&#39;</span><span class="p">,</span>
+                 <span class="s1">&#39;_is_first_window&#39;</span><span class="p">,</span>
+                 <span class="s1">&#39;_process_on_first_call&#39;</span><span class="p">,</span>
+                 <span class="p">)</span>
+
+    <span class="c1">### INITIALISER ###</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+                 <span class="o">*</span><span class="p">,</span>
+                 <span class="n">head_position</span><span class="p">,</span>
+                 <span class="n">window_size</span><span class="p">,</span>
+                 <span class="n">step_size</span><span class="p">,</span>
+                 <span class="n">max_steps</span><span class="p">,</span>
+                 <span class="n">repetition_chance</span><span class="p">,</span>
+                 <span class="n">forward_bias</span><span class="p">,</span>
+                 <span class="n">process_on_first_call</span><span class="p">,</span>
+                 <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sa">r</span><span class="s1">&#39;Initialises self.&#39;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">process_on_first_call</span><span class="p">,</span> <span class="nb">bool</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;&#39;process_on_first_call&#39; must be &#39;bool&#39;&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">head_position</span> <span class="o">=</span> <span class="n">head_position</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">window_size</span> <span class="o">=</span> <span class="n">window_size</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">step_size</span> <span class="o">=</span> <span class="n">step_size</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">max_steps</span> <span class="o">=</span> <span class="n">max_steps</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">repetition_chance</span> <span class="o">=</span> <span class="n">repetition_chance</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">forward_bias</span> <span class="o">=</span> <span class="n">forward_bias</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">process_on_first_call</span> <span class="o">=</span> <span class="n">process_on_first_call</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_is_first_window</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_current_window</span> <span class="o">=</span> <span class="kc">None</span>
+
+    <span class="c1">### SPECIAL METHODS ###</span>
+
+    <span class="k">def</span> <span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Selection</span><span class="p">:</span>
+        <span class="sa">r</span><span class="sd">&quot;&quot;&quot;Calls the looping process for one iteration, returning an</span>
+<span class="sd">        |abjad.Selection|.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_move_head</span><span class="p">()</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_done</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s2">&quot;&#39;contents&#39; has been exhausted&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_slice_contents</span><span class="p">()</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">current_window</span>
+
+    <span class="k">def</span> <span class="fm">__next__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Selection</span><span class="p">:</span>
+        <span class="sa">r</span><span class="sd">&quot;&quot;&quot;Calls the looping process for one iteration, returning an</span>
+<span class="sd">        |abjad.Selection|.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_move_head</span><span class="p">()</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_done</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">StopIteration</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_slice_contents</span><span class="p">()</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">current_window</span>
+
+    <span class="k">def</span> <span class="fm">__iter__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sa">r</span><span class="s1">&#39;Returns an iterator, allowing instances to be used as iterators.&#39;</span>
+        <span class="k">return</span> <span class="bp">self</span>
+
+    <span class="c1">### PUBLIC METHODS ###</span>
+
+    <span class="k">def</span> <span class="nf">output_all</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+                   <span class="o">*</span><span class="p">,</span>
+                   <span class="n">tie_identical_pitches</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+                   <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Selection</span><span class="p">:</span>
+        <span class="sa">r</span><span class="sd">&quot;&quot;&quot;Goes through the whole looping process and outputs a single</span>
+<span class="sd">        |abjad.Selection|.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">tie_identical_pitches</span><span class="p">,</span> <span class="nb">bool</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;&#39;tie_identical_pitches&#39; must be &#39;bool&#39;&quot;</span><span class="p">)</span>
+        <span class="n">dummy_container</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">()</span>
+        <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="k">if</span> <span class="ow">not</span> <span class="n">tie_identical_pitches</span> <span class="ow">or</span> <span class="nb">len</span><span class="p">(</span><span class="n">dummy_container</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                    <span class="n">dummy_container</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="fm">__call__</span><span class="p">())</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">new_window</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="fm">__call__</span><span class="p">()</span>
+                    <span class="n">leaf1</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="n">new_window</span><span class="p">)</span><span class="o">.</span><span class="n">leaf</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+                    <span class="n">leaf2</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="n">dummy_container</span><span class="p">)</span><span class="o">.</span><span class="n">leaf</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+                    <span class="k">if</span> <span class="n">inspect</span><span class="p">((</span><span class="n">leaf1</span><span class="p">,</span> <span class="n">leaf2</span><span class="p">))</span><span class="o">.</span><span class="n">leaves_are_tieable</span><span class="p">():</span>
+                        <span class="n">abjad</span><span class="o">.</span><span class="n">attach</span><span class="p">(</span><span class="n">abjad</span><span class="o">.</span><span class="n">Tie</span><span class="p">(),</span> <span class="n">dummy_container</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+                    <span class="n">dummy_container</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">new_window</span><span class="p">)</span>
+            <span class="k">except</span> <span class="ne">RuntimeError</span><span class="p">:</span>
+                <span class="k">break</span>
+        <span class="n">mutate</span><span class="p">(</span><span class="n">dummy_container</span><span class="p">[:])</span><span class="o">.</span><span class="n">remove_repeated_time_signatures</span><span class="p">()</span>
+        <span class="n">mutate</span><span class="p">(</span><span class="n">dummy_container</span><span class="p">[:])</span><span class="o">.</span><span class="n">reposition_dynamics</span><span class="p">()</span>
+        <span class="n">output</span> <span class="o">=</span> <span class="n">dummy_container</span><span class="p">[:]</span>
+        <span class="n">dummy_container</span><span class="p">[:]</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">return</span> <span class="n">output</span>
+
+    <span class="k">def</span> <span class="nf">output_n</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+                 <span class="n">n</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+                 <span class="o">*</span><span class="p">,</span>
+                 <span class="n">tie_identical_pitches</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+                 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Selection</span><span class="p">:</span>
+        <span class="sa">r</span><span class="sd">&quot;&quot;&quot;Goes through ``n`` iterations of the looping process and outputs a</span>
+<span class="sd">        single |abjad.Selection|.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="nb">int</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;first positional argument must be &#39;int&#39;&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">n</span> <span class="o">&lt;</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;first positional argument must be a positive &quot;</span>
+                             <span class="s2">&quot;&#39;int&#39;&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">tie_identical_pitches</span><span class="p">,</span> <span class="nb">bool</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;&#39;tie_identical_pitches&#39; must be &#39;bool&#39;&quot;</span><span class="p">)</span>
+        <span class="n">dummy_container</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">tie_identical_pitches</span> <span class="ow">or</span> <span class="nb">len</span><span class="p">(</span><span class="n">dummy_container</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="n">dummy_container</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="fm">__call__</span><span class="p">())</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">new_window</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="fm">__call__</span><span class="p">()</span>
+                <span class="n">leaf1</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="n">new_window</span><span class="p">)</span><span class="o">.</span><span class="n">leaf</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+                <span class="n">leaf2</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="n">dummy_container</span><span class="p">)</span><span class="o">.</span><span class="n">leaf</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+                <span class="k">if</span> <span class="n">inspect</span><span class="p">((</span><span class="n">leaf1</span><span class="p">,</span> <span class="n">leaf2</span><span class="p">))</span><span class="o">.</span><span class="n">leaves_are_tieable</span><span class="p">():</span>
+                    <span class="n">abjad</span><span class="o">.</span><span class="n">attach</span><span class="p">(</span><span class="n">abjad</span><span class="o">.</span><span class="n">Tie</span><span class="p">(),</span> <span class="n">dummy_container</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+                <span class="n">dummy_container</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">new_window</span><span class="p">)</span>
+        <span class="n">mutate</span><span class="p">(</span><span class="n">dummy_container</span><span class="p">[:])</span><span class="o">.</span><span class="n">remove_repeated_time_signatures</span><span class="p">()</span>
+        <span class="n">mutate</span><span class="p">(</span><span class="n">dummy_container</span><span class="p">[:])</span><span class="o">.</span><span class="n">reposition_dynamics</span><span class="p">()</span>
+        <span class="n">output</span> <span class="o">=</span> <span class="n">dummy_container</span><span class="p">[:]</span>
+        <span class="n">dummy_container</span><span class="p">[:]</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">return</span> <span class="n">output</span>
+
+    <span class="c1">### PRIVATE METHODS ###</span>
+
+    <span class="k">def</span> <span class="nf">_move_head</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sa">r</span><span class="sd">&quot;&quot;&quot;Moves the head by a certain number of steps of fixed size, either</span>
+<span class="sd">        forwards or backwards according to the forward bias.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_is_first_window</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">_process_on_first_call</span><span class="p">:</span>
+            <span class="k">if</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_repetition_chance</span> <span class="o">==</span> <span class="mf">0.0</span>
+                    <span class="ow">or</span> <span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">()</span> <span class="o">&gt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">_repetition_chance</span><span class="p">):</span>
+                <span class="n">step</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_step_size</span> <span class="o">*</span> <span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_max_steps</span><span class="p">)</span>
+                <span class="n">diretion</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_biased_choice</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_forward_bias</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_head_position</span> <span class="o">+=</span> <span class="n">step</span> <span class="o">*</span> <span class="n">diretion</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_is_first_window</span> <span class="o">=</span> <span class="kc">False</span>
+
+    <span class="k">def</span> <span class="nf">_slice_contents</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sa">r</span><span class="sd">&quot;&quot;&quot;Slices :attr:`contents`, will be defined for each individual child</span>
+<span class="sd">        class.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">pass</span>
+
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">_biased_choice</span><span class="p">(</span><span class="n">bias</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sa">r</span><span class="s1">&#39;Returns either +1 or -1 according to a bias value.&#39;</span>
+        <span class="k">return</span> <span class="n">random</span><span class="o">.</span><span class="n">choices</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">weights</span><span class="o">=</span><span class="p">[</span><span class="n">bias</span><span class="p">,</span> <span class="mf">1.0</span> <span class="o">-</span> <span class="n">bias</span><span class="p">])[</span><span class="mi">0</span><span class="p">]</span>
+
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">_remove_all_time_signatures</span><span class="p">(</span><span class="n">container</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sa">r</span><span class="s1">&#39;Removes all time signatures of an |abjad.Container|.&#39;</span>
+        <span class="k">for</span> <span class="n">leaf</span> <span class="ow">in</span> <span class="n">abjad</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="n">container</span><span class="p">)</span><span class="o">.</span><span class="n">leaves</span><span class="p">():</span>
+            <span class="k">if</span> <span class="n">abjad</span><span class="o">.</span><span class="n">inspect</span><span class="p">(</span><span class="n">leaf</span><span class="p">)</span><span class="o">.</span><span class="n">effective</span><span class="p">(</span><span class="n">abjad</span><span class="o">.</span><span class="n">TimeSignature</span><span class="p">):</span>
+                <span class="n">abjad</span><span class="o">.</span><span class="n">detach</span><span class="p">(</span><span class="n">abjad</span><span class="o">.</span><span class="n">TimeSignature</span><span class="p">,</span> <span class="n">leaf</span><span class="p">)</span>
+
+    <span class="c1">### PUBLIC PROPERTIES ###</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">contents</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sa">r</span><span class="sd">&quot;&quot;&quot;:attr:`contents` property will be defined for each individual child</span>
+<span class="sd">        class.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">pass</span>
+
+    <span class="nd">@contents</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">contents</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">pass</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">head_position</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+        <span class="sa">r</span><span class="s1">&#39;The position of the head at the start of a looping window.&#39;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_head_position</span>
+
+    <span class="nd">@head_position</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">head_position</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+                      <span class="n">head_position</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+                      <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">head_position</span><span class="p">,</span> <span class="nb">int</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;&#39;head_position&#39; must be &#39;int&#39;&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">head_position</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;&#39;head_position&#39; must be a positive &#39;int&#39;&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">head_position</span> <span class="o">&gt;=</span> <span class="bp">self</span><span class="o">.</span><span class="fm">__len__</span><span class="p">():</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;&#39;head_position&#39; must be smaller than the length &quot;</span>
+                             <span class="s2">&quot;of &#39;contents&#39;&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_is_first_window</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_head_position</span> <span class="o">=</span> <span class="n">head_position</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">window_size</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+        <span class="sa">r</span><span class="s1">&#39;The length of the looping window.&#39;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_window_size</span>
+
+    <span class="nd">@window_size</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">window_size</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+                    <span class="n">window_size</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+                    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">window_size</span><span class="p">,</span> <span class="nb">int</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;&#39;window_size&#39; must be &#39;int&#39;&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">window_size</span> <span class="o">&lt;</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;&#39;window_size&#39; must be greater than zero&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">window_size</span> <span class="o">&gt;</span> <span class="bp">self</span><span class="o">.</span><span class="fm">__len__</span><span class="p">():</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;&#39;window_size&#39; must be smaller than or equal to &quot;</span>
+                             <span class="s2">&quot;the length of &#39;contents&#39;&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_window_size</span> <span class="o">=</span> <span class="n">window_size</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">step_size</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+        <span class="sa">r</span><span class="s1">&#39;The size of each step when moving the head.&#39;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_step_size</span>
+
+    <span class="nd">@step_size</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">step_size</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+                  <span class="n">step_size</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+                  <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">step_size</span><span class="p">,</span> <span class="nb">int</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;&#39;step_size&#39; must be &#39;int&#39;&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">step_size</span> <span class="o">&lt;</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;&#39;step_size&#39; must be greater than zero&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">step_size</span> <span class="o">&gt;=</span> <span class="bp">self</span><span class="o">.</span><span class="fm">__len__</span><span class="p">():</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;&#39;step_size&#39; must be smaller than the length of &quot;</span>
+                             <span class="s2">&quot;&#39;contents&#39;&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_step_size</span> <span class="o">=</span> <span class="n">step_size</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">max_steps</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+        <span class="sa">r</span><span class="s1">&#39;The maximum number of steps per operation.&#39;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_max_steps</span>
+
+    <span class="nd">@max_steps</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">max_steps</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+                  <span class="n">max_steps</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+                  <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">max_steps</span><span class="p">,</span> <span class="nb">int</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;&#39;max_steps&#39; must be &#39;int&#39;&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">max_steps</span> <span class="o">&lt;</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;&#39;max_steps&#39; must be greater than zero&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_max_steps</span> <span class="o">=</span> <span class="n">max_steps</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">repetition_chance</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+        <span class="sa">r</span><span class="s1">&#39;The chance of the head not moving, thus repeating the output.&#39;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_repetition_chance</span>
+
+    <span class="nd">@repetition_chance</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">repetition_chance</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+                          <span class="n">repetition_chance</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
+                          <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">repetition_chance</span><span class="p">,</span> <span class="nb">float</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;&#39;repetition_chance&#39; must be &#39;float&#39;&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">repetition_chance</span> <span class="o">&lt;</span> <span class="mf">0.0</span> <span class="ow">or</span> <span class="n">repetition_chance</span> <span class="o">&gt;</span> <span class="mf">1.0</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;&#39;repetition_chance&#39; must be between 0.0 and 1.0&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_repetition_chance</span> <span class="o">=</span> <span class="n">repetition_chance</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">forward_bias</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+        <span class="sa">r</span><span class="sd">&quot;&quot;&quot;The chance of the window moving forward instead of backwards. It</span>
+<span class="sd">        should range from ``0.0`` to ``1.0`` (default ``1.0``, which means the</span>
+<span class="sd">        window can only move forwards. A value of ``0.5`` gives :math:`50\%`</span>
+<span class="sd">        chance of moving forwards while a value of ``0.0`` will move the window</span>
+<span class="sd">        only backwards).</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_forward_bias</span>
+
+    <span class="nd">@forward_bias</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">forward_bias</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+                     <span class="n">forward_bias</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
+                     <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">forward_bias</span><span class="p">,</span> <span class="nb">float</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;&#39;forward_bias&#39; must be &#39;float&#39;&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">forward_bias</span> <span class="o">&lt;</span> <span class="mf">0.0</span> <span class="ow">or</span> <span class="n">forward_bias</span> <span class="o">&gt;</span> <span class="mf">1.0</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;&#39;forward_bias&#39; must be between 0.0 and 1.0&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_forward_bias</span> <span class="o">=</span> <span class="n">forward_bias</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">process_on_first_call</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+        <span class="sa">r</span><span class="sd">&quot;&quot;&quot;If ``True`` then :attr:`contents` will be processed in the very</span>
+<span class="sd">        first call.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_process_on_first_call</span>
+
+    <span class="nd">@process_on_first_call</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">process_on_first_call</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+                              <span class="n">process_on_first_call</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
+                              <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">process_on_first_call</span><span class="p">,</span> <span class="nb">bool</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;&#39;process_on_first_call&#39; must be &#39;bool&#39;&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_process_on_first_call</span> <span class="o">=</span> <span class="n">process_on_first_call</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">current_window</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Union</span><span class="p">[</span><span class="n">abjad</span><span class="o">.</span><span class="n">Selection</span><span class="p">,</span> <span class="kc">None</span><span class="p">]:</span>
+        <span class="sa">r</span><span class="s1">&#39;Read-only property, returns the window at the current head position.&#39;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_current_window</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_current_window</span>
+        <span class="n">current_window</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">mutate</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_current_window</span><span class="p">)</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_omit_time_signatures</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_remove_all_time_signatures</span><span class="p">(</span><span class="n">current_window</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">current_window</span>
+
+    <span class="c1">### PRIVATE PROPERTIES ###</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">_done</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+        <span class="sa">r</span><span class="sd">&quot;&quot;&quot;:obj:`bool` indicating whether the process is done (i.e. whether</span>
+<span class="sd">        the head position has overtaken the :attr:`contents`&#39;s length).</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_head_position</span> <span class="o">&gt;=</span> <span class="bp">self</span><span class="o">.</span><span class="fm">__len__</span><span class="p">()</span>
+                <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">_head_position</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">)</span>
+</pre></div>
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 2020, Gilberto Agostinho
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

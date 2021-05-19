@@ -1,0 +1,1861 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>auxjad.core.Shuffler &mdash; auxjad 0.8.24 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+        <script src="../../../_static/jquery.js"></script>
+        <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/doctools.js"></script>
+        <script src="../../../_static/language_data.js"></script>
+        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    <script type="text/javascript" src="../../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../../index.html" class="icon icon-home" alt="Documentation Home"> auxjad
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.8
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../index.html">Welcome to Auxjad’s documentation!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../examples/index.html">Examples of usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../score_gallery/index.html">Score gallery</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../api/index.html">Auxjad API</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">auxjad</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../../index.html">Module code</a> &raquo;</li>
+        
+      <li>auxjad.core.Shuffler</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for auxjad.core.Shuffler</h1><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">random</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Union</span>
+
+<span class="kn">import</span> <span class="nn">abjad</span>
+
+<span class="kn">from</span> <span class="nn">..utilities.inspect</span> <span class="kn">import</span> <span class="n">inspect</span>
+<span class="kn">from</span> <span class="nn">..utilities.mutate</span> <span class="kn">import</span> <span class="n">mutate</span>
+
+
+<div class="viewcode-block" id="Shuffler"><a class="viewcode-back" href="../../../_api_members/auxjad.Shuffler.html#auxjad.Shuffler">[docs]</a><span class="k">class</span> <span class="nc">Shuffler</span><span class="p">:</span>
+    <span class="sa">r</span><span class="sd">&quot;&quot;&quot;This class takes an input |abjad.Container| (or child class) and</span>
+<span class="sd">    shuffles or rotates its logical ties or pitches. When shuffling or rotating</span>
+<span class="sd">    pitches only, tuplets are supported, otherwise tuplets are not supported.</span>
+
+<span class="sd">    Basic usage:</span>
+<span class="sd">        Calling the object will output a shuffled selection of the input</span>
+<span class="sd">        container.</span>
+
+<span class="sd">        &gt;&gt;&gt; container = abjad.Container(r&quot;c&#39;4 d&#39;4 e&#39;4 f&#39;4&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; shuffler = auxjad.Shuffler(container)</span>
+<span class="sd">        &gt;&gt;&gt; notes = shuffler()</span>
+<span class="sd">        &gt;&gt;&gt; staff = abjad.Staff(notes)</span>
+<span class="sd">        &gt;&gt;&gt; abjad.f(staff)</span>
+<span class="sd">        \new Staff</span>
+<span class="sd">        {</span>
+<span class="sd">            \time 4/4</span>
+<span class="sd">            d&#39;4</span>
+<span class="sd">            c&#39;4</span>
+<span class="sd">            f&#39;4</span>
+<span class="sd">            e&#39;4</span>
+<span class="sd">        }</span>
+
+<span class="sd">        .. figure:: ../_images/Shuffler-z2om98675v.png</span>
+
+<span class="sd">        &gt;&gt;&gt; notes = shuffler()</span>
+<span class="sd">        &gt;&gt;&gt; staff = abjad.Staff(notes)</span>
+<span class="sd">        &gt;&gt;&gt; abjad.f(staff)</span>
+<span class="sd">        \new Staff</span>
+<span class="sd">        {</span>
+<span class="sd">            \time 4/4</span>
+<span class="sd">            c&#39;4</span>
+<span class="sd">            e&#39;4</span>
+<span class="sd">            d&#39;4</span>
+<span class="sd">            f&#39;4</span>
+<span class="sd">        }</span>
+
+<span class="sd">        .. figure:: ../_images/Shuffler-xu7sln4vt7n.png</span>
+
+<span class="sd">        To get the result of the last operation, use the property</span>
+<span class="sd">        :attr:`current_window`.</span>
+
+<span class="sd">        &gt;&gt;&gt; notes = shuffler.current_window</span>
+<span class="sd">        &gt;&gt;&gt; staff = abjad.Staff(notes)</span>
+<span class="sd">        &gt;&gt;&gt; abjad.f(staff)</span>
+<span class="sd">        \new Staff</span>
+<span class="sd">        {</span>
+<span class="sd">            \time 4/4</span>
+<span class="sd">            c&#39;4</span>
+<span class="sd">            e&#39;4</span>
+<span class="sd">            d&#39;4</span>
+<span class="sd">            f&#39;4</span>
+<span class="sd">        }</span>
+
+<span class="sd">        .. figure:: ../_images/Shuffler-gphtpqn9jb.png</span>
+
+<span class="sd">        Calling the object outputs the same result as using the method</span>
+<span class="sd">        :meth:`shuffle`.</span>
+
+<span class="sd">        &gt;&gt;&gt; notes = shuffler.shuffle()</span>
+<span class="sd">        &gt;&gt;&gt; staff = abjad.Staff(notes)</span>
+<span class="sd">        &gt;&gt;&gt; abjad.f(staff)</span>
+<span class="sd">        \new Staff</span>
+<span class="sd">        {</span>
+<span class="sd">            \time 4/4</span>
+<span class="sd">            e&#39;4</span>
+<span class="sd">            f&#39;4</span>
+<span class="sd">            c&#39;4</span>
+<span class="sd">            d&#39;4</span>
+<span class="sd">        }</span>
+
+<span class="sd">        .. figure:: ../_images/Shuffler-g965k0d03if.png</span>
+
+<span class="sd">    .. warning::</span>
+
+<span class="sd">        Unlike the other classes in Auxjad, the very first call of an instance</span>
+<span class="sd">        of this class will already process the initial container. To disable</span>
+<span class="sd">        this behaviour and output the initial container once before shuffling</span>
+<span class="sd">        or rotating it, initialise the class with the keyword argument</span>
+<span class="sd">        :attr:`process_on_first_call` set to ``False``.</span>
+
+<span class="sd">        &gt;&gt;&gt; container = abjad.Container(r&quot;c&#39;4 d&#39;4 e&#39;4 f&#39;4&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; shuffler = auxjad.Shuffler(container,</span>
+<span class="sd">        ...                            process_on_first_call=False,</span>
+<span class="sd">        ...                            )</span>
+<span class="sd">        &gt;&gt;&gt; notes = shuffler()</span>
+<span class="sd">        &gt;&gt;&gt; staff = abjad.Staff(notes)</span>
+<span class="sd">        &gt;&gt;&gt; abjad.f(staff)</span>
+<span class="sd">        \new Staff</span>
+<span class="sd">        {</span>
+<span class="sd">            \time 4/4</span>
+<span class="sd">            c&#39;4</span>
+<span class="sd">            d&#39;4</span>
+<span class="sd">            e&#39;4</span>
+<span class="sd">            f&#39;4</span>
+<span class="sd">        }</span>
+
+<span class="sd">        .. figure:: ../_images/Shuffler-76039tn5b9k.png</span>
+
+<span class="sd">    :func:`len()`:</span>
+<span class="sd">        Applying the :func:`len()` function to the shuffler will return the</span>
+<span class="sd">        number of logical ties of :attr:`contents`.</span>
+
+<span class="sd">        &gt;&gt;&gt; container = abjad.Container(r&quot;c&#39;4 d&#39;4 e&#39;4 f&#39;4 ~ | f&#39;2 g&#39;2&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; shuffler = auxjad.Shuffler(container)</span>
+<span class="sd">        &gt;&gt;&gt; len(shuffler)</span>
+<span class="sd">        5</span>
+
+<span class="sd">         Do note that consecutive rests are considered as a single logical tie,</span>
+<span class="sd">         so in the example below the :func:`len()` function returns ``5`` and</span>
+<span class="sd">         not ``6``. When shuffling or rotating logical ties, consecutive rests</span>
+<span class="sd">         are also shuffled and rotated together.</span>
+
+<span class="sd">         &gt;&gt;&gt; container = abjad.Container(r&quot;c&#39;8. d&#39;4 r8 r8. e&#39;16 f&#39;8.&quot;)</span>
+<span class="sd">         &gt;&gt;&gt; shuffler = auxjad.Shuffler(container)</span>
+<span class="sd">         &gt;&gt;&gt; len(shuffler)</span>
+<span class="sd">         5</span>
+
+<span class="sd">    Arguments and properties:</span>
+<span class="sd">        This class has many keyword arguments, all of which can be altered</span>
+<span class="sd">        after instantiation using properties with the same names as shown</span>
+<span class="sd">        below. Setting :attr:`pitch_only` to ``True`` will enable pitch mode;</span>
+<span class="sd">        by default, this class shuffles and rotates logical ties, but in pitch</span>
+<span class="sd">        mode only pitches are shuffled or rotated. By setting</span>
+<span class="sd">        :attr:`preserve_rest_position` to ``True`` the shuffle and rotation</span>
+<span class="sd">        operations will not change the position or duration of rests.</span>
+<span class="sd">        :attr:`disable_rewrite_meter` disables the</span>
+<span class="sd">        |abjad.mutate().rewrite_meter()| mutation which is applied to the</span>
+<span class="sd">        container after every call, and :attr:`omit_time_signatures` will</span>
+<span class="sd">        remove all time signatures from the output (both are ``False`` by</span>
+<span class="sd">        default). The properties :attr:`boundary_depth`,</span>
+<span class="sd">        :attr:`maximum_dot_count`, and :attr:`rewrite_tuplets` are passed as</span>
+<span class="sd">        arguments to |abjad.mutate().rewrite_meter()|, see its documentation</span>
+<span class="sd">        for more information. By default, calling the object will first return</span>
+<span class="sd">        the original container and subsequent calls will process it; set</span>
+<span class="sd">        :attr:`process_on_first_call` to ``True`` and the shuffling process</span>
+<span class="sd">        will be applied on the very first call.</span>
+
+<span class="sd">        &gt;&gt;&gt; container = abjad.Container(</span>
+<span class="sd">        ...     r&quot;\time 3/4 c&#39;4 d&#39;4 e&#39;4 \time 2/4 f&#39;4 g&#39;4&quot;</span>
+<span class="sd">        ... )</span>
+<span class="sd">        &gt;&gt;&gt; shuffler = auxjad.Shuffler(container,</span>
+<span class="sd">        ...                            pitch_only=False,</span>
+<span class="sd">        ...                            preserve_rest_position=True,</span>
+<span class="sd">        ...                            disable_rewrite_meter=False,</span>
+<span class="sd">        ...                            omit_time_signatures=True,</span>
+<span class="sd">        ...                            boundary_depth=0,</span>
+<span class="sd">        ...                            maximum_dot_count=1,</span>
+<span class="sd">        ...                            rewrite_tuplets=False,</span>
+<span class="sd">        ...                            process_on_first_call=True,</span>
+<span class="sd">        ...                            swap_limit=3,</span>
+<span class="sd">        ...                            )</span>
+<span class="sd">        &gt;&gt;&gt; shuffler.pitch_only</span>
+<span class="sd">        False</span>
+<span class="sd">        &gt;&gt;&gt; shuffler.preserve_rest_position</span>
+<span class="sd">        True</span>
+<span class="sd">        &gt;&gt;&gt; shuffler.disable_rewrite_meter</span>
+<span class="sd">        False</span>
+<span class="sd">        &gt;&gt;&gt; shuffler.omit_time_signatures</span>
+<span class="sd">        True</span>
+<span class="sd">        &gt;&gt;&gt; shuffler.boundary_depth</span>
+<span class="sd">        0</span>
+<span class="sd">        &gt;&gt;&gt; shuffler.maximum_dot_count</span>
+<span class="sd">        1</span>
+<span class="sd">        &gt;&gt;&gt; shuffler.rewrite_tuplets</span>
+<span class="sd">        False</span>
+<span class="sd">        &gt;&gt;&gt; shuffler.process_on_first_call</span>
+<span class="sd">        True</span>
+<span class="sd">        &gt;&gt;&gt; shuffler.swap_limit</span>
+<span class="sd">        3</span>
+
+<span class="sd">        Use the properties below to change these values after initialisation.</span>
+
+<span class="sd">        &gt;&gt;&gt; shuffler.pitch_only = True</span>
+<span class="sd">        &gt;&gt;&gt; shuffler.preserve_rest_position = False</span>
+<span class="sd">        &gt;&gt;&gt; shuffler.disable_rewrite_meter = True</span>
+<span class="sd">        &gt;&gt;&gt; shuffler.omit_time_signatures = False</span>
+<span class="sd">        &gt;&gt;&gt; shuffler.boundary_depth = 1</span>
+<span class="sd">        &gt;&gt;&gt; shuffler.maximum_dot_count = 2</span>
+<span class="sd">        &gt;&gt;&gt; shuffler.rewrite_tuplets = True</span>
+<span class="sd">        &gt;&gt;&gt; shuffler.process_on_first_call = False</span>
+<span class="sd">        &gt;&gt;&gt; shuffler.swap_limit = None</span>
+<span class="sd">        &gt;&gt;&gt; shuffler.pitch_only</span>
+<span class="sd">        True</span>
+<span class="sd">        &gt;&gt;&gt; shuffler.preserve_rest_position</span>
+<span class="sd">        True</span>
+<span class="sd">        &gt;&gt;&gt; shuffler.disable_rewrite_meter</span>
+<span class="sd">        True</span>
+<span class="sd">        &gt;&gt;&gt; shuffler.omit_time_signatures</span>
+<span class="sd">        False</span>
+<span class="sd">        &gt;&gt;&gt; shuffler.boundary_depth</span>
+<span class="sd">        1</span>
+<span class="sd">        &gt;&gt;&gt; shuffler.maximum_dot_count</span>
+<span class="sd">        2</span>
+<span class="sd">        &gt;&gt;&gt; shuffler.rewrite_tuplets</span>
+<span class="sd">        True</span>
+<span class="sd">        &gt;&gt;&gt; shuffler.process_on_first_call</span>
+<span class="sd">        False</span>
+<span class="sd">        &gt;&gt;&gt; shuffler.swap_limit</span>
+<span class="sd">        None</span>
+
+<span class="sd">    :attr:`pitch_only`:</span>
+<span class="sd">        By default, the shuffling operation will shuffle logical ties:</span>
+
+<span class="sd">        &gt;&gt;&gt; container = abjad.Container(r&quot;c&#39;8. d&#39;4 r8 r8. e&#39;16 f&#39;8.&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; shuffler = auxjad.Shuffler(container)</span>
+<span class="sd">        &gt;&gt;&gt; notes = shuffler()</span>
+<span class="sd">        &gt;&gt;&gt; staff = abjad.Staff(notes)</span>
+<span class="sd">        &gt;&gt;&gt; abjad.f(staff)</span>
+<span class="sd">        \new Staff</span>
+<span class="sd">        {</span>
+<span class="sd">            \time 4/4</span>
+<span class="sd">            r4</span>
+<span class="sd">            r16</span>
+<span class="sd">            e&#39;16</span>
+<span class="sd">            f&#39;8</span>
+<span class="sd">            ~</span>
+<span class="sd">            f&#39;16</span>
+<span class="sd">            d&#39;8.</span>
+<span class="sd">            ~</span>
+<span class="sd">            d&#39;16</span>
+<span class="sd">            c&#39;8.</span>
+<span class="sd">        }</span>
+
+<span class="sd">        .. figure:: ../_images/Shuffler-5j79m0wuxu.png</span>
+
+<span class="sd">        Setting :attr:`pitch_only` to ``True`` enables pitch mode, so only</span>
+<span class="sd">        pitches are shuffled (and not durations). Note how in the example below</span>
+<span class="sd">        the duration of each leaf is the same as the input container.</span>
+
+<span class="sd">        &gt;&gt;&gt; container = abjad.Container(r&quot;c&#39;8. d&#39;4 r8 r8. e&#39;16 f&#39;8.&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; shuffler = auxjad.Shuffler(container, pitch_only=True)</span>
+<span class="sd">        &gt;&gt;&gt; notes = shuffler()</span>
+<span class="sd">        &gt;&gt;&gt; staff = abjad.Staff(notes)</span>
+<span class="sd">        &gt;&gt;&gt; abjad.f(staff)</span>
+<span class="sd">        \new Staff</span>
+<span class="sd">        {</span>
+<span class="sd">            \time 4/4</span>
+<span class="sd">            f&#39;8.</span>
+<span class="sd">            r4</span>
+<span class="sd">            d&#39;8</span>
+<span class="sd">            ~</span>
+<span class="sd">            d&#39;8.</span>
+<span class="sd">            ~</span>
+<span class="sd">            c&#39;16</span>
+<span class="sd">            e&#39;8.</span>
+<span class="sd">        }</span>
+
+<span class="sd">        .. figure:: ../_images/Shuffler-f9jbzqkrkdf.png</span>
+
+<span class="sd">    .. note::</span>
+
+<span class="sd">        Altering the value of :attr:`pitch_only`: will replace the original</span>
+<span class="sd">        :attr:`contents`: with the contents of :attr:`current_window`. Note how</span>
+<span class="sd">        in the example below, the shuffled leaves in measure 3 comes from the</span>
+<span class="sd">        previous measure and not from the initial :attr:`contents`:.</span>
+
+<span class="sd">        &gt;&gt;&gt; container = abjad.Container(r&quot;c&#39;4.. d&#39;16 e&#39;4. f&#39;8&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; shuffler = auxjad.Shuffler(container, pitch_only=True)</span>
+<span class="sd">        &gt;&gt;&gt; notes = shuffler.shuffle_n(2)</span>
+<span class="sd">        &gt;&gt;&gt; staff = abjad.Staff(notes)</span>
+<span class="sd">        &gt;&gt;&gt; shuffler.pitch_only = False</span>
+<span class="sd">        &gt;&gt;&gt; notes = shuffler.shuffle_n(2)</span>
+<span class="sd">        &gt;&gt;&gt; staff.append(notes)</span>
+<span class="sd">        &gt;&gt;&gt; auxjad.mutate(staff[:]).remove_repeated_time_signatures()</span>
+<span class="sd">        &gt;&gt;&gt; abjad.f(staff)</span>
+<span class="sd">        \new Staff</span>
+<span class="sd">        {</span>
+<span class="sd">            \time 4/4</span>
+<span class="sd">            d&#39;4..</span>
+<span class="sd">            c&#39;16</span>
+<span class="sd">            f&#39;4.</span>
+<span class="sd">            e&#39;8</span>
+<span class="sd">            d&#39;4..</span>
+<span class="sd">            f&#39;16</span>
+<span class="sd">            c&#39;4.</span>
+<span class="sd">            e&#39;8</span>
+<span class="sd">            f&#39;16</span>
+<span class="sd">            d&#39;4..</span>
+<span class="sd">            e&#39;8</span>
+<span class="sd">            c&#39;4.</span>
+<span class="sd">            c&#39;4.</span>
+<span class="sd">            d&#39;8</span>
+<span class="sd">            ~</span>
+<span class="sd">            d&#39;4</span>
+<span class="sd">            ~</span>
+<span class="sd">            d&#39;16</span>
+<span class="sd">            e&#39;8</span>
+<span class="sd">            f&#39;16</span>
+<span class="sd">        }</span>
+
+<span class="sd">        .. figure:: ../_images/Shuffler-tyq8y6q8zr9.png</span>
+
+<span class="sd">    :attr:`swap_limit`:</span>
+<span class="sd">        The attribute :attr:`swap_limit` can be used to set the number of times</span>
+<span class="sd">        that pairs of elements are swapped on a single invocation of the</span>
+<span class="sd">        shuffling process. Set :attr:`swap_limit` to ``None`` to not limit the</span>
+<span class="sd">        shuffling process.</span>
+
+<span class="sd">        &gt;&gt;&gt; container = abjad.Container(r&quot;c&#39;8 d&#39;8 e&#39;8 f&#39;8 g&#39;8 a&#39;8 b&#39;8 c&#39;&#39;8&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; shuffler = auxjad.Shuffler(container,</span>
+<span class="sd">        ...                            swap_limit=1,</span>
+<span class="sd">        ...                            )</span>
+<span class="sd">        &gt;&gt;&gt; notes = shuffler.shuffle_n(3)</span>
+<span class="sd">        &gt;&gt;&gt; staff = abjad.Staff(notes)</span>
+<span class="sd">        &gt;&gt;&gt; abjad.f(staff)</span>
+<span class="sd">        \new Staff</span>
+<span class="sd">        {</span>
+<span class="sd">            \time 4/4</span>
+<span class="sd">            c&#39;8</span>
+<span class="sd">            d&#39;8</span>
+<span class="sd">            e&#39;8</span>
+<span class="sd">            g&#39;8</span>
+<span class="sd">            f&#39;8</span>
+<span class="sd">            a&#39;8</span>
+<span class="sd">            b&#39;8</span>
+<span class="sd">            c&#39;&#39;8</span>
+<span class="sd">            c&#39;8</span>
+<span class="sd">            c&#39;&#39;8</span>
+<span class="sd">            e&#39;8</span>
+<span class="sd">            g&#39;8</span>
+<span class="sd">            f&#39;8</span>
+<span class="sd">            a&#39;8</span>
+<span class="sd">            b&#39;8</span>
+<span class="sd">            d&#39;8</span>
+<span class="sd">            c&#39;8</span>
+<span class="sd">            c&#39;&#39;8</span>
+<span class="sd">            e&#39;8</span>
+<span class="sd">            g&#39;8</span>
+<span class="sd">            b&#39;8</span>
+<span class="sd">            a&#39;8</span>
+<span class="sd">            f&#39;8</span>
+<span class="sd">            d&#39;8</span>
+<span class="sd">        }</span>
+
+<span class="sd">        .. figure:: ../_images/Shuffler-Nbo5S6wcfQ.png</span>
+
+<span class="sd">    :meth:`rotate`:</span>
+<span class="sd">        Besides shuffling, logical ties and pitches can also be rotated using</span>
+<span class="sd">        the :meth:`rotate` method. Similarly to shuffling, it can be applied to</span>
+<span class="sd">        logical ties or pitches only depending on the property</span>
+<span class="sd">        :attr:`pitch_only`.</span>
+
+<span class="sd">        &gt;&gt;&gt; container = abjad.Container(</span>
+<span class="sd">        ...     r&quot;\time 3/4 c&#39;16 d&#39;8. ~ d&#39;4 e&#39;4 r4 f&#39;4 ~ f&#39;8.. g&#39;32&quot;</span>
+<span class="sd">        ... )</span>
+<span class="sd">        &gt;&gt;&gt; shuffler = auxjad.Shuffler(container)</span>
+<span class="sd">        &gt;&gt;&gt; notes = shuffler.rotate()</span>
+<span class="sd">        &gt;&gt;&gt; staff = abjad.Staff(notes)</span>
+<span class="sd">        &gt;&gt;&gt; abjad.f(staff)</span>
+<span class="sd">        \new Staff</span>
+<span class="sd">        {</span>
+<span class="sd">            \time 3/4</span>
+<span class="sd">            d&#39;4..</span>
+<span class="sd">            e&#39;16</span>
+<span class="sd">            ~</span>
+<span class="sd">            e&#39;8.</span>
+<span class="sd">            r16</span>
+<span class="sd">            r8.</span>
+<span class="sd">            f&#39;16</span>
+<span class="sd">            ~</span>
+<span class="sd">            f&#39;4</span>
+<span class="sd">            ~</span>
+<span class="sd">            f&#39;8</span>
+<span class="sd">            ~</span>
+<span class="sd">            f&#39;32</span>
+<span class="sd">            g&#39;32</span>
+<span class="sd">            c&#39;16</span>
+<span class="sd">        }</span>
+
+<span class="sd">        .. figure:: ../_images/Shuffler-7vamgsxlr6.png</span>
+
+<span class="sd">        &gt;&gt;&gt; container = abjad.Container(</span>
+<span class="sd">        ...     r&quot;\time 3/4 c&#39;16 d&#39;8. ~ d&#39;4 e&#39;4 r4 f&#39;4 ~ f&#39;8.. g&#39;32&quot;</span>
+<span class="sd">        ... )</span>
+<span class="sd">        &gt;&gt;&gt; shuffler = auxjad.Shuffler(container, pitch_only=True)</span>
+<span class="sd">        &gt;&gt;&gt; notes = shuffler.rotate()</span>
+<span class="sd">        &gt;&gt;&gt; staff = abjad.Staff(notes)</span>
+<span class="sd">        &gt;&gt;&gt; abjad.f(staff)</span>
+<span class="sd">        \new Staff</span>
+<span class="sd">        {</span>
+<span class="sd">            \time 3/4</span>
+<span class="sd">            d&#39;16</span>
+<span class="sd">            e&#39;8.</span>
+<span class="sd">            ~</span>
+<span class="sd">            e&#39;4</span>
+<span class="sd">            r4</span>
+<span class="sd">            f&#39;4</span>
+<span class="sd">            g&#39;4</span>
+<span class="sd">            ~</span>
+<span class="sd">            g&#39;8..</span>
+<span class="sd">            c&#39;32</span>
+<span class="sd">        }</span>
+
+<span class="sd">        .. figure:: ../_images/Shuffler-89cx79bjji8.png</span>
+
+<span class="sd">        This method can also take the optional parameters ``n_rotations`` and</span>
+<span class="sd">        ``anticlockwise``. The first is an :obj:`int` setting the number of</span>
+<span class="sd">        rotations applied to the material, and the second is a :obj:`bool`</span>
+<span class="sd">        setting the direction of the rotation (default ``False``).</span>
+
+<span class="sd">        &gt;&gt;&gt; container = abjad.Container(</span>
+<span class="sd">        ...     r&quot;\time 3/4 c&#39;16 d&#39;8. ~ d&#39;4 e&#39;4 r4 f&#39;4 ~ f&#39;8.. g&#39;32&quot;</span>
+<span class="sd">        ... )</span>
+<span class="sd">        &gt;&gt;&gt; shuffler = auxjad.Shuffler(container, pitch_only=True)</span>
+<span class="sd">        &gt;&gt;&gt; notes = shuffler.rotate(n_rotations=2, anticlockwise=True)</span>
+<span class="sd">        &gt;&gt;&gt; staff = abjad.Staff(notes)</span>
+<span class="sd">        &gt;&gt;&gt; abjad.f(staff)</span>
+<span class="sd">        \new Staff</span>
+<span class="sd">        {</span>
+<span class="sd">            \time 3/4</span>
+<span class="sd">            f&#39;16</span>
+<span class="sd">            g&#39;8.</span>
+<span class="sd">            ~</span>
+<span class="sd">            g&#39;4</span>
+<span class="sd">            c&#39;4</span>
+<span class="sd">            d&#39;4</span>
+<span class="sd">            e&#39;4</span>
+<span class="sd">            ~</span>
+<span class="sd">            e&#39;8..</span>
+<span class="sd">            r32</span>
+<span class="sd">        }</span>
+
+<span class="sd">        .. figure:: ../_images/Shuffler-g6v6wjm12ub.png</span>
+
+<span class="sd">    :attr:`preserve_rest_position`:</span>
+<span class="sd">        If :attr:`preserve_rest_position` is set to ``True``, the positions of</span>
+<span class="sd">        all rests will remain the same after either shuffling and rotation. In</span>
+<span class="sd">        pitch mode (when :attr:`pitch_only` is set to ``True``), this means</span>
+<span class="sd">        that only the pitched notes will be shuffled or rotated, while the</span>
+<span class="sd">        rests remain in the exact same place.</span>
+
+<span class="sd">        &gt;&gt;&gt; container = abjad.Container(r&quot;c&#39;8. d&#39;4 r8 r8. e&#39;16 f&#39;8.&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; shuffler = auxjad.Shuffler(container,</span>
+<span class="sd">        ...                            pitch_only=True,</span>
+<span class="sd">        ...                            preserve_rest_position=True,</span>
+<span class="sd">        ...                            )</span>
+<span class="sd">        &gt;&gt;&gt; notes = shuffler()</span>
+<span class="sd">        &gt;&gt;&gt; staff = abjad.Staff(notes)</span>
+<span class="sd">        &gt;&gt;&gt; abjad.f(staff)</span>
+<span class="sd">        \new Staff</span>
+<span class="sd">        {</span>
+<span class="sd">            \time 4/4</span>
+<span class="sd">            d&#39;8.</span>
+<span class="sd">            f&#39;4</span>
+<span class="sd">            r8</span>
+<span class="sd">            r8.</span>
+<span class="sd">            c&#39;16</span>
+<span class="sd">            e&#39;8.</span>
+<span class="sd">        }</span>
+
+<span class="sd">        .. figure:: ../_images/Shuffler-pmou83f7rlj.png</span>
+
+<span class="sd">        In logical ties mode, the rests will remain at the same index and will</span>
+<span class="sd">        have the same total duration as before, but their position in the</span>
+<span class="sd">        measure might vary since the duration of the pitched logical ties</span>
+<span class="sd">        preceding it might change.</span>
+
+<span class="sd">        &gt;&gt;&gt; container = abjad.Container(r&quot;c&#39;8. d&#39;4 r8 r8. e&#39;16 f&#39;8.&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; shuffler = auxjad.Shuffler(container, preserve_rest_position=True)</span>
+<span class="sd">        &gt;&gt;&gt; notes = shuffler()</span>
+<span class="sd">        &gt;&gt;&gt; staff = abjad.Staff(notes)</span>
+<span class="sd">        &gt;&gt;&gt; abjad.f(staff)</span>
+<span class="sd">        \new Staff</span>
+<span class="sd">        {</span>
+<span class="sd">            \time 4/4</span>
+<span class="sd">            d&#39;4</span>
+<span class="sd">            e&#39;16</span>
+<span class="sd">            r8.</span>
+<span class="sd">            r8</span>
+<span class="sd">            f&#39;8</span>
+<span class="sd">            ~</span>
+<span class="sd">            f&#39;16</span>
+<span class="sd">            c&#39;8.</span>
+<span class="sd">        }</span>
+
+<span class="sd">        .. figure:: ../_images/Shuffler-7hbp2kdpqof.png</span>
+
+<span class="sd">    :attr:`disable_rewrite_meter`:</span>
+<span class="sd">        If :attr:`disable_rewrite_meter` is set to ``True``, then the automatic</span>
+<span class="sd">        behaviour of rewriting the leaves according to the meter is disabled.</span>
+
+<span class="sd">        &gt;&gt;&gt; container = abjad.Container(r&quot;c&#39;4 d&#39;8 e&#39;8 f&#39;2&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; shuffler = auxjad.Shuffler(container,</span>
+<span class="sd">        ...                            disable_rewrite_meter=True,</span>
+<span class="sd">        ...                            )</span>
+<span class="sd">        &gt;&gt;&gt; notes = shuffler()</span>
+<span class="sd">        &gt;&gt;&gt; staff = abjad.Staff(notes)</span>
+<span class="sd">        &gt;&gt;&gt; abjad.f(staff)</span>
+<span class="sd">        \new Staff</span>
+<span class="sd">        {</span>
+<span class="sd">            \time 4/4</span>
+<span class="sd">            e&#39;8</span>
+<span class="sd">            f&#39;2</span>
+<span class="sd">            c&#39;4</span>
+<span class="sd">            d&#39;8</span>
+<span class="sd">        }</span>
+
+<span class="sd">        .. figure:: ../_images/Shuffler-tb78izpzvjp.png</span>
+
+<span class="sd">    :meth:`shuffle_n` and :meth:`rotate_n`:</span>
+<span class="sd">        To output several shuffled containers at once, use the methods</span>
+<span class="sd">        :meth:`shuffle_n` and :meth:`rotate_n`, inputting the desired number of</span>
+<span class="sd">        iterations. :meth:`rotate_n` can also take the optional arguments</span>
+<span class="sd">        ``n_rotations`` and ``anticlockwise``, similarly to :meth:`rotate`.</span>
+
+<span class="sd">        &gt;&gt;&gt; container = abjad.Container(r&quot;c&#39;4 d&#39;8 e&#39;4. f&#39;8. g&#39;16&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; shuffler = auxjad.Shuffler(container)</span>
+<span class="sd">        &gt;&gt;&gt; notes = shuffler.shuffle_n(2)</span>
+<span class="sd">        &gt;&gt;&gt; staff = abjad.Staff(notes)</span>
+<span class="sd">        &gt;&gt;&gt; abjad.f(staff)</span>
+<span class="sd">        \new Staff</span>
+<span class="sd">        {</span>
+<span class="sd">            \time 4/4</span>
+<span class="sd">            d&#39;8</span>
+<span class="sd">            g&#39;16</span>
+<span class="sd">            c&#39;16</span>
+<span class="sd">            ~</span>
+<span class="sd">            c&#39;8.</span>
+<span class="sd">            f&#39;16</span>
+<span class="sd">            ~</span>
+<span class="sd">            f&#39;8</span>
+<span class="sd">            e&#39;4.</span>
+<span class="sd">            g&#39;16</span>
+<span class="sd">            f&#39;8.</span>
+<span class="sd">            e&#39;4</span>
+<span class="sd">            ~</span>
+<span class="sd">            e&#39;8</span>
+<span class="sd">            c&#39;4</span>
+<span class="sd">            d&#39;8</span>
+<span class="sd">        }</span>
+
+<span class="sd">        .. figure:: ../_images/Shuffler-vtia65lbk5.png</span>
+
+<span class="sd">        &gt;&gt;&gt; container = abjad.Container(r&quot;c&#39;4 d&#39;8 e&#39;4. f&#39;8. g&#39;16&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; shuffler = auxjad.Shuffler(container)</span>
+<span class="sd">        &gt;&gt;&gt; notes = shuffler.rotate_n(2)</span>
+<span class="sd">        &gt;&gt;&gt; staff = abjad.Staff(notes)</span>
+<span class="sd">        &gt;&gt;&gt; abjad.f(staff)</span>
+<span class="sd">        \new Staff</span>
+<span class="sd">        {</span>
+<span class="sd">            \time 4/4</span>
+<span class="sd">            d&#39;8</span>
+<span class="sd">            e&#39;4.</span>
+<span class="sd">            f&#39;8.</span>
+<span class="sd">            g&#39;16</span>
+<span class="sd">            c&#39;4</span>
+<span class="sd">            e&#39;4.</span>
+<span class="sd">            f&#39;8</span>
+<span class="sd">            ~</span>
+<span class="sd">            f&#39;16</span>
+<span class="sd">            g&#39;16</span>
+<span class="sd">            c&#39;4</span>
+<span class="sd">            d&#39;8</span>
+<span class="sd">        }</span>
+
+<span class="sd">        .. figure:: ../_images/Shuffler-3dqhy8eoiez.png</span>
+
+<span class="sd">    :attr:`omit_time_signatures`:</span>
+<span class="sd">        To disable time signatures altogether, initialise this class with the</span>
+<span class="sd">        keyword argument :attr:`omit_time_signatures` set to ``True`` (default</span>
+<span class="sd">        is ``False``), or change the :attr:`omit_time_signatures` property</span>
+<span class="sd">        after initialisation.</span>
+
+<span class="sd">        &gt;&gt;&gt; container = abjad.Container(r&quot;\time 3/4 c&#39;16 d&#39;4.. e&#39;4 | r4 f&#39;2&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; shuffler = auxjad.Shuffler(container,</span>
+<span class="sd">        ...                            omit_time_signatures=True,</span>
+<span class="sd">        ...                            )</span>
+<span class="sd">        &gt;&gt;&gt; notes = shuffler()</span>
+<span class="sd">        &gt;&gt;&gt; staff = abjad.Staff(notes)</span>
+<span class="sd">        &gt;&gt;&gt; abjad.f(staff)</span>
+<span class="sd">        \new Staff</span>
+<span class="sd">        {</span>
+<span class="sd">            \time 4/4</span>
+<span class="sd">            d&#39;4..</span>
+<span class="sd">            e&#39;16</span>
+<span class="sd">            ~</span>
+<span class="sd">            e&#39;8.</span>
+<span class="sd">            f&#39;16</span>
+<span class="sd">            ~</span>
+<span class="sd">            f&#39;4..</span>
+<span class="sd">            r16</span>
+<span class="sd">            r8.</span>
+<span class="sd">            c&#39;16</span>
+<span class="sd">        }</span>
+
+<span class="sd">        .. figure:: ../_images/Shuffler-1v3lwhj430b.png</span>
+
+<span class="sd">    .. tip::</span>
+
+<span class="sd">        All methods that return an |abjad.Selection| will add an initial time</span>
+<span class="sd">        signature to it. The :meth:`shuffle_n` and :meth:`rotate_n` methods</span>
+<span class="sd">        automatically remove repeated time signatures. When joining selections</span>
+<span class="sd">        output by multiple method calls, use</span>
+<span class="sd">        |auxjad.mutate().remove_repeated_time_signatures()| on the whole</span>
+<span class="sd">        container after fusing the selections to remove any unecessary time</span>
+<span class="sd">        signature changes.</span>
+
+<span class="sd">    Time signature changes:</span>
+<span class="sd">        This class handles time signature changes too:</span>
+
+<span class="sd">        &gt;&gt;&gt; container = abjad.Container(</span>
+<span class="sd">        ...     r&quot;\time 3/4 c&#39;8. d&#39;4 r8 r8. \time 2/4 e&#39;16 f&#39;4..&quot;</span>
+<span class="sd">        ... )</span>
+<span class="sd">        &gt;&gt;&gt; shuffler = auxjad.Shuffler(container)</span>
+<span class="sd">        &gt;&gt;&gt; notes = shuffler.shuffle_n(2)</span>
+<span class="sd">        &gt;&gt;&gt; staff = abjad.Staff(notes)</span>
+<span class="sd">        &gt;&gt;&gt; abjad.f(staff)</span>
+<span class="sd">        \new Staff</span>
+<span class="sd">        {</span>
+<span class="sd">            \time 3/4</span>
+<span class="sd">            e&#39;16</span>
+<span class="sd">            d&#39;8.</span>
+<span class="sd">            ~</span>
+<span class="sd">            d&#39;16</span>
+<span class="sd">            f&#39;4..</span>
+<span class="sd">            \time 2/4</span>
+<span class="sd">            c&#39;8.</span>
+<span class="sd">            r16</span>
+<span class="sd">            r4</span>
+<span class="sd">            \time 3/4</span>
+<span class="sd">            c&#39;8.</span>
+<span class="sd">            f&#39;16</span>
+<span class="sd">            ~</span>
+<span class="sd">            f&#39;4.</span>
+<span class="sd">            r8</span>
+<span class="sd">            \time 2/4</span>
+<span class="sd">            r8.</span>
+<span class="sd">            d&#39;16</span>
+<span class="sd">            ~</span>
+<span class="sd">            d&#39;8.</span>
+<span class="sd">            e&#39;16</span>
+<span class="sd">        }</span>
+
+<span class="sd">        .. figure:: ../_images/Shuffler-yx11u6o14v.png</span>
+
+<span class="sd">    Tuplet support:</span>
+<span class="sd">        Tuplets are supported when :attr:`pitch_only` is ``True`` (pitch-only</span>
+<span class="sd">        mode).</span>
+
+<span class="sd">        &gt;&gt;&gt; container = abjad.Container(</span>
+<span class="sd">        ...     r&quot;\time 5/4 r4 \times 2/3 {c&#39;4 d&#39;2} e&#39;4. f&#39;8&quot;</span>
+<span class="sd">        ... )</span>
+<span class="sd">        &gt;&gt;&gt; shuffler = auxjad.Shuffler(container, pitch_only=True)</span>
+<span class="sd">        &gt;&gt;&gt; notes = shuffler()</span>
+<span class="sd">        &gt;&gt;&gt; staff = abjad.Staff(notes)</span>
+<span class="sd">        &gt;&gt;&gt; abjad.f(staff)</span>
+<span class="sd">        \new Staff</span>
+<span class="sd">        {</span>
+<span class="sd">            \time 5/4</span>
+<span class="sd">            d&#39;4</span>
+<span class="sd">            \times 2/3 {</span>
+<span class="sd">                f&#39;4</span>
+<span class="sd">                c&#39;2</span>
+<span class="sd">            }</span>
+<span class="sd">            e&#39;4.</span>
+<span class="sd">            r8</span>
+<span class="sd">        }</span>
+
+<span class="sd">        .. figure:: ../_images/Shuffler-mjxubkel8y.png</span>
+
+<span class="sd">    .. error::</span>
+
+<span class="sd">        Tuplets are not supported when :attr:`pitch_only` is ``False`` (logical</span>
+<span class="sd">        tie mode). Using a container with tuplets and :attr:`pitch_only` set to</span>
+<span class="sd">        ``True`` will raise a :exc:`TypeError` exception.</span>
+
+<span class="sd">        &gt;&gt;&gt; container = abjad.Container(</span>
+<span class="sd">        ...     r&quot;\time 5/4 r4 \times 2/3 {c&#39;4 d&#39;2} e&#39;4. f&#39;8&quot;</span>
+<span class="sd">        ... )</span>
+<span class="sd">        &gt;&gt;&gt; shuffler = auxjad.Shuffler(container)</span>
+<span class="sd">        &gt;&gt;&gt; notes = shuffler()</span>
+<span class="sd">        TypeError: &#39;contents&#39; contain one ore more tuplets, which are not</span>
+<span class="sd">        currently supported by the shuffle method</span>
+
+<span class="sd">    Indicators:</span>
+<span class="sd">        This class can also handle dynamics and articulations.</span>
+
+<span class="sd">        &gt;&gt;&gt; container = abjad.Container(</span>
+<span class="sd">        ...     r&quot;&lt;c&#39; e&#39; g&#39;&gt;4--\p d&#39;8-. e&#39;8-. f&#39;4-^\f r4&quot;</span>
+<span class="sd">        ... )</span>
+<span class="sd">        &gt;&gt;&gt; shuffler = auxjad.Shuffler(container)</span>
+<span class="sd">        &gt;&gt;&gt; notes = shuffler.shuffle_n(3)</span>
+<span class="sd">        &gt;&gt;&gt; staff = abjad.Staff(notes)</span>
+<span class="sd">        &gt;&gt;&gt; abjad.f(staff)</span>
+<span class="sd">        \new Staff</span>
+<span class="sd">        {</span>
+<span class="sd">            \time 4/4</span>
+<span class="sd">            e&#39;8</span>
+<span class="sd">            \p</span>
+<span class="sd">            - \staccato</span>
+<span class="sd">            d&#39;8</span>
+<span class="sd">            - \staccato</span>
+<span class="sd">            f&#39;4</span>
+<span class="sd">            \f</span>
+<span class="sd">            - \marcato</span>
+<span class="sd">            &lt;c&#39; e&#39; g&#39;&gt;4</span>
+<span class="sd">            \p</span>
+<span class="sd">            - \tenuto</span>
+<span class="sd">            r4</span>
+<span class="sd">            r4</span>
+<span class="sd">            d&#39;8</span>
+<span class="sd">            - \staccato</span>
+<span class="sd">            f&#39;8</span>
+<span class="sd">            \f</span>
+<span class="sd">            - \marcato</span>
+<span class="sd">            ~</span>
+<span class="sd">            f&#39;8</span>
+<span class="sd">            &lt;c&#39; e&#39; g&#39;&gt;4</span>
+<span class="sd">            \p</span>
+<span class="sd">            - \tenuto</span>
+<span class="sd">            e&#39;8</span>
+<span class="sd">            - \staccato</span>
+<span class="sd">            f&#39;4</span>
+<span class="sd">            \f</span>
+<span class="sd">            - \marcato</span>
+<span class="sd">            e&#39;8</span>
+<span class="sd">            \p</span>
+<span class="sd">            - \staccato</span>
+<span class="sd">            &lt;c&#39; e&#39; g&#39;&gt;8</span>
+<span class="sd">            - \tenuto</span>
+<span class="sd">            ~</span>
+<span class="sd">            &lt;c&#39; e&#39; g&#39;&gt;8</span>
+<span class="sd">            d&#39;8</span>
+<span class="sd">            - \staccato</span>
+<span class="sd">            r4</span>
+<span class="sd">        }</span>
+
+<span class="sd">        .. figure:: ../_images/Shuffler-2ibui58pj8w.png</span>
+
+<span class="sd">    .. tip::</span>
+
+<span class="sd">        The functions |auxjad.mutate().remove_repeated_dynamics()| and</span>
+<span class="sd">        |auxjad.mutate().reposition_clefs()| can be used to clean the output</span>
+<span class="sd">        and remove repeated dynamics and unnecessary clef changes.</span>
+
+<span class="sd">    .. warning::</span>
+
+<span class="sd">        Do note that some elements that span multiple notes (such as ottava</span>
+<span class="sd">        indicators, manual beams, etc.) can become problematic when notes</span>
+<span class="sd">        containing them are split into two. As a rule of thumb, it is always</span>
+<span class="sd">        better to attach those to the music after the fading process has ended.</span>
+<span class="sd">        In the case of shuffling logical ties, slurs and hairpins can also</span>
+<span class="sd">        become a problem, since their start and end position can shift around.</span>
+<span class="sd">        Dynamics are shuffled together with their leaves, so the initial leaf</span>
+<span class="sd">        may lack a dynamic marking.</span>
+
+<span class="sd">    :attr:`contents`:</span>
+<span class="sd">        Use the property :attr:`contents` to get the input container upon which</span>
+<span class="sd">        the shuffler operates. Notice that :attr:`contents` remains invariant</span>
+<span class="sd">        after any shuffling or rotation operations (use :attr:`current_window`</span>
+<span class="sd">        for the transformed selection of music). :attr:`contents` can be used</span>
+<span class="sd">        to change the |abjad.Container| to be shuffled.</span>
+
+<span class="sd">        &gt;&gt;&gt; container = abjad.Container(r&quot;c&#39;4 d&#39;4 e&#39;4 f&#39;4&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; shuffler = auxjad.Shuffler(container)</span>
+<span class="sd">        &gt;&gt;&gt; abjad.f(shuffler.contents)</span>
+<span class="sd">        {</span>
+<span class="sd">            c&#39;4</span>
+<span class="sd">            d&#39;4</span>
+<span class="sd">            e&#39;4</span>
+<span class="sd">            f&#39;4</span>
+<span class="sd">        }</span>
+
+<span class="sd">        .. figure:: ../_images/Shuffler-qsee7chymo.png</span>
+
+<span class="sd">        &gt;&gt;&gt; shuffler()</span>
+<span class="sd">        &gt;&gt;&gt; abjad.f(shuffler.contents)</span>
+<span class="sd">        {</span>
+<span class="sd">            c&#39;4</span>
+<span class="sd">            d&#39;4</span>
+<span class="sd">            e&#39;4</span>
+<span class="sd">            f&#39;4</span>
+<span class="sd">        }</span>
+
+<span class="sd">        .. figure:: ../_images/Shuffler-ii3fxe001ki.png</span>
+
+<span class="sd">        &gt;&gt;&gt; shuffler.contents = abjad.Container(r&quot;cs2 ds2&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; abjad.f(shuffler.contents)</span>
+<span class="sd">        {</span>
+<span class="sd">            cs2</span>
+<span class="sd">            ds2</span>
+<span class="sd">        }</span>
+
+<span class="sd">        .. figure:: ../_images/Shuffler-p2vd4mfvucp.png</span>
+
+<span class="sd">    Tweaking |abjad.mutate().rewrite_meter()|:</span>
+<span class="sd">        This function uses the default logical tie splitting algorithm from</span>
+<span class="sd">        |abjad.mutate().rewrite_meter()|.</span>
+
+<span class="sd">        &gt;&gt;&gt; container = abjad.Container(r&quot;c&#39;4. d&#39;8 e&#39;2&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; shuffler = auxjad.Shuffler(container)</span>
+<span class="sd">        &gt;&gt;&gt; notes = shuffler()</span>
+<span class="sd">        &gt;&gt;&gt; staff = abjad.Staff(notes)</span>
+<span class="sd">        &gt;&gt;&gt; abjad.f(staff)</span>
+<span class="sd">        \new Staff</span>
+<span class="sd">        {</span>
+<span class="sd">            \time 4/4</span>
+<span class="sd">            e&#39;2</span>
+<span class="sd">            c&#39;4.</span>
+<span class="sd">            d&#39;8</span>
+<span class="sd">        }</span>
+
+<span class="sd">        .. figure:: ../_images/Shuffler-t4lsqxg18ab.png</span>
+
+<span class="sd">        Set :attr:`boundary_depth` to a different number to change its</span>
+<span class="sd">        behaviour.</span>
+
+<span class="sd">        &gt;&gt;&gt; shuffler = auxjad.Shuffler(container,</span>
+<span class="sd">        ...                            boundary_depth=1,</span>
+<span class="sd">        ...                            )</span>
+<span class="sd">        &gt;&gt;&gt; notes = shuffler()</span>
+<span class="sd">        &gt;&gt;&gt; staff = abjad.Staff(notes)</span>
+<span class="sd">        &gt;&gt;&gt; abjad.f(staff)</span>
+<span class="sd">        \new Staff</span>
+<span class="sd">        {</span>
+<span class="sd">            \time 4/4</span>
+<span class="sd">            e&#39;2</span>
+<span class="sd">            c&#39;4</span>
+<span class="sd">            ~</span>
+<span class="sd">            c&#39;8</span>
+<span class="sd">            d&#39;8</span>
+<span class="sd">        }</span>
+
+<span class="sd">        .. figure:: ../_images/Shuffler-7na5znnhhwe.png</span>
+
+<span class="sd">        Other arguments available for tweaking the output of</span>
+<span class="sd">        |abjad.mutate().rewrite_meter()| are :attr:`maximum_dot_count` and</span>
+<span class="sd">        :attr:`rewrite_tuplets`, which work exactly as the identically named</span>
+<span class="sd">        arguments of |abjad.mutate().rewrite_meter()|.</span>
+
+<span class="sd">        This class also accepts the arguments ``fuse_across_groups_of_beats``,</span>
+<span class="sd">        ``fuse_quadruple_meter``, ``fuse_triple_meter``, and</span>
+<span class="sd">        ``extract_trivial_tuplets``, which are passed on to</span>
+<span class="sd">        |auxjad.mutate().prettify_rewrite_meter()| (the latter can be disabled</span>
+<span class="sd">        by setting ``prettify_rewrite_meter`` to ``False``). See the</span>
+<span class="sd">        documentation of this function for more details on these arguments.</span>
+
+<span class="sd">    :attr:`disable_rewrite_meter`:</span>
+<span class="sd">        By default, this class uses the |abjad.mutate().rewrite_meter()|</span>
+<span class="sd">        mutation.</span>
+
+<span class="sd">        &gt;&gt;&gt; container = abjad.Container(r&quot;c&#39;4 d&#39;8 e&#39;8 f&#39;2&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; shuffler = auxjad.Shuffler(container)</span>
+<span class="sd">        &gt;&gt;&gt; notes = shuffler()</span>
+<span class="sd">        &gt;&gt;&gt; staff = abjad.Staff(notes)</span>
+<span class="sd">        &gt;&gt;&gt; abjad.f(staff)</span>
+<span class="sd">        \new Staff</span>
+<span class="sd">        {</span>
+<span class="sd">            \time 4/4</span>
+<span class="sd">            e&#39;8</span>
+<span class="sd">            f&#39;8</span>
+<span class="sd">            ~</span>
+<span class="sd">            f&#39;4.</span>
+<span class="sd">            c&#39;8</span>
+<span class="sd">            ~</span>
+<span class="sd">            c&#39;8</span>
+<span class="sd">            d&#39;8</span>
+<span class="sd">        }</span>
+
+<span class="sd">        .. figure:: ../_images/Shuffler-7cfnxx7shci.png</span>
+
+<span class="sd">        Set :attr:`disable_rewrite_meter` to ``True`` in order to disable this</span>
+<span class="sd">        behaviour.</span>
+
+<span class="sd">        &gt;&gt;&gt; container = abjad.Container(r&quot;c&#39;4 d&#39;8. e&#39;16 f&#39;2&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; abjad.f(container)</span>
+<span class="sd">        \new Staff</span>
+<span class="sd">        {</span>
+<span class="sd">            \time 4/4</span>
+<span class="sd">            e&#39;16</span>
+<span class="sd">            f&#39;8.</span>
+<span class="sd">            ~</span>
+<span class="sd">            f&#39;4</span>
+<span class="sd">            ~</span>
+<span class="sd">            f&#39;16</span>
+<span class="sd">            c&#39;8.</span>
+<span class="sd">            ~</span>
+<span class="sd">            c&#39;16</span>
+<span class="sd">            d&#39;8.</span>
+<span class="sd">        }</span>
+
+<span class="sd">        .. figure:: ../_images/Shuffler-6gm4ev48j9k.png</span>
+
+<span class="sd">        &gt;&gt;&gt; shuffler = auxjad.Shuffler(container,</span>
+<span class="sd">        ...                            disable_rewrite_meter=True,</span>
+<span class="sd">        ...                            )</span>
+<span class="sd">        &gt;&gt;&gt; notes = shuffler()</span>
+<span class="sd">        &gt;&gt;&gt; staff = abjad.Staff(notes)</span>
+<span class="sd">        &gt;&gt;&gt; abjad.f(staff)</span>
+<span class="sd">        \new Staff</span>
+<span class="sd">        {</span>
+<span class="sd">            \time 4/4</span>
+<span class="sd">            e&#39;16</span>
+<span class="sd">            f&#39;2</span>
+<span class="sd">            c&#39;4</span>
+<span class="sd">            d&#39;8.</span>
+<span class="sd">        }</span>
+
+<span class="sd">        .. figure:: ../_images/Shuffler-xlr4x3bhj6n.png</span>
+
+<span class="sd">    Using as iterator:</span>
+<span class="sd">        The instances of this class can also be used as an iterator, which can</span>
+<span class="sd">        then be used in a for loop. Note that unlike the methods</span>
+<span class="sd">        :meth:`shuffle_n` and :meth:`rotate_n`, time signatures are added to</span>
+<span class="sd">        each window returned by the shuffler. Use the function</span>
+<span class="sd">        |auxjad.mutate().remove_repeated_time_signatures()| to clean the output</span>
+<span class="sd">        when using this class in this way. It is also important to note that a</span>
+<span class="sd">        ``break`` statement is needed when using this class as an iterator. The</span>
+<span class="sd">        reason is that shuffling is a process that can happen indefinitely</span>
+<span class="sd">        (unlike some of the other classes in this library).</span>
+
+<span class="sd">        &gt;&gt;&gt; container = abjad.Container(r&quot;\time 3/4 c&#39;4 d&#39;4 e&#39;4&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; shuffler = auxjad.Shuffler(container)</span>
+<span class="sd">        &gt;&gt;&gt; staff = abjad.Staff()</span>
+<span class="sd">        &gt;&gt;&gt; for window in shuffler:</span>
+<span class="sd">        ...     staff.append(window)</span>
+<span class="sd">        ...     if abjad.inspect(staff).duration() == abjad.Duration((9, 4)):</span>
+<span class="sd">        ...         break</span>
+<span class="sd">        &gt;&gt;&gt; auxjad.mutate(staff[:]).remove_repeated_time_signatures()</span>
+<span class="sd">        &gt;&gt;&gt; abjad.f(staff)</span>
+<span class="sd">        \new Staff</span>
+<span class="sd">        {</span>
+<span class="sd">            \time 3/4</span>
+<span class="sd">            e&#39;4</span>
+<span class="sd">            c&#39;4</span>
+<span class="sd">            d&#39;4</span>
+<span class="sd">            d&#39;4</span>
+<span class="sd">            c&#39;4</span>
+<span class="sd">            e&#39;4</span>
+<span class="sd">            c&#39;4</span>
+<span class="sd">            e&#39;4</span>
+<span class="sd">            d&#39;4</span>
+<span class="sd">        }</span>
+
+<span class="sd">        .. figure:: ../_images/Shuffler-3gyz7atvemx.png</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="c1">### CLASS VARIABLES ###</span>
+
+    <span class="vm">__slots__</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;_contents&#39;</span><span class="p">,</span>
+                 <span class="s1">&#39;_pitch_only&#39;</span><span class="p">,</span>
+                 <span class="s1">&#39;_preserve_rest_position&#39;</span><span class="p">,</span>
+                 <span class="s1">&#39;_disable_rewrite_meter&#39;</span><span class="p">,</span>
+                 <span class="s1">&#39;_omit_time_signatures&#39;</span><span class="p">,</span>
+                 <span class="s1">&#39;_current_window&#39;</span><span class="p">,</span>
+                 <span class="s1">&#39;_logical_selections&#39;</span><span class="p">,</span>
+                 <span class="s1">&#39;_logical_selections_indeces&#39;</span><span class="p">,</span>
+                 <span class="s1">&#39;_pitches&#39;</span><span class="p">,</span>
+                 <span class="s1">&#39;_time_signatures&#39;</span><span class="p">,</span>
+                 <span class="s1">&#39;_is_first_window&#39;</span><span class="p">,</span>
+                 <span class="s1">&#39;_boundary_depth&#39;</span><span class="p">,</span>
+                 <span class="s1">&#39;_maximum_dot_count&#39;</span><span class="p">,</span>
+                 <span class="s1">&#39;_rewrite_tuplets&#39;</span><span class="p">,</span>
+                 <span class="s1">&#39;_process_on_first_call&#39;</span><span class="p">,</span>
+                 <span class="s1">&#39;_prettify_rewrite_meter&#39;</span><span class="p">,</span>
+                 <span class="s1">&#39;_extract_trivial_tuplets&#39;</span><span class="p">,</span>
+                 <span class="s1">&#39;_fuse_across_groups_of_beats&#39;</span><span class="p">,</span>
+                 <span class="s1">&#39;_fuse_quadruple_meter&#39;</span><span class="p">,</span>
+                 <span class="s1">&#39;_fuse_triple_meter&#39;</span><span class="p">,</span>
+                 <span class="s1">&#39;_swap_limit&#39;</span><span class="p">,</span>
+                 <span class="p">)</span>
+
+    <span class="c1">### INITIALISER ###</span>
+
+<div class="viewcode-block" id="Shuffler.__init__"><a class="viewcode-back" href="../../../_api_members/auxjad.Shuffler.html#auxjad.Shuffler.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+                 <span class="n">contents</span><span class="p">:</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">,</span>
+                 <span class="o">*</span><span class="p">,</span>
+                 <span class="n">pitch_only</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+                 <span class="n">preserve_rest_position</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+                 <span class="n">disable_rewrite_meter</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+                 <span class="n">omit_time_signatures</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+                 <span class="n">boundary_depth</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+                 <span class="n">maximum_dot_count</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+                 <span class="n">rewrite_tuplets</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+                 <span class="n">process_on_first_call</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+                 <span class="n">prettify_rewrite_meter</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+                 <span class="n">extract_trivial_tuplets</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+                 <span class="n">fuse_across_groups_of_beats</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+                 <span class="n">fuse_quadruple_meter</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+                 <span class="n">fuse_triple_meter</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+                 <span class="n">swap_limit</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+                 <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sa">r</span><span class="s1">&#39;Initialises self.&#39;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">contents</span> <span class="o">=</span> <span class="n">contents</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">pitch_only</span> <span class="o">=</span> <span class="n">pitch_only</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">preserve_rest_position</span> <span class="o">=</span> <span class="n">preserve_rest_position</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">disable_rewrite_meter</span> <span class="o">=</span> <span class="n">disable_rewrite_meter</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">omit_time_signatures</span> <span class="o">=</span> <span class="n">omit_time_signatures</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">boundary_depth</span> <span class="o">=</span> <span class="n">boundary_depth</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">maximum_dot_count</span> <span class="o">=</span> <span class="n">maximum_dot_count</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">rewrite_tuplets</span> <span class="o">=</span> <span class="n">rewrite_tuplets</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">prettify_rewrite_meter</span> <span class="o">=</span> <span class="n">prettify_rewrite_meter</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">extract_trivial_tuplets</span> <span class="o">=</span> <span class="n">extract_trivial_tuplets</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">fuse_across_groups_of_beats</span> <span class="o">=</span> <span class="n">fuse_across_groups_of_beats</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">fuse_quadruple_meter</span> <span class="o">=</span> <span class="n">fuse_quadruple_meter</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">fuse_triple_meter</span> <span class="o">=</span> <span class="n">fuse_triple_meter</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">process_on_first_call</span> <span class="o">=</span> <span class="n">process_on_first_call</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">swap_limit</span> <span class="o">=</span> <span class="n">swap_limit</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_is_first_window</span> <span class="o">=</span> <span class="kc">True</span></div>
+
+    <span class="c1">### SPECIAL METHODS ###</span>
+
+<div class="viewcode-block" id="Shuffler.__repr__"><a class="viewcode-back" href="../../../_api_members/auxjad.Shuffler.html#auxjad.Shuffler.__repr__">[docs]</a>    <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="sa">r</span><span class="s1">&#39;Returns interpreter representation of :attr:`contents`.&#39;</span>
+        <span class="k">return</span> <span class="nb">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_contents</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="Shuffler.__len__"><a class="viewcode-back" href="../../../_api_members/auxjad.Shuffler.html#auxjad.Shuffler.__len__">[docs]</a>    <span class="k">def</span> <span class="fm">__len__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+        <span class="sa">r</span><span class="s1">&#39;Returns the number of logical ties of :attr:`contents`.&#39;</span>
+        <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_logical_selections</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="Shuffler.__call__"><a class="viewcode-back" href="../../../_api_members/auxjad.Shuffler.html#auxjad.Shuffler.__call__">[docs]</a>    <span class="k">def</span> <span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Selection</span><span class="p">:</span>
+        <span class="sa">r</span><span class="s1">&#39;Calls the shuffling process, returning an |abjad.Selection|&#39;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">shuffle</span><span class="p">()</span></div>
+
+<div class="viewcode-block" id="Shuffler.__next__"><a class="viewcode-back" href="../../../_api_members/auxjad.Shuffler.html#auxjad.Shuffler.__next__">[docs]</a>    <span class="k">def</span> <span class="fm">__next__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Selection</span><span class="p">:</span>
+        <span class="sa">r</span><span class="sd">&quot;&quot;&quot;Calls the shuffling process for one iteration, returning an</span>
+<span class="sd">        |abjad.Selection|.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="fm">__call__</span><span class="p">()</span></div>
+
+<div class="viewcode-block" id="Shuffler.__iter__"><a class="viewcode-back" href="../../../_api_members/auxjad.Shuffler.html#auxjad.Shuffler.__iter__">[docs]</a>    <span class="k">def</span> <span class="fm">__iter__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sa">r</span><span class="s1">&#39;Returns an iterator, allowing instances to be used as iterators.&#39;</span>
+        <span class="k">return</span> <span class="bp">self</span></div>
+
+    <span class="c1">### PUBLIC METHODS ###</span>
+
+<div class="viewcode-block" id="Shuffler.shuffle"><a class="viewcode-back" href="../../../_api_members/auxjad.Shuffler.html#auxjad.Shuffler.shuffle">[docs]</a>    <span class="k">def</span> <span class="nf">shuffle</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Selection</span><span class="p">:</span>
+        <span class="sa">r</span><span class="s1">&#39;Shuffles logical ties or pitches of :attr:`contents`.&#39;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_is_first_window</span> <span class="ow">and</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_process_on_first_call</span><span class="p">:</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_pitch_only</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_rewrite_logical_selections</span><span class="p">()</span>
+                <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">current_window</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_rewrite_pitches</span><span class="p">()</span>
+                <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">current_window</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_pitch_only</span><span class="p">:</span>
+                <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_shuffle_logical_selections</span><span class="p">()</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_shuffle_pitches</span><span class="p">()</span></div>
+
+<div class="viewcode-block" id="Shuffler.rotate"><a class="viewcode-back" href="../../../_api_members/auxjad.Shuffler.html#auxjad.Shuffler.rotate">[docs]</a>    <span class="k">def</span> <span class="nf">rotate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+               <span class="o">*</span><span class="p">,</span>
+               <span class="n">n_rotations</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span>
+               <span class="n">anticlockwise</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+               <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Selection</span><span class="p">:</span>
+        <span class="sa">r</span><span class="s1">&#39;Rotates logical ties or pitches of :attr:`contents`.&#39;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">n_rotations</span><span class="p">,</span> <span class="nb">int</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;&#39;n_rotations&#39; must be &#39;int&#39;&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">n_rotations</span> <span class="o">&lt;</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;&#39;n_rotations&#39; must be greater than zero&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">anticlockwise</span><span class="p">,</span> <span class="nb">bool</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;&#39;anticlockwise&#39; must be &#39;bool&#39;&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_is_first_window</span> <span class="ow">and</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_process_on_first_call</span><span class="p">:</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_pitch_only</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_rewrite_logical_selections</span><span class="p">()</span>
+                <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">current_window</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_rewrite_pitches</span><span class="p">()</span>
+                <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">current_window</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_pitch_only</span><span class="p">:</span>
+                <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_rotate_logical_selections</span><span class="p">(</span>
+                    <span class="n">n_rotations</span><span class="o">=</span><span class="n">n_rotations</span><span class="p">,</span>
+                    <span class="n">anticlockwise</span><span class="o">=</span><span class="n">anticlockwise</span><span class="p">,</span>
+                <span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_rotate_pitches</span><span class="p">(</span>
+                    <span class="n">n_rotations</span><span class="o">=</span><span class="n">n_rotations</span><span class="p">,</span>
+                    <span class="n">anticlockwise</span><span class="o">=</span><span class="n">anticlockwise</span><span class="p">,</span>
+                <span class="p">)</span></div>
+
+<div class="viewcode-block" id="Shuffler.shuffle_n"><a class="viewcode-back" href="../../../_api_members/auxjad.Shuffler.html#auxjad.Shuffler.shuffle_n">[docs]</a>    <span class="k">def</span> <span class="nf">shuffle_n</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+                  <span class="n">n</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+                  <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Selection</span><span class="p">:</span>
+        <span class="sa">r</span><span class="sd">&quot;&quot;&quot;Goes through ``n`` iterations of the shuffling process and outputs</span>
+<span class="sd">        a single |abjad.Selection|.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="nb">int</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;argument must be &#39;int&#39;&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">n</span> <span class="o">&lt;</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;argument must be greater than zero&quot;</span><span class="p">)</span>
+        <span class="n">dummy_container</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+            <span class="n">dummy_container</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="fm">__call__</span><span class="p">())</span>
+        <span class="n">mutate</span><span class="p">(</span><span class="n">dummy_container</span><span class="p">[:])</span><span class="o">.</span><span class="n">remove_repeated_time_signatures</span><span class="p">()</span>
+        <span class="n">mutate</span><span class="p">(</span><span class="n">dummy_container</span><span class="p">[:])</span><span class="o">.</span><span class="n">remove_repeated_dynamics</span><span class="p">()</span>
+        <span class="n">output</span> <span class="o">=</span> <span class="n">dummy_container</span><span class="p">[:]</span>
+        <span class="n">dummy_container</span><span class="p">[:]</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">return</span> <span class="n">output</span></div>
+
+<div class="viewcode-block" id="Shuffler.rotate_n"><a class="viewcode-back" href="../../../_api_members/auxjad.Shuffler.html#auxjad.Shuffler.rotate_n">[docs]</a>    <span class="k">def</span> <span class="nf">rotate_n</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+                 <span class="n">n</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+                 <span class="o">*</span><span class="p">,</span>
+                 <span class="n">n_rotations</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span>
+                 <span class="n">anticlockwise</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+                 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Selection</span><span class="p">:</span>
+        <span class="sa">r</span><span class="sd">&quot;&quot;&quot;Goes through ``n`` iterations of the pitch shuffling process and</span>
+<span class="sd">        outputs a single |abjad.Selection|.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="nb">int</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;argument must be &#39;int&#39;&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">n</span> <span class="o">&lt;</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;argument must be greater than zero&quot;</span><span class="p">)</span>
+        <span class="n">dummy_container</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+            <span class="n">dummy_container</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">rotate</span><span class="p">(</span><span class="n">n_rotations</span><span class="o">=</span><span class="n">n_rotations</span><span class="p">,</span>
+                                               <span class="n">anticlockwise</span><span class="o">=</span><span class="n">anticlockwise</span><span class="p">))</span>
+        <span class="n">mutate</span><span class="p">(</span><span class="n">dummy_container</span><span class="p">[:])</span><span class="o">.</span><span class="n">remove_repeated_time_signatures</span><span class="p">()</span>
+        <span class="n">mutate</span><span class="p">(</span><span class="n">dummy_container</span><span class="p">[:])</span><span class="o">.</span><span class="n">remove_repeated_dynamics</span><span class="p">()</span>
+        <span class="n">output</span> <span class="o">=</span> <span class="n">dummy_container</span><span class="p">[:]</span>
+        <span class="n">dummy_container</span><span class="p">[:]</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">return</span> <span class="n">output</span></div>
+
+    <span class="c1">### PRIVATE METHODS ###</span>
+
+    <span class="k">def</span> <span class="nf">_update_logical_selections</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sa">r</span><span class="s1">&#39;Updates the selection of logical ties of :attr:`contents`.&#39;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_logical_selections</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_logical_selections</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_contents</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_logical_selections_indeces</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="fm">__len__</span><span class="p">()))</span>
+
+    <span class="k">def</span> <span class="nf">_get_pitch_list</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sa">r</span><span class="s1">&#39;Creates a :obj:`list` of all pitches in :attr:`contents`.&#39;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_pitches</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">logical_selection</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_logical_selections</span><span class="p">:</span>
+            <span class="n">leaf</span> <span class="o">=</span> <span class="n">logical_selection</span><span class="o">.</span><span class="n">leaves</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">leaf</span><span class="p">,</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Rest</span><span class="p">):</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_pitches</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="kc">None</span><span class="p">)</span>
+            <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">leaf</span><span class="p">,</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Note</span><span class="p">):</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_pitches</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">leaf</span><span class="o">.</span><span class="n">written_pitch</span><span class="p">)</span>
+            <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">leaf</span><span class="p">,</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Chord</span><span class="p">):</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_pitches</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">leaf</span><span class="o">.</span><span class="n">written_pitches</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_shuffle_list_preserving_rests</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+                                       <span class="n">input_list</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">Any</span><span class="p">],</span>
+                                       <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sa">r</span><span class="s1">&#39;Shuffles a :obj:`list` while keeping rest indeces unchanged.&#39;</span>
+        <span class="n">dummy_list</span> <span class="o">=</span> <span class="p">[</span><span class="n">input_list</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">input_list</span><span class="p">))</span>
+                      <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_pitches</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_random_shuffle</span><span class="p">(</span><span class="n">dummy_list</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_replace_list_preserving_rests</span><span class="p">(</span><span class="n">dummy_list</span><span class="p">,</span> <span class="n">input_list</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_rotate_list_preserving_rests</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+                                      <span class="n">input_list</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">Any</span><span class="p">],</span>
+                                      <span class="o">*</span><span class="p">,</span>
+                                      <span class="n">n_rotations</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span>
+                                      <span class="n">anticlockwise</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+                                      <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sa">r</span><span class="s1">&#39;Rotates a :obj:`list` while keeping rest indeces unchanged.&#39;</span>
+        <span class="n">dummy_list</span> <span class="o">=</span> <span class="p">[</span><span class="n">input_list</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">input_list</span><span class="p">))</span>
+                      <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_pitches</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_rotate_list</span><span class="p">(</span><span class="n">dummy_list</span><span class="p">,</span>
+                          <span class="n">n_rotations</span><span class="o">=</span><span class="n">n_rotations</span><span class="p">,</span>
+                          <span class="n">anticlockwise</span><span class="o">=</span><span class="n">anticlockwise</span><span class="p">,</span>
+                          <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_replace_list_preserving_rests</span><span class="p">(</span><span class="n">dummy_list</span><span class="p">,</span> <span class="n">input_list</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_random_shuffle</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+                        <span class="n">input_list</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">Any</span><span class="p">],</span>
+                        <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sa">r</span><span class="s1">&#39;Random shuffles a :obj:`list`.&#39;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_swap_limit</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">random</span><span class="o">.</span><span class="n">shuffle</span><span class="p">(</span><span class="n">input_list</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_swap_limit</span><span class="p">):</span>
+                <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">input_list</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+                    <span class="n">i</span><span class="p">,</span> <span class="n">j</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">input_list</span><span class="p">)),</span> <span class="mi">2</span><span class="p">)</span>
+                    <span class="n">input_list</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">input_list</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">input_list</span><span class="p">[</span><span class="n">j</span><span class="p">],</span> <span class="n">input_list</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+
+    <span class="k">def</span> <span class="nf">_replace_list_preserving_rests</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+                                       <span class="n">input_list</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">Any</span><span class="p">],</span>
+                                       <span class="n">destination_list</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">Any</span><span class="p">],</span>
+                                       <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sa">r</span><span class="s1">&#39;Substitutes back an altered :obj:`list` while preserving rests.&#39;</span>
+        <span class="n">counter</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">for</span> <span class="n">index</span><span class="p">,</span> <span class="n">pitch</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_pitches</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">pitch</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="n">destination_list</span><span class="p">[</span><span class="n">index</span><span class="p">]</span> <span class="o">=</span> <span class="n">input_list</span><span class="p">[</span><span class="n">counter</span><span class="p">]</span>
+                <span class="n">counter</span> <span class="o">+=</span> <span class="mi">1</span>
+
+    <span class="k">def</span> <span class="nf">_shuffle_logical_selections</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Selection</span><span class="p">:</span>
+        <span class="sa">r</span><span class="s1">&#39;Shuffles the logical ties of :attr:`contents`.&#39;</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">abjad</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_contents</span><span class="p">)</span><span class="o">.</span><span class="n">tuplets</span><span class="p">())</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;&#39;contents&#39; contain one ore more tuplets; &quot;</span>
+                             <span class="s2">&quot;tuplets are currently supported only in &quot;</span>
+                             <span class="s2">&quot;pitch-only mode&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_preserve_rest_position</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_random_shuffle</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_logical_selections_indeces</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_shuffle_list_preserving_rests</span><span class="p">(</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_logical_selections_indeces</span>
+            <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_rewrite_logical_selections</span><span class="p">()</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">current_window</span>
+
+    <span class="k">def</span> <span class="nf">_shuffle_pitches</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Selection</span><span class="p">:</span>
+        <span class="sa">r</span><span class="s1">&#39;Shuffles only the pitches of :attr:`contents`.&#39;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_preserve_rest_position</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_random_shuffle</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_pitches</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_shuffle_list_preserving_rests</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_pitches</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_rewrite_pitches</span><span class="p">()</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">current_window</span>
+
+    <span class="k">def</span> <span class="nf">_rotate_logical_selections</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+                                   <span class="o">*</span><span class="p">,</span>
+                                   <span class="n">n_rotations</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span>
+                                   <span class="n">anticlockwise</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+                                   <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Selection</span><span class="p">:</span>
+        <span class="sa">r</span><span class="s1">&#39;Rotates the logical ties of :attr:`contents`.&#39;</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">abjad</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_contents</span><span class="p">)</span><span class="o">.</span><span class="n">tuplets</span><span class="p">())</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;&#39;contents&#39; contain one ore more tuplets; &quot;</span>
+                             <span class="s2">&quot;tuplets are currently supported only in &quot;</span>
+                             <span class="s2">&quot;pitch-only mode&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_preserve_rest_position</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_rotate_list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_logical_selections_indeces</span><span class="p">,</span>
+                              <span class="n">n_rotations</span><span class="o">=</span><span class="n">n_rotations</span><span class="p">,</span>
+                              <span class="n">anticlockwise</span><span class="o">=</span><span class="n">anticlockwise</span><span class="p">,</span>
+                              <span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_rotate_list_preserving_rests</span><span class="p">(</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_logical_selections_indeces</span><span class="p">,</span>
+                <span class="n">n_rotations</span><span class="o">=</span><span class="n">n_rotations</span><span class="p">,</span>
+                <span class="n">anticlockwise</span><span class="o">=</span><span class="n">anticlockwise</span><span class="p">,</span>
+            <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_rewrite_logical_selections</span><span class="p">()</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">current_window</span>
+
+    <span class="k">def</span> <span class="nf">_rotate_pitches</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+                        <span class="o">*</span><span class="p">,</span>
+                        <span class="n">n_rotations</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span>
+                        <span class="n">anticlockwise</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+                        <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Selection</span><span class="p">:</span>
+        <span class="sa">r</span><span class="s1">&#39;Rotates the pitches of :attr:`contents`.&#39;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_preserve_rest_position</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_rotate_list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_pitches</span><span class="p">,</span>
+                              <span class="n">n_rotations</span><span class="o">=</span><span class="n">n_rotations</span><span class="p">,</span>
+                              <span class="n">anticlockwise</span><span class="o">=</span><span class="n">anticlockwise</span><span class="p">,</span>
+                              <span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_rotate_list_preserving_rests</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_pitches</span><span class="p">,</span>
+                                               <span class="n">n_rotations</span><span class="o">=</span><span class="n">n_rotations</span><span class="p">,</span>
+                                               <span class="n">anticlockwise</span><span class="o">=</span><span class="n">anticlockwise</span><span class="p">,</span>
+                                               <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_rewrite_pitches</span><span class="p">()</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">current_window</span>
+
+    <span class="k">def</span> <span class="nf">_rewrite_logical_selections</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sa">r</span><span class="s1">&#39;Rewrites the logical selections of the current window.&#39;</span>
+        <span class="c1"># writing dummy_container in shuffled order</span>
+        <span class="n">dummy_container</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">()</span>
+        <span class="n">logical_selections</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_logical_selections</span><span class="p">(</span>
+            <span class="n">abjad</span><span class="o">.</span><span class="n">mutate</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_contents</span><span class="p">)</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_force_dynamics</span><span class="p">(</span><span class="n">logical_selections</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">index</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_logical_selections_indeces</span><span class="p">:</span>
+            <span class="n">logical_selection</span> <span class="o">=</span> <span class="n">logical_selections</span><span class="p">[</span><span class="n">index</span><span class="p">]</span>
+            <span class="n">dummy_container</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">logical_selection</span><span class="o">.</span><span class="n">leaves</span><span class="p">())</span>
+        <span class="c1"># splitting leaves at measure line points</span>
+        <span class="n">abjad</span><span class="o">.</span><span class="n">mutate</span><span class="p">(</span><span class="n">dummy_container</span><span class="p">[:])</span><span class="o">.</span><span class="n">split</span><span class="p">(</span>
+            <span class="p">[</span><span class="n">ts</span><span class="o">.</span><span class="n">duration</span> <span class="k">for</span> <span class="n">ts</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_time_signatures</span><span class="p">],</span>
+            <span class="n">cyclic</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="c1"># attaching time signature structure</span>
+        <span class="n">mutate</span><span class="p">(</span><span class="n">dummy_container</span><span class="p">)</span><span class="o">.</span><span class="n">enforce_time_signature</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_time_signatures</span><span class="p">,</span>
+            <span class="n">disable_rewrite_meter</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="c1"># handling dynamics and slurs</span>
+        <span class="n">mutate</span><span class="p">(</span><span class="n">dummy_container</span><span class="p">[:])</span><span class="o">.</span><span class="n">reposition_dynamics</span><span class="p">()</span>
+        <span class="n">mutate</span><span class="p">(</span><span class="n">dummy_container</span><span class="p">[:])</span><span class="o">.</span><span class="n">reposition_slurs</span><span class="p">()</span>
+        <span class="c1"># rewrite meter</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_disable_rewrite_meter</span><span class="p">:</span>
+            <span class="n">mutate</span><span class="p">(</span><span class="n">dummy_container</span><span class="p">)</span><span class="o">.</span><span class="n">auto_rewrite_meter</span><span class="p">(</span>
+                <span class="n">meter_list</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_time_signatures</span><span class="p">,</span>
+                <span class="n">boundary_depth</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_boundary_depth</span><span class="p">,</span>
+                <span class="n">maximum_dot_count</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_maximum_dot_count</span><span class="p">,</span>
+                <span class="n">rewrite_tuplets</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_rewrite_tuplets</span><span class="p">,</span>
+                <span class="n">prettify_rewrite_meter</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_prettify_rewrite_meter</span><span class="p">,</span>
+                <span class="n">extract_trivial_tuplets</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_extract_trivial_tuplets</span><span class="p">,</span>
+                <span class="n">fuse_across_groups_of_beats</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_fuse_across_groups_of_beats</span><span class="p">,</span>
+                <span class="n">fuse_quadruple_meter</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_fuse_quadruple_meter</span><span class="p">,</span>
+                <span class="n">fuse_triple_meter</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_fuse_triple_meter</span><span class="p">,</span>
+            <span class="p">)</span>
+        <span class="c1"># output</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_is_first_window</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_current_window</span> <span class="o">=</span> <span class="n">dummy_container</span><span class="p">[:]</span>
+        <span class="n">dummy_container</span><span class="p">[:]</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="k">def</span> <span class="nf">_rewrite_pitches</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sa">r</span><span class="s1">&#39;Rewrites the pitches of the current window.&#39;</span>
+        <span class="n">dummy_container</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">(</span>
+            <span class="n">abjad</span><span class="o">.</span><span class="n">mutate</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_contents</span><span class="p">[:])</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+        <span class="p">)</span>
+        <span class="n">leaf_counter</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">for</span> <span class="n">pitch</span><span class="p">,</span> <span class="n">logical_selection</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_pitches</span><span class="p">,</span>
+                                            <span class="bp">self</span><span class="o">.</span><span class="n">_logical_selections</span><span class="p">,</span>
+                                            <span class="p">):</span>
+            <span class="n">logical_tie</span> <span class="o">=</span> <span class="n">logical_selection</span><span class="o">.</span><span class="n">leaves</span><span class="p">()</span>
+            <span class="k">for</span> <span class="n">leaf</span> <span class="ow">in</span> <span class="n">logical_tie</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">pitch</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                    <span class="n">new_leaf</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Rest</span><span class="p">(</span><span class="n">leaf</span><span class="o">.</span><span class="n">written_duration</span><span class="p">)</span>
+                <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">pitch</span><span class="p">,</span> <span class="n">abjad</span><span class="o">.</span><span class="n">PitchSegment</span><span class="p">):</span>
+                    <span class="n">new_leaf</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Chord</span><span class="p">(</span><span class="n">pitch</span><span class="p">,</span> <span class="n">leaf</span><span class="o">.</span><span class="n">written_duration</span><span class="p">)</span>
+                    <span class="k">if</span> <span class="p">(</span><span class="nb">isinstance</span><span class="p">(</span><span class="n">leaf</span><span class="p">,</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Rest</span><span class="p">)</span> <span class="ow">and</span> <span class="nb">len</span><span class="p">(</span><span class="n">logical_tie</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span>
+                            <span class="ow">and</span> <span class="n">leaf</span> <span class="ow">is</span> <span class="ow">not</span> <span class="n">logical_tie</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]):</span>
+                        <span class="n">abjad</span><span class="o">.</span><span class="n">attach</span><span class="p">(</span><span class="n">abjad</span><span class="o">.</span><span class="n">Tie</span><span class="p">(),</span> <span class="n">new_leaf</span><span class="p">)</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">new_leaf</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Note</span><span class="p">(</span><span class="n">pitch</span><span class="p">,</span> <span class="n">leaf</span><span class="o">.</span><span class="n">written_duration</span><span class="p">)</span>
+                    <span class="k">if</span> <span class="p">(</span><span class="nb">isinstance</span><span class="p">(</span><span class="n">leaf</span><span class="p">,</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Rest</span><span class="p">)</span> <span class="ow">and</span> <span class="nb">len</span><span class="p">(</span><span class="n">logical_tie</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span>
+                            <span class="ow">and</span> <span class="n">leaf</span> <span class="ow">is</span> <span class="ow">not</span> <span class="n">logical_tie</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]):</span>
+                        <span class="n">abjad</span><span class="o">.</span><span class="n">attach</span><span class="p">(</span><span class="n">abjad</span><span class="o">.</span><span class="n">Tie</span><span class="p">(),</span> <span class="n">new_leaf</span><span class="p">)</span>
+                <span class="k">for</span> <span class="n">indicator</span> <span class="ow">in</span> <span class="n">abjad</span><span class="o">.</span><span class="n">inspect</span><span class="p">(</span><span class="n">leaf</span><span class="p">)</span><span class="o">.</span><span class="n">indicators</span><span class="p">():</span>
+                    <span class="k">if</span> <span class="p">(</span><span class="nb">isinstance</span><span class="p">(</span><span class="n">indicator</span><span class="p">,</span> <span class="p">(</span><span class="n">abjad</span><span class="o">.</span><span class="n">Tie</span><span class="p">,</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Articulation</span><span class="p">))</span>
+                            <span class="ow">and</span> <span class="n">pitch</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">):</span>
+                        <span class="k">continue</span>
+                    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">indicator</span><span class="p">,</span> <span class="n">abjad</span><span class="o">.</span><span class="n">TimeSignature</span><span class="p">):</span>
+                        <span class="n">abjad</span><span class="o">.</span><span class="n">attach</span><span class="p">(</span><span class="n">indicator</span><span class="p">,</span> <span class="n">new_leaf</span><span class="p">)</span>
+                    <span class="k">else</span><span class="p">:</span>
+                        <span class="n">abjad</span><span class="o">.</span><span class="n">attach</span><span class="p">(</span><span class="n">indicator</span><span class="p">,</span> <span class="n">new_leaf</span><span class="p">)</span>
+                <span class="n">selection</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="n">dummy_container</span><span class="p">)</span><span class="o">.</span><span class="n">leaf</span><span class="p">(</span><span class="n">leaf_counter</span><span class="p">)</span>
+                <span class="n">abjad</span><span class="o">.</span><span class="n">mutate</span><span class="p">(</span><span class="n">selection</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="n">new_leaf</span><span class="p">)</span>
+                <span class="n">leaf_counter</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="c1"># attaching time signature structure</span>
+        <span class="n">mutate</span><span class="p">(</span><span class="n">dummy_container</span><span class="p">[:])</span><span class="o">.</span><span class="n">extract_trivial_tuplets</span><span class="p">()</span>
+        <span class="n">mutate</span><span class="p">(</span><span class="n">dummy_container</span><span class="p">)</span><span class="o">.</span><span class="n">enforce_time_signature</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_time_signatures</span><span class="p">,</span>
+            <span class="n">disable_rewrite_meter</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="c1"># output</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_is_first_window</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_current_window</span> <span class="o">=</span> <span class="n">dummy_container</span><span class="p">[:]</span>
+        <span class="n">dummy_container</span><span class="p">[:]</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">_get_logical_selections</span><span class="p">(</span><span class="n">container</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sa">r</span><span class="s1">&#39;Updates the selection of logical ties of a container.&#39;</span>
+        <span class="k">def</span> <span class="nf">group_logical_ties</span><span class="p">(</span><span class="n">logical_tie</span><span class="p">):</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">logical_tie</span><span class="o">.</span><span class="n">head</span><span class="p">,</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Rest</span><span class="p">):</span>
+                <span class="k">return</span> <span class="kc">True</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">return</span> <span class="n">logical_tie</span><span class="o">.</span><span class="n">head</span>
+        <span class="n">logical_ties</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="n">container</span><span class="p">)</span><span class="o">.</span><span class="n">logical_ties</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">logical_ties</span><span class="o">.</span><span class="n">group_by</span><span class="p">(</span><span class="n">group_logical_ties</span><span class="p">)</span>
+
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">_remove_all_time_signatures</span><span class="p">(</span><span class="n">container</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sa">r</span><span class="s1">&#39;Removes all time signatures of an |abjad.Container|.&#39;</span>
+        <span class="k">for</span> <span class="n">leaf</span> <span class="ow">in</span> <span class="n">abjad</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="n">container</span><span class="p">)</span><span class="o">.</span><span class="n">leaves</span><span class="p">():</span>
+            <span class="k">if</span> <span class="n">abjad</span><span class="o">.</span><span class="n">inspect</span><span class="p">(</span><span class="n">leaf</span><span class="p">)</span><span class="o">.</span><span class="n">effective</span><span class="p">(</span><span class="n">abjad</span><span class="o">.</span><span class="n">TimeSignature</span><span class="p">):</span>
+                <span class="n">abjad</span><span class="o">.</span><span class="n">detach</span><span class="p">(</span><span class="n">abjad</span><span class="o">.</span><span class="n">TimeSignature</span><span class="p">,</span> <span class="n">leaf</span><span class="p">)</span>
+
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">_force_dynamics</span><span class="p">(</span><span class="n">container</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">logical_ties</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="n">container</span><span class="p">)</span><span class="o">.</span><span class="n">logical_ties</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">logical_tie</span> <span class="ow">in</span> <span class="n">logical_ties</span><span class="p">[</span><span class="mi">1</span><span class="p">:]:</span>
+            <span class="k">if</span> <span class="n">abjad</span><span class="o">.</span><span class="n">inspect</span><span class="p">(</span><span class="n">logical_tie</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span><span class="o">.</span><span class="n">indicator</span><span class="p">(</span><span class="n">abjad</span><span class="o">.</span><span class="n">Dynamic</span><span class="p">)</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="n">index</span> <span class="o">=</span> <span class="n">logical_ties</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">logical_tie</span><span class="p">)</span>
+                <span class="n">previous_logical_tie</span> <span class="o">=</span> <span class="n">logical_ties</span><span class="p">[</span><span class="n">index</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span>
+                <span class="n">inspector</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">inspect</span><span class="p">(</span><span class="n">previous_logical_tie</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+                <span class="k">if</span> <span class="n">inspector</span><span class="o">.</span><span class="n">indicator</span><span class="p">(</span><span class="n">abjad</span><span class="o">.</span><span class="n">Dynamic</span><span class="p">)</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                    <span class="n">abjad</span><span class="o">.</span><span class="n">attach</span><span class="p">(</span><span class="n">inspector</span><span class="o">.</span><span class="n">indicator</span><span class="p">(</span><span class="n">abjad</span><span class="o">.</span><span class="n">Dynamic</span><span class="p">),</span>
+                                 <span class="n">logical_tie</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
+                                 <span class="p">)</span>
+
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">_rotate_list</span><span class="p">(</span><span class="n">input_list</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">Any</span><span class="p">],</span>
+                     <span class="o">*</span><span class="p">,</span>
+                     <span class="n">n_rotations</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span>
+                     <span class="n">anticlockwise</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+                     <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sa">r</span><span class="s1">&#39;Rotates a :obj:`list`.&#39;</span>
+        <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_rotations</span><span class="p">):</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">anticlockwise</span><span class="p">:</span>
+                <span class="n">element</span> <span class="o">=</span> <span class="n">input_list</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+                <span class="n">input_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">element</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">element</span> <span class="o">=</span> <span class="n">input_list</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+                <span class="n">input_list</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">element</span><span class="p">)</span>
+
+    <span class="c1">### PUBLIC PROPERTIES ###</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">contents</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">:</span>
+        <span class="sa">r</span><span class="s1">&#39;The |abjad.Container| to be shuffled.&#39;</span>
+        <span class="k">return</span> <span class="n">abjad</span><span class="o">.</span><span class="n">mutate</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_contents</span><span class="p">)</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+
+    <span class="nd">@contents</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">contents</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+                 <span class="n">contents</span><span class="p">:</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">,</span>
+                 <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">contents</span><span class="p">,</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;&#39;contents&#39; must be &#39;abjad.Container&#39; or child &quot;</span>
+                            <span class="s2">&quot;class&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">abjad</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="n">contents</span><span class="p">)</span><span class="o">.</span><span class="n">leaves</span><span class="p">()</span><span class="o">.</span><span class="n">are_contiguous_logical_voice</span><span class="p">():</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;&#39;contents&#39; must be contiguous logical voice&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">contents</span><span class="p">,</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Score</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_contents</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">mutate</span><span class="p">(</span><span class="n">contents</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">contents</span><span class="p">,</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Tuplet</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_contents</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">([</span><span class="n">abjad</span><span class="o">.</span><span class="n">mutate</span><span class="p">(</span><span class="n">contents</span><span class="p">)</span><span class="o">.</span><span class="n">copy</span><span class="p">()])</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_contents</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">mutate</span><span class="p">(</span><span class="n">contents</span><span class="p">)</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+        <span class="n">dummy_container</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">mutate</span><span class="p">(</span><span class="n">contents</span><span class="p">)</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_current_window</span> <span class="o">=</span> <span class="n">dummy_container</span><span class="p">[:]</span>
+        <span class="n">dummy_container</span><span class="p">[:]</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_update_logical_selections</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_get_pitch_list</span><span class="p">()</span>
+        <span class="n">inspector</span> <span class="o">=</span> <span class="n">inspect</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_contents</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_time_signatures</span> <span class="o">=</span> <span class="n">inspector</span><span class="o">.</span><span class="n">extract_time_signatures</span><span class="p">(</span>
+            <span class="n">do_not_use_none</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_is_first_window</span> <span class="o">=</span> <span class="kc">True</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">pitch_only</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+        <span class="sa">r</span><span class="sd">&quot;&quot;&quot;When ``True``, only the pitches will be shuffled or rotated while</span>
+<span class="sd">        the durations remain the same.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_pitch_only</span>
+
+    <span class="nd">@pitch_only</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">pitch_only</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+                   <span class="n">pitch_only</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
+                   <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">pitch_only</span><span class="p">,</span> <span class="nb">bool</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;&#39;pitch_only&#39; must be &#39;bool&#39;&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_pitch_only</span> <span class="o">=</span> <span class="n">pitch_only</span>
+        <span class="c1"># potentially new logical selections when shifting from pitch-only mode</span>
+        <span class="c1"># to logical selections mode</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_update_logical_selections</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_get_pitch_list</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_contents</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">(</span>
+            <span class="n">abjad</span><span class="o">.</span><span class="n">mutate</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_current_window</span><span class="p">)</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+        <span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">preserve_rest_position</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+        <span class="sa">r</span><span class="sd">&quot;&quot;&quot;When ``True``, shuffle operations will preserve rest positions and</span>
+<span class="sd">        durations.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_preserve_rest_position</span>
+
+    <span class="nd">@preserve_rest_position</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">preserve_rest_position</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+                               <span class="n">preserve_rest_position</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
+                               <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">preserve_rest_position</span><span class="p">,</span> <span class="nb">bool</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;&#39;preserve_rest_position&#39; must be &#39;bool&#39;&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_preserve_rest_position</span> <span class="o">=</span> <span class="n">preserve_rest_position</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">disable_rewrite_meter</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+        <span class="sa">r</span><span class="sd">&quot;&quot;&quot;When ``True``, the durations of the notes in the output will not be</span>
+<span class="sd">        rewritten by the |abjad.mutate().rewrite_meter()| mutation.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_disable_rewrite_meter</span>
+
+    <span class="nd">@disable_rewrite_meter</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">disable_rewrite_meter</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+                              <span class="n">disable_rewrite_meter</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
+                              <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">disable_rewrite_meter</span><span class="p">,</span> <span class="nb">bool</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;&#39;disable_rewrite_meter&#39; must be &#39;bool&#39;&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_disable_rewrite_meter</span> <span class="o">=</span> <span class="n">disable_rewrite_meter</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">omit_time_signatures</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+        <span class="sa">r</span><span class="s1">&#39;When ``True``, the output will contain no time signatures.&#39;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_omit_time_signatures</span>
+
+    <span class="nd">@omit_time_signatures</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">omit_time_signatures</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+                             <span class="n">omit_time_signatures</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
+                             <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">omit_time_signatures</span><span class="p">,</span> <span class="nb">bool</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;&#39;omit_time_signatures&#39; must be &#39;bool&#39;&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_omit_time_signatures</span> <span class="o">=</span> <span class="n">omit_time_signatures</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">boundary_depth</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Union</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="kc">None</span><span class="p">]:</span>
+        <span class="sa">r</span><span class="sd">&quot;&quot;&quot;Sets the argument ``boundary_depth`` of</span>
+<span class="sd">        |abjad.mutate().rewrite_meter()|.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_boundary_depth</span>
+
+    <span class="nd">@boundary_depth</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">boundary_depth</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+                       <span class="n">boundary_depth</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">],</span>
+                       <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">boundary_depth</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">boundary_depth</span><span class="p">,</span> <span class="nb">int</span><span class="p">):</span>
+                <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;&#39;boundary_depth&#39; must be &#39;int&#39;&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_boundary_depth</span> <span class="o">=</span> <span class="n">boundary_depth</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">maximum_dot_count</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Union</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="kc">None</span><span class="p">]:</span>
+        <span class="sa">r</span><span class="sd">&quot;&quot;&quot;Sets the argument ``maximum_dot_count`` of</span>
+<span class="sd">        |abjad.mutate().rewrite_meter()|.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_maximum_dot_count</span>
+
+    <span class="nd">@maximum_dot_count</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">maximum_dot_count</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+                          <span class="n">maximum_dot_count</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">],</span>
+                          <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">maximum_dot_count</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">maximum_dot_count</span><span class="p">,</span> <span class="nb">int</span><span class="p">):</span>
+                <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;&#39;maximum_dot_count&#39; must be &#39;int&#39;&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_maximum_dot_count</span> <span class="o">=</span> <span class="n">maximum_dot_count</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">rewrite_tuplets</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+        <span class="sa">r</span><span class="sd">&quot;&quot;&quot;Sets the argument ``rewrite_tuplets`` of</span>
+<span class="sd">        |abjad.mutate().rewrite_meter()|.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_rewrite_tuplets</span>
+
+    <span class="nd">@rewrite_tuplets</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">rewrite_tuplets</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+                        <span class="n">rewrite_tuplets</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
+                        <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">rewrite_tuplets</span><span class="p">,</span> <span class="nb">bool</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;&#39;rewrite_tuplets&#39; must be &#39;bool&#39;&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_rewrite_tuplets</span> <span class="o">=</span> <span class="n">rewrite_tuplets</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">prettify_rewrite_meter</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+        <span class="sa">r</span><span class="sd">&quot;&quot;&quot;Used to enable or disable the mutation</span>
+<span class="sd">        |auxjad.mutate().prettify_rewrite_meter()| (default ``True``).</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_prettify_rewrite_meter</span>
+
+    <span class="nd">@prettify_rewrite_meter</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">prettify_rewrite_meter</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+                               <span class="n">prettify_rewrite_meter</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
+                               <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">prettify_rewrite_meter</span><span class="p">,</span> <span class="nb">bool</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;&#39;prettify_rewrite_meter&#39; must be &#39;bool&#39;&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_prettify_rewrite_meter</span> <span class="o">=</span> <span class="n">prettify_rewrite_meter</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">extract_trivial_tuplets</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+        <span class="sa">r</span><span class="sd">&quot;&quot;&quot;Sets the argument ``extract_trivial_tuplets`` of</span>
+<span class="sd">        |auxjad.mutate().prettify_rewrite_meter()|.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_extract_trivial_tuplets</span>
+
+    <span class="nd">@extract_trivial_tuplets</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">extract_trivial_tuplets</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+                                <span class="n">extract_trivial_tuplets</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
+                                <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">extract_trivial_tuplets</span><span class="p">,</span> <span class="nb">bool</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;&#39;extract_trivial_tuplets&#39; must be &#39;bool&#39;&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_extract_trivial_tuplets</span> <span class="o">=</span> <span class="n">extract_trivial_tuplets</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">fuse_across_groups_of_beats</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+        <span class="sa">r</span><span class="sd">&quot;&quot;&quot;Sets the argument ``fuse_across_groups_of_beats`` of</span>
+<span class="sd">        |auxjad.mutate().prettify_rewrite_meter()|.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_fuse_across_groups_of_beats</span>
+
+    <span class="nd">@fuse_across_groups_of_beats</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">fuse_across_groups_of_beats</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+                                    <span class="n">fuse_across_groups_of_beats</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
+                                    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">fuse_across_groups_of_beats</span><span class="p">,</span> <span class="nb">bool</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;&#39;fuse_across_groups_of_beats&#39; must be &#39;bool&#39;&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_fuse_across_groups_of_beats</span> <span class="o">=</span> <span class="n">fuse_across_groups_of_beats</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">fuse_quadruple_meter</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+        <span class="sa">r</span><span class="sd">&quot;&quot;&quot;Sets the argument ``fuse_quadruple_meter`` of</span>
+<span class="sd">        |auxjad.mutate().prettify_rewrite_meter()|.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_fuse_quadruple_meter</span>
+
+    <span class="nd">@fuse_quadruple_meter</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">fuse_quadruple_meter</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+                             <span class="n">fuse_quadruple_meter</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
+                             <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">fuse_quadruple_meter</span><span class="p">,</span> <span class="nb">bool</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;&#39;fuse_quadruple_meter&#39; must be &#39;bool&#39;&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_fuse_quadruple_meter</span> <span class="o">=</span> <span class="n">fuse_quadruple_meter</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">fuse_triple_meter</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+        <span class="sa">r</span><span class="sd">&quot;&quot;&quot;Sets the argument ``fuse_triple_meter`` of</span>
+<span class="sd">        |auxjad.mutate().prettify_rewrite_meter()|.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_fuse_triple_meter</span>
+
+    <span class="nd">@fuse_triple_meter</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">fuse_triple_meter</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+                          <span class="n">fuse_triple_meter</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
+                          <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">fuse_triple_meter</span><span class="p">,</span> <span class="nb">bool</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;&#39;fuse_triple_meter&#39; must be &#39;bool&#39;&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_fuse_triple_meter</span> <span class="o">=</span> <span class="n">fuse_triple_meter</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">process_on_first_call</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+        <span class="sa">r</span><span class="sd">&quot;&quot;&quot;If ``True`` then :attr:`contents` will be processed in the very</span>
+<span class="sd">        first call.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_process_on_first_call</span>
+
+    <span class="nd">@process_on_first_call</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">process_on_first_call</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+                              <span class="n">process_on_first_call</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
+                              <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">process_on_first_call</span><span class="p">,</span> <span class="nb">bool</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;&#39;process_on_first_call&#39; must be &#39;bool&#39;&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_process_on_first_call</span> <span class="o">=</span> <span class="n">process_on_first_call</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">swap_limit</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+        <span class="sa">r</span><span class="sd">&quot;&quot;&quot;If :obj:`int` then it dictates how instances of random swapping of</span>
+<span class="sd">        pairs of elements are applied to :attr:`contents` in each iteration. If</span>
+<span class="sd">        ``None`` then :attr:`contents` is completely shuffled at each</span>
+<span class="sd">        iteration.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_swap_limit</span>
+
+    <span class="nd">@swap_limit</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">swap_limit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+                   <span class="n">swap_limit</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">],</span>
+                   <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">swap_limit</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">swap_limit</span><span class="p">,</span> <span class="nb">int</span><span class="p">):</span>
+                <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;&#39;swap_limit&#39; must be &#39;int&#39;&quot;</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">swap_limit</span> <span class="o">&lt;</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;&#39;swap_limit&#39; must be equal to or greater &quot;</span>
+                                 <span class="s2">&quot;than 1&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_swap_limit</span> <span class="o">=</span> <span class="n">swap_limit</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">current_window</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Selection</span><span class="p">:</span>
+        <span class="sa">r</span><span class="s1">&#39;Read-only property, returns the result of the last operation.&#39;</span>
+        <span class="n">current_window</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">mutate</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_current_window</span><span class="p">)</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_omit_time_signatures</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_remove_all_time_signatures</span><span class="p">(</span><span class="n">current_window</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">current_window</span></div>
+</pre></div>
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 2020, Gilberto Agostinho
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

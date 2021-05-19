@@ -1,0 +1,1060 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>auxjad.core.PitchRandomiser &mdash; auxjad 0.8.24 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+        <script src="../../../_static/jquery.js"></script>
+        <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/doctools.js"></script>
+        <script src="../../../_static/language_data.js"></script>
+        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    <script type="text/javascript" src="../../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../../index.html" class="icon icon-home" alt="Documentation Home"> auxjad
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.8
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../index.html">Welcome to Auxjad’s documentation!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../examples/index.html">Examples of usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../score_gallery/index.html">Score gallery</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../api/index.html">Auxjad API</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">auxjad</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../../index.html">Module code</a> &raquo;</li>
+        
+      <li>auxjad.core.PitchRandomiser</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for auxjad.core.PitchRandomiser</h1><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">random</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Union</span>
+
+<span class="kn">import</span> <span class="nn">abjad</span>
+
+<span class="kn">from</span> <span class="nn">..utilities.mutate</span> <span class="kn">import</span> <span class="n">mutate</span>
+<span class="kn">from</span> <span class="nn">.TenneySelector</span> <span class="kn">import</span> <span class="n">TenneySelector</span>
+
+
+<div class="viewcode-block" id="PitchRandomiser"><a class="viewcode-back" href="../../../_api_members/auxjad.PitchRandomiser.html#auxjad.PitchRandomiser">[docs]</a><span class="k">class</span> <span class="nc">PitchRandomiser</span><span class="p">:</span>
+    <span class="sa">r</span><span class="sd">&quot;&quot;&quot;This class takes an input |abjad.Container| (or child class) and a</span>
+<span class="sd">    series of pitches and randomises the container&#39;s pitches using that series.</span>
+<span class="sd">    The pitches can be of type :obj:`list`, :obj:`tuple`, :obj:`str`, or</span>
+<span class="sd">    |abjad.PitchSegment|.</span>
+
+<span class="sd">    Basic usage:</span>
+<span class="sd">        Calling the object will output a selection of the input container with</span>
+<span class="sd">        randomised pitches. Pitches are randomly selected from :attr:`pitches`.</span>
+
+<span class="sd">        &gt;&gt;&gt; container = abjad.Container(r&quot;\time 4/4 c&#39;4 d&#39;4 e&#39;4 f&#39;4&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; pitches = r&quot;fs&#39; gs&#39; a&#39; b&#39; cs&#39;&#39;&quot;</span>
+<span class="sd">        &gt;&gt;&gt; randomiser = auxjad.PitchRandomiser(container,</span>
+<span class="sd">        ...                                     pitches,</span>
+<span class="sd">        ...                                     )</span>
+<span class="sd">        &gt;&gt;&gt; notes = randomiser()</span>
+<span class="sd">        &gt;&gt;&gt; staff = abjad.Staff(notes)</span>
+<span class="sd">        &gt;&gt;&gt; abjad.f(staff)</span>
+<span class="sd">        \new Staff</span>
+<span class="sd">        {</span>
+<span class="sd">            \time 4/4</span>
+<span class="sd">            a&#39;4</span>
+<span class="sd">            b&#39;4</span>
+<span class="sd">            cs&#39;&#39;4</span>
+<span class="sd">            fs&#39;4</span>
+<span class="sd">        }</span>
+
+<span class="sd">        .. figure:: ../_images/PitchRandomiser-134lqskbb6o.png</span>
+
+<span class="sd">        &gt;&gt;&gt; notes = randomiser()</span>
+<span class="sd">        &gt;&gt;&gt; staff = abjad.Staff(notes)</span>
+<span class="sd">        &gt;&gt;&gt; abjad.f(staff)</span>
+<span class="sd">        \new Staff</span>
+<span class="sd">        {</span>
+<span class="sd">            \time 4/4</span>
+<span class="sd">            b&#39;4</span>
+<span class="sd">            b&#39;4</span>
+<span class="sd">            b&#39;4</span>
+<span class="sd">            fs&#39;4</span>
+<span class="sd">        }</span>
+
+<span class="sd">        .. figure:: ../_images/PitchRandomiser-z66g1fy8nm8.png</span>
+
+<span class="sd">        To get the result of the last operation, use the property</span>
+<span class="sd">        :attr:`current_window`.</span>
+
+<span class="sd">        &gt;&gt;&gt; notes = randomiser.current_window</span>
+<span class="sd">        &gt;&gt;&gt; staff = abjad.Staff(notes)</span>
+<span class="sd">        &gt;&gt;&gt; abjad.f(staff)</span>
+<span class="sd">        \new Staff</span>
+<span class="sd">        {</span>
+<span class="sd">            \time 4/4</span>
+<span class="sd">            b&#39;4</span>
+<span class="sd">            b&#39;4</span>
+<span class="sd">            b&#39;4</span>
+<span class="sd">            fs&#39;4</span>
+<span class="sd">        }</span>
+
+<span class="sd">        .. figure:: ../_images/PitchRandomiser-x0e6yduogh.png</span>
+
+<span class="sd">    .. warning::</span>
+
+<span class="sd">        Unlike the other classes in Auxjad, the very first call of this class</span>
+<span class="sd">        will already process the initial container. To disable this behaviour</span>
+<span class="sd">        and output the initial container once before randomising its pitches,</span>
+<span class="sd">        initialise the class with the keyword argument</span>
+<span class="sd">        :attr:`process_on_first_call` set to ``False``.</span>
+
+<span class="sd">        &gt;&gt;&gt; container = abjad.Container(r&quot;c&#39;4 d&#39;4 e&#39;4 f&#39;4&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; pitches = r&quot;fs&#39; gs&#39; a&#39; b&#39;&quot;</span>
+<span class="sd">        &gt;&gt;&gt; randomiser = auxjad.PitchRandomiser(container,</span>
+<span class="sd">        ...                                     pitches,</span>
+<span class="sd">        ...                                     process_on_first_call=False,</span>
+<span class="sd">        ...                                     )</span>
+<span class="sd">        &gt;&gt;&gt; notes = randomiser()</span>
+<span class="sd">        &gt;&gt;&gt; staff = abjad.Staff(notes)</span>
+<span class="sd">        &gt;&gt;&gt; abjad.f(staff)</span>
+<span class="sd">        \new Staff</span>
+<span class="sd">        {</span>
+<span class="sd">            c&#39;4</span>
+<span class="sd">            d&#39;4</span>
+<span class="sd">            e&#39;4</span>
+<span class="sd">            f&#39;4</span>
+<span class="sd">        }</span>
+
+<span class="sd">        .. figure:: ../_images/PitchRandomiser-640x6vsjwtk.png</span>
+
+<span class="sd">        &gt;&gt;&gt; notes = randomiser()</span>
+<span class="sd">        &gt;&gt;&gt; staff = abjad.Staff(notes)</span>
+<span class="sd">        &gt;&gt;&gt; abjad.f(staff)</span>
+<span class="sd">        \new Staff</span>
+<span class="sd">        {</span>
+<span class="sd">            b&#39;4</span>
+<span class="sd">            fs&#39;4</span>
+<span class="sd">            gs&#39;4</span>
+<span class="sd">            fs&#39;4</span>
+<span class="sd">        }</span>
+
+<span class="sd">        .. figure:: ../_images/PitchRandomiser-vsjdj8gkanj.png</span>
+
+<span class="sd">    :func:`len()`:</span>
+<span class="sd">        Applying the :func:`len()` function to the randomiser will return the</span>
+<span class="sd">        number of pitches in :attr:`pitches`.</span>
+
+<span class="sd">        &gt;&gt;&gt; container = abjad.Container(r&quot;c&#39;4 d&#39;4 e&#39;4 f&#39;4&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; pitches = r&quot;fs&#39; gs&#39; a&#39; b&#39;&quot;</span>
+<span class="sd">        &gt;&gt;&gt; randomiser = auxjad.PitchRandomiser(container,</span>
+<span class="sd">        ...                                     pitches,</span>
+<span class="sd">        ...                                     )</span>
+<span class="sd">        &gt;&gt;&gt; len(randomiser)</span>
+<span class="sd">        4</span>
+
+<span class="sd">        &gt;&gt;&gt; container = abjad.Container(r&quot;c&#39;4 d&#39;4 e&#39;4 f&#39;4&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; pitches = [6, 7, 8, 9, 10, 11, 12]</span>
+<span class="sd">        &gt;&gt;&gt; randomiser = auxjad.PitchRandomiser(container,</span>
+<span class="sd">        ...                                     pitches,</span>
+<span class="sd">        ...                                     )</span>
+<span class="sd">        &gt;&gt;&gt; len(randomiser)</span>
+<span class="sd">        7</span>
+
+<span class="sd">    Arguments and properties:</span>
+<span class="sd">        This class has many keyword arguments, all of which can be altered</span>
+<span class="sd">        after instantiation using properties with the same names as shown</span>
+<span class="sd">        below. :attr:`weights` takes a :obj:`list` of :obj:`int`&#39;s or</span>
+<span class="sd">        :obj:`float`&#39;s representing the weight of each pitch from</span>
+<span class="sd">        :attr:`pitches` (their lengths must also match).</span>
+<span class="sd">        :attr:`omit_time_signatures` will remove all time signatures from the</span>
+<span class="sd">        output (both are ``False`` by default). :attr:`process_on_first_call`</span>
+<span class="sd">        to ``True`` and the random pitch process will be applied on the very</span>
+<span class="sd">        first call. Setting :attr:`use_tenney_selector` to ``True`` will make</span>
+<span class="sd">        the randomiser use :class:`auxjad.TenneySelector` for the random</span>
+<span class="sd">        selection instead of :func:`random.choices()` (default is ``False``).</span>
+
+<span class="sd">        &gt;&gt;&gt; container = abjad.Container(r&quot;c&#39;4 d&#39;4 e&#39;4 f&#39;4&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; randomiser = auxjad.PitchRandomiser(</span>
+<span class="sd">        ...     container,</span>
+<span class="sd">        ...     pitches=r&quot;a b cs&#39; ds&#39; e&#39;&quot;,</span>
+<span class="sd">        ...     weights=[1.0, 2.0, 1.0, 1.5, 1.3],</span>
+<span class="sd">        ...     omit_time_signatures=True,</span>
+<span class="sd">        ...     process_on_first_call=True,</span>
+<span class="sd">        ...     use_tenney_selector=True,</span>
+<span class="sd">        ... )</span>
+<span class="sd">        &gt;&gt;&gt; randomiser.pitches</span>
+<span class="sd">        &lt;a b cs&#39; ds&#39; e&#39;&gt;</span>
+<span class="sd">        &gt;&gt;&gt; randomiser.weights</span>
+<span class="sd">        [1.0, 2.0, 1.0, 1.5, 1.3]</span>
+<span class="sd">        &gt;&gt;&gt; randomiser.omit_time_signatures</span>
+<span class="sd">        True</span>
+<span class="sd">        &gt;&gt;&gt; randomiser.process_on_first_call</span>
+<span class="sd">        True</span>
+<span class="sd">        &gt;&gt;&gt; randomiser.use_tenney_selector</span>
+<span class="sd">        True</span>
+
+<span class="sd">        Use the properties below to change these values after initialisation.</span>
+
+<span class="sd">        &gt;&gt;&gt; randomiser.pitches = abjad.PitchSegment(r&quot;c&#39; d&#39; e&#39; f&#39;&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; randomiser.weights = [1, 2, 5, 8]</span>
+<span class="sd">        &gt;&gt;&gt; randomiser.omit_time_signatures = False</span>
+<span class="sd">        &gt;&gt;&gt; randomiser.process_on_first_call = False</span>
+<span class="sd">        &gt;&gt;&gt; randomiser.use_tenney_selector = False</span>
+<span class="sd">        &gt;&gt;&gt; randomiser.pitches</span>
+<span class="sd">        &lt;c&#39; d&#39; e&#39; f&#39;&gt;</span>
+<span class="sd">        &gt;&gt;&gt; randomiser.weights</span>
+<span class="sd">        [1, 2, 5, 8]</span>
+<span class="sd">        &gt;&gt;&gt; randomiser.omit_time_signatures</span>
+<span class="sd">        False</span>
+<span class="sd">        &gt;&gt;&gt; randomiser.process_on_first_call</span>
+<span class="sd">        False</span>
+<span class="sd">        &gt;&gt;&gt; randomiser.use_tenney_selector</span>
+<span class="sd">        False</span>
+
+<span class="sd">    Rests:</span>
+<span class="sd">        Only pitched logical ties are randomised, rests are left untouched.</span>
+
+<span class="sd">        &gt;&gt;&gt; container = abjad.Container(r&quot;c&#39;8. d&#39;4 r8 r8. e&#39;16 f&#39;8.&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; pitches = [6, 7, 8, 9, 10, 11]</span>
+<span class="sd">        &gt;&gt;&gt; randomiser = auxjad.PitchRandomiser(container,</span>
+<span class="sd">        ...                                     pitches,</span>
+<span class="sd">        ...                                     )</span>
+<span class="sd">        &gt;&gt;&gt; notes = randomiser()</span>
+<span class="sd">        &gt;&gt;&gt; staff = abjad.Staff(notes)</span>
+<span class="sd">        &gt;&gt;&gt; abjad.f(staff)</span>
+<span class="sd">        \new Staff</span>
+<span class="sd">        {</span>
+<span class="sd">            bf&#39;8.</span>
+<span class="sd">            af&#39;4</span>
+<span class="sd">            r8</span>
+<span class="sd">            r8.</span>
+<span class="sd">            bf&#39;16</span>
+<span class="sd">            a&#39;8.</span>
+<span class="sd">        }</span>
+
+<span class="sd">        .. figure:: ../_images/PitchRandomiser-u4294ozm92.png</span>
+
+<span class="sd">    Chords:</span>
+<span class="sd">        Each note of a chord is randomised too.</span>
+
+<span class="sd">        &gt;&gt;&gt; container = abjad.Container(</span>
+<span class="sd">        ...     r&quot;&lt;c&#39; e&#39; g&#39;&gt;8. d&#39;4 r8 r8. e&#39;16 &lt;f&#39; a&#39;&gt;8.&quot;</span>
+<span class="sd">        ... )</span>
+<span class="sd">        &gt;&gt;&gt; pitches = [6, 7, 8, 9, 10, 11]</span>
+<span class="sd">        &gt;&gt;&gt; randomiser = auxjad.PitchRandomiser(container,</span>
+<span class="sd">        ...                                     pitches,</span>
+<span class="sd">        ...                                     )</span>
+<span class="sd">        &gt;&gt;&gt; notes = randomiser()</span>
+<span class="sd">        &gt;&gt;&gt; staff = abjad.Staff(notes)</span>
+<span class="sd">        &gt;&gt;&gt; abjad.f(staff)</span>
+<span class="sd">        \new Staff</span>
+<span class="sd">        {</span>
+<span class="sd">            &lt;fs&#39; g&#39; bf&#39;&gt;8.</span>
+<span class="sd">            b&#39;4</span>
+<span class="sd">            r8</span>
+<span class="sd">            r8.</span>
+<span class="sd">            bf&#39;16</span>
+<span class="sd">            &lt;fs&#39; bf&#39;&gt;8.</span>
+<span class="sd">        }</span>
+
+<span class="sd">        .. figure:: ../_images/PitchRandomiser-318eldj7tzc.png</span>
+
+<span class="sd">        The number of notes in a chord stay the same unless there are fewer</span>
+<span class="sd">        pitches available in :attr:`pitches`.</span>
+
+<span class="sd">        &gt;&gt;&gt; container = abjad.Container(</span>
+<span class="sd">        ...     r&quot;&lt;c&#39; e&#39; g&#39; a&#39;&gt;2 &lt;cs&#39; ds&#39; e&#39; f&#39; g&#39; a&#39; b&#39;&gt;2&quot;</span>
+<span class="sd">        ... )</span>
+<span class="sd">        &gt;&gt;&gt; pitches = [6, 7, 8]</span>
+<span class="sd">        &gt;&gt;&gt; randomiser = auxjad.PitchRandomiser(container,</span>
+<span class="sd">        ...                                     pitches,</span>
+<span class="sd">        ...                                     )</span>
+<span class="sd">        &gt;&gt;&gt; notes = randomiser()</span>
+<span class="sd">        &gt;&gt;&gt; staff = abjad.Staff(notes)</span>
+<span class="sd">        &gt;&gt;&gt; abjad.f(staff)</span>
+<span class="sd">        \new Staff</span>
+<span class="sd">        {</span>
+<span class="sd">            &lt;fs&#39; g&#39; af&#39;&gt;2</span>
+<span class="sd">            &lt;fs&#39; g&#39; af&#39;&gt;2</span>
+<span class="sd">        }</span>
+
+<span class="sd">        .. figure:: ../_images/PitchRandomiser-cciyee49qrj.png</span>
+
+<span class="sd">    :attr:`use_tenney_selector`:</span>
+<span class="sd">        Setting :attr:`use_tenney_selector` to ``True`` will make the</span>
+<span class="sd">        randomiser use :class:`auxjad.TenneySelector` for the random selection</span>
+<span class="sd">        instead of :func:`random.choices()` (default is ``False``).</span>
+<span class="sd">        :class:`auxjad.TenneySelector` will raise the chance of a pitch being</span>
+<span class="sd">        selected the longer it hasn&#39;t been selected, and will forbid immediate</span>
+<span class="sd">        repetitions of pitches. See its documentation for more information.</span>
+
+<span class="sd">        &gt;&gt;&gt; container = abjad.Container(r&quot;c&#39;8 d&#39;8 e&#39;8 f&#39;8 g&#39;8 a&#39;8 b&#39;8 c&#39;8&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; pitches = r&quot;fs&#39; gs&#39; a&#39; b&#39;&quot;</span>
+<span class="sd">        &gt;&gt;&gt; randomiser = auxjad.PitchRandomiser(container,</span>
+<span class="sd">        ...                                     pitches,</span>
+<span class="sd">        ...                                     use_tenney_selector=True,</span>
+<span class="sd">        ...                                     )</span>
+<span class="sd">        &gt;&gt;&gt; notes = randomiser()</span>
+<span class="sd">        &gt;&gt;&gt; staff = abjad.Staff(notes)</span>
+<span class="sd">        &gt;&gt;&gt; abjad.f(staff)</span>
+<span class="sd">        \new Staff</span>
+<span class="sd">        {</span>
+<span class="sd">            fs&#39;8</span>
+<span class="sd">            a&#39;8</span>
+<span class="sd">            fs&#39;8</span>
+<span class="sd">            gs&#39;8</span>
+<span class="sd">            a&#39;8</span>
+<span class="sd">            b&#39;8</span>
+<span class="sd">            gs&#39;8</span>
+<span class="sd">            fs&#39;8</span>
+<span class="sd">        }</span>
+
+<span class="sd">        .. figure:: ../_images/PitchRandomiser-tmxllu13pa8.png</span>
+
+<span class="sd">    :attr:`weights`:</span>
+<span class="sd">        Individual pitches can have different weights, defined by the</span>
+<span class="sd">        :attr:`weights` property. It takes a :obj:`list` of :obj:`float`&#39;s or</span>
+<span class="sd">        :obj:`int`&#39;s.</span>
+
+<span class="sd">        &gt;&gt;&gt; container = abjad.Container(r&quot;c&#39;8 d&#39;8 e&#39;8 f&#39;8 g&#39;8 a&#39;8 b&#39;8 c&#39;8&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; pitches = r&quot;fs&#39; gs&#39; a&#39; b&#39;&quot;</span>
+<span class="sd">        &gt;&gt;&gt; randomiser = auxjad.PitchRandomiser(container,</span>
+<span class="sd">        ...                                     pitches,</span>
+<span class="sd">        ...                                     weights=[5.0, 2.0, 1.5, 1.0],</span>
+<span class="sd">        ...                                     )</span>
+<span class="sd">        &gt;&gt;&gt; notes = randomiser()</span>
+<span class="sd">        &gt;&gt;&gt; staff = abjad.Staff(notes)</span>
+<span class="sd">        &gt;&gt;&gt; abjad.f(staff)</span>
+<span class="sd">        \new Staff</span>
+<span class="sd">        {</span>
+<span class="sd">            b&#39;8</span>
+<span class="sd">            fs&#39;8</span>
+<span class="sd">            gs&#39;8</span>
+<span class="sd">            gs&#39;8</span>
+<span class="sd">            gs&#39;8</span>
+<span class="sd">            fs&#39;8</span>
+<span class="sd">            fs&#39;8</span>
+<span class="sd">            a&#39;8</span>
+<span class="sd">        }</span>
+
+<span class="sd">        .. figure:: ../_images/PitchRandomiser-zkvbzd1brgq.png</span>
+
+<span class="sd">    :attr:`weights` and :attr:`use_tenney_selector`:</span>
+<span class="sd">        Non-uniform :attr:`weights` can also be used when</span>
+<span class="sd">        :attr:`use_tenney_selector` is set to ``True``.</span>
+
+<span class="sd">        &gt;&gt;&gt; container = abjad.Container(r&quot;c&#39;8 d&#39;8 e&#39;8 f&#39;8 g&#39;8 a&#39;8 b&#39;8 c&#39;8&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; pitches = r&quot;fs&#39; gs&#39; a&#39; b&#39;&quot;</span>
+<span class="sd">        &gt;&gt;&gt; randomiser = auxjad.PitchRandomiser(container,</span>
+<span class="sd">        ...                                     pitches,</span>
+<span class="sd">        ...                                     weights=[5.0, 2.0, 1.5, 1.0],</span>
+<span class="sd">        ...                                     use_tenney_selector=True,</span>
+<span class="sd">        ...                                     )</span>
+<span class="sd">        &gt;&gt;&gt; notes = randomiser()</span>
+<span class="sd">        &gt;&gt;&gt; staff = abjad.Staff(notes)</span>
+<span class="sd">        &gt;&gt;&gt; abjad.f(staff)</span>
+<span class="sd">        \new Staff</span>
+<span class="sd">        {</span>
+<span class="sd">            fs&#39;8</span>
+<span class="sd">            gs&#39;8</span>
+<span class="sd">            a&#39;8</span>
+<span class="sd">            fs&#39;8</span>
+<span class="sd">            gs&#39;8</span>
+<span class="sd">            a&#39;8</span>
+<span class="sd">            gs&#39;8</span>
+<span class="sd">            b&#39;8</span>
+<span class="sd">        }</span>
+
+<span class="sd">        .. figure:: ../_images/PitchRandomiser-cq1nobkjozg.png</span>
+
+<span class="sd">    Resetting :attr:`weights`:</span>
+<span class="sd">        Setting :attr:`weights` to ``None`` will reset it back to a uniform</span>
+<span class="sd">        distribution.</span>
+
+<span class="sd">        &gt;&gt;&gt; container = abjad.Container(r&quot;c&#39;8 d&#39;8 e&#39;8 f&#39;8 g&#39;8 a&#39;8 b&#39;8 c&#39;8&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; pitches = r&quot;fs&#39; gs&#39; a&#39; b&#39;&quot;</span>
+<span class="sd">        &gt;&gt;&gt; randomiser = auxjad.PitchRandomiser(container,</span>
+<span class="sd">        ...                                     pitches,</span>
+<span class="sd">        ...                                     weights=[100.0, 1.0, 1.0, 1.0],</span>
+<span class="sd">        ...                                     )</span>
+<span class="sd">        &gt;&gt;&gt; notes = randomiser()</span>
+<span class="sd">        &gt;&gt;&gt; staff = abjad.Staff(notes)</span>
+<span class="sd">        &gt;&gt;&gt; abjad.f(staff)</span>
+<span class="sd">        \new Staff</span>
+<span class="sd">        {</span>
+<span class="sd">            fs&#39;8</span>
+<span class="sd">            fs&#39;8</span>
+<span class="sd">            fs&#39;8</span>
+<span class="sd">            fs&#39;8</span>
+<span class="sd">            fs&#39;8</span>
+<span class="sd">            fs&#39;8</span>
+<span class="sd">            fs&#39;8</span>
+<span class="sd">            fs&#39;8</span>
+<span class="sd">        }</span>
+
+<span class="sd">        .. figure:: ../_images/PitchRandomiser-wtl5o15q5qp.png</span>
+
+<span class="sd">        &gt;&gt;&gt; randomiser.weights = None</span>
+<span class="sd">        &gt;&gt;&gt; notes = randomiser()</span>
+<span class="sd">        &gt;&gt;&gt; staff = abjad.Staff(notes)</span>
+<span class="sd">        &gt;&gt;&gt; abjad.f(staff)</span>
+<span class="sd">        \new Staff</span>
+<span class="sd">        {</span>
+<span class="sd">            fs&#39;8</span>
+<span class="sd">            fs&#39;8</span>
+<span class="sd">            b&#39;8</span>
+<span class="sd">            gs&#39;8</span>
+<span class="sd">            gs&#39;8</span>
+<span class="sd">            a&#39;8</span>
+<span class="sd">            fs&#39;8</span>
+<span class="sd">            b&#39;8</span>
+<span class="sd">        }</span>
+
+<span class="sd">        .. figure:: ../_images/PitchRandomiser-4bqe6cbawg6.png</span>
+
+<span class="sd">    Changing :attr:`pitches`:</span>
+<span class="sd">        When using a custom :obj:`list` of :attr:`weights`, changing the</span>
+<span class="sd">        :attr:`pitches` to a series of new values with the same length will</span>
+<span class="sd">        preserve the :attr:`weights` values. If on the other hand</span>
+<span class="sd">        :attr:`pitches` changes in length, :attr:`weights` is reset to ``None``</span>
+<span class="sd">        (i.e. uniform distribution).</span>
+
+<span class="sd">        &gt;&gt;&gt; container = abjad.Container(r&quot;c&#39;8 d&#39;8 e&#39;8 f&#39;8 g&#39;8 a&#39;8 b&#39;8 c&#39;8&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; pitches = r&quot;fs&#39; gs&#39; a&#39; b&#39;&quot;</span>
+<span class="sd">        &gt;&gt;&gt; randomiser = auxjad.PitchRandomiser(container,</span>
+<span class="sd">        ...                                     pitches,</span>
+<span class="sd">        ...                                     weights=[100.0, 1.0, 1.0, 1.0],</span>
+<span class="sd">        ...                                     )</span>
+<span class="sd">        &gt;&gt;&gt; randomiser.pitches = r&quot;c&#39;&#39; d&#39;&#39; e&#39;&#39; f&#39;&#39;&quot;</span>
+<span class="sd">        &gt;&gt;&gt; randomiser.pitches</span>
+<span class="sd">        &lt;c&#39;&#39; d&#39;&#39; e&#39;&#39; f&#39;&#39;&gt;</span>
+<span class="sd">        &gt;&gt;&gt; randomiser.weights</span>
+<span class="sd">        [100.0, 1.0, 1.0, 1.0]</span>
+<span class="sd">        &gt;&gt;&gt; randomiser.pitches = r&quot;c&#39;&#39; d&#39;&#39; e&#39;&#39; f&#39;&#39; g&#39;&#39; a&#39;&#39; b&#39;&#39;&quot;</span>
+<span class="sd">        &gt;&gt;&gt; randomiser.pitches</span>
+<span class="sd">        &lt;c&#39;&#39; d&#39;&#39; e&#39;&#39; f&#39;&#39; g&#39;&#39; a&#39;&#39; b&#39;&#39;&gt;</span>
+<span class="sd">        &gt;&gt;&gt; randomiser.weights</span>
+<span class="sd">        None</span>
+
+<span class="sd">    .. error::</span>
+
+<span class="sd">        Note that :attr:`weights` must always have the same length as</span>
+<span class="sd">        :attr:`pitches`, otherwise a :exc:`ValueError` exception will be</span>
+<span class="sd">        raised.</span>
+
+<span class="sd">        &gt;&gt;&gt; container = abjad.Container(r&quot;c&#39;4 d&#39;4 e&#39;4 f&#39;4&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; pitches = r&quot;fs&#39; gs&#39; a&#39; b&#39;&quot;</span>
+<span class="sd">        &gt;&gt;&gt; weights = [1, 1, 5, 2, 3, 4, 8]</span>
+<span class="sd">        &gt;&gt;&gt; auxjad.PitchRandomiser(container, pitches, weights=weights)</span>
+<span class="sd">        ValueError: &#39;weights&#39; must have the same length as &#39;pitches&#39;</span>
+
+<span class="sd">    :meth:`output_n`:</span>
+<span class="sd">        To output several randomised containers at once, use the method</span>
+<span class="sd">        :meth:`output_n`, inputting the desired number of iterations.</span>
+
+<span class="sd">        &gt;&gt;&gt; container = abjad.Container(r&quot;c&#39;4 ~ c&#39;16 r8. d&#39;4 e&#39;8. r16&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; pitches = [6, 7, 8, 9, 10]</span>
+<span class="sd">        &gt;&gt;&gt; randomiser = auxjad.PitchRandomiser(container,</span>
+<span class="sd">        ...                                     pitches,</span>
+<span class="sd">        ...                                     )</span>
+<span class="sd">        &gt;&gt;&gt; notes = randomiser.output_n(3)</span>
+<span class="sd">        &gt;&gt;&gt; staff = abjad.Staff(notes)</span>
+<span class="sd">        &gt;&gt;&gt; abjad.f(staff)</span>
+<span class="sd">        \new Staff</span>
+<span class="sd">        {</span>
+<span class="sd">            a&#39;4</span>
+<span class="sd">            ~</span>
+<span class="sd">            a&#39;16</span>
+<span class="sd">            r8.</span>
+<span class="sd">            g&#39;4</span>
+<span class="sd">            fs&#39;8.</span>
+<span class="sd">            r16</span>
+<span class="sd">            g&#39;4</span>
+<span class="sd">            ~</span>
+<span class="sd">            g&#39;16</span>
+<span class="sd">            r8.</span>
+<span class="sd">            g&#39;4</span>
+<span class="sd">            fs&#39;8.</span>
+<span class="sd">            r16</span>
+<span class="sd">            bf&#39;4</span>
+<span class="sd">            ~</span>
+<span class="sd">            bf&#39;16</span>
+<span class="sd">            r8.</span>
+<span class="sd">            a&#39;4</span>
+<span class="sd">            af&#39;8.</span>
+<span class="sd">            r16</span>
+<span class="sd">        }</span>
+
+<span class="sd">        .. figure:: ../_images/PitchRandomiser-fvwaaz3vgi.png</span>
+
+<span class="sd">    Indicators:</span>
+<span class="sd">        This class preserves indicators.</span>
+
+<span class="sd">        &gt;&gt;&gt; container = abjad.Container(</span>
+<span class="sd">        ...     r&quot;c&#39;4\p\&lt; ~ c&#39;8. d&#39;16-.\f e&#39;4--\pp f&#39;8.( g&#39;16)&quot;</span>
+<span class="sd">        ... )</span>
+<span class="sd">        &gt;&gt;&gt; pitches = [6, 7, 8, 9, 10, 11, 12]</span>
+<span class="sd">        &gt;&gt;&gt; randomiser = auxjad.PitchRandomiser(container,</span>
+<span class="sd">        ...                                     pitches,</span>
+<span class="sd">        ...                                     )</span>
+<span class="sd">        &gt;&gt;&gt; notes = randomiser()</span>
+<span class="sd">        &gt;&gt;&gt; staff = abjad.Staff(notes)</span>
+<span class="sd">        &gt;&gt;&gt; abjad.f(staff)</span>
+<span class="sd">        \new Staff</span>
+<span class="sd">        {</span>
+<span class="sd">            a&#39;4</span>
+<span class="sd">            \p</span>
+<span class="sd">            \&lt;</span>
+<span class="sd">            ~</span>
+<span class="sd">            a&#39;8.</span>
+<span class="sd">            c&#39;&#39;16</span>
+<span class="sd">            \f</span>
+<span class="sd">            - \staccato</span>
+<span class="sd">            af&#39;4</span>
+<span class="sd">            \pp</span>
+<span class="sd">            - \tenuto</span>
+<span class="sd">            a&#39;8.</span>
+<span class="sd">            (</span>
+<span class="sd">            bf&#39;16</span>
+<span class="sd">            )</span>
+<span class="sd">        }</span>
+
+<span class="sd">        .. figure:: ../_images/PitchRandomiser-2e647eng8yc.png</span>
+
+<span class="sd">    Example:</span>
+<span class="sd">        This class also preserves the time signature structure.</span>
+
+<span class="sd">        &gt;&gt;&gt; container = abjad.Container(</span>
+<span class="sd">        ...     r&quot;\time 3/4 c&#39;4 d&#39;2 \time 2/4 e&#39;8 f&#39;8 g&#39;8 a&#39;8&quot;</span>
+<span class="sd">        ... )</span>
+<span class="sd">        &gt;&gt;&gt; pitches = r&quot;fs&#39; gs&#39; a&#39; b&#39;&quot;</span>
+<span class="sd">        &gt;&gt;&gt; randomiser = auxjad.PitchRandomiser(container,</span>
+<span class="sd">        ...                                     pitches,</span>
+<span class="sd">        ...                                     )</span>
+<span class="sd">        &gt;&gt;&gt; notes = randomiser()</span>
+<span class="sd">        &gt;&gt;&gt; staff = abjad.Staff(notes)</span>
+<span class="sd">        &gt;&gt;&gt; abjad.f(staff)</span>
+<span class="sd">        \new Staff</span>
+<span class="sd">        {</span>
+<span class="sd">            \time 3/4</span>
+<span class="sd">            a&#39;4</span>
+<span class="sd">            fs&#39;2</span>
+<span class="sd">            \time 2/4</span>
+<span class="sd">            gs&#39;8</span>
+<span class="sd">            gs&#39;8</span>
+<span class="sd">            a&#39;8</span>
+<span class="sd">            gs&#39;8</span>
+<span class="sd">        }</span>
+
+<span class="sd">        .. figure:: ../_images/PitchRandomiser-c9t7r3thrqg.png</span>
+
+<span class="sd">    :attr:`omit_time_signatures`:</span>
+<span class="sd">        To omit time signatures altogether, set :attr:`omit_time_signatures` to</span>
+<span class="sd">        ``True`` (default is ``False``).</span>
+
+<span class="sd">        &gt;&gt;&gt; container = abjad.Container(</span>
+<span class="sd">        ...     r&quot;\time 3/4 c&#39;4 d&#39;2 \time 2/4 e&#39;8 f&#39;8 g&#39;8 a&#39;8&quot;</span>
+<span class="sd">        ... )</span>
+<span class="sd">        &gt;&gt;&gt; pitches = r&quot;fs&#39; gs&#39; a&#39; b&#39;&quot;</span>
+<span class="sd">        &gt;&gt;&gt; randomiser = auxjad.PitchRandomiser(container,</span>
+<span class="sd">        ...                                     pitches,</span>
+<span class="sd">        ...                                     omit_time_signatures=True,</span>
+<span class="sd">        ...                                     )</span>
+<span class="sd">        &gt;&gt;&gt; notes = randomiser()</span>
+<span class="sd">        &gt;&gt;&gt; staff = abjad.Staff(notes)</span>
+<span class="sd">        &gt;&gt;&gt; abjad.f(staff)</span>
+<span class="sd">        \new Staff</span>
+<span class="sd">        {</span>
+<span class="sd">            a&#39;4</span>
+<span class="sd">            fs&#39;2</span>
+<span class="sd">            gs&#39;8</span>
+<span class="sd">            gs&#39;8</span>
+<span class="sd">            a&#39;8</span>
+<span class="sd">            gs&#39;8</span>
+<span class="sd">        }</span>
+
+<span class="sd">        .. figure:: ../_images/PitchRandomiser-mwruvbmgu3o.png</span>
+
+<span class="sd">    Using as iterator:</span>
+<span class="sd">        The instances of this class can also be used as an iterator, which can</span>
+<span class="sd">        then be used in a for loop. Note that unlike the method</span>
+<span class="sd">        :meth:`output_n`, time signatures are added to each window returned by</span>
+<span class="sd">        the randomiser. Use the function</span>
+<span class="sd">        |auxjad.mutate().remove_repeated_time_signatures()| to clean the output</span>
+<span class="sd">        when using this class in this way. It is also important to note that a</span>
+<span class="sd">        ``break`` statement is needed when using this class as an iterator. The</span>
+<span class="sd">        reason is that pitch randomisation is a process that can happen</span>
+<span class="sd">        indefinitely (unlike some of the other classes in this library).</span>
+
+<span class="sd">        &gt;&gt;&gt; container = abjad.Container(r&quot;\time 3/4 c&#39;4 d&#39;4 e&#39;4&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; pitches = r&quot;fs&#39; gs&#39; a&#39; b&#39; cs&#39;&#39;&quot;</span>
+<span class="sd">        &gt;&gt;&gt; randomiser = auxjad.PitchRandomiser(container,</span>
+<span class="sd">        ...                                     pitches,</span>
+<span class="sd">        ...                                     )</span>
+<span class="sd">        &gt;&gt;&gt; staff = abjad.Staff()</span>
+<span class="sd">        &gt;&gt;&gt; for window in randomiser:</span>
+<span class="sd">        ...     staff.append(window)</span>
+<span class="sd">        ...     if abjad.inspect(staff).duration() == abjad.Duration((9, 4)):</span>
+<span class="sd">        ...         break</span>
+<span class="sd">        &gt;&gt;&gt; auxjad.mutate(staff).remove_repeated_time_signatures()</span>
+<span class="sd">        &gt;&gt;&gt; abjad.f(staff)</span>
+<span class="sd">        \new Staff</span>
+<span class="sd">        {</span>
+<span class="sd">            \time 3/4</span>
+<span class="sd">            a&#39;4</span>
+<span class="sd">            b&#39;4</span>
+<span class="sd">            gs&#39;4</span>
+<span class="sd">            fs&#39;4</span>
+<span class="sd">            a&#39;4</span>
+<span class="sd">            b&#39;4</span>
+<span class="sd">            a&#39;4</span>
+<span class="sd">            gs&#39;4</span>
+<span class="sd">            cs&#39;&#39;4</span>
+<span class="sd">        }</span>
+
+<span class="sd">        .. figure:: ../_images/PitchRandomiser-2c9zzip8tpc.png</span>
+
+<span class="sd">    .. tip::</span>
+
+<span class="sd">        The functions |auxjad.mutate().remove_repeated_dynamics()| and</span>
+<span class="sd">        |auxjad.mutate().reposition_clefs()| can be used to clean the output</span>
+<span class="sd">        and remove repeated dynamics and unnecessary clef changes.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="c1">### CLASS VARIABLES ###</span>
+
+    <span class="vm">__slots__</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;_contents&#39;</span><span class="p">,</span>
+                 <span class="s1">&#39;_pitches&#39;</span><span class="p">,</span>
+                 <span class="s1">&#39;_weights&#39;</span><span class="p">,</span>
+                 <span class="s1">&#39;_omit_time_signatures&#39;</span><span class="p">,</span>
+                 <span class="s1">&#39;_process_on_first_call&#39;</span><span class="p">,</span>
+                 <span class="s1">&#39;_use_tenney_selector&#39;</span><span class="p">,</span>
+                 <span class="s1">&#39;_tenney_selector&#39;</span><span class="p">,</span>
+                 <span class="s1">&#39;_current_window&#39;</span><span class="p">,</span>
+                 <span class="s1">&#39;_is_first_window&#39;</span><span class="p">,</span>
+                 <span class="p">)</span>
+
+    <span class="c1">### INITIALISER ###</span>
+
+<div class="viewcode-block" id="PitchRandomiser.__init__"><a class="viewcode-back" href="../../../_api_members/auxjad.PitchRandomiser.html#auxjad.PitchRandomiser.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+                 <span class="n">contents</span><span class="p">:</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">,</span>
+                 <span class="n">pitches</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">str</span><span class="p">,</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Pitch</span><span class="p">]],</span>
+                                <span class="nb">tuple</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">str</span><span class="p">,</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Pitch</span><span class="p">]],</span>
+                                <span class="nb">str</span><span class="p">,</span>
+                                <span class="n">abjad</span><span class="o">.</span><span class="n">PitchSegment</span><span class="p">,</span>
+                                <span class="p">],</span>
+                 <span class="o">*</span><span class="p">,</span>
+                 <span class="n">weights</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">list</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+                 <span class="n">omit_time_signatures</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+                 <span class="n">process_on_first_call</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+                 <span class="n">use_tenney_selector</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+                 <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sa">r</span><span class="s1">&#39;Initialises self.&#39;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">contents</span> <span class="o">=</span> <span class="n">contents</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_weights</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">pitches</span> <span class="o">=</span> <span class="n">pitches</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">weights</span> <span class="o">=</span> <span class="n">weights</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">omit_time_signatures</span> <span class="o">=</span> <span class="n">omit_time_signatures</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">process_on_first_call</span> <span class="o">=</span> <span class="n">process_on_first_call</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">use_tenney_selector</span> <span class="o">=</span> <span class="n">use_tenney_selector</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_is_first_window</span> <span class="o">=</span> <span class="kc">True</span></div>
+
+    <span class="c1">### SPECIAL METHODS ###</span>
+
+<div class="viewcode-block" id="PitchRandomiser.__repr__"><a class="viewcode-back" href="../../../_api_members/auxjad.PitchRandomiser.html#auxjad.PitchRandomiser.__repr__">[docs]</a>    <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="sa">r</span><span class="s1">&#39;Returns interpreter representation of :attr:`pitches`.&#39;</span>
+        <span class="k">return</span> <span class="nb">repr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_pitches</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="PitchRandomiser.__len__"><a class="viewcode-back" href="../../../_api_members/auxjad.PitchRandomiser.html#auxjad.PitchRandomiser.__len__">[docs]</a>    <span class="k">def</span> <span class="fm">__len__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+        <span class="sa">r</span><span class="s1">&#39;Returns the number of available :attr:`pitches`.&#39;</span>
+        <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_pitches</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="PitchRandomiser.__call__"><a class="viewcode-back" href="../../../_api_members/auxjad.PitchRandomiser.html#auxjad.PitchRandomiser.__call__">[docs]</a>    <span class="k">def</span> <span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Selection</span><span class="p">:</span>
+        <span class="sa">r</span><span class="s1">&#39;Calls the randomise process, returning an |abjad.Selection|&#39;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_randomise</span><span class="p">()</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">current_window</span></div>
+
+<div class="viewcode-block" id="PitchRandomiser.__next__"><a class="viewcode-back" href="../../../_api_members/auxjad.PitchRandomiser.html#auxjad.PitchRandomiser.__next__">[docs]</a>    <span class="k">def</span> <span class="fm">__next__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Selection</span><span class="p">:</span>
+        <span class="sa">r</span><span class="sd">&quot;&quot;&quot;Calls the randomise process for one iteration, returning an</span>
+<span class="sd">        |abjad.Selection|.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="fm">__call__</span><span class="p">()</span></div>
+
+<div class="viewcode-block" id="PitchRandomiser.__iter__"><a class="viewcode-back" href="../../../_api_members/auxjad.PitchRandomiser.html#auxjad.PitchRandomiser.__iter__">[docs]</a>    <span class="k">def</span> <span class="fm">__iter__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sa">r</span><span class="s1">&#39;Returns an iterator, allowing instances to be used as iterators.&#39;</span>
+        <span class="k">return</span> <span class="bp">self</span></div>
+
+    <span class="c1">### PUBLIC METHODS ###</span>
+
+<div class="viewcode-block" id="PitchRandomiser.output_n"><a class="viewcode-back" href="../../../_api_members/auxjad.PitchRandomiser.html#auxjad.PitchRandomiser.output_n">[docs]</a>    <span class="k">def</span> <span class="nf">output_n</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+                 <span class="n">n</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+                 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Selection</span><span class="p">:</span>
+        <span class="sa">r</span><span class="sd">&quot;&quot;&quot;Goes through ``n`` iterations of the pitch randomisation process</span>
+<span class="sd">        and outputs a single |abjad.Selection|.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="nb">int</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;argument must be &#39;int&#39;&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">n</span> <span class="o">&lt;</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;argument must be greater than zero&quot;</span><span class="p">)</span>
+        <span class="n">dummy_container</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+            <span class="n">dummy_container</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="fm">__call__</span><span class="p">())</span>
+        <span class="n">mutate</span><span class="p">(</span><span class="n">dummy_container</span><span class="p">[:])</span><span class="o">.</span><span class="n">remove_repeated_time_signatures</span><span class="p">()</span>
+        <span class="n">mutate</span><span class="p">(</span><span class="n">dummy_container</span><span class="p">[:])</span><span class="o">.</span><span class="n">remove_repeated_dynamics</span><span class="p">()</span>
+        <span class="n">output</span> <span class="o">=</span> <span class="n">dummy_container</span><span class="p">[:]</span>
+        <span class="n">dummy_container</span><span class="p">[:]</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">return</span> <span class="n">output</span></div>
+
+    <span class="c1">### PRIVATE METHODS ###</span>
+
+    <span class="k">def</span> <span class="nf">_randomise</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Selection</span><span class="p">:</span>
+        <span class="sa">r</span><span class="s1">&#39;Randomises pitches of :attr:`contents`.&#39;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_is_first_window</span> <span class="ow">and</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_process_on_first_call</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_is_first_window</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_rewrite_pitches</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">_rewrite_pitches</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sa">r</span><span class="s1">&#39;Rewrites the pitches of the current window.&#39;</span>
+        <span class="n">dummy_container</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">mutate</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_contents</span><span class="p">)</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+        <span class="n">logical_ties</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="n">dummy_container</span><span class="p">)</span><span class="o">.</span><span class="n">logical_ties</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">logical_tie</span> <span class="ow">in</span> <span class="n">logical_ties</span><span class="p">:</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">logical_tie</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Note</span><span class="p">):</span>
+                <span class="n">pitch</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_pick_random_pitch</span><span class="p">()</span>
+                <span class="k">for</span> <span class="n">leaf</span> <span class="ow">in</span> <span class="n">logical_tie</span><span class="p">:</span>
+                    <span class="n">leaf</span><span class="o">.</span><span class="n">written_pitch</span> <span class="o">=</span> <span class="n">pitch</span>
+            <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">logical_tie</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Chord</span><span class="p">):</span>
+                <span class="n">chord_n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">logical_tie</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">written_pitches</span><span class="p">)</span>
+                <span class="k">if</span> <span class="n">chord_n</span> <span class="o">&gt;</span> <span class="bp">self</span><span class="o">.</span><span class="fm">__len__</span><span class="p">():</span>
+                    <span class="n">pitches</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_pitches</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">pitches</span> <span class="o">=</span> <span class="p">[]</span>
+                    <span class="k">while</span> <span class="nb">len</span><span class="p">(</span><span class="n">pitches</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">chord_n</span><span class="p">:</span>
+                        <span class="n">pitch</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_pick_random_pitch</span><span class="p">()</span>
+                        <span class="k">if</span> <span class="n">pitch</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">pitches</span><span class="p">:</span>
+                            <span class="n">pitches</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">pitch</span><span class="p">)</span>
+                <span class="k">for</span> <span class="n">leaf</span> <span class="ow">in</span> <span class="n">logical_tie</span><span class="p">:</span>
+                    <span class="n">leaf</span><span class="o">.</span><span class="n">written_pitches</span> <span class="o">=</span> <span class="n">pitches</span>
+        <span class="c1"># output</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_is_first_window</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_current_window</span> <span class="o">=</span> <span class="n">dummy_container</span><span class="p">[:]</span>
+        <span class="n">dummy_container</span><span class="p">[:]</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="k">def</span> <span class="nf">_pick_random_pitch</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Pitch</span><span class="p">:</span>
+        <span class="sa">r</span><span class="sd">&quot;&quot;&quot;Random pitch selector, using either :func:`random.choices()` or</span>
+<span class="sd">        :class:`auxjad.TenneySelector`.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_use_tenney_selector</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">random</span><span class="o">.</span><span class="n">choices</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_pitches</span><span class="p">,</span>
+                                  <span class="n">weights</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_weights</span><span class="p">,</span>
+                                  <span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_tenney_selector</span><span class="p">()</span>
+
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">_remove_all_time_signatures</span><span class="p">(</span><span class="n">container</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sa">r</span><span class="s1">&#39;Removes all time signatures of an |abjad.Container|.&#39;</span>
+        <span class="k">for</span> <span class="n">leaf</span> <span class="ow">in</span> <span class="n">abjad</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="n">container</span><span class="p">)</span><span class="o">.</span><span class="n">leaves</span><span class="p">():</span>
+            <span class="k">if</span> <span class="n">abjad</span><span class="o">.</span><span class="n">inspect</span><span class="p">(</span><span class="n">leaf</span><span class="p">)</span><span class="o">.</span><span class="n">effective</span><span class="p">(</span><span class="n">abjad</span><span class="o">.</span><span class="n">TimeSignature</span><span class="p">):</span>
+                <span class="n">abjad</span><span class="o">.</span><span class="n">detach</span><span class="p">(</span><span class="n">abjad</span><span class="o">.</span><span class="n">TimeSignature</span><span class="p">,</span> <span class="n">leaf</span><span class="p">)</span>
+
+    <span class="c1">### PUBLIC PROPERTIES ###</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">contents</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">:</span>
+        <span class="sa">r</span><span class="s1">&#39;The |abjad.Container| to be shuffled.&#39;</span>
+        <span class="k">return</span> <span class="n">abjad</span><span class="o">.</span><span class="n">mutate</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_contents</span><span class="p">)</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+
+    <span class="nd">@contents</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">contents</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+                 <span class="n">contents</span><span class="p">:</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">,</span>
+                 <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">contents</span><span class="p">,</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;&#39;contents&#39; must be &#39;abjad.Container&#39; or child &quot;</span>
+                            <span class="s2">&quot;class&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">abjad</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="n">contents</span><span class="p">)</span><span class="o">.</span><span class="n">leaves</span><span class="p">()</span><span class="o">.</span><span class="n">are_contiguous_logical_voice</span><span class="p">():</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;&#39;contents&#39; must be contiguous logical voice&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">contents</span><span class="p">,</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Score</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_contents</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">mutate</span><span class="p">(</span><span class="n">contents</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">contents</span><span class="p">,</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Tuplet</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_contents</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">([</span><span class="n">abjad</span><span class="o">.</span><span class="n">mutate</span><span class="p">(</span><span class="n">contents</span><span class="p">)</span><span class="o">.</span><span class="n">copy</span><span class="p">()])</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_contents</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">mutate</span><span class="p">(</span><span class="n">contents</span><span class="p">)</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+        <span class="n">dummy_container</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">mutate</span><span class="p">(</span><span class="n">contents</span><span class="p">)</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_current_window</span> <span class="o">=</span> <span class="n">dummy_container</span><span class="p">[:]</span>
+        <span class="n">dummy_container</span><span class="p">[:]</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_is_first_window</span> <span class="o">=</span> <span class="kc">True</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">pitches</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">abjad</span><span class="o">.</span><span class="n">PitchSegment</span><span class="p">:</span>
+        <span class="sa">r</span><span class="s1">&#39;Pitches available for the randomiser.&#39;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_pitches</span>
+
+    <span class="nd">@pitches</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">pitches</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+                <span class="n">pitches</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">str</span><span class="p">,</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Pitch</span><span class="p">]],</span>
+                               <span class="nb">tuple</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">str</span><span class="p">,</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Pitch</span><span class="p">]],</span>
+                               <span class="nb">str</span><span class="p">,</span>
+                               <span class="n">abjad</span><span class="o">.</span><span class="n">PitchSegment</span><span class="p">,</span>
+                               <span class="p">],</span>
+                <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">pitches</span><span class="p">,</span> <span class="p">(</span><span class="nb">list</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">,</span> <span class="nb">str</span><span class="p">,</span> <span class="n">abjad</span><span class="o">.</span><span class="n">PitchSegment</span><span class="p">)):</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;&#39;pitches&#39; must be &#39;list&#39;, &#39;tuple&#39;, &#39;str&#39;, or &quot;</span>
+                            <span class="s2">&quot;&#39;abjad.PitchSegment&#39;&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">pitches</span><span class="p">,</span> <span class="p">(</span><span class="nb">list</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">,</span> <span class="nb">str</span><span class="p">)):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_pitches</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">PitchSegment</span><span class="p">(</span><span class="n">pitches</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_pitches</span> <span class="o">=</span> <span class="n">pitches</span>
+        <span class="n">pitch_list</span> <span class="o">=</span> <span class="p">[</span><span class="n">pitch</span> <span class="k">for</span> <span class="n">pitch</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_pitches</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_tenney_selector</span> <span class="o">=</span> <span class="n">TenneySelector</span><span class="p">(</span><span class="n">pitch_list</span><span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_weights</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">pitch_list</span><span class="p">)</span> <span class="o">!=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_weights</span><span class="p">):</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">weights</span> <span class="o">=</span> <span class="kc">None</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">weights</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="nb">int</span><span class="p">]]:</span>
+        <span class="sa">r</span><span class="s1">&#39;The :obj:`list` with weights for each element of :attr:`pitches`&#39;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_weights</span>
+
+    <span class="nd">@weights</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">weights</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+                <span class="n">weights</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="nb">int</span><span class="p">]]],</span>
+                <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">weights</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">weights</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
+                <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;&#39;weights&#39; must be &#39;list&#39;&quot;</span><span class="p">)</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="fm">__len__</span><span class="p">()</span> <span class="o">==</span> <span class="nb">len</span><span class="p">(</span><span class="n">weights</span><span class="p">):</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;&#39;weights&#39; must have the same length as &quot;</span>
+                                 <span class="s2">&quot;&#39;pitches&#39;&quot;</span><span class="p">)</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="nb">all</span><span class="p">(</span><span class="nb">isinstance</span><span class="p">(</span><span class="n">weight</span><span class="p">,</span> <span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="nb">float</span><span class="p">))</span>
+                       <span class="k">for</span> <span class="n">weight</span> <span class="ow">in</span> <span class="n">weights</span><span class="p">):</span>
+                <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;&#39;weights&#39; elements must be &#39;int&#39; or &#39;float&#39;&quot;</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_weights</span> <span class="o">=</span> <span class="n">weights</span><span class="p">[:]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_weights</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_tenney_selector</span><span class="o">.</span><span class="n">weights</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_weights</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">omit_time_signatures</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+        <span class="sa">r</span><span class="s1">&#39;When ``True``, the output will contain no time signatures.&#39;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_omit_time_signatures</span>
+
+    <span class="nd">@omit_time_signatures</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">omit_time_signatures</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+                             <span class="n">omit_time_signatures</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
+                             <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">omit_time_signatures</span><span class="p">,</span> <span class="nb">bool</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;&#39;omit_time_signatures&#39; must be &#39;bool&#39;&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_omit_time_signatures</span> <span class="o">=</span> <span class="n">omit_time_signatures</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">process_on_first_call</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+        <span class="sa">r</span><span class="sd">&quot;&quot;&quot;If ``True`` then :attr:`contents` will be processed in the very</span>
+<span class="sd">        first call.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_process_on_first_call</span>
+
+    <span class="nd">@process_on_first_call</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">process_on_first_call</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+                              <span class="n">process_on_first_call</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
+                              <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">process_on_first_call</span><span class="p">,</span> <span class="nb">bool</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;&#39;process_on_first_call&#39; must be &#39;bool&#39;&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_process_on_first_call</span> <span class="o">=</span> <span class="n">process_on_first_call</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">use_tenney_selector</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+        <span class="sa">r</span><span class="sd">&quot;&quot;&quot;If ``True`` then the pitches will be selected using</span>
+<span class="sd">        :class:`auxjad.TenneySelector`, otherwise they are chosen using a</span>
+<span class="sd">        uniform random distribution.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_use_tenney_selector</span>
+
+    <span class="nd">@use_tenney_selector</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">use_tenney_selector</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+                            <span class="n">use_tenney_selector</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
+                            <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">use_tenney_selector</span><span class="p">,</span> <span class="nb">bool</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;&#39;use_tenney_selector&#39; must be &#39;bool&#39;&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_use_tenney_selector</span> <span class="o">=</span> <span class="n">use_tenney_selector</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">current_window</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Selection</span><span class="p">:</span>
+        <span class="sa">r</span><span class="s1">&#39;Read-only property, returns the result of the last operation.&#39;</span>
+        <span class="n">current_window</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">mutate</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_current_window</span><span class="p">)</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_omit_time_signatures</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_remove_all_time_signatures</span><span class="p">(</span><span class="n">current_window</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">current_window</span></div>
+</pre></div>
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 2020, Gilberto Agostinho
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

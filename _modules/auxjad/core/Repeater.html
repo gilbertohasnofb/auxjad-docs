@@ -1,0 +1,865 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>auxjad.core.Repeater &mdash; auxjad 0.8.24 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+        <script src="../../../_static/jquery.js"></script>
+        <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/doctools.js"></script>
+        <script src="../../../_static/language_data.js"></script>
+        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    <script type="text/javascript" src="../../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../../index.html" class="icon icon-home" alt="Documentation Home"> auxjad
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.8
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../index.html">Welcome to Auxjad’s documentation!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../examples/index.html">Examples of usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../score_gallery/index.html">Score gallery</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../api/index.html">Auxjad API</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">auxjad</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../../index.html">Module code</a> &raquo;</li>
+        
+      <li>auxjad.core.Repeater</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for auxjad.core.Repeater</h1><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">abjad</span>
+
+<span class="kn">from</span> <span class="nn">..utilities.inspect</span> <span class="kn">import</span> <span class="n">inspect</span>
+<span class="kn">from</span> <span class="nn">..utilities.mutate</span> <span class="kn">import</span> <span class="n">mutate</span>
+
+
+<div class="viewcode-block" id="Repeater"><a class="viewcode-back" href="../../../_api_members/auxjad.Repeater.html#auxjad.Repeater">[docs]</a><span class="k">class</span> <span class="nc">Repeater</span><span class="p">():</span>
+    <span class="sa">r</span><span class="sd">&quot;&quot;&quot;This class takes an |abjad.Container| (or child class) as input and</span>
+<span class="sd">    outputs an |abjad.Selection| with ``n`` repetitions of it.</span>
+
+<span class="sd">    Basic usage:</span>
+<span class="sd">        Calling the object will return an |abjad.Selection| generated by the</span>
+<span class="sd">        repeating process. The argument of :meth:`__call__()` defines the</span>
+<span class="sd">        number of repetitions.</span>
+
+<span class="sd">        &gt;&gt;&gt; container = abjad.Container(r&quot;c&#39;4 d&#39;4 e&#39;4 f&#39;4&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; repeater = auxjad.Repeater(container)</span>
+<span class="sd">        &gt;&gt;&gt; notes = repeater(2)</span>
+<span class="sd">        &gt;&gt;&gt; staff = abjad.Staff(notes)</span>
+<span class="sd">        &gt;&gt;&gt; abjad.f(staff)</span>
+<span class="sd">        \new Staff</span>
+<span class="sd">        {</span>
+<span class="sd">            c&#39;4</span>
+<span class="sd">            d&#39;4</span>
+<span class="sd">            e&#39;4</span>
+<span class="sd">            f&#39;4</span>
+<span class="sd">            c&#39;4</span>
+<span class="sd">            d&#39;4</span>
+<span class="sd">            e&#39;4</span>
+<span class="sd">            f&#39;4</span>
+<span class="sd">        }</span>
+
+<span class="sd">        .. figure:: ../_images/Repeater-tigd5dwtszh.png</span>
+
+<span class="sd">        The property :attr:`current_window` can be used to access the last</span>
+<span class="sd">        results.</span>
+
+<span class="sd">        &gt;&gt;&gt; notes = repeater.current_window()</span>
+<span class="sd">        &gt;&gt;&gt; staff = abjad.Staff(notes)</span>
+<span class="sd">        &gt;&gt;&gt; abjad.f(staff)</span>
+<span class="sd">        \new Staff</span>
+<span class="sd">        {</span>
+<span class="sd">            c&#39;4</span>
+<span class="sd">            d&#39;4</span>
+<span class="sd">            e&#39;4</span>
+<span class="sd">            f&#39;4</span>
+<span class="sd">            c&#39;4</span>
+<span class="sd">            d&#39;4</span>
+<span class="sd">            e&#39;4</span>
+<span class="sd">            f&#39;4</span>
+<span class="sd">        }</span>
+
+<span class="sd">        .. figure:: ../_images/Repeater-hg86wd75fvp.png</span>
+
+<span class="sd">    Time signatures:</span>
+<span class="sd">        This class handles different time signatures.</span>
+
+<span class="sd">        &gt;&gt;&gt; container = abjad.Staff(r&quot;\time 3/4 c&#39;2. \time 2/4 r2 g&#39;2&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; repeater = auxjad.Repeater(container)</span>
+<span class="sd">        &gt;&gt;&gt; notes = repeater(3)</span>
+<span class="sd">        &gt;&gt;&gt; staff = abjad.Staff(notes)</span>
+<span class="sd">        &gt;&gt;&gt; abjad.f(staff)</span>
+<span class="sd">        \new Staff</span>
+<span class="sd">        {</span>
+<span class="sd">            \time 3/4</span>
+<span class="sd">            c&#39;2.</span>
+<span class="sd">            \time 2/4</span>
+<span class="sd">            r2</span>
+<span class="sd">            g&#39;2</span>
+<span class="sd">            \time 3/4</span>
+<span class="sd">            c&#39;2.</span>
+<span class="sd">            \time 2/4</span>
+<span class="sd">            r2</span>
+<span class="sd">            g&#39;2</span>
+<span class="sd">            \time 3/4</span>
+<span class="sd">            c&#39;2.</span>
+<span class="sd">            \time 2/4</span>
+<span class="sd">            r2</span>
+<span class="sd">            g&#39;2</span>
+<span class="sd">        }</span>
+
+<span class="sd">        .. figure:: ../_images/Repeater-fqkjxhegzmv.png</span>
+
+<span class="sd">    Underfull containers:</span>
+<span class="sd">        Containers that are not fully filled in are automatically closed by</span>
+<span class="sd">        this class in its output. Containers without a time signature are</span>
+<span class="sd">        assumed to be in ``4/4`` (which is LilyPond&#39;s default).</span>
+
+<span class="sd">        &gt;&gt;&gt; container = abjad.Container(r&quot;c&#39;4 d&#39;4 e&#39;4&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; repeater = auxjad.Repeater(container)</span>
+<span class="sd">        &gt;&gt;&gt; notes = repeater(3)</span>
+<span class="sd">        &gt;&gt;&gt; staff = abjad.Staff(notes)</span>
+<span class="sd">        &gt;&gt;&gt; abjad.f(staff)</span>
+<span class="sd">        \new Staff</span>
+<span class="sd">        {</span>
+<span class="sd">            \time 3/4</span>
+<span class="sd">            c&#39;4</span>
+<span class="sd">            d&#39;4</span>
+<span class="sd">            e&#39;4</span>
+<span class="sd">            c&#39;4</span>
+<span class="sd">            d&#39;4</span>
+<span class="sd">            e&#39;4</span>
+<span class="sd">            c&#39;4</span>
+<span class="sd">            d&#39;4</span>
+<span class="sd">            e&#39;4</span>
+<span class="sd">        }</span>
+
+<span class="sd">        .. figure:: ../_images/Repeater-k4hxxghalwh.png</span>
+
+<span class="sd">        &gt;&gt;&gt; container = abjad.Staff(r&quot;\time 3/4 c&#39;4 d&#39;4 e&#39;4 f&#39;2&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; repeater = auxjad.Repeater(container)</span>
+<span class="sd">        &gt;&gt;&gt; notes = repeater(2)</span>
+<span class="sd">        &gt;&gt;&gt; staff = abjad.Staff(notes)</span>
+<span class="sd">        &gt;&gt;&gt; abjad.f(staff)</span>
+<span class="sd">        \new Staff</span>
+<span class="sd">        {</span>
+<span class="sd">            \time 3/4</span>
+<span class="sd">            c&#39;4</span>
+<span class="sd">            d&#39;4</span>
+<span class="sd">            e&#39;4</span>
+<span class="sd">            \time 2/4</span>
+<span class="sd">            f&#39;2</span>
+<span class="sd">            \time 3/4</span>
+<span class="sd">            c&#39;4</span>
+<span class="sd">            d&#39;4</span>
+<span class="sd">            e&#39;4</span>
+<span class="sd">            \time 2/4</span>
+<span class="sd">            f&#39;2</span>
+<span class="sd">        }</span>
+
+<span class="sd">        .. figure:: ../_images/Repeater-fee3qe1vdjl.png</span>
+
+<span class="sd">    Using as iterator:</span>
+<span class="sd">        The instances of this class can also be used as an iterator, which can</span>
+<span class="sd">        then be used in a for loop. Note that unlike the methods</span>
+<span class="sd">        :meth:`__call__()` and :meth:`output_n`, time signatures are added to</span>
+<span class="sd">        each window returned by the shuffler. Use the function</span>
+<span class="sd">        |auxjad.mutate().remove_repeated_time_signatures()| to clean the output</span>
+<span class="sd">        when using this class in this way. It is also important to note that a</span>
+<span class="sd">        ``break`` statement is needed when using this class as an iterator. The</span>
+<span class="sd">        reason is that repeating is a process that can happen indefinitely</span>
+<span class="sd">        (unlike some of the other classes in this library).</span>
+
+<span class="sd">        &gt;&gt;&gt; container = abjad.Container(r&quot;\time 3/4 c&#39;4 d&#39;4 e&#39;4&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; repeater = auxjad.Repeater(container)</span>
+<span class="sd">        &gt;&gt;&gt; staff = abjad.Staff()</span>
+<span class="sd">        &gt;&gt;&gt; for window in repeater:</span>
+<span class="sd">        ...     staff.append(window)</span>
+<span class="sd">        ...     if abjad.inspect(staff).duration() == abjad.Duration((9, 4)):</span>
+<span class="sd">        ...         break</span>
+<span class="sd">        &gt;&gt;&gt; auxjad.mutate(staff[:]).remove_repeated_time_signatures()</span>
+<span class="sd">        &gt;&gt;&gt; abjad.f(staff)</span>
+<span class="sd">        \new Staff</span>
+<span class="sd">        {</span>
+<span class="sd">            \time 3/4</span>
+<span class="sd">            c&#39;4</span>
+<span class="sd">            d&#39;4</span>
+<span class="sd">            e&#39;4</span>
+<span class="sd">            c&#39;4</span>
+<span class="sd">            d&#39;4</span>
+<span class="sd">            e&#39;4</span>
+<span class="sd">            c&#39;4</span>
+<span class="sd">            d&#39;4</span>
+<span class="sd">            e&#39;4</span>
+<span class="sd">        }</span>
+
+<span class="sd">        .. figure:: ../_images/Repeater-8oouugbk5zc.png</span>
+
+<span class="sd">    Arguments and properties:</span>
+<span class="sd">        This class can take many optional keyword arguments during its</span>
+<span class="sd">        creation. attr:`omit_time_signatures` will remove all time signatures</span>
+<span class="sd">        from the output while :attr:`force_identical_time_signatures` will</span>
+<span class="sd">        force all time signatures (including repeated ones) to be added to the</span>
+<span class="sd">        output (both are ``False`` by default). When set to ``True``, the</span>
+<span class="sd">        properties  :attr:`reposition_clefs`, :attr:`reposition_dynamics`, and</span>
+<span class="sd">        :attr:`reposition_slurs` will invoke the mutations</span>
+<span class="sd">        |auxjad.mutate().reposition_clefs()|,</span>
+<span class="sd">        |auxjad.mutate().reposition_dynamics()|, and</span>
+<span class="sd">        |auxjad.mutate().reposition_slurs()| (default values are ``True``).</span>
+<span class="sd">        Check their documentation for more information on how they operate.</span>
+
+<span class="sd">        &gt;&gt;&gt; container = abjad.Container(r&quot;\time 3/4 c&#39;4 d&#39;4 e&#39;4&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; repeater = auxjad.Repeater(container,</span>
+<span class="sd">        ...                            omit_time_signatures=False,</span>
+<span class="sd">        ...                            force_identical_time_signatures=False,</span>
+<span class="sd">        ...                            reposition_clefs=True,</span>
+<span class="sd">        ...                            reposition_dynamics=True,</span>
+<span class="sd">        ...                            reposition_slurs=True,</span>
+<span class="sd">        ...                            )</span>
+<span class="sd">        &gt;&gt;&gt; repeater.omit_time_signatures</span>
+<span class="sd">        False</span>
+<span class="sd">        &gt;&gt;&gt; repeater.force_identical_time_signatures</span>
+<span class="sd">        False</span>
+<span class="sd">        &gt;&gt;&gt; repeater.reposition_clefs</span>
+<span class="sd">        True</span>
+<span class="sd">        &gt;&gt;&gt; repeater.reposition_dynamics</span>
+<span class="sd">        True</span>
+<span class="sd">        &gt;&gt;&gt; repeater.reposition_slurs</span>
+<span class="sd">        True</span>
+
+<span class="sd">        Use the properties below to change these values after initialisation.</span>
+
+<span class="sd">        &gt;&gt;&gt; repeater.omit_time_signatures = True</span>
+<span class="sd">        &gt;&gt;&gt; repeater.force_identical_time_signatures = True</span>
+<span class="sd">        &gt;&gt;&gt; repeater.reposition_clefs = False</span>
+<span class="sd">        &gt;&gt;&gt; repeater.reposition_dynamics = False</span>
+<span class="sd">        &gt;&gt;&gt; repeater.reposition_slurs = False</span>
+<span class="sd">        &gt;&gt;&gt; repeater.omit_time_signatures</span>
+<span class="sd">        True</span>
+<span class="sd">        &gt;&gt;&gt; repeater.force_identical_time_signatures</span>
+<span class="sd">        True</span>
+<span class="sd">        &gt;&gt;&gt; repeater.reposition_clefs</span>
+<span class="sd">        False</span>
+<span class="sd">        &gt;&gt;&gt; repeater.reposition_dynamics</span>
+<span class="sd">        False</span>
+<span class="sd">        &gt;&gt;&gt; repeater.reposition_slurs</span>
+<span class="sd">        False</span>
+
+<span class="sd">    :attr:`contents`:</span>
+<span class="sd">        Use the :attr:`contents` property to read as well as overwrite the</span>
+<span class="sd">        contents of the repeater.</span>
+
+<span class="sd">        &gt;&gt;&gt; container = abjad.Container(r&quot;c&#39;4 d&#39;4 e&#39;4 f&#39;4&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; repeater = auxjad.Repeater(container)</span>
+<span class="sd">        &gt;&gt;&gt; notes = repeater(2)</span>
+<span class="sd">        &gt;&gt;&gt; staff = abjad.Staff(notes)</span>
+<span class="sd">        &gt;&gt;&gt; abjad.f(staff)</span>
+<span class="sd">        \new Staff</span>
+<span class="sd">        {</span>
+<span class="sd">            c&#39;4</span>
+<span class="sd">            d&#39;4</span>
+<span class="sd">            e&#39;4</span>
+<span class="sd">            f&#39;4</span>
+<span class="sd">            c&#39;4</span>
+<span class="sd">            d&#39;4</span>
+<span class="sd">            e&#39;4</span>
+<span class="sd">            f&#39;4</span>
+<span class="sd">        }</span>
+
+<span class="sd">        .. figure:: ../_images/Repeater-f1kqq128afw.png</span>
+
+<span class="sd">        &gt;&gt;&gt; repeater.contents = abjad.Container(r&quot;c&#39;16 d&#39;16 e&#39;16 f&#39;16 g&#39;2.&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; notes = repeater(2)</span>
+<span class="sd">        &gt;&gt;&gt; staff = abjad.Staff(notes)</span>
+<span class="sd">        &gt;&gt;&gt; abjad.f(staff)</span>
+<span class="sd">        \new Staff</span>
+<span class="sd">        {</span>
+<span class="sd">            c&#39;16</span>
+<span class="sd">            d&#39;16</span>
+<span class="sd">            e&#39;16</span>
+<span class="sd">            f&#39;16</span>
+<span class="sd">            g&#39;2.</span>
+<span class="sd">            c&#39;16</span>
+<span class="sd">            d&#39;16</span>
+<span class="sd">            e&#39;16</span>
+<span class="sd">            f&#39;16</span>
+<span class="sd">            g&#39;2.</span>
+<span class="sd">        }</span>
+
+<span class="sd">        .. figure:: ../_images/Repeater-jblq28xlso.png</span>
+
+<span class="sd">    :meth:`output_n`:</span>
+<span class="sd">        This is an alias of :meth:`__call__()`. Takes an argument ``n`` for the</span>
+<span class="sd">        number of repetitions.</span>
+
+<span class="sd">        &gt;&gt;&gt; container = abjad.Container(r&quot;c&#39;4 d&#39;4 e&#39;4 f&#39;4&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; repeater = auxjad.Repeater(container)</span>
+<span class="sd">        &gt;&gt;&gt; notes = repeater.output_n(2)</span>
+<span class="sd">        &gt;&gt;&gt; staff = abjad.Staff(notes)</span>
+<span class="sd">        &gt;&gt;&gt; abjad.f(staff)</span>
+<span class="sd">        \new Staff</span>
+<span class="sd">        {</span>
+<span class="sd">            c&#39;4</span>
+<span class="sd">            d&#39;4</span>
+<span class="sd">            e&#39;4</span>
+<span class="sd">            f&#39;4</span>
+<span class="sd">            c&#39;4</span>
+<span class="sd">            d&#39;4</span>
+<span class="sd">            e&#39;4</span>
+<span class="sd">            f&#39;4</span>
+<span class="sd">        }</span>
+
+<span class="sd">        .. figure:: ../_images/Repeater-w0hd2fp2w9e.png</span>
+
+<span class="sd">    :attr:`omit_time_signatures`:</span>
+<span class="sd">        To disable time signatures altogether, initialise this class with the</span>
+<span class="sd">        keyword argument :attr:`omit_time_signatures` set to ``True`` (default</span>
+<span class="sd">        is ``False``), or use the :attr:`omit_time_signatures` property after</span>
+<span class="sd">        initialisation.</span>
+
+<span class="sd">        &gt;&gt;&gt; container = abjad.Staff(r&quot;c&#39;4 d&#39;4 e&#39;4&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; repeater = auxjad.Repeater(container,</span>
+<span class="sd">        ...                            omit_time_signatures=True,</span>
+<span class="sd">        ...                            )</span>
+<span class="sd">        &gt;&gt;&gt; notes = repeater(3)</span>
+<span class="sd">        &gt;&gt;&gt; staff = abjad.Staff(notes)</span>
+<span class="sd">        &gt;&gt;&gt; abjad.f(staff)</span>
+<span class="sd">        \new Staff</span>
+<span class="sd">        {</span>
+<span class="sd">            c&#39;4</span>
+<span class="sd">            d&#39;4</span>
+<span class="sd">            e&#39;4</span>
+<span class="sd">            c&#39;4</span>
+<span class="sd">            d&#39;4</span>
+<span class="sd">            e&#39;4</span>
+<span class="sd">            c&#39;4</span>
+<span class="sd">            d&#39;4</span>
+<span class="sd">            e&#39;4</span>
+<span class="sd">        }</span>
+
+<span class="sd">        .. figure:: ../_images/Repeater-vr4af47iwjg.png</span>
+
+<span class="sd">    :attr:`force_identical_time_signatures`:</span>
+<span class="sd">        To force time signatures in all iterations of the output, initialise</span>
+<span class="sd">        this class with the keyword argument</span>
+<span class="sd">        :attr:`force_identical_time_signatures` set to ``True`` (default is</span>
+<span class="sd">        ``False``), or use the :attr:`force_identical_time_signatures` property</span>
+<span class="sd">        after initialisation.</span>
+
+<span class="sd">        &gt;&gt;&gt; container = abjad.Staff(r&quot;\time 5/4 c&#39;2. d&#39;4 e&#39;4&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; repeater = auxjad.Repeater(container,</span>
+<span class="sd">        ...                            force_identical_time_signatures=True,</span>
+<span class="sd">        ...                            )</span>
+<span class="sd">        &gt;&gt;&gt; notes = repeater(3)</span>
+<span class="sd">        &gt;&gt;&gt; staff = abjad.Staff(notes)</span>
+<span class="sd">        &gt;&gt;&gt; abjad.f(staff)</span>
+<span class="sd">        \new Staff</span>
+<span class="sd">        {</span>
+<span class="sd">            \time 5/4</span>
+<span class="sd">            c&#39;2.</span>
+<span class="sd">            d&#39;4</span>
+<span class="sd">            e&#39;4</span>
+<span class="sd">            \time 5/4</span>
+<span class="sd">            c&#39;2.</span>
+<span class="sd">            d&#39;4</span>
+<span class="sd">            e&#39;4</span>
+<span class="sd">            \time 5/4</span>
+<span class="sd">            c&#39;2.</span>
+<span class="sd">            d&#39;4</span>
+<span class="sd">            e&#39;4</span>
+<span class="sd">        }</span>
+
+<span class="sd">        .. figure:: ../_images/Repeater-xgpndbdb0j.png</span>
+
+<span class="sd">    Dynamics, slurs, and clefs:</span>
+<span class="sd">        By default, this class automatically handles dynamics, slurs, and</span>
+<span class="sd">        clefs, optimising their position and omitting repetitions.</span>
+
+<span class="sd">        &gt;&gt;&gt; container = abjad.Staff(r&quot;\clef bass f4\pp( e4) d4(&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; abjad.f(staff)</span>
+<span class="sd">        \new Staff</span>
+<span class="sd">        {</span>
+<span class="sd">            \time 3/4</span>
+<span class="sd">            \clef &quot;bass&quot;</span>
+<span class="sd">            f4</span>
+<span class="sd">            \pp</span>
+<span class="sd">            (</span>
+<span class="sd">            e4</span>
+<span class="sd">            )</span>
+<span class="sd">            d4</span>
+<span class="sd">            (</span>
+<span class="sd">        }</span>
+
+<span class="sd">        .. figure:: ../_images/Repeater-m1ibei9s3am.png</span>
+
+<span class="sd">        This is done by invoking |auxjad.mutate().reposition_clefs()|,</span>
+<span class="sd">        |auxjad.mutate().reposition_dynamics()|, and</span>
+<span class="sd">        |auxjad.mutate().reposition_slurs()|. Check their documentation for</span>
+<span class="sd">        more information on how they operate.</span>
+
+<span class="sd">        &gt;&gt;&gt; repeater = auxjad.Repeater(container)</span>
+<span class="sd">        &gt;&gt;&gt; notes = repeater(3)</span>
+<span class="sd">        &gt;&gt;&gt; staff = abjad.Staff(notes)</span>
+<span class="sd">        &gt;&gt;&gt; abjad.f(staff)</span>
+<span class="sd">        \new Staff</span>
+<span class="sd">        {</span>
+<span class="sd">            \time 3/4</span>
+<span class="sd">            \clef &quot;bass&quot;</span>
+<span class="sd">            f4</span>
+<span class="sd">            \pp</span>
+<span class="sd">            (</span>
+<span class="sd">            e4</span>
+<span class="sd">            )</span>
+<span class="sd">            d4</span>
+<span class="sd">            (</span>
+<span class="sd">            f4</span>
+<span class="sd">            e4</span>
+<span class="sd">            )</span>
+<span class="sd">            d4</span>
+<span class="sd">            (</span>
+<span class="sd">            f4</span>
+<span class="sd">            e4</span>
+<span class="sd">            )</span>
+<span class="sd">            d4</span>
+<span class="sd">        }</span>
+
+<span class="sd">        .. figure:: ../_images/Repeater-scjj2uwz2p.png</span>
+
+<span class="sd">        Set theproperties  :attr:`reposition_clefs`,</span>
+<span class="sd">        :attr:`reposition_dynamics`, and :attr:`reposition_slurs` to ``False``</span>
+<span class="sd">        to not invoke these mutations.</span>
+
+<span class="sd">        &gt;&gt;&gt; repeater = auxjad.Repeater(container,</span>
+<span class="sd">        ...                            reposition_clefs=False,</span>
+<span class="sd">        ...                            reposition_dynamics=False,</span>
+<span class="sd">        ...                            reposition_slurs=False,</span>
+<span class="sd">        ...                            )</span>
+<span class="sd">        &gt;&gt;&gt; notes = repeater(3)</span>
+<span class="sd">        &gt;&gt;&gt; staff = abjad.Staff(notes)</span>
+<span class="sd">        &gt;&gt;&gt; abjad.f(staff)</span>
+<span class="sd">        \new Staff</span>
+<span class="sd">        {</span>
+<span class="sd">            \time 3/4</span>
+<span class="sd">            \clef &quot;bass&quot;</span>
+<span class="sd">            f4</span>
+<span class="sd">            \pp</span>
+<span class="sd">            (</span>
+<span class="sd">            e4</span>
+<span class="sd">            )</span>
+<span class="sd">            d4</span>
+<span class="sd">            (</span>
+<span class="sd">            \clef &quot;bass&quot;</span>
+<span class="sd">            f4</span>
+<span class="sd">            \pp</span>
+<span class="sd">            (</span>
+<span class="sd">            e4</span>
+<span class="sd">            )</span>
+<span class="sd">            d4</span>
+<span class="sd">            (</span>
+<span class="sd">            \clef &quot;bass&quot;</span>
+<span class="sd">            f4</span>
+<span class="sd">            \pp</span>
+<span class="sd">            (</span>
+<span class="sd">            e4</span>
+<span class="sd">            )</span>
+<span class="sd">            d4</span>
+<span class="sd">            (</span>
+<span class="sd">        }</span>
+
+<span class="sd">        .. figure:: ../_images/Repeater-cc39a0h84dc.png</span>
+
+<span class="sd">    .. error::</span>
+
+<span class="sd">        If a container is malformed, i.e. it has an underfilled measure before</span>
+<span class="sd">        a time signature change, this class will raise a :exc:`ValueError`</span>
+<span class="sd">        exception.</span>
+
+<span class="sd">        &gt;&gt;&gt; container = abjad.Container(r&quot;\time 5/4 g&#39;&#39;1 \time 4/4 f&#39;1&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; repeater = auxjad.Repeater(container)</span>
+<span class="sd">        ValueError: &#39;contents&#39; is malformed, with an underfull measure</span>
+<span class="sd">        preceding a time signature change</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="c1">### CLASS VARIABLES ###</span>
+
+    <span class="vm">__slots__</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;_contents&#39;</span><span class="p">,</span>
+                 <span class="s1">&#39;_current_window&#39;</span><span class="p">,</span>
+                 <span class="s1">&#39;_omit_time_signatures&#39;</span><span class="p">,</span>
+                 <span class="s1">&#39;_force_identical_time_signatures&#39;</span><span class="p">,</span>
+                 <span class="s1">&#39;_reposition_clefs&#39;</span><span class="p">,</span>
+                 <span class="s1">&#39;_reposition_dynamics&#39;</span><span class="p">,</span>
+                 <span class="s1">&#39;_reposition_slurs&#39;</span><span class="p">,</span>
+                 <span class="p">)</span>
+
+    <span class="c1">### INITIALISER ###</span>
+
+<div class="viewcode-block" id="Repeater.__init__"><a class="viewcode-back" href="../../../_api_members/auxjad.Repeater.html#auxjad.Repeater.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+                 <span class="n">contents</span><span class="p">:</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">,</span>
+                 <span class="o">*</span><span class="p">,</span>
+                 <span class="n">omit_time_signatures</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+                 <span class="n">force_identical_time_signatures</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+                 <span class="n">reposition_clefs</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+                 <span class="n">reposition_dynamics</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+                 <span class="n">reposition_slurs</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+                 <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sa">r</span><span class="s1">&#39;Initialises self.&#39;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">contents</span> <span class="o">=</span> <span class="n">contents</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">omit_time_signatures</span> <span class="o">=</span> <span class="n">omit_time_signatures</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">force_identical_time_signatures</span> <span class="o">=</span> <span class="n">force_identical_time_signatures</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">reposition_clefs</span> <span class="o">=</span> <span class="n">reposition_clefs</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">reposition_dynamics</span> <span class="o">=</span> <span class="n">reposition_dynamics</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">reposition_slurs</span> <span class="o">=</span> <span class="n">reposition_slurs</span></div>
+
+    <span class="c1">### SPECIAL METHODS ###</span>
+
+<div class="viewcode-block" id="Repeater.__repr__"><a class="viewcode-back" href="../../../_api_members/auxjad.Repeater.html#auxjad.Repeater.__repr__">[docs]</a>    <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="sa">r</span><span class="s1">&#39;Returns interpreter representation of  :attr:`contents`.&#39;</span>
+        <span class="k">return</span> <span class="nb">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_contents</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="Repeater.__call__"><a class="viewcode-back" href="../../../_api_members/auxjad.Repeater.html#auxjad.Repeater.__call__">[docs]</a>    <span class="k">def</span> <span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+                 <span class="n">n</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span>
+                 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Selection</span><span class="p">:</span>
+        <span class="sa">r</span><span class="sd">&quot;&quot;&quot;Calls the repeater process for ``n`` iterations, returning an</span>
+<span class="sd">        |abjad.Selection|. Default ``n`` is ``1``.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="nb">int</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;first positional argument must be &#39;int&#39;&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">n</span> <span class="o">&lt;</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;first positional argument must be a positive &quot;</span>
+                             <span class="s2">&quot;&#39;int&#39;&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_repeating_process</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">current_window</span></div>
+
+<div class="viewcode-block" id="Repeater.__next__"><a class="viewcode-back" href="../../../_api_members/auxjad.Repeater.html#auxjad.Repeater.__next__">[docs]</a>    <span class="k">def</span> <span class="fm">__next__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Selection</span><span class="p">:</span>
+        <span class="sa">r</span><span class="sd">&quot;&quot;&quot;Calls the shuffling process for one iteration, returning an</span>
+<span class="sd">        |abjad.Selection|.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="fm">__call__</span><span class="p">()</span></div>
+
+<div class="viewcode-block" id="Repeater.__iter__"><a class="viewcode-back" href="../../../_api_members/auxjad.Repeater.html#auxjad.Repeater.__iter__">[docs]</a>    <span class="k">def</span> <span class="fm">__iter__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sa">r</span><span class="s1">&#39;Returns an iterator, allowing instances to be used as iterators.&#39;</span>
+        <span class="k">return</span> <span class="bp">self</span></div>
+
+    <span class="c1">### PUBLIC METHODS ###</span>
+
+<div class="viewcode-block" id="Repeater.output_n"><a class="viewcode-back" href="../../../_api_members/auxjad.Repeater.html#auxjad.Repeater.output_n">[docs]</a>    <span class="k">def</span> <span class="nf">output_n</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+                 <span class="n">n</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span>
+                 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Selection</span><span class="p">:</span>
+        <span class="sa">r</span><span class="sd">&quot;&quot;&quot;Calls the repeater process for ``n`` iterations, returning an</span>
+<span class="sd">        |abjad.Selection|. Default ``n`` is ``1``.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="fm">__call__</span><span class="p">(</span><span class="n">n</span><span class="p">)</span></div>
+
+    <span class="c1">### PRIVATE METHODS ###</span>
+
+    <span class="k">def</span> <span class="nf">_repeating_process</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+                           <span class="n">n</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+                           <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sa">r</span><span class="s1">&#39;Repeats a container ``n`` times.&#39;</span>
+        <span class="n">dummy_container</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">mutate</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_contents</span><span class="p">)</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">):</span>
+            <span class="n">dummy_container</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">abjad</span><span class="o">.</span><span class="n">mutate</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_contents</span><span class="p">)</span><span class="o">.</span><span class="n">copy</span><span class="p">())</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_force_identical_time_signatures</span><span class="p">:</span>
+            <span class="n">mutate</span><span class="p">(</span><span class="n">dummy_container</span><span class="p">[:])</span><span class="o">.</span><span class="n">remove_repeated_time_signatures</span><span class="p">()</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_reposition_clefs</span><span class="p">:</span>
+            <span class="n">mutate</span><span class="p">(</span><span class="n">dummy_container</span><span class="p">[:])</span><span class="o">.</span><span class="n">reposition_clefs</span><span class="p">()</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_reposition_clefs</span><span class="p">:</span>
+            <span class="n">mutate</span><span class="p">(</span><span class="n">dummy_container</span><span class="p">[:])</span><span class="o">.</span><span class="n">reposition_dynamics</span><span class="p">()</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_reposition_clefs</span><span class="p">:</span>
+            <span class="n">mutate</span><span class="p">(</span><span class="n">dummy_container</span><span class="p">[:])</span><span class="o">.</span><span class="n">reposition_slurs</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_current_window</span> <span class="o">=</span> <span class="n">dummy_container</span><span class="p">[:]</span>
+        <span class="n">dummy_container</span><span class="p">[:]</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">_remove_all_time_signatures</span><span class="p">(</span><span class="n">container</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sa">r</span><span class="s1">&#39;Removes all time signatures of an |abjad.Container|.&#39;</span>
+        <span class="k">for</span> <span class="n">leaf</span> <span class="ow">in</span> <span class="n">abjad</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="n">container</span><span class="p">)</span><span class="o">.</span><span class="n">leaves</span><span class="p">():</span>
+            <span class="k">if</span> <span class="n">abjad</span><span class="o">.</span><span class="n">inspect</span><span class="p">(</span><span class="n">leaf</span><span class="p">)</span><span class="o">.</span><span class="n">effective</span><span class="p">(</span><span class="n">abjad</span><span class="o">.</span><span class="n">TimeSignature</span><span class="p">):</span>
+                <span class="n">abjad</span><span class="o">.</span><span class="n">detach</span><span class="p">(</span><span class="n">abjad</span><span class="o">.</span><span class="n">TimeSignature</span><span class="p">,</span> <span class="n">leaf</span><span class="p">)</span>
+
+    <span class="c1">### PUBLIC PROPERTIES ###</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">contents</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">:</span>
+        <span class="sa">r</span><span class="s1">&#39;The |abjad.Container| to be shuffled.&#39;</span>
+        <span class="k">return</span> <span class="n">abjad</span><span class="o">.</span><span class="n">mutate</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_contents</span><span class="p">)</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+
+    <span class="nd">@contents</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">contents</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+                 <span class="n">contents</span><span class="p">:</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">,</span>
+                 <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">contents</span><span class="p">,</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;&#39;contents&#39; must be &#39;abjad.Container&#39; or child &quot;</span>
+                            <span class="s2">&quot;class&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">abjad</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="n">contents</span><span class="p">)</span><span class="o">.</span><span class="n">leaves</span><span class="p">()</span><span class="o">.</span><span class="n">are_contiguous_logical_voice</span><span class="p">():</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;&#39;contents&#39; must be contiguous logical voice&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">contents</span><span class="p">,</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Score</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_contents</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">mutate</span><span class="p">(</span><span class="n">contents</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">contents</span><span class="p">,</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Tuplet</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_contents</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">([</span><span class="n">abjad</span><span class="o">.</span><span class="n">mutate</span><span class="p">(</span><span class="n">contents</span><span class="p">)</span><span class="o">.</span><span class="n">copy</span><span class="p">()])</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_contents</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">mutate</span><span class="p">(</span><span class="n">contents</span><span class="p">)</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+        <span class="n">dummy_container</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">mutate</span><span class="p">(</span><span class="n">contents</span><span class="p">)</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">inspect</span><span class="p">(</span><span class="n">dummy_container</span><span class="p">[:])</span><span class="o">.</span><span class="n">selection_is_full</span><span class="p">():</span>
+                <span class="n">mutate</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_contents</span><span class="p">)</span><span class="o">.</span><span class="n">close_container</span><span class="p">()</span>
+                <span class="n">mutate</span><span class="p">(</span><span class="n">dummy_container</span><span class="p">)</span><span class="o">.</span><span class="n">close_container</span><span class="p">()</span>
+        <span class="k">except</span> <span class="ne">ValueError</span> <span class="k">as</span> <span class="n">err</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;&#39;contents&#39; is malformed, with an underfull &quot;</span>
+                             <span class="s2">&quot;measure preceding a time signature change&quot;</span>
+                             <span class="p">)</span> <span class="kn">from</span> <span class="nn">err</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_current_window</span> <span class="o">=</span> <span class="n">dummy_container</span><span class="p">[:]</span>
+        <span class="n">dummy_container</span><span class="p">[:]</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">current_window</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Selection</span><span class="p">:</span>
+        <span class="sa">r</span><span class="s1">&#39;Read-only property, returns the previously output selection.&#39;</span>
+        <span class="n">current_window</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">mutate</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_current_window</span><span class="p">)</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_omit_time_signatures</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_remove_all_time_signatures</span><span class="p">(</span><span class="n">current_window</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">current_window</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">omit_time_signatures</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+        <span class="sa">r</span><span class="s1">&#39;When ``True``, all time signatures will be omitted from the output.&#39;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_omit_time_signatures</span>
+
+    <span class="nd">@omit_time_signatures</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">omit_time_signatures</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+                             <span class="n">omit_time_signatures</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
+                             <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">omit_time_signatures</span><span class="p">,</span> <span class="nb">bool</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;&#39;omit_time_signatures&#39; must be &#39;bool&#39;&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_omit_time_signatures</span> <span class="o">=</span> <span class="n">omit_time_signatures</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">force_identical_time_signatures</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+        <span class="sa">r</span><span class="sd">&quot;&quot;&quot;When ``True``, all time signatures will be printed in the output,</span>
+<span class="sd">        including repeated ones .</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_force_identical_time_signatures</span>
+
+    <span class="nd">@force_identical_time_signatures</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">force_identical_time_signatures</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">force_identical_time_signatures</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">force_identical_time_signatures</span><span class="p">,</span> <span class="nb">bool</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;&#39;force_identical_time_signatures&#39; must be &#39;bool&#39;&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_force_identical_time_signatures</span> <span class="o">=</span> <span class="n">force_identical_time_signatures</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">reposition_clefs</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+        <span class="sa">r</span><span class="s1">&#39;When ``True``, |auxjad.mutate().reposition_clefs()| is invoked.&#39;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_reposition_clefs</span>
+
+    <span class="nd">@reposition_clefs</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">reposition_clefs</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+                         <span class="n">reposition_clefs</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
+                         <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">reposition_clefs</span><span class="p">,</span> <span class="nb">bool</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;&#39;reposition_clefs&#39; must be &#39;bool&#39;&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_reposition_clefs</span> <span class="o">=</span> <span class="n">reposition_clefs</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">reposition_dynamics</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+        <span class="sa">r</span><span class="s1">&#39;When ``True``, |auxjad.mutate().reposition_dynamics()| is invoked.&#39;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_reposition_dynamics</span>
+
+    <span class="nd">@reposition_dynamics</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">reposition_dynamics</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+                            <span class="n">reposition_dynamics</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
+                            <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">reposition_dynamics</span><span class="p">,</span> <span class="nb">bool</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;&#39;reposition_dynamics&#39; must be &#39;bool&#39;&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_reposition_dynamics</span> <span class="o">=</span> <span class="n">reposition_dynamics</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">reposition_slurs</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+        <span class="sa">r</span><span class="s1">&#39;When ``True``, |auxjad.mutate().reposition_slurs()| is invoked.&#39;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_reposition_slurs</span>
+
+    <span class="nd">@reposition_slurs</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">reposition_slurs</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+                         <span class="n">reposition_slurs</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
+                         <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">reposition_slurs</span><span class="p">,</span> <span class="nb">bool</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;&#39;reposition_slurs&#39; must be &#39;bool&#39;&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_reposition_slurs</span> <span class="o">=</span> <span class="n">reposition_slurs</span></div>
+</pre></div>
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 2020, Gilberto Agostinho
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

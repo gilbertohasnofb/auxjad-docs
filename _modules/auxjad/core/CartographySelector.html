@@ -1,0 +1,729 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>auxjad.core.CartographySelector &mdash; auxjad 0.8.24 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+        <script src="../../../_static/jquery.js"></script>
+        <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/doctools.js"></script>
+        <script src="../../../_static/language_data.js"></script>
+        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    <script type="text/javascript" src="../../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../../index.html" class="icon icon-home" alt="Documentation Home"> auxjad
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.8
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../index.html">Welcome to Auxjad’s documentation!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../examples/index.html">Examples of usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../score_gallery/index.html">Score gallery</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../api/index.html">Auxjad API</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">auxjad</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../../index.html">Module code</a> &raquo;</li>
+        
+      <li>auxjad.core.CartographySelector</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for auxjad.core.CartographySelector</h1><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">random</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Union</span>
+
+
+<div class="viewcode-block" id="CartographySelector"><a class="viewcode-back" href="../../../_api_members/auxjad.CartographySelector.html#auxjad.CartographySelector">[docs]</a><span class="k">class</span> <span class="nc">CartographySelector</span><span class="p">():</span>
+    <span class="sa">r</span><span class="sd">&quot;&quot;&quot;A selector used to store, manipulate, and select objects using a</span>
+<span class="sd">    weighted function constructed with a fixed decay rate. The decay rate</span>
+<span class="sd">    represents the ratio of probabilities of any index given the probability of</span>
+<span class="sd">    the preceding one. For instance, if the decay rate is set to ``0.75``</span>
+<span class="sd">    (which is its default value), the probability of the element in index ``1``</span>
+<span class="sd">    of the input :obj:`list` being selected is :math:`75\%`` the probability of</span>
+<span class="sd">    the element in index ``0``, and the probability of the element in index</span>
+<span class="sd">    ``2`` is :math:`56.25\%`` (i.e. :math:`0.75^2`) the probability of the</span>
+<span class="sd">    element in index ``0``. The probability :math:`P(n)`` of the :math:`n`-th</span>
+<span class="sd">    element can thus be expressed as a relation to the probability of another</span>
+<span class="sd">    element :math:`k` indexes apart using:</span>
+
+<span class="sd">    .. math::</span>
+
+<span class="sd">        P(n) = (3/4)^k \times P(n-k)</span>
+
+<span class="sd">    This is the selector used in my *Cartography* series of compositions.</span>
+
+<span class="sd">    Basic usage:</span>
+<span class="sd">        The selector should be initialised with a :obj:`list` of objects. The</span>
+<span class="sd">        elements of this :obj:`list` can be of any type.</span>
+
+<span class="sd">        &gt;&gt;&gt; selector = auxjad.CartographySelector([0, 1, 2, 3, 4])</span>
+<span class="sd">        &gt;&gt;&gt; selector.contents</span>
+<span class="sd">        [0, 1, 2, 3, 4]</span>
+
+<span class="sd">        Calling the selector will output one of its elements, selected</span>
+<span class="sd">        according to its weight function.</span>
+
+<span class="sd">        &gt;&gt;&gt; selector()</span>
+<span class="sd">        2</span>
+
+<span class="sd">        The default decay rate is ``0.75``; that is, the weight of any given</span>
+<span class="sd">        elements is the weight of the previous one multiplied by ``0.75``. The</span>
+<span class="sd">        :attr:`weights` are associated with the index position, not the</span>
+<span class="sd">        elements themselves.</span>
+
+<span class="sd">        &gt;&gt;&gt; selector.weights</span>
+<span class="sd">        [1.0, 0.75, 0.5625, 0.421875, 0.31640625]</span>
+
+<span class="sd">        By default, only the weight function (defined by the decay rate) is</span>
+<span class="sd">        taken into consideration when selecting an element. This means that</span>
+<span class="sd">        repeated elements can appear, as shown below.</span>
+
+<span class="sd">        &gt;&gt;&gt; result = &#39;&#39;</span>
+<span class="sd">        &gt;&gt;&gt; for _ in range(30):</span>
+<span class="sd">        ...     result += str(selector())</span>
+<span class="sd">        &gt;&gt;&gt; result</span>
+<span class="sd">        203001402200011111101400310140</span>
+
+<span class="sd">    :func:`len()` function:</span>
+<span class="sd">        Applying the :func:`len()` function to the selector will return the</span>
+<span class="sd">        length of the input :obj:`list`.</span>
+
+<span class="sd">        &gt;&gt;&gt; selector = auxjad.CartographySelector([0, 1, 2, 3, 4])</span>
+<span class="sd">        &gt;&gt;&gt; len(selector)</span>
+<span class="sd">        5</span>
+
+<span class="sd">    :func:`next()` function:</span>
+<span class="sd">        Alternatively, use the :func:`next()` function or :meth:`__next__()`</span>
+<span class="sd">        method to get the next result.</span>
+
+<span class="sd">        &gt;&gt;&gt; selector = auxjad.CartographySelector([0, 1, 2, 3, 4])</span>
+<span class="sd">        &gt;&gt;&gt; selector.__next__()</span>
+<span class="sd">        1</span>
+<span class="sd">        &gt;&gt;&gt; next(selector)</span>
+<span class="sd">        0</span>
+
+<span class="sd">    :meth:`__call__` and argument ``no_repeat``:</span>
+<span class="sd">        Calling the selector with the optional keyword argument ``no_repeat``</span>
+<span class="sd">        set to ``True`` will forbid immediate repetitions among consecutive</span>
+<span class="sd">        calls.</span>
+
+<span class="sd">        &gt;&gt;&gt; selector = auxjad.CartographySelector([0, 1, 2, 3, 4])</span>
+<span class="sd">        &gt;&gt;&gt; result = &#39;&#39;</span>
+<span class="sd">        &gt;&gt;&gt; for _ in range(30):</span>
+<span class="sd">        ...     result += str(selector(no_repeat=True))</span>
+<span class="sd">        &gt;&gt;&gt; result</span>
+<span class="sd">        210421021020304024230120241202</span>
+
+<span class="sd">    :attr:`decay_rate`:</span>
+<span class="sd">        The keyword argument :attr:`decay_rate` can be used to set a different</span>
+<span class="sd">        decay rate when creating a selector.</span>
+
+<span class="sd">        &gt;&gt;&gt; selector = auxjad.CartographySelector([0, 1, 2, 3, 4],</span>
+<span class="sd">        ...                                       decay_rate=0.5,</span>
+<span class="sd">        ...                                       )</span>
+<span class="sd">        &gt;&gt;&gt; selector.weights</span>
+<span class="sd">        [1.0, 0.5, 0.25, 0.125, 0.0625]</span>
+
+<span class="sd">        The decay rate can also be set after the creation of a selector using,</span>
+<span class="sd">        the property :attr:`decay_rate`.</span>
+
+<span class="sd">        &gt;&gt;&gt; selector = auxjad.CartographySelector([0, 1, 2, 3, 4])</span>
+<span class="sd">        &gt;&gt;&gt; selector.decay_rate = 0.2</span>
+<span class="sd">        &gt;&gt;&gt; selector.weights</span>
+<span class="sd">        [1.0, 0.2, 0.04000000000000001, 0.008000000000000002,</span>
+<span class="sd">        0.0016000000000000003]</span>
+<span class="sd">        &gt;&gt;&gt; result = &#39;&#39;</span>
+<span class="sd">        &gt;&gt;&gt; for _ in range(30):</span>
+<span class="sd">        ...     result += str(selector())</span>
+<span class="sd">        &gt;&gt;&gt; result</span>
+<span class="sd">        &#39;000001002100000201001030000100&#39;</span>
+
+<span class="sd">    :meth:`drop_first_and_append`:</span>
+<span class="sd">        This is a type of content transformation, it drops the first element of</span>
+<span class="sd">        :attr:`contents`, shifts all others leftwards, and appends the new</span>
+<span class="sd">        element to the last index.</span>
+
+<span class="sd">        &gt;&gt;&gt; selector = auxjad.CartographySelector([0, 1, 2, 3, 4])</span>
+<span class="sd">        &gt;&gt;&gt; selector.contents</span>
+<span class="sd">        [0, 1, 2, 3, 4]</span>
+<span class="sd">        &gt;&gt;&gt; selector.drop_first_and_append(5)</span>
+<span class="sd">        &gt;&gt;&gt; selector.contents</span>
+<span class="sd">        [1, 2, 3, 4, 5]</span>
+<span class="sd">        &gt;&gt;&gt; selector.drop_first_and_append(42)</span>
+<span class="sd">        &gt;&gt;&gt; selector.contents</span>
+<span class="sd">        [2, 3, 4, 5, 42]</span>
+
+<span class="sd">    :meth:`drop_n_and_append`:</span>
+<span class="sd">        This is a type of content transformation similar to</span>
+<span class="sd">        :meth:`drop_first_and_append`, it drops the element at index ``n`` of</span>
+<span class="sd">        :attr:`contents`, shifts all the next elements one position lefwards,</span>
+<span class="sd">        and appends the new element at the last index.</span>
+
+<span class="sd">        &gt;&gt;&gt; selector = auxjad.CartographySelector([10, 7, 14, 31, 98])</span>
+<span class="sd">        &gt;&gt;&gt; selector.contents</span>
+<span class="sd">        [10, 7, 14, 31, 98]</span>
+<span class="sd">        &gt;&gt;&gt; selector.drop_n_and_append(100, 2)</span>
+<span class="sd">        &gt;&gt;&gt; selector.contents</span>
+<span class="sd">        [10, 7, 31, 98, 100]</span>
+
+<span class="sd">    :meth:`drop_last_and_prepend`:</span>
+<span class="sd">        A type of content transformation, it drops the last element of</span>
+<span class="sd">        :attr:`contents`, shifts all others rightwards, and then prepends</span>
+<span class="sd">        the new element to the first index.</span>
+
+<span class="sd">        &gt;&gt;&gt; selector = auxjad.CartographySelector([0, 1, 2, 3, 4])</span>
+<span class="sd">        &gt;&gt;&gt; selector.contents</span>
+<span class="sd">        [0, 1, 2, 3, 4]</span>
+<span class="sd">        &gt;&gt;&gt; selector.drop_last_and_prepend(-1)</span>
+<span class="sd">        &gt;&gt;&gt; selector.contents</span>
+<span class="sd">        [-1, 0, 1, 2, 3]</span>
+<span class="sd">        &gt;&gt;&gt; selector.drop_last_and_prepend(71)</span>
+<span class="sd">        &gt;&gt;&gt; selector.contents</span>
+<span class="sd">        [71, -1, 0, 1, 2]</span>
+
+<span class="sd">    :meth:`rotate`:</span>
+<span class="sd">        Rotation is another type of content transformation. It rotates all</span>
+<span class="sd">        elements rightwards, moving the last element to the first index. If the</span>
+<span class="sd">        optional keyword argument ``anticlockwise`` is set to ``True``, the</span>
+<span class="sd">        rotation will be in the opposite direction.</span>
+
+<span class="sd">        &gt;&gt;&gt; selector = auxjad.CartographySelector([0, 1, 2, 3, 4])</span>
+<span class="sd">        &gt;&gt;&gt; selector.contents</span>
+<span class="sd">        [0, 1, 2, 3, 4]</span>
+<span class="sd">        &gt;&gt;&gt; selector.rotate()</span>
+<span class="sd">        &gt;&gt;&gt; selector.contents</span>
+<span class="sd">        [1, 2, 3, 4, 0]</span>
+<span class="sd">        &gt;&gt;&gt; selector.rotate(anticlockwise=True)</span>
+<span class="sd">        &gt;&gt;&gt; selector.contents</span>
+<span class="sd">        [0, 1, 2, 3, 4]</span>
+<span class="sd">        &gt;&gt;&gt; selector.rotate(anticlockwise=True)</span>
+<span class="sd">        &gt;&gt;&gt; selector.contents</span>
+<span class="sd">        [1, 2, 3, 4, 0]</span>
+
+<span class="sd">    :meth:`mirror_swap`:</span>
+<span class="sd">        The mirror swap transformation swaps takes an input index and swaps the</span>
+<span class="sd">        element at tit with its complementary element. Complementary elements</span>
+<span class="sd">        are defined as the pair of elements which share the same distance from</span>
+<span class="sd">        the centre of the :attr:`contents` (in terms of number of indeces), and</span>
+<span class="sd">        are located at either side of this centre.</span>
+
+<span class="sd">        &gt;&gt;&gt; selector = auxjad.CartographySelector([0, 1, 2, 3, 4])</span>
+<span class="sd">        &gt;&gt;&gt; selector.contents</span>
+<span class="sd">        [0, 1, 2, 3, 4]</span>
+<span class="sd">        &gt;&gt;&gt; selector.mirror_swap(0)</span>
+<span class="sd">        &gt;&gt;&gt; selector.contents</span>
+<span class="sd">        [4, 1, 2, 3, 0]</span>
+<span class="sd">        &gt;&gt;&gt; selector.mirror_swap(0)</span>
+<span class="sd">        &gt;&gt;&gt; selector.contents</span>
+<span class="sd">        [0, 1, 2, 3, 4]</span>
+<span class="sd">        &gt;&gt;&gt; selector.mirror_swap(3)</span>
+<span class="sd">        &gt;&gt;&gt; selector.contents</span>
+<span class="sd">        [0, 3, 2, 1, 4]</span>
+<span class="sd">        &gt;&gt;&gt; selector.mirror_swap(2)</span>
+<span class="sd">        &gt;&gt;&gt; selector.contents</span>
+<span class="sd">        [0, 3, 2, 1, 4]</span>
+
+<span class="sd">    :meth:`mirror_random_swap`:</span>
+<span class="sd">        A type of content transformation which will apply  :meth:`mirror_swap`</span>
+<span class="sd">        to a random pair of complementary elements. In case of a selector with</span>
+<span class="sd">        an odd number of elements, this method will never pick the element at</span>
+<span class="sd">        the central index since that is the pivot point of the operation and it</span>
+<span class="sd">        would not result in any changes.</span>
+
+<span class="sd">        &gt;&gt;&gt; selector = auxjad.CartographySelector([0, 1, 2, 3, 4])</span>
+<span class="sd">        &gt;&gt;&gt; selector.contents</span>
+<span class="sd">        [0, 1, 2, 3, 4]</span>
+<span class="sd">        &gt;&gt;&gt; selector.mirror_random_swap()</span>
+<span class="sd">        &gt;&gt;&gt; selector.contents</span>
+<span class="sd">        [4, 1, 2, 3, 0]</span>
+<span class="sd">        &gt;&gt;&gt; selector.mirror_random_swap()</span>
+<span class="sd">        &gt;&gt;&gt; selector.contents</span>
+<span class="sd">        [4, 3, 2, 1, 0]</span>
+<span class="sd">        &gt;&gt;&gt; selector.mirror_random_swap()</span>
+<span class="sd">        &gt;&gt;&gt; selector.contents</span>
+<span class="sd">        [4, 1, 2, 3, 0]</span>
+
+<span class="sd">    :meth:`shuffle`:</span>
+<span class="sd">        The method :meth:`shuffle` will shuffle the position of the elements of</span>
+<span class="sd">        the selector&#39;s :attr:`contents`.</span>
+
+<span class="sd">        &gt;&gt;&gt; selector = auxjad.CartographySelector([0, 1, 2, 3, 4])</span>
+<span class="sd">        &gt;&gt;&gt; selector.contents</span>
+<span class="sd">        [0, 1, 2, 3, 4]</span>
+<span class="sd">        &gt;&gt;&gt; selector.shuffle()</span>
+<span class="sd">        &gt;&gt;&gt; selector.contents</span>
+<span class="sd">        [1, 4, 3, 0, 2]</span>
+
+<span class="sd">    :attr:`contents`:</span>
+<span class="sd">        The contents of a selector can also be altered after it has been</span>
+<span class="sd">        initialised using the :attr:`contents` property. The length of the</span>
+<span class="sd">        contents can change as well.</span>
+
+<span class="sd">        &gt;&gt;&gt; selector = auxjad.CartographySelector([0, 1, 2, 3, 4],</span>
+<span class="sd">        ...                                       decay_rate=0.5,</span>
+<span class="sd">        ...                                       )</span>
+<span class="sd">        &gt;&gt;&gt; len(selector)</span>
+<span class="sd">        5</span>
+<span class="sd">        &gt;&gt;&gt; selector.weights</span>
+<span class="sd">        [1.0, 0.5, 0.25, 0.125, 0.0625]</span>
+<span class="sd">        &gt;&gt;&gt; selector.contents = [10, 7, 14, 31, 98, 47, 32]</span>
+<span class="sd">        &gt;&gt;&gt; selector.contents</span>
+<span class="sd">        [10, 7, 14, 31, 98, 47, 32]</span>
+<span class="sd">        &gt;&gt;&gt; len(selector)</span>
+<span class="sd">        7</span>
+<span class="sd">        &gt;&gt;&gt; selector.weights</span>
+<span class="sd">        [1.0, 0.5, 0.25, 0.125, 0.0625, 0.03125, 0.015625]</span>
+
+<span class="sd">    :attr:`previous_result` and :attr:`previous_index`:</span>
+<span class="sd">        Use the read-only properties :attr:`previous_result` and</span>
+<span class="sd">        :attr:`previous_index` to output the previous result and its index.</span>
+
+<span class="sd">        &gt;&gt;&gt; selector = auxjad.CartographySelector([10, 7, 14, 31, 98])</span>
+<span class="sd">        &gt;&gt;&gt; selector()</span>
+<span class="sd">        14</span>
+<span class="sd">        &gt;&gt;&gt; previous_index = selector.previous_index</span>
+<span class="sd">        &gt;&gt;&gt; previous_index</span>
+<span class="sd">        2</span>
+<span class="sd">        &gt;&gt;&gt; selector.previous_result</span>
+<span class="sd">        14</span>
+
+<span class="sd">    Slicing and indexing:</span>
+<span class="sd">        Instances of this class can be indexed and sliced. This allows reading,</span>
+<span class="sd">        assigning, or deleting values from :attr:`contents`.</span>
+
+<span class="sd">        &gt;&gt;&gt; selector = auxjad.CartographySelector([10, 7, 14, 31, 98])</span>
+<span class="sd">        &gt;&gt;&gt; selector[1]</span>
+<span class="sd">        7</span>
+<span class="sd">        &gt;&gt;&gt; selector[1:4]</span>
+<span class="sd">        [7, 14, 31]</span>
+<span class="sd">        &gt;&gt;&gt; selector[:]</span>
+<span class="sd">        [10, 7, 14, 31, 98]</span>
+<span class="sd">        &gt;&gt;&gt; selector()</span>
+<span class="sd">        31</span>
+<span class="sd">        &gt;&gt;&gt; previous_index = selector.previous_index</span>
+<span class="sd">        &gt;&gt;&gt; previous_index</span>
+<span class="sd">        3</span>
+<span class="sd">        &gt;&gt;&gt; selector[previous_index]</span>
+<span class="sd">        31</span>
+<span class="sd">        &gt;&gt;&gt; selector.contents</span>
+<span class="sd">        [10, 7, 14, 31, 98]</span>
+<span class="sd">        &gt;&gt;&gt; selector[2] = 100</span>
+<span class="sd">        &gt;&gt;&gt; selector.contents</span>
+<span class="sd">        [10, 7, 100, 31, 98]</span>
+<span class="sd">        &gt;&gt;&gt; del selector[2:4]</span>
+<span class="sd">        &gt;&gt;&gt; selector.contents</span>
+<span class="sd">        [10, 7, 98]</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="c1">### CLASS VARIABLES ###</span>
+
+    <span class="vm">__slots__</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;_contents&#39;</span><span class="p">,</span>
+                 <span class="s1">&#39;_decay_rate&#39;</span><span class="p">,</span>
+                 <span class="s1">&#39;_previous_index&#39;</span><span class="p">,</span>
+                 <span class="s1">&#39;_weights&#39;</span><span class="p">,</span>
+                 <span class="p">)</span>
+
+    <span class="c1">### INITIALISER ###</span>
+
+<div class="viewcode-block" id="CartographySelector.__init__"><a class="viewcode-back" href="../../../_api_members/auxjad.CartographySelector.html#auxjad.CartographySelector.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+                 <span class="n">contents</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">Any</span><span class="p">],</span>
+                 <span class="o">*</span><span class="p">,</span>
+                 <span class="n">decay_rate</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.75</span><span class="p">,</span>
+                 <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sa">r</span><span class="s1">&#39;Initialises self.&#39;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">contents</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;&#39;contents&#39; must be &#39;list&#39;&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">decay_rate</span><span class="p">,</span> <span class="nb">float</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;&#39;decay_rate&#39; must be &#39;float&#39;&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">decay_rate</span> <span class="o">&lt;=</span> <span class="mf">0.0</span> <span class="ow">or</span> <span class="n">decay_rate</span> <span class="o">&gt;</span> <span class="mf">1.0</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;&#39;decay_rate&#39; must be larger than 0.0 and &quot;</span>
+                             <span class="s2">&quot;less than or equal to 1.0&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_contents</span> <span class="o">=</span> <span class="n">contents</span><span class="p">[:]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_previous_index</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_decay_rate</span> <span class="o">=</span> <span class="n">decay_rate</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_generate_weights</span><span class="p">()</span></div>
+
+    <span class="c1">### SPECIAL METHODS ###</span>
+
+<div class="viewcode-block" id="CartographySelector.__repr__"><a class="viewcode-back" href="../../../_api_members/auxjad.CartographySelector.html#auxjad.CartographySelector.__repr__">[docs]</a>    <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="sa">r</span><span class="s1">&#39;Returns interpreter representation of :attr:`contents`.&#39;</span>
+        <span class="k">return</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_contents</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="CartographySelector.__len__"><a class="viewcode-back" href="../../../_api_members/auxjad.CartographySelector.html#auxjad.CartographySelector.__len__">[docs]</a>    <span class="k">def</span> <span class="fm">__len__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+        <span class="sa">r</span><span class="s1">&#39;Returns the length of :attr:`contents`.&#39;</span>
+        <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_contents</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="CartographySelector.__call__"><a class="viewcode-back" href="../../../_api_members/auxjad.CartographySelector.html#auxjad.CartographySelector.__call__">[docs]</a>    <span class="k">def</span> <span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+                 <span class="o">*</span><span class="p">,</span>
+                 <span class="n">no_repeat</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+                 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Any</span><span class="p">:</span>
+        <span class="sa">r</span><span class="sd">&quot;&quot;&quot;Calls the selection process and outputs one element of</span>
+<span class="sd">        :attr:`contents`.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">no_repeat</span><span class="p">,</span> <span class="nb">bool</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;&#39;no_repeat&#39; must be &#39;bool&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">no_repeat</span><span class="p">:</span>
+            <span class="n">new_index</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">choices</span><span class="p">(</span>
+                <span class="p">[</span><span class="n">n</span> <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="fm">__len__</span><span class="p">())],</span>
+                <span class="n">weights</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_weights</span><span class="p">,</span>
+            <span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">new_index</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_previous_index</span>
+            <span class="k">while</span> <span class="n">new_index</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">_previous_index</span><span class="p">:</span>
+                <span class="n">new_index</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">choices</span><span class="p">(</span>
+                    <span class="p">[</span><span class="n">n</span> <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="fm">__len__</span><span class="p">())],</span>
+                    <span class="n">weights</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_weights</span><span class="p">,</span>
+                <span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_previous_index</span> <span class="o">=</span> <span class="n">new_index</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_contents</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">_previous_index</span><span class="p">]</span></div>
+
+<div class="viewcode-block" id="CartographySelector.__next__"><a class="viewcode-back" href="../../../_api_members/auxjad.CartographySelector.html#auxjad.CartographySelector.__next__">[docs]</a>    <span class="k">def</span> <span class="fm">__next__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Any</span><span class="p">:</span>
+        <span class="sa">r</span><span class="sd">&quot;&quot;&quot;Calls the selection process and outputs one element of</span>
+<span class="sd">        :attr:`contents`.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="fm">__call__</span><span class="p">()</span></div>
+
+<div class="viewcode-block" id="CartographySelector.__getitem__"><a class="viewcode-back" href="../../../_api_members/auxjad.CartographySelector.html#auxjad.CartographySelector.__getitem__">[docs]</a>    <span class="k">def</span> <span class="fm">__getitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+                    <span class="n">key</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+                    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Any</span><span class="p">:</span>
+        <span class="sa">r</span><span class="sd">&quot;&quot;&quot;Returns one or more elements of :attr:`contents` through indexing</span>
+<span class="sd">        or slicing.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_contents</span><span class="p">[</span><span class="n">key</span><span class="p">]</span></div>
+
+<div class="viewcode-block" id="CartographySelector.__setitem__"><a class="viewcode-back" href="../../../_api_members/auxjad.CartographySelector.html#auxjad.CartographySelector.__setitem__">[docs]</a>    <span class="k">def</span> <span class="fm">__setitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+                    <span class="n">key</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+                    <span class="n">value</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span>
+                    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sa">r</span><span class="sd">&quot;&quot;&quot;Assigns values to one or more elements of :attr:`contents` through</span>
+<span class="sd">        indexing or slicing.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_contents</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">value</span></div>
+
+<div class="viewcode-block" id="CartographySelector.__delitem__"><a class="viewcode-back" href="../../../_api_members/auxjad.CartographySelector.html#auxjad.CartographySelector.__delitem__">[docs]</a>    <span class="k">def</span> <span class="fm">__delitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+                    <span class="n">key</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+                    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sa">r</span><span class="sd">&quot;&quot;&quot;Deletes one or more elements of :attr:`contents` through indexing</span>
+<span class="sd">        or slicing.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">del</span> <span class="bp">self</span><span class="o">.</span><span class="n">_contents</span><span class="p">[</span><span class="n">key</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_generate_weights</span><span class="p">()</span></div>
+
+    <span class="c1">### PUBLIC METHODS ###</span>
+
+<div class="viewcode-block" id="CartographySelector.drop_first_and_append"><a class="viewcode-back" href="../../../_api_members/auxjad.CartographySelector.html#auxjad.CartographySelector.drop_first_and_append">[docs]</a>    <span class="k">def</span> <span class="nf">drop_first_and_append</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+                              <span class="n">new_element</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span>
+                              <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sa">r</span><span class="sd">&quot;&quot;&quot;A type of content transformation, it drops the first element of</span>
+<span class="sd">        :attr:`contents`, shifts all others leftwards, and appends the new</span>
+<span class="sd">        element to the last index.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_contents</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_contents</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span> <span class="o">+</span> <span class="p">[</span><span class="n">new_element</span><span class="p">]</span></div>
+
+<div class="viewcode-block" id="CartographySelector.drop_n_and_append"><a class="viewcode-back" href="../../../_api_members/auxjad.CartographySelector.html#auxjad.CartographySelector.drop_n_and_append">[docs]</a>    <span class="k">def</span> <span class="nf">drop_n_and_append</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+                          <span class="n">new_element</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span>
+                          <span class="n">n</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+                          <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sa">r</span><span class="sd">&quot;&quot;&quot;A type of content transformation similar to</span>
+<span class="sd">        :meth:`drop_first_and_append`, it drops the element at index ``n`` of</span>
+<span class="sd">        :attr:`contents`, shifts all the next elements one position lefwards,</span>
+<span class="sd">        and appends the new element at the last index.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_contents</span> <span class="o">=</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_contents</span><span class="p">[:</span><span class="n">n</span><span class="p">]</span>
+                          <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">_contents</span><span class="p">[</span><span class="n">n</span> <span class="o">+</span> <span class="mi">1</span><span class="p">:]</span>
+                          <span class="o">+</span> <span class="p">[</span><span class="n">new_element</span><span class="p">])</span></div>
+
+<div class="viewcode-block" id="CartographySelector.drop_last_and_prepend"><a class="viewcode-back" href="../../../_api_members/auxjad.CartographySelector.html#auxjad.CartographySelector.drop_last_and_prepend">[docs]</a>    <span class="k">def</span> <span class="nf">drop_last_and_prepend</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+                              <span class="n">new_element</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span>
+                              <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sa">r</span><span class="sd">&quot;&quot;&quot;A type of content transformation, it drops the last element of</span>
+<span class="sd">        :attr:`contents`, shifts all others rightwards, and then prepends</span>
+<span class="sd">        the new element to the first index.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_contents</span> <span class="o">=</span> <span class="p">[</span><span class="n">new_element</span><span class="p">]</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">_contents</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span></div>
+
+<div class="viewcode-block" id="CartographySelector.rotate"><a class="viewcode-back" href="../../../_api_members/auxjad.CartographySelector.html#auxjad.CartographySelector.rotate">[docs]</a>    <span class="k">def</span> <span class="nf">rotate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+               <span class="o">*</span><span class="p">,</span>
+               <span class="n">anticlockwise</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+               <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sa">r</span><span class="sd">&quot;&quot;&quot;A type of content transformation, it rotates all elements</span>
+<span class="sd">        rightwards, moving the last element to the first index. If the optional</span>
+<span class="sd">        keyword argument ``anticlockwise`` is set to ``True``, the rotation</span>
+<span class="sd">        will be in the opposite direction.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">anticlockwise</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_contents</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_contents</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">_contents</span><span class="p">[:</span><span class="mi">1</span><span class="p">]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_contents</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_contents</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">:]</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">_contents</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span></div>
+
+<div class="viewcode-block" id="CartographySelector.mirror_swap"><a class="viewcode-back" href="../../../_api_members/auxjad.CartographySelector.html#auxjad.CartographySelector.mirror_swap">[docs]</a>    <span class="k">def</span> <span class="nf">mirror_swap</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+                    <span class="n">index</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+                    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sa">r</span><span class="sd">&quot;&quot;&quot;A type of content transformation which swaps takes an input index</span>
+<span class="sd">        and swaps the element at tit with its complementary element.</span>
+<span class="sd">        Complementary elements are defined as the pair of elements which share</span>
+<span class="sd">        the same distance from the centre of the :attr:`contents` (in terms of</span>
+<span class="sd">        number of indeces), and are located at either side of this centre.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">aux</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_contents</span><span class="p">[</span><span class="n">index</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_contents</span><span class="p">[</span><span class="n">index</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_contents</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span> <span class="o">-</span> <span class="n">index</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_contents</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span> <span class="o">-</span> <span class="n">index</span><span class="p">]</span> <span class="o">=</span> <span class="n">aux</span></div>
+
+<div class="viewcode-block" id="CartographySelector.mirror_random_swap"><a class="viewcode-back" href="../../../_api_members/auxjad.CartographySelector.html#auxjad.CartographySelector.mirror_random_swap">[docs]</a>    <span class="k">def</span> <span class="nf">mirror_random_swap</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sa">r</span><span class="sd">&quot;&quot;&quot;A type of content transformation which will apply</span>
+<span class="sd">        :meth:`mirror_swap` to a random pair of complementary elements. In case</span>
+<span class="sd">        of a selector with an odd number of elements, this method will never</span>
+<span class="sd">        pick the element at the central index since that is the pivot point of</span>
+<span class="sd">        the operation and it would not result in any changes.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">max_index</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="fm">__len__</span><span class="p">()</span> <span class="o">//</span> <span class="mi">2</span> <span class="o">-</span> <span class="mi">1</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">mirror_swap</span><span class="p">(</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">max_index</span><span class="p">))</span></div>
+
+<div class="viewcode-block" id="CartographySelector.shuffle"><a class="viewcode-back" href="../../../_api_members/auxjad.CartographySelector.html#auxjad.CartographySelector.shuffle">[docs]</a>    <span class="k">def</span> <span class="nf">shuffle</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sa">r</span><span class="s1">&#39;Shuffles the position of the elements of :attr:`contents`.&#39;</span>
+        <span class="n">random</span><span class="o">.</span><span class="n">shuffle</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_contents</span><span class="p">)</span></div>
+
+    <span class="c1">### PRIVATE METHODS ###</span>
+
+    <span class="k">def</span> <span class="nf">_generate_weights</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sa">r</span><span class="sd">&quot;&quot;&quot;Given a decay rate, this method generates the :attr:`weights` of</span>
+<span class="sd">        individual indeces.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_weights</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="fm">__len__</span><span class="p">()):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_weights</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_decay_rate</span> <span class="o">**</span> <span class="n">n</span><span class="p">)</span>
+
+    <span class="c1">### PUBLIC PROPERTIES ###</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">contents</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="n">Any</span><span class="p">]:</span>
+        <span class="sa">r</span><span class="s1">&#39;The :obj:`list` from which the selector picks elements.&#39;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_contents</span>
+
+    <span class="nd">@contents</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">contents</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+                 <span class="n">contents</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">Any</span><span class="p">],</span>
+                 <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">contents</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;&#39;contents&#39; must be &#39;list&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_contents</span> <span class="o">=</span> <span class="n">contents</span><span class="p">[:]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_generate_weights</span><span class="p">()</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">decay_rate</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+        <span class="sa">r</span><span class="sd">&quot;&quot;&quot;The decay rate represents the ratio of probabilities of any index</span>
+<span class="sd">        given the probability of the preceding one. For instance, if the decay</span>
+<span class="sd">        rate is set to ``0.75`` (which is its default value), the probability</span>
+<span class="sd">        of the element in index ``1`` of the input :obj:`list` being selected</span>
+<span class="sd">        is ``0.75`` the probability of the element in index ``0``, and the</span>
+<span class="sd">        probability of the element in index ``2`` is ``0.5625`` (i.e. ``0.75``</span>
+<span class="sd">        squared) the probability of the element in index ``0``.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_decay_rate</span>
+
+    <span class="nd">@decay_rate</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">decay_rate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+                   <span class="n">decay_rate</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
+                   <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">decay_rate</span><span class="p">,</span> <span class="nb">float</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;&#39;decay_rate&#39; must be float&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">decay_rate</span> <span class="o">&lt;=</span> <span class="mf">0.0</span> <span class="ow">or</span> <span class="n">decay_rate</span> <span class="o">&gt;</span> <span class="mf">1.0</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;&#39;decay_rate&#39; must be larger than 0.0 and less &quot;</span>
+                             <span class="s2">&quot;than or equal to 1.0&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_decay_rate</span> <span class="o">=</span> <span class="n">decay_rate</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_generate_weights</span><span class="p">()</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">previous_index</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Union</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="kc">None</span><span class="p">]:</span>
+        <span class="sa">r</span><span class="sd">&quot;&quot;&quot;Read-only property, returns the index of the previously output</span>
+<span class="sd">        element.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_previous_index</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">previous_result</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Any</span><span class="p">:</span>
+        <span class="sa">r</span><span class="s1">&#39;Read-only property, returns the previously output element.&#39;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_previous_index</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_contents</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">_previous_index</span><span class="p">]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_previous_index</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">weights</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">float</span><span class="p">]:</span>
+        <span class="sa">r</span><span class="s1">&#39;Read-only property, returns the weight vector.&#39;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_weights</span></div>
+</pre></div>
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 2020, Gilberto Agostinho
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

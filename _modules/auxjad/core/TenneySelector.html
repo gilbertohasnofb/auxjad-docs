@@ -1,0 +1,783 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>auxjad.core.TenneySelector &mdash; auxjad 0.8.24 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+        <script src="../../../_static/jquery.js"></script>
+        <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/doctools.js"></script>
+        <script src="../../../_static/language_data.js"></script>
+        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    <script type="text/javascript" src="../../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../../index.html" class="icon icon-home" alt="Documentation Home"> auxjad
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.8
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../index.html">Welcome to Auxjad’s documentation!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../examples/index.html">Examples of usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../score_gallery/index.html">Score gallery</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../api/index.html">Auxjad API</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">auxjad</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../../index.html">Module code</a> &raquo;</li>
+        
+      <li>auxjad.core.TenneySelector</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for auxjad.core.TenneySelector</h1><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">random</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Union</span>
+
+
+<div class="viewcode-block" id="TenneySelector"><a class="viewcode-back" href="../../../_api_members/auxjad.TenneySelector.html#auxjad.TenneySelector">[docs]</a><span class="k">class</span> <span class="nc">TenneySelector</span><span class="p">():</span>
+    <span class="sa">r</span><span class="sd">&quot;&quot;&quot;This class is an implementation of the Dissonant Counterpoint Algorithm</span>
+<span class="sd">    by James Tenney. This class can be used to randomly select elements from an</span>
+<span class="sd">    input :obj:`list`, giving more weight to elements which have not been</span>
+<span class="sd">    selected in recent iterations. In other words, Tenney&#39;s algorithm uses</span>
+<span class="sd">    feedback in order to lower the weight of recently selected elements.</span>
+
+<span class="sd">    This implementation is based on the paper: Polansky, L., A. Barnett, and</span>
+<span class="sd">    M. Winter (2011). &#39;A Few More Words About James Tenney: Dissonant</span>
+<span class="sd">    Counterpoint and Statistical Feedback&#39;. In: Journal of Mathematics and</span>
+<span class="sd">    Music 5(2). pp. 63--82.</span>
+
+<span class="sd">    Basic usage:</span>
+<span class="sd">        The selector should be initialised with a :obj:`list`. The elements of</span>
+<span class="sd">        this :obj:`list` can be of any type.</span>
+
+<span class="sd">        &gt;&gt;&gt; selector = auxjad.TenneySelector([&#39;A&#39;, &#39;B&#39;, &#39;C&#39;, &#39;D&#39;, &#39;E&#39;, &#39;F&#39;])</span>
+<span class="sd">        &gt;&gt;&gt; selector.contents</span>
+<span class="sd">        [&#39;A&#39;, &#39;B&#39;, &#39;C&#39;, &#39;D&#39;, &#39;E&#39;, &#39;F&#39;]</span>
+
+<span class="sd">        Applying the :func:`len()` function to the selector will return the</span>
+<span class="sd">        length of the input :obj:`list`.</span>
+
+<span class="sd">        &gt;&gt;&gt; len(selector)</span>
+<span class="sd">        6</span>
+
+<span class="sd">        When no other keyword arguments are used, the default probabilities of</span>
+<span class="sd">        each element in the :obj:`list` is ``1.0``. Probabilities are not</span>
+<span class="sd">        normalised.</span>
+
+<span class="sd">        &gt;&gt;&gt; selector.probabilities</span>
+<span class="sd">        [1.0, 1.0, 1.0, 1.0, 1.0, 1.0]</span>
+<span class="sd">        &gt;&gt;&gt; selector.previous_index</span>
+<span class="sd">        None</span>
+
+<span class="sd">        Calling the selector will output one of its elements, selected</span>
+<span class="sd">        according to the current probability values.</span>
+
+<span class="sd">        &gt;&gt;&gt; selector()</span>
+<span class="sd">        C</span>
+
+<span class="sd">        Alternatively, use the :func:`next()` function or :meth:`__next__`</span>
+<span class="sd">        method to get the next result.</span>
+
+<span class="sd">        &gt;&gt;&gt; selector.__next__()</span>
+<span class="sd">        A</span>
+<span class="sd">        &gt;&gt;&gt; next(selector)</span>
+<span class="sd">        D</span>
+
+<span class="sd">        After each call, the object updates all probability values, setting the</span>
+<span class="sd">        previously selected element&#39;s probability at ``0.0`` and raising all</span>
+<span class="sd">        other probabilities according to a growth function (more on this</span>
+<span class="sd">        below).</span>
+
+<span class="sd">        &gt;&gt;&gt; result = &#39;&#39;</span>
+<span class="sd">        &gt;&gt;&gt; for _ in range(30):</span>
+<span class="sd">        ...     result += selector()</span>
+<span class="sd">        &gt;&gt;&gt; result</span>
+<span class="sd">        EDFACEABAFDCEDAFADCBFEDABEDFEC</span>
+
+<span class="sd">        From the result above it is possible to see that there are no immediate</span>
+<span class="sd">        repetitions of elements (since once selected, their probability is</span>
+<span class="sd">        always set to 0.0 and will take at least one iteration to grow to a</span>
+<span class="sd">        non-zero value). Checking the :attr:`probabilities` and</span>
+<span class="sd">        :attr:`previous_index` properties will return us their current values.</span>
+
+<span class="sd">        &gt;&gt;&gt; selector.probabilities</span>
+<span class="sd">        [6.0, 5.0, 0.0, 3.0, 1.0, 2.0]</span>
+<span class="sd">        &gt;&gt;&gt; selector.previous_index</span>
+<span class="sd">        2</span>
+
+<span class="sd">    :attr:`previous_result` and :attr:`previous_index`:</span>
+<span class="sd">        Use the read-only properties :attr:`previous_result` and</span>
+<span class="sd">        :attr:`previous_index` to output the previous result and its index.</span>
+<span class="sd">        Default values for both is ``None``.</span>
+
+<span class="sd">        &gt;&gt;&gt; selector = auxjad.TenneySelector([&#39;A&#39;, &#39;B&#39;, &#39;C&#39;, &#39;D&#39;, &#39;E&#39;, &#39;F&#39;])</span>
+<span class="sd">        &gt;&gt;&gt; selector.previous_index</span>
+<span class="sd">        None</span>
+<span class="sd">        &gt;&gt;&gt; selector.previous_result</span>
+<span class="sd">        None</span>
+<span class="sd">        &gt;&gt;&gt; selector()</span>
+<span class="sd">        C</span>
+<span class="sd">        &gt;&gt;&gt; selector.previous_index</span>
+<span class="sd">        2</span>
+<span class="sd">        &gt;&gt;&gt; selector.previous_result</span>
+<span class="sd">        C</span>
+
+<span class="sd">    Arguments and properties:</span>
+<span class="sd">        This class can take two optional keywords argument during its</span>
+<span class="sd">        instantiation, namely :attr:`weights` and :attr:`curvature`.</span>
+<span class="sd">        :attr:`weights` takes a :obj:`list` of :obj:`float` with the individual</span>
+<span class="sd">        weights of each element; by default, all weights are set to ``1.0``.</span>
+<span class="sd">        These weights affects the effective probability of each element. The</span>
+<span class="sd">        other argument, :attr:`curvature`, is the exponent of the growth</span>
+<span class="sd">        function for all elements. The growth function takes as input the</span>
+<span class="sd">        number of iterations since an element has been last selected, and raise</span>
+<span class="sd">        this number by the curvature value. If :attr:`curvature` is set to</span>
+<span class="sd">        ``1.0`` (which is its default value), the growth is linear with each</span>
+<span class="sd">        iteration. If set to a value larger than ``0.0`` and less than ``1.0``,</span>
+<span class="sd">        the growth is negative (or concave), so that the chances of an element</span>
+<span class="sd">        which is not being selected will grow at ever smaller rates as the</span>
+<span class="sd">        number of iterations it has not been selected increase. If the</span>
+<span class="sd">        :attr:`curvature` is set to ``1.0``, the growth is linear with the</span>
+<span class="sd">        number of iterations. If the :attr:`curvature` is larger than ``1.0``,</span>
+<span class="sd">        the curvature is positive (or convex) and the growth will accelerate as</span>
+<span class="sd">        the number of iterations an element has not been selected grows.</span>
+<span class="sd">        Setting the curvature to ``0.0`` will result in an static probability</span>
+<span class="sd">        vector with all values set to ``1.0``, except for the previously</span>
+<span class="sd">        selected one which will be set to ``0.0``; this will result in a</span>
+<span class="sd">        uniformly random selection without repetition.</span>
+
+<span class="sd">        With linear curvature (default value of ``1.0``):</span>
+
+<span class="sd">        &gt;&gt;&gt; selector = auxjad.TenneySelector([&#39;A&#39;, &#39;B&#39;, &#39;C&#39;, &#39;D&#39;, &#39;E&#39;, &#39;F&#39;])</span>
+<span class="sd">        &gt;&gt;&gt; selector.curvature</span>
+<span class="sd">        1.0</span>
+<span class="sd">        &gt;&gt;&gt; selector.weights</span>
+<span class="sd">        [1.0, 1.0, 1.0, 1.0, 1.0, 1.0]</span>
+<span class="sd">        &gt;&gt;&gt; selector.probabilities</span>
+<span class="sd">        [1.0, 1.0, 1.0, 1.0, 1.0, 1.0]</span>
+<span class="sd">        &gt;&gt;&gt; selector()</span>
+<span class="sd">        &#39;B&#39;</span>
+<span class="sd">        &gt;&gt;&gt; selector.curvature</span>
+<span class="sd">        1.0</span>
+<span class="sd">        &gt;&gt;&gt; selector.weights</span>
+<span class="sd">        [1.0, 1.0, 1.0, 1.0, 1.0, 1.0]</span>
+<span class="sd">        &gt;&gt;&gt; selector.probabilities</span>
+<span class="sd">        [2.0, 0.0, 2.0, 2.0, 2.0, 2.0]</span>
+
+<span class="sd">    Convex :attr:`curvature`:</span>
+<span class="sd">        Using a convex :attr:`curvature` (i.e. greater than ``0.0`` and less</span>
+<span class="sd">        than ``1.0``):</span>
+
+<span class="sd">        &gt;&gt;&gt; selector = auxjad.TenneySelector([&#39;A&#39;, &#39;B&#39;, &#39;C&#39;, &#39;D&#39;, &#39;E&#39;, &#39;F&#39;],</span>
+<span class="sd">        ...                                  curvature=0.2,</span>
+<span class="sd">        ...                                  )</span>
+<span class="sd">        &gt;&gt;&gt; selector.curvature</span>
+<span class="sd">        0.2</span>
+<span class="sd">        &gt;&gt;&gt; selector.weights</span>
+<span class="sd">        [1.0, 1.0, 1.0, 1.0, 1.0, 1.0]</span>
+<span class="sd">        &gt;&gt;&gt; selector.probabilities</span>
+<span class="sd">        [1.0, 1.0, 1.0, 1.0, 1.0, 1.0]</span>
+<span class="sd">        &gt;&gt;&gt; selector()</span>
+<span class="sd">        &#39;C&#39;</span>
+<span class="sd">        &gt;&gt;&gt; selector.curvature</span>
+<span class="sd">        0.2</span>
+<span class="sd">        &gt;&gt;&gt; selector.weights</span>
+<span class="sd">        [1.0, 1.0, 1.0, 1.0, 1.0, 1.0]</span>
+<span class="sd">        &gt;&gt;&gt; selector.probabilities</span>
+<span class="sd">        [1.148698354997035, 1.148698354997035, 0.0, 1.148698354997035,</span>
+<span class="sd">        1.148698354997035, 1.148698354997035]</span>
+
+<span class="sd">        With a convex curvature, the growth of the probability of each</span>
+<span class="sd">        non-selected term gets smaller as the number of times it is not</span>
+<span class="sd">        selected increases. The smaller the curvature is, the less difference</span>
+<span class="sd">        there will be between any non-previously selected elements. This</span>
+<span class="sd">        results in sequences which have more chances of a same element being</span>
+<span class="sd">        near each other. In the sequence below, note how there are many cases</span>
+<span class="sd">        of a same element being separated only by a single other one, such as</span>
+<span class="sd">        ``&#39;ACA&#39;`` in index ``6``.</span>
+
+<span class="sd">        &gt;&gt;&gt; result = &#39;&#39;</span>
+<span class="sd">        &gt;&gt;&gt; for _ in range(30):</span>
+<span class="sd">        ...     result += selector()</span>
+<span class="sd">        &gt;&gt;&gt; result</span>
+<span class="sd">        DACBEDFACABDACECBEFAEDBAFBABFD</span>
+
+<span class="sd">        Checking the probability values at this point outputs:</span>
+
+<span class="sd">        &gt;&gt;&gt; selector.probabilities</span>
+<span class="sd">        [1.2457309396155174, 1.148698354997035, 1.6952182030724354, 0.0,</span>
+<span class="sd">        1.5518455739153598, 1.0]</span>
+
+<span class="sd">        As we can see, all non-zero values are relatively close to each other,</span>
+<span class="sd">        which is why there is a high chance of an element being selected again</span>
+<span class="sd">        just two iterations apart.</span>
+
+<span class="sd">    Concave :attr:`curvature`:</span>
+<span class="sd">        Using a concave :attr:`curvature` (i.e. greater than ``1.0``):</span>
+
+<span class="sd">        &gt;&gt;&gt; selector = auxjad.TenneySelector([&#39;A&#39;, &#39;B&#39;, &#39;C&#39;, &#39;D&#39;, &#39;E&#39;, &#39;F&#39;],</span>
+<span class="sd">        ...                                  curvature=15.2,</span>
+<span class="sd">        ...                                  )</span>
+<span class="sd">        &gt;&gt;&gt; selector.curvature</span>
+<span class="sd">        0.2</span>
+<span class="sd">        &gt;&gt;&gt; selector.weights</span>
+<span class="sd">        [1.0, 1.0, 1.0, 1.0, 1.0, 1.0]</span>
+<span class="sd">        &gt;&gt;&gt; selector.probabilities</span>
+<span class="sd">        [1.0, 1.0, 1.0, 1.0, 1.0, 1.0]</span>
+<span class="sd">        &gt;&gt;&gt; selector()</span>
+<span class="sd">        &#39;C&#39;</span>
+<span class="sd">        &gt;&gt;&gt; selector.curvature</span>
+<span class="sd">        0.2</span>
+<span class="sd">        &gt;&gt;&gt; selector.weights</span>
+<span class="sd">        [1.0, 1.0, 1.0, 1.0, 1.0, 1.0]</span>
+<span class="sd">        &gt;&gt;&gt; selector.probabilities</span>
+<span class="sd">        [37640.547696542824, 37640.547696542824, 37640.547696542824, 0.0,</span>
+<span class="sd">        37640.547696542824, 37640.547696542824]</span>
+
+<span class="sd">        With a concave curvature, the growth of the probability of each</span>
+<span class="sd">        non-selected term gets larger as the number of times it is not selected</span>
+<span class="sd">        increases. The larger the curvature is, the larger difference there</span>
+<span class="sd">        will be between any non-previously selected elements. This results in</span>
+<span class="sd">        sequences which have less chances of a same element being near each</span>
+<span class="sd">        other. In the sequence below, with a curvature of ``15.2``, note how</span>
+<span class="sd">        the elements are as far apart from each other, resulting in a repeating</span>
+<span class="sd">        string of ``&#39;DFAECB&#39;``.</span>
+
+<span class="sd">        &gt;&gt;&gt; result = &#39;&#39;</span>
+<span class="sd">        &gt;&gt;&gt; for _ in range(30):</span>
+<span class="sd">        ...     result += selector()</span>
+<span class="sd">        &gt;&gt;&gt; result</span>
+<span class="sd">        DFAECBDFAECBDFAECBDFAECBDFAECB</span>
+
+<span class="sd">        Checking the probability values at this point outputs:</span>
+
+<span class="sd">        &gt;&gt;&gt; selector.probabilities</span>
+<span class="sd">        [17874877.39956566, 0.0, 1.0, 42106007735.02238,</span>
+<span class="sd">        37640.547696542824, 1416810830.8957152]</span>
+
+<span class="sd">        As we can see, the non-zero values vary wildly. The higher the</span>
+<span class="sd">        curvature, the higher the difference between these values, making some</span>
+<span class="sd">        of them much more likely to be selected.</span>
+
+<span class="sd">    :attr:`curvature` property:</span>
+<span class="sd">        To change the curvature value at any point, simply set the property</span>
+<span class="sd">        :attr:`curvature` to a different value.</span>
+
+<span class="sd">        &gt;&gt;&gt; selector = auxjad.TenneySelector([&#39;A&#39;, &#39;B&#39;, &#39;C&#39;, &#39;D&#39;, &#39;E&#39;, &#39;F&#39;])</span>
+<span class="sd">        &gt;&gt;&gt; selector.curvature</span>
+<span class="sd">        1.0</span>
+<span class="sd">        &gt;&gt;&gt; selector.curvature = 0.25</span>
+<span class="sd">        &gt;&gt;&gt; selector.curvature</span>
+<span class="sd">        0.25</span>
+
+<span class="sd">    :attr:`weights`:</span>
+<span class="sd">        Each element can also have a fixed weight to themselves. This will</span>
+<span class="sd">        affect the probability calculation. The example below uses the default</span>
+<span class="sd">        linear curvature.</span>
+
+<span class="sd">        &gt;&gt;&gt; selector = auxjad.TenneySelector(</span>
+<span class="sd">        ...     [&#39;A&#39;, &#39;B&#39;, &#39;C&#39;, &#39;D&#39;, &#39;E&#39;, &#39;F&#39;],</span>
+<span class="sd">        ...     weights=[1.0, 1.0, 5.0, 5.0, 10.0, 20.0],</span>
+<span class="sd">        &gt;&gt;&gt; )</span>
+<span class="sd">        &gt;&gt;&gt; selector.weights</span>
+<span class="sd">        [1.0, 1.0, 5.0, 5.0, 10.0, 20.0]</span>
+<span class="sd">        &gt;&gt;&gt; selector.probabilities</span>
+<span class="sd">        [1.0, 1.0, 5.0, 5.0, 10.0, 20.0]</span>
+<span class="sd">        &gt;&gt;&gt; result = &#39;&#39;</span>
+<span class="sd">        &gt;&gt;&gt; for _ in range(30):</span>
+<span class="sd">        ...     result += selector()</span>
+<span class="sd">        &gt;&gt;&gt; result</span>
+<span class="sd">        FBEFECFDEADFEDFEDBFECDAFCEDCFE</span>
+<span class="sd">        &gt;&gt;&gt; selector.weights</span>
+<span class="sd">        [1.0, 1.0, 5.0, 5.0, 10.0, 20.0]</span>
+<span class="sd">        &gt;&gt;&gt; selector.probabilities</span>
+<span class="sd">        [7.0, 12.0, 10.0, 15.0, 0.0, 20.0]</span>
+
+<span class="sd">        Set :attr:`weights` to ``None`` to reset it to a uniform distribution.</span>
+
+<span class="sd">        &gt;&gt;&gt; selector = auxjad.TenneySelector(</span>
+<span class="sd">        ...     [&#39;A&#39;, &#39;B&#39;, &#39;C&#39;, &#39;D&#39;, &#39;E&#39;, &#39;F&#39;],</span>
+<span class="sd">        ...     weights=[1.0, 1.0, 5.0, 5.0, 10.0, 20.0],</span>
+<span class="sd">        &gt;&gt;&gt; )</span>
+<span class="sd">        &gt;&gt;&gt; selector.weights</span>
+<span class="sd">        [1.0, 1.0, 5.0, 5.0, 10.0, 20.0]</span>
+<span class="sd">        &gt;&gt;&gt; selector.weights = None</span>
+<span class="sd">        &gt;&gt;&gt; selector.weights</span>
+<span class="sd">        [1.0, 1.0, 1.0, 1.0, 1.0, 1.0]</span>
+
+<span class="sd">    :meth:`reset_probabilities`:</span>
+<span class="sd">        To reset the probability distribution of all elements to its initial</span>
+<span class="sd">        value (an uniform distribution), use the method</span>
+<span class="sd">        :meth:`reset_probabilities`.</span>
+
+<span class="sd">        &gt;&gt;&gt; selector = auxjad.TenneySelector([&#39;A&#39;, &#39;B&#39;, &#39;C&#39;, &#39;D&#39;, &#39;E&#39;, &#39;F&#39;])</span>
+<span class="sd">        &gt;&gt;&gt; for _ in range(30):</span>
+<span class="sd">        ...     selector()</span>
+<span class="sd">        &gt;&gt;&gt; selector.probabilities</span>
+<span class="sd">        [4.0, 3.0, 1.0, 0.0, 5.0, 2.0]</span>
+<span class="sd">        &gt;&gt;&gt; selector.reset_probabilities()</span>
+<span class="sd">        &gt;&gt;&gt; selector.probabilities</span>
+<span class="sd">        [1.0, 1.0, 1.0, 1.0, 1.0, 1.0]</span>
+
+<span class="sd">    :attr:`contents`:</span>
+<span class="sd">        The instances of this class can be indexed and sliced. This allows</span>
+<span class="sd">        reading, assigning, or deleting values from :attr:`contents`. Replacing</span>
+<span class="sd">        elements by assignment will not affect the :attr:`probabilities`</span>
+<span class="sd">        property, and the new elements will have the same probability as the</span>
+<span class="sd">        ones it replaced. Deleting element will delete the probability of that</span>
+<span class="sd">        index.</span>
+
+<span class="sd">        &gt;&gt;&gt; selector = auxjad.TenneySelector([&#39;A&#39;, &#39;B&#39;, &#39;C&#39;, &#39;D&#39;, &#39;E&#39;, &#39;F&#39;])</span>
+<span class="sd">        &gt;&gt;&gt; for _ in range(30):</span>
+<span class="sd">        ...     selector()</span>
+<span class="sd">        &gt;&gt;&gt; selector.probabilities</span>
+<span class="sd">        [3.0, 2.0, 1.0, 7.0, 5.0, 0.0]</span>
+<span class="sd">        &gt;&gt;&gt; selector[2]</span>
+<span class="sd">        &#39;C&#39;</span>
+<span class="sd">        &gt;&gt;&gt; selector[1:4]</span>
+<span class="sd">        [&#39;B&#39;, &#39;C&#39;, &#39;D&#39;]</span>
+<span class="sd">        &gt;&gt;&gt; selector[2] = &#39;foo&#39;</span>
+<span class="sd">        &gt;&gt;&gt; selector.contents</span>
+<span class="sd">        [&#39;A&#39;, &#39;B&#39;, &#39;foo&#39;, &#39;D&#39;, &#39;E&#39;, &#39;F&#39;]</span>
+<span class="sd">        &gt;&gt;&gt; selector[:] = [&#39;foo&#39;, &#39;bar&#39;, &#39;X&#39;, &#39;Y&#39;, &#39;Z&#39;, &#39;...&#39;]</span>
+<span class="sd">        &gt;&gt;&gt; selector.contents</span>
+<span class="sd">        [&#39;foo&#39;, &#39;bar&#39;, &#39;X&#39;, &#39;Y&#39;, &#39;Z&#39;, &#39;...&#39;]</span>
+<span class="sd">        &gt;&gt;&gt; selector.probabilities</span>
+<span class="sd">        [3.0, 2.0, 1.0, 7.0, 5.0, 0.0]</span>
+<span class="sd">        &gt;&gt;&gt; del selector[0:2]</span>
+<span class="sd">        &gt;&gt;&gt; selector.contents</span>
+<span class="sd">        [&#39;X&#39;, &#39;Y&#39;, &#39;Z&#39;, &#39;...&#39;]</span>
+<span class="sd">        &gt;&gt;&gt; selector.probabilities</span>
+<span class="sd">        [1.0, 7.0, 5.0, 0.0]</span>
+
+<span class="sd">        You can also check if the instance contains a specific element. In the</span>
+<span class="sd">        case of the selector above, we have:</span>
+
+<span class="sd">        &gt;&gt;&gt; &#39;X&#39; in selector</span>
+<span class="sd">        True</span>
+<span class="sd">        &gt;&gt;&gt; &#39;A&#39; in selector</span>
+<span class="sd">        False</span>
+
+<span class="sd">    Changing :attr:`contents` resets :attr:`probabilities` and :attr:`weights`:</span>
+<span class="sd">        A new :obj:`list` of an arbitrary length can be set at any point using</span>
+<span class="sd">        the property :attr:`contents`. Do notice that both</span>
+<span class="sd">        :attr:`probabilities` and :attr:`weights` will be reset at that point.</span>
+
+<span class="sd">        &gt;&gt;&gt; selector = auxjad.TenneySelector(</span>
+<span class="sd">        ...     [&#39;A&#39;, &#39;B&#39;, &#39;C&#39;, &#39;D&#39;, &#39;E&#39;, &#39;F&#39;],</span>
+<span class="sd">        ...     weights=[1.0, 1.0, 5.0, 5.0, 10.0, 20.0],</span>
+<span class="sd">        &gt;&gt;&gt; )</span>
+<span class="sd">        &gt;&gt;&gt; for _ in range(30):</span>
+<span class="sd">        ...     selector()</span>
+<span class="sd">        &gt;&gt;&gt; len(selector)</span>
+<span class="sd">        6</span>
+<span class="sd">        &gt;&gt;&gt; selector.contents</span>
+<span class="sd">        [&#39;A&#39;, &#39;B&#39;, &#39;C&#39;, &#39;D&#39;, &#39;E&#39;, &#39;F&#39;]</span>
+<span class="sd">        &gt;&gt;&gt; selector.weights</span>
+<span class="sd">        [1.0, 1.0, 5.0, 5.0, 10.0, 20.0]</span>
+<span class="sd">        &gt;&gt;&gt; selector.probabilities</span>
+<span class="sd">        [8.0, 2.0, 5.0, 15.0, 50.0, 0.0]</span>
+<span class="sd">        &gt;&gt;&gt; selector.contents = [2, 4, 6, 8]</span>
+<span class="sd">        &gt;&gt;&gt; len(selector)</span>
+<span class="sd">        4</span>
+<span class="sd">        &gt;&gt;&gt; selector.contents</span>
+<span class="sd">        [2, 4, 6, 8]</span>
+<span class="sd">        &gt;&gt;&gt; selector.weights</span>
+<span class="sd">        [1.0, 1.0, 1.0, 1.0]</span>
+<span class="sd">        &gt;&gt;&gt; selector.probabilities</span>
+<span class="sd">        [1.0, 1.0, 1.0, 1.0]</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="c1">### CLASS VARIABLES ###</span>
+
+    <span class="vm">__slots__</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;_contents&#39;</span><span class="p">,</span>
+                 <span class="s1">&#39;_weights&#39;</span><span class="p">,</span>
+                 <span class="s1">&#39;_curvature&#39;</span><span class="p">,</span>
+                 <span class="s1">&#39;_counter&#39;</span><span class="p">,</span>
+                 <span class="s1">&#39;_previous_index&#39;</span><span class="p">,</span>
+                 <span class="s1">&#39;_probabilities&#39;</span><span class="p">,</span>
+                 <span class="p">)</span>
+
+    <span class="c1">### INITIALISER ###</span>
+
+<div class="viewcode-block" id="TenneySelector.__init__"><a class="viewcode-back" href="../../../_api_members/auxjad.TenneySelector.html#auxjad.TenneySelector.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+                 <span class="n">contents</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">Any</span><span class="p">],</span>
+                 <span class="o">*</span><span class="p">,</span>
+                 <span class="n">weights</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">list</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+                 <span class="n">curvature</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1.0</span><span class="p">,</span>
+                 <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sa">r</span><span class="s1">&#39;Initialises self.&#39;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">contents</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;&#39;contents&#39; must be &#39;list&#39;&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">weights</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">weights</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
+                <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;&#39;weights&#39; must be &#39;list&#39;&quot;</span><span class="p">)</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="nb">len</span><span class="p">(</span><span class="n">contents</span><span class="p">)</span> <span class="o">==</span> <span class="nb">len</span><span class="p">(</span><span class="n">weights</span><span class="p">):</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;&#39;weights&#39; must have the same length &quot;</span>
+                                 <span class="s2">&quot;as &#39;contents&#39;&quot;</span><span class="p">)</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="nb">all</span><span class="p">(</span><span class="nb">isinstance</span><span class="p">(</span><span class="n">weight</span><span class="p">,</span> <span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="nb">float</span><span class="p">))</span>
+                       <span class="k">for</span> <span class="n">weight</span> <span class="ow">in</span> <span class="n">weights</span><span class="p">):</span>
+                <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;&#39;weights&#39; elements must be &quot;</span>
+                                <span class="s2">&quot;&#39;int&#39; or &#39;float&#39;&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">curvature</span><span class="p">,</span> <span class="nb">float</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;&#39;curvature&#39; must be &#39;float&#39;&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">curvature</span> <span class="o">&lt;</span> <span class="mf">0.0</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;&#39;curvature&#39; must be larger than 0.0&quot;</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_contents</span> <span class="o">=</span> <span class="n">contents</span><span class="p">[:]</span>
+        <span class="k">if</span> <span class="n">weights</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_weights</span> <span class="o">=</span> <span class="n">weights</span><span class="p">[:]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_weights</span> <span class="o">=</span> <span class="p">[</span><span class="mf">1.0</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="fm">__len__</span><span class="p">())]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_curvature</span> <span class="o">=</span> <span class="n">curvature</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_counter</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="fm">__len__</span><span class="p">())]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_generate_probabilities</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_previous_index</span> <span class="o">=</span> <span class="kc">None</span></div>
+
+    <span class="c1">### SPECIAL METHODS ###</span>
+
+<div class="viewcode-block" id="TenneySelector.__repr__"><a class="viewcode-back" href="../../../_api_members/auxjad.TenneySelector.html#auxjad.TenneySelector.__repr__">[docs]</a>    <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="sa">r</span><span class="s1">&#39;Returns interpreter representation of :attr:`contents`.&#39;</span>
+        <span class="k">return</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_contents</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="TenneySelector.__len__"><a class="viewcode-back" href="../../../_api_members/auxjad.TenneySelector.html#auxjad.TenneySelector.__len__">[docs]</a>    <span class="k">def</span> <span class="fm">__len__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+        <span class="sa">r</span><span class="s1">&#39;Returns the length of :attr:`contents`.&#39;</span>
+        <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_contents</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="TenneySelector.__call__"><a class="viewcode-back" href="../../../_api_members/auxjad.TenneySelector.html#auxjad.TenneySelector.__call__">[docs]</a>    <span class="k">def</span> <span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Any</span><span class="p">:</span>
+        <span class="sa">r</span><span class="sd">&quot;&quot;&quot;Calls the selection process and outputs one element of</span>
+<span class="sd">        :attr:`contents`.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_previous_index</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">choices</span><span class="p">(</span>
+            <span class="p">[</span><span class="n">n</span> <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="fm">__len__</span><span class="p">())],</span>
+            <span class="n">weights</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_probabilities</span><span class="p">,</span>
+        <span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_regenerate_counts</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_generate_probabilities</span><span class="p">()</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_contents</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">_previous_index</span><span class="p">]</span></div>
+
+<div class="viewcode-block" id="TenneySelector.__next__"><a class="viewcode-back" href="../../../_api_members/auxjad.TenneySelector.html#auxjad.TenneySelector.__next__">[docs]</a>    <span class="k">def</span> <span class="fm">__next__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Any</span><span class="p">:</span>
+        <span class="sa">r</span><span class="sd">&quot;&quot;&quot;Calls the selection process and outputs one element of</span>
+<span class="sd">        :attr:`contents`.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="fm">__call__</span><span class="p">()</span></div>
+
+<div class="viewcode-block" id="TenneySelector.__getitem__"><a class="viewcode-back" href="../../../_api_members/auxjad.TenneySelector.html#auxjad.TenneySelector.__getitem__">[docs]</a>    <span class="k">def</span> <span class="fm">__getitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+                    <span class="n">key</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+                    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Any</span><span class="p">:</span>
+        <span class="sa">r</span><span class="sd">&quot;&quot;&quot;Returns one or more elements of :attr:`contents` through indexing</span>
+<span class="sd">        or slicing.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_contents</span><span class="p">[</span><span class="n">key</span><span class="p">]</span></div>
+
+<div class="viewcode-block" id="TenneySelector.__setitem__"><a class="viewcode-back" href="../../../_api_members/auxjad.TenneySelector.html#auxjad.TenneySelector.__setitem__">[docs]</a>    <span class="k">def</span> <span class="fm">__setitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+                    <span class="n">key</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+                    <span class="n">value</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span>
+                    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sa">r</span><span class="sd">&quot;&quot;&quot;Assigns values to one or more elements of :attr:`contents` through</span>
+<span class="sd">        indexing or slicing.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_contents</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">value</span></div>
+
+<div class="viewcode-block" id="TenneySelector.__delitem__"><a class="viewcode-back" href="../../../_api_members/auxjad.TenneySelector.html#auxjad.TenneySelector.__delitem__">[docs]</a>    <span class="k">def</span> <span class="fm">__delitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+                    <span class="n">key</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+                    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sa">r</span><span class="sd">&quot;&quot;&quot;Deletes one or more elements of :attr:`contents` through indexing</span>
+<span class="sd">        or slicing.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">del</span> <span class="bp">self</span><span class="o">.</span><span class="n">_contents</span><span class="p">[</span><span class="n">key</span><span class="p">]</span>
+        <span class="k">del</span> <span class="bp">self</span><span class="o">.</span><span class="n">_weights</span><span class="p">[</span><span class="n">key</span><span class="p">]</span>
+        <span class="k">del</span> <span class="bp">self</span><span class="o">.</span><span class="n">_probabilities</span><span class="p">[</span><span class="n">key</span><span class="p">]</span>
+        <span class="k">del</span> <span class="bp">self</span><span class="o">.</span><span class="n">_counter</span><span class="p">[</span><span class="n">key</span><span class="p">]</span></div>
+
+    <span class="c1">### PUBLIC METHODS ###</span>
+
+<div class="viewcode-block" id="TenneySelector.reset_probabilities"><a class="viewcode-back" href="../../../_api_members/auxjad.TenneySelector.html#auxjad.TenneySelector.reset_probabilities">[docs]</a>    <span class="k">def</span> <span class="nf">reset_probabilities</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sa">r</span><span class="sd">&quot;&quot;&quot;Resets the probability distribution of all elements to an uniform</span>
+<span class="sd">        distribution.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_counter</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="fm">__len__</span><span class="p">())]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_generate_probabilities</span><span class="p">()</span></div>
+
+    <span class="c1">### PRIVATE METHODS ###</span>
+
+    <span class="k">def</span> <span class="nf">_regenerate_counts</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sa">r</span><span class="sd">&quot;&quot;&quot;Increases the count of all elements except for the previously</span>
+<span class="sd">        selected one, whose count is reset to zero.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="fm">__len__</span><span class="p">()):</span>
+            <span class="k">if</span> <span class="n">i</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">_previous_index</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_counter</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_counter</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+
+    <span class="k">def</span> <span class="nf">_generate_probabilities</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+                                <span class="o">*</span><span class="p">,</span>
+                                <span class="n">reset</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+                                <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sa">r</span><span class="sd">&quot;&quot;&quot;Generates the probabilities given the weights of the elements as</span>
+<span class="sd">        well as their count numbers (which are fed into the growth function).</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">reset</span><span class="p">,</span> <span class="nb">bool</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;&#39;reset&#39; must be &#39;bool&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">reset</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_counter</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="fm">__len__</span><span class="p">())]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_probabilities</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">weight</span><span class="p">,</span> <span class="n">count</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_weights</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_counter</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_probabilities</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">weight</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">_growth_function</span><span class="p">(</span><span class="n">count</span><span class="p">))</span>
+
+    <span class="k">def</span> <span class="nf">_growth_function</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+                         <span class="n">count</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+                         <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+        <span class="sa">r</span><span class="s1">&#39;Applies the growth exponent given a number of counts.&#39;</span>
+        <span class="k">return</span> <span class="n">count</span> <span class="o">**</span> <span class="bp">self</span><span class="o">.</span><span class="n">_curvature</span>
+
+    <span class="c1">### PUBLIC PROPERTIES ###</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">contents</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="n">Any</span><span class="p">]:</span>
+        <span class="sa">r</span><span class="s1">&#39;The :obj:`list` from which the selector picks elements.&#39;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_contents</span>
+
+    <span class="nd">@contents</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">contents</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+                 <span class="n">contents</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">Any</span><span class="p">],</span>
+                 <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">contents</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;&#39;contents&#39; must be &#39;list&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_contents</span> <span class="o">=</span> <span class="n">contents</span><span class="p">[:]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_weights</span> <span class="o">=</span> <span class="p">[</span><span class="mf">1.0</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="fm">__len__</span><span class="p">())]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_generate_probabilities</span><span class="p">(</span><span class="n">reset</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">weights</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="nb">int</span><span class="p">]]:</span>
+        <span class="sa">r</span><span class="s1">&#39;The :obj:`list` with weights for each element of :attr:`contents`.&#39;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_weights</span>
+
+    <span class="nd">@weights</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">weights</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+                <span class="n">weights</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="nb">int</span><span class="p">]]],</span>
+                <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">weights</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">weights</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
+                <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;&#39;weights&#39; must be &#39;list&#39;&quot;</span><span class="p">)</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="fm">__len__</span><span class="p">()</span> <span class="o">==</span> <span class="nb">len</span><span class="p">(</span><span class="n">weights</span><span class="p">):</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;&#39;weights&#39; must have the same length as the &quot;</span>
+                                 <span class="s2">&quot;contents of the object&quot;</span><span class="p">)</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="nb">all</span><span class="p">(</span><span class="nb">isinstance</span><span class="p">(</span><span class="n">weight</span><span class="p">,</span> <span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="nb">float</span><span class="p">))</span>
+                       <span class="k">for</span> <span class="n">weight</span> <span class="ow">in</span> <span class="n">weights</span><span class="p">):</span>
+                <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;&#39;weights&#39; elements must be &#39;int&#39; or &#39;float&#39;&quot;</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_weights</span> <span class="o">=</span> <span class="n">weights</span><span class="p">[:]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_weights</span> <span class="o">=</span> <span class="p">[</span><span class="mf">1.0</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="fm">__len__</span><span class="p">())]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_generate_probabilities</span><span class="p">(</span><span class="n">reset</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">curvature</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+        <span class="sa">r</span><span class="s1">&#39;The exponent of the growth function.&#39;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_curvature</span>
+
+    <span class="nd">@curvature</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">curvature</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+                  <span class="n">curvature</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
+                  <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">curvature</span><span class="p">,</span> <span class="nb">float</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;&#39;curvature&#39; must be &#39;float&#39;&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">curvature</span> <span class="o">&lt;</span> <span class="mf">0.0</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;&#39;curvature&#39; must be larger than 0.0&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_curvature</span> <span class="o">=</span> <span class="n">curvature</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_generate_probabilities</span><span class="p">()</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">previous_index</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Union</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="kc">None</span><span class="p">]:</span>
+        <span class="sa">r</span><span class="sd">&quot;&quot;&quot;Read-only property, returns the index of the previously output</span>
+<span class="sd">        element.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_previous_index</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">previous_result</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Any</span><span class="p">:</span>
+        <span class="sa">r</span><span class="s1">&#39;Read-only property, returns the previously output element.&#39;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_previous_index</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_contents</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">_previous_index</span><span class="p">]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_previous_index</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">probabilities</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">float</span><span class="p">]:</span>
+        <span class="sa">r</span><span class="s1">&#39;Read-only property, returns the probabilities vector.&#39;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_probabilities</span></div>
+</pre></div>
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 2020, Gilberto Agostinho
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>
