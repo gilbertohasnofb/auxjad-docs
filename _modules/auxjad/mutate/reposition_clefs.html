@@ -1,0 +1,704 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>auxjad.mutate.reposition_clefs &mdash; auxjad 0.8.25 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+        <script src="../../../_static/jquery.js"></script>
+        <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/doctools.js"></script>
+    
+    <script type="text/javascript" src="../../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../../index.html" class="icon icon-home"> auxjad
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.8
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../index.html">Welcome to Auxjad’s documentation!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../examples/index.html">Examples of usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../score_gallery/index.html">Score gallery</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../api/index.html">Auxjad API</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">auxjad</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../../index.html">Module code</a> &raquo;</li>
+        
+      <li>auxjad.mutate.reposition_clefs</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for auxjad.mutate.reposition_clefs</h1><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">abjad</span>
+
+
+<div class="viewcode-block" id="reposition_clefs"><a class="viewcode-back" href="../../../_api_members/auxjad.mutate.reposition_clefs.html#auxjad.mutate.reposition_clefs">[docs]</a><span class="k">def</span> <span class="nf">reposition_clefs</span><span class="p">(</span><span class="n">selection</span><span class="p">:</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Selection</span><span class="p">,</span>
+                     <span class="o">*</span><span class="p">,</span>
+                     <span class="n">shift_clef_to_notes</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+                     <span class="n">implicit_clef</span><span class="p">:</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Clef</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Clef</span><span class="p">(</span><span class="s1">&#39;treble&#39;</span><span class="p">),</span>
+                     <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="sa">r</span><span class="sd">&quot;&quot;&quot;Mutates an input |abjad.Selection| in place and has no return value;</span>
+<span class="sd">    this function removes all consecutive repeated clefs. It can also be used</span>
+<span class="sd">    to shift clefs from rests to pitched leaves.</span>
+
+<span class="sd">    Basic usage:</span>
+<span class="sd">        When consecutive clefs are the same, the second one is removed:</span>
+
+<span class="sd">        &gt;&gt;&gt; staff = abjad.Staff(r&quot;c&#39;1 | d&#39;1&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; abjad.attach(abjad.Clef(&#39;treble&#39;), staff[0])</span>
+<span class="sd">        &gt;&gt;&gt; abjad.attach(abjad.Clef(&#39;treble&#39;), staff[1])</span>
+<span class="sd">        &gt;&gt;&gt; abjad.show(staff)</span>
+
+<span class="sd">        ..  docs::</span>
+
+<span class="sd">            \new Staff</span>
+<span class="sd">            {</span>
+<span class="sd">                \clef &quot;treble&quot;</span>
+<span class="sd">                c&#39;1</span>
+<span class="sd">                \clef &quot;treble&quot;</span>
+<span class="sd">                d&#39;1</span>
+<span class="sd">            }</span>
+
+<span class="sd">        ..  figure:: ../_images/reposition_clefs-ve7c2iykuyb.png</span>
+
+<span class="sd">        &gt;&gt;&gt; auxjad.mutate.reposition_clefs(staff[:])</span>
+<span class="sd">        &gt;&gt;&gt; abjad.show(staff)</span>
+
+<span class="sd">        ..  docs::</span>
+
+<span class="sd">            \new Staff</span>
+<span class="sd">            {</span>
+<span class="sd">                \clef &quot;treble&quot;</span>
+<span class="sd">                c&#39;1</span>
+<span class="sd">                d&#39;1</span>
+<span class="sd">            }</span>
+
+<span class="sd">        ..  figure:: ../_images/reposition_clefs-w6sbmg4iihr.png</span>
+
+<span class="sd">    ..  note::</span>
+
+<span class="sd">        Auxjad automatically adds this function as an extension function to</span>
+<span class="sd">        |abjad.mutate|. It can thus be used from either |auxjad.mutate|_ or</span>
+<span class="sd">        |abjad.mutate| namespaces. Therefore, the two lines below are</span>
+<span class="sd">        equivalent:</span>
+
+<span class="sd">        &gt;&gt;&gt; auxjad.mutate.reposition_clefs(staff[:])</span>
+<span class="sd">        &gt;&gt;&gt; abjad.mutate.reposition_clefs(staff[:])</span>
+
+<span class="sd">    LilyPond&#39;s fallback clef:</span>
+<span class="sd">        As seen above, LilyPond automatically omits repeated clefs unless the</span>
+<span class="sd">        first clef is omitted. In that case, it uses a treble clef as fallback,</span>
+<span class="sd">        although it won&#39;t then remove a subsequent repeated treble clef:</span>
+
+<span class="sd">        &gt;&gt;&gt; staff = abjad.Staff(r&quot;c&#39;1 | d&#39;1&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; abjad.attach(abjad.Clef(&#39;treble&#39;), staff[1])</span>
+<span class="sd">        &gt;&gt;&gt; abjad.show(staff)</span>
+
+<span class="sd">        ..  docs::</span>
+
+<span class="sd">            \new Staff</span>
+<span class="sd">            {</span>
+<span class="sd">                c&#39;1</span>
+<span class="sd">                \clef &quot;treble&quot;</span>
+<span class="sd">                d&#39;1</span>
+<span class="sd">            }</span>
+
+<span class="sd">        ..  figure:: ../_images/reposition_clefs-ozr2sz3jugc.png</span>
+
+<span class="sd">        This function handles fallback clefs too:</span>
+
+<span class="sd">        &gt;&gt;&gt; auxjad.mutate.reposition_clefs(staff[:])</span>
+<span class="sd">        &gt;&gt;&gt; abjad.show(staff)</span>
+
+<span class="sd">        ..  docs::</span>
+
+<span class="sd">            \new Staff</span>
+<span class="sd">            {</span>
+<span class="sd">                c&#39;1</span>
+<span class="sd">                d&#39;1</span>
+<span class="sd">            }</span>
+
+<span class="sd">        ..  figure:: ../_images/reposition_clefs-0620w7q00lsr.png</span>
+
+<span class="sd">    Clef structure:</span>
+<span class="sd">        The function also removes clefs that are separated by an arbitrary</span>
+<span class="sd">        number of leaves without clefs:</span>
+
+<span class="sd">        &gt;&gt;&gt; staff = abjad.Staff(r&quot;c&#39;1 | d&#39;2 e&#39;4 r4 | f&#39;1&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; abjad.attach(abjad.Clef(&#39;treble&#39;), staff[4])</span>
+<span class="sd">        &gt;&gt;&gt; abjad.show(staff)</span>
+
+<span class="sd">        ..  docs::</span>
+
+<span class="sd">            \new Staff</span>
+<span class="sd">            {</span>
+<span class="sd">                c&#39;1</span>
+<span class="sd">                d&#39;2</span>
+<span class="sd">                e&#39;4</span>
+<span class="sd">                r4</span>
+<span class="sd">                \clef &quot;treble&quot;</span>
+<span class="sd">                f&#39;1</span>
+<span class="sd">            }</span>
+
+<span class="sd">        ..  figure:: ../_images/reposition_clefs-1dwpu3agebe.png</span>
+
+<span class="sd">        &gt;&gt;&gt; auxjad.mutate.reposition_clefs(staff[:])</span>
+<span class="sd">        &gt;&gt;&gt; abjad.show(staff)</span>
+
+<span class="sd">        ..  docs::</span>
+
+<span class="sd">            \new Staff</span>
+<span class="sd">            {</span>
+<span class="sd">                c&#39;1</span>
+<span class="sd">                d&#39;2</span>
+<span class="sd">                e&#39;4</span>
+<span class="sd">                r4</span>
+<span class="sd">                f&#39;1</span>
+<span class="sd">            }</span>
+
+<span class="sd">        ..  figure:: ../_images/reposition_clefs-wjmmwbhtaq.png</span>
+
+<span class="sd">    Inputs with optimal clef structure:</span>
+<span class="sd">        The function will not alter the container if the clef changes are</span>
+<span class="sd">        already optimal.</span>
+
+<span class="sd">        &gt;&gt;&gt; staff = abjad.Staff(r&quot;c&#39;1 | a,2 bf,4 r4 | f&#39;1&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; abjad.attach(abjad.Clef(&#39;bass&#39;), staff[1])</span>
+<span class="sd">        &gt;&gt;&gt; abjad.attach(abjad.Clef(&#39;treble&#39;), staff[4])</span>
+<span class="sd">        &gt;&gt;&gt; abjad.show(staff)</span>
+
+<span class="sd">        ..  docs::</span>
+
+<span class="sd">            \new Staff</span>
+<span class="sd">            {</span>
+<span class="sd">                c&#39;1</span>
+<span class="sd">                \clef &quot;bass&quot;</span>
+<span class="sd">                a,2</span>
+<span class="sd">                bf,4</span>
+<span class="sd">                r4</span>
+<span class="sd">                \clef &quot;treble&quot;</span>
+<span class="sd">                f&#39;1</span>
+<span class="sd">            }</span>
+
+<span class="sd">        ..  figure:: ../_images/reposition_clefs-ooacruvoibr.png</span>
+
+<span class="sd">        &gt;&gt;&gt; auxjad.mutate.reposition_clefs(staff[:])</span>
+<span class="sd">        &gt;&gt;&gt; abjad.show(staff)</span>
+
+<span class="sd">        ..  docs::</span>
+
+<span class="sd">            \new Staff</span>
+<span class="sd">            {</span>
+<span class="sd">                c&#39;1</span>
+<span class="sd">                \clef &quot;bass&quot;</span>
+<span class="sd">                a,2</span>
+<span class="sd">                bf,4</span>
+<span class="sd">                r4</span>
+<span class="sd">                \clef &quot;treble&quot;</span>
+<span class="sd">                f&#39;1</span>
+<span class="sd">            }</span>
+
+<span class="sd">        ..  figure:: ../_images/reposition_clefs-8z0s96frl4x.png</span>
+
+<span class="sd">    Multi-measure rests:</span>
+<span class="sd">        The function handles rests and multi-measure rests.</span>
+
+<span class="sd">        &gt;&gt;&gt; staff = abjad.Staff(r&quot;c&#39;1 | d&#39;2 r2 | R1 | e&#39;1&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; abjad.attach(abjad.Clef(&#39;treble&#39;), staff[0])</span>
+<span class="sd">        &gt;&gt;&gt; abjad.attach(abjad.Clef(&#39;treble&#39;), staff[4])</span>
+<span class="sd">        &gt;&gt;&gt; abjad.show(staff)</span>
+
+<span class="sd">        ..  docs::</span>
+
+<span class="sd">            \new Staff</span>
+<span class="sd">            {</span>
+<span class="sd">                c&#39;1</span>
+<span class="sd">                d&#39;2</span>
+<span class="sd">                r2</span>
+<span class="sd">                R1</span>
+<span class="sd">                \clef &quot;treble&quot;</span>
+<span class="sd">                e&#39;1</span>
+<span class="sd">            }</span>
+
+<span class="sd">        ..  figure:: ../_images/reposition_clefs-wpuzqrszs7i.png</span>
+
+<span class="sd">        &gt;&gt;&gt; auxjad.mutate.reposition_clefs(staff[:])</span>
+<span class="sd">        &gt;&gt;&gt; abjad.show(staff)</span>
+
+<span class="sd">        ..  docs::</span>
+
+<span class="sd">            \new Staff</span>
+<span class="sd">            {</span>
+<span class="sd">                c&#39;1</span>
+<span class="sd">                d&#39;2</span>
+<span class="sd">                r2</span>
+<span class="sd">                R1</span>
+<span class="sd">                e&#39;1</span>
+<span class="sd">            }</span>
+
+<span class="sd">        ..  figure:: ../_images/reposition_clefs-os7dqkh11vl.png</span>
+
+<span class="sd">    ``shift_clef_to_notes``:</span>
+<span class="sd">        By default, clefs attached to rests are shifted to the first pitched</span>
+<span class="sd">        leaf.</span>
+
+<span class="sd">        &gt;&gt;&gt; staff = abjad.Staff(r&quot;c&#39;1 | d&#39;2 r2 | fs1&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; abjad.attach(abjad.Clef(&#39;treble&#39;), staff[0])</span>
+<span class="sd">        &gt;&gt;&gt; abjad.attach(abjad.Clef(&#39;bass&#39;), staff[2])</span>
+<span class="sd">        &gt;&gt;&gt; abjad.show(staff)</span>
+
+<span class="sd">        ..  docs::</span>
+
+<span class="sd">            \new Staff</span>
+<span class="sd">            {</span>
+<span class="sd">                \clef &quot;treble&quot;</span>
+<span class="sd">                c&#39;1</span>
+<span class="sd">                d&#39;2</span>
+<span class="sd">                \clef &quot;bass&quot;</span>
+<span class="sd">                r2</span>
+<span class="sd">                fs1</span>
+<span class="sd">            }</span>
+
+<span class="sd">        ..  figure:: ../_images/reposition_clefs-jft5tljn0ni.png</span>
+
+<span class="sd">        &gt;&gt;&gt; auxjad.mutate.reposition_clefs(staff[:])</span>
+<span class="sd">        &gt;&gt;&gt; abjad.show(staff)</span>
+
+<span class="sd">        ..  docs::</span>
+
+<span class="sd">            \new Staff</span>
+<span class="sd">            {</span>
+<span class="sd">                \clef &quot;treble&quot;</span>
+<span class="sd">                c&#39;1</span>
+<span class="sd">                d&#39;2</span>
+<span class="sd">                r2</span>
+<span class="sd">                \clef &quot;bass&quot;</span>
+<span class="sd">                fs1</span>
+<span class="sd">            }</span>
+
+<span class="sd">        ..  figure:: ../_images/reposition_clefs-pirrrq3p6di.png</span>
+
+<span class="sd">        Set ``shift_clef_to_notes`` to ``False`` to disable this behaviour.</span>
+
+<span class="sd">        &gt;&gt;&gt; staff = abjad.Staff(r&quot;c&#39;1 | d&#39;2 r2 | fs1&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; abjad.attach(abjad.Clef(&#39;treble&#39;), staff[0])</span>
+<span class="sd">        &gt;&gt;&gt; abjad.attach(abjad.Clef(&#39;bass&#39;), staff[2])</span>
+<span class="sd">        &gt;&gt;&gt; auxjad.mutate.reposition_clefs(staff[:], shift_clef_to_notes=False)</span>
+<span class="sd">        &gt;&gt;&gt; abjad.show(staff)</span>
+
+<span class="sd">        ..  docs::</span>
+
+<span class="sd">            \new Staff</span>
+<span class="sd">            {</span>
+<span class="sd">                \clef &quot;treble&quot;</span>
+<span class="sd">                c&#39;1</span>
+<span class="sd">                d&#39;2</span>
+<span class="sd">                \clef &quot;bass&quot;</span>
+<span class="sd">                r2</span>
+<span class="sd">                fs1</span>
+<span class="sd">            }</span>
+
+<span class="sd">        ..  figure:: ../_images/reposition_clefs-srrb69k33oe.png</span>
+
+<span class="sd">    Multiple multi-measure rests:</span>
+<span class="sd">        Clefs are shifted even if the container has multiple multi-measure</span>
+<span class="sd">        rests.</span>
+
+<span class="sd">        &gt;&gt;&gt; staff = abjad.Staff(r&quot;\time 3/4 c&#39;2. | d&#39;4 r2 | R1 * 3/4 | e&#39;2.&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; abjad.attach(abjad.Clef(&#39;treble&#39;), staff[0])</span>
+<span class="sd">        &gt;&gt;&gt; abjad.attach(abjad.Clef(&#39;bass&#39;), staff[2])</span>
+<span class="sd">        &gt;&gt;&gt; abjad.show(staff)</span>
+
+<span class="sd">        ..  docs::</span>
+
+<span class="sd">            \new Staff</span>
+<span class="sd">            {</span>
+<span class="sd">                \time 3/4</span>
+<span class="sd">                \clef &quot;treble&quot;</span>
+<span class="sd">                c&#39;2.</span>
+<span class="sd">                d&#39;4</span>
+<span class="sd">                \clef &quot;bass&quot;</span>
+<span class="sd">                r2</span>
+<span class="sd">                R1 * 3/4</span>
+<span class="sd">                e&#39;2.</span>
+<span class="sd">            }</span>
+
+<span class="sd">        ..  figure:: ../_images/reposition_clefs-1l1ws1tqqt5.png</span>
+
+<span class="sd">        &gt;&gt;&gt; auxjad.mutate.reposition_clefs(staff[:])</span>
+<span class="sd">        &gt;&gt;&gt; abjad.show(staff)</span>
+
+<span class="sd">        ..  docs::</span>
+
+<span class="sd">            \new Staff</span>
+<span class="sd">            {</span>
+<span class="sd">                \time 3/4</span>
+<span class="sd">                \clef &quot;treble&quot;</span>
+<span class="sd">                c&#39;2.</span>
+<span class="sd">                d&#39;4</span>
+<span class="sd">                r2</span>
+<span class="sd">                R1 * 3/4</span>
+<span class="sd">                \clef &quot;bass&quot;</span>
+<span class="sd">                e&#39;2.</span>
+<span class="sd">            }</span>
+
+<span class="sd">        ..  figure:: ../_images/reposition_clefs-gmh7uqxjjrf.png</span>
+
+<span class="sd">    Subcontainers:</span>
+<span class="sd">        The container from which the selection is made can also have</span>
+<span class="sd">        subcontainers, including cases in which the clefs are attached to</span>
+<span class="sd">        leaves of subcontainers:</span>
+
+<span class="sd">        &gt;&gt;&gt; staff = abjad.Staff([abjad.Note(&quot;c&#39;2&quot;),</span>
+<span class="sd">        ...                      abjad.Chord(&quot;&lt;d&#39; f&#39;&gt;2&quot;),</span>
+<span class="sd">        ...                      abjad.Tuplet((2, 3), &quot;g&#39;2 a&#39;2 b&#39;2&quot;),</span>
+<span class="sd">        ...                      ])</span>
+<span class="sd">        &gt;&gt;&gt; abjad.attach(abjad.Clef(&#39;treble&#39;), staff[2][1])</span>
+<span class="sd">        &gt;&gt;&gt; abjad.show(staff)</span>
+
+<span class="sd">        ..  docs::</span>
+
+<span class="sd">            \new Staff</span>
+<span class="sd">            {</span>
+<span class="sd">                c&#39;2</span>
+<span class="sd">                &lt;d&#39; f&#39;&gt;2</span>
+<span class="sd">                \times 2/3</span>
+<span class="sd">                {</span>
+<span class="sd">                    g&#39;2</span>
+<span class="sd">                    \clef &quot;treble&quot;</span>
+<span class="sd">                    a&#39;2</span>
+<span class="sd">                    b&#39;2</span>
+<span class="sd">                }</span>
+<span class="sd">            }</span>
+
+<span class="sd">        ..  figure:: ../_images/reposition_clefs-vwygykrmjd.png</span>
+
+<span class="sd">        &gt;&gt;&gt; auxjad.mutate.reposition_clefs(staff[:])</span>
+<span class="sd">        &gt;&gt;&gt; abjad.show(staff)</span>
+
+<span class="sd">        ..  docs::</span>
+
+<span class="sd">            \new Staff</span>
+<span class="sd">            {</span>
+<span class="sd">                c&#39;2</span>
+<span class="sd">                &lt;d&#39; f&#39;&gt;2</span>
+<span class="sd">                \times 2/3</span>
+<span class="sd">                {</span>
+<span class="sd">                    g&#39;2</span>
+<span class="sd">                    a&#39;2</span>
+<span class="sd">                    b&#39;2</span>
+<span class="sd">                }</span>
+<span class="sd">            }</span>
+
+<span class="sd">        ..  figure:: ../_images/reposition_clefs-9gaqlf92kc.png</span>
+
+<span class="sd">    ``implicit_clef``:</span>
+<span class="sd">        By default, when the first leaf doesn&#39;t have a clef the function</span>
+<span class="sd">        assumes that the music is written in treble clef (which is the default</span>
+<span class="sd">        fallback clef in LilyPond).</span>
+
+<span class="sd">        &gt;&gt;&gt; staff = abjad.Staff(r&quot;c&#39;1 | d&#39;1&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; abjad.attach(abjad.Clef(&#39;treble&#39;), staff[1])</span>
+<span class="sd">        &gt;&gt;&gt; abjad.show(staff)</span>
+
+<span class="sd">        ..  docs::</span>
+
+<span class="sd">            \new Staff</span>
+<span class="sd">            {</span>
+<span class="sd">                c&#39;1</span>
+<span class="sd">                \clef &quot;treble&quot;</span>
+<span class="sd">                d&#39;1</span>
+<span class="sd">            }</span>
+
+<span class="sd">        ..  figure:: ../_images/reposition_clefs-tuxicnsglgk.png</span>
+
+<span class="sd">        &gt;&gt;&gt; auxjad.mutate.reposition_clefs(staff[:])</span>
+<span class="sd">        &gt;&gt;&gt; abjad.show(staff)</span>
+
+<span class="sd">        ..  docs::</span>
+
+<span class="sd">            \new Staff</span>
+<span class="sd">            {</span>
+<span class="sd">                c&#39;1</span>
+<span class="sd">                d&#39;1</span>
+<span class="sd">            }</span>
+
+<span class="sd">        ..  figure:: ../_images/reposition_clefs-co27o4xxato.png</span>
+
+<span class="sd">        Set the argument ``implicit_clef`` to a different |abjad.Clef| to</span>
+<span class="sd">        change the implicit clef.</span>
+
+<span class="sd">        &gt;&gt;&gt; staff = abjad.Staff(r&quot;c1 | d1&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; abjad.attach(abjad.Clef(&#39;bass&#39;), staff[1])</span>
+<span class="sd">        &gt;&gt;&gt; abjad.show(staff)</span>
+
+<span class="sd">        ..  docs::</span>
+
+<span class="sd">            \new Staff</span>
+<span class="sd">            {</span>
+<span class="sd">                c1</span>
+<span class="sd">                \clef &quot;bass&quot;</span>
+<span class="sd">                d1</span>
+<span class="sd">            }</span>
+
+<span class="sd">        ..  figure:: ../_images/reposition_clefs-jyp5xd92vgi.png</span>
+
+<span class="sd">        &gt;&gt;&gt; auxjad.mutate.reposition_clefs(</span>
+<span class="sd">        ...     staff[:],</span>
+<span class="sd">        ...     implicit_clef=abjad.Clef(&#39;bass&#39;),</span>
+<span class="sd">        ... )</span>
+<span class="sd">        &gt;&gt;&gt; abjad.show(staff)</span>
+
+<span class="sd">        ..  docs::</span>
+
+<span class="sd">            \new Staff</span>
+<span class="sd">            {</span>
+<span class="sd">                c1</span>
+<span class="sd">                d1</span>
+<span class="sd">            }</span>
+
+<span class="sd">        ..  figure:: ../_images/reposition_clefs-o7bi4n2n58.png</span>
+
+<span class="sd">        This can be useful when extending a container that already has a</span>
+<span class="sd">        specific clef.</span>
+
+<span class="sd">        &gt;&gt;&gt; music = abjad.Staff(r&quot;\clef bass c4 d4 e4 f4&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; music.extend(staff)</span>
+<span class="sd">        &gt;&gt;&gt; abjad.show(music)</span>
+
+<span class="sd">        ..  docs::</span>
+
+<span class="sd">            \new Staff</span>
+<span class="sd">            {</span>
+<span class="sd">                \clef &quot;bass&quot;</span>
+<span class="sd">                c4</span>
+<span class="sd">                d4</span>
+<span class="sd">                e4</span>
+<span class="sd">                f4</span>
+<span class="sd">                c1</span>
+<span class="sd">                d1</span>
+<span class="sd">            }</span>
+
+<span class="sd">        ..  figure:: ../_images/reposition_clefs-7y32wepotnf.png</span>
+
+<span class="sd">    ..  warning::</span>
+
+<span class="sd">        The input selection must be a contiguous logical voice. When dealing</span>
+<span class="sd">        with a container with multiple subcontainers (e.g. a score containing</span>
+<span class="sd">        multiple staves), the best approach is to cycle through these</span>
+<span class="sd">        subcontainers, applying this function to them individually.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">selection</span><span class="p">,</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Selection</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;argument must be &#39;abjad.Selection&#39;&quot;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">selection</span><span class="o">.</span><span class="n">leaves</span><span class="p">()</span><span class="o">.</span><span class="n">are_contiguous_logical_voice</span><span class="p">():</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;argument must be contiguous logical voice&quot;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">shift_clef_to_notes</span><span class="p">,</span> <span class="nb">bool</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;&#39;shift_clef_to_notes&#39; must be &#39;bool&#39;&quot;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">implicit_clef</span><span class="p">,</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Clef</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;&#39;implicit_clef&#39; must be &#39;abjad.Clef&#39;&quot;</span><span class="p">)</span>
+
+    <span class="n">leaves</span> <span class="o">=</span> <span class="n">selection</span><span class="o">.</span><span class="n">leaves</span><span class="p">()</span>
+
+    <span class="c1"># shifting clefs from rests to notes</span>
+    <span class="k">if</span> <span class="n">shift_clef_to_notes</span><span class="p">:</span>
+        <span class="n">shifted_clef</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="k">for</span> <span class="n">leaf</span> <span class="ow">in</span> <span class="n">leaves</span><span class="p">[</span><span class="mi">1</span><span class="p">:]:</span>
+            <span class="n">clef</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">get</span><span class="o">.</span><span class="n">indicator</span><span class="p">(</span><span class="n">leaf</span><span class="p">,</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Clef</span><span class="p">)</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">leaf</span><span class="p">,</span> <span class="p">(</span><span class="n">abjad</span><span class="o">.</span><span class="n">Rest</span><span class="p">,</span> <span class="n">abjad</span><span class="o">.</span><span class="n">MultimeasureRest</span><span class="p">)):</span>
+                <span class="k">if</span> <span class="n">abjad</span><span class="o">.</span><span class="n">get</span><span class="o">.</span><span class="n">indicator</span><span class="p">(</span><span class="n">leaf</span><span class="p">,</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Clef</span><span class="p">)</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                    <span class="n">shifted_clef</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">get</span><span class="o">.</span><span class="n">indicator</span><span class="p">(</span><span class="n">leaf</span><span class="p">,</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Clef</span><span class="p">)</span>
+                    <span class="n">abjad</span><span class="o">.</span><span class="n">detach</span><span class="p">(</span><span class="n">abjad</span><span class="o">.</span><span class="n">Clef</span><span class="p">,</span> <span class="n">leaf</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">if</span> <span class="p">(</span><span class="n">abjad</span><span class="o">.</span><span class="n">get</span><span class="o">.</span><span class="n">indicator</span><span class="p">(</span><span class="n">leaf</span><span class="p">,</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Clef</span><span class="p">)</span> <span class="ow">is</span> <span class="kc">None</span>
+                        <span class="ow">and</span> <span class="n">shifted_clef</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">):</span>
+                    <span class="n">abjad</span><span class="o">.</span><span class="n">attach</span><span class="p">(</span><span class="n">shifted_clef</span><span class="p">,</span> <span class="n">leaf</span><span class="p">)</span>
+                <span class="n">shifted_clef</span> <span class="o">=</span> <span class="kc">None</span>
+
+    <span class="c1"># removing repeated clefs</span>
+    <span class="n">previous_clef</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">get</span><span class="o">.</span><span class="n">indicator</span><span class="p">(</span><span class="n">leaves</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Clef</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">previous_clef</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">previous_clef</span> <span class="o">=</span> <span class="n">implicit_clef</span>
+    <span class="k">for</span> <span class="n">leaf</span> <span class="ow">in</span> <span class="n">leaves</span><span class="p">[</span><span class="mi">1</span><span class="p">:]:</span>
+        <span class="n">clef</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">get</span><span class="o">.</span><span class="n">indicator</span><span class="p">(</span><span class="n">leaf</span><span class="p">,</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Clef</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">clef</span> <span class="o">==</span> <span class="n">previous_clef</span><span class="p">:</span>
+            <span class="n">abjad</span><span class="o">.</span><span class="n">detach</span><span class="p">(</span><span class="n">abjad</span><span class="o">.</span><span class="n">Clef</span><span class="p">,</span> <span class="n">leaf</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">clef</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">previous_clef</span> <span class="o">=</span> <span class="n">clef</span></div>
+</pre></div>
+
+           </div>
+           
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2020, Gilberto Agostinho.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

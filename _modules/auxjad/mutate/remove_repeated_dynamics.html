@@ -1,0 +1,639 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>auxjad.mutate.remove_repeated_dynamics &mdash; auxjad 0.8.25 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+        <script src="../../../_static/jquery.js"></script>
+        <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/doctools.js"></script>
+    
+    <script type="text/javascript" src="../../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../../index.html" class="icon icon-home"> auxjad
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.8
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../index.html">Welcome to Auxjad’s documentation!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../examples/index.html">Examples of usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../score_gallery/index.html">Score gallery</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../api/index.html">Auxjad API</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">auxjad</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../../index.html">Module code</a> &raquo;</li>
+        
+      <li>auxjad.mutate.remove_repeated_dynamics</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for auxjad.mutate.remove_repeated_dynamics</h1><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">abjad</span>
+
+
+<div class="viewcode-block" id="remove_repeated_dynamics"><a class="viewcode-back" href="../../../_api_members/auxjad.mutate.remove_repeated_dynamics.html#auxjad.mutate.remove_repeated_dynamics">[docs]</a><span class="k">def</span> <span class="nf">remove_repeated_dynamics</span><span class="p">(</span><span class="n">selection</span><span class="p">:</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Selection</span><span class="p">,</span>
+                             <span class="o">*</span><span class="p">,</span>
+                             <span class="n">ignore_hairpins</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+                             <span class="n">reset_after_rests</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+                             <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="sa">r</span><span class="sd">&quot;&quot;&quot;Mutates an input |abjad.Selection| in place and has no return value;</span>
+<span class="sd">    this function removes all consecutive repeated dynamic markings.</span>
+
+<span class="sd">    Basic usage:</span>
+<span class="sd">        When two consecutive leaves have identical dynamics, the second</span>
+<span class="sd">        one is removed:</span>
+
+<span class="sd">        &gt;&gt;&gt; staff = abjad.Staff(r&quot;\time 3/8 c&#39;4\pp d&#39;8\pp | c&#39;4\f d&#39;8\f&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; abjad.show(staff)</span>
+
+<span class="sd">        ..  docs::</span>
+
+<span class="sd">            \new Staff</span>
+<span class="sd">            {</span>
+<span class="sd">                \time 3/8</span>
+<span class="sd">                c&#39;4</span>
+<span class="sd">                \pp</span>
+<span class="sd">                d&#39;8</span>
+<span class="sd">                \pp</span>
+<span class="sd">                c&#39;4</span>
+<span class="sd">                \f</span>
+<span class="sd">                d&#39;8</span>
+<span class="sd">                \f</span>
+<span class="sd">            }</span>
+
+<span class="sd">        ..  figure:: ../_images/remove_repeated_dynamics-anw32e9i0f.png</span>
+
+<span class="sd">        &gt;&gt;&gt; auxjad.mutate.remove_repeated_dynamics(staff[:])</span>
+<span class="sd">        &gt;&gt;&gt; abjad.show(staff)</span>
+
+<span class="sd">        ..  docs::</span>
+
+<span class="sd">            \new Staff</span>
+<span class="sd">            {</span>
+<span class="sd">                \time 3/8</span>
+<span class="sd">                c&#39;4</span>
+<span class="sd">                \pp</span>
+<span class="sd">                d&#39;8</span>
+<span class="sd">                c&#39;4</span>
+<span class="sd">                \f</span>
+<span class="sd">                d&#39;8</span>
+<span class="sd">            }</span>
+
+<span class="sd">        ..  figure:: ../_images/remove_repeated_dynamics-i5ylxkzv7md.png</span>
+
+<span class="sd">    ..  note::</span>
+
+<span class="sd">        Auxjad automatically adds this function as an extension function to</span>
+<span class="sd">        |abjad.mutate|. It can thus be used from either |auxjad.mutate|_ or</span>
+<span class="sd">        |abjad.mutate| namespaces. Therefore, the two lines below are</span>
+<span class="sd">        equivalent:</span>
+
+<span class="sd">        &gt;&gt;&gt; auxjad.mutate.remove_repeated_dynamics(staff[:])</span>
+<span class="sd">        &gt;&gt;&gt; abjad.mutate.remove_repeated_dynamics(staff[:])</span>
+
+<span class="sd">    Dynamic structure:</span>
+<span class="sd">        The function also removes dynamics that are separated by an arbitrary</span>
+<span class="sd">        number of leaves without dynamics:</span>
+
+<span class="sd">        &gt;&gt;&gt; staff = abjad.Staff(r&quot;\time 3/8 c&#39;4\p d&#39;8 | e&#39;4.\p | c&#39;4\p d&#39;8\f&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; abjad.show(staff)</span>
+
+<span class="sd">        ..  docs::</span>
+
+<span class="sd">            \new Staff</span>
+<span class="sd">            {</span>
+<span class="sd">                \time 3/8</span>
+<span class="sd">                c&#39;4</span>
+<span class="sd">                \p</span>
+<span class="sd">                d&#39;8</span>
+<span class="sd">                e&#39;4.</span>
+<span class="sd">                \p</span>
+<span class="sd">                c&#39;4</span>
+<span class="sd">                \p</span>
+<span class="sd">                d&#39;8</span>
+<span class="sd">                \f</span>
+<span class="sd">            }</span>
+
+<span class="sd">        ..  figure:: ../_images/remove_repeated_dynamics-ha1x7s8d2fb.png</span>
+
+<span class="sd">        &gt;&gt;&gt; auxjad.mutate.remove_repeated_dynamics(staff[:])</span>
+<span class="sd">        &gt;&gt;&gt; abjad.show(staff)</span>
+
+<span class="sd">        ..  docs::</span>
+
+<span class="sd">            \new Staff</span>
+<span class="sd">            {</span>
+<span class="sd">                \time 3/8</span>
+<span class="sd">                c&#39;4</span>
+<span class="sd">                \p</span>
+<span class="sd">                d&#39;8</span>
+<span class="sd">                e&#39;4.</span>
+<span class="sd">                c&#39;4</span>
+<span class="sd">                d&#39;8</span>
+<span class="sd">                \f</span>
+<span class="sd">            }</span>
+
+<span class="sd">        ..  figure:: ../_images/remove_repeated_dynamics-g157jbbojhv.png</span>
+
+<span class="sd">    Subcontainers:</span>
+<span class="sd">        The container from which the selection is made can also have</span>
+<span class="sd">        subcontainers:</span>
+
+<span class="sd">        &gt;&gt;&gt; staff = abjad.Staff([abjad.Note(&quot;c&#39;2&quot;),</span>
+<span class="sd">        ...                      abjad.Chord(&quot;&lt;d&#39; f&#39;&gt;2&quot;),</span>
+<span class="sd">        ...                      abjad.Tuplet((2, 3), &quot;g2 a2 b2&quot;),</span>
+<span class="sd">        ...                      ])</span>
+<span class="sd">        &gt;&gt;&gt; abjad.attach(abjad.Dynamic(&#39;ppp&#39;), staff[0])</span>
+<span class="sd">        &gt;&gt;&gt; abjad.attach(abjad.Dynamic(&#39;ppp&#39;), staff[1])</span>
+<span class="sd">        &gt;&gt;&gt; abjad.attach(abjad.Dynamic(&#39;ppp&#39;), staff[2][0])</span>
+<span class="sd">        &gt;&gt;&gt; abjad.show(staff)</span>
+
+<span class="sd">        ..  docs::</span>
+
+<span class="sd">            \new Staff</span>
+<span class="sd">            {</span>
+<span class="sd">                c&#39;2</span>
+<span class="sd">                \ppp</span>
+<span class="sd">                &lt;d&#39; f&#39;&gt;2</span>
+<span class="sd">                \ppp</span>
+<span class="sd">                \times 2/3</span>
+<span class="sd">                {</span>
+<span class="sd">                    g2</span>
+<span class="sd">                    \ppp</span>
+<span class="sd">                    a2</span>
+<span class="sd">                    b2</span>
+<span class="sd">                }</span>
+<span class="sd">            }</span>
+
+<span class="sd">        ..  figure:: ../_images/remove_repeated_dynamics-4h9xze4780d.png</span>
+
+<span class="sd">        &gt;&gt;&gt; auxjad.mutate.remove_repeated_dynamics(staff[:])</span>
+<span class="sd">        &gt;&gt;&gt; abjad.show(staff)</span>
+
+<span class="sd">        ..  docs::</span>
+
+<span class="sd">            \new Staff</span>
+<span class="sd">            {</span>
+<span class="sd">                c&#39;2</span>
+<span class="sd">                \ppp</span>
+<span class="sd">                &lt;d&#39; f&#39;&gt;2</span>
+<span class="sd">                \times 2/3</span>
+<span class="sd">                {</span>
+<span class="sd">                    g2</span>
+<span class="sd">                    a2</span>
+<span class="sd">                    b2</span>
+<span class="sd">                }</span>
+<span class="sd">            }</span>
+
+<span class="sd">        ..  figure:: ../_images/remove_repeated_dynamics-7n9aaveoslu.png</span>
+
+<span class="sd">    ``ignore_hairpins``:</span>
+<span class="sd">        By default, repeated dynamics with hairpins in between are not removed,</span>
+<span class="sd">        but consecutive ones will.</span>
+
+<span class="sd">        &gt;&gt;&gt; staff = abjad.Staff(r&quot;c&#39;2\p\&lt; d&#39;2\f\&gt; | c&#39;2\f d&#39;2\f | e&#39;1\p&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; abjad.show(staff)</span>
+
+<span class="sd">        ..  docs::</span>
+
+<span class="sd">            \new Staff</span>
+<span class="sd">            {</span>
+<span class="sd">                c&#39;1</span>
+<span class="sd">                \p</span>
+<span class="sd">                \&lt;</span>
+<span class="sd">                d&#39;1</span>
+<span class="sd">                \f</span>
+<span class="sd">                \&gt;</span>
+<span class="sd">                c&#39;1</span>
+<span class="sd">                \f</span>
+<span class="sd">                d&#39;1</span>
+<span class="sd">                \f</span>
+<span class="sd">                e&#39;1</span>
+<span class="sd">                \p</span>
+<span class="sd">            }</span>
+
+<span class="sd">        ..  figure:: ../_images/remove_repeated_dynamics-frmlobo3gis.png</span>
+
+<span class="sd">        &gt;&gt;&gt; auxjad.mutate.remove_repeated_dynamics(staff[:])</span>
+<span class="sd">        &gt;&gt;&gt; abjad.show(staff)</span>
+
+<span class="sd">        ..  docs::</span>
+
+<span class="sd">            \new Staff</span>
+<span class="sd">            {</span>
+<span class="sd">                c&#39;1</span>
+<span class="sd">                \p</span>
+<span class="sd">                \&lt;</span>
+<span class="sd">                d&#39;1</span>
+<span class="sd">                \f</span>
+<span class="sd">                \&gt;</span>
+<span class="sd">                c&#39;1</span>
+<span class="sd">                \f</span>
+<span class="sd">                d&#39;1</span>
+<span class="sd">                e&#39;1</span>
+<span class="sd">                \p</span>
+<span class="sd">            }</span>
+
+<span class="sd">        ..  figure:: ../_images/remove_repeated_dynamics-ov05k1imubj.png</span>
+
+<span class="sd">        To override the previous behaviour, set ``ignore_hairpins=True`` and</span>
+<span class="sd">        hairpins will be ignored.</span>
+
+<span class="sd">        &gt;&gt;&gt; staff = abjad.Staff(r&quot;c&#39;2\p\&lt; d&#39;2\f\&gt; | c&#39;2\f d&#39;2\f | e&#39;1\p&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; abjad.show(staff)</span>
+
+<span class="sd">        ..  docs::</span>
+
+<span class="sd">            \new Staff</span>
+<span class="sd">            {</span>
+<span class="sd">                c&#39;1</span>
+<span class="sd">                \p</span>
+<span class="sd">                \&lt;</span>
+<span class="sd">                d&#39;1</span>
+<span class="sd">                \f</span>
+<span class="sd">                \&gt;</span>
+<span class="sd">                c&#39;1</span>
+<span class="sd">                \f</span>
+<span class="sd">                d&#39;1</span>
+<span class="sd">                \f</span>
+<span class="sd">                e&#39;1</span>
+<span class="sd">                \p</span>
+<span class="sd">            }</span>
+
+<span class="sd">        ..  figure:: ../_images/remove_repeated_dynamics-2hdkt6cyca1.png</span>
+
+<span class="sd">        &gt;&gt;&gt; auxjad.mutate.remove_repeated_dynamics(</span>
+<span class="sd">        ...     staff[:],</span>
+<span class="sd">        ...     ignore_hairpins=True,</span>
+<span class="sd">        ... )</span>
+<span class="sd">        &gt;&gt;&gt; abjad.show(staff)</span>
+
+<span class="sd">        ..  docs::</span>
+
+<span class="sd">            \new Staff</span>
+<span class="sd">            {</span>
+<span class="sd">                c&#39;1</span>
+<span class="sd">                \p</span>
+<span class="sd">                \&lt;</span>
+<span class="sd">                d&#39;1</span>
+<span class="sd">                \f</span>
+<span class="sd">                \&gt;</span>
+<span class="sd">                c&#39;1</span>
+<span class="sd">                d&#39;1</span>
+<span class="sd">                e&#39;1</span>
+<span class="sd">                \p</span>
+<span class="sd">            }</span>
+
+<span class="sd">        ..  figure:: ../_images/remove_repeated_dynamics-xkaipizr2jr.png</span>
+
+<span class="sd">    ``reset_after_rests``:</span>
+<span class="sd">        By default, rests are treated just like any other leaf and thus notes</span>
+<span class="sd">        with an identical dynamic separated by an arbitrary number of rests</span>
+<span class="sd">        will be considered as repeated and the second dynamic will be removed.</span>
+
+<span class="sd">        &gt;&gt;&gt; staff = abjad.Staff(r&quot;c&#39;4\pp r2. | c&#39;1\pp&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; auxjad.mutate.remove_repeated_dynamics(staff[:])</span>
+<span class="sd">        &gt;&gt;&gt; abjad.show(staff)</span>
+
+<span class="sd">        ..  docs::</span>
+
+<span class="sd">            \new Staff</span>
+<span class="sd">            {</span>
+<span class="sd">                c&#39;4</span>
+<span class="sd">                \pp</span>
+<span class="sd">                r2.</span>
+<span class="sd">                c&#39;1</span>
+<span class="sd">            }</span>
+
+<span class="sd">        ..  figure:: ../_images/remove_repeated_dynamics-wtno2t8qroh.png</span>
+
+<span class="sd">        To override the previous behaviour, set ``reset_after_rests=True`` and</span>
+<span class="sd">        dynamics will always be restated after a rest.</span>
+
+<span class="sd">        &gt;&gt;&gt; staff = abjad.Staff(r&quot;c&#39;4\pp r2. | c&#39;1\pp&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; auxjad.mutate.remove_repeated_dynamics(</span>
+<span class="sd">        ...     staff[:],</span>
+<span class="sd">        ...     reset_after_rests=True,</span>
+<span class="sd">        ... )</span>
+<span class="sd">        &gt;&gt;&gt; abjad.show(staff)</span>
+
+<span class="sd">        ..  docs::</span>
+
+<span class="sd">            \new Staff</span>
+<span class="sd">            {</span>
+<span class="sd">                c&#39;4</span>
+<span class="sd">                \pp</span>
+<span class="sd">                r2.</span>
+<span class="sd">                c&#39;1</span>
+<span class="sd">                \pp</span>
+<span class="sd">            }</span>
+
+<span class="sd">        ..  figure:: ../_images/remove_repeated_dynamics-3e6g7u0q1i1.png</span>
+
+<span class="sd">    ``reset_after_rests`` and non-:obj:`bool` values:</span>
+<span class="sd">        The argument ``reset_after_rests`` takes not only :obj:`bool` values</span>
+<span class="sd">        but also durations (|abjad.Duration|, :obj:`tuple`, :obj:`float`,</span>
+<span class="sd">        etc.). This sets the maximum length of rests before which identical</span>
+<span class="sd">        dynamics are restated. If the total length of rests falls below that</span>
+<span class="sd">        value, then repeated dynamics are removed.</span>
+
+<span class="sd">        In the case below, a rest of ``r2``. is shorter than a duration of</span>
+<span class="sd">        ``(4, 4)``, so the repeated dynamic is removed.</span>
+
+<span class="sd">        &gt;&gt;&gt; staff = abjad.Staff(r&quot;c&#39;4\pp r2. | c&#39;1\pp&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; auxjad.mutate.remove_repeated_dynamics(</span>
+<span class="sd">        ...     staff[:],</span>
+<span class="sd">        ...     reset_after_rests=(4, 4),</span>
+<span class="sd">        ... )</span>
+<span class="sd">        &gt;&gt;&gt; abjad.show(staff)</span>
+
+<span class="sd">        ..  docs::</span>
+
+<span class="sd">            \new Staff</span>
+<span class="sd">            {</span>
+<span class="sd">                c&#39;4</span>
+<span class="sd">                \pp</span>
+<span class="sd">                r2.</span>
+<span class="sd">                c&#39;1</span>
+<span class="sd">            }</span>
+
+<span class="sd">        ..  figure:: ../_images/remove_repeated_dynamics-b323xuesujc.png</span>
+
+<span class="sd">        But setting the duration to ``2/4`` forces the dynamic to be restated.</span>
+
+<span class="sd">        &gt;&gt;&gt; staff = abjad.Staff(r&quot;c&#39;4\pp r2. | c&#39;1\pp&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; auxjad.mutate.remove_repeated_dynamics(</span>
+<span class="sd">        ...     staff[:],</span>
+<span class="sd">        ...     reset_after_rests=2 / 4,</span>
+<span class="sd">        ... )</span>
+<span class="sd">        &gt;&gt;&gt; abjad.show(staff)</span>
+
+<span class="sd">        ..  docs::</span>
+
+<span class="sd">            \new Staff</span>
+<span class="sd">            {</span>
+<span class="sd">                c&#39;4</span>
+<span class="sd">                \pp</span>
+<span class="sd">                r2.</span>
+<span class="sd">                c&#39;1</span>
+<span class="sd">                \pp</span>
+<span class="sd">            }</span>
+
+<span class="sd">        ..  figure:: ../_images/remove_repeated_dynamics-64dppx3cp99.png</span>
+
+<span class="sd">    ``reset_after_rests``:</span>
+<span class="sd">        The function also handles measure rests with ``reset_after_rests``.</span>
+
+<span class="sd">        &gt;&gt;&gt; staff = abjad.Staff(r&quot;c&#39;4\pp r2. | c&#39;4\pp r2. | R1 | c&#39;1\pp&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; auxjad.mutate.remove_repeated_dynamics(</span>
+<span class="sd">        ...     staff[:],</span>
+<span class="sd">        ...     reset_after_rests=abjad.Duration(4, 4),</span>
+<span class="sd">        ... )</span>
+<span class="sd">        &gt;&gt;&gt; abjad.show(staff)</span>
+
+<span class="sd">        ..  docs::</span>
+
+<span class="sd">            \new Staff</span>
+<span class="sd">            {</span>
+<span class="sd">                c&#39;4</span>
+<span class="sd">                \pp</span>
+<span class="sd">                r2.</span>
+<span class="sd">                c&#39;4</span>
+<span class="sd">                r2.</span>
+<span class="sd">                R1</span>
+<span class="sd">                c&#39;1</span>
+<span class="sd">                \pp</span>
+<span class="sd">            }</span>
+
+<span class="sd">        ..  figure:: ../_images/remove_repeated_dynamics-jt7akhtbsge.png</span>
+
+<span class="sd">    ..  warning::</span>
+
+<span class="sd">        The input selection must be a contiguous logical voice. When dealing</span>
+<span class="sd">        with a container with multiple subcontainers (e.g. a score containing</span>
+<span class="sd">        multiple staves), the best approach is to cycle through these</span>
+<span class="sd">        subcontainers, applying this function to them individually.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">selection</span><span class="p">,</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Selection</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;argument must be &#39;abjad.Selection&#39;&quot;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">abjad</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="n">selection</span><span class="p">)</span><span class="o">.</span><span class="n">leaves</span><span class="p">()</span><span class="o">.</span><span class="n">are_contiguous_logical_voice</span><span class="p">():</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;argument must be contiguous logical voice&quot;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">ignore_hairpins</span><span class="p">,</span> <span class="nb">bool</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;&#39;ignore_hairpins&#39; must be &#39;bool&#39;&quot;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">reset_after_rests</span><span class="p">,</span>
+                      <span class="p">(</span><span class="nb">bool</span><span class="p">,</span> <span class="nb">int</span><span class="p">,</span> <span class="nb">float</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">,</span> <span class="nb">str</span><span class="p">,</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Duration</span><span class="p">),</span>
+                      <span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;&#39;reset_after_rests&#39; must be a number, &#39;bool&#39; or &quot;</span>
+                        <span class="s2">&quot;&#39;abjad.Duration&#39;&quot;</span><span class="p">)</span>
+
+    <span class="n">previous_dynamic</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="n">current_dynamic</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="n">duration_since_last_note</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Duration</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">leaf</span> <span class="ow">in</span> <span class="n">selection</span><span class="o">.</span><span class="n">leaves</span><span class="p">():</span>
+        <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">leaf</span><span class="p">)</span> <span class="ow">in</span> <span class="p">(</span><span class="n">abjad</span><span class="o">.</span><span class="n">Rest</span><span class="p">,</span> <span class="n">abjad</span><span class="o">.</span><span class="n">MultimeasureRest</span><span class="p">):</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">reset_after_rests</span><span class="p">,</span> <span class="nb">bool</span><span class="p">)</span> <span class="ow">and</span> <span class="n">reset_after_rests</span><span class="p">:</span>
+                <span class="n">previous_dynamic</span> <span class="o">=</span> <span class="kc">None</span>
+            <span class="k">elif</span> <span class="n">reset_after_rests</span><span class="p">:</span>
+                <span class="n">duration_since_last_note</span> <span class="o">+=</span> <span class="n">leaf</span><span class="o">.</span><span class="n">written_duration</span>
+                <span class="k">if</span> <span class="p">(</span><span class="n">duration_since_last_note</span>
+                        <span class="o">&gt;=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Duration</span><span class="p">(</span><span class="n">reset_after_rests</span><span class="p">)):</span>
+                    <span class="n">previous_dynamic</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">duration_since_last_note</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Duration</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+            <span class="n">indicators</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">get</span><span class="o">.</span><span class="n">indicators</span><span class="p">(</span><span class="n">leaf</span><span class="p">)</span>
+            <span class="n">hairpin_present</span> <span class="o">=</span> <span class="nb">any</span><span class="p">([</span><span class="nb">isinstance</span><span class="p">(</span><span class="n">indicator</span><span class="p">,</span> <span class="n">abjad</span><span class="o">.</span><span class="n">StartHairpin</span><span class="p">)</span>
+                                   <span class="k">for</span> <span class="n">indicator</span> <span class="ow">in</span> <span class="n">indicators</span><span class="p">])</span>
+            <span class="k">if</span> <span class="n">hairpin_present</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">ignore_hairpins</span><span class="p">:</span>
+                <span class="k">for</span> <span class="n">indicator</span> <span class="ow">in</span> <span class="n">indicators</span><span class="p">:</span>
+                    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">indicator</span><span class="p">,</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Dynamic</span><span class="p">):</span>
+                        <span class="k">if</span> <span class="p">(</span><span class="n">indicator</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span>
+                                <span class="ow">and</span> <span class="n">indicator</span> <span class="o">==</span> <span class="n">previous_dynamic</span><span class="p">):</span>
+                            <span class="n">abjad</span><span class="o">.</span><span class="n">detach</span><span class="p">(</span><span class="n">abjad</span><span class="o">.</span><span class="n">Dynamic</span><span class="p">,</span> <span class="n">leaf</span><span class="p">)</span>
+                <span class="n">current_dynamic</span> <span class="o">=</span> <span class="kc">None</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">for</span> <span class="n">indicator</span> <span class="ow">in</span> <span class="n">indicators</span><span class="p">:</span>
+                    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">indicator</span><span class="p">,</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Dynamic</span><span class="p">):</span>
+                        <span class="n">current_dynamic</span> <span class="o">=</span> <span class="n">indicator</span>
+            <span class="k">if</span> <span class="n">current_dynamic</span> <span class="o">!=</span> <span class="n">previous_dynamic</span><span class="p">:</span>
+                <span class="n">previous_dynamic</span> <span class="o">=</span> <span class="n">current_dynamic</span>
+            <span class="k">elif</span> <span class="n">current_dynamic</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="n">abjad</span><span class="o">.</span><span class="n">detach</span><span class="p">(</span><span class="n">abjad</span><span class="o">.</span><span class="n">Dynamic</span><span class="p">,</span> <span class="n">leaf</span><span class="p">)</span></div>
+</pre></div>
+
+           </div>
+           
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2020, Gilberto Agostinho.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

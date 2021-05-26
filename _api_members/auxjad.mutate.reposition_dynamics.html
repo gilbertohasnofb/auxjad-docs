@@ -1,0 +1,478 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>reposition_dynamics &mdash; auxjad 0.8.25 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="reposition_slurs" href="auxjad.mutate.reposition_slurs.html" />
+    <link rel="prev" title="reposition_clefs" href="auxjad.mutate.reposition_clefs.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> auxjad
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.8
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../index.html">Welcome to Auxjad’s documentation!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../examples/index.html">Examples of usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../score_gallery/index.html">Score gallery</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../api/index.html">Auxjad API</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../api/api-core.html">core</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/api-get.html">get</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/api-indicators.html">indicators</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../api/api-mutate.html">mutate</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="auxjad.mutate.auto_rewrite_meter.html">auto_rewrite_meter</a></li>
+<li class="toctree-l3"><a class="reference internal" href="auxjad.mutate.close_container.html">close_container</a></li>
+<li class="toctree-l3"><a class="reference internal" href="auxjad.mutate.double_barlines_before_time_signatures.html">double_barlines_before_time_signatures</a></li>
+<li class="toctree-l3"><a class="reference internal" href="auxjad.mutate.enforce_time_signature.html">enforce_time_signature</a></li>
+<li class="toctree-l3"><a class="reference internal" href="auxjad.mutate.extract_trivial_tuplets.html">extract_trivial_tuplets</a></li>
+<li class="toctree-l3"><a class="reference internal" href="auxjad.mutate.fill_with_rests.html">fill_with_rests</a></li>
+<li class="toctree-l3"><a class="reference internal" href="auxjad.mutate.merge_partial_tuplets.html">merge_partial_tuplets</a></li>
+<li class="toctree-l3"><a class="reference internal" href="auxjad.mutate.prettify_rewrite_meter.html">prettify_rewrite_meter</a></li>
+<li class="toctree-l3"><a class="reference internal" href="auxjad.mutate.remove_repeated_dynamics.html">remove_repeated_dynamics</a></li>
+<li class="toctree-l3"><a class="reference internal" href="auxjad.mutate.remove_repeated_time_signatures.html">remove_repeated_time_signatures</a></li>
+<li class="toctree-l3"><a class="reference internal" href="auxjad.mutate.reposition_clefs.html">reposition_clefs</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">reposition_dynamics</a></li>
+<li class="toctree-l3"><a class="reference internal" href="auxjad.mutate.reposition_slurs.html">reposition_slurs</a></li>
+<li class="toctree-l3"><a class="reference internal" href="auxjad.mutate.respell_accidentals.html">respell_accidentals</a></li>
+<li class="toctree-l3"><a class="reference internal" href="auxjad.mutate.rests_to_multimeasure_rest.html">rests_to_multimeasure_rest</a></li>
+<li class="toctree-l3"><a class="reference internal" href="auxjad.mutate.sustain_notes.html">sustain_notes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="auxjad.mutate.sync_containers.html">sync_containers</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../api/api-score.html">score</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/api-spanners.html">spanners</a></li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">auxjad</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../api/index.html">Auxjad API</a> &raquo;</li>
+        
+          <li><a href="../api/api-mutate.html">mutate</a> &raquo;</li>
+        
+      <li>reposition_dynamics</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="../_sources/_api_members/auxjad.mutate.reposition_dynamics.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="reposition-dynamics">
+<h1>reposition_dynamics<a class="headerlink" href="#reposition-dynamics" title="Permalink to this headline">¶</a></h1>
+<dl class="py function">
+<dt class="sig sig-object py" id="auxjad.mutate.reposition_dynamics">
+<span class="sig-prename descclassname"><span class="pre">auxjad.mutate.</span></span><span class="sig-name descname"><span class="pre">reposition_dynamics</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">selection</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference external" href="https://abjad.github.io/api/abjad/select.html#abjad.select.Selection" title="(in Abjad v3.4)"><span class="pre">abjad.select.Selection</span></a></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">allow_hairpins_under_rests</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)"><span class="pre">bool</span></a></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">check_hairpin_trends</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)"><span class="pre">bool</span></a></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">remove_repeated_dynamics</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)"><span class="pre">bool</span></a></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">allow_hairpin_to_rest_with_dynamic</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)"><span class="pre">bool</span></a></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)"><span class="pre">None</span></a><a class="reference internal" href="../_modules/auxjad/mutate/reposition_dynamics.html#reposition_dynamics"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#auxjad.mutate.reposition_dynamics" title="Permalink to this definition">¶</a></dt>
+<dd><p>Mutates an input <a class="reference external" href="https://abjad.github.io/api/abjad/select.html#abjad.select.Selection" title="(in Abjad v3.4)"><code class="xref py py-class docutils literal notranslate"><span class="pre">abjad.Selection</span></code></a> in place and has no return value;
+this function shifts all dynamics from rests to the next pitched leaves. It
+will also adjust hairpins if necessary.</p>
+<dl>
+<dt>Basic usage:</dt><dd><p>This function will shift dynamics under rests to the next pitched leaf.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">staff</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;c&#39;1\p d&#39;2 r2\f r1 e&#39;1&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">staff</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="figure align-default">
+<img alt="../_images/reposition_dynamics-sqwvevg7o9.png" src="../_images/reposition_dynamics-sqwvevg7o9.png" />
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">staff</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;c&#39;1\p d&#39;2 r2\f r1 e&#39;1&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">auxjad</span><span class="o">.</span><span class="n">mutate</span><span class="o">.</span><span class="n">reposition_dynamics</span><span class="p">(</span><span class="n">staff</span><span class="p">[:])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">staff</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="figure align-default">
+<img alt="../_images/reposition_dynamics-v18uzh1zjs.png" src="../_images/reposition_dynamics-v18uzh1zjs.png" />
+</div>
+</dd>
+</dl>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Auxjad automatically adds this function as an extension function to
+<a class="reference external" href="https://abjad.github.io/api/abjad/mutate.html#module-abjad.mutate" title="(in Abjad v3.4)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">abjad.mutate</span></code></a>. It can thus be used from either <a class="reference external" href="../api/api-mutate.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">auxjad.mutate</span></code></a> or
+<a class="reference external" href="https://abjad.github.io/api/abjad/mutate.html#module-abjad.mutate" title="(in Abjad v3.4)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">abjad.mutate</span></code></a> namespaces. Therefore, the two lines below are
+equivalent:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">auxjad</span><span class="o">.</span><span class="n">mutate</span><span class="o">.</span><span class="n">reposition_dynamics</span><span class="p">(</span><span class="n">staff</span><span class="p">[:])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">mutate</span><span class="o">.</span><span class="n">reposition_dynamics</span><span class="p">(</span><span class="n">staff</span><span class="p">[:])</span>
+</pre></div>
+</div>
+</div>
+<dl>
+<dt>Removing dynamics:</dt><dd><p>If the next pitched leaf already contain a dynamic, this function will
+simply remove the dynamic under the rest.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">staff</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;c&#39;1\p d&#39;2 r2\f r1\mf e&#39;1\pp&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">staff</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="figure align-default">
+<img alt="../_images/reposition_dynamics-aom2qywcn9m.png" src="../_images/reposition_dynamics-aom2qywcn9m.png" />
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">staff</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;c&#39;1\p d&#39;2 r2\f r1\mf e&#39;1\pp&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">auxjad</span><span class="o">.</span><span class="n">mutate</span><span class="o">.</span><span class="n">reposition_dynamics</span><span class="p">(</span><span class="n">staff</span><span class="p">[:])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">staff</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="figure align-default">
+<img alt="../_images/reposition_dynamics-2ua73x102fp.png" src="../_images/reposition_dynamics-2ua73x102fp.png" />
+</div>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">remove_repeated_dynamics</span></code>:</dt><dd><p>By default indentical repeated dynamics are omitted.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">staff</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;c&#39;1\p d&#39;1 r1\f e&#39;1\p&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">auxjad</span><span class="o">.</span><span class="n">mutate</span><span class="o">.</span><span class="n">reposition_dynamics</span><span class="p">(</span><span class="n">staff</span><span class="p">[:])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">staff</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="figure align-default">
+<img alt="../_images/reposition_dynamics-i4x8b1z1ak.png" src="../_images/reposition_dynamics-i4x8b1z1ak.png" />
+</div>
+<p>Set the optional keyword argument <code class="docutils literal notranslate"><span class="pre">remove_repeated_dynamics</span></code> to
+<code class="docutils literal notranslate"><span class="pre">False</span></code> to disable this behaviour.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">staff</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;c&#39;1\p d&#39;1 r1\f e&#39;1\p&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">auxjad</span><span class="o">.</span><span class="n">mutate</span><span class="o">.</span><span class="n">reposition_dynamics</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="n">staff</span><span class="p">[:],</span>
+<span class="gp">... </span>    <span class="n">remove_repeated_dynamics</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+<span class="gp">... </span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">staff</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="figure align-default">
+<img alt="../_images/reposition_dynamics-se8a5aeqer.png" src="../_images/reposition_dynamics-se8a5aeqer.png" />
+</div>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">allow_hairpins_under_rests</span></code>:</dt><dd><p>This function will shorten hairpins until rests by default.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">staff</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;c&#39;1\p\&lt; d&#39;2 r2 r1\f e&#39;1&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">staff</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="figure align-default">
+<img alt="../_images/reposition_dynamics-r28po3j3hd.png" src="../_images/reposition_dynamics-r28po3j3hd.png" />
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">staff</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;c&#39;1\p\&lt; d&#39;2 r2 r1\f e&#39;1&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">auxjad</span><span class="o">.</span><span class="n">mutate</span><span class="o">.</span><span class="n">reposition_dynamics</span><span class="p">(</span><span class="n">staff</span><span class="p">[:])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">staff</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="figure align-default">
+<img alt="../_images/reposition_dynamics-n60vvnqrcnr.png" src="../_images/reposition_dynamics-n60vvnqrcnr.png" />
+</div>
+<p>Set the optional keyword argument <code class="docutils literal notranslate"><span class="pre">allow_hairpins_under_rests</span></code> to
+<code class="docutils literal notranslate"><span class="pre">True</span></code> to allow hairpins to extend cross rests.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">staff</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;c&#39;1\p\&lt; d&#39;2 r2 r1\f e&#39;1&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">auxjad</span><span class="o">.</span><span class="n">mutate</span><span class="o">.</span><span class="n">reposition_dynamics</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="n">staff</span><span class="p">[:],</span>
+<span class="gp">... </span>    <span class="n">allow_hairpins_under_rests</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+<span class="gp">... </span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">staff</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="figure align-default">
+<img alt="../_images/reposition_dynamics-ugit7ijz89h.png" src="../_images/reposition_dynamics-ugit7ijz89h.png" />
+</div>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">allow_hairpin_to_rest_with_dynamic</span></code>:</dt><dd><p>Notice that if a hairpin leads to a rest with dynamic, that one is not
+removed.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">staff</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;c&#39;1\p\&lt; d&#39;2 r2\f r1 e&#39;1&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">auxjad</span><span class="o">.</span><span class="n">mutate</span><span class="o">.</span><span class="n">reposition_dynamics</span><span class="p">(</span><span class="n">staff</span><span class="p">[:])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">staff</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="figure align-default">
+<img alt="../_images/reposition_dynamics-t9z4y5zzj6.png" src="../_images/reposition_dynamics-t9z4y5zzj6.png" />
+</div>
+<p>Set the argument <code class="docutils literal notranslate"><span class="pre">allow_hairpin_to_rest_with_dynamic</span></code> to <code class="docutils literal notranslate"><span class="pre">False</span></code> to
+disable this behaviour.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">staff</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;c&#39;1\p\&lt; d&#39;2 r2\f r1 e&#39;1&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">auxjad</span><span class="o">.</span><span class="n">mutate</span><span class="o">.</span><span class="n">reposition_dynamics</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="n">staff</span><span class="p">[:],</span>
+<span class="gp">... </span>    <span class="n">allow_hairpin_to_rest_with_dynamic</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+<span class="gp">... </span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">staff</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="figure align-default">
+<img alt="../_images/reposition_dynamics-wpwweov55qf.png" src="../_images/reposition_dynamics-wpwweov55qf.png" />
+</div>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">check_hairpin_trends</span></code>:</dt><dd><p>This function will remove any hairpins connecting dynamics that grow in
+the opposite direction to the hairpin’s trend, such as a diminuendo
+hairpin from piano to forte.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">staff</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;c&#39;1\p\&gt; d&#39;1\f\&gt; e&#39;1\p&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">auxjad</span><span class="o">.</span><span class="n">mutate</span><span class="o">.</span><span class="n">reposition_dynamics</span><span class="p">(</span><span class="n">staff</span><span class="p">[:])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">staff</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="figure align-default">
+<img alt="../_images/reposition_dynamics-f0b4ppb71ii.png" src="../_images/reposition_dynamics-f0b4ppb71ii.png" />
+</div>
+<p>This behaviour can be disabled by setting the argument
+<code class="docutils literal notranslate"><span class="pre">check_hairpin_trends</span></code> to <code class="docutils literal notranslate"><span class="pre">False</span></code>.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">staff</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;c&#39;1\p\&gt; d&#39;1\f\&gt; e&#39;1\p&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">auxjad</span><span class="o">.</span><span class="n">mutate</span><span class="o">.</span><span class="n">reposition_dynamics</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="n">staff</span><span class="p">[:],</span>
+<span class="gp">... </span>    <span class="n">check_hairpin_trends</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+<span class="gp">... </span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">staff</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="figure align-default">
+<img alt="../_images/reposition_dynamics-1e2ugszm95fi.png" src="../_images/reposition_dynamics-1e2ugszm95fi.png" />
+</div>
+</dd>
+</dl>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The behaviour described above is only applicable when a hairpin ends
+on a dynamic. Using the hairpin terminator <code class="docutils literal notranslate"><span class="pre">\!</span></code> before a dynamic
+change will not cause a hairpin to be removed as it is not considered
+to be connecting dynamics of the opposite trend.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">staff</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;c&#39;1\p\&gt; d&#39;1\! e&#39;1\f\&gt; f&#39;1\p&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">auxjad</span><span class="o">.</span><span class="n">mutate</span><span class="o">.</span><span class="n">reposition_dynamics</span><span class="p">(</span><span class="n">staff</span><span class="p">[:])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">staff</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="figure align-default">
+<img alt="../_images/reposition_dynamics-77g0uwthbgd.png" src="../_images/reposition_dynamics-77g0uwthbgd.png" />
+</div>
+</div>
+<dl>
+<dt>Types of hairpins:</dt><dd><p>This function can handle multiple types of hairpins as well as niente
+dynamics.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">staff</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;c&#39;1 d&#39;1 e&#39;1 r1\mf r1\ff f&#39;1 r1 g&#39;1&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">attach</span><span class="p">(</span><span class="n">abjad</span><span class="o">.</span><span class="n">Dynamic</span><span class="p">(</span><span class="s1">&#39;niente&#39;</span><span class="p">,</span> <span class="n">hide</span><span class="o">=</span><span class="kc">True</span><span class="p">),</span> <span class="n">staff</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">attach</span><span class="p">(</span><span class="n">abjad</span><span class="o">.</span><span class="n">Dynamic</span><span class="p">(</span><span class="s1">&#39;niente&#39;</span><span class="p">,</span> <span class="n">hide</span><span class="o">=</span><span class="kc">True</span><span class="p">),</span> <span class="n">staff</span><span class="p">[</span><span class="mi">7</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">attach</span><span class="p">(</span><span class="n">abjad</span><span class="o">.</span><span class="n">StartHairpin</span><span class="p">(</span><span class="s1">&#39;o&lt;&#39;</span><span class="p">),</span> <span class="n">staff</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">attach</span><span class="p">(</span><span class="n">abjad</span><span class="o">.</span><span class="n">StartHairpin</span><span class="p">(</span><span class="s1">&#39;&gt;o&#39;</span><span class="p">),</span> <span class="n">staff</span><span class="p">[</span><span class="mi">4</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">attach</span><span class="p">(</span><span class="n">abjad</span><span class="o">.</span><span class="n">StopHairpin</span><span class="p">(),</span> <span class="n">staff</span><span class="p">[</span><span class="mi">7</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">auxjad</span><span class="o">.</span><span class="n">mutate</span><span class="o">.</span><span class="n">reposition_dynamics</span><span class="p">(</span><span class="n">staff</span><span class="p">[:])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">staff</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="figure align-default">
+<img alt="../_images/reposition_dynamics-m8it9awv1ce.png" src="../_images/reposition_dynamics-m8it9awv1ce.png" />
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">staff</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="sa">r</span><span class="s2">&quot;c&#39;1\p d&#39;1\f\&gt; e&#39;1\ff\&lt; r1\fff f&#39;1\p\&gt; g&#39;1\ppp&quot;</span>
+<span class="gp">... </span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">attach</span><span class="p">(</span><span class="n">abjad</span><span class="o">.</span><span class="n">StartHairpin</span><span class="p">(</span><span class="s1">&#39;--&#39;</span><span class="p">),</span> <span class="n">staff</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">auxjad</span><span class="o">.</span><span class="n">mutate</span><span class="o">.</span><span class="n">reposition_dynamics</span><span class="p">(</span><span class="n">staff</span><span class="p">[:])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">staff</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="figure align-default">
+<img alt="../_images/reposition_dynamics-fosad5ltzj.png" src="../_images/reposition_dynamics-fosad5ltzj.png" />
+</div>
+</dd>
+<dt>Multi-measure rests:</dt><dd><p>Multi-measure rests are also supported.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">staff</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;c&#39;1\p R1\f d&#39;1&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">staff</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="figure align-default">
+<img alt="../_images/reposition_dynamics-uj6jasfs2uh.png" src="../_images/reposition_dynamics-uj6jasfs2uh.png" />
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">staff</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;c&#39;1\p R1\f d&#39;1&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">auxjad</span><span class="o">.</span><span class="n">mutate</span><span class="o">.</span><span class="n">reposition_dynamics</span><span class="p">(</span><span class="n">staff</span><span class="p">[:])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">staff</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="figure align-default">
+<img alt="../_images/reposition_dynamics-axpcbm9hocd.png" src="../_images/reposition_dynamics-axpcbm9hocd.png" />
+</div>
+</dd>
+</dl>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>The input selection must be a contiguous logical voice. When dealing
+with a container with multiple subcontainers (e.g. a score containing
+multiple staves), the best approach is to cycle through these
+subcontainers, applying this function to them individually.</p>
+</div>
+</dd></dl>
+
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+        <a href="auxjad.mutate.reposition_slurs.html" class="btn btn-neutral float-right" title="reposition_slurs" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="auxjad.mutate.reposition_clefs.html" class="btn btn-neutral float-left" title="reposition_clefs" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2020, Gilberto Agostinho.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

@@ -3,20 +3,25 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8">
+  <meta charset="utf-8" />
   
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>auxjad.score.HarmonicNote &mdash; auxjad 0.8.24 documentation</title>
+  <title>auxjad.score.HarmonicNote &mdash; auxjad 0.8.25 documentation</title>
   
 
   
   <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
 
   
   
+
   
+  
+
   
 
   
@@ -26,11 +31,10 @@
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
         <script src="../../../_static/jquery.js"></script>
         <script src="../../../_static/underscore.js"></script>
         <script src="../../../_static/doctools.js"></script>
-        <script src="../../../_static/language_data.js"></script>
-        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     
     <script type="text/javascript" src="../../../_static/js/theme.js"></script>
 
@@ -50,7 +54,7 @@
           
 
           
-            <a href="../../../index.html" class="icon icon-home" alt="Documentation Home"> auxjad
+            <a href="../../../index.html" class="icon icon-home"> auxjad
           
 
           
@@ -131,6 +135,8 @@
 
 
 
+
+
 <div role="navigation" aria-label="breadcrumbs navigation">
 
   <ul class="wy-breadcrumbs">
@@ -171,12 +177,15 @@
 
 <span class="sd">        &gt;&gt;&gt; harm = auxjad.HarmonicNote(r&quot;c&#39;&#39;4&quot;)</span>
 <span class="sd">        &gt;&gt;&gt; harm.style</span>
-<span class="sd">        &#39;harmonic&#39;</span>
-<span class="sd">        &gt;&gt;&gt; abjad.f(harm)</span>
-<span class="sd">        \tweak style #&#39;harmonic</span>
-<span class="sd">        c&#39;&#39;4</span>
+<span class="sd">        &quot;#&#39;harmonic&quot;</span>
+<span class="sd">        &gt;&gt;&gt; abjad.show(harm)</span>
 
-<span class="sd">        .. figure:: ../_images/HarmonicNote-jslykzpz7en.png</span>
+<span class="sd">        ..  docs::</span>
+
+<span class="sd">            \tweak style #&#39;harmonic</span>
+<span class="sd">            c&#39;&#39;4</span>
+
+<span class="sd">        ..  figure:: ../_images/HarmonicNote-jslykzpz7en.png</span>
 
 <span class="sd">        And similarly to |abjad.Note|, pitch and duration can be input in</span>
 <span class="sd">        many different ways:</span>
@@ -186,35 +195,41 @@
 <span class="sd">        &gt;&gt;&gt; harm3 = auxjad.HarmonicNote(12, 0.25)</span>
 <span class="sd">        &gt;&gt;&gt; harm4 = auxjad.HarmonicNote(12, abjad.Duration(1, 4))</span>
 <span class="sd">        &gt;&gt;&gt; staff = abjad.Staff([harm1, harm2, harm3, harm4])</span>
-<span class="sd">        &gt;&gt;&gt; abjad.f(staff)</span>
-<span class="sd">        \new Staff</span>
-<span class="sd">        {</span>
-<span class="sd">            \tweak style #&#39;harmonic</span>
-<span class="sd">            c&#39;&#39;4</span>
-<span class="sd">            \tweak style #&#39;harmonic</span>
-<span class="sd">            c&#39;&#39;4</span>
-<span class="sd">            \tweak style #&#39;harmonic</span>
-<span class="sd">            c&#39;&#39;4</span>
-<span class="sd">            \tweak style #&#39;harmonic</span>
-<span class="sd">            c&#39;&#39;4</span>
-<span class="sd">        }</span>
+<span class="sd">        &gt;&gt;&gt; abjad.show(staff)</span>
 
-<span class="sd">        .. figure:: ../_images/HarmonicNote-kdx8pmkdspn.png</span>
+<span class="sd">        ..  docs::</span>
+
+<span class="sd">            \new Staff</span>
+<span class="sd">            {</span>
+<span class="sd">                \tweak style #&#39;harmonic</span>
+<span class="sd">                c&#39;&#39;4</span>
+<span class="sd">                \tweak style #&#39;harmonic</span>
+<span class="sd">                c&#39;&#39;4</span>
+<span class="sd">                \tweak style #&#39;harmonic</span>
+<span class="sd">                c&#39;&#39;4</span>
+<span class="sd">                \tweak style #&#39;harmonic</span>
+<span class="sd">                c&#39;&#39;4</span>
+<span class="sd">            }</span>
+
+<span class="sd">        ..  figure:: ../_images/HarmonicNote-kdx8pmkdspn.png</span>
 
 <span class="sd">    :attr:`style`:</span>
 <span class="sd">        When instantiating this class, use the keyword argument :attr:`style`</span>
-<span class="sd">        to set a different type of note head, such as ``&#39;harmonic-mixed&#39;``:</span>
+<span class="sd">        to set a different type of note head, such as ``&quot;#&#39;harmonic-mixed&quot;``:</span>
 
 <span class="sd">        &gt;&gt;&gt; harm = auxjad.HarmonicNote(r&quot;c&#39;&#39;4&quot;,</span>
-<span class="sd">        ...                            style=&#39;harmonic-mixed&#39;,</span>
+<span class="sd">        ...                            style=&quot;#&#39;harmonic-mixed&quot;,</span>
 <span class="sd">        ...                            )</span>
 <span class="sd">        &gt;&gt;&gt; harm.style</span>
-<span class="sd">        &#39;harmonic-mixed&#39;</span>
-<span class="sd">        &gt;&gt;&gt; abjad.f(harm)</span>
-<span class="sd">        \tweak style #&#39;harmonic-mixed</span>
-<span class="sd">        c&#39;&#39;4</span>
+<span class="sd">        &quot;#&#39;harmonic-mixed&quot;</span>
+<span class="sd">        &gt;&gt;&gt; abjad.show(harm)</span>
 
-<span class="sd">        .. figure:: ../_images/HarmonicNote-z48i5il6vf.png</span>
+<span class="sd">        ..  docs::</span>
+
+<span class="sd">            \tweak style #&#39;harmonic-mixed</span>
+<span class="sd">            c&#39;&#39;4</span>
+
+<span class="sd">        ..  figure:: ../_images/HarmonicNote-z48i5il6vf.png</span>
 
 <span class="sd">    :attr:`~abjad.core.Note.Note.multiplier`:</span>
 <span class="sd">        Similarly to |abjad.Note|, this class can take multipliers:</span>
@@ -224,11 +239,14 @@
 <span class="sd">        ...                            )</span>
 <span class="sd">        &gt;&gt;&gt; harm.multiplier</span>
 <span class="sd">        abjad.Multiplier(2, 3)</span>
-<span class="sd">        &gt;&gt;&gt; abjad.f(harm)</span>
-<span class="sd">        \tweak style #&#39;harmonic</span>
-<span class="sd">        c&#39;&#39;4 * 2/3</span>
+<span class="sd">        &gt;&gt;&gt; abjad.show(harm)</span>
 
-<span class="sd">        .. figure:: ../_images/HarmonicNote-4qbhly2hfi.png</span>
+<span class="sd">        ..  docs::</span>
+
+<span class="sd">            \tweak style #&#39;harmonic</span>
+<span class="sd">            c&#39;&#39;4 * 2/3</span>
+
+<span class="sd">        ..  figure:: ../_images/HarmonicNote-4qbhly2hfi.png</span>
 
 <span class="sd">    Properties:</span>
 <span class="sd">        All properties of |abjad.Note| are also available to be read. This</span>
@@ -240,20 +258,20 @@
 <span class="sd">        &gt;&gt;&gt; harm.written_duration</span>
 <span class="sd">        1/4</span>
 <span class="sd">        &gt;&gt;&gt; harm.style</span>
-<span class="sd">        &#39;harmonic&#39;</span>
+<span class="sd">        &quot;#&#39;harmonic&quot;</span>
 
 <span class="sd">        All these properties can be set to different values after</span>
 <span class="sd">        initialisation:</span>
 
 <span class="sd">        &gt;&gt;&gt; harm.written_pitch = 18</span>
 <span class="sd">        &gt;&gt;&gt; harm.written_duration = abjad.Duration(1, 8)</span>
-<span class="sd">        &gt;&gt;&gt; harm.style = &#39;harmonic-mixed&#39;</span>
+<span class="sd">        &gt;&gt;&gt; harm.style = &quot;#&#39;harmonic-mixed&quot;</span>
 <span class="sd">        &gt;&gt;&gt; harm.written_pitch</span>
 <span class="sd">        &quot;fs&#39;&#39;&quot;</span>
 <span class="sd">        &gt;&gt;&gt; harm.written_duration</span>
 <span class="sd">        1/8</span>
 <span class="sd">        &gt;&gt;&gt; harm.style</span>
-<span class="sd">        &#39;harmonic-mixed&#39;</span>
+<span class="sd">        &quot;#&#39;harmonic-mixed&quot;</span>
 
 <span class="sd">    Setting :attr:`style` to ``&#39;flageolet&#39;``:</span>
 <span class="sd">        To create a harmonic note with a regular note head and with a flageolet</span>
@@ -264,18 +282,21 @@
 <span class="sd">        ...                            )</span>
 <span class="sd">        &gt;&gt;&gt; harm.style</span>
 <span class="sd">        &#39;flageolet&#39;</span>
-<span class="sd">        &gt;&gt;&gt; abjad.f(harm)</span>
-<span class="sd">        c&#39;&#39;1</span>
-<span class="sd">        \flageolet</span>
+<span class="sd">        &gt;&gt;&gt; abjad.show(harm)</span>
 
-<span class="sd">        .. figure:: ../_images/HarmonicNote-4q2q7rz65lj.png</span>
+<span class="sd">        ..  docs::</span>
+
+<span class="sd">            c&#39;&#39;1</span>
+<span class="sd">            \flageolet</span>
+
+<span class="sd">        ..  figure:: ../_images/HarmonicNote-4q2q7rz65lj.png</span>
 
 <span class="sd">    :attr:`markup`:</span>
 <span class="sd">        To add a markup expression to the harmonic note, use the :attr:`markup`</span>
 <span class="sd">        optional keyword argument, which takes strings. By default, the markup</span>
 <span class="sd">        position is above the harmonic note, but this can be overridden using</span>
 <span class="sd">        the keyword :attr:`direction`, which can take strings as well as</span>
-<span class="sd">        |abjad.Up| and |abjad.Down|:</span>
+<span class="sd">        ``abjad.Up`` and ``abjad.Down``:</span>
 
 <span class="sd">        &gt;&gt;&gt; harm1 = auxjad.HarmonicNote(r&quot;d&#39;&#39;1&quot;)</span>
 <span class="sd">        &gt;&gt;&gt; harm2 = auxjad.HarmonicNote(r&quot;d&#39;&#39;1&quot;,</span>
@@ -285,24 +306,27 @@
 <span class="sd">        ...                             markup=&#39;III.&#39;,</span>
 <span class="sd">        ...                             direction=abjad.Down)</span>
 <span class="sd">        &gt;&gt;&gt; staff = abjad.Staff([harm1, harm2, harm3])</span>
-<span class="sd">        &gt;&gt;&gt; abjad.f(staff)</span>
-<span class="sd">        \new Staff</span>
-<span class="sd">        {</span>
-<span class="sd">            \tweak style #&#39;harmonic</span>
-<span class="sd">            d&#39;&#39;1</span>
-<span class="sd">            \once \override TextScript.parent-alignment-X = 0</span>
-<span class="sd">            \once \override TextScript.self-alignment-X = 0</span>
-<span class="sd">            \tweak style #&#39;harmonic</span>
-<span class="sd">            d&#39;&#39;1</span>
-<span class="sd">            ^ \markup { III. }</span>
-<span class="sd">            \once \override TextScript.parent-alignment-X = 0</span>
-<span class="sd">            \once \override TextScript.self-alignment-X = 0</span>
-<span class="sd">            \tweak style #&#39;harmonic</span>
-<span class="sd">            d&#39;&#39;1</span>
-<span class="sd">            _ \markup { III. }</span>
-<span class="sd">        }</span>
+<span class="sd">        &gt;&gt;&gt; abjad.show(staff)</span>
 
-<span class="sd">        .. figure:: ../_images/HarmonicNote-v9uer4i864.png</span>
+<span class="sd">        ..  docs::</span>
+
+<span class="sd">            \new Staff</span>
+<span class="sd">            {</span>
+<span class="sd">                \tweak style #&#39;harmonic</span>
+<span class="sd">                d&#39;&#39;1</span>
+<span class="sd">                \once \override TextScript.parent-alignment-X = 0</span>
+<span class="sd">                \once \override TextScript.self-alignment-X = 0</span>
+<span class="sd">                \tweak style #&#39;harmonic</span>
+<span class="sd">                d&#39;&#39;1</span>
+<span class="sd">                ^ \markup { III. }</span>
+<span class="sd">                \once \override TextScript.parent-alignment-X = 0</span>
+<span class="sd">                \once \override TextScript.self-alignment-X = 0</span>
+<span class="sd">                \tweak style #&#39;harmonic</span>
+<span class="sd">                d&#39;&#39;1</span>
+<span class="sd">                _ \markup { III. }</span>
+<span class="sd">            }</span>
+
+<span class="sd">        ..  figure:: ../_images/HarmonicNote-v9uer4i864.png</span>
 
 <span class="sd">        Setting :attr:`markup` to ``None`` will remove the markup from the</span>
 <span class="sd">        note.</span>
@@ -311,11 +335,14 @@
 <span class="sd">        ...                            markup=&#39;III.&#39;,</span>
 <span class="sd">        ...                            )</span>
 <span class="sd">        &gt;&gt;&gt; harm.markup = None</span>
-<span class="sd">        &gt;&gt;&gt; abjad.f(harm)</span>
-<span class="sd">        \tweak style #&#39;harmonic</span>
-<span class="sd">        d&#39;&#39;1</span>
+<span class="sd">        &gt;&gt;&gt; abjad.show(harm)</span>
 
-<span class="sd">        .. figure:: ../_images/HarmonicNote-2gqky0o8dgt.png</span>
+<span class="sd">        ..  docs::</span>
+
+<span class="sd">            \tweak style #&#39;harmonic</span>
+<span class="sd">            d&#39;&#39;1</span>
+
+<span class="sd">        ..  figure:: ../_images/HarmonicNote-2gqky0o8dgt.png</span>
 
 <span class="sd">    :attr:`centre_markup`:</span>
 <span class="sd">        When a markup expression is added to the harmonic note by using the</span>
@@ -327,27 +354,33 @@
 <span class="sd">        &gt;&gt;&gt; harm1 = auxjad.HarmonicNote(r&quot;d&#39;&#39;1&quot;,</span>
 <span class="sd">        ...                            markup=&#39;III.&#39;,</span>
 <span class="sd">        ...                            )</span>
-<span class="sd">        &gt;&gt;&gt; abjad.f(harm1)</span>
-<span class="sd">        \once \override TextScript.parent-alignment-X = 0</span>
-<span class="sd">        \once \override TextScript.self-alignment-X = 0</span>
-<span class="sd">        \tweak style #&#39;harmonic</span>
-<span class="sd">        d&#39;&#39;1</span>
-<span class="sd">        ^ \markup { III. }</span>
+<span class="sd">        &gt;&gt;&gt; abjad.show(harm1)</span>
 
-<span class="sd">        .. figure:: ../_images/HarmonicNote-Vb1lf8wt7O.png</span>
+<span class="sd">        ..  docs::</span>
+
+<span class="sd">            \once \override TextScript.parent-alignment-X = 0</span>
+<span class="sd">            \once \override TextScript.self-alignment-X = 0</span>
+<span class="sd">            \tweak style #&#39;harmonic</span>
+<span class="sd">            d&#39;&#39;1</span>
+<span class="sd">            ^ \markup { III. }</span>
+
+<span class="sd">        ..  figure:: ../_images/HarmonicNote-Vb1lf8wt7O.png</span>
 
 <span class="sd">        &gt;&gt;&gt; harm2 = auxjad.HarmonicNote(r&quot;d&#39;&#39;1&quot;,</span>
 <span class="sd">        ...                            markup=&#39;III.&#39;,</span>
 <span class="sd">        ...                            centre_markup=False,</span>
 <span class="sd">        ...                            )</span>
-<span class="sd">        &gt;&gt;&gt; abjad.f(harm2)</span>
-<span class="sd">        \tweak style #&#39;harmonic</span>
-<span class="sd">        d&#39;&#39;1</span>
-<span class="sd">        ^ \markup { III. }</span>
+<span class="sd">        &gt;&gt;&gt; abjad.show(harm2)</span>
 
-<span class="sd">        .. figure:: ../_images/HarmonicNote-ZxHdPOas1z.png</span>
+<span class="sd">        ..  docs::</span>
 
-<span class="sd">    .. error::</span>
+<span class="sd">            \tweak style #&#39;harmonic</span>
+<span class="sd">            d&#39;&#39;1</span>
+<span class="sd">            ^ \markup { III. }</span>
+
+<span class="sd">        ..  figure:: ../_images/HarmonicNote-ZxHdPOas1z.png</span>
+
+<span class="sd">    ..  error::</span>
 
 <span class="sd">        If another markup is attached to the harmonic note, trying to set the</span>
 <span class="sd">        :attr:`markup` to ``None`` will raise an :exc:`Exception`:</span>
@@ -373,7 +406,7 @@
                  <span class="o">*</span><span class="n">arguments</span><span class="p">,</span>
                  <span class="n">multiplier</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">abjad</span><span class="o">.</span><span class="n">typings</span><span class="o">.</span><span class="n">DurationTyping</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
                  <span class="n">tag</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">abjad</span><span class="o">.</span><span class="n">Tag</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-                 <span class="n">style</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;harmonic&#39;</span><span class="p">,</span>
+                 <span class="n">style</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;#&#39;harmonic&quot;</span><span class="p">,</span>
                  <span class="n">markup</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
                  <span class="n">centre_markup</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
                  <span class="n">direction</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">abjad</span><span class="o">.</span><span class="n">enums</span><span class="o">.</span><span class="n">VerticalAlignment</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;up&#39;</span><span class="p">,</span>
@@ -385,7 +418,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">centre_markup</span> <span class="o">=</span> <span class="n">centre_markup</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">markup</span> <span class="o">=</span> <span class="n">markup</span></div>
 
-    <span class="c1">###########################</span>
+    <span class="c1">### PRIVATE METHODS ###</span>
 
     <span class="k">def</span> <span class="nf">_attach_centre_markup</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="sa">r</span><span class="s1">&#39;Attaches the centre markup tweaks.&#39;</span>
@@ -406,9 +439,9 @@
         <span class="n">literal2</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">LilyPondLiteral</span><span class="p">(</span>
             <span class="sa">r</span><span class="s1">&#39;\once \override TextScript.self-alignment-X = 0&#39;</span>
         <span class="p">)</span>
-        <span class="k">if</span> <span class="n">abjad</span><span class="o">.</span><span class="n">inspect</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">indicator</span><span class="p">(</span><span class="n">literal1</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">abjad</span><span class="o">.</span><span class="n">get</span><span class="o">.</span><span class="n">indicator</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">literal1</span><span class="p">):</span>
             <span class="n">abjad</span><span class="o">.</span><span class="n">detach</span><span class="p">(</span><span class="n">literal1</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span>
-        <span class="k">if</span> <span class="n">abjad</span><span class="o">.</span><span class="n">inspect</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">indicator</span><span class="p">(</span><span class="n">literal2</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">abjad</span><span class="o">.</span><span class="n">get</span><span class="o">.</span><span class="n">indicator</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">literal2</span><span class="p">):</span>
             <span class="n">abjad</span><span class="o">.</span><span class="n">detach</span><span class="p">(</span><span class="n">literal2</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span>
 
     <span class="c1">### PUBLIC PROPERTIES ###</span>
@@ -425,7 +458,7 @@
         <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">style</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
             <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;&#39;style&#39; must be &#39;str&#39;&quot;</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_style</span> <span class="o">=</span> <span class="n">style</span>
-        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_style</span> <span class="o">==</span> <span class="s1">&#39;flageolet&#39;</span><span class="p">:</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_style</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s1">&#39;flageolet&#39;</span><span class="p">):</span>
             <span class="n">abjad</span><span class="o">.</span><span class="n">tweak</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_note_head</span><span class="p">)</span><span class="o">.</span><span class="n">style</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_style</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="n">flageolet</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">LilyPondLiteral</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;\flageolet&#39;</span><span class="p">,</span>
@@ -471,7 +504,7 @@
                 <span class="bp">self</span><span class="o">.</span><span class="n">_detach_centre_markup</span><span class="p">()</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_markup</span> <span class="o">=</span> <span class="n">markup</span>
-            <span class="k">if</span> <span class="n">abjad</span><span class="o">.</span><span class="n">inspect</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">indicator</span><span class="p">(</span><span class="n">abjad</span><span class="o">.</span><span class="n">Markup</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">abjad</span><span class="o">.</span><span class="n">get</span><span class="o">.</span><span class="n">indicator</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Markup</span><span class="p">):</span>
                 <span class="n">abjad</span><span class="o">.</span><span class="n">detach</span><span class="p">(</span><span class="n">abjad</span><span class="o">.</span><span class="n">Markup</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_detach_centre_markup</span><span class="p">()</span></div>
 </pre></div>
@@ -480,28 +513,25 @@
            
           </div>
           <footer>
-  
 
   <hr/>
 
   <div role="contentinfo">
     <p>
-        
-        &copy; Copyright 2020, Gilberto Agostinho
+        &#169; Copyright 2020, Gilberto Agostinho.
 
     </p>
   </div>
     
     
     
-    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
     
-    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
     
     provided by <a href="https://readthedocs.org">Read the Docs</a>. 
 
 </footer>
-
         </div>
       </div>
 

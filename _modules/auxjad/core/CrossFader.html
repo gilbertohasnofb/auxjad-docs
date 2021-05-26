@@ -3,20 +3,25 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8">
+  <meta charset="utf-8" />
   
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>auxjad.core.CrossFader &mdash; auxjad 0.8.24 documentation</title>
+  <title>auxjad.core.CrossFader &mdash; auxjad 0.8.25 documentation</title>
   
 
   
   <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
 
   
   
+
   
+  
+
   
 
   
@@ -26,11 +31,10 @@
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
         <script src="../../../_static/jquery.js"></script>
         <script src="../../../_static/underscore.js"></script>
         <script src="../../../_static/doctools.js"></script>
-        <script src="../../../_static/language_data.js"></script>
-        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     
     <script type="text/javascript" src="../../../_static/js/theme.js"></script>
 
@@ -50,7 +54,7 @@
           
 
           
-            <a href="../../../index.html" class="icon icon-home" alt="Documentation Home"> auxjad
+            <a href="../../../index.html" class="icon icon-home"> auxjad
           
 
           
@@ -131,6 +135,8 @@
 
 
 
+
+
 <div role="navigation" aria-label="breadcrumbs navigation">
 
   <ul class="wy-breadcrumbs">
@@ -160,7 +166,7 @@
 
 <span class="kn">import</span> <span class="nn">abjad</span>
 
-<span class="kn">from</span> <span class="nn">..utilities.mutate</span> <span class="kn">import</span> <span class="n">mutate</span>
+<span class="kn">from</span> <span class="nn">..</span> <span class="kn">import</span> <span class="n">mutate</span>
 <span class="kn">from</span> <span class="nn">.Fader</span> <span class="kn">import</span> <span class="n">Fader</span>
 
 
@@ -184,78 +190,89 @@
 <span class="sd">        ...     abjad.Staff(selection_a),</span>
 <span class="sd">        ...     abjad.Staff(selection_b),</span>
 <span class="sd">        ... ])</span>
-<span class="sd">        &gt;&gt;&gt; abjad.f(score)</span>
-<span class="sd">        \new Score</span>
-<span class="sd">        &lt;&lt;</span>
-<span class="sd">            \new Staff</span>
-<span class="sd">            {</span>
-<span class="sd">                \time 4/4</span>
-<span class="sd">                fs&#39;4</span>
-<span class="sd">                g&#39;2</span>
-<span class="sd">                bf&#39;4</span>
-<span class="sd">            }</span>
-<span class="sd">            \new Staff</span>
-<span class="sd">            {</span>
-<span class="sd">                \time 4/4</span>
-<span class="sd">                R1</span>
-<span class="sd">            }</span>
-<span class="sd">        &gt;&gt;</span>
+<span class="sd">        &gt;&gt;&gt; abjad.show(score)</span>
 
-<span class="sd">        .. figure:: ../_images/CrossFader-gdofr6vtutv.png</span>
+<span class="sd">        ..  docs::</span>
+
+<span class="sd">            \new Score</span>
+<span class="sd">            &lt;&lt;</span>
+<span class="sd">                \new Staff</span>
+<span class="sd">                {</span>
+<span class="sd">                    \time 4/4</span>
+<span class="sd">                    fs&#39;4</span>
+<span class="sd">                    g&#39;2</span>
+<span class="sd">                    bf&#39;4</span>
+<span class="sd">                }</span>
+<span class="sd">                \new Staff</span>
+<span class="sd">                {</span>
+<span class="sd">                    \time 4/4</span>
+<span class="sd">                    R1</span>
+<span class="sd">                }</span>
+<span class="sd">            &gt;&gt;</span>
+
+<span class="sd">        ..  figure:: ../_images/CrossFader-gdofr6vtutv.png</span>
 
 <span class="sd">        &gt;&gt;&gt; selection_a, selection_b = fader()</span>
 <span class="sd">        &gt;&gt;&gt; score = abjad.Score([</span>
 <span class="sd">        ...     abjad.Staff(selection_a),</span>
 <span class="sd">        ...     abjad.Staff(selection_b),</span>
 <span class="sd">        ... ])</span>
-<span class="sd">        &gt;&gt;&gt; abjad.f(score)</span>
-<span class="sd">        \new Score</span>
-<span class="sd">        &lt;&lt;</span>
-<span class="sd">            \new Staff</span>
-<span class="sd">            {</span>
-<span class="sd">                \time 4/4</span>
-<span class="sd">                fs&#39;4</span>
-<span class="sd">                g&#39;2</span>
-<span class="sd">                bf&#39;4</span>
-<span class="sd">            }</span>
-<span class="sd">            \new Staff</span>
-<span class="sd">            {</span>
-<span class="sd">                \times 4/5 {</span>
-<span class="sd">                    \time 4/4</span>
-<span class="sd">                    r4</span>
-<span class="sd">                    d&#39;&#39;1</span>
-<span class="sd">                }</span>
-<span class="sd">            }</span>
-<span class="sd">        &gt;&gt;</span>
+<span class="sd">        &gt;&gt;&gt; abjad.show(score)</span>
 
-<span class="sd">        .. figure:: ../_images/CrossFader-ge0qzrwa7fr.png</span>
+<span class="sd">        ..  docs::</span>
+
+<span class="sd">            \new Score</span>
+<span class="sd">            &lt;&lt;</span>
+<span class="sd">                \new Staff</span>
+<span class="sd">                {</span>
+<span class="sd">                    \time 4/4</span>
+<span class="sd">                    fs&#39;4</span>
+<span class="sd">                    g&#39;2</span>
+<span class="sd">                    bf&#39;4</span>
+<span class="sd">                }</span>
+<span class="sd">                \new Staff</span>
+<span class="sd">                {</span>
+<span class="sd">                    \times 4/5</span>
+<span class="sd">                    {</span>
+<span class="sd">                        \time 4/4</span>
+<span class="sd">                        r4</span>
+<span class="sd">                        d&#39;&#39;1</span>
+<span class="sd">                    }</span>
+<span class="sd">                }</span>
+<span class="sd">            &gt;&gt;</span>
+
+<span class="sd">        ..  figure:: ../_images/CrossFader-ge0qzrwa7fr.png</span>
 
 <span class="sd">        &gt;&gt;&gt; selection_a, selection_b = fader()</span>
 <span class="sd">        &gt;&gt;&gt; score = abjad.Score([</span>
 <span class="sd">        ...     abjad.Staff(selection_a),</span>
 <span class="sd">        ...     abjad.Staff(selection_b),</span>
 <span class="sd">        ... ])</span>
-<span class="sd">        &gt;&gt;&gt; abjad.f(score)</span>
-<span class="sd">        \new Score</span>
-<span class="sd">        &lt;&lt;</span>
-<span class="sd">            \new Staff</span>
-<span class="sd">            {</span>
-<span class="sd">                \time 4/4</span>
-<span class="sd">                fs&#39;4</span>
-<span class="sd">                r2</span>
-<span class="sd">                bf&#39;4</span>
-<span class="sd">            }</span>
-<span class="sd">            \new Staff</span>
-<span class="sd">            {</span>
-<span class="sd">                \times 4/5 {</span>
-<span class="sd">                    \time 4/4</span>
-<span class="sd">                    r4</span>
-<span class="sd">                    d&#39;&#39;1</span>
-<span class="sd">                }</span>
-<span class="sd">            }</span>
-<span class="sd">        &gt;&gt;</span>
+<span class="sd">        &gt;&gt;&gt; abjad.show(score)</span>
 
-<span class="sd">        .. figure:: ../_images/CrossFader-0iynx7xenvmp.png</span>
+<span class="sd">        ..  docs::</span>
+
+<span class="sd">            \new Score</span>
+<span class="sd">            &lt;&lt;</span>
+<span class="sd">                \new Staff</span>
+<span class="sd">                {</span>
+<span class="sd">                    \time 4/4</span>
+<span class="sd">                    fs&#39;4</span>
+<span class="sd">                    r2</span>
+<span class="sd">                    bf&#39;4</span>
+<span class="sd">                }</span>
+<span class="sd">                \new Staff</span>
+<span class="sd">                {</span>
+<span class="sd">                    \times 4/5</span>
+<span class="sd">                    {</span>
+<span class="sd">                        \time 4/4</span>
+<span class="sd">                        r4</span>
+<span class="sd">                        d&#39;&#39;1</span>
+<span class="sd">                    }</span>
+<span class="sd">                }</span>
+<span class="sd">            &gt;&gt;</span>
+
+<span class="sd">        ..  figure:: ../_images/CrossFader-0iynx7xenvmp.png</span>
 
 <span class="sd">        The property :attr:`current_window` can be used to access the current</span>
 <span class="sd">        window without processing it.</span>
@@ -265,27 +282,31 @@
 <span class="sd">        ...     abjad.Staff(selection_a),</span>
 <span class="sd">        ...     abjad.Staff(selection_b),</span>
 <span class="sd">        ... ])</span>
-<span class="sd">        &gt;&gt;&gt; abjad.f(score)</span>
-<span class="sd">        \new Score</span>
-<span class="sd">        &lt;&lt;</span>
-<span class="sd">            \new Staff</span>
-<span class="sd">            {</span>
-<span class="sd">                \time 4/4</span>
-<span class="sd">                fs&#39;4</span>
-<span class="sd">                r2</span>
-<span class="sd">                bf&#39;4</span>
-<span class="sd">            }</span>
-<span class="sd">            \new Staff</span>
-<span class="sd">            {</span>
-<span class="sd">                \times 4/5 {</span>
-<span class="sd">                    \time 4/4</span>
-<span class="sd">                    r4</span>
-<span class="sd">                    d&#39;&#39;1</span>
-<span class="sd">                }</span>
-<span class="sd">            }</span>
-<span class="sd">        &gt;&gt;</span>
+<span class="sd">        &gt;&gt;&gt; abjad.show(score)</span>
 
-<span class="sd">        .. figure:: ../_images/CrossFader-kinei9zncl.png</span>
+<span class="sd">        ..  docs::</span>
+
+<span class="sd">            \new Score</span>
+<span class="sd">            &lt;&lt;</span>
+<span class="sd">                \new Staff</span>
+<span class="sd">                {</span>
+<span class="sd">                    \time 4/4</span>
+<span class="sd">                    fs&#39;4</span>
+<span class="sd">                    r2</span>
+<span class="sd">                    bf&#39;4</span>
+<span class="sd">                }</span>
+<span class="sd">                \new Staff</span>
+<span class="sd">                {</span>
+<span class="sd">                    \times 4/5</span>
+<span class="sd">                    {</span>
+<span class="sd">                        \time 4/4</span>
+<span class="sd">                        r4</span>
+<span class="sd">                        d&#39;&#39;1</span>
+<span class="sd">                    }</span>
+<span class="sd">                }</span>
+<span class="sd">            &gt;&gt;</span>
+
+<span class="sd">        ..  figure:: ../_images/CrossFader-kinei9zncl.png</span>
 
 <span class="sd">    :meth:`output_all`:</span>
 <span class="sd">        To run through the whole process and output it as a :obj:`tuple` of two</span>
@@ -299,56 +320,64 @@
 <span class="sd">        ...     abjad.Staff(selection_a),</span>
 <span class="sd">        ...     abjad.Staff(selection_b),</span>
 <span class="sd">        ... ])</span>
-<span class="sd">        &gt;&gt;&gt; abjad.f(score)</span>
-<span class="sd">        \new Score</span>
-<span class="sd">        &lt;&lt;</span>
-<span class="sd">            \new Staff</span>
-<span class="sd">            {</span>
-<span class="sd">                \time 4/4</span>
-<span class="sd">                fs&#39;4</span>
-<span class="sd">                g&#39;2</span>
-<span class="sd">                bf&#39;4</span>
-<span class="sd">                fs&#39;4</span>
-<span class="sd">                g&#39;2</span>
-<span class="sd">                bf&#39;4</span>
-<span class="sd">                fs&#39;4</span>
-<span class="sd">                r2</span>
-<span class="sd">                bf&#39;4</span>
-<span class="sd">                fs&#39;4</span>
-<span class="sd">                r2</span>
-<span class="sd">                bf&#39;4</span>
-<span class="sd">                r2.</span>
-<span class="sd">                bf&#39;4</span>
-<span class="sd">                R1</span>
-<span class="sd">            }</span>
-<span class="sd">            \new Staff</span>
-<span class="sd">            {</span>
-<span class="sd">                \time 4/4</span>
-<span class="sd">                R1</span>
-<span class="sd">                \times 4/5 {</span>
-<span class="sd">                    cs&#39;&#39;4</span>
-<span class="sd">                    r1</span>
-<span class="sd">                }</span>
-<span class="sd">                \times 4/5 {</span>
-<span class="sd">                    cs&#39;&#39;4</span>
-<span class="sd">                    r1</span>
-<span class="sd">                }</span>
-<span class="sd">                \times 4/5 {</span>
-<span class="sd">                    cs&#39;&#39;4</span>
-<span class="sd">                    d&#39;1</span>
-<span class="sd">                }</span>
-<span class="sd">                \times 4/5 {</span>
-<span class="sd">                    cs&#39;&#39;4</span>
-<span class="sd">                    d&#39;1</span>
-<span class="sd">                }</span>
-<span class="sd">                \times 4/5 {</span>
-<span class="sd">                    cs&#39;&#39;4</span>
-<span class="sd">                    d&#39;1</span>
-<span class="sd">                }</span>
-<span class="sd">            }</span>
-<span class="sd">        &gt;&gt;</span>
+<span class="sd">        &gt;&gt;&gt; abjad.show(score)</span>
 
-<span class="sd">        .. figure:: ../_images/CrossFader-0t206fb4ycne.png</span>
+<span class="sd">        ..  docs::</span>
+
+<span class="sd">            \new Score</span>
+<span class="sd">            &lt;&lt;</span>
+<span class="sd">                \new Staff</span>
+<span class="sd">                {</span>
+<span class="sd">                    \time 4/4</span>
+<span class="sd">                    fs&#39;4</span>
+<span class="sd">                    g&#39;2</span>
+<span class="sd">                    bf&#39;4</span>
+<span class="sd">                    fs&#39;4</span>
+<span class="sd">                    g&#39;2</span>
+<span class="sd">                    bf&#39;4</span>
+<span class="sd">                    fs&#39;4</span>
+<span class="sd">                    r2</span>
+<span class="sd">                    bf&#39;4</span>
+<span class="sd">                    fs&#39;4</span>
+<span class="sd">                    r2</span>
+<span class="sd">                    bf&#39;4</span>
+<span class="sd">                    r2.</span>
+<span class="sd">                    bf&#39;4</span>
+<span class="sd">                    R1</span>
+<span class="sd">                }</span>
+<span class="sd">                \new Staff</span>
+<span class="sd">                {</span>
+<span class="sd">                    \time 4/4</span>
+<span class="sd">                    R1</span>
+<span class="sd">                    \times 4/5</span>
+<span class="sd">                    {</span>
+<span class="sd">                        cs&#39;&#39;4</span>
+<span class="sd">                        r1</span>
+<span class="sd">                    }</span>
+<span class="sd">                    \times 4/5</span>
+<span class="sd">                    {</span>
+<span class="sd">                        cs&#39;&#39;4</span>
+<span class="sd">                        r1</span>
+<span class="sd">                    }</span>
+<span class="sd">                    \times 4/5</span>
+<span class="sd">                    {</span>
+<span class="sd">                        cs&#39;&#39;4</span>
+<span class="sd">                        d&#39;1</span>
+<span class="sd">                    }</span>
+<span class="sd">                    \times 4/5</span>
+<span class="sd">                    {</span>
+<span class="sd">                        cs&#39;&#39;4</span>
+<span class="sd">                        d&#39;1</span>
+<span class="sd">                    }</span>
+<span class="sd">                    \times 4/5</span>
+<span class="sd">                    {</span>
+<span class="sd">                        cs&#39;&#39;4</span>
+<span class="sd">                        d&#39;1</span>
+<span class="sd">                    }</span>
+<span class="sd">                }</span>
+<span class="sd">            &gt;&gt;</span>
+
+<span class="sd">        ..  figure:: ../_images/CrossFader-0t206fb4ycne.png</span>
 
 <span class="sd">    :meth:`output_n`:</span>
 <span class="sd">        To run through just part of the process and output it as a :obj:`tuple`</span>
@@ -363,44 +392,47 @@
 <span class="sd">        ...     abjad.Staff(selection_a),</span>
 <span class="sd">        ...     abjad.Staff(selection_b),</span>
 <span class="sd">        ... ])</span>
-<span class="sd">        &gt;&gt;&gt; abjad.f(score)</span>
-<span class="sd">        \new Score</span>
-<span class="sd">        &lt;&lt;</span>
-<span class="sd">            \new Staff</span>
-<span class="sd">            {</span>
-<span class="sd">                \time 4/4</span>
-<span class="sd">                e&#39;8</span>
-<span class="sd">                fs&#39;4.</span>
-<span class="sd">                r2</span>
-<span class="sd">                e&#39;8</span>
-<span class="sd">                fs&#39;4.</span>
-<span class="sd">                r2</span>
-<span class="sd">                e&#39;8</span>
-<span class="sd">                r2..</span>
-<span class="sd">            }</span>
-<span class="sd">            \new Staff</span>
-<span class="sd">            {</span>
-<span class="sd">                \time 4/4</span>
-<span class="sd">                R1</span>
-<span class="sd">                c&#39;&#39;2</span>
-<span class="sd">                ~</span>
-<span class="sd">                c&#39;&#39;8</span>
-<span class="sd">                r4.</span>
-<span class="sd">                c&#39;&#39;2</span>
-<span class="sd">                ~</span>
-<span class="sd">                c&#39;&#39;8</span>
-<span class="sd">                r4.</span>
-<span class="sd">            }</span>
-<span class="sd">        &gt;&gt;</span>
+<span class="sd">        &gt;&gt;&gt; abjad.show(score)</span>
 
-<span class="sd">        .. figure:: ../_images/CrossFader-8o5fjalw1px.png</span>
+<span class="sd">        ..  docs::</span>
+
+<span class="sd">            \new Score</span>
+<span class="sd">            &lt;&lt;</span>
+<span class="sd">                \new Staff</span>
+<span class="sd">                {</span>
+<span class="sd">                    \time 4/4</span>
+<span class="sd">                    e&#39;8</span>
+<span class="sd">                    fs&#39;4.</span>
+<span class="sd">                    r2</span>
+<span class="sd">                    e&#39;8</span>
+<span class="sd">                    fs&#39;4.</span>
+<span class="sd">                    r2</span>
+<span class="sd">                    e&#39;8</span>
+<span class="sd">                    r2..</span>
+<span class="sd">                }</span>
+<span class="sd">                \new Staff</span>
+<span class="sd">                {</span>
+<span class="sd">                    \time 4/4</span>
+<span class="sd">                    R1</span>
+<span class="sd">                    c&#39;&#39;2</span>
+<span class="sd">                    ~</span>
+<span class="sd">                    c&#39;&#39;8</span>
+<span class="sd">                    r4.</span>
+<span class="sd">                    c&#39;&#39;2</span>
+<span class="sd">                    ~</span>
+<span class="sd">                    c&#39;&#39;8</span>
+<span class="sd">                    r4.</span>
+<span class="sd">                }</span>
+<span class="sd">            &gt;&gt;</span>
+
+<span class="sd">        ..  figure:: ../_images/CrossFader-8o5fjalw1px.png</span>
 
 <span class="sd">    Using as iterator:</span>
 <span class="sd">        The instances of this class can also be used as an iterator, which can</span>
 <span class="sd">        then be used in a for loop to run through the whole process. Note that</span>
 <span class="sd">        unlike the methods :meth:`output_n` and :meth:`output_all`, time</span>
 <span class="sd">        signatures are added to each window returned by the fader. Use the</span>
-<span class="sd">        function |auxjad.mutate().remove_repeated_time_signatures()| to clean</span>
+<span class="sd">        function |auxjad.mutate.remove_repeated_time_signatures()| to clean</span>
 <span class="sd">        the output when using this class in this way.</span>
 
 <span class="sd">        &gt;&gt;&gt; fade_out_container = abjad.Container(r&quot;e&#39;8 fs&#39;4. r2&quot;)</span>
@@ -411,51 +443,54 @@
 <span class="sd">        &gt;&gt;&gt; for selection_a, selection_b in fader:</span>
 <span class="sd">        ...     staff_a.extend(selection_a)</span>
 <span class="sd">        ...     staff_b.extend(selection_b)</span>
-<span class="sd">        &gt;&gt;&gt; auxjad.mutate(staff_a).remove_repeated_time_signatures()</span>
-<span class="sd">        &gt;&gt;&gt; auxjad.mutate(staff_b).remove_repeated_time_signatures()</span>
+<span class="sd">        &gt;&gt;&gt; auxjad.mutate.remove_repeated_time_signatures(staff_a)</span>
+<span class="sd">        &gt;&gt;&gt; auxjad.mutate.remove_repeated_time_signatures(staff_b)</span>
 <span class="sd">        &gt;&gt;&gt; score = abjad.Score([staff_a, staff_b])</span>
-<span class="sd">        &gt;&gt;&gt; abjad.f(score)</span>
-<span class="sd">        \new Score</span>
-<span class="sd">        &lt;&lt;</span>
-<span class="sd">            \new Staff</span>
-<span class="sd">            {</span>
-<span class="sd">                \time 4/4</span>
-<span class="sd">                e&#39;8</span>
-<span class="sd">                fs&#39;4.</span>
-<span class="sd">                r2</span>
-<span class="sd">                e&#39;8</span>
-<span class="sd">                fs&#39;4.</span>
-<span class="sd">                r2</span>
-<span class="sd">                e&#39;8</span>
-<span class="sd">                r2..</span>
-<span class="sd">                e&#39;8</span>
-<span class="sd">                r2..</span>
-<span class="sd">                R1</span>
-<span class="sd">            }</span>
-<span class="sd">            \new Staff</span>
-<span class="sd">            {</span>
-<span class="sd">                \time 4/4</span>
-<span class="sd">                R1</span>
-<span class="sd">                c&#39;&#39;2</span>
-<span class="sd">                ~</span>
-<span class="sd">                c&#39;&#39;8</span>
-<span class="sd">                r4.</span>
-<span class="sd">                c&#39;&#39;2</span>
-<span class="sd">                ~</span>
-<span class="sd">                c&#39;&#39;8</span>
-<span class="sd">                r4.</span>
-<span class="sd">                c&#39;&#39;2</span>
-<span class="sd">                ~</span>
-<span class="sd">                c&#39;&#39;8</span>
-<span class="sd">                d&#39;&#39;4.</span>
-<span class="sd">                c&#39;&#39;2</span>
-<span class="sd">                ~</span>
-<span class="sd">                c&#39;&#39;8</span>
-<span class="sd">                d&#39;&#39;4.</span>
-<span class="sd">            }</span>
-<span class="sd">        &gt;&gt;</span>
+<span class="sd">        &gt;&gt;&gt; abjad.show(score)</span>
 
-<span class="sd">        .. figure:: ../_images/CrossFader-3g9fv4ew4h9.png</span>
+<span class="sd">        ..  docs::</span>
+
+<span class="sd">            \new Score</span>
+<span class="sd">            &lt;&lt;</span>
+<span class="sd">                \new Staff</span>
+<span class="sd">                {</span>
+<span class="sd">                    \time 4/4</span>
+<span class="sd">                    e&#39;8</span>
+<span class="sd">                    fs&#39;4.</span>
+<span class="sd">                    r2</span>
+<span class="sd">                    e&#39;8</span>
+<span class="sd">                    fs&#39;4.</span>
+<span class="sd">                    r2</span>
+<span class="sd">                    e&#39;8</span>
+<span class="sd">                    r2..</span>
+<span class="sd">                    e&#39;8</span>
+<span class="sd">                    r2..</span>
+<span class="sd">                    R1</span>
+<span class="sd">                }</span>
+<span class="sd">                \new Staff</span>
+<span class="sd">                {</span>
+<span class="sd">                    \time 4/4</span>
+<span class="sd">                    R1</span>
+<span class="sd">                    c&#39;&#39;2</span>
+<span class="sd">                    ~</span>
+<span class="sd">                    c&#39;&#39;8</span>
+<span class="sd">                    r4.</span>
+<span class="sd">                    c&#39;&#39;2</span>
+<span class="sd">                    ~</span>
+<span class="sd">                    c&#39;&#39;8</span>
+<span class="sd">                    r4.</span>
+<span class="sd">                    c&#39;&#39;2</span>
+<span class="sd">                    ~</span>
+<span class="sd">                    c&#39;&#39;8</span>
+<span class="sd">                    d&#39;&#39;4.</span>
+<span class="sd">                    c&#39;&#39;2</span>
+<span class="sd">                    ~</span>
+<span class="sd">                    c&#39;&#39;8</span>
+<span class="sd">                    d&#39;&#39;4.</span>
+<span class="sd">                }</span>
+<span class="sd">            &gt;&gt;</span>
+
+<span class="sd">        ..  figure:: ../_images/CrossFader-3g9fv4ew4h9.png</span>
 
 <span class="sd">    Arguments and properties:</span>
 <span class="sd">        This class can take many optional keyword arguments during its</span>
@@ -474,14 +509,14 @@
 <span class="sd">        notes as well its length), making it more likely that both will fade in</span>
 <span class="sd">        and out at a similar rate (default value is ``False``).</span>
 <span class="sd">        :attr:`disable_rewrite_meter` disables the</span>
-<span class="sd">        |abjad.mutate().rewrite_meter()| mutation which is applied to the</span>
+<span class="sd">        |abjad.Meter.rewrite_meter()| mutation which is applied to the</span>
 <span class="sd">        container after every call, and :attr:`omit_time_signatures` will</span>
 <span class="sd">        remove all time signatures from the output (both are ``False`` by</span>
 <span class="sd">        default). Any measure filled with rests will be rewritten using a</span>
 <span class="sd">        multi-measure rest; set the :attr:`use_multimeasure_rests` to ``False``</span>
 <span class="sd">        to disable this behaviour. The properties :attr:`boundary_depth`,</span>
 <span class="sd">        :attr:`maximum_dot_count`, and :attr:`rewrite_tuplets` are passed as</span>
-<span class="sd">        arguments to |abjad.mutate().rewrite_meter()|, see its documentation</span>
+<span class="sd">        arguments to |abjad.Meter.rewrite_meter()|, see its documentation</span>
 <span class="sd">        for more information.</span>
 
 <span class="sd">        &gt;&gt;&gt; fade_out_container = abjad.Container(r&quot;fs&#39;4 g&#39;2 bf&#39;4&quot;)</span>
@@ -582,45 +617,50 @@
 <span class="sd">        &gt;&gt;&gt; selection_a, selection_b = fader()</span>
 <span class="sd">        &gt;&gt;&gt; staff_a.extend(selection_a)</span>
 <span class="sd">        &gt;&gt;&gt; staff_b.extend(selection_b)</span>
-<span class="sd">        &gt;&gt;&gt; auxjad.mutate(staff_a).remove_repeated_time_signatures()</span>
-<span class="sd">        &gt;&gt;&gt; auxjad.mutate(staff_b).remove_repeated_time_signatures()</span>
+<span class="sd">        &gt;&gt;&gt; auxjad.mutate.remove_repeated_time_signatures(staff_a)</span>
+<span class="sd">        &gt;&gt;&gt; auxjad.mutate.remove_repeated_time_signatures(staff_b)</span>
 <span class="sd">        &gt;&gt;&gt; score = abjad.Score([staff_a, staff_b])</span>
-<span class="sd">        &gt;&gt;&gt; abjad.f(score)</span>
-<span class="sd">        \new Score</span>
-<span class="sd">        &lt;&lt;</span>
-<span class="sd">            \new Staff</span>
-<span class="sd">            {</span>
-<span class="sd">                \time 4/4</span>
-<span class="sd">                fs&#39;4</span>
-<span class="sd">                g&#39;2</span>
-<span class="sd">                bf&#39;4</span>
-<span class="sd">                fs&#39;4</span>
-<span class="sd">                g&#39;2</span>
-<span class="sd">                bf&#39;4</span>
-<span class="sd">                fs&#39;4</span>
-<span class="sd">                r2</span>
-<span class="sd">                bf&#39;4</span>
-<span class="sd">                fs&#39;4</span>
-<span class="sd">                g&#39;2</span>
-<span class="sd">                bf&#39;4</span>
-<span class="sd">            }</span>
-<span class="sd">            \new Staff</span>
-<span class="sd">            {</span>
-<span class="sd">                \time 4/4</span>
-<span class="sd">                R1</span>
-<span class="sd">                \times 4/5 {</span>
-<span class="sd">                    cs&#39;&#39;4</span>
-<span class="sd">                    r1</span>
-<span class="sd">                }</span>
-<span class="sd">                \times 4/5 {</span>
-<span class="sd">                    cs&#39;&#39;4</span>
-<span class="sd">                    r1</span>
-<span class="sd">                }</span>
-<span class="sd">                R1</span>
-<span class="sd">            }</span>
-<span class="sd">        &gt;&gt;</span>
+<span class="sd">        &gt;&gt;&gt; abjad.show(score)</span>
 
-<span class="sd">        .. figure:: ../_images/CrossFader-pauqe26ke8e.png</span>
+<span class="sd">        ..  docs::</span>
+
+<span class="sd">            \new Score</span>
+<span class="sd">            &lt;&lt;</span>
+<span class="sd">                \new Staff</span>
+<span class="sd">                {</span>
+<span class="sd">                    \time 4/4</span>
+<span class="sd">                    fs&#39;4</span>
+<span class="sd">                    g&#39;2</span>
+<span class="sd">                    bf&#39;4</span>
+<span class="sd">                    fs&#39;4</span>
+<span class="sd">                    g&#39;2</span>
+<span class="sd">                    bf&#39;4</span>
+<span class="sd">                    fs&#39;4</span>
+<span class="sd">                    r2</span>
+<span class="sd">                    bf&#39;4</span>
+<span class="sd">                    fs&#39;4</span>
+<span class="sd">                    g&#39;2</span>
+<span class="sd">                    bf&#39;4</span>
+<span class="sd">                }</span>
+<span class="sd">                \new Staff</span>
+<span class="sd">                {</span>
+<span class="sd">                    \time 4/4</span>
+<span class="sd">                    R1</span>
+<span class="sd">                    \times 4/5</span>
+<span class="sd">                    {</span>
+<span class="sd">                        cs&#39;&#39;4</span>
+<span class="sd">                        r1</span>
+<span class="sd">                    }</span>
+<span class="sd">                    \times 4/5</span>
+<span class="sd">                    {</span>
+<span class="sd">                        cs&#39;&#39;4</span>
+<span class="sd">                        r1</span>
+<span class="sd">                    }</span>
+<span class="sd">                    R1</span>
+<span class="sd">                }</span>
+<span class="sd">            &gt;&gt;</span>
+
+<span class="sd">        ..  figure:: ../_images/CrossFader-pauqe26ke8e.png</span>
 
 <span class="sd">    Chords:</span>
 <span class="sd">        This class also support chords. Each of their individual notes are</span>
@@ -638,64 +678,74 @@
 <span class="sd">        ...     abjad.Staff(selection_a),</span>
 <span class="sd">        ...     abjad.Staff(selection_b),</span>
 <span class="sd">        ... ])</span>
-<span class="sd">        &gt;&gt;&gt; abjad.f(score)</span>
-<span class="sd">        \new Score</span>
-<span class="sd">        &lt;&lt;</span>
-<span class="sd">            \new Staff</span>
-<span class="sd">            {</span>
-<span class="sd">                \times 2/3 {</span>
-<span class="sd">                    \time 4/4</span>
-<span class="sd">                    &lt;c&#39; e&#39;&gt;2</span>
-<span class="sd">                    g&#39;1</span>
-<span class="sd">                }</span>
-<span class="sd">                \times 2/3 {</span>
-<span class="sd">                    &lt;c&#39; e&#39;&gt;2</span>
-<span class="sd">                    g&#39;1</span>
-<span class="sd">                }</span>
-<span class="sd">                \times 2/3 {</span>
-<span class="sd">                    &lt;c&#39; e&#39;&gt;2</span>
-<span class="sd">                    g&#39;1</span>
-<span class="sd">                }</span>
-<span class="sd">                \times 2/3 {</span>
-<span class="sd">                    &lt;c&#39; e&#39;&gt;2</span>
-<span class="sd">                    g&#39;1</span>
-<span class="sd">                }</span>
-<span class="sd">                \times 2/3 {</span>
-<span class="sd">                    c&#39;2</span>
-<span class="sd">                    g&#39;1</span>
-<span class="sd">                }</span>
-<span class="sd">                \times 2/3 {</span>
-<span class="sd">                    c&#39;2</span>
-<span class="sd">                    g&#39;1</span>
-<span class="sd">                }</span>
-<span class="sd">                \times 2/3 {</span>
-<span class="sd">                    c&#39;2</span>
-<span class="sd">                    r1</span>
-<span class="sd">                }</span>
-<span class="sd">                R1</span>
-<span class="sd">            }</span>
-<span class="sd">            \new Staff</span>
-<span class="sd">            {</span>
-<span class="sd">                \time 4/4</span>
-<span class="sd">                R1</span>
-<span class="sd">                ef&#39;2.</span>
-<span class="sd">                r4</span>
-<span class="sd">                &lt;d&#39; ef&#39;&gt;2.</span>
-<span class="sd">                r4</span>
-<span class="sd">                &lt;d&#39; ef&#39;&gt;2.</span>
-<span class="sd">                bf4</span>
-<span class="sd">                &lt;d&#39; ef&#39;&gt;2.</span>
-<span class="sd">                bf4</span>
-<span class="sd">                &lt;d&#39; ef&#39;&gt;2.</span>
-<span class="sd">                &lt;bf a&#39;&gt;4</span>
-<span class="sd">                &lt;d&#39; ef&#39;&gt;2.</span>
-<span class="sd">                &lt;bf a&#39;&gt;4</span>
-<span class="sd">                &lt;d&#39; ef&#39;&gt;2.</span>
-<span class="sd">                &lt;bf a&#39;&gt;4</span>
-<span class="sd">            }</span>
-<span class="sd">        &gt;&gt;</span>
+<span class="sd">        &gt;&gt;&gt; abjad.show(score)</span>
 
-<span class="sd">        .. figure:: ../_images/CrossFader-lm8byjxoayn.png</span>
+<span class="sd">        ..  docs::</span>
+
+<span class="sd">            \new Score</span>
+<span class="sd">            &lt;&lt;</span>
+<span class="sd">                \new Staff</span>
+<span class="sd">                {</span>
+<span class="sd">                    \times 2/3</span>
+<span class="sd">                    {</span>
+<span class="sd">                        \time 4/4</span>
+<span class="sd">                        &lt;c&#39; e&#39;&gt;2</span>
+<span class="sd">                        g&#39;1</span>
+<span class="sd">                    }</span>
+<span class="sd">                    \times 2/3</span>
+<span class="sd">                    {</span>
+<span class="sd">                        &lt;c&#39; e&#39;&gt;2</span>
+<span class="sd">                        g&#39;1</span>
+<span class="sd">                    }</span>
+<span class="sd">                    \times 2/3</span>
+<span class="sd">                    {</span>
+<span class="sd">                        &lt;c&#39; e&#39;&gt;2</span>
+<span class="sd">                        g&#39;1</span>
+<span class="sd">                    }</span>
+<span class="sd">                    \times 2/3</span>
+<span class="sd">                    {</span>
+<span class="sd">                        &lt;c&#39; e&#39;&gt;2</span>
+<span class="sd">                        g&#39;1</span>
+<span class="sd">                    }</span>
+<span class="sd">                    \times 2/3</span>
+<span class="sd">                    {</span>
+<span class="sd">                        c&#39;2</span>
+<span class="sd">                        g&#39;1</span>
+<span class="sd">                    }</span>
+<span class="sd">                    \times 2/3</span>
+<span class="sd">                    {</span>
+<span class="sd">                        c&#39;2</span>
+<span class="sd">                        g&#39;1</span>
+<span class="sd">                    }</span>
+<span class="sd">                    \times 2/3</span>
+<span class="sd">                    {</span>
+<span class="sd">                        c&#39;2</span>
+<span class="sd">                        r1</span>
+<span class="sd">                    }</span>
+<span class="sd">                    R1</span>
+<span class="sd">                }</span>
+<span class="sd">                \new Staff</span>
+<span class="sd">                {</span>
+<span class="sd">                    \time 4/4</span>
+<span class="sd">                    R1</span>
+<span class="sd">                    ef&#39;2.</span>
+<span class="sd">                    r4</span>
+<span class="sd">                    &lt;d&#39; ef&#39;&gt;2.</span>
+<span class="sd">                    r4</span>
+<span class="sd">                    &lt;d&#39; ef&#39;&gt;2.</span>
+<span class="sd">                    bf4</span>
+<span class="sd">                    &lt;d&#39; ef&#39;&gt;2.</span>
+<span class="sd">                    bf4</span>
+<span class="sd">                    &lt;d&#39; ef&#39;&gt;2.</span>
+<span class="sd">                    &lt;bf a&#39;&gt;4</span>
+<span class="sd">                    &lt;d&#39; ef&#39;&gt;2.</span>
+<span class="sd">                    &lt;bf a&#39;&gt;4</span>
+<span class="sd">                    &lt;d&#39; ef&#39;&gt;2.</span>
+<span class="sd">                    &lt;bf a&#39;&gt;4</span>
+<span class="sd">                }</span>
+<span class="sd">            &gt;&gt;</span>
+
+<span class="sd">        ..  figure:: ../_images/CrossFader-lm8byjxoayn.png</span>
 
 <span class="sd">    :func:`len()`:</span>
 <span class="sd">        The function :func:`len()` returns the sum of the number of notes of</span>
@@ -733,37 +783,40 @@
 <span class="sd">        ...     abjad.Staff(selection_a),</span>
 <span class="sd">        ...     abjad.Staff(selection_b),</span>
 <span class="sd">        ... ])</span>
-<span class="sd">        &gt;&gt;&gt; abjad.f(score)</span>
-<span class="sd">        \new Score</span>
-<span class="sd">        &lt;&lt;</span>
-<span class="sd">            \new Staff</span>
-<span class="sd">            {</span>
-<span class="sd">                \time 3/4</span>
-<span class="sd">                r4</span>
-<span class="sd">                c&#39;4</span>
-<span class="sd">                d&#39;4</span>
-<span class="sd">                r2</span>
-<span class="sd">                d&#39;4</span>
-<span class="sd">                r2</span>
-<span class="sd">                d&#39;4</span>
-<span class="sd">                R1 * 3/4</span>
-<span class="sd">                R1 * 3/4</span>
-<span class="sd">            }</span>
-<span class="sd">            \new Staff</span>
-<span class="sd">            {</span>
-<span class="sd">                \time 3/4</span>
-<span class="sd">                R1 * 3/4</span>
-<span class="sd">                R1 * 3/4</span>
-<span class="sd">                a&#39;&#39;4</span>
-<span class="sd">                r2</span>
-<span class="sd">                a&#39;&#39;4</span>
-<span class="sd">                r2</span>
-<span class="sd">                a&#39;&#39;4</span>
-<span class="sd">                g&#39;&#39;2</span>
-<span class="sd">            }</span>
-<span class="sd">        &gt;&gt;</span>
+<span class="sd">        &gt;&gt;&gt; abjad.show(score)</span>
 
-<span class="sd">        .. figure:: ../_images/CrossFader-sm9qcruxat.png</span>
+<span class="sd">        ..  docs::</span>
+
+<span class="sd">            \new Score</span>
+<span class="sd">            &lt;&lt;</span>
+<span class="sd">                \new Staff</span>
+<span class="sd">                {</span>
+<span class="sd">                    \time 3/4</span>
+<span class="sd">                    r4</span>
+<span class="sd">                    c&#39;4</span>
+<span class="sd">                    d&#39;4</span>
+<span class="sd">                    r2</span>
+<span class="sd">                    d&#39;4</span>
+<span class="sd">                    r2</span>
+<span class="sd">                    d&#39;4</span>
+<span class="sd">                    R1 * 3/4</span>
+<span class="sd">                    R1 * 3/4</span>
+<span class="sd">                }</span>
+<span class="sd">                \new Staff</span>
+<span class="sd">                {</span>
+<span class="sd">                    \time 3/4</span>
+<span class="sd">                    R1 * 3/4</span>
+<span class="sd">                    R1 * 3/4</span>
+<span class="sd">                    a&#39;&#39;4</span>
+<span class="sd">                    r2</span>
+<span class="sd">                    a&#39;&#39;4</span>
+<span class="sd">                    r2</span>
+<span class="sd">                    a&#39;&#39;4</span>
+<span class="sd">                    g&#39;&#39;2</span>
+<span class="sd">                }</span>
+<span class="sd">            &gt;&gt;</span>
+
+<span class="sd">        ..  figure:: ../_images/CrossFader-sm9qcruxat.png</span>
 
 <span class="sd">        &gt;&gt;&gt; fader = auxjad.CrossFader(fade_out_container,</span>
 <span class="sd">        ...                           fade_in_container,</span>
@@ -774,38 +827,41 @@
 <span class="sd">        ...     abjad.Staff(selection_a),</span>
 <span class="sd">        ...     abjad.Staff(selection_b),</span>
 <span class="sd">        ... ])</span>
-<span class="sd">        &gt;&gt;&gt; abjad.f(score)</span>
-<span class="sd">        \new Score</span>
-<span class="sd">        &lt;&lt;</span>
-<span class="sd">            \new Staff</span>
-<span class="sd">            {</span>
-<span class="sd">                \time 3/4</span>
-<span class="sd">                r4</span>
-<span class="sd">                c&#39;4</span>
-<span class="sd">                d&#39;4</span>
-<span class="sd">                r2</span>
-<span class="sd">                d&#39;4</span>
-<span class="sd">                r2</span>
-<span class="sd">                d&#39;4</span>
-<span class="sd">                r2</span>
-<span class="sd">                d&#39;4</span>
-<span class="sd">                R1 * 3/4</span>
-<span class="sd">            }</span>
-<span class="sd">            \new Staff</span>
-<span class="sd">            {</span>
-<span class="sd">                \time 3/4</span>
-<span class="sd">                R1 * 3/4</span>
-<span class="sd">                R1 * 3/4</span>
-<span class="sd">                a&#39;&#39;4</span>
-<span class="sd">                r2</span>
-<span class="sd">                a&#39;&#39;4</span>
-<span class="sd">                g&#39;&#39;2</span>
-<span class="sd">                a&#39;&#39;4</span>
-<span class="sd">                g&#39;&#39;2</span>
-<span class="sd">            }</span>
-<span class="sd">        &gt;&gt;</span>
+<span class="sd">        &gt;&gt;&gt; abjad.show(score)</span>
 
-<span class="sd">        .. figure:: ../_images/CrossFader-2a4cyxsyxrg.png</span>
+<span class="sd">        ..  docs::</span>
+
+<span class="sd">            \new Score</span>
+<span class="sd">            &lt;&lt;</span>
+<span class="sd">                \new Staff</span>
+<span class="sd">                {</span>
+<span class="sd">                    \time 3/4</span>
+<span class="sd">                    r4</span>
+<span class="sd">                    c&#39;4</span>
+<span class="sd">                    d&#39;4</span>
+<span class="sd">                    r2</span>
+<span class="sd">                    d&#39;4</span>
+<span class="sd">                    r2</span>
+<span class="sd">                    d&#39;4</span>
+<span class="sd">                    r2</span>
+<span class="sd">                    d&#39;4</span>
+<span class="sd">                    R1 * 3/4</span>
+<span class="sd">                }</span>
+<span class="sd">                \new Staff</span>
+<span class="sd">                {</span>
+<span class="sd">                    \time 3/4</span>
+<span class="sd">                    R1 * 3/4</span>
+<span class="sd">                    R1 * 3/4</span>
+<span class="sd">                    a&#39;&#39;4</span>
+<span class="sd">                    r2</span>
+<span class="sd">                    a&#39;&#39;4</span>
+<span class="sd">                    g&#39;&#39;2</span>
+<span class="sd">                    a&#39;&#39;4</span>
+<span class="sd">                    g&#39;&#39;2</span>
+<span class="sd">                }</span>
+<span class="sd">            &gt;&gt;</span>
+
+<span class="sd">        ..  figure:: ../_images/CrossFader-2a4cyxsyxrg.png</span>
 
 <span class="sd">        &gt;&gt;&gt; fader = auxjad.CrossFader(fade_out_container,</span>
 <span class="sd">        ...                           fade_in_container,</span>
@@ -817,41 +873,44 @@
 <span class="sd">        ...     abjad.Staff(selection_a),</span>
 <span class="sd">        ...     abjad.Staff(selection_b),</span>
 <span class="sd">        ... ])</span>
-<span class="sd">        &gt;&gt;&gt; abjad.f(score)</span>
-<span class="sd">        \new Score</span>
-<span class="sd">        &lt;&lt;</span>
-<span class="sd">            \new Staff</span>
-<span class="sd">            {</span>
-<span class="sd">                \time 3/4</span>
-<span class="sd">                r4</span>
-<span class="sd">                c&#39;4</span>
-<span class="sd">                d&#39;4</span>
-<span class="sd">                r4</span>
-<span class="sd">                c&#39;4</span>
-<span class="sd">                d&#39;4</span>
-<span class="sd">                r4</span>
-<span class="sd">                c&#39;4</span>
-<span class="sd">                d&#39;4</span>
-<span class="sd">                r2</span>
-<span class="sd">                d&#39;4</span>
-<span class="sd">                R1 * 3/4</span>
-<span class="sd">            }</span>
-<span class="sd">            \new Staff</span>
-<span class="sd">            {</span>
-<span class="sd">                \time 3/4</span>
-<span class="sd">                R1 * 3/4</span>
-<span class="sd">                a&#39;&#39;4</span>
-<span class="sd">                r2</span>
-<span class="sd">                a&#39;&#39;4</span>
-<span class="sd">                g&#39;&#39;2</span>
-<span class="sd">                a&#39;&#39;4</span>
-<span class="sd">                g&#39;&#39;2</span>
-<span class="sd">                a&#39;&#39;4</span>
-<span class="sd">                g&#39;&#39;2</span>
-<span class="sd">            }</span>
-<span class="sd">        &gt;&gt;</span>
+<span class="sd">        &gt;&gt;&gt; abjad.show(score)</span>
 
-<span class="sd">        .. figure:: ../_images/CrossFader-oap1pnwrfqc.png</span>
+<span class="sd">        ..  docs::</span>
+
+<span class="sd">            \new Score</span>
+<span class="sd">            &lt;&lt;</span>
+<span class="sd">                \new Staff</span>
+<span class="sd">                {</span>
+<span class="sd">                    \time 3/4</span>
+<span class="sd">                    r4</span>
+<span class="sd">                    c&#39;4</span>
+<span class="sd">                    d&#39;4</span>
+<span class="sd">                    r4</span>
+<span class="sd">                    c&#39;4</span>
+<span class="sd">                    d&#39;4</span>
+<span class="sd">                    r4</span>
+<span class="sd">                    c&#39;4</span>
+<span class="sd">                    d&#39;4</span>
+<span class="sd">                    r2</span>
+<span class="sd">                    d&#39;4</span>
+<span class="sd">                    R1 * 3/4</span>
+<span class="sd">                }</span>
+<span class="sd">                \new Staff</span>
+<span class="sd">                {</span>
+<span class="sd">                    \time 3/4</span>
+<span class="sd">                    R1 * 3/4</span>
+<span class="sd">                    a&#39;&#39;4</span>
+<span class="sd">                    r2</span>
+<span class="sd">                    a&#39;&#39;4</span>
+<span class="sd">                    g&#39;&#39;2</span>
+<span class="sd">                    a&#39;&#39;4</span>
+<span class="sd">                    g&#39;&#39;2</span>
+<span class="sd">                    a&#39;&#39;4</span>
+<span class="sd">                    g&#39;&#39;2</span>
+<span class="sd">                }</span>
+<span class="sd">            &gt;&gt;</span>
+
+<span class="sd">        ..  figure:: ../_images/CrossFader-oap1pnwrfqc.png</span>
 
 <span class="sd">    :attr:`weighted_duration`:</span>
 <span class="sd">        Setting :attr:`weighted_duration` to ``True`` will give more weight to</span>
@@ -869,97 +928,100 @@
 <span class="sd">        ...     abjad.Staff(selection_a),</span>
 <span class="sd">        ...     abjad.Staff(selection_b),</span>
 <span class="sd">        ... ])</span>
-<span class="sd">        &gt;&gt;&gt; abjad.f(score)</span>
-<span class="sd">        \new Score</span>
-<span class="sd">        &lt;&lt;</span>
-<span class="sd">            \new Staff</span>
-<span class="sd">            {</span>
-<span class="sd">                \time 4/4</span>
-<span class="sd">                e&#39;2</span>
-<span class="sd">                c&#39;2</span>
-<span class="sd">                e&#39;2</span>
-<span class="sd">                c&#39;2</span>
-<span class="sd">                r2</span>
-<span class="sd">                c&#39;2</span>
-<span class="sd">                r2</span>
-<span class="sd">                c&#39;2</span>
-<span class="sd">                r2</span>
-<span class="sd">                c&#39;2</span>
-<span class="sd">                R1</span>
-<span class="sd">                R1</span>
-<span class="sd">                R1</span>
-<span class="sd">                R1</span>
-<span class="sd">                R1</span>
-<span class="sd">                R1</span>
-<span class="sd">            }</span>
-<span class="sd">            \new Staff</span>
-<span class="sd">            {</span>
-<span class="sd">                \time 4/4</span>
-<span class="sd">                R1</span>
-<span class="sd">                r4.</span>
-<span class="sd">                f&#39;&#39;8</span>
-<span class="sd">                r2</span>
-<span class="sd">                r4.</span>
-<span class="sd">                f&#39;&#39;8</span>
-<span class="sd">                r2</span>
-<span class="sd">                r4.</span>
-<span class="sd">                f&#39;&#39;8</span>
-<span class="sd">                r8</span>
-<span class="sd">                a&#39;&#39;8</span>
-<span class="sd">                r4</span>
-<span class="sd">                r4.</span>
-<span class="sd">                f&#39;&#39;8</span>
-<span class="sd">                r8</span>
-<span class="sd">                a&#39;&#39;8</span>
-<span class="sd">                b&#39;&#39;8</span>
-<span class="sd">                r8</span>
-<span class="sd">                r4.</span>
-<span class="sd">                f&#39;&#39;8</span>
-<span class="sd">                r8</span>
-<span class="sd">                a&#39;&#39;8</span>
-<span class="sd">                b&#39;&#39;8</span>
-<span class="sd">                r8</span>
-<span class="sd">                r4.</span>
-<span class="sd">                f&#39;&#39;8</span>
-<span class="sd">                r8</span>
-<span class="sd">                a&#39;&#39;8</span>
-<span class="sd">                b&#39;&#39;8</span>
-<span class="sd">                c&#39;&#39;&#39;8</span>
-<span class="sd">                r4</span>
-<span class="sd">                e&#39;&#39;8</span>
-<span class="sd">                f&#39;&#39;8</span>
-<span class="sd">                r8</span>
-<span class="sd">                a&#39;&#39;8</span>
-<span class="sd">                b&#39;&#39;8</span>
-<span class="sd">                c&#39;&#39;&#39;8</span>
-<span class="sd">                r8</span>
-<span class="sd">                d&#39;&#39;8</span>
-<span class="sd">                e&#39;&#39;8</span>
-<span class="sd">                f&#39;&#39;8</span>
-<span class="sd">                r8</span>
-<span class="sd">                a&#39;&#39;8</span>
-<span class="sd">                b&#39;&#39;8</span>
-<span class="sd">                c&#39;&#39;&#39;8</span>
-<span class="sd">                c&#39;&#39;8</span>
-<span class="sd">                d&#39;&#39;8</span>
-<span class="sd">                e&#39;&#39;8</span>
-<span class="sd">                f&#39;&#39;8</span>
-<span class="sd">                r8</span>
-<span class="sd">                a&#39;&#39;8</span>
-<span class="sd">                b&#39;&#39;8</span>
-<span class="sd">                c&#39;&#39;&#39;8</span>
-<span class="sd">                c&#39;&#39;8</span>
-<span class="sd">                d&#39;&#39;8</span>
-<span class="sd">                e&#39;&#39;8</span>
-<span class="sd">                f&#39;&#39;8</span>
-<span class="sd">                g&#39;&#39;8</span>
-<span class="sd">                a&#39;&#39;8</span>
-<span class="sd">                b&#39;&#39;8</span>
-<span class="sd">                c&#39;&#39;&#39;8</span>
-<span class="sd">            }</span>
-<span class="sd">        &gt;&gt;</span>
+<span class="sd">        &gt;&gt;&gt; abjad.show(score)</span>
 
-<span class="sd">        .. figure:: ../_images/CrossFader-o58h79ijsdf.png</span>
+<span class="sd">        ..  docs::</span>
+
+<span class="sd">            \new Score</span>
+<span class="sd">            &lt;&lt;</span>
+<span class="sd">                \new Staff</span>
+<span class="sd">                {</span>
+<span class="sd">                    \time 4/4</span>
+<span class="sd">                    e&#39;2</span>
+<span class="sd">                    c&#39;2</span>
+<span class="sd">                    e&#39;2</span>
+<span class="sd">                    c&#39;2</span>
+<span class="sd">                    r2</span>
+<span class="sd">                    c&#39;2</span>
+<span class="sd">                    r2</span>
+<span class="sd">                    c&#39;2</span>
+<span class="sd">                    r2</span>
+<span class="sd">                    c&#39;2</span>
+<span class="sd">                    R1</span>
+<span class="sd">                    R1</span>
+<span class="sd">                    R1</span>
+<span class="sd">                    R1</span>
+<span class="sd">                    R1</span>
+<span class="sd">                    R1</span>
+<span class="sd">                }</span>
+<span class="sd">                \new Staff</span>
+<span class="sd">                {</span>
+<span class="sd">                    \time 4/4</span>
+<span class="sd">                    R1</span>
+<span class="sd">                    r4.</span>
+<span class="sd">                    f&#39;&#39;8</span>
+<span class="sd">                    r2</span>
+<span class="sd">                    r4.</span>
+<span class="sd">                    f&#39;&#39;8</span>
+<span class="sd">                    r2</span>
+<span class="sd">                    r4.</span>
+<span class="sd">                    f&#39;&#39;8</span>
+<span class="sd">                    r8</span>
+<span class="sd">                    a&#39;&#39;8</span>
+<span class="sd">                    r4</span>
+<span class="sd">                    r4.</span>
+<span class="sd">                    f&#39;&#39;8</span>
+<span class="sd">                    r8</span>
+<span class="sd">                    a&#39;&#39;8</span>
+<span class="sd">                    b&#39;&#39;8</span>
+<span class="sd">                    r8</span>
+<span class="sd">                    r4.</span>
+<span class="sd">                    f&#39;&#39;8</span>
+<span class="sd">                    r8</span>
+<span class="sd">                    a&#39;&#39;8</span>
+<span class="sd">                    b&#39;&#39;8</span>
+<span class="sd">                    r8</span>
+<span class="sd">                    r4.</span>
+<span class="sd">                    f&#39;&#39;8</span>
+<span class="sd">                    r8</span>
+<span class="sd">                    a&#39;&#39;8</span>
+<span class="sd">                    b&#39;&#39;8</span>
+<span class="sd">                    c&#39;&#39;&#39;8</span>
+<span class="sd">                    r4</span>
+<span class="sd">                    e&#39;&#39;8</span>
+<span class="sd">                    f&#39;&#39;8</span>
+<span class="sd">                    r8</span>
+<span class="sd">                    a&#39;&#39;8</span>
+<span class="sd">                    b&#39;&#39;8</span>
+<span class="sd">                    c&#39;&#39;&#39;8</span>
+<span class="sd">                    r8</span>
+<span class="sd">                    d&#39;&#39;8</span>
+<span class="sd">                    e&#39;&#39;8</span>
+<span class="sd">                    f&#39;&#39;8</span>
+<span class="sd">                    r8</span>
+<span class="sd">                    a&#39;&#39;8</span>
+<span class="sd">                    b&#39;&#39;8</span>
+<span class="sd">                    c&#39;&#39;&#39;8</span>
+<span class="sd">                    c&#39;&#39;8</span>
+<span class="sd">                    d&#39;&#39;8</span>
+<span class="sd">                    e&#39;&#39;8</span>
+<span class="sd">                    f&#39;&#39;8</span>
+<span class="sd">                    r8</span>
+<span class="sd">                    a&#39;&#39;8</span>
+<span class="sd">                    b&#39;&#39;8</span>
+<span class="sd">                    c&#39;&#39;&#39;8</span>
+<span class="sd">                    c&#39;&#39;8</span>
+<span class="sd">                    d&#39;&#39;8</span>
+<span class="sd">                    e&#39;&#39;8</span>
+<span class="sd">                    f&#39;&#39;8</span>
+<span class="sd">                    g&#39;&#39;8</span>
+<span class="sd">                    a&#39;&#39;8</span>
+<span class="sd">                    b&#39;&#39;8</span>
+<span class="sd">                    c&#39;&#39;&#39;8</span>
+<span class="sd">                }</span>
+<span class="sd">            &gt;&gt;</span>
+
+<span class="sd">        ..  figure:: ../_images/CrossFader-o58h79ijsdf.png</span>
 
 <span class="sd">        &gt;&gt;&gt; fader = auxjad.CrossFader(fade_out_container,</span>
 <span class="sd">        ...                           fade_in_container,</span>
@@ -970,105 +1032,108 @@
 <span class="sd">        ...     abjad.Staff(selection_a),</span>
 <span class="sd">        ...     abjad.Staff(selection_b),</span>
 <span class="sd">        ... ])</span>
-<span class="sd">        &gt;&gt;&gt; abjad.f(score)</span>
-<span class="sd">        \new Score</span>
-<span class="sd">        &lt;&lt;</span>
-<span class="sd">            \new Staff</span>
-<span class="sd">            {</span>
-<span class="sd">                \time 4/4</span>
-<span class="sd">                e&#39;2</span>
-<span class="sd">                c&#39;2</span>
-<span class="sd">                e&#39;2</span>
-<span class="sd">                c&#39;2</span>
-<span class="sd">                r2</span>
-<span class="sd">                c&#39;2</span>
-<span class="sd">                r2</span>
-<span class="sd">                c&#39;2</span>
-<span class="sd">                r2</span>
-<span class="sd">                c&#39;2</span>
-<span class="sd">                r2</span>
-<span class="sd">                c&#39;2</span>
-<span class="sd">                r2</span>
-<span class="sd">                c&#39;2</span>
-<span class="sd">                r2</span>
-<span class="sd">                c&#39;2</span>
-<span class="sd">                r2</span>
-<span class="sd">                c&#39;2</span>
-<span class="sd">                r2</span>
-<span class="sd">                c&#39;2</span>
-<span class="sd">                R1</span>
-<span class="sd">            }</span>
-<span class="sd">            \new Staff</span>
-<span class="sd">            {</span>
-<span class="sd">                \time 4/4</span>
-<span class="sd">                R1</span>
-<span class="sd">                r4.</span>
-<span class="sd">                f&#39;&#39;8</span>
-<span class="sd">                r2</span>
-<span class="sd">                r4.</span>
-<span class="sd">                f&#39;&#39;8</span>
-<span class="sd">                r2</span>
-<span class="sd">                r4.</span>
-<span class="sd">                f&#39;&#39;8</span>
-<span class="sd">                r8</span>
-<span class="sd">                a&#39;&#39;8</span>
-<span class="sd">                r4</span>
-<span class="sd">                r4.</span>
-<span class="sd">                f&#39;&#39;8</span>
-<span class="sd">                r8</span>
-<span class="sd">                a&#39;&#39;8</span>
-<span class="sd">                b&#39;&#39;8</span>
-<span class="sd">                r8</span>
-<span class="sd">                r4</span>
-<span class="sd">                e&#39;&#39;8</span>
-<span class="sd">                f&#39;&#39;8</span>
-<span class="sd">                r8</span>
-<span class="sd">                a&#39;&#39;8</span>
-<span class="sd">                b&#39;&#39;8</span>
-<span class="sd">                r8</span>
-<span class="sd">                r4</span>
-<span class="sd">                e&#39;&#39;8</span>
-<span class="sd">                f&#39;&#39;8</span>
-<span class="sd">                g&#39;&#39;8</span>
-<span class="sd">                a&#39;&#39;8</span>
-<span class="sd">                b&#39;&#39;8</span>
-<span class="sd">                r8</span>
-<span class="sd">                c&#39;&#39;8</span>
-<span class="sd">                r8</span>
-<span class="sd">                e&#39;&#39;8</span>
-<span class="sd">                f&#39;&#39;8</span>
-<span class="sd">                g&#39;&#39;8</span>
-<span class="sd">                a&#39;&#39;8</span>
-<span class="sd">                b&#39;&#39;8</span>
-<span class="sd">                r8</span>
-<span class="sd">                c&#39;&#39;8</span>
-<span class="sd">                r8</span>
-<span class="sd">                e&#39;&#39;8</span>
-<span class="sd">                f&#39;&#39;8</span>
-<span class="sd">                g&#39;&#39;8</span>
-<span class="sd">                a&#39;&#39;8</span>
-<span class="sd">                b&#39;&#39;8</span>
-<span class="sd">                c&#39;&#39;&#39;8</span>
-<span class="sd">                c&#39;&#39;8</span>
-<span class="sd">                d&#39;&#39;8</span>
-<span class="sd">                e&#39;&#39;8</span>
-<span class="sd">                f&#39;&#39;8</span>
-<span class="sd">                g&#39;&#39;8</span>
-<span class="sd">                a&#39;&#39;8</span>
-<span class="sd">                b&#39;&#39;8</span>
-<span class="sd">                c&#39;&#39;&#39;8</span>
-<span class="sd">                c&#39;&#39;8</span>
-<span class="sd">                d&#39;&#39;8</span>
-<span class="sd">                e&#39;&#39;8</span>
-<span class="sd">                f&#39;&#39;8</span>
-<span class="sd">                g&#39;&#39;8</span>
-<span class="sd">                a&#39;&#39;8</span>
-<span class="sd">                b&#39;&#39;8</span>
-<span class="sd">                c&#39;&#39;&#39;8</span>
-<span class="sd">            }</span>
-<span class="sd">        &gt;&gt;</span>
+<span class="sd">        &gt;&gt;&gt; abjad.show(score)</span>
 
-<span class="sd">        .. figure:: ../_images/CrossFader-l3dc3vxfpdnsxdym4gql.png</span>
+<span class="sd">        ..  docs::</span>
+
+<span class="sd">            \new Score</span>
+<span class="sd">            &lt;&lt;</span>
+<span class="sd">                \new Staff</span>
+<span class="sd">                {</span>
+<span class="sd">                    \time 4/4</span>
+<span class="sd">                    e&#39;2</span>
+<span class="sd">                    c&#39;2</span>
+<span class="sd">                    e&#39;2</span>
+<span class="sd">                    c&#39;2</span>
+<span class="sd">                    r2</span>
+<span class="sd">                    c&#39;2</span>
+<span class="sd">                    r2</span>
+<span class="sd">                    c&#39;2</span>
+<span class="sd">                    r2</span>
+<span class="sd">                    c&#39;2</span>
+<span class="sd">                    r2</span>
+<span class="sd">                    c&#39;2</span>
+<span class="sd">                    r2</span>
+<span class="sd">                    c&#39;2</span>
+<span class="sd">                    r2</span>
+<span class="sd">                    c&#39;2</span>
+<span class="sd">                    r2</span>
+<span class="sd">                    c&#39;2</span>
+<span class="sd">                    r2</span>
+<span class="sd">                    c&#39;2</span>
+<span class="sd">                    R1</span>
+<span class="sd">                }</span>
+<span class="sd">                \new Staff</span>
+<span class="sd">                {</span>
+<span class="sd">                    \time 4/4</span>
+<span class="sd">                    R1</span>
+<span class="sd">                    r4.</span>
+<span class="sd">                    f&#39;&#39;8</span>
+<span class="sd">                    r2</span>
+<span class="sd">                    r4.</span>
+<span class="sd">                    f&#39;&#39;8</span>
+<span class="sd">                    r2</span>
+<span class="sd">                    r4.</span>
+<span class="sd">                    f&#39;&#39;8</span>
+<span class="sd">                    r8</span>
+<span class="sd">                    a&#39;&#39;8</span>
+<span class="sd">                    r4</span>
+<span class="sd">                    r4.</span>
+<span class="sd">                    f&#39;&#39;8</span>
+<span class="sd">                    r8</span>
+<span class="sd">                    a&#39;&#39;8</span>
+<span class="sd">                    b&#39;&#39;8</span>
+<span class="sd">                    r8</span>
+<span class="sd">                    r4</span>
+<span class="sd">                    e&#39;&#39;8</span>
+<span class="sd">                    f&#39;&#39;8</span>
+<span class="sd">                    r8</span>
+<span class="sd">                    a&#39;&#39;8</span>
+<span class="sd">                    b&#39;&#39;8</span>
+<span class="sd">                    r8</span>
+<span class="sd">                    r4</span>
+<span class="sd">                    e&#39;&#39;8</span>
+<span class="sd">                    f&#39;&#39;8</span>
+<span class="sd">                    g&#39;&#39;8</span>
+<span class="sd">                    a&#39;&#39;8</span>
+<span class="sd">                    b&#39;&#39;8</span>
+<span class="sd">                    r8</span>
+<span class="sd">                    c&#39;&#39;8</span>
+<span class="sd">                    r8</span>
+<span class="sd">                    e&#39;&#39;8</span>
+<span class="sd">                    f&#39;&#39;8</span>
+<span class="sd">                    g&#39;&#39;8</span>
+<span class="sd">                    a&#39;&#39;8</span>
+<span class="sd">                    b&#39;&#39;8</span>
+<span class="sd">                    r8</span>
+<span class="sd">                    c&#39;&#39;8</span>
+<span class="sd">                    r8</span>
+<span class="sd">                    e&#39;&#39;8</span>
+<span class="sd">                    f&#39;&#39;8</span>
+<span class="sd">                    g&#39;&#39;8</span>
+<span class="sd">                    a&#39;&#39;8</span>
+<span class="sd">                    b&#39;&#39;8</span>
+<span class="sd">                    c&#39;&#39;&#39;8</span>
+<span class="sd">                    c&#39;&#39;8</span>
+<span class="sd">                    d&#39;&#39;8</span>
+<span class="sd">                    e&#39;&#39;8</span>
+<span class="sd">                    f&#39;&#39;8</span>
+<span class="sd">                    g&#39;&#39;8</span>
+<span class="sd">                    a&#39;&#39;8</span>
+<span class="sd">                    b&#39;&#39;8</span>
+<span class="sd">                    c&#39;&#39;&#39;8</span>
+<span class="sd">                    c&#39;&#39;8</span>
+<span class="sd">                    d&#39;&#39;8</span>
+<span class="sd">                    e&#39;&#39;8</span>
+<span class="sd">                    f&#39;&#39;8</span>
+<span class="sd">                    g&#39;&#39;8</span>
+<span class="sd">                    a&#39;&#39;8</span>
+<span class="sd">                    b&#39;&#39;8</span>
+<span class="sd">                    c&#39;&#39;&#39;8</span>
+<span class="sd">                }</span>
+<span class="sd">            &gt;&gt;</span>
+
+<span class="sd">        ..  figure:: ../_images/CrossFader-l3dc3vxfpdnsxdym4gql.png</span>
 
 <span class="sd">    :attr:`initial_repetitions` and :attr:`final_repetitions`:</span>
 <span class="sd">        The properties :attr:`initial_repetitions` and</span>
@@ -1087,51 +1152,54 @@
 <span class="sd">        ...     abjad.Staff(selection_a),</span>
 <span class="sd">        ...     abjad.Staff(selection_b),</span>
 <span class="sd">        ... ])</span>
-<span class="sd">        &gt;&gt;&gt; abjad.f(score)</span>
-<span class="sd">        \new Score</span>
-<span class="sd">        &lt;&lt;</span>
-<span class="sd">            \new Staff</span>
-<span class="sd">            {</span>
-<span class="sd">                \time 4/4</span>
-<span class="sd">                a&#39;4</span>
-<span class="sd">                bf&#39;2</span>
-<span class="sd">                r4</span>
-<span class="sd">                a&#39;4</span>
-<span class="sd">                bf&#39;2</span>
-<span class="sd">                r4</span>
-<span class="sd">                r4</span>
-<span class="sd">                bf&#39;2</span>
-<span class="sd">                r4</span>
-<span class="sd">                r4</span>
-<span class="sd">                bf&#39;2</span>
-<span class="sd">                r4</span>
-<span class="sd">                r4</span>
-<span class="sd">                bf&#39;2</span>
-<span class="sd">                r4</span>
-<span class="sd">                R1</span>
-<span class="sd">                R1</span>
-<span class="sd">                R1</span>
-<span class="sd">            }</span>
-<span class="sd">            \new Staff</span>
-<span class="sd">            {</span>
-<span class="sd">                \time 4/4</span>
-<span class="sd">                R1</span>
-<span class="sd">                R1</span>
-<span class="sd">                R1</span>
-<span class="sd">                r2</span>
-<span class="sd">                d&#39;&#39;2</span>
-<span class="sd">                c&#39;&#39;2</span>
-<span class="sd">                d&#39;&#39;2</span>
-<span class="sd">                c&#39;&#39;2</span>
-<span class="sd">                d&#39;&#39;2</span>
-<span class="sd">                c&#39;&#39;2</span>
-<span class="sd">                d&#39;&#39;2</span>
-<span class="sd">                c&#39;&#39;2</span>
-<span class="sd">                d&#39;&#39;2</span>
-<span class="sd">            }</span>
-<span class="sd">        &gt;&gt;</span>
+<span class="sd">        &gt;&gt;&gt; abjad.show(score)</span>
 
-<span class="sd">        .. figure:: ../_images/CrossFader-e480tbrvwg.png</span>
+<span class="sd">        ..  docs::</span>
+
+<span class="sd">            \new Score</span>
+<span class="sd">            &lt;&lt;</span>
+<span class="sd">                \new Staff</span>
+<span class="sd">                {</span>
+<span class="sd">                    \time 4/4</span>
+<span class="sd">                    a&#39;4</span>
+<span class="sd">                    bf&#39;2</span>
+<span class="sd">                    r4</span>
+<span class="sd">                    a&#39;4</span>
+<span class="sd">                    bf&#39;2</span>
+<span class="sd">                    r4</span>
+<span class="sd">                    r4</span>
+<span class="sd">                    bf&#39;2</span>
+<span class="sd">                    r4</span>
+<span class="sd">                    r4</span>
+<span class="sd">                    bf&#39;2</span>
+<span class="sd">                    r4</span>
+<span class="sd">                    r4</span>
+<span class="sd">                    bf&#39;2</span>
+<span class="sd">                    r4</span>
+<span class="sd">                    R1</span>
+<span class="sd">                    R1</span>
+<span class="sd">                    R1</span>
+<span class="sd">                }</span>
+<span class="sd">                \new Staff</span>
+<span class="sd">                {</span>
+<span class="sd">                    \time 4/4</span>
+<span class="sd">                    R1</span>
+<span class="sd">                    R1</span>
+<span class="sd">                    R1</span>
+<span class="sd">                    r2</span>
+<span class="sd">                    d&#39;&#39;2</span>
+<span class="sd">                    c&#39;&#39;2</span>
+<span class="sd">                    d&#39;&#39;2</span>
+<span class="sd">                    c&#39;&#39;2</span>
+<span class="sd">                    d&#39;&#39;2</span>
+<span class="sd">                    c&#39;&#39;2</span>
+<span class="sd">                    d&#39;&#39;2</span>
+<span class="sd">                    c&#39;&#39;2</span>
+<span class="sd">                    d&#39;&#39;2</span>
+<span class="sd">                }</span>
+<span class="sd">            &gt;&gt;</span>
+
+<span class="sd">        ..  figure:: ../_images/CrossFader-e480tbrvwg.png</span>
 
 <span class="sd">    :attr:`repetition_chance`:</span>
 <span class="sd">        Use :attr:`repetition_chance` to set the chance of a measure repeating</span>
@@ -1149,39 +1217,42 @@
 <span class="sd">        ...     abjad.Staff(selection_a),</span>
 <span class="sd">        ...     abjad.Staff(selection_b),</span>
 <span class="sd">        ... ])</span>
-<span class="sd">        &gt;&gt;&gt; abjad.f(score)</span>
-<span class="sd">        \new Score</span>
-<span class="sd">        &lt;&lt;</span>
-<span class="sd">            \new Staff</span>
-<span class="sd">            {</span>
-<span class="sd">                \time 4/4</span>
-<span class="sd">                a&#39;4</span>
-<span class="sd">                bf&#39;2</span>
-<span class="sd">                r4</span>
-<span class="sd">                a&#39;4</span>
-<span class="sd">                bf&#39;2</span>
-<span class="sd">                r4</span>
-<span class="sd">                a&#39;4</span>
-<span class="sd">                bf&#39;2</span>
-<span class="sd">                r4</span>
-<span class="sd">                a&#39;4</span>
-<span class="sd">                bf&#39;2</span>
-<span class="sd">                r4</span>
-<span class="sd">            }</span>
-<span class="sd">            \new Staff</span>
-<span class="sd">            {</span>
-<span class="sd">                \time 4/4</span>
-<span class="sd">                R1</span>
-<span class="sd">                r2</span>
-<span class="sd">                d&#39;&#39;2</span>
-<span class="sd">                r2</span>
-<span class="sd">                d&#39;&#39;2</span>
-<span class="sd">                r2</span>
-<span class="sd">                d&#39;&#39;2</span>
-<span class="sd">            }</span>
-<span class="sd">        &gt;&gt;</span>
+<span class="sd">        &gt;&gt;&gt; abjad.show(score)</span>
 
-<span class="sd">        .. figure:: ../_images/CrossFader-743rxr2n02o.png</span>
+<span class="sd">        ..  docs::</span>
+
+<span class="sd">            \new Score</span>
+<span class="sd">            &lt;&lt;</span>
+<span class="sd">                \new Staff</span>
+<span class="sd">                {</span>
+<span class="sd">                    \time 4/4</span>
+<span class="sd">                    a&#39;4</span>
+<span class="sd">                    bf&#39;2</span>
+<span class="sd">                    r4</span>
+<span class="sd">                    a&#39;4</span>
+<span class="sd">                    bf&#39;2</span>
+<span class="sd">                    r4</span>
+<span class="sd">                    a&#39;4</span>
+<span class="sd">                    bf&#39;2</span>
+<span class="sd">                    r4</span>
+<span class="sd">                    a&#39;4</span>
+<span class="sd">                    bf&#39;2</span>
+<span class="sd">                    r4</span>
+<span class="sd">                }</span>
+<span class="sd">                \new Staff</span>
+<span class="sd">                {</span>
+<span class="sd">                    \time 4/4</span>
+<span class="sd">                    R1</span>
+<span class="sd">                    r2</span>
+<span class="sd">                    d&#39;&#39;2</span>
+<span class="sd">                    r2</span>
+<span class="sd">                    d&#39;&#39;2</span>
+<span class="sd">                    r2</span>
+<span class="sd">                    d&#39;&#39;2</span>
+<span class="sd">                }</span>
+<span class="sd">            &gt;&gt;</span>
+
+<span class="sd">        ..  figure:: ../_images/CrossFader-743rxr2n02o.png</span>
 
 <span class="sd">    :attr:`omit_time_signatures`:</span>
 <span class="sd">        To disable time signatures altogether, initialise this class with the</span>
@@ -1200,47 +1271,51 @@
 <span class="sd">        ...     abjad.Staff(selection_a),</span>
 <span class="sd">        ...     abjad.Staff(selection_b),</span>
 <span class="sd">        ... ])</span>
-<span class="sd">        &gt;&gt;&gt; abjad.f(score)</span>
-<span class="sd">        \new Score</span>
-<span class="sd">        &lt;&lt;</span>
-<span class="sd">            \new Staff</span>
-<span class="sd">            {</span>
-<span class="sd">                fs&#39;4</span>
-<span class="sd">                g&#39;2</span>
-<span class="sd">                bf&#39;4</span>
-<span class="sd">                fs&#39;4</span>
-<span class="sd">                g&#39;2</span>
-<span class="sd">                r4</span>
-<span class="sd">                fs&#39;4</span>
-<span class="sd">                g&#39;2</span>
-<span class="sd">                r4</span>
-<span class="sd">            }</span>
-<span class="sd">            \new Staff</span>
-<span class="sd">            {</span>
-<span class="sd">                R1</span>
-<span class="sd">                R1</span>
-<span class="sd">                \times 4/5 {</span>
-<span class="sd">                    cs&#39;&#39;4</span>
-<span class="sd">                    r1</span>
+<span class="sd">        &gt;&gt;&gt; abjad.show(score)</span>
+
+<span class="sd">        ..  docs::</span>
+
+<span class="sd">            \new Score</span>
+<span class="sd">            &lt;&lt;</span>
+<span class="sd">                \new Staff</span>
+<span class="sd">                {</span>
+<span class="sd">                    fs&#39;4</span>
+<span class="sd">                    g&#39;2</span>
+<span class="sd">                    bf&#39;4</span>
+<span class="sd">                    fs&#39;4</span>
+<span class="sd">                    g&#39;2</span>
+<span class="sd">                    r4</span>
+<span class="sd">                    fs&#39;4</span>
+<span class="sd">                    g&#39;2</span>
+<span class="sd">                    r4</span>
 <span class="sd">                }</span>
-<span class="sd">            }</span>
-<span class="sd">        &gt;&gt;</span>
+<span class="sd">                \new Staff</span>
+<span class="sd">                {</span>
+<span class="sd">                    R1</span>
+<span class="sd">                    R1</span>
+<span class="sd">                    \times 4/5</span>
+<span class="sd">                    {</span>
+<span class="sd">                        cs&#39;&#39;4</span>
+<span class="sd">                        r1</span>
+<span class="sd">                    }</span>
+<span class="sd">                }</span>
+<span class="sd">            &gt;&gt;</span>
 
-<span class="sd">        .. figure:: ../_images/CrossFader-aypzofmynwe.png</span>
+<span class="sd">        ..  figure:: ../_images/CrossFader-aypzofmynwe.png</span>
 
-<span class="sd">    .. tip::</span>
+<span class="sd">    ..  tip::</span>
 
 <span class="sd">        All methods that return an |abjad.Selection| will add an initial time</span>
 <span class="sd">        signature to it. The :meth:`output_n` and :meth:`output_all` methods</span>
 <span class="sd">        automatically remove repeated time signatures. When joining selections</span>
 <span class="sd">        output by multiple method calls, use</span>
-<span class="sd">        |auxjad.mutate().remove_repeated_time_signatures()| on the whole</span>
+<span class="sd">        |auxjad.mutate.remove_repeated_time_signatures()| on the whole</span>
 <span class="sd">        container after fusing the selections to remove any unecessary time</span>
 <span class="sd">        signature changes.</span>
 
-<span class="sd">    Tweaking or disabling |abjad.mutate().rewrite_meter()|:</span>
+<span class="sd">    Tweaking or disabling |abjad.Meter.rewrite_meter()|:</span>
 <span class="sd">        This function uses the default logical tie splitting algorithm from</span>
-<span class="sd">        |abjad.mutate().rewrite_meter()|. It can be disabled with the property</span>
+<span class="sd">        |abjad.Meter.rewrite_meter()|. It can be disabled with the property</span>
 <span class="sd">        :attr:`disable_rewrite_meter`.</span>
 
 <span class="sd">        &gt;&gt;&gt; fade_out_container = abjad.Container(r&quot;c&#39;8 d&#39;4 e&#39;8 ~ e&#39;2&quot;)</span>
@@ -1254,45 +1329,48 @@
 <span class="sd">        ...     abjad.Staff(selection_a),</span>
 <span class="sd">        ...     abjad.Staff(selection_b),</span>
 <span class="sd">        ... ])</span>
-<span class="sd">        &gt;&gt;&gt; abjad.f(score)</span>
-<span class="sd">        \new Score</span>
-<span class="sd">        &lt;&lt;</span>
-<span class="sd">            \new Staff</span>
-<span class="sd">            {</span>
-<span class="sd">                \time 4/4</span>
-<span class="sd">                c&#39;8</span>
-<span class="sd">                d&#39;4</span>
-<span class="sd">                e&#39;8</span>
-<span class="sd">                ~</span>
-<span class="sd">                e&#39;2</span>
-<span class="sd">                r8</span>
-<span class="sd">                d&#39;4</span>
-<span class="sd">                e&#39;8</span>
-<span class="sd">                ~</span>
-<span class="sd">                e&#39;2</span>
-<span class="sd">                r8</span>
-<span class="sd">                d&#39;4</span>
-<span class="sd">                e&#39;8</span>
-<span class="sd">                ~</span>
-<span class="sd">                e&#39;2</span>
-<span class="sd">            }</span>
-<span class="sd">            \new Staff</span>
-<span class="sd">            {</span>
-<span class="sd">                \time 4/4</span>
-<span class="sd">                R1</span>
-<span class="sd">                R1</span>
-<span class="sd">                r2</span>
-<span class="sd">                d&#39;2</span>
-<span class="sd">            }</span>
-<span class="sd">        &gt;&gt;</span>
+<span class="sd">        &gt;&gt;&gt; abjad.show(score)</span>
 
-<span class="sd">        .. figure:: ../_images/CrossFader-vprhoh84quk.png</span>
+<span class="sd">        ..  docs::</span>
+
+<span class="sd">            \new Score</span>
+<span class="sd">            &lt;&lt;</span>
+<span class="sd">                \new Staff</span>
+<span class="sd">                {</span>
+<span class="sd">                    \time 4/4</span>
+<span class="sd">                    c&#39;8</span>
+<span class="sd">                    d&#39;4</span>
+<span class="sd">                    e&#39;8</span>
+<span class="sd">                    ~</span>
+<span class="sd">                    e&#39;2</span>
+<span class="sd">                    r8</span>
+<span class="sd">                    d&#39;4</span>
+<span class="sd">                    e&#39;8</span>
+<span class="sd">                    ~</span>
+<span class="sd">                    e&#39;2</span>
+<span class="sd">                    r8</span>
+<span class="sd">                    d&#39;4</span>
+<span class="sd">                    e&#39;8</span>
+<span class="sd">                    ~</span>
+<span class="sd">                    e&#39;2</span>
+<span class="sd">                }</span>
+<span class="sd">                \new Staff</span>
+<span class="sd">                {</span>
+<span class="sd">                    \time 4/4</span>
+<span class="sd">                    R1</span>
+<span class="sd">                    R1</span>
+<span class="sd">                    r2</span>
+<span class="sd">                    d&#39;2</span>
+<span class="sd">                }</span>
+<span class="sd">            &gt;&gt;</span>
+
+<span class="sd">        ..  figure:: ../_images/CrossFader-vprhoh84quk.png</span>
 
 <span class="sd">        Arguments available for tweaking the output of</span>
-<span class="sd">        |abjad.mutate().rewrite_meter()| are :attr:`boundary_depth`,</span>
+<span class="sd">        |abjad.Meter.rewrite_meter()| are :attr:`boundary_depth`,</span>
 <span class="sd">        :attr:`maximum_dot_count` and :attr:`rewrite_tuplets`, which work</span>
 <span class="sd">        exactly as the identically named arguments of</span>
-<span class="sd">        |abjad.mutate().rewrite_meter()|.</span>
+<span class="sd">        |abjad.Meter.rewrite_meter()|.</span>
 
 <span class="sd">    :attr:`fade_in_contents` and :attr:`fade_out_contents`:</span>
 <span class="sd">        Containers can be switched after initialisation by overwriting the</span>
@@ -1338,55 +1416,58 @@
 <span class="sd">        ...     abjad.Staff(selection_a),</span>
 <span class="sd">        ...     abjad.Staff(selection_b),</span>
 <span class="sd">        ... ])</span>
-<span class="sd">        &gt;&gt;&gt; abjad.f(score)</span>
-<span class="sd">        \new Score</span>
-<span class="sd">        &lt;&lt;</span>
-<span class="sd">            \new Staff</span>
-<span class="sd">            {</span>
-<span class="sd">                \time 3/4</span>
-<span class="sd">                a&#39;4</span>
-<span class="sd">                bf&#39;2</span>
-<span class="sd">                ~</span>
-<span class="sd">                \time 2/4</span>
-<span class="sd">                bf&#39;4</span>
-<span class="sd">                f&#39;4</span>
-<span class="sd">                \time 3/4</span>
-<span class="sd">                a&#39;4</span>
-<span class="sd">                bf&#39;2</span>
-<span class="sd">                ~</span>
-<span class="sd">                \time 2/4</span>
-<span class="sd">                bf&#39;4</span>
-<span class="sd">                f&#39;4</span>
-<span class="sd">                \time 3/4</span>
-<span class="sd">                a&#39;4</span>
-<span class="sd">                bf&#39;2</span>
-<span class="sd">                ~</span>
-<span class="sd">                \time 2/4</span>
-<span class="sd">                bf&#39;4</span>
-<span class="sd">                r4</span>
-<span class="sd">            }</span>
-<span class="sd">            \new Staff</span>
-<span class="sd">            {</span>
-<span class="sd">                \time 3/4</span>
-<span class="sd">                R1 * 3/4</span>
-<span class="sd">                \time 2/4</span>
-<span class="sd">                R1 * 1/2</span>
-<span class="sd">                \time 3/4</span>
-<span class="sd">                r16</span>
-<span class="sd">                cs&#39;&#39;4..</span>
-<span class="sd">                r4</span>
-<span class="sd">                \time 2/4</span>
-<span class="sd">                R1 * 1/2</span>
-<span class="sd">                \time 3/4</span>
-<span class="sd">                r16</span>
-<span class="sd">                cs&#39;&#39;4..</span>
-<span class="sd">                r4</span>
-<span class="sd">                \time 2/4</span>
-<span class="sd">                R1 * 1/2</span>
-<span class="sd">            }</span>
-<span class="sd">        &gt;&gt;</span>
+<span class="sd">        &gt;&gt;&gt; abjad.show(score)</span>
 
-<span class="sd">        .. figure:: ../_images/CrossFader-w99zcui5rj.png</span>
+<span class="sd">        ..  docs::</span>
+
+<span class="sd">            \new Score</span>
+<span class="sd">            &lt;&lt;</span>
+<span class="sd">                \new Staff</span>
+<span class="sd">                {</span>
+<span class="sd">                    \time 3/4</span>
+<span class="sd">                    a&#39;4</span>
+<span class="sd">                    bf&#39;2</span>
+<span class="sd">                    ~</span>
+<span class="sd">                    \time 2/4</span>
+<span class="sd">                    bf&#39;4</span>
+<span class="sd">                    f&#39;4</span>
+<span class="sd">                    \time 3/4</span>
+<span class="sd">                    a&#39;4</span>
+<span class="sd">                    bf&#39;2</span>
+<span class="sd">                    ~</span>
+<span class="sd">                    \time 2/4</span>
+<span class="sd">                    bf&#39;4</span>
+<span class="sd">                    f&#39;4</span>
+<span class="sd">                    \time 3/4</span>
+<span class="sd">                    a&#39;4</span>
+<span class="sd">                    bf&#39;2</span>
+<span class="sd">                    ~</span>
+<span class="sd">                    \time 2/4</span>
+<span class="sd">                    bf&#39;4</span>
+<span class="sd">                    r4</span>
+<span class="sd">                }</span>
+<span class="sd">                \new Staff</span>
+<span class="sd">                {</span>
+<span class="sd">                    \time 3/4</span>
+<span class="sd">                    R1 * 3/4</span>
+<span class="sd">                    \time 2/4</span>
+<span class="sd">                    R1 * 1/2</span>
+<span class="sd">                    \time 3/4</span>
+<span class="sd">                    r16</span>
+<span class="sd">                    cs&#39;&#39;4..</span>
+<span class="sd">                    r4</span>
+<span class="sd">                    \time 2/4</span>
+<span class="sd">                    R1 * 1/2</span>
+<span class="sd">                    \time 3/4</span>
+<span class="sd">                    r16</span>
+<span class="sd">                    cs&#39;&#39;4..</span>
+<span class="sd">                    r4</span>
+<span class="sd">                    \time 2/4</span>
+<span class="sd">                    R1 * 1/2</span>
+<span class="sd">                }</span>
+<span class="sd">            &gt;&gt;</span>
+
+<span class="sd">        ..  figure:: ../_images/CrossFader-w99zcui5rj.png</span>
 
 <span class="sd">    Indicators:</span>
 <span class="sd">        This class can also handle dynamics, articulations, chords, and</span>
@@ -1407,88 +1488,95 @@
 <span class="sd">        ...     abjad.Staff(selection_a),</span>
 <span class="sd">        ...     abjad.Staff(selection_b),</span>
 <span class="sd">        ... ])</span>
-<span class="sd">        &gt;&gt;&gt; abjad.f(score)</span>
-<span class="sd">        \new Score</span>
-<span class="sd">        &lt;&lt;</span>
-<span class="sd">            \new Staff</span>
-<span class="sd">            {</span>
-<span class="sd">                \time 4/4</span>
-<span class="sd">                c&#39;4.</span>
-<span class="sd">                \p</span>
-<span class="sd">                e&#39;8</span>
-<span class="sd">                \f</span>
-<span class="sd">                - \tenuto</span>
-<span class="sd">                ~</span>
-<span class="sd">                e&#39;2</span>
-<span class="sd">                c&#39;4.</span>
-<span class="sd">                \p</span>
-<span class="sd">                e&#39;8</span>
-<span class="sd">                \f</span>
-<span class="sd">                - \tenuto</span>
-<span class="sd">                ~</span>
-<span class="sd">                e&#39;2</span>
-<span class="sd">                r4.</span>
-<span class="sd">                e&#39;8</span>
-<span class="sd">                - \tenuto</span>
-<span class="sd">                ~</span>
-<span class="sd">                e&#39;2</span>
-<span class="sd">                r4.</span>
-<span class="sd">                e&#39;8</span>
-<span class="sd">                - \tenuto</span>
-<span class="sd">                ~</span>
-<span class="sd">                e&#39;2</span>
-<span class="sd">                R1</span>
-<span class="sd">            }</span>
-<span class="sd">            \new Staff</span>
-<span class="sd">            {</span>
-<span class="sd">                \time 4/4</span>
-<span class="sd">                R1</span>
-<span class="sd">                \times 2/3 {</span>
-<span class="sd">                    f&#39;4</span>
-<span class="sd">                    \pp</span>
-<span class="sd">                    - \staccato</span>
-<span class="sd">                    r2</span>
-<span class="sd">                }</span>
-<span class="sd">                r2</span>
-<span class="sd">                \times 2/3 {</span>
-<span class="sd">                    f&#39;4</span>
-<span class="sd">                    - \staccato</span>
-<span class="sd">                    r2</span>
-<span class="sd">                }</span>
-<span class="sd">                r2</span>
-<span class="sd">                \times 2/3 {</span>
-<span class="sd">                    f&#39;4</span>
-<span class="sd">                    - \staccato</span>
-<span class="sd">                    r4</span>
-<span class="sd">                    d&#39;4</span>
+<span class="sd">        &gt;&gt;&gt; abjad.show(score)</span>
+
+<span class="sd">        ..  docs::</span>
+
+<span class="sd">            \new Score</span>
+<span class="sd">            &lt;&lt;</span>
+<span class="sd">                \new Staff</span>
+<span class="sd">                {</span>
+<span class="sd">                    \time 4/4</span>
+<span class="sd">                    c&#39;4.</span>
+<span class="sd">                    \p</span>
+<span class="sd">                    e&#39;8</span>
 <span class="sd">                    \f</span>
-<span class="sd">                    - \accent</span>
+<span class="sd">                    - \tenuto</span>
 <span class="sd">                    ~</span>
-<span class="sd">                }</span>
-<span class="sd">                d&#39;2</span>
-<span class="sd">                \times 2/3 {</span>
-<span class="sd">                    f&#39;4</span>
-<span class="sd">                    \pp</span>
-<span class="sd">                    - \staccato</span>
-<span class="sd">                    r4</span>
-<span class="sd">                    d&#39;4</span>
+<span class="sd">                    e&#39;2</span>
+<span class="sd">                    c&#39;4.</span>
+<span class="sd">                    \p</span>
+<span class="sd">                    e&#39;8</span>
 <span class="sd">                    \f</span>
-<span class="sd">                    - \accent</span>
+<span class="sd">                    - \tenuto</span>
 <span class="sd">                    ~</span>
+<span class="sd">                    e&#39;2</span>
+<span class="sd">                    r4.</span>
+<span class="sd">                    e&#39;8</span>
+<span class="sd">                    - \tenuto</span>
+<span class="sd">                    ~</span>
+<span class="sd">                    e&#39;2</span>
+<span class="sd">                    r4.</span>
+<span class="sd">                    e&#39;8</span>
+<span class="sd">                    - \tenuto</span>
+<span class="sd">                    ~</span>
+<span class="sd">                    e&#39;2</span>
+<span class="sd">                    R1</span>
 <span class="sd">                }</span>
-<span class="sd">                d&#39;2</span>
-<span class="sd">            }</span>
-<span class="sd">        &gt;&gt;</span>
+<span class="sd">                \new Staff</span>
+<span class="sd">                {</span>
+<span class="sd">                    \time 4/4</span>
+<span class="sd">                    R1</span>
+<span class="sd">                    \times 2/3</span>
+<span class="sd">                    {</span>
+<span class="sd">                        f&#39;4</span>
+<span class="sd">                        \pp</span>
+<span class="sd">                        - \staccato</span>
+<span class="sd">                        r2</span>
+<span class="sd">                    }</span>
+<span class="sd">                    r2</span>
+<span class="sd">                    \times 2/3</span>
+<span class="sd">                    {</span>
+<span class="sd">                        f&#39;4</span>
+<span class="sd">                        - \staccato</span>
+<span class="sd">                        r2</span>
+<span class="sd">                    }</span>
+<span class="sd">                    r2</span>
+<span class="sd">                    \times 2/3</span>
+<span class="sd">                    {</span>
+<span class="sd">                        f&#39;4</span>
+<span class="sd">                        - \staccato</span>
+<span class="sd">                        r4</span>
+<span class="sd">                        d&#39;4</span>
+<span class="sd">                        \f</span>
+<span class="sd">                        - \accent</span>
+<span class="sd">                        ~</span>
+<span class="sd">                    }</span>
+<span class="sd">                    d&#39;2</span>
+<span class="sd">                    \times 2/3</span>
+<span class="sd">                    {</span>
+<span class="sd">                        f&#39;4</span>
+<span class="sd">                        \pp</span>
+<span class="sd">                        - \staccato</span>
+<span class="sd">                        r4</span>
+<span class="sd">                        d&#39;4</span>
+<span class="sd">                        \f</span>
+<span class="sd">                        - \accent</span>
+<span class="sd">                        ~</span>
+<span class="sd">                    }</span>
+<span class="sd">                    d&#39;2</span>
+<span class="sd">                }</span>
+<span class="sd">            &gt;&gt;</span>
 
-<span class="sd">        .. figure:: ../_images/CrossFader-o0yetbq5wqj.png</span>
+<span class="sd">        ..  figure:: ../_images/CrossFader-o0yetbq5wqj.png</span>
 
-<span class="sd">    .. tip::</span>
+<span class="sd">    ..  tip::</span>
 
-<span class="sd">        The functions |auxjad.mutate().remove_repeated_dynamics()| and</span>
-<span class="sd">        |auxjad.mutate().reposition_clefs()| can be used to clean the output</span>
+<span class="sd">        The functions |auxjad.mutate.remove_repeated_dynamics()| and</span>
+<span class="sd">        |auxjad.mutate.reposition_clefs()| can be used to clean the output</span>
 <span class="sd">        and remove repeated dynamics and unnecessary clef changes.</span>
 
-<span class="sd">    .. warning::</span>
+<span class="sd">    ..  warning::</span>
 
 <span class="sd">        Do note that some elements that span multiple notes (such as ottava</span>
 <span class="sd">        indicators, manual beams, etc.) can become problematic when notes</span>
@@ -1512,86 +1600,95 @@
 <span class="sd">        ...     [abjad.Voice(selection_a), abjad.Voice(selection_b)],</span>
 <span class="sd">        ...     simultaneous=True,</span>
 <span class="sd">        ... )</span>
-<span class="sd">        &gt;&gt;&gt; abjad.f(staff)</span>
-<span class="sd">        \new Staff</span>
-<span class="sd">        &lt;&lt;</span>
-<span class="sd">            \new Voice</span>
-<span class="sd">            {</span>
-<span class="sd">                \time 4/4</span>
-<span class="sd">                \voiceOne</span>
-<span class="sd">                b&#39;8</span>
-<span class="sd">                c&#39;&#39;8</span>
-<span class="sd">                e&#39;&#39;2</span>
-<span class="sd">                g&#39;&#39;4</span>
-<span class="sd">                b&#39;8</span>
-<span class="sd">                c&#39;&#39;8</span>
-<span class="sd">                e&#39;&#39;2</span>
-<span class="sd">                r4</span>
-<span class="sd">                b&#39;8</span>
-<span class="sd">                c&#39;&#39;8</span>
-<span class="sd">                e&#39;&#39;2</span>
-<span class="sd">                r4</span>
-<span class="sd">                b&#39;8</span>
-<span class="sd">                c&#39;&#39;8</span>
-<span class="sd">                e&#39;&#39;2</span>
-<span class="sd">                r4</span>
-<span class="sd">                b&#39;8</span>
-<span class="sd">                c&#39;&#39;8</span>
-<span class="sd">                e&#39;&#39;2</span>
-<span class="sd">                r4</span>
-<span class="sd">                b&#39;8</span>
-<span class="sd">                c&#39;&#39;8</span>
-<span class="sd">                r2.</span>
-<span class="sd">                b&#39;8</span>
-<span class="sd">                r2..</span>
-<span class="sd">                R1</span>
-<span class="sd">            }</span>
-<span class="sd">            \new Voice</span>
-<span class="sd">            {</span>
-<span class="sd">                \time 4/4</span>
-<span class="sd">                \voiceTwo</span>
-<span class="sd">                R1</span>
-<span class="sd">                R1</span>
-<span class="sd">                \times 2/3 {</span>
-<span class="sd">                    r1</span>
-<span class="sd">                    c&#39;2</span>
-<span class="sd">                }</span>
-<span class="sd">                \times 2/3 {</span>
-<span class="sd">                    e&#39;2</span>
-<span class="sd">                    r2</span>
-<span class="sd">                    c&#39;2</span>
-<span class="sd">                }</span>
-<span class="sd">                \times 2/3 {</span>
-<span class="sd">                    e&#39;2</span>
-<span class="sd">                    d&#39;2</span>
-<span class="sd">                    c&#39;2</span>
-<span class="sd">                }</span>
-<span class="sd">                \times 2/3 {</span>
-<span class="sd">                    e&#39;2</span>
-<span class="sd">                    d&#39;2</span>
-<span class="sd">                    c&#39;2</span>
-<span class="sd">                }</span>
-<span class="sd">                \times 2/3 {</span>
-<span class="sd">                    e&#39;2</span>
-<span class="sd">                    d&#39;2</span>
-<span class="sd">                    c&#39;2</span>
-<span class="sd">                }</span>
-<span class="sd">                \times 2/3 {</span>
-<span class="sd">                    e&#39;2</span>
-<span class="sd">                    d&#39;2</span>
-<span class="sd">                    c&#39;2</span>
-<span class="sd">                }</span>
-<span class="sd">            }</span>
-<span class="sd">        &gt;&gt;</span>
+<span class="sd">        &gt;&gt;&gt; abjad.show(staff)</span>
 
-<span class="sd">        .. figure:: ../_images/CrossFader-rZLSa2kyqM.png</span>
+<span class="sd">        ..  docs::</span>
+
+<span class="sd">            \new Staff</span>
+<span class="sd">            &lt;&lt;</span>
+<span class="sd">                \new Voice</span>
+<span class="sd">                {</span>
+<span class="sd">                    \time 4/4</span>
+<span class="sd">                    \voiceOne</span>
+<span class="sd">                    b&#39;8</span>
+<span class="sd">                    c&#39;&#39;8</span>
+<span class="sd">                    e&#39;&#39;2</span>
+<span class="sd">                    g&#39;&#39;4</span>
+<span class="sd">                    b&#39;8</span>
+<span class="sd">                    c&#39;&#39;8</span>
+<span class="sd">                    e&#39;&#39;2</span>
+<span class="sd">                    r4</span>
+<span class="sd">                    b&#39;8</span>
+<span class="sd">                    c&#39;&#39;8</span>
+<span class="sd">                    e&#39;&#39;2</span>
+<span class="sd">                    r4</span>
+<span class="sd">                    b&#39;8</span>
+<span class="sd">                    c&#39;&#39;8</span>
+<span class="sd">                    e&#39;&#39;2</span>
+<span class="sd">                    r4</span>
+<span class="sd">                    b&#39;8</span>
+<span class="sd">                    c&#39;&#39;8</span>
+<span class="sd">                    e&#39;&#39;2</span>
+<span class="sd">                    r4</span>
+<span class="sd">                    b&#39;8</span>
+<span class="sd">                    c&#39;&#39;8</span>
+<span class="sd">                    r2.</span>
+<span class="sd">                    b&#39;8</span>
+<span class="sd">                    r2..</span>
+<span class="sd">                    R1</span>
+<span class="sd">                }</span>
+<span class="sd">                \new Voice</span>
+<span class="sd">                {</span>
+<span class="sd">                    \time 4/4</span>
+<span class="sd">                    \voiceTwo</span>
+<span class="sd">                    R1</span>
+<span class="sd">                    R1</span>
+<span class="sd">                    \times 2/3</span>
+<span class="sd">                    {</span>
+<span class="sd">                        r1</span>
+<span class="sd">                        c&#39;2</span>
+<span class="sd">                    }</span>
+<span class="sd">                    \times 2/3</span>
+<span class="sd">                    {</span>
+<span class="sd">                        e&#39;2</span>
+<span class="sd">                        r2</span>
+<span class="sd">                        c&#39;2</span>
+<span class="sd">                    }</span>
+<span class="sd">                    \times 2/3</span>
+<span class="sd">                    {</span>
+<span class="sd">                        e&#39;2</span>
+<span class="sd">                        d&#39;2</span>
+<span class="sd">                        c&#39;2</span>
+<span class="sd">                    }</span>
+<span class="sd">                    \times 2/3</span>
+<span class="sd">                    {</span>
+<span class="sd">                        e&#39;2</span>
+<span class="sd">                        d&#39;2</span>
+<span class="sd">                        c&#39;2</span>
+<span class="sd">                    }</span>
+<span class="sd">                    \times 2/3</span>
+<span class="sd">                    {</span>
+<span class="sd">                        e&#39;2</span>
+<span class="sd">                        d&#39;2</span>
+<span class="sd">                        c&#39;2</span>
+<span class="sd">                    }</span>
+<span class="sd">                    \times 2/3</span>
+<span class="sd">                    {</span>
+<span class="sd">                        e&#39;2</span>
+<span class="sd">                        d&#39;2</span>
+<span class="sd">                        c&#39;2</span>
+<span class="sd">                    }</span>
+<span class="sd">                }</span>
+<span class="sd">            &gt;&gt;</span>
+
+<span class="sd">        ..  figure:: ../_images/CrossFader-rZLSa2kyqM.png</span>
 
 <span class="sd">    Using containers of different lengths:</span>
 <span class="sd">        It is possible to use this class with containers of different lengths</span>
 <span class="sd">        and time signatures, although this feature is not fully implemented and</span>
 <span class="sd">        should be considered experimental. LilyPond must be set up to allow</span>
 <span class="sd">        different simultaneous time signatures, and</span>
-<span class="sd">        |auxjad.mutate().sync_containers()| can be used to add rests to the end</span>
+<span class="sd">        |auxjad.mutate.sync_containers()| can be used to add rests to the end</span>
 <span class="sd">        of the shorter staff.</span>
 
 <span class="sd">        &gt;&gt;&gt; fade_out_container = abjad.Container(r&quot;\time 3/4 c&#39;4 d&#39;4 e&#39;4&quot;)</span>
@@ -1605,7 +1702,7 @@
 <span class="sd">        &gt;&gt;&gt; selection_a, selection_b = fader.output_all()</span>
 <span class="sd">        &gt;&gt;&gt; staff_a = abjad.Staff(selection_a)</span>
 <span class="sd">        &gt;&gt;&gt; staff_b = abjad.Staff(selection_b)</span>
-<span class="sd">        &gt;&gt;&gt; abjad.mutate([staff_a, staff_b]).sync_containers()</span>
+<span class="sd">        &gt;&gt;&gt; abjad.mutate.sync_containers([staff_a, staff_b])</span>
 <span class="sd">        &gt;&gt;&gt; score = abjad.Score([staff_a, staff_b])</span>
 <span class="sd">        &gt;&gt;&gt; lilypond_file = abjad.LilyPondFile.new()</span>
 <span class="sd">        &gt;&gt;&gt; score_block = abjad.Block(name=&#39;score&#39;)</span>
@@ -1625,68 +1722,71 @@
 <span class="sd">        ...         \consists &quot;Default_bar_line_engraver&quot;</span>
 <span class="sd">        ...     }&#39;&#39;&#39;</span>
 <span class="sd">        ... )</span>
-<span class="sd">        &gt;&gt;&gt; abjad.f(score)</span>
-<span class="sd">        \version &quot;2.19.82&quot;  %! abjad.LilyPondFile._get_format_pieces()</span>
-<span class="sd">        \language &quot;english&quot; %! abjad.LilyPondFile._get_format_pieces()</span>
-<span class="sd">        \header { %! abjad.LilyPondFile._get_formatted_blocks()</span>
-<span class="sd">            tagline = ##f</span>
-<span class="sd">        } %! abjad.LilyPondFile._get_formatted_blocks()</span>
-<span class="sd">        \layout {}</span>
-<span class="sd">        \paper {}</span>
-<span class="sd">        \score { %! abjad.LilyPondFile._get_formatted_blocks()</span>
-<span class="sd">            \new Score</span>
-<span class="sd">            &lt;&lt;</span>
-<span class="sd">                \new Staff</span>
-<span class="sd">                {</span>
-<span class="sd">                    \time 3/4</span>
-<span class="sd">                    c&#39;4</span>
-<span class="sd">                    d&#39;4</span>
-<span class="sd">                    e&#39;4</span>
-<span class="sd">                    c&#39;4</span>
-<span class="sd">                    d&#39;4</span>
-<span class="sd">                    e&#39;4</span>
-<span class="sd">                    c&#39;4</span>
-<span class="sd">                    r4</span>
-<span class="sd">                    e&#39;4</span>
-<span class="sd">                    c&#39;4</span>
-<span class="sd">                    r2</span>
-<span class="sd">                    c&#39;4</span>
-<span class="sd">                    r2</span>
-<span class="sd">                    R1 * 3/4</span>
-<span class="sd">                    R1 * 3/4</span>
-<span class="sd">                    R1 * 3/4</span>
-<span class="sd">                }</span>
-<span class="sd">                \new Staff</span>
-<span class="sd">                {</span>
-<span class="sd">                    \time 4/4</span>
-<span class="sd">                    R1</span>
-<span class="sd">                    r2</span>
-<span class="sd">                    a&#39;2</span>
-<span class="sd">                    r2</span>
-<span class="sd">                    a&#39;2</span>
-<span class="sd">                    r2</span>
-<span class="sd">                    a&#39;2</span>
-<span class="sd">                    g&#39;2</span>
-<span class="sd">                    a&#39;2</span>
-<span class="sd">                    g&#39;2</span>
-<span class="sd">                    a&#39;2</span>
-<span class="sd">                }</span>
-<span class="sd">            &gt;&gt;</span>
-<span class="sd">            \layout {</span>
-<span class="sd">                \context {</span>
-<span class="sd">                    \Score</span>
-<span class="sd">                    \remove &quot;Timing_translator&quot;</span>
-<span class="sd">                    \remove &quot;Default_bar_line_engraver&quot;</span>
-<span class="sd">                }</span>
-<span class="sd">                \context {</span>
-<span class="sd">                    \Staff</span>
-<span class="sd">                    \consists &quot;Timing_translator&quot;</span>
-<span class="sd">                    \consists &quot;Default_bar_line_engraver&quot;</span>
-<span class="sd">                }</span>
-<span class="sd">            }</span>
-<span class="sd">        } %! abjad.LilyPondFile._get_formatted_blocks()</span>
+<span class="sd">        &gt;&gt;&gt; abjad.show(score)</span>
 
-<span class="sd">        .. figure:: ../_images/CrossFader-5qvaan79w8p.png</span>
+<span class="sd">        ..  docs::</span>
+
+<span class="sd">            \version &quot;2.19.82&quot;  %! abjad.LilyPondFile._get_format_pieces()</span>
+<span class="sd">            \language &quot;english&quot; %! abjad.LilyPondFile._get_format_pieces()</span>
+<span class="sd">            \header { %! abjad.LilyPondFile._get_formatted_blocks()</span>
+<span class="sd">                tagline = ##f</span>
+<span class="sd">            } %! abjad.LilyPondFile._get_formatted_blocks()</span>
+<span class="sd">            \layout {}</span>
+<span class="sd">            \paper {}</span>
+<span class="sd">            \score { %! abjad.LilyPondFile._get_formatted_blocks()</span>
+<span class="sd">                \new Score</span>
+<span class="sd">                &lt;&lt;</span>
+<span class="sd">                    \new Staff</span>
+<span class="sd">                    {</span>
+<span class="sd">                        \time 3/4</span>
+<span class="sd">                        c&#39;4</span>
+<span class="sd">                        d&#39;4</span>
+<span class="sd">                        e&#39;4</span>
+<span class="sd">                        c&#39;4</span>
+<span class="sd">                        d&#39;4</span>
+<span class="sd">                        e&#39;4</span>
+<span class="sd">                        c&#39;4</span>
+<span class="sd">                        r4</span>
+<span class="sd">                        e&#39;4</span>
+<span class="sd">                        c&#39;4</span>
+<span class="sd">                        r2</span>
+<span class="sd">                        c&#39;4</span>
+<span class="sd">                        r2</span>
+<span class="sd">                        R1 * 3/4</span>
+<span class="sd">                        R1 * 3/4</span>
+<span class="sd">                        R1 * 3/4</span>
+<span class="sd">                    }</span>
+<span class="sd">                    \new Staff</span>
+<span class="sd">                    {</span>
+<span class="sd">                        \time 4/4</span>
+<span class="sd">                        R1</span>
+<span class="sd">                        r2</span>
+<span class="sd">                        a&#39;2</span>
+<span class="sd">                        r2</span>
+<span class="sd">                        a&#39;2</span>
+<span class="sd">                        r2</span>
+<span class="sd">                        a&#39;2</span>
+<span class="sd">                        g&#39;2</span>
+<span class="sd">                        a&#39;2</span>
+<span class="sd">                        g&#39;2</span>
+<span class="sd">                        a&#39;2</span>
+<span class="sd">                    }</span>
+<span class="sd">                &gt;&gt;</span>
+<span class="sd">                \layout {</span>
+<span class="sd">                    \context {</span>
+<span class="sd">                        \Score</span>
+<span class="sd">                        \remove &quot;Timing_translator&quot;</span>
+<span class="sd">                        \remove &quot;Default_bar_line_engraver&quot;</span>
+<span class="sd">                    }</span>
+<span class="sd">                    \context {</span>
+<span class="sd">                        \Staff</span>
+<span class="sd">                        \consists &quot;Timing_translator&quot;</span>
+<span class="sd">                        \consists &quot;Default_bar_line_engraver&quot;</span>
+<span class="sd">                    }</span>
+<span class="sd">                }</span>
+<span class="sd">            } %! abjad.LilyPondFile._get_formatted_blocks()</span>
+
+<span class="sd">        ..  figure:: ../_images/CrossFader-5qvaan79w8p.png</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="c1">### CLASS VARIABLES ###</span>
@@ -1767,7 +1867,10 @@
 
 <div class="viewcode-block" id="CrossFader.__repr__"><a class="viewcode-back" href="../../../_api_members/auxjad.CrossFader.html#auxjad.CrossFader.__repr__">[docs]</a>    <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
         <span class="sa">r</span><span class="s1">&#39;Returns interpreter representation of both contents.&#39;</span>
-        <span class="k">return</span> <span class="nb">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_fader_out</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">+</span> <span class="nb">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_fader_in</span><span class="p">)</span></div>
+        <span class="n">string</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">lilypond</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_fader_out</span><span class="p">)</span>
+        <span class="n">string</span> <span class="o">+=</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span>
+        <span class="n">string</span> <span class="o">+=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">lilypond</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_fader_in</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">string</span></div>
 
 <div class="viewcode-block" id="CrossFader.__len__"><a class="viewcode-back" href="../../../_api_members/auxjad.CrossFader.html#auxjad.CrossFader.__len__">[docs]</a>    <span class="k">def</span> <span class="fm">__len__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
         <span class="sa">r</span><span class="s1">&#39;Returns the sum of the number of notes of both contents.&#39;</span>
@@ -1809,10 +1912,10 @@
                 <span class="n">dummy_container_b</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">result_b</span><span class="p">)</span>
             <span class="k">except</span> <span class="ne">RuntimeError</span><span class="p">:</span>
                 <span class="k">break</span>
-        <span class="n">mutate</span><span class="p">(</span><span class="n">dummy_container_a</span><span class="p">[:])</span><span class="o">.</span><span class="n">remove_repeated_time_signatures</span><span class="p">()</span>
-        <span class="n">mutate</span><span class="p">(</span><span class="n">dummy_container_b</span><span class="p">[:])</span><span class="o">.</span><span class="n">remove_repeated_time_signatures</span><span class="p">()</span>
-        <span class="n">mutate</span><span class="p">(</span><span class="n">dummy_container_a</span><span class="p">[:])</span><span class="o">.</span><span class="n">remove_repeated_dynamics</span><span class="p">()</span>
-        <span class="n">mutate</span><span class="p">(</span><span class="n">dummy_container_b</span><span class="p">[:])</span><span class="o">.</span><span class="n">remove_repeated_dynamics</span><span class="p">()</span>
+        <span class="n">mutate</span><span class="o">.</span><span class="n">remove_repeated_time_signatures</span><span class="p">(</span><span class="n">dummy_container_a</span><span class="p">[:])</span>
+        <span class="n">mutate</span><span class="o">.</span><span class="n">remove_repeated_time_signatures</span><span class="p">(</span><span class="n">dummy_container_b</span><span class="p">[:])</span>
+        <span class="n">mutate</span><span class="o">.</span><span class="n">remove_repeated_dynamics</span><span class="p">(</span><span class="n">dummy_container_a</span><span class="p">[:])</span>
+        <span class="n">mutate</span><span class="o">.</span><span class="n">remove_repeated_dynamics</span><span class="p">(</span><span class="n">dummy_container_b</span><span class="p">[:])</span>
         <span class="n">output</span> <span class="o">=</span> <span class="p">(</span><span class="n">dummy_container_a</span><span class="p">[:],</span> <span class="n">dummy_container_b</span><span class="p">[:])</span>
         <span class="n">dummy_container_a</span><span class="p">[:]</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="n">dummy_container_b</span><span class="p">[:]</span> <span class="o">=</span> <span class="p">[]</span>
@@ -1839,10 +1942,10 @@
                 <span class="n">dummy_container_b</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">result_b</span><span class="p">)</span>
             <span class="k">except</span> <span class="ne">RuntimeError</span><span class="p">:</span>
                 <span class="k">break</span>
-        <span class="n">mutate</span><span class="p">(</span><span class="n">dummy_container_a</span><span class="p">[:])</span><span class="o">.</span><span class="n">remove_repeated_time_signatures</span><span class="p">()</span>
-        <span class="n">mutate</span><span class="p">(</span><span class="n">dummy_container_b</span><span class="p">[:])</span><span class="o">.</span><span class="n">remove_repeated_time_signatures</span><span class="p">()</span>
-        <span class="n">mutate</span><span class="p">(</span><span class="n">dummy_container_a</span><span class="p">[:])</span><span class="o">.</span><span class="n">remove_repeated_dynamics</span><span class="p">()</span>
-        <span class="n">mutate</span><span class="p">(</span><span class="n">dummy_container_b</span><span class="p">[:])</span><span class="o">.</span><span class="n">remove_repeated_dynamics</span><span class="p">()</span>
+        <span class="n">mutate</span><span class="o">.</span><span class="n">remove_repeated_time_signatures</span><span class="p">(</span><span class="n">dummy_container_a</span><span class="p">[:])</span>
+        <span class="n">mutate</span><span class="o">.</span><span class="n">remove_repeated_time_signatures</span><span class="p">(</span><span class="n">dummy_container_b</span><span class="p">[:])</span>
+        <span class="n">mutate</span><span class="o">.</span><span class="n">remove_repeated_dynamics</span><span class="p">(</span><span class="n">dummy_container_a</span><span class="p">[:])</span>
+        <span class="n">mutate</span><span class="o">.</span><span class="n">remove_repeated_dynamics</span><span class="p">(</span><span class="n">dummy_container_b</span><span class="p">[:])</span>
         <span class="n">output</span> <span class="o">=</span> <span class="p">(</span><span class="n">dummy_container_a</span><span class="p">[:],</span> <span class="n">dummy_container_b</span><span class="p">[:])</span>
         <span class="n">dummy_container_a</span><span class="p">[:]</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="n">dummy_container_b</span><span class="p">[:]</span> <span class="o">=</span> <span class="p">[]</span>
@@ -1896,12 +1999,16 @@
                     <span class="k">finally</span><span class="p">:</span>
                         <span class="bp">self</span><span class="o">.</span><span class="n">_is_first_process</span> <span class="o">=</span> <span class="kc">False</span>
 
+    <span class="k">def</span> <span class="nf">_get_lilypond_format</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="sa">r</span><span class="s1">&#39;Returns interpreter representation of  :attr:`contents`.&#39;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="fm">__repr__</span><span class="p">()</span>
+
     <span class="c1">### PUBLIC PROPERTIES ###</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">fade_out_contents</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">:</span>
         <span class="sa">r</span><span class="s1">&#39;The |abjad.Container| to be faded out.&#39;</span>
-        <span class="k">return</span> <span class="n">abjad</span><span class="o">.</span><span class="n">mutate</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_fade_out_contents</span><span class="p">)</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">abjad</span><span class="o">.</span><span class="n">mutate</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_fade_out_contents</span><span class="p">)</span>
 
     <span class="nd">@fade_out_contents</span><span class="o">.</span><span class="n">setter</span>
     <span class="k">def</span> <span class="nf">fade_out_contents</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
@@ -1914,14 +2021,14 @@
         <span class="k">if</span> <span class="ow">not</span> <span class="n">leaves</span><span class="o">.</span><span class="n">are_contiguous_logical_voice</span><span class="p">():</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;&#39;fade_out_contents&#39; must be contiguous logical &quot;</span>
                              <span class="s2">&quot; voice&quot;</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_fade_out_contents</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">mutate</span><span class="p">(</span><span class="n">fade_out_contents</span><span class="p">)</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_fade_out_contents</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">mutate</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="n">fade_out_contents</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_fader_out</span><span class="o">.</span><span class="n">contents</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_fade_out_contents</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">reset</span><span class="p">()</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">fade_in_contents</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">:</span>
         <span class="sa">r</span><span class="s1">&#39;The |abjad.Container| to be faded in.&#39;</span>
-        <span class="k">return</span> <span class="n">abjad</span><span class="o">.</span><span class="n">mutate</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_fade_in_contents</span><span class="p">)</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">abjad</span><span class="o">.</span><span class="n">mutate</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_fade_in_contents</span><span class="p">)</span>
 
     <span class="nd">@fade_in_contents</span><span class="o">.</span><span class="n">setter</span>
     <span class="k">def</span> <span class="nf">fade_in_contents</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
@@ -1934,7 +2041,7 @@
         <span class="k">if</span> <span class="ow">not</span> <span class="n">leaves</span><span class="o">.</span><span class="n">are_contiguous_logical_voice</span><span class="p">():</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;&#39;fade_in_contents&#39; must be contiguous logical &quot;</span>
                              <span class="s2">&quot; voice&quot;</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_fade_in_contents</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">mutate</span><span class="p">(</span><span class="n">fade_in_contents</span><span class="p">)</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_fade_in_contents</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">mutate</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="n">fade_in_contents</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_fader_in</span><span class="o">.</span><span class="n">contents</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_fade_in_contents</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">reset</span><span class="p">()</span>
 
@@ -1963,7 +2070,7 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">_weights</span> <span class="o">=</span> <span class="p">[]</span>
             <span class="k">for</span> <span class="n">container</span> <span class="ow">in</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">_fade_in_contents</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_fade_out_contents</span><span class="p">]:</span>
                 <span class="n">notes</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="n">container</span><span class="p">)</span><span class="o">.</span><span class="n">logical_ties</span><span class="p">(</span><span class="n">pitched</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-                <span class="n">duration</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">inspect</span><span class="p">(</span><span class="n">container</span><span class="p">)</span><span class="o">.</span><span class="n">duration</span><span class="p">()</span>
+                <span class="n">duration</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">get</span><span class="o">.</span><span class="n">duration</span><span class="p">(</span><span class="n">container</span><span class="p">)</span>
                 <span class="n">value</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">notes</span><span class="p">)</span> <span class="o">*</span> <span class="nb">float</span><span class="p">(</span><span class="n">duration</span><span class="p">)</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">_weights</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
@@ -2068,7 +2175,7 @@
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">disable_rewrite_meter</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
         <span class="sa">r</span><span class="sd">&quot;&quot;&quot;When ``True``, the durations of the notes in the output will not be</span>
-<span class="sd">        rewritten by the |abjad.mutate().rewrite_meter()| mutation.</span>
+<span class="sd">        rewritten by the |abjad.Meter.rewrite_meter()| mutation.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_disable_rewrite_meter</span>
 
@@ -2115,7 +2222,7 @@
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">boundary_depth</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Union</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="kc">None</span><span class="p">]:</span>
         <span class="sa">r</span><span class="sd">&quot;&quot;&quot;Sets the argument ``boundary_depth`` of</span>
-<span class="sd">        |abjad.mutate().rewrite_meter()|.</span>
+<span class="sd">        |abjad.Meter.rewrite_meter()|.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_boundary_depth</span>
 
@@ -2133,7 +2240,7 @@
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">maximum_dot_count</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Union</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="kc">None</span><span class="p">]:</span>
         <span class="sa">r</span><span class="sd">&quot;&quot;&quot;Sets the argument ``maximum_dot_count`` of</span>
-<span class="sd">        |abjad.mutate().rewrite_meter()|.</span>
+<span class="sd">        |abjad.Meter.rewrite_meter()|.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_maximum_dot_count</span>
 
@@ -2151,7 +2258,7 @@
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">rewrite_tuplets</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
         <span class="sa">r</span><span class="sd">&quot;&quot;&quot;Sets the argument ``rewrite_tuplets`` of</span>
-<span class="sd">        |abjad.mutate().rewrite_meter()|.</span>
+<span class="sd">        |abjad.Meter.rewrite_meter()|.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_rewrite_tuplets</span>
 
@@ -2179,28 +2286,25 @@
            
           </div>
           <footer>
-  
 
   <hr/>
 
   <div role="contentinfo">
     <p>
-        
-        &copy; Copyright 2020, Gilberto Agostinho
+        &#169; Copyright 2020, Gilberto Agostinho.
 
     </p>
   </div>
     
     
     
-    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
     
-    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
     
     provided by <a href="https://readthedocs.org">Read the Docs</a>. 
 
 </footer>
-
         </div>
       </div>
 

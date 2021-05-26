@@ -1,0 +1,616 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>auxjad.mutate.reposition_slurs &mdash; auxjad 0.8.25 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+        <script src="../../../_static/jquery.js"></script>
+        <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/doctools.js"></script>
+    
+    <script type="text/javascript" src="../../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../../index.html" class="icon icon-home"> auxjad
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.8
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../index.html">Welcome to Auxjad’s documentation!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../examples/index.html">Examples of usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../score_gallery/index.html">Score gallery</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../api/index.html">Auxjad API</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">auxjad</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../../index.html">Module code</a> &raquo;</li>
+        
+      <li>auxjad.mutate.reposition_slurs</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for auxjad.mutate.reposition_slurs</h1><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">abjad</span>
+
+
+<div class="viewcode-block" id="reposition_slurs"><a class="viewcode-back" href="../../../_api_members/auxjad.mutate.reposition_slurs.html#auxjad.mutate.reposition_slurs">[docs]</a><span class="k">def</span> <span class="nf">reposition_slurs</span><span class="p">(</span><span class="n">selection</span><span class="p">:</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Selection</span><span class="p">,</span>
+                     <span class="o">*</span><span class="p">,</span>
+                     <span class="n">allow_slurs_under_rests</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+                     <span class="n">close_unterminated_final_slur</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+                     <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="sa">r</span><span class="sd">&quot;&quot;&quot;Mutates an input |abjad.Selection| in place and has no return value;</span>
+<span class="sd">    this function repositions all slurs that starts or ends on rests.</span>
+
+<span class="sd">    Basic usage:</span>
+<span class="sd">        This function will shift slurs that ends on rests to the previous</span>
+<span class="sd">        pitched leaf.</span>
+
+<span class="sd">        &gt;&gt;&gt; staff = abjad.Staff(r&quot;c&#39;1( d&#39;2 r2) r1 e&#39;1&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; abjad.show(staff)</span>
+
+<span class="sd">        ..  docs::</span>
+
+<span class="sd">            \new Staff</span>
+<span class="sd">            {</span>
+<span class="sd">                c&#39;1</span>
+<span class="sd">                (</span>
+<span class="sd">                d&#39;2</span>
+<span class="sd">                r2</span>
+<span class="sd">                )</span>
+<span class="sd">                r1</span>
+<span class="sd">                e&#39;1</span>
+<span class="sd">            }</span>
+
+<span class="sd">        ..  figure:: ../_images/reposition_slurs-uxji4xx6ftk.png</span>
+
+<span class="sd">        &gt;&gt;&gt; staff = abjad.Staff(r&quot;c&#39;1( d&#39;2 r2) r1 e&#39;1&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; auxjad.mutate.reposition_slurs(staff[:])</span>
+<span class="sd">        &gt;&gt;&gt; abjad.show(staff)</span>
+
+<span class="sd">        ..  docs::</span>
+
+<span class="sd">            \new Staff</span>
+<span class="sd">            {</span>
+<span class="sd">                c&#39;1</span>
+<span class="sd">                (</span>
+<span class="sd">                d&#39;2</span>
+<span class="sd">                )</span>
+<span class="sd">                r2</span>
+<span class="sd">                r1</span>
+<span class="sd">                e&#39;1</span>
+<span class="sd">            }</span>
+
+<span class="sd">        ..  figure:: ../_images/reposition_slurs-7nnp5cttm4y.png</span>
+
+<span class="sd">    ..  note::</span>
+
+<span class="sd">        Auxjad automatically adds this function as an extension function to</span>
+<span class="sd">        |abjad.mutate|. It can thus be used from either |auxjad.mutate|_ or</span>
+<span class="sd">        |abjad.mutate| namespaces. Therefore, the two lines below are</span>
+<span class="sd">        equivalent:</span>
+
+<span class="sd">        &gt;&gt;&gt; auxjad.mutate.reposition_slurs(staff[:])</span>
+<span class="sd">        &gt;&gt;&gt; abjad.mutate.reposition_slurs(staff[:])</span>
+
+<span class="sd">    Rests:</span>
+<span class="sd">        Slurs starting on rests are shifted to the next pitched leaf.</span>
+
+<span class="sd">        &gt;&gt;&gt; staff = abjad.Staff(r&quot;c&#39;1 r2( d&#39;2 e&#39;1)&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; abjad.show(staff)</span>
+
+<span class="sd">        ..  docs::</span>
+
+<span class="sd">            \new Staff</span>
+<span class="sd">            {</span>
+<span class="sd">                c&#39;1</span>
+<span class="sd">                r2</span>
+<span class="sd">                (</span>
+<span class="sd">                d&#39;2</span>
+<span class="sd">                e&#39;1</span>
+<span class="sd">                )</span>
+<span class="sd">            }</span>
+
+<span class="sd">        ..  figure:: ../_images/reposition_slurs-2j7hgqd7bt1.png</span>
+
+<span class="sd">        &gt;&gt;&gt; staff = abjad.Staff(r&quot;c&#39;1 r2( d&#39;2 e&#39;1)&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; auxjad.mutate.reposition_slurs(staff[:])</span>
+<span class="sd">        &gt;&gt;&gt; abjad.show(staff)</span>
+
+<span class="sd">        ..  docs::</span>
+
+<span class="sd">            \new Staff</span>
+<span class="sd">            {</span>
+<span class="sd">                c&#39;1</span>
+<span class="sd">                r2</span>
+<span class="sd">                d&#39;2</span>
+<span class="sd">                (</span>
+<span class="sd">                e&#39;1</span>
+<span class="sd">                )</span>
+<span class="sd">            }</span>
+
+<span class="sd">        ..  figure:: ../_images/reposition_slurs-i957u1wt30m.png</span>
+
+<span class="sd">    Multiple rests:</span>
+<span class="sd">        This function also works when multiple rests are present.</span>
+
+<span class="sd">        &gt;&gt;&gt; staff = abjad.Staff(r&quot;c&#39;1( d&#39;2 r2 r1) e&#39;1&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; abjad.show(staff)</span>
+
+<span class="sd">        ..  docs::</span>
+
+<span class="sd">            \new Staff</span>
+<span class="sd">            {</span>
+<span class="sd">                c&#39;1</span>
+<span class="sd">                (</span>
+<span class="sd">                d&#39;2</span>
+<span class="sd">                r2</span>
+<span class="sd">                r1</span>
+<span class="sd">                )</span>
+<span class="sd">                e&#39;1</span>
+<span class="sd">            }</span>
+
+<span class="sd">        ..  figure:: ../_images/reposition_slurs-v76u42x7idk.png</span>
+
+<span class="sd">        &gt;&gt;&gt; staff = abjad.Staff(r&quot;c&#39;1( d&#39;2 r2 r1) e&#39;1&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; auxjad.mutate.reposition_slurs(staff[:])</span>
+<span class="sd">        &gt;&gt;&gt; abjad.show(staff)</span>
+
+<span class="sd">        ..  docs::</span>
+
+<span class="sd">            \new Staff</span>
+<span class="sd">            {</span>
+<span class="sd">                c&#39;1</span>
+<span class="sd">                (</span>
+<span class="sd">                d&#39;2</span>
+<span class="sd">                )</span>
+<span class="sd">                r2</span>
+<span class="sd">                r1</span>
+<span class="sd">                e&#39;1</span>
+<span class="sd">            }</span>
+
+<span class="sd">        ..  figure:: ../_images/reposition_slurs-burs1t0daid.png</span>
+
+<span class="sd">    ``allow_slurs_under_rests``:</span>
+<span class="sd">        By default, a slur crossing a rest is broken into two.</span>
+
+<span class="sd">        &gt;&gt;&gt; staff = abjad.Staff(r&quot;c&#39;1( d&#39;2 r2 e&#39;1 f&#39;1)&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; auxjad.mutate.reposition_slurs(staff[:])</span>
+<span class="sd">        &gt;&gt;&gt; abjad.show(staff)</span>
+
+<span class="sd">        ..  docs::</span>
+
+<span class="sd">            \new Staff</span>
+<span class="sd">            {</span>
+<span class="sd">                c&#39;1</span>
+<span class="sd">                (</span>
+<span class="sd">                d&#39;2</span>
+<span class="sd">                )</span>
+<span class="sd">                r2</span>
+<span class="sd">                e&#39;1</span>
+<span class="sd">                (</span>
+<span class="sd">                f&#39;1</span>
+<span class="sd">                )</span>
+<span class="sd">            }</span>
+
+<span class="sd">        ..  figure:: ../_images/reposition_slurs-8wb7orpt285.png</span>
+
+<span class="sd">        Set the optional keyword argument ``allow_slurs_under_rests`` to</span>
+<span class="sd">        ``True`` to allow slurs under rests.</span>
+
+<span class="sd">        &gt;&gt;&gt; staff = abjad.Staff(r&quot;c&#39;1( d&#39;2 r2 e&#39;1 f&#39;1)&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; auxjad.mutate.reposition_slurs(</span>
+<span class="sd">        ...     staff[:],</span>
+<span class="sd">        ...     allow_slurs_under_rests=True,</span>
+<span class="sd">        ... )</span>
+<span class="sd">        &gt;&gt;&gt; abjad.show(staff)</span>
+
+<span class="sd">        ..  docs::</span>
+
+<span class="sd">            \new Staff</span>
+<span class="sd">            {</span>
+<span class="sd">                c&#39;1</span>
+<span class="sd">                (</span>
+<span class="sd">                d&#39;2</span>
+<span class="sd">                r2</span>
+<span class="sd">                e&#39;1</span>
+<span class="sd">                f&#39;1</span>
+<span class="sd">                )</span>
+<span class="sd">            }</span>
+
+<span class="sd">        ..  figure:: ../_images/reposition_slurs-ftb59kz6u8j.png</span>
+
+<span class="sd">    ``close_unterminated_final_slur``:</span>
+<span class="sd">        By default, unterminated slurs at the end of the selection are closed</span>
+<span class="sd">        when possible or removed when not.</span>
+
+<span class="sd">        &gt;&gt;&gt; staff = abjad.Staff(r&quot;c&#39;1( d&#39;2 r2 e&#39;2 f&#39;2) g&#39;1( a&#39;1&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; auxjad.mutate.reposition_slurs(staff[:])</span>
+<span class="sd">        &gt;&gt;&gt; abjad.show(staff)</span>
+
+<span class="sd">        ..  docs::</span>
+
+<span class="sd">            \new Staff</span>
+<span class="sd">            {</span>
+<span class="sd">                c&#39;1</span>
+<span class="sd">                (</span>
+<span class="sd">                d&#39;2</span>
+<span class="sd">                )</span>
+<span class="sd">                r2</span>
+<span class="sd">                e&#39;2</span>
+<span class="sd">                (</span>
+<span class="sd">                f&#39;2</span>
+<span class="sd">                )</span>
+<span class="sd">                g&#39;1</span>
+<span class="sd">                (</span>
+<span class="sd">                a&#39;1</span>
+<span class="sd">                )</span>
+<span class="sd">            }</span>
+
+<span class="sd">        ..  figure:: ../_images/reposition_slurs-70dli8e0kqr.png</span>
+
+<span class="sd">        Set the optional keyword argument ``close_unterminated_final_slur`` to</span>
+<span class="sd">        ``False`` to disable this behaviour.</span>
+
+<span class="sd">        &gt;&gt;&gt; staff = abjad.Staff(r&quot;c&#39;1( d&#39;2 r2 e&#39;2 f&#39;2) g&#39;1( a&#39;1&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; auxjad.mutate.reposition_slurs(</span>
+<span class="sd">        ...     staff[:],</span>
+<span class="sd">        ...     close_unterminated_final_slur=False,</span>
+<span class="sd">        ... )</span>
+<span class="sd">        &gt;&gt;&gt; abjad.show(staff)</span>
+
+<span class="sd">        ..  docs::</span>
+
+<span class="sd">            \new Staff</span>
+<span class="sd">            {</span>
+<span class="sd">                c&#39;1</span>
+<span class="sd">                (</span>
+<span class="sd">                d&#39;2</span>
+<span class="sd">                )</span>
+<span class="sd">                r2</span>
+<span class="sd">                e&#39;2</span>
+<span class="sd">                (</span>
+<span class="sd">                f&#39;2</span>
+<span class="sd">                )</span>
+<span class="sd">                g&#39;1</span>
+<span class="sd">                (</span>
+<span class="sd">                a&#39;1</span>
+<span class="sd">            }</span>
+
+<span class="sd">        ..  figure:: ../_images/reposition_slurs-1usa2dezl45.png</span>
+
+<span class="sd">        When there are no pitched leaves left after an unterminated open slur,</span>
+<span class="sd">        it is removed.</span>
+
+<span class="sd">        &gt;&gt;&gt; staff = abjad.Staff(r&quot;c&#39;1( d&#39;2 r2 e&#39;2 f&#39;2) g&#39;1( r1&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; auxjad.mutate.reposition_slurs(staff[:])</span>
+<span class="sd">        &gt;&gt;&gt; abjad.show(staff)</span>
+
+<span class="sd">        ..  docs::</span>
+
+<span class="sd">            \new Staff</span>
+<span class="sd">            {</span>
+<span class="sd">                c&#39;1</span>
+<span class="sd">                (</span>
+<span class="sd">                d&#39;2</span>
+<span class="sd">                )</span>
+<span class="sd">                r2</span>
+<span class="sd">                e&#39;2</span>
+<span class="sd">                (</span>
+<span class="sd">                f&#39;2</span>
+<span class="sd">                )</span>
+<span class="sd">                g&#39;1</span>
+<span class="sd">                r1</span>
+<span class="sd">            }</span>
+
+<span class="sd">        ..  figure:: ../_images/reposition_slurs-a0uakfcltuf.png</span>
+
+<span class="sd">    ..  note::</span>
+
+<span class="sd">        Duplicate slur starts or stops are removed. Note that the score output</span>
+<span class="sd">        will not change, as LilyPond also ignores duplicate slurs, but the</span>
+<span class="sd">        output in the ``.ly`` file will be cleaner.</span>
+
+<span class="sd">        &gt;&gt;&gt; staff = abjad.Staff(r&quot;c&#39;1( d&#39;2) e&#39;2) f&#39;2( g&#39;2( a&#39;1)&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; auxjad.mutate.reposition_slurs(staff[:])</span>
+<span class="sd">        &gt;&gt;&gt; abjad.show(staff)</span>
+
+<span class="sd">        ..  docs::</span>
+
+<span class="sd">            \new Staff</span>
+<span class="sd">            {</span>
+<span class="sd">                c&#39;1</span>
+<span class="sd">                (</span>
+<span class="sd">                d&#39;2</span>
+<span class="sd">                )</span>
+<span class="sd">                e&#39;2</span>
+<span class="sd">                f&#39;2</span>
+<span class="sd">                (</span>
+<span class="sd">                g&#39;2</span>
+<span class="sd">                a&#39;1</span>
+<span class="sd">                )</span>
+<span class="sd">            }</span>
+
+<span class="sd">        ..  figure:: ../_images/reposition_slurs-0ugn322x3tr.png</span>
+
+<span class="sd">    ..  warning::</span>
+
+<span class="sd">        The input selection must be a contiguous logical voice. When dealing</span>
+<span class="sd">        with a container with multiple subcontainers (e.g. a score containing</span>
+<span class="sd">        multiple staves), the best approach is to cycle through these</span>
+<span class="sd">        subcontainers, applying this function to them individually.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">selection</span><span class="p">,</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Selection</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;argument must be &#39;abjad.Container&#39; or child class&quot;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">selection</span><span class="o">.</span><span class="n">leaves</span><span class="p">()</span><span class="o">.</span><span class="n">are_contiguous_logical_voice</span><span class="p">():</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;argument must be contiguous logical voice&quot;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">allow_slurs_under_rests</span><span class="p">,</span> <span class="nb">bool</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;&#39;allow_slurs_under_rests&#39; must be &#39;bool&#39;&quot;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">close_unterminated_final_slur</span><span class="p">,</span> <span class="nb">bool</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;&#39;close_unterminated_final_slur&#39; must be &#39;bool&#39;&quot;</span><span class="p">)</span>
+
+    <span class="n">leaves</span> <span class="o">=</span> <span class="n">selection</span><span class="o">.</span><span class="n">leaves</span><span class="p">()</span>
+
+    <span class="c1"># checking for final unfinished slurs</span>
+    <span class="k">if</span> <span class="n">close_unterminated_final_slur</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">leaf</span> <span class="ow">in</span> <span class="n">leaves</span><span class="p">[::</span><span class="o">-</span><span class="mi">1</span><span class="p">]:</span>
+            <span class="k">if</span> <span class="n">abjad</span><span class="o">.</span><span class="n">get</span><span class="o">.</span><span class="n">indicator</span><span class="p">(</span><span class="n">leaf</span><span class="p">,</span> <span class="n">abjad</span><span class="o">.</span><span class="n">StartSlur</span><span class="p">)</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">leaf</span> <span class="ow">is</span> <span class="n">leaves</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]:</span>
+                    <span class="n">abjad</span><span class="o">.</span><span class="n">detach</span><span class="p">(</span><span class="n">abjad</span><span class="o">.</span><span class="n">StartSlur</span><span class="p">(),</span> <span class="n">leaf</span><span class="p">)</span>
+                <span class="k">elif</span> <span class="p">(</span><span class="n">abjad</span><span class="o">.</span><span class="n">get</span><span class="o">.</span><span class="n">indicator</span><span class="p">(</span><span class="n">leaves</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">abjad</span><span class="o">.</span><span class="n">StopSlur</span><span class="p">)</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">):</span>
+                    <span class="n">abjad</span><span class="o">.</span><span class="n">attach</span><span class="p">(</span><span class="n">abjad</span><span class="o">.</span><span class="n">StopSlur</span><span class="p">(),</span> <span class="n">leaves</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+            <span class="k">if</span> <span class="n">abjad</span><span class="o">.</span><span class="n">get</span><span class="o">.</span><span class="n">indicator</span><span class="p">(</span><span class="n">leaf</span><span class="p">,</span> <span class="n">abjad</span><span class="o">.</span><span class="n">StopSlur</span><span class="p">)</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="k">break</span>
+
+    <span class="c1"># checking for duplicate open or close slurs</span>
+    <span class="n">start_slur_count</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">stop_slur_count</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">for</span> <span class="n">leaf</span> <span class="ow">in</span> <span class="n">leaves</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">abjad</span><span class="o">.</span><span class="n">get</span><span class="o">.</span><span class="n">indicator</span><span class="p">(</span><span class="n">leaf</span><span class="p">,</span> <span class="n">abjad</span><span class="o">.</span><span class="n">StartSlur</span><span class="p">)</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">start_slur_count</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="n">stop_slur_count</span> <span class="o">=</span> <span class="mi">0</span>
+            <span class="k">if</span> <span class="n">start_slur_count</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="n">abjad</span><span class="o">.</span><span class="n">detach</span><span class="p">(</span><span class="n">abjad</span><span class="o">.</span><span class="n">StartSlur</span><span class="p">(),</span> <span class="n">leaf</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">abjad</span><span class="o">.</span><span class="n">get</span><span class="o">.</span><span class="n">indicator</span><span class="p">(</span><span class="n">leaf</span><span class="p">,</span> <span class="n">abjad</span><span class="o">.</span><span class="n">StopSlur</span><span class="p">)</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">stop_slur_count</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="n">start_slur_count</span> <span class="o">=</span> <span class="mi">0</span>
+            <span class="k">if</span> <span class="n">stop_slur_count</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="n">abjad</span><span class="o">.</span><span class="n">detach</span><span class="p">(</span><span class="n">abjad</span><span class="o">.</span><span class="n">StopSlur</span><span class="p">(),</span> <span class="n">leaf</span><span class="p">)</span>
+
+    <span class="c1"># shifting slurs from rests to notes</span>
+    <span class="n">shifted_startslur</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="k">for</span> <span class="n">leaf</span> <span class="ow">in</span> <span class="n">leaves</span><span class="p">:</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">leaf</span><span class="p">,</span> <span class="p">(</span><span class="n">abjad</span><span class="o">.</span><span class="n">Rest</span><span class="p">,</span> <span class="n">abjad</span><span class="o">.</span><span class="n">MultimeasureRest</span><span class="p">)):</span>
+            <span class="k">if</span> <span class="n">abjad</span><span class="o">.</span><span class="n">get</span><span class="o">.</span><span class="n">indicator</span><span class="p">(</span><span class="n">leaf</span><span class="p">,</span> <span class="n">abjad</span><span class="o">.</span><span class="n">StartSlur</span><span class="p">)</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="n">shifted_startslur</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">get</span><span class="o">.</span><span class="n">indicator</span><span class="p">(</span><span class="n">leaf</span><span class="p">,</span> <span class="n">abjad</span><span class="o">.</span><span class="n">StartSlur</span><span class="p">)</span>
+                <span class="n">abjad</span><span class="o">.</span><span class="n">detach</span><span class="p">(</span><span class="n">abjad</span><span class="o">.</span><span class="n">StartSlur</span><span class="p">,</span> <span class="n">leaf</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">abjad</span><span class="o">.</span><span class="n">get</span><span class="o">.</span><span class="n">indicator</span><span class="p">(</span><span class="n">leaf</span><span class="p">,</span> <span class="n">abjad</span><span class="o">.</span><span class="n">StartSlur</span><span class="p">)</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">shifted_startslur</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                    <span class="n">abjad</span><span class="o">.</span><span class="n">attach</span><span class="p">(</span><span class="n">shifted_startslur</span><span class="p">,</span> <span class="n">leaf</span><span class="p">)</span>
+                    <span class="n">shifted_startslur</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="n">shifted_stopslur</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="k">for</span> <span class="n">leaf</span> <span class="ow">in</span> <span class="n">leaves</span><span class="p">[::</span><span class="o">-</span><span class="mi">1</span><span class="p">]:</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">leaf</span><span class="p">,</span> <span class="p">(</span><span class="n">abjad</span><span class="o">.</span><span class="n">Rest</span><span class="p">,</span> <span class="n">abjad</span><span class="o">.</span><span class="n">MultimeasureRest</span><span class="p">)):</span>
+            <span class="k">if</span> <span class="n">abjad</span><span class="o">.</span><span class="n">get</span><span class="o">.</span><span class="n">indicator</span><span class="p">(</span><span class="n">leaf</span><span class="p">,</span> <span class="n">abjad</span><span class="o">.</span><span class="n">StopSlur</span><span class="p">)</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="n">shifted_stopslur</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">get</span><span class="o">.</span><span class="n">indicator</span><span class="p">(</span><span class="n">leaf</span><span class="p">,</span> <span class="n">abjad</span><span class="o">.</span><span class="n">StopSlur</span><span class="p">)</span>
+                <span class="n">abjad</span><span class="o">.</span><span class="n">detach</span><span class="p">(</span><span class="n">abjad</span><span class="o">.</span><span class="n">StopSlur</span><span class="p">,</span> <span class="n">leaf</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">abjad</span><span class="o">.</span><span class="n">get</span><span class="o">.</span><span class="n">indicator</span><span class="p">(</span><span class="n">leaf</span><span class="p">,</span> <span class="n">abjad</span><span class="o">.</span><span class="n">StopSlur</span><span class="p">)</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">shifted_stopslur</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                    <span class="n">abjad</span><span class="o">.</span><span class="n">attach</span><span class="p">(</span><span class="n">shifted_stopslur</span><span class="p">,</span> <span class="n">leaf</span><span class="p">)</span>
+                    <span class="n">shifted_stopslur</span> <span class="o">=</span> <span class="kc">None</span>
+
+    <span class="c1"># splitting slurs under rests</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">allow_slurs_under_rests</span><span class="p">:</span>
+        <span class="n">active_slur</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="k">for</span> <span class="n">index</span><span class="p">,</span> <span class="n">leaf</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">leaves</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">abjad</span><span class="o">.</span><span class="n">get</span><span class="o">.</span><span class="n">indicator</span><span class="p">(</span><span class="n">leaf</span><span class="p">,</span> <span class="n">abjad</span><span class="o">.</span><span class="n">StartSlur</span><span class="p">)</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="n">active_slur</span> <span class="o">=</span> <span class="kc">True</span>
+            <span class="k">elif</span> <span class="n">abjad</span><span class="o">.</span><span class="n">get</span><span class="o">.</span><span class="n">indicator</span><span class="p">(</span><span class="n">leaf</span><span class="p">,</span> <span class="n">abjad</span><span class="o">.</span><span class="n">StopSlur</span><span class="p">)</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="k">if</span> <span class="ow">not</span> <span class="n">active_slur</span><span class="p">:</span>
+                    <span class="n">abjad</span><span class="o">.</span><span class="n">detach</span><span class="p">(</span><span class="n">abjad</span><span class="o">.</span><span class="n">StopSlur</span><span class="p">,</span> <span class="n">leaf</span><span class="p">)</span>
+                <span class="n">active_slur</span> <span class="o">=</span> <span class="kc">False</span>
+            <span class="k">if</span> <span class="p">(</span><span class="nb">isinstance</span><span class="p">(</span><span class="n">leaf</span><span class="p">,</span> <span class="p">(</span><span class="n">abjad</span><span class="o">.</span><span class="n">Rest</span><span class="p">,</span> <span class="n">abjad</span><span class="o">.</span><span class="n">MultimeasureRest</span><span class="p">))</span>
+                    <span class="ow">and</span> <span class="n">active_slur</span><span class="p">):</span>
+                <span class="n">previous_leaf</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="n">leaf</span><span class="p">)</span><span class="o">.</span><span class="n">with_previous_leaf</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span>
+                <span class="k">if</span> <span class="p">(</span><span class="n">abjad</span><span class="o">.</span><span class="n">get</span><span class="o">.</span><span class="n">indicator</span><span class="p">(</span><span class="n">previous_leaf</span><span class="p">,</span> <span class="n">abjad</span><span class="o">.</span><span class="n">StopSlur</span><span class="p">)</span>
+                        <span class="ow">is</span> <span class="kc">None</span><span class="p">):</span>
+                    <span class="n">abjad</span><span class="o">.</span><span class="n">attach</span><span class="p">(</span><span class="n">abjad</span><span class="o">.</span><span class="n">StopSlur</span><span class="p">(),</span> <span class="n">previous_leaf</span><span class="p">)</span>
+                <span class="k">for</span> <span class="n">next_leaf</span> <span class="ow">in</span> <span class="n">leaves</span><span class="p">[</span><span class="n">index</span> <span class="o">+</span> <span class="mi">1</span><span class="p">:]:</span>
+                    <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">next_leaf</span><span class="p">,</span> <span class="p">(</span><span class="n">abjad</span><span class="o">.</span><span class="n">Rest</span><span class="p">,</span>
+                                                  <span class="n">abjad</span><span class="o">.</span><span class="n">MultimeasureRest</span><span class="p">,</span>
+                                                  <span class="p">)):</span>
+                        <span class="k">if</span> <span class="p">(</span><span class="n">abjad</span><span class="o">.</span><span class="n">get</span><span class="o">.</span><span class="n">indicator</span><span class="p">(</span><span class="n">next_leaf</span><span class="p">,</span> <span class="n">abjad</span><span class="o">.</span><span class="n">StartSlur</span><span class="p">)</span>
+                                <span class="ow">is</span> <span class="kc">None</span><span class="p">):</span>
+                            <span class="n">abjad</span><span class="o">.</span><span class="n">attach</span><span class="p">(</span><span class="n">abjad</span><span class="o">.</span><span class="n">StartSlur</span><span class="p">(),</span> <span class="n">next_leaf</span><span class="p">)</span>
+                        <span class="k">break</span>
+        <span class="k">for</span> <span class="n">leaf</span> <span class="ow">in</span> <span class="n">leaves</span><span class="p">:</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">abjad</span><span class="o">.</span><span class="n">get</span><span class="o">.</span><span class="n">indicator</span><span class="p">(</span><span class="n">leaf</span><span class="p">,</span> <span class="n">abjad</span><span class="o">.</span><span class="n">StartSlur</span><span class="p">)</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span>
+                    <span class="ow">and</span> <span class="n">abjad</span><span class="o">.</span><span class="n">get</span><span class="o">.</span><span class="n">indicator</span><span class="p">(</span><span class="n">leaf</span><span class="p">,</span> <span class="n">abjad</span><span class="o">.</span><span class="n">StopSlur</span><span class="p">)</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">):</span>
+                <span class="n">abjad</span><span class="o">.</span><span class="n">detach</span><span class="p">(</span><span class="n">abjad</span><span class="o">.</span><span class="n">StartSlur</span><span class="p">,</span> <span class="n">leaf</span><span class="p">)</span>
+                <span class="n">abjad</span><span class="o">.</span><span class="n">detach</span><span class="p">(</span><span class="n">abjad</span><span class="o">.</span><span class="n">StopSlur</span><span class="p">,</span> <span class="n">leaf</span><span class="p">)</span>
+
+    <span class="c1"># removing slurs spanning a single logical tie</span>
+    <span class="k">for</span> <span class="n">logical_tie</span> <span class="ow">in</span> <span class="n">selection</span><span class="o">.</span><span class="n">logical_ties</span><span class="p">():</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">abjad</span><span class="o">.</span><span class="n">get</span><span class="o">.</span><span class="n">indicator</span><span class="p">(</span><span class="n">logical_tie</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">abjad</span><span class="o">.</span><span class="n">StartSlur</span><span class="p">)</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span>
+                <span class="ow">and</span> <span class="n">abjad</span><span class="o">.</span><span class="n">get</span><span class="o">.</span><span class="n">indicator</span><span class="p">(</span><span class="n">logical_tie</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">abjad</span><span class="o">.</span><span class="n">StopSlur</span><span class="p">)</span>
+                <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">):</span>
+            <span class="n">abjad</span><span class="o">.</span><span class="n">detach</span><span class="p">(</span><span class="n">abjad</span><span class="o">.</span><span class="n">StartSlur</span><span class="p">,</span> <span class="n">logical_tie</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+            <span class="n">abjad</span><span class="o">.</span><span class="n">detach</span><span class="p">(</span><span class="n">abjad</span><span class="o">.</span><span class="n">StopSlur</span><span class="p">,</span> <span class="n">logical_tie</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span></div>
+</pre></div>
+
+           </div>
+           
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2020, Gilberto Agostinho.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

@@ -1,0 +1,1202 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>auxjad.mutate.prettify_rewrite_meter &mdash; auxjad 0.8.25 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+        <script src="../../../_static/jquery.js"></script>
+        <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/doctools.js"></script>
+    
+    <script type="text/javascript" src="../../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../../index.html" class="icon icon-home"> auxjad
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.8
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../index.html">Welcome to Auxjad’s documentation!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../examples/index.html">Examples of usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../score_gallery/index.html">Score gallery</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../api/index.html">Auxjad API</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">auxjad</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../../index.html">Module code</a> &raquo;</li>
+        
+      <li>auxjad.mutate.prettify_rewrite_meter</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for auxjad.mutate.prettify_rewrite_meter</h1><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Union</span>
+
+<span class="kn">import</span> <span class="nn">abjad</span>
+
+<span class="kn">from</span> <span class="nn">.extract_trivial_tuplets</span> <span class="kn">import</span> <span class="p">(</span>
+    <span class="n">extract_trivial_tuplets</span> <span class="k">as</span> <span class="n">extract_trivial_tuplets_function</span><span class="p">,</span>
+<span class="p">)</span>
+
+
+<div class="viewcode-block" id="prettify_rewrite_meter"><a class="viewcode-back" href="../../../_api_members/auxjad.mutate.prettify_rewrite_meter.html#auxjad.mutate.prettify_rewrite_meter">[docs]</a><span class="k">def</span> <span class="nf">prettify_rewrite_meter</span><span class="p">(</span><span class="n">selection</span><span class="p">:</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Selection</span><span class="p">,</span>
+                           <span class="n">meter</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">abjad</span><span class="o">.</span><span class="n">Meter</span><span class="p">,</span> <span class="n">abjad</span><span class="o">.</span><span class="n">TimeSignature</span><span class="p">],</span>
+                           <span class="o">*</span><span class="p">,</span>
+                           <span class="n">fuse_across_groups_of_beats</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+                           <span class="n">fuse_quadruple_meter</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+                           <span class="n">fuse_triple_meter</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+                           <span class="n">extract_trivial_tuplets</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+                           <span class="n">split_quadruple_meter</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+                           <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="sa">r</span><span class="sd">&quot;&quot;&quot;Mutates an input |abjad.Selection| in place and has no return value;</span>
+<span class="sd">    this function fuses pitched leaves according to the rules shown below,</span>
+<span class="sd">    improving the default output of |abjad.Meter.rewrite_meter()|.</span>
+
+<span class="sd">    Basic usage:</span>
+<span class="sd">        Meters whose denominators are a crotchet or longer get tied notes</span>
+<span class="sd">        within a beat after |abjad.Meter.rewrite_meter()| when they are at</span>
+<span class="sd">        an offset ``denominator / 4``, so a rhythm such as  ``denominator / 4``</span>
+<span class="sd">        ``denominator / 2`` ``denominator / 4`` becomes ``denominator / 4``</span>
+<span class="sd">        ``denominator / 4`` ``~`` ``denominator / 4`` ``denominator / 4``. This</span>
+<span class="sd">        function looks for those specific cases and fuses them, generating an</span>
+<span class="sd">        output which is often more readable.</span>
+
+<span class="sd">        &gt;&gt;&gt; staff = abjad.Staff(</span>
+<span class="sd">        ...     r&quot;\time 3/4 c&#39;16 d&#39;8 e&#39;16 f&#39;16 g&#39;16 a&#39;8 b&#39;8 c&#39;&#39;16 d&#39;&#39;16&quot;</span>
+<span class="sd">        ... )</span>
+<span class="sd">        &gt;&gt;&gt; meter = abjad.Meter((3, 4))</span>
+<span class="sd">        &gt;&gt;&gt; abjad.mutate.rewrite_meter(staff[:], meter)</span>
+<span class="sd">        &gt;&gt;&gt; abjad.show(staff)</span>
+
+<span class="sd">        ..  docs::</span>
+
+<span class="sd">            \new Staff</span>
+<span class="sd">            {</span>
+<span class="sd">                \time 3/4</span>
+<span class="sd">                c&#39;16</span>
+<span class="sd">                d&#39;16</span>
+<span class="sd">                ~</span>
+<span class="sd">                d&#39;16</span>
+<span class="sd">                e&#39;16</span>
+<span class="sd">                f&#39;16</span>
+<span class="sd">                g&#39;16</span>
+<span class="sd">                a&#39;8</span>
+<span class="sd">                b&#39;8</span>
+<span class="sd">                c&#39;&#39;16</span>
+<span class="sd">                d&#39;&#39;16</span>
+<span class="sd">            }</span>
+
+<span class="sd">        ..  figure:: ../_images/prettify_rewrite_meter-vlnd7l5fb7s.png</span>
+
+<span class="sd">        &gt;&gt;&gt; auxjad.mutate.prettify_rewrite_meter(staff[:], meter)</span>
+<span class="sd">        &gt;&gt;&gt; abjad.show(staff)</span>
+
+<span class="sd">        ..  docs::</span>
+
+<span class="sd">            \new Staff</span>
+<span class="sd">            {</span>
+<span class="sd">                \time 3/4</span>
+<span class="sd">                c&#39;16</span>
+<span class="sd">                d&#39;8</span>
+<span class="sd">                e&#39;16</span>
+<span class="sd">                f&#39;16</span>
+<span class="sd">                g&#39;16</span>
+<span class="sd">                a&#39;8</span>
+<span class="sd">                b&#39;8</span>
+<span class="sd">                c&#39;&#39;16</span>
+<span class="sd">                d&#39;&#39;16</span>
+<span class="sd">            }</span>
+
+<span class="sd">        ..  figure:: ../_images/prettify_rewrite_meter-e7vfnese0ut.png</span>
+
+<span class="sd">    ..  note::</span>
+
+<span class="sd">        Auxjad automatically adds this function as an extension function to</span>
+<span class="sd">        |abjad.mutate|. It can thus be used from either |auxjad.mutate|_ or</span>
+<span class="sd">        |abjad.mutate| namespaces. Therefore, the two lines below are</span>
+<span class="sd">        equivalent:</span>
+
+<span class="sd">        &gt;&gt;&gt; auxjad.mutate.prettify_rewrite_meter(staff[:], meter)</span>
+<span class="sd">        &gt;&gt;&gt; abjad.mutate.prettify_rewrite_meter(staff[:], meter)</span>
+
+<span class="sd">    Other examples:</span>
+<span class="sd">        The rhythm of the leaves just before and after the two leaves to be</span>
+<span class="sd">        fused can be different than ``denominator / 4``, as the function</span>
+<span class="sd">        searches for logical ties of specific length and offset, and its</span>
+<span class="sd">        surroundings do not matter.</span>
+
+<span class="sd">        &gt;&gt;&gt; staff = abjad.Staff(r&quot;\time 3/4 c&#39;32 d&#39;32 e&#39;8 f&#39;16 &quot;</span>
+<span class="sd">        ...                     r&quot;\times 2/3 {g&#39;32 a&#39;32 b&#39;32} c&#39;&#39;8 &quot;</span>
+<span class="sd">        ...                     r&quot;r16 r32. d&#39;&#39;64 e&#39;&#39;8 f&#39;&#39;32 g&#39;&#39;32&quot;</span>
+<span class="sd">        ...                     )</span>
+<span class="sd">        &gt;&gt;&gt; meter = abjad.Meter((3, 4))</span>
+<span class="sd">        &gt;&gt;&gt; abjad.mutate.rewrite_meter(staff[:], meter)</span>
+<span class="sd">        &gt;&gt;&gt; abjad.show(staff)</span>
+
+<span class="sd">        ..  docs::</span>
+
+<span class="sd">            \new Staff</span>
+<span class="sd">            {</span>
+<span class="sd">                \time 3/4</span>
+<span class="sd">                c&#39;32</span>
+<span class="sd">                d&#39;32</span>
+<span class="sd">                e&#39;16</span>
+<span class="sd">                ~</span>
+<span class="sd">                e&#39;16</span>
+<span class="sd">                f&#39;16</span>
+<span class="sd">                \times 2/3</span>
+<span class="sd">                {</span>
+<span class="sd">                    g&#39;32</span>
+<span class="sd">                    a&#39;32</span>
+<span class="sd">                    b&#39;32</span>
+<span class="sd">                }</span>
+<span class="sd">                c&#39;&#39;16</span>
+<span class="sd">                ~</span>
+<span class="sd">                c&#39;&#39;16</span>
+<span class="sd">                r16</span>
+<span class="sd">                r32.</span>
+<span class="sd">                d&#39;&#39;64</span>
+<span class="sd">                e&#39;&#39;16</span>
+<span class="sd">                ~</span>
+<span class="sd">                e&#39;&#39;16</span>
+<span class="sd">                f&#39;&#39;32</span>
+<span class="sd">                g&#39;&#39;32</span>
+<span class="sd">            }</span>
+
+<span class="sd">        ..  figure:: ../_images/prettify_rewrite_meter-kw09gse2zxj.png</span>
+
+<span class="sd">        &gt;&gt;&gt; auxjad.mutate.prettify_rewrite_meter(staff[:], meter)</span>
+<span class="sd">        &gt;&gt;&gt; abjad.show(staff)</span>
+
+<span class="sd">        ..  docs::</span>
+
+<span class="sd">            \new Staff</span>
+<span class="sd">            {</span>
+<span class="sd">                \time 3/4</span>
+<span class="sd">                c&#39;32</span>
+<span class="sd">                d&#39;32</span>
+<span class="sd">                e&#39;8</span>
+<span class="sd">                f&#39;16</span>
+<span class="sd">                \times 2/3</span>
+<span class="sd">                {</span>
+<span class="sd">                    g&#39;32</span>
+<span class="sd">                    a&#39;32</span>
+<span class="sd">                    b&#39;32</span>
+<span class="sd">                }</span>
+<span class="sd">                c&#39;&#39;8</span>
+<span class="sd">                r16</span>
+<span class="sd">                r32.</span>
+<span class="sd">                d&#39;&#39;64</span>
+<span class="sd">                e&#39;&#39;8</span>
+<span class="sd">                f&#39;&#39;32</span>
+<span class="sd">                g&#39;&#39;32</span>
+<span class="sd">            }</span>
+
+<span class="sd">        ..  figure:: ../_images/prettify_rewrite_meter-u5gmtdippsa.png</span>
+
+<span class="sd">    ``fuse_across_groups_of_beats``:</span>
+<span class="sd">        By default, this function also fuses rhythms of type</span>
+<span class="sd">        ``denominator / 2`` ``denominator / 2`` ``~`` ``denominator / 2``</span>
+<span class="sd">        ``denominator / 2``, becoming ``denominator / 2`` ``denominator``</span>
+<span class="sd">        ``denominator / 2``. This is only applied when the meter&#39;s structure</span>
+<span class="sd">        has a depth of 2, which is the case for meters with numerators equal to</span>
+<span class="sd">        or larger than ``5``.</span>
+
+<span class="sd">        &gt;&gt;&gt; staff = abjad.Staff(r&quot;\time 6/4 c&#39;8 d&#39;4 e&#39;4 f&#39;4 g&#39;4 a&#39;4 b&#39;8&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; meter = abjad.Meter((6, 4))</span>
+<span class="sd">        &gt;&gt;&gt; abjad.mutate.rewrite_meter(staff[:], meter)</span>
+<span class="sd">        &gt;&gt;&gt; abjad.show(staff)</span>
+
+<span class="sd">        ..  docs::</span>
+
+<span class="sd">            \new Staff</span>
+<span class="sd">            {</span>
+<span class="sd">                \time 6/4</span>
+<span class="sd">                c&#39;8</span>
+<span class="sd">                d&#39;8</span>
+<span class="sd">                ~</span>
+<span class="sd">                d&#39;8</span>
+<span class="sd">                e&#39;8</span>
+<span class="sd">                ~</span>
+<span class="sd">                e&#39;8</span>
+<span class="sd">                f&#39;8</span>
+<span class="sd">                ~</span>
+<span class="sd">                f&#39;8</span>
+<span class="sd">                g&#39;8</span>
+<span class="sd">                ~</span>
+<span class="sd">                g&#39;8</span>
+<span class="sd">                a&#39;8</span>
+<span class="sd">                ~</span>
+<span class="sd">                a&#39;8</span>
+<span class="sd">                b&#39;8</span>
+<span class="sd">            }</span>
+
+<span class="sd">        ..  figure:: ../_images/prettify_rewrite_meter-tqi4p0u8qog.png</span>
+
+<span class="sd">        &gt;&gt;&gt; auxjad.mutate.prettify_rewrite_meter(staff[:], meter)</span>
+<span class="sd">        &gt;&gt;&gt; abjad.show(staff)</span>
+
+<span class="sd">        ..  docs::</span>
+
+<span class="sd">            \new Staff</span>
+<span class="sd">            {</span>
+<span class="sd">                \time 6/4</span>
+<span class="sd">                c&#39;8</span>
+<span class="sd">                d&#39;4</span>
+<span class="sd">                e&#39;4</span>
+<span class="sd">                f&#39;8</span>
+<span class="sd">                ~</span>
+<span class="sd">                f&#39;8</span>
+<span class="sd">                g&#39;4</span>
+<span class="sd">                a&#39;4</span>
+<span class="sd">                b&#39;8</span>
+<span class="sd">            }</span>
+
+<span class="sd">        ..  figure:: ../_images/prettify_rewrite_meter-riif1glyqpo.png</span>
+
+<span class="sd">        to disable this behaviour, set the optional keyword argument</span>
+<span class="sd">        ``fuse_across_groups_of_beats`` to ``False``.</span>
+
+<span class="sd">        &gt;&gt;&gt; staff = abjad.Staff(r&quot;\time 6/4 c&#39;8 d&#39;4 e&#39;4 f&#39;4 g&#39;4 a&#39;4 b&#39;8&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; meter = abjad.Meter((6, 4))</span>
+<span class="sd">        &gt;&gt;&gt; abjad.mutate.rewrite_meter(staff[:], meter)</span>
+<span class="sd">        &gt;&gt;&gt; auxjad.mutate.prettify_rewrite_meter(</span>
+<span class="sd">        ...     staff[:],</span>
+<span class="sd">        ...     meter,</span>
+<span class="sd">        ...     fuse_across_groups_of_beats=False,</span>
+<span class="sd">        ... )</span>
+<span class="sd">        &gt;&gt;&gt; abjad.show(staff)</span>
+
+<span class="sd">        ..  docs::</span>
+
+<span class="sd">            \new Staff</span>
+<span class="sd">            {</span>
+<span class="sd">                \time 6/4</span>
+<span class="sd">                c&#39;8</span>
+<span class="sd">                d&#39;8</span>
+<span class="sd">                ~</span>
+<span class="sd">                d&#39;8</span>
+<span class="sd">                e&#39;8</span>
+<span class="sd">                ~</span>
+<span class="sd">                e&#39;8</span>
+<span class="sd">                f&#39;8</span>
+<span class="sd">                ~</span>
+<span class="sd">                f&#39;8</span>
+<span class="sd">                g&#39;8</span>
+<span class="sd">                ~</span>
+<span class="sd">                g&#39;8</span>
+<span class="sd">                a&#39;8</span>
+<span class="sd">                ~</span>
+<span class="sd">                a&#39;8</span>
+<span class="sd">                b&#39;8</span>
+<span class="sd">            }</span>
+
+<span class="sd">        ..  figure:: ../_images/prettify_rewrite_meter-ki5xbiteij.png</span>
+
+<span class="sd">    |abjad.Meter| with ``increase_monotonic=True``:</span>
+<span class="sd">        The fused notes will respect the beat structures of such meters, even</span>
+<span class="sd">        when ``increase_monotonic`` is set to the non-default value ``True``.</span>
+<span class="sd">        Compare the outputs below.</span>
+
+<span class="sd">        &gt;&gt;&gt; staff = abjad.Staff(r&quot;\time 7/4 c&#39;8 d&#39;4 e&#39;4 f&#39;4 g&#39;4 a&#39;4 b&#39;4 c&#39;&#39;8&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; meter = abjad.Meter((7, 4))</span>
+<span class="sd">        &gt;&gt;&gt; abjad.mutate.rewrite_meter(staff[:], meter)</span>
+<span class="sd">        &gt;&gt;&gt; auxjad.mutate.prettify_rewrite_meter(staff[:], meter)</span>
+<span class="sd">        &gt;&gt;&gt; abjad.show(staff)</span>
+
+<span class="sd">        ..  docs::</span>
+
+<span class="sd">            \new Staff</span>
+<span class="sd">            {</span>
+<span class="sd">                \time 7/4</span>
+<span class="sd">                c&#39;8</span>
+<span class="sd">                d&#39;4</span>
+<span class="sd">                e&#39;4</span>
+<span class="sd">                f&#39;8</span>
+<span class="sd">                ~</span>
+<span class="sd">                f&#39;8</span>
+<span class="sd">                g&#39;4</span>
+<span class="sd">                a&#39;8</span>
+<span class="sd">                ~</span>
+<span class="sd">                a&#39;8</span>
+<span class="sd">                b&#39;4</span>
+<span class="sd">                c&#39;&#39;8</span>
+<span class="sd">            }</span>
+
+<span class="sd">        ..  figure:: ../_images/prettify_rewrite_meter-bud0jhkvvl.png</span>
+
+<span class="sd">        &gt;&gt;&gt; staff = abjad.Staff(r&quot;\time 7/4 c&#39;8 d&#39;4 e&#39;4 f&#39;4 g&#39;4 a&#39;4 b&#39;4 c&#39;&#39;8&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; meter = abjad.Meter((7, 4), increase_monotonic=True)</span>
+<span class="sd">        &gt;&gt;&gt; abjad.mutate.rewrite_meter(staff[:], meter)</span>
+<span class="sd">        &gt;&gt;&gt; auxjad.mutate.prettify_rewrite_meter(staff[:], meter)</span>
+<span class="sd">        &gt;&gt;&gt; abjad.show(staff)</span>
+
+<span class="sd">        ..  docs::</span>
+
+<span class="sd">            \new Staff</span>
+<span class="sd">            {</span>
+<span class="sd">                \time 7/4</span>
+<span class="sd">                c&#39;8</span>
+<span class="sd">                d&#39;4</span>
+<span class="sd">                e&#39;8</span>
+<span class="sd">                ~</span>
+<span class="sd">                e&#39;8</span>
+<span class="sd">                f&#39;4</span>
+<span class="sd">                g&#39;8</span>
+<span class="sd">                ~</span>
+<span class="sd">                g&#39;8</span>
+<span class="sd">                a&#39;4</span>
+<span class="sd">                b&#39;4</span>
+<span class="sd">                c&#39;&#39;8</span>
+<span class="sd">            }</span>
+
+<span class="sd">        ..  figure:: ../_images/prettify_rewrite_meter-47y86pbwwv5.png</span>
+
+<span class="sd">    Multiple measures at once:</span>
+<span class="sd">        This function can take handle multiple measures at once, as long as</span>
+<span class="sd">        they share the same meter.</span>
+
+<span class="sd">        &gt;&gt;&gt; staff = abjad.Staff(r&quot;\time 5/8 c&#39;16 d&#39;8 e&#39;8 f&#39;8 g&#39;8 a&#39;16 ~ &quot;</span>
+<span class="sd">        ...                     r&quot;a&#39;16 b&#39;8 c&#39;&#39;8 d&#39;&#39;8 e&#39;&#39;8 f&#39;&#39;16&quot;</span>
+<span class="sd">        ...                     )</span>
+<span class="sd">        &gt;&gt;&gt; meter = abjad.Meter((5, 8))</span>
+<span class="sd">        &gt;&gt;&gt; for measure in abjad.select(staff[:]).group_by_measure():</span>
+<span class="sd">        ...     abjad.mutate.rewrite_meter(staff[:], meter)</span>
+<span class="sd">        &gt;&gt;&gt; abjad.show(staff)</span>
+
+<span class="sd">        ..  docs::</span>
+
+<span class="sd">            \new Staff</span>
+<span class="sd">            {</span>
+<span class="sd">                \time 5/8</span>
+<span class="sd">                c&#39;16</span>
+<span class="sd">                d&#39;16</span>
+<span class="sd">                ~</span>
+<span class="sd">                d&#39;16</span>
+<span class="sd">                e&#39;16</span>
+<span class="sd">                ~</span>
+<span class="sd">                e&#39;16</span>
+<span class="sd">                f&#39;16</span>
+<span class="sd">                ~</span>
+<span class="sd">                f&#39;16</span>
+<span class="sd">                g&#39;16</span>
+<span class="sd">                ~</span>
+<span class="sd">                g&#39;16</span>
+<span class="sd">                a&#39;16</span>
+<span class="sd">                ~</span>
+<span class="sd">                a&#39;16</span>
+<span class="sd">                b&#39;16</span>
+<span class="sd">                ~</span>
+<span class="sd">                b&#39;16</span>
+<span class="sd">                c&#39;&#39;16</span>
+<span class="sd">                ~</span>
+<span class="sd">                c&#39;&#39;16</span>
+<span class="sd">                d&#39;&#39;16</span>
+<span class="sd">                ~</span>
+<span class="sd">                d&#39;&#39;16</span>
+<span class="sd">                e&#39;&#39;16</span>
+<span class="sd">                ~</span>
+<span class="sd">                e&#39;&#39;16</span>
+<span class="sd">                f&#39;&#39;16</span>
+<span class="sd">            }</span>
+
+<span class="sd">        ..  figure:: ../_images/prettify_rewrite_meter-8jdzmvf9yl.png</span>
+
+<span class="sd">        &gt;&gt;&gt; auxjad.mutate.prettify_rewrite_meter(staff[:], meter)</span>
+<span class="sd">        &gt;&gt;&gt; abjad.show(staff)</span>
+
+<span class="sd">        ..  docs::</span>
+
+<span class="sd">            \new Staff</span>
+<span class="sd">            {</span>
+<span class="sd">                \time 5/8</span>
+<span class="sd">                c&#39;16</span>
+<span class="sd">                d&#39;8</span>
+<span class="sd">                e&#39;8</span>
+<span class="sd">                f&#39;16</span>
+<span class="sd">                ~</span>
+<span class="sd">                f&#39;16</span>
+<span class="sd">                g&#39;8</span>
+<span class="sd">                a&#39;16</span>
+<span class="sd">                ~</span>
+<span class="sd">                a&#39;16</span>
+<span class="sd">                b&#39;8</span>
+<span class="sd">                c&#39;&#39;8</span>
+<span class="sd">                d&#39;&#39;16</span>
+<span class="sd">                ~</span>
+<span class="sd">                d&#39;&#39;16</span>
+<span class="sd">                e&#39;&#39;8</span>
+<span class="sd">                f&#39;&#39;16</span>
+<span class="sd">            }</span>
+
+<span class="sd">        ..  figure:: ../_images/prettify_rewrite_meter-pcn8x9hr6bb.png</span>
+
+<span class="sd">    Multiple measures:</span>
+<span class="sd">        Similarly to |abjad.Meter.rewrite_meter()|, this function accepts</span>
+<span class="sd">        selections of multiple measures:</span>
+
+<span class="sd">        &gt;&gt;&gt; staff = abjad.Staff(r&quot;\time 4/4 c&#39;8 d&#39;4 e&#39;4 f&#39;4 g&#39;8 | &quot;</span>
+<span class="sd">        ...                     r&quot;a&#39;8 b&#39;4 c&#39;&#39;8 d&#39;&#39;16 e&#39;&#39;4 f&#39;&#39;8.&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; meter = abjad.Meter((4, 4))</span>
+<span class="sd">        &gt;&gt;&gt; for measure in abjad.select(staff[:]).group_by_measure():</span>
+<span class="sd">        ...     abjad.mutate.rewrite_meter(measure, meter)</span>
+<span class="sd">        &gt;&gt;&gt; abjad.show(staff)</span>
+
+<span class="sd">        ..  docs::</span>
+
+<span class="sd">            \new Staff</span>
+<span class="sd">            {</span>
+<span class="sd">                \time 4/4</span>
+<span class="sd">                c&#39;8</span>
+<span class="sd">                d&#39;8</span>
+<span class="sd">                ~</span>
+<span class="sd">                d&#39;8</span>
+<span class="sd">                e&#39;8</span>
+<span class="sd">                ~</span>
+<span class="sd">                e&#39;8</span>
+<span class="sd">                f&#39;8</span>
+<span class="sd">                ~</span>
+<span class="sd">                f&#39;8</span>
+<span class="sd">                g&#39;8</span>
+<span class="sd">                a&#39;8</span>
+<span class="sd">                b&#39;8</span>
+<span class="sd">                ~</span>
+<span class="sd">                b&#39;8</span>
+<span class="sd">                c&#39;&#39;8</span>
+<span class="sd">                d&#39;&#39;16</span>
+<span class="sd">                e&#39;&#39;8.</span>
+<span class="sd">                ~</span>
+<span class="sd">                e&#39;&#39;16</span>
+<span class="sd">                f&#39;&#39;8.</span>
+<span class="sd">            }</span>
+
+<span class="sd">        ..  figure:: ../_images/prettify_rewrite_meter-s8fg7a2k0tr.png</span>
+
+<span class="sd">        &gt;&gt;&gt; for measure in abjad.select(staff[:]).group_by_measure():</span>
+<span class="sd">        ...     auxjad.mutate.prettify_rewrite_meter(measure, meter)</span>
+<span class="sd">        &gt;&gt;&gt; abjad.show(staff)</span>
+
+<span class="sd">        ..  docs::</span>
+
+<span class="sd">            \new Staff</span>
+<span class="sd">            {</span>
+<span class="sd">                \time 4/4</span>
+<span class="sd">                c&#39;8</span>
+<span class="sd">                d&#39;4</span>
+<span class="sd">                e&#39;8</span>
+<span class="sd">                ~</span>
+<span class="sd">                e&#39;8</span>
+<span class="sd">                f&#39;4</span>
+<span class="sd">                g&#39;8</span>
+<span class="sd">                a&#39;8</span>
+<span class="sd">                b&#39;4</span>
+<span class="sd">                c&#39;&#39;8</span>
+<span class="sd">                d&#39;&#39;16</span>
+<span class="sd">                e&#39;&#39;8.</span>
+<span class="sd">                ~</span>
+<span class="sd">                e&#39;&#39;16</span>
+<span class="sd">                f&#39;&#39;8.</span>
+<span class="sd">            }</span>
+
+<span class="sd">        ..  figure:: ../_images/prettify_rewrite_meter-rgd7ok7fkq.png</span>
+
+<span class="sd">    Multiple measures with different meters:</span>
+<span class="sd">        If the measures have different meters, they can be passed on</span>
+<span class="sd">        individually using :func:`zip()` as shown below.</span>
+
+<span class="sd">        &gt;&gt;&gt; staff = abjad.Staff(r&quot;\time 3/4 c&#39;8 d&#39;4 e&#39;4 f&#39;16 g&#39;16 | &quot;</span>
+<span class="sd">        ...                     r&quot;\time 4/4 a&#39;8 b&#39;4 c&#39;&#39;8 d&#39;&#39;16 e&#39;&#39;4 f&#39;&#39;8.&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; meters = [abjad.Meter((3, 4)), abjad.Meter((4, 4))]</span>
+<span class="sd">        &gt;&gt;&gt; for meter, measure in zip(</span>
+<span class="sd">        ...     meters,</span>
+<span class="sd">        ...     abjad.select(staff[:]).group_by_measure(),</span>
+<span class="sd">        ... ):</span>
+<span class="sd">        ...     abjad.mutate.rewrite_meter(measure, meter)</span>
+<span class="sd">        &gt;&gt;&gt; abjad.show(staff)</span>
+
+<span class="sd">        ..  docs::</span>
+
+<span class="sd">            \new Staff</span>
+<span class="sd">            {</span>
+<span class="sd">                \time 3/4</span>
+<span class="sd">                c&#39;8</span>
+<span class="sd">                d&#39;8</span>
+<span class="sd">                ~</span>
+<span class="sd">                d&#39;8</span>
+<span class="sd">                e&#39;8</span>
+<span class="sd">                ~</span>
+<span class="sd">                e&#39;8</span>
+<span class="sd">                f&#39;16</span>
+<span class="sd">                g&#39;16</span>
+<span class="sd">                \time 4/4</span>
+<span class="sd">                a&#39;8</span>
+<span class="sd">                b&#39;8</span>
+<span class="sd">                ~</span>
+<span class="sd">                b&#39;8</span>
+<span class="sd">                c&#39;&#39;8</span>
+<span class="sd">                d&#39;&#39;16</span>
+<span class="sd">                e&#39;&#39;8.</span>
+<span class="sd">                ~</span>
+<span class="sd">                e&#39;&#39;16</span>
+<span class="sd">                f&#39;&#39;8.</span>
+<span class="sd">            }</span>
+
+<span class="sd">        ..  figure:: ../_images/prettify_rewrite_meter-o2izz0m7s9k.png</span>
+
+<span class="sd">        &gt;&gt;&gt; for meter, measure in zip(</span>
+<span class="sd">        ...     meters,</span>
+<span class="sd">        ...     abjad.select(staff[:]).group_by_measure(),</span>
+<span class="sd">        ... ):</span>
+<span class="sd">        ...     auxjad.mutate.prettify_rewrite_meter(measure, meter)</span>
+<span class="sd">        &gt;&gt;&gt; abjad.show(staff)</span>
+
+<span class="sd">        ..  docs::</span>
+
+<span class="sd">            \new Staff</span>
+<span class="sd">            {</span>
+<span class="sd">                \time 3/4</span>
+<span class="sd">                c&#39;8</span>
+<span class="sd">                d&#39;4</span>
+<span class="sd">                e&#39;4</span>
+<span class="sd">                f&#39;16</span>
+<span class="sd">                g&#39;16</span>
+<span class="sd">                \time 4/4</span>
+<span class="sd">                a&#39;8</span>
+<span class="sd">                b&#39;4</span>
+<span class="sd">                c&#39;&#39;8</span>
+<span class="sd">                d&#39;&#39;16</span>
+<span class="sd">                e&#39;&#39;8.</span>
+<span class="sd">                ~</span>
+<span class="sd">                e&#39;&#39;16</span>
+<span class="sd">                f&#39;&#39;8.</span>
+<span class="sd">            }</span>
+
+<span class="sd">        ..  figure:: ../_images/prettify_rewrite_meter-zh89kk66zon.png</span>
+
+<span class="sd">    ``fuse_quadruple_meter``:</span>
+<span class="sd">        This function also takes care of two special cases, namely quadruple</span>
+<span class="sd">        and triple meters. By default, it will fuse leaves in quadruple meters</span>
+<span class="sd">        across beats 1 and 2, and across beats 3 and 4 (as long as they fulfil</span>
+<span class="sd">        the other requirements of duration and offset).</span>
+
+<span class="sd">        &gt;&gt;&gt; staff = abjad.Staff(r&quot;\time 4/4 c&#39;8 d&#39;4 e&#39;4 f&#39;4 g&#39;8&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; meter = abjad.Meter((4, 4))</span>
+<span class="sd">        &gt;&gt;&gt; abjad.mutate.rewrite_meter(staff[:], meter)</span>
+<span class="sd">        &gt;&gt;&gt; auxjad.mutate.prettify_rewrite_meter(staff[:], meter)</span>
+<span class="sd">        &gt;&gt;&gt; abjad.show(staff)</span>
+
+<span class="sd">        ..  docs::</span>
+
+<span class="sd">            \new Staff</span>
+<span class="sd">            {</span>
+<span class="sd">                \time 4/4</span>
+<span class="sd">                c&#39;8</span>
+<span class="sd">                d&#39;4</span>
+<span class="sd">                e&#39;8</span>
+<span class="sd">                ~</span>
+<span class="sd">                e&#39;8</span>
+<span class="sd">                f&#39;4</span>
+<span class="sd">                g&#39;8</span>
+<span class="sd">            }</span>
+
+<span class="sd">        ..  figure:: ../_images/prettify_rewrite_meter-nap4bbf7mxe.png</span>
+
+<span class="sd">        Set ``fuse_quadruple_meter`` to ``False`` to disable this behaviour.</span>
+
+<span class="sd">        &gt;&gt;&gt; staff = abjad.Staff(r&quot;\time 4/4 c&#39;8 d&#39;4 e&#39;4 f&#39;4 g&#39;8&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; meter = abjad.Meter((4, 4))</span>
+<span class="sd">        &gt;&gt;&gt; abjad.mutate.rewrite_meter(staff[:], meter)</span>
+<span class="sd">        &gt;&gt;&gt; auxjad.mutate.prettify_rewrite_meter(</span>
+<span class="sd">        ...     staff[:],</span>
+<span class="sd">        ...     meter,</span>
+<span class="sd">        ...     fuse_quadruple_meter=False,</span>
+<span class="sd">        ... )</span>
+<span class="sd">        &gt;&gt;&gt; abjad.show(staff)</span>
+
+<span class="sd">        ..  docs::</span>
+
+<span class="sd">            \new Staff</span>
+<span class="sd">            {</span>
+<span class="sd">                \time 4/4</span>
+<span class="sd">                c&#39;8</span>
+<span class="sd">                d&#39;8</span>
+<span class="sd">                ~</span>
+<span class="sd">                d&#39;8</span>
+<span class="sd">                e&#39;8</span>
+<span class="sd">                ~</span>
+<span class="sd">                e&#39;8</span>
+<span class="sd">                f&#39;8</span>
+<span class="sd">                ~</span>
+<span class="sd">                f&#39;8</span>
+<span class="sd">                g&#39;8</span>
+<span class="sd">            }</span>
+
+<span class="sd">        ..  figure:: ../_images/prettify_rewrite_meter-juipg9nzna.png</span>
+
+<span class="sd">    ``fuse_triple_meter``:</span>
+<span class="sd">        In the case of triple meters, it will fuse leaves across any beat as</span>
+<span class="sd">        long as the previously mentioned conditions of offset and duration are</span>
+<span class="sd">        met.</span>
+
+<span class="sd">        &gt;&gt;&gt; staff = abjad.Staff(r&quot;\time 3/4 c&#39;8 d&#39;4 e&#39;4 f&#39;8&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; meter = abjad.Meter((3, 4))</span>
+<span class="sd">        &gt;&gt;&gt; abjad.mutate.rewrite_meter(staff[:], meter)</span>
+<span class="sd">        &gt;&gt;&gt; auxjad.mutate.prettify_rewrite_meter(staff[:], meter)</span>
+<span class="sd">        &gt;&gt;&gt; abjad.show(staff)</span>
+
+<span class="sd">        ..  docs::</span>
+
+<span class="sd">            \new Staff</span>
+<span class="sd">            {</span>
+<span class="sd">                \time 3/4</span>
+<span class="sd">                c&#39;8</span>
+<span class="sd">                d&#39;4</span>
+<span class="sd">                e&#39;4</span>
+<span class="sd">                f&#39;8</span>
+<span class="sd">            }</span>
+
+<span class="sd">        ..  figure:: ../_images/prettify_rewrite_meter-4wg3grpb94p.png</span>
+
+<span class="sd">        Similarly to the example before, set ``fuse_triple_meter`` to ``False``</span>
+<span class="sd">        to disable this behaviour.</span>
+
+<span class="sd">        &gt;&gt;&gt; staff = abjad.Staff(r&quot;\time 3/4 c&#39;8 d&#39;4 e&#39;4 f&#39;8&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; meter = abjad.Meter((3, 4))</span>
+<span class="sd">        &gt;&gt;&gt; abjad.mutate.rewrite_meter(staff[:], meter)</span>
+<span class="sd">        &gt;&gt;&gt; auxjad.mutate.prettify_rewrite_meter(</span>
+<span class="sd">        ...     staff[:],</span>
+<span class="sd">        ...     meter,</span>
+<span class="sd">        ...     fuse_triple_meter=False,</span>
+<span class="sd">        ... )</span>
+<span class="sd">        &gt;&gt;&gt; abjad.show(staff)</span>
+
+<span class="sd">        ..  docs::</span>
+
+<span class="sd">            \new Staff</span>
+<span class="sd">            {</span>
+<span class="sd">                \time 3/4</span>
+<span class="sd">                c&#39;8</span>
+<span class="sd">                d&#39;8</span>
+<span class="sd">                ~</span>
+<span class="sd">                d&#39;8</span>
+<span class="sd">                e&#39;8</span>
+<span class="sd">                ~</span>
+<span class="sd">                e&#39;8</span>
+<span class="sd">                f&#39;8</span>
+<span class="sd">            }</span>
+
+<span class="sd">        ..  figure:: ../_images/prettify_rewrite_meter-l16ostzscta.png</span>
+
+<span class="sd">    ``extract_trivial_tuplets``:</span>
+<span class="sd">        By default, this function extracts the contents of tuples that consist</span>
+<span class="sd">        solely of rests, or solely of tied notes and chords.</span>
+
+<span class="sd">        &gt;&gt;&gt; staff = abjad.Staff(</span>
+<span class="sd">        ...     r&quot;\times 2/3 {c&#39;4 ~ c&#39;8} \times 2/3 {d&#39;8 r4} &quot;</span>
+<span class="sd">        ...     r&quot;\times 2/3 {r8 r8 r8} \times 2/3 {&lt;e&#39; g&#39;&gt;8 ~ &lt;e&#39; g&#39;&gt;4}&quot;</span>
+<span class="sd">        ... )</span>
+<span class="sd">        &gt;&gt;&gt; meter = abjad.Meter((4, 4))</span>
+<span class="sd">        &gt;&gt;&gt; abjad.mutate.rewrite_meter(staff[:], meter)</span>
+<span class="sd">        &gt;&gt;&gt; abjad.mutate.prettify_rewrite_meter(staff[:], meter)</span>
+<span class="sd">        &gt;&gt;&gt; abjad.show(staff)</span>
+
+<span class="sd">        ..  docs::</span>
+
+<span class="sd">            \new Staff</span>
+<span class="sd">            {</span>
+<span class="sd">                c&#39;4</span>
+<span class="sd">                \times 2/3</span>
+<span class="sd">                {</span>
+<span class="sd">                    d&#39;8</span>
+<span class="sd">                    r4</span>
+<span class="sd">                }</span>
+<span class="sd">                r4</span>
+<span class="sd">                &lt;e&#39; g&#39;&gt;4</span>
+<span class="sd">            }</span>
+
+<span class="sd">        ..  figure:: ../_images/prettify_rewrite_meter-a72jx4fc1xd.png</span>
+
+<span class="sd">        Set ``extract_trivial_tuplets`` to ``False`` to disable this behaviour.</span>
+
+<span class="sd">        &gt;&gt;&gt; staff = abjad.Staff(</span>
+<span class="sd">        ...     r&quot;\times 2/3 {c&#39;4 ~ c&#39;8} \times 2/3 {d&#39;8 r4} &quot;</span>
+<span class="sd">        ...     r&quot;\times 2/3 {r8 r8 r8} \times 2/3 {&lt;e&#39; g&#39;&gt;8 ~ &lt;e&#39; g&#39;&gt;4}&quot;</span>
+<span class="sd">        ... )</span>
+<span class="sd">        &gt;&gt;&gt; meter = abjad.Meter((4, 4))</span>
+<span class="sd">        &gt;&gt;&gt; abjad.mutate.rewrite_meter(staff[:], meter)</span>
+<span class="sd">        &gt;&gt;&gt; abjad.mutate.prettify_rewrite_meter(</span>
+<span class="sd">        ...     staff[:]</span>
+<span class="sd">        ...     meter,</span>
+<span class="sd">        ...     extract_trivial_tuplets=False,</span>
+<span class="sd">        ... )</span>
+<span class="sd">        &gt;&gt;&gt; abjad.show(staff)</span>
+
+<span class="sd">        ..  docs::</span>
+
+<span class="sd">            \new Staff</span>
+<span class="sd">            {</span>
+<span class="sd">                \times 2/3</span>
+<span class="sd">                {</span>
+<span class="sd">                    c&#39;4.</span>
+<span class="sd">                }</span>
+<span class="sd">                \times 2/3</span>
+<span class="sd">                {</span>
+<span class="sd">                    d&#39;8</span>
+<span class="sd">                    r4</span>
+<span class="sd">                }</span>
+<span class="sd">                \times 2/3</span>
+<span class="sd">                {</span>
+<span class="sd">                    r4.</span>
+<span class="sd">                }</span>
+<span class="sd">                \times 2/3</span>
+<span class="sd">                {</span>
+<span class="sd">                    &lt;e&#39; g&#39;&gt;4.</span>
+<span class="sd">                }</span>
+<span class="sd">            }</span>
+
+<span class="sd">        ..  figure:: ../_images/prettify_rewrite_meter-v9q0ka94qcd.png</span>
+
+<span class="sd">    ``split_quadruple_meter``</span>
+<span class="sd">        When applying |abjad.Meter.rewrite_meter()| to a selection with</span>
+<span class="sd">        quadruple meter and without using a deeper ``boundary_depth`` than the</span>
+<span class="sd">        default, the resulting notation will often have leaves crossing the</span>
+<span class="sd">        third beat of the measure, as shown below.</span>
+
+<span class="sd">        &gt;&gt;&gt; staff = abjad.Staff(</span>
+<span class="sd">        ...     r&quot;c&#39;4 d&#39;2 r4&quot;</span>
+<span class="sd">        ...     r&quot;e&#39;4. f&#39;2 g&#39;8&quot;</span>
+<span class="sd">        ...     r&quot;a&#39;4. b&#39;4. c&#39;&#39;4&quot;</span>
+<span class="sd">        ...     r&quot;d&#39;&#39;16 e&#39;&#39;8. f&#39;&#39;4. g&#39;&#39;4 a&#39;&#39;8&quot;</span>
+<span class="sd">        ... )</span>
+<span class="sd">        &gt;&gt;&gt; meter = abjad.Meter((4, 4))</span>
+<span class="sd">        &gt;&gt;&gt; for measure in abjad.select(staff[:]).group_by_measure():</span>
+<span class="sd">        ...     abjad.mutate.rewrite_meter(measure, meter)</span>
+<span class="sd">        &gt;&gt;&gt; abjad.show(staff)</span>
+
+<span class="sd">        ..  docs::</span>
+
+<span class="sd">            \new Staff</span>
+<span class="sd">            {</span>
+<span class="sd">                c&#39;4</span>
+<span class="sd">                d&#39;2</span>
+<span class="sd">                r4</span>
+<span class="sd">                e&#39;4.</span>
+<span class="sd">                f&#39;8</span>
+<span class="sd">                ~</span>
+<span class="sd">                f&#39;4.</span>
+<span class="sd">                g&#39;8</span>
+<span class="sd">                a&#39;4.</span>
+<span class="sd">                b&#39;4.</span>
+<span class="sd">                c&#39;&#39;4</span>
+<span class="sd">                d&#39;&#39;16</span>
+<span class="sd">                e&#39;&#39;8.</span>
+<span class="sd">                f&#39;&#39;4.</span>
+<span class="sd">                g&#39;&#39;8</span>
+<span class="sd">                ~</span>
+<span class="sd">                g&#39;&#39;8</span>
+<span class="sd">                a&#39;&#39;8</span>
+<span class="sd">            }</span>
+
+<span class="sd">        ..  figure:: ../_images/prettify_rewrite_meter-1wvhrjife1i.png</span>
+
+<span class="sd">        This function tests those leaves against a series of rules, splitting</span>
+<span class="sd">        them when the tests fails. In the case shown above, the first two bars</span>
+<span class="sd">        are very easy to read rhythmically, but the third and fourth are less</span>
+<span class="sd">        so. This is due to the dotted crotchet, which starts off a beat,</span>
+<span class="sd">        crossing the third beat of the measure. This function will split these</span>
+<span class="sd">        sort of leaves as shown below.</span>
+
+<span class="sd">        &gt;&gt;&gt; abjad.mutate.prettify_rewrite_meter(staff[:], meter)</span>
+<span class="sd">        &gt;&gt;&gt; abjad.show(staff)</span>
+
+<span class="sd">        ..  docs::</span>
+
+<span class="sd">            \new Staff</span>
+<span class="sd">            {</span>
+<span class="sd">                c&#39;4</span>
+<span class="sd">                d&#39;2</span>
+<span class="sd">                r4</span>
+<span class="sd">                e&#39;4.</span>
+<span class="sd">                f&#39;8</span>
+<span class="sd">                ~</span>
+<span class="sd">                f&#39;4.</span>
+<span class="sd">                g&#39;8</span>
+<span class="sd">                a&#39;4.</span>
+<span class="sd">                b&#39;8</span>
+<span class="sd">                ~</span>
+<span class="sd">                b&#39;4</span>
+<span class="sd">                c&#39;&#39;4</span>
+<span class="sd">                d&#39;&#39;16</span>
+<span class="sd">                e&#39;&#39;8.</span>
+<span class="sd">                f&#39;&#39;4</span>
+<span class="sd">                ~</span>
+<span class="sd">                f&#39;&#39;8</span>
+<span class="sd">                g&#39;&#39;4</span>
+<span class="sd">                a&#39;&#39;8</span>
+<span class="sd">            }</span>
+<span class="sd">        ..  figure:: ../_images/prettify_rewrite_meter-56dy04wjzg.png</span>
+
+<span class="sd">        Set ``split_quadruple_meter`` to ``False`` to disable this behaviour.</span>
+
+<span class="sd">        &gt;&gt;&gt; staff = abjad.Staff(</span>
+<span class="sd">        ...     r&quot;c&#39;4 d&#39;2 r4&quot;</span>
+<span class="sd">        ...     r&quot;e&#39;4. f&#39;2 g&#39;8&quot;</span>
+<span class="sd">        ...     r&quot;a&#39;4. b&#39;4. c&#39;&#39;4&quot;</span>
+<span class="sd">        ...     r&quot;d&#39;&#39;16 e&#39;&#39;8. f&#39;&#39;4. g&#39;&#39;4 a&#39;&#39;8&quot;</span>
+<span class="sd">        ... )</span>
+<span class="sd">        &gt;&gt;&gt; meter = abjad.Meter((4, 4))</span>
+<span class="sd">        &gt;&gt;&gt; for measure in abjad.select(staff[:]).group_by_measure():</span>
+<span class="sd">        ...     abjad.mutate.rewrite_meter(measure, meter)</span>
+<span class="sd">        &gt;&gt;&gt; abjad.mutate.prettify_rewrite_meter(</span>
+<span class="sd">        ...     staff[:]</span>
+<span class="sd">        ...     meter,</span>
+<span class="sd">        ...     split_quadruple_meter=False,</span>
+<span class="sd">        ... )</span>
+<span class="sd">        &gt;&gt;&gt; abjad.show(staff)</span>
+
+<span class="sd">        ..  docs::</span>
+
+<span class="sd">            \new Staff</span>
+<span class="sd">            {</span>
+<span class="sd">                c&#39;4</span>
+<span class="sd">                d&#39;2</span>
+<span class="sd">                r4</span>
+<span class="sd">                e&#39;4.</span>
+<span class="sd">                f&#39;8</span>
+<span class="sd">                ~</span>
+<span class="sd">                f&#39;4.</span>
+<span class="sd">                g&#39;8</span>
+<span class="sd">                a&#39;4.</span>
+<span class="sd">                b&#39;4.</span>
+<span class="sd">                c&#39;&#39;4</span>
+<span class="sd">                d&#39;&#39;16</span>
+<span class="sd">                e&#39;&#39;8.</span>
+<span class="sd">                f&#39;&#39;4.</span>
+<span class="sd">                g&#39;&#39;4</span>
+<span class="sd">                a&#39;&#39;8</span>
+<span class="sd">            }</span>
+
+<span class="sd">        ..  figure:: ../_images/prettify_rewrite_meter-ww1x0zsxlnd.png</span>
+
+<span class="sd">    ..  tip::</span>
+
+<span class="sd">        Use :func:`auxjad.auto_rewrite_meter()` to automatically apply</span>
+<span class="sd">        |abjad.Meter.rewrite_meter()| and</span>
+<span class="sd">        |auxjad.mutate.prettify_rewrite_meter()| to a container with multiple</span>
+<span class="sd">        time signatures.</span>
+
+<span class="sd">    ..  warning::</span>
+
+<span class="sd">        The input selection must be a contiguous logical voice. When dealing</span>
+<span class="sd">        with a container with multiple subcontainers (e.g. a score containing</span>
+<span class="sd">        multiple staves), the best approach is to cycle through these</span>
+<span class="sd">        subcontainers, applying this function to them individually.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">selection</span><span class="p">,</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Selection</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;first argument must be &#39;abjad.Selection&#39;&quot;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">selection</span><span class="o">.</span><span class="n">leaves</span><span class="p">()</span><span class="o">.</span><span class="n">are_contiguous_logical_voice</span><span class="p">():</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;first argument must be contiguous logical voice&quot;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">meter</span><span class="p">,</span> <span class="p">(</span><span class="n">abjad</span><span class="o">.</span><span class="n">Meter</span><span class="p">,</span> <span class="n">abjad</span><span class="o">.</span><span class="n">TimeSignature</span><span class="p">)):</span>
+        <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;argument must be &#39;abjad.Meter&#39; or &quot;</span>
+                        <span class="s2">&quot;&#39;abjad.TimeSignature&#39;&quot;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">fuse_across_groups_of_beats</span><span class="p">,</span> <span class="nb">bool</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;&#39;fuse_across_groups_of_beats&#39; must be &#39;bool&#39;&quot;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">fuse_quadruple_meter</span><span class="p">,</span> <span class="nb">bool</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;&#39;fuse_quadruple_meter&#39; must be &#39;bool&#39;&quot;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">fuse_triple_meter</span><span class="p">,</span> <span class="nb">bool</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;&#39;fuse_triple_meter&#39; must be &#39;bool&#39;&quot;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">extract_trivial_tuplets</span><span class="p">,</span> <span class="nb">bool</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;&#39;extract_trivial_tuplets&#39; must be &#39;bool&#39;&quot;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">split_quadruple_meter</span><span class="p">,</span> <span class="nb">bool</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;&#39;split_quadruple_meter&#39; must be &#39;bool&#39;&quot;</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">meter</span><span class="p">,</span> <span class="n">abjad</span><span class="o">.</span><span class="n">TimeSignature</span><span class="p">):</span>
+        <span class="n">meter</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Meter</span><span class="p">(</span><span class="n">meter</span><span class="o">.</span><span class="n">pair</span><span class="p">)</span>
+
+    <span class="n">logical_ties</span> <span class="o">=</span> <span class="n">selection</span><span class="o">.</span><span class="n">logical_ties</span><span class="p">(</span><span class="n">pitched</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">logical_ties</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">return</span>
+
+    <span class="n">first_leaf</span> <span class="o">=</span> <span class="n">selection</span><span class="o">.</span><span class="n">leaf</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+    <span class="n">initial_offset</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">get</span><span class="o">.</span><span class="n">timespan</span><span class="p">(</span><span class="n">first_leaf</span><span class="p">)</span><span class="o">.</span><span class="n">start_offset</span>
+    <span class="n">base</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">/</span> <span class="n">meter</span><span class="o">.</span><span class="n">denominator</span>
+
+    <span class="k">def</span> <span class="nf">_merge_indicators_then_fuse</span><span class="p">(</span><span class="n">logical_tie</span><span class="p">):</span>
+        <span class="n">last_indicators</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">get</span><span class="o">.</span><span class="n">indicators</span><span class="p">(</span><span class="n">logical_tie</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+        <span class="n">initial_indicators</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">get</span><span class="o">.</span><span class="n">indicators</span><span class="p">(</span><span class="n">logical_tie</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+        <span class="n">initial_indicators_types</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">indicator</span><span class="p">)</span> <span class="k">for</span> <span class="n">indicator</span>
+                                         <span class="ow">in</span> <span class="n">initial_indicators</span><span class="p">)</span>
+        <span class="n">abjad</span><span class="o">.</span><span class="n">mutate</span><span class="o">.</span><span class="n">fuse</span><span class="p">(</span><span class="n">logical_tie</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">indicator</span> <span class="ow">in</span> <span class="n">last_indicators</span><span class="p">:</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">indicator</span><span class="p">,</span> <span class="p">(</span><span class="n">abjad</span><span class="o">.</span><span class="n">Dynamic</span><span class="p">,</span>
+                                      <span class="n">abjad</span><span class="o">.</span><span class="n">StopSlur</span><span class="p">,</span>
+                                      <span class="n">abjad</span><span class="o">.</span><span class="n">StopGroup</span><span class="p">,</span>
+                                      <span class="n">abjad</span><span class="o">.</span><span class="n">StopHairpin</span><span class="p">,</span>
+                                      <span class="n">abjad</span><span class="o">.</span><span class="n">StopTextSpan</span><span class="p">,</span>
+                                      <span class="n">abjad</span><span class="o">.</span><span class="n">StopTrillSpan</span><span class="p">,</span>
+                                      <span class="n">abjad</span><span class="o">.</span><span class="n">StopPianoPedal</span><span class="p">,</span>
+                                      <span class="n">abjad</span><span class="o">.</span><span class="n">StopPhrasingSlur</span><span class="p">,</span>
+                                      <span class="p">)):</span>
+                <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">indicator</span><span class="p">,</span> <span class="n">initial_indicators_types</span><span class="p">):</span>
+                    <span class="n">abjad</span><span class="o">.</span><span class="n">attach</span><span class="p">(</span><span class="n">indicator</span><span class="p">,</span> <span class="n">logical_tie</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+
+    <span class="k">for</span> <span class="n">logical_tie</span> <span class="ow">in</span> <span class="n">logical_ties</span><span class="o">.</span><span class="n">filter_duration</span><span class="p">(</span><span class="s2">&quot;==&quot;</span><span class="p">,</span> <span class="n">base</span> <span class="o">/</span> <span class="mi">2</span><span class="p">):</span>
+        <span class="n">offset</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">get</span><span class="o">.</span><span class="n">timespan</span><span class="p">(</span><span class="n">logical_tie</span><span class="p">)</span><span class="o">.</span><span class="n">start_offset</span>
+        <span class="n">offset</span> <span class="o">-=</span> <span class="n">initial_offset</span>
+        <span class="n">offset</span> <span class="o">%=</span> <span class="n">base</span>
+        <span class="k">if</span> <span class="n">offset</span> <span class="o">==</span> <span class="n">base</span> <span class="o">/</span> <span class="mi">4</span><span class="p">:</span>
+            <span class="n">_merge_indicators_then_fuse</span><span class="p">(</span><span class="n">logical_tie</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">fuse_across_groups_of_beats</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">logical_tie</span> <span class="ow">in</span> <span class="n">logical_ties</span><span class="o">.</span><span class="n">filter_duration</span><span class="p">(</span><span class="s2">&quot;==&quot;</span><span class="p">,</span> <span class="n">base</span><span class="p">):</span>
+            <span class="n">offset</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">get</span><span class="o">.</span><span class="n">timespan</span><span class="p">(</span><span class="n">logical_tie</span><span class="p">)</span><span class="o">.</span><span class="n">start_offset</span>
+            <span class="n">offset</span> <span class="o">-=</span> <span class="n">initial_offset</span>
+            <span class="n">offset</span> <span class="o">%=</span> <span class="n">meter</span><span class="o">.</span><span class="n">duration</span>
+            <span class="n">offset_mod</span> <span class="o">=</span> <span class="n">offset</span> <span class="o">%</span> <span class="n">base</span>
+            <span class="k">if</span> <span class="n">offset_mod</span> <span class="o">==</span> <span class="n">base</span> <span class="o">/</span> <span class="mi">2</span><span class="p">:</span>
+                <span class="k">if</span> <span class="p">(</span><span class="ow">not</span> <span class="n">offset</span> <span class="o">+</span> <span class="n">base</span> <span class="o">/</span> <span class="mi">2</span>
+                        <span class="ow">in</span> <span class="n">meter</span><span class="o">.</span><span class="n">depthwise_offset_inventory</span><span class="p">[</span><span class="mi">1</span><span class="p">]):</span>
+                    <span class="n">_merge_indicators_then_fuse</span><span class="p">(</span><span class="n">logical_tie</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">fuse_quadruple_meter</span> <span class="ow">and</span> <span class="n">meter</span><span class="o">.</span><span class="n">numerator</span> <span class="o">==</span> <span class="mi">4</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">logical_tie</span> <span class="ow">in</span> <span class="n">logical_ties</span><span class="o">.</span><span class="n">filter_duration</span><span class="p">(</span><span class="s2">&quot;==&quot;</span><span class="p">,</span> <span class="n">base</span><span class="p">):</span>
+            <span class="n">offset</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">get</span><span class="o">.</span><span class="n">timespan</span><span class="p">(</span><span class="n">logical_tie</span><span class="p">)</span><span class="o">.</span><span class="n">start_offset</span>
+            <span class="n">offset</span> <span class="o">-=</span> <span class="n">initial_offset</span>
+            <span class="n">offset</span> <span class="o">%=</span> <span class="n">meter</span><span class="o">.</span><span class="n">duration</span>
+            <span class="n">offset_mod</span> <span class="o">=</span> <span class="n">offset</span> <span class="o">%</span> <span class="n">base</span>
+            <span class="k">if</span> <span class="n">offset_mod</span> <span class="o">==</span> <span class="n">base</span> <span class="o">/</span> <span class="mi">2</span><span class="p">:</span>
+                <span class="k">if</span> <span class="ow">not</span> <span class="n">offset</span> <span class="o">+</span> <span class="n">base</span> <span class="o">/</span> <span class="mi">2</span> <span class="ow">in</span> <span class="p">(</span><span class="n">abjad</span><span class="o">.</span><span class="n">Offset</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span>
+                                             <span class="n">abjad</span><span class="o">.</span><span class="n">Offset</span><span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">base</span><span class="p">),</span>
+                                             <span class="n">abjad</span><span class="o">.</span><span class="n">Offset</span><span class="p">(</span><span class="mi">4</span> <span class="o">*</span> <span class="n">base</span><span class="p">),</span>
+                                             <span class="p">):</span>
+                    <span class="n">_merge_indicators_then_fuse</span><span class="p">(</span><span class="n">logical_tie</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">fuse_triple_meter</span> <span class="ow">and</span> <span class="n">meter</span><span class="o">.</span><span class="n">numerator</span> <span class="o">==</span> <span class="mi">3</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">logical_tie</span> <span class="ow">in</span> <span class="n">logical_ties</span><span class="o">.</span><span class="n">filter_duration</span><span class="p">(</span><span class="s2">&quot;==&quot;</span><span class="p">,</span> <span class="n">base</span><span class="p">):</span>
+            <span class="n">offset</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">get</span><span class="o">.</span><span class="n">timespan</span><span class="p">(</span><span class="n">logical_tie</span><span class="p">)</span><span class="o">.</span><span class="n">start_offset</span>
+            <span class="n">offset</span> <span class="o">-=</span> <span class="n">initial_offset</span>
+            <span class="n">offset</span> <span class="o">%=</span> <span class="n">meter</span><span class="o">.</span><span class="n">duration</span>
+            <span class="n">offset_mod</span> <span class="o">=</span> <span class="n">offset</span> <span class="o">%</span> <span class="n">base</span>
+            <span class="k">if</span> <span class="n">offset_mod</span> <span class="o">==</span> <span class="n">base</span> <span class="o">/</span> <span class="mi">2</span><span class="p">:</span>
+                <span class="k">if</span> <span class="ow">not</span> <span class="n">offset</span> <span class="o">+</span> <span class="n">base</span> <span class="o">/</span> <span class="mi">2</span> <span class="ow">in</span> <span class="p">(</span><span class="n">abjad</span><span class="o">.</span><span class="n">Offset</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span>
+                                             <span class="n">abjad</span><span class="o">.</span><span class="n">Offset</span><span class="p">(</span><span class="mi">3</span> <span class="o">*</span> <span class="n">base</span><span class="p">),</span>
+                                             <span class="p">):</span>
+                    <span class="n">_merge_indicators_then_fuse</span><span class="p">(</span><span class="n">logical_tie</span><span class="p">)</span>
+
+    <span class="n">logical_ties</span> <span class="o">=</span> <span class="n">selection</span><span class="o">.</span><span class="n">logical_ties</span><span class="p">()</span>  <span class="c1"># splitting not only pitched</span>
+    <span class="k">if</span> <span class="n">split_quadruple_meter</span> <span class="ow">and</span> <span class="n">meter</span><span class="o">.</span><span class="n">numerator</span> <span class="o">==</span> <span class="mi">4</span><span class="p">:</span>
+        <span class="n">half_point_offset</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Offset</span><span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">base</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">logical_tie</span> <span class="ow">in</span> <span class="n">logical_ties</span><span class="p">:</span>
+            <span class="n">offset0</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">get</span><span class="o">.</span><span class="n">timespan</span><span class="p">(</span><span class="n">logical_tie</span><span class="p">)</span><span class="o">.</span><span class="n">start_offset</span>
+            <span class="n">offset0</span> <span class="o">-=</span> <span class="n">initial_offset</span>
+            <span class="n">offset0</span> <span class="o">%=</span> <span class="n">meter</span><span class="o">.</span><span class="n">duration</span>
+            <span class="k">if</span> <span class="n">offset0</span> <span class="o">==</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Offset</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">):</span>
+                <span class="c1"># do not split things like c&#39;1, c&#39;2.. r8, c&#39;2. r4, etc.</span>
+                <span class="k">continue</span>
+            <span class="n">offset1</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">get</span><span class="o">.</span><span class="n">timespan</span><span class="p">(</span><span class="n">logical_tie</span><span class="p">)</span><span class="o">.</span><span class="n">stop_offset</span>
+            <span class="n">offset1</span> <span class="o">-=</span> <span class="n">initial_offset</span>
+            <span class="n">offset1</span> <span class="o">%=</span> <span class="n">meter</span><span class="o">.</span><span class="n">duration</span>
+            <span class="k">if</span> <span class="n">offset1</span> <span class="o">==</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Offset</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">):</span>
+                <span class="n">offset1</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Offset</span><span class="p">(</span><span class="n">meter</span><span class="o">.</span><span class="n">duration</span><span class="p">)</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">offset0</span> <span class="o">%</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Offset</span><span class="p">(</span><span class="n">base</span><span class="p">)</span> <span class="o">==</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Offset</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+                    <span class="ow">and</span> <span class="n">offset1</span> <span class="o">%</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Offset</span><span class="p">(</span><span class="n">base</span><span class="p">)</span> <span class="o">==</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Offset</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)):</span>
+                <span class="c1"># do not split things like r4 c&#39;2.</span>
+                <span class="k">continue</span>
+            <span class="k">if</span> <span class="n">offset0</span> <span class="o">&lt;</span> <span class="n">half_point_offset</span> <span class="o">&lt;</span> <span class="n">offset1</span><span class="p">:</span>
+                <span class="k">if</span> <span class="p">(</span><span class="n">offset1</span> <span class="o">==</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Offset</span><span class="p">(</span><span class="n">meter</span><span class="o">.</span><span class="n">duration</span><span class="p">)</span>
+                        <span class="ow">and</span> <span class="nb">len</span><span class="p">(</span><span class="n">logical_tie</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">):</span>
+                    <span class="c1"># do not split r8 c&#39;2.., r16 c&#39;2..., etc.</span>
+                    <span class="k">break</span>
+                <span class="k">if</span> <span class="nb">any</span><span class="p">(</span><span class="n">abjad</span><span class="o">.</span><span class="n">get</span><span class="o">.</span><span class="n">duration</span><span class="p">(</span><span class="n">leaf</span><span class="p">)</span>
+                       <span class="o">==</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Duration</span><span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">base</span><span class="p">)</span> <span class="k">for</span> <span class="n">leaf</span> <span class="ow">in</span> <span class="n">logical_tie</span><span class="p">):</span>
+                    <span class="c1"># do not split r8 c&#39;8~c&#39;2 r4, r16 c&#39;8.~c&#39;2~c&#39;8 r8, etc.</span>
+                    <span class="k">break</span>
+                <span class="c1"># do not split tuplets</span>
+                <span class="n">result</span> <span class="o">=</span> <span class="n">selection</span><span class="o">.</span><span class="n">tuplets</span><span class="p">()</span>
+                <span class="n">result</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="n">abjad</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="n">_</span><span class="p">)</span><span class="o">.</span><span class="n">logical_ties</span><span class="p">()</span>
+                                      <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="n">result</span><span class="p">)</span>
+                <span class="n">result</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">flatten</span><span class="p">()</span>
+                <span class="k">if</span> <span class="n">logical_tie</span> <span class="ow">in</span> <span class="n">result</span><span class="p">:</span>
+                    <span class="k">break</span>
+                <span class="n">duration</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Duration</span><span class="p">(</span><span class="n">half_point_offset</span> <span class="o">-</span> <span class="n">offset0</span><span class="p">)</span>
+                <span class="n">abjad</span><span class="o">.</span><span class="n">mutate</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">logical_tie</span><span class="p">,</span> <span class="p">[</span><span class="n">duration</span><span class="p">])</span>
+
+    <span class="k">if</span> <span class="n">extract_trivial_tuplets</span><span class="p">:</span>
+        <span class="n">extract_trivial_tuplets_function</span><span class="p">(</span><span class="n">selection</span><span class="p">)</span></div>
+</pre></div>
+
+           </div>
+           
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2020, Gilberto Agostinho.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

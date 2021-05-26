@@ -3,20 +3,25 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8">
+  <meta charset="utf-8" />
   
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>auxjad.core.Hocketer &mdash; auxjad 0.8.24 documentation</title>
+  <title>auxjad.core.Hocketer &mdash; auxjad 0.8.25 documentation</title>
   
 
   
   <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
 
   
   
+
   
+  
+
   
 
   
@@ -26,11 +31,10 @@
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
         <script src="../../../_static/jquery.js"></script>
         <script src="../../../_static/underscore.js"></script>
         <script src="../../../_static/doctools.js"></script>
-        <script src="../../../_static/language_data.js"></script>
-        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     
     <script type="text/javascript" src="../../../_static/js/theme.js"></script>
 
@@ -50,7 +54,7 @@
           
 
           
-            <a href="../../../index.html" class="icon icon-home" alt="Documentation Home"> auxjad
+            <a href="../../../index.html" class="icon icon-home"> auxjad
           
 
           
@@ -131,6 +135,8 @@
 
 
 
+
+
 <div role="navigation" aria-label="breadcrumbs navigation">
 
   <ul class="wy-breadcrumbs">
@@ -160,8 +166,7 @@
 
 <span class="kn">import</span> <span class="nn">abjad</span>
 
-<span class="kn">from</span> <span class="nn">..utilities.inspect</span> <span class="kn">import</span> <span class="n">inspect</span>
-<span class="kn">from</span> <span class="nn">..utilities.mutate</span> <span class="kn">import</span> <span class="n">mutate</span>
+<span class="kn">from</span> <span class="nn">..</span> <span class="kn">import</span> <span class="n">get</span><span class="p">,</span> <span class="n">mutate</span>
 
 
 <div class="viewcode-block" id="Hocketer"><a class="viewcode-back" href="../../../_api_members/auxjad.Hocketer.html#auxjad.Hocketer">[docs]</a><span class="k">class</span> <span class="nc">Hocketer</span><span class="p">():</span>
@@ -180,48 +185,54 @@
 <span class="sd">        &gt;&gt;&gt; score = abjad.Score()</span>
 <span class="sd">        &gt;&gt;&gt; for selection in music:</span>
 <span class="sd">        ...     score.append(abjad.Staff(selection))</span>
-<span class="sd">        &gt;&gt;&gt; abjad.f(score)</span>
-<span class="sd">        \new Score</span>
-<span class="sd">        &lt;&lt;</span>
-<span class="sd">            \new Staff</span>
-<span class="sd">            {</span>
-<span class="sd">                r2</span>
-<span class="sd">                e&#39;4</span>
-<span class="sd">                r4</span>
-<span class="sd">            }</span>
-<span class="sd">            \new Staff</span>
-<span class="sd">            {</span>
-<span class="sd">                c&#39;4</span>
-<span class="sd">                d&#39;4</span>
-<span class="sd">                r4</span>
-<span class="sd">                f&#39;4</span>
-<span class="sd">            }</span>
-<span class="sd">        &gt;&gt;</span>
+<span class="sd">        &gt;&gt;&gt; abjad.show(score)</span>
 
-<span class="sd">        .. figure:: ../_images/Hocketer-dh5lutbv09v.png</span>
+<span class="sd">        ..  docs::</span>
+
+<span class="sd">            \new Score</span>
+<span class="sd">            &lt;&lt;</span>
+<span class="sd">                \new Staff</span>
+<span class="sd">                {</span>
+<span class="sd">                    r2</span>
+<span class="sd">                    e&#39;4</span>
+<span class="sd">                    r4</span>
+<span class="sd">                }</span>
+<span class="sd">                \new Staff</span>
+<span class="sd">                {</span>
+<span class="sd">                    c&#39;4</span>
+<span class="sd">                    d&#39;4</span>
+<span class="sd">                    r4</span>
+<span class="sd">                    f&#39;4</span>
+<span class="sd">                }</span>
+<span class="sd">            &gt;&gt;</span>
+
+<span class="sd">        ..  figure:: ../_images/Hocketer-dh5lutbv09v.png</span>
 
 <span class="sd">        &gt;&gt;&gt; music = hocketer()</span>
 <span class="sd">        &gt;&gt;&gt; score = abjad.Score()</span>
 <span class="sd">        &gt;&gt;&gt; for selection in music:</span>
 <span class="sd">        ...     score.append(abjad.Staff(selection))</span>
-<span class="sd">        &gt;&gt;&gt; abjad.f(score)</span>
-<span class="sd">        \new Score</span>
-<span class="sd">        &lt;&lt;</span>
-<span class="sd">            \new Staff</span>
-<span class="sd">            {</span>
-<span class="sd">                c&#39;4</span>
-<span class="sd">                d&#39;4</span>
-<span class="sd">                e&#39;4</span>
-<span class="sd">                r4</span>
-<span class="sd">            }</span>
-<span class="sd">            \new Staff</span>
-<span class="sd">            {</span>
-<span class="sd">                r2.</span>
-<span class="sd">                f&#39;4</span>
-<span class="sd">            }</span>
-<span class="sd">        &gt;&gt;</span>
+<span class="sd">        &gt;&gt;&gt; abjad.show(score)</span>
 
-<span class="sd">        .. figure:: ../_images/Hocketer-gj278dv7vff.png</span>
+<span class="sd">        ..  docs::</span>
+
+<span class="sd">            \new Score</span>
+<span class="sd">            &lt;&lt;</span>
+<span class="sd">                \new Staff</span>
+<span class="sd">                {</span>
+<span class="sd">                    c&#39;4</span>
+<span class="sd">                    d&#39;4</span>
+<span class="sd">                    e&#39;4</span>
+<span class="sd">                    r4</span>
+<span class="sd">                }</span>
+<span class="sd">                \new Staff</span>
+<span class="sd">                {</span>
+<span class="sd">                    r2.</span>
+<span class="sd">                    f&#39;4</span>
+<span class="sd">                }</span>
+<span class="sd">            &gt;&gt;</span>
+
+<span class="sd">        ..  figure:: ../_images/Hocketer-gj278dv7vff.png</span>
 
 <span class="sd">    Indexing:</span>
 <span class="sd">        Alternatively, it is possible to retrieve an |abjad.Selection| for</span>
@@ -237,87 +248,96 @@
 <span class="sd">        &gt;&gt;&gt; for selection in hocketer[:]:</span>
 <span class="sd">        ...     staff = abjad.Staff(selection)</span>
 <span class="sd">        ...     score.append(staff)</span>
-<span class="sd">        &gt;&gt;&gt; abjad.f(score)</span>
-<span class="sd">        \new Score</span>
-<span class="sd">        &lt;&lt;</span>
-<span class="sd">            \new Staff</span>
-<span class="sd">            {</span>
-<span class="sd">                r2.</span>
-<span class="sd">                f&#39;4</span>
-<span class="sd">            }</span>
-<span class="sd">            \new Staff</span>
-<span class="sd">            {</span>
-<span class="sd">                c&#39;4</span>
-<span class="sd">                r4</span>
-<span class="sd">                e&#39;4</span>
-<span class="sd">                r4</span>
-<span class="sd">            }</span>
-<span class="sd">            \new Staff</span>
-<span class="sd">            {</span>
-<span class="sd">                r4</span>
-<span class="sd">                d&#39;4</span>
-<span class="sd">                e&#39;4</span>
-<span class="sd">                r4</span>
-<span class="sd">            }</span>
-<span class="sd">            \new Staff</span>
-<span class="sd">            {</span>
-<span class="sd">                c&#39;4</span>
-<span class="sd">                d&#39;4</span>
-<span class="sd">                r4</span>
-<span class="sd">                f&#39;4</span>
-<span class="sd">            }</span>
-<span class="sd">            \new Staff</span>
-<span class="sd">            {</span>
-<span class="sd">                c&#39;4</span>
-<span class="sd">                r4</span>
-<span class="sd">                e&#39;4</span>
-<span class="sd">                r4</span>
-<span class="sd">            }</span>
-<span class="sd">        &gt;&gt;</span>
+<span class="sd">        &gt;&gt;&gt; abjad.show(score)</span>
 
-<span class="sd">        .. figure:: ../_images/Hocketer-5r3ybkxhmd4.png</span>
+<span class="sd">        ..  docs::</span>
+
+<span class="sd">            \new Score</span>
+<span class="sd">            &lt;&lt;</span>
+<span class="sd">                \new Staff</span>
+<span class="sd">                {</span>
+<span class="sd">                    r2.</span>
+<span class="sd">                    f&#39;4</span>
+<span class="sd">                }</span>
+<span class="sd">                \new Staff</span>
+<span class="sd">                {</span>
+<span class="sd">                    c&#39;4</span>
+<span class="sd">                    r4</span>
+<span class="sd">                    e&#39;4</span>
+<span class="sd">                    r4</span>
+<span class="sd">                }</span>
+<span class="sd">                \new Staff</span>
+<span class="sd">                {</span>
+<span class="sd">                    r4</span>
+<span class="sd">                    d&#39;4</span>
+<span class="sd">                    e&#39;4</span>
+<span class="sd">                    r4</span>
+<span class="sd">                }</span>
+<span class="sd">                \new Staff</span>
+<span class="sd">                {</span>
+<span class="sd">                    c&#39;4</span>
+<span class="sd">                    d&#39;4</span>
+<span class="sd">                    r4</span>
+<span class="sd">                    f&#39;4</span>
+<span class="sd">                }</span>
+<span class="sd">                \new Staff</span>
+<span class="sd">                {</span>
+<span class="sd">                    c&#39;4</span>
+<span class="sd">                    r4</span>
+<span class="sd">                    e&#39;4</span>
+<span class="sd">                    r4</span>
+<span class="sd">                }</span>
+<span class="sd">            &gt;&gt;</span>
+
+<span class="sd">        ..  figure:: ../_images/Hocketer-5r3ybkxhmd4.png</span>
 
 <span class="sd">        Individual staves can also be retrieved as shown below.</span>
 
 <span class="sd">        &gt;&gt;&gt; staff = abjad.Staff(hocketer[0])</span>
-<span class="sd">        &gt;&gt;&gt; abjad.f(staff)</span>
-<span class="sd">        \new Staff</span>
-<span class="sd">        {</span>
-<span class="sd">            c&#39;4</span>
-<span class="sd">            r4</span>
-<span class="sd">            e&#39;4</span>
-<span class="sd">            f&#39;4</span>
-<span class="sd">        }</span>
+<span class="sd">        &gt;&gt;&gt; abjad.show(staff)</span>
 
-<span class="sd">        .. figure:: ../_images/Hocketer-sodb0btsuhq.png</span>
+<span class="sd">        ..  docs::</span>
+
+<span class="sd">            \new Staff</span>
+<span class="sd">            {</span>
+<span class="sd">                c&#39;4</span>
+<span class="sd">                r4</span>
+<span class="sd">                e&#39;4</span>
+<span class="sd">                f&#39;4</span>
+<span class="sd">            }</span>
+
+<span class="sd">        ..  figure:: ../_images/Hocketer-sodb0btsuhq.png</span>
 
 <span class="sd">        &gt;&gt;&gt; partial_score = abjad.Score()</span>
 <span class="sd">        &gt;&gt;&gt; for selection in hocketer[1:4]:</span>
 <span class="sd">        ...     staff = abjad.Staff(selection)</span>
 <span class="sd">        ...     partial_score.append(selection)</span>
-<span class="sd">        &gt;&gt;&gt; abjad.f(partial_score)</span>
-<span class="sd">        \new Score</span>
-<span class="sd">        &lt;&lt;</span>
-<span class="sd">            \new Staff</span>
-<span class="sd">            {</span>
-<span class="sd">                c&#39;4</span>
-<span class="sd">                d&#39;4</span>
-<span class="sd">                r2</span>
-<span class="sd">            }</span>
-<span class="sd">            \new Staff</span>
-<span class="sd">            {</span>
-<span class="sd">                r4</span>
-<span class="sd">                d&#39;4</span>
-<span class="sd">                e&#39;4</span>
-<span class="sd">                r4</span>
-<span class="sd">            }</span>
-<span class="sd">            \new Staff</span>
-<span class="sd">            {</span>
-<span class="sd">                R1</span>
-<span class="sd">            }</span>
-<span class="sd">        &gt;&gt;</span>
+<span class="sd">        &gt;&gt;&gt; abjad.show(partial_score)</span>
 
-<span class="sd">        .. figure:: ../_images/Hocketer-3gsh3qtl21d.png</span>
+<span class="sd">        ..  docs::</span>
+
+<span class="sd">            \new Score</span>
+<span class="sd">            &lt;&lt;</span>
+<span class="sd">                \new Staff</span>
+<span class="sd">                {</span>
+<span class="sd">                    c&#39;4</span>
+<span class="sd">                    d&#39;4</span>
+<span class="sd">                    r2</span>
+<span class="sd">                }</span>
+<span class="sd">                \new Staff</span>
+<span class="sd">                {</span>
+<span class="sd">                    r4</span>
+<span class="sd">                    d&#39;4</span>
+<span class="sd">                    e&#39;4</span>
+<span class="sd">                    r4</span>
+<span class="sd">                }</span>
+<span class="sd">                \new Staff</span>
+<span class="sd">                {</span>
+<span class="sd">                    R1</span>
+<span class="sd">                }</span>
+<span class="sd">            &gt;&gt;</span>
+
+<span class="sd">        ..  figure:: ../_images/Hocketer-3gsh3qtl21d.png</span>
 
 <span class="sd">    :attr:`current_window`:</span>
 <span class="sd">        To get the result of the last operation, use the property</span>
@@ -329,51 +349,57 @@
 <span class="sd">        &gt;&gt;&gt; score = abjad.Score()</span>
 <span class="sd">        &gt;&gt;&gt; for selection in music:</span>
 <span class="sd">        ...     score.append(abjad.Staff(selection))</span>
-<span class="sd">        &gt;&gt;&gt; abjad.f(score)</span>
-<span class="sd">        \new Score</span>
-<span class="sd">        &lt;&lt;</span>
-<span class="sd">            \new Staff</span>
-<span class="sd">            {</span>
-<span class="sd">                c&#39;4</span>
-<span class="sd">                r4</span>
-<span class="sd">                e&#39;4</span>
-<span class="sd">                r4</span>
-<span class="sd">            }</span>
-<span class="sd">            \new Staff</span>
-<span class="sd">            {</span>
-<span class="sd">                r4</span>
-<span class="sd">                d&#39;4</span>
-<span class="sd">                r4</span>
-<span class="sd">                f&#39;4</span>
-<span class="sd">            }</span>
-<span class="sd">        &gt;&gt;</span>
+<span class="sd">        &gt;&gt;&gt; abjad.show(score)</span>
 
-<span class="sd">        .. figure:: ../_images/Hocketer-i2jt38x28fd.png</span>
+<span class="sd">        ..  docs::</span>
+
+<span class="sd">            \new Score</span>
+<span class="sd">            &lt;&lt;</span>
+<span class="sd">                \new Staff</span>
+<span class="sd">                {</span>
+<span class="sd">                    c&#39;4</span>
+<span class="sd">                    r4</span>
+<span class="sd">                    e&#39;4</span>
+<span class="sd">                    r4</span>
+<span class="sd">                }</span>
+<span class="sd">                \new Staff</span>
+<span class="sd">                {</span>
+<span class="sd">                    r4</span>
+<span class="sd">                    d&#39;4</span>
+<span class="sd">                    r4</span>
+<span class="sd">                    f&#39;4</span>
+<span class="sd">                }</span>
+<span class="sd">            &gt;&gt;</span>
+
+<span class="sd">        ..  figure:: ../_images/Hocketer-i2jt38x28fd.png</span>
 
 <span class="sd">        &gt;&gt;&gt; music = hocketer.current_window</span>
 <span class="sd">        &gt;&gt;&gt; score = abjad.Score()</span>
 <span class="sd">        &gt;&gt;&gt; for selection in music:</span>
 <span class="sd">        ...     score.append(abjad.Staff(selection))</span>
-<span class="sd">        &gt;&gt;&gt; abjad.f(score)</span>
-<span class="sd">        \new Score</span>
-<span class="sd">        &lt;&lt;</span>
-<span class="sd">            \new Staff</span>
-<span class="sd">            {</span>
-<span class="sd">                c&#39;4</span>
-<span class="sd">                r4</span>
-<span class="sd">                e&#39;4</span>
-<span class="sd">                r4</span>
-<span class="sd">            }</span>
-<span class="sd">            \new Staff</span>
-<span class="sd">            {</span>
-<span class="sd">                r4</span>
-<span class="sd">                d&#39;4</span>
-<span class="sd">                r4</span>
-<span class="sd">                f&#39;4</span>
-<span class="sd">            }</span>
-<span class="sd">        &gt;&gt;</span>
+<span class="sd">        &gt;&gt;&gt; abjad.show(score)</span>
 
-<span class="sd">        .. figure:: ../_images/Hocketer-4291u773dng.png</span>
+<span class="sd">        ..  docs::</span>
+
+<span class="sd">            \new Score</span>
+<span class="sd">            &lt;&lt;</span>
+<span class="sd">                \new Staff</span>
+<span class="sd">                {</span>
+<span class="sd">                    c&#39;4</span>
+<span class="sd">                    r4</span>
+<span class="sd">                    e&#39;4</span>
+<span class="sd">                    r4</span>
+<span class="sd">                }</span>
+<span class="sd">                \new Staff</span>
+<span class="sd">                {</span>
+<span class="sd">                    r4</span>
+<span class="sd">                    d&#39;4</span>
+<span class="sd">                    r4</span>
+<span class="sd">                    f&#39;4</span>
+<span class="sd">                }</span>
+<span class="sd">            &gt;&gt;</span>
+
+<span class="sd">        ..  figure:: ../_images/Hocketer-4291u773dng.png</span>
 
 <span class="sd">    Arguments and properties:</span>
 <span class="sd">        This class has many keyword arguments, all of which can be altered</span>
@@ -387,13 +413,13 @@
 <span class="sd">        from chords into unique voices. :attr:`pitch_ranges` defines the pitch</span>
 <span class="sd">        range of each voice; it takes a list of |abjad.PitchRange|&#39;s.</span>
 <span class="sd">        :attr:`disable_rewrite_meter` disables the</span>
-<span class="sd">        |abjad.mutate().rewrite_meter()| mutation which is applied to the</span>
+<span class="sd">        |abjad.Meter.rewrite_meter()| mutation which is applied to the</span>
 <span class="sd">        container after every call. Any measure filled with rests will be</span>
 <span class="sd">        rewritten using a multi-measure rest; set the</span>
 <span class="sd">        :attr:`use_multimeasure_rests` to ``False`` to disable this behaviour.</span>
 <span class="sd">        The properties :attr:`boundary_depth`, :attr:`maximum_dot_count`, and</span>
 <span class="sd">        :attr:`rewrite_tuplets` are passed as arguments to</span>
-<span class="sd">        |abjad.mutate().rewrite_meter()|, see its documentation for more</span>
+<span class="sd">        |abjad.Meter.rewrite_meter()|, see its documentation for more</span>
 <span class="sd">        information. Setting the property :attr:`omit_time_signatures` to</span>
 <span class="sd">        ``True`` will remove all time signatures from the output (``False`` by</span>
 <span class="sd">        default).</span>
@@ -492,38 +518,41 @@
 <span class="sd">        &gt;&gt;&gt; score = abjad.Score()</span>
 <span class="sd">        &gt;&gt;&gt; for selection in music:</span>
 <span class="sd">        ...     score.append(abjad.Staff(selection))</span>
-<span class="sd">        &gt;&gt;&gt; abjad.f(score)</span>
-<span class="sd">        \new Score</span>
-<span class="sd">        &lt;&lt;</span>
-<span class="sd">            \new Staff</span>
-<span class="sd">            {</span>
-<span class="sd">                c&#39;8</span>
-<span class="sd">                r8</span>
-<span class="sd">                e&#39;8</span>
-<span class="sd">                r8</span>
-<span class="sd">                g&#39;8</span>
-<span class="sd">                r4.</span>
-<span class="sd">            }</span>
-<span class="sd">            \new Staff</span>
-<span class="sd">            {</span>
-<span class="sd">                r8</span>
-<span class="sd">                d&#39;8</span>
-<span class="sd">                r4</span>
-<span class="sd">                r8</span>
-<span class="sd">                a&#39;8</span>
-<span class="sd">                r4</span>
-<span class="sd">            }</span>
-<span class="sd">            \new Staff</span>
-<span class="sd">            {</span>
-<span class="sd">                r4.</span>
-<span class="sd">                f&#39;8</span>
-<span class="sd">                r4</span>
-<span class="sd">                b&#39;8</span>
-<span class="sd">                c&#39;&#39;8</span>
-<span class="sd">            }</span>
-<span class="sd">        &gt;&gt;</span>
+<span class="sd">        &gt;&gt;&gt; abjad.show(score)</span>
 
-<span class="sd">        .. figure:: ../_images/Hocketer-qf9niqf7em.png</span>
+<span class="sd">        ..  docs::</span>
+
+<span class="sd">            \new Score</span>
+<span class="sd">            &lt;&lt;</span>
+<span class="sd">                \new Staff</span>
+<span class="sd">                {</span>
+<span class="sd">                    c&#39;8</span>
+<span class="sd">                    r8</span>
+<span class="sd">                    e&#39;8</span>
+<span class="sd">                    r8</span>
+<span class="sd">                    g&#39;8</span>
+<span class="sd">                    r4.</span>
+<span class="sd">                }</span>
+<span class="sd">                \new Staff</span>
+<span class="sd">                {</span>
+<span class="sd">                    r8</span>
+<span class="sd">                    d&#39;8</span>
+<span class="sd">                    r4</span>
+<span class="sd">                    r8</span>
+<span class="sd">                    a&#39;8</span>
+<span class="sd">                    r4</span>
+<span class="sd">                }</span>
+<span class="sd">                \new Staff</span>
+<span class="sd">                {</span>
+<span class="sd">                    r4.</span>
+<span class="sd">                    f&#39;8</span>
+<span class="sd">                    r4</span>
+<span class="sd">                    b&#39;8</span>
+<span class="sd">                    c&#39;&#39;8</span>
+<span class="sd">                }</span>
+<span class="sd">            &gt;&gt;</span>
+
+<span class="sd">        ..  figure:: ../_images/Hocketer-qf9niqf7em.png</span>
 
 <span class="sd">    :func:`len()`:</span>
 <span class="sd">        Applying the :func:`len()` function to the hocketer will return the</span>
@@ -553,38 +582,41 @@
 <span class="sd">        &gt;&gt;&gt; for selection in music:</span>
 <span class="sd">        ...     score.append(abjad.Staff(selection))</span>
 <span class="sd">        &gt;&gt;&gt; abjad.attach(abjad.Clef(&#39;bass&#39;), abjad.select(score[2]).leaf(0))</span>
-<span class="sd">        &gt;&gt;&gt; abjad.f(score)</span>
-<span class="sd">        \new Score</span>
-<span class="sd">        &lt;&lt;</span>
-<span class="sd">            \new Staff</span>
-<span class="sd">            {</span>
-<span class="sd">                c&#39;4</span>
-<span class="sd">                d&#39;4</span>
-<span class="sd">                r4</span>
-<span class="sd">                f&#39;4</span>
-<span class="sd">                r4</span>
-<span class="sd">                a&#39;4</span>
-<span class="sd">                r2</span>
-<span class="sd">            }</span>
-<span class="sd">            \new Staff</span>
-<span class="sd">            {</span>
-<span class="sd">                R1</span>
-<span class="sd">                r2</span>
-<span class="sd">                b&#39;4</span>
-<span class="sd">                c&#39;&#39;4</span>
-<span class="sd">            }</span>
-<span class="sd">            \new Staff</span>
-<span class="sd">            {</span>
-<span class="sd">                \clef &quot;bass&quot;</span>
-<span class="sd">                r2</span>
-<span class="sd">                e4</span>
-<span class="sd">                r4</span>
-<span class="sd">                g4</span>
-<span class="sd">                r2.</span>
-<span class="sd">            }</span>
-<span class="sd">        &gt;&gt;</span>
+<span class="sd">        &gt;&gt;&gt; abjad.show(score)</span>
 
-<span class="sd">        .. figure:: ../_images/Hocketer-akuL9BDgw8.png</span>
+<span class="sd">        ..  docs::</span>
+
+<span class="sd">            \new Score</span>
+<span class="sd">            &lt;&lt;</span>
+<span class="sd">                \new Staff</span>
+<span class="sd">                {</span>
+<span class="sd">                    c&#39;4</span>
+<span class="sd">                    d&#39;4</span>
+<span class="sd">                    r4</span>
+<span class="sd">                    f&#39;4</span>
+<span class="sd">                    r4</span>
+<span class="sd">                    a&#39;4</span>
+<span class="sd">                    r2</span>
+<span class="sd">                }</span>
+<span class="sd">                \new Staff</span>
+<span class="sd">                {</span>
+<span class="sd">                    R1</span>
+<span class="sd">                    r2</span>
+<span class="sd">                    b&#39;4</span>
+<span class="sd">                    c&#39;&#39;4</span>
+<span class="sd">                }</span>
+<span class="sd">                \new Staff</span>
+<span class="sd">                {</span>
+<span class="sd">                    \clef &quot;bass&quot;</span>
+<span class="sd">                    r2</span>
+<span class="sd">                    e4</span>
+<span class="sd">                    r4</span>
+<span class="sd">                    g4</span>
+<span class="sd">                    r2.</span>
+<span class="sd">                }</span>
+<span class="sd">            &gt;&gt;</span>
+
+<span class="sd">        ..  figure:: ../_images/Hocketer-akuL9BDgw8.png</span>
 
 <span class="sd">        Note that changing :attr:`n_voices` will reset :attr:`pitch_ranges`:</span>
 
@@ -623,31 +655,34 @@
 <span class="sd">        &gt;&gt;&gt; score = abjad.Score()</span>
 <span class="sd">        &gt;&gt;&gt; for selection in music:</span>
 <span class="sd">        ...     score.append(abjad.Staff(selection))</span>
-<span class="sd">        &gt;&gt;&gt; abjad.f(score)</span>
-<span class="sd">        \new Score</span>
-<span class="sd">        &lt;&lt;</span>
-<span class="sd">            \new Staff</span>
-<span class="sd">            {</span>
-<span class="sd">                r8</span>
-<span class="sd">                d&#39;8</span>
-<span class="sd">                r4</span>
-<span class="sd">                g&#39;8</span>
-<span class="sd">                r4.</span>
-<span class="sd">            }</span>
-<span class="sd">            \new Staff</span>
-<span class="sd">            {</span>
-<span class="sd">                c&#39;8</span>
-<span class="sd">                r8</span>
-<span class="sd">                e&#39;8</span>
-<span class="sd">                f&#39;8</span>
-<span class="sd">                r8</span>
-<span class="sd">                a&#39;8</span>
-<span class="sd">                b&#39;8</span>
-<span class="sd">                c&#39;&#39;8</span>
-<span class="sd">            }</span>
-<span class="sd">        &gt;&gt;</span>
+<span class="sd">        &gt;&gt;&gt; abjad.show(score)</span>
 
-<span class="sd">        .. figure:: ../_images/Hocketer-xyecbupzmm.png</span>
+<span class="sd">        ..  docs::</span>
+
+<span class="sd">            \new Score</span>
+<span class="sd">            &lt;&lt;</span>
+<span class="sd">                \new Staff</span>
+<span class="sd">                {</span>
+<span class="sd">                    r8</span>
+<span class="sd">                    d&#39;8</span>
+<span class="sd">                    r4</span>
+<span class="sd">                    g&#39;8</span>
+<span class="sd">                    r4.</span>
+<span class="sd">                }</span>
+<span class="sd">                \new Staff</span>
+<span class="sd">                {</span>
+<span class="sd">                    c&#39;8</span>
+<span class="sd">                    r8</span>
+<span class="sd">                    e&#39;8</span>
+<span class="sd">                    f&#39;8</span>
+<span class="sd">                    r8</span>
+<span class="sd">                    a&#39;8</span>
+<span class="sd">                    b&#39;8</span>
+<span class="sd">                    c&#39;&#39;8</span>
+<span class="sd">                }</span>
+<span class="sd">            &gt;&gt;</span>
+
+<span class="sd">        ..  figure:: ../_images/Hocketer-xyecbupzmm.png</span>
 
 <span class="sd">        Use the method :meth:`reset_weights` to reset the weights back to their</span>
 <span class="sd">        default values.</span>
@@ -675,36 +710,39 @@
 <span class="sd">        &gt;&gt;&gt; score = abjad.Score()</span>
 <span class="sd">        &gt;&gt;&gt; for selection in music:</span>
 <span class="sd">        ...     score.append(abjad.Staff(selection))</span>
-<span class="sd">        &gt;&gt;&gt; abjad.f(score)</span>
-<span class="sd">        \new Score</span>
-<span class="sd">        &lt;&lt;</span>
-<span class="sd">            \new Staff</span>
-<span class="sd">            {</span>
-<span class="sd">                c&#39;4</span>
-<span class="sd">                d&#39;4</span>
-<span class="sd">                e&#39;4</span>
-<span class="sd">                r4</span>
-<span class="sd">            }</span>
-<span class="sd">            \new Staff</span>
-<span class="sd">            {</span>
-<span class="sd">                r2</span>
-<span class="sd">                e&#39;4</span>
-<span class="sd">                f&#39;4</span>
-<span class="sd">            }</span>
-<span class="sd">            \new Staff</span>
-<span class="sd">            {</span>
-<span class="sd">                r2.</span>
-<span class="sd">                f&#39;4</span>
-<span class="sd">            }</span>
-<span class="sd">            \new Staff</span>
-<span class="sd">            {</span>
-<span class="sd">                r4</span>
-<span class="sd">                d&#39;4</span>
-<span class="sd">                r2</span>
-<span class="sd">            }</span>
-<span class="sd">        &gt;&gt;</span>
+<span class="sd">        &gt;&gt;&gt; abjad.show(score)</span>
 
-<span class="sd">        .. figure:: ../_images/Hocketer-ytjqsp7r2bn.png</span>
+<span class="sd">        ..  docs::</span>
+
+<span class="sd">            \new Score</span>
+<span class="sd">            &lt;&lt;</span>
+<span class="sd">                \new Staff</span>
+<span class="sd">                {</span>
+<span class="sd">                    c&#39;4</span>
+<span class="sd">                    d&#39;4</span>
+<span class="sd">                    e&#39;4</span>
+<span class="sd">                    r4</span>
+<span class="sd">                }</span>
+<span class="sd">                \new Staff</span>
+<span class="sd">                {</span>
+<span class="sd">                    r2</span>
+<span class="sd">                    e&#39;4</span>
+<span class="sd">                    f&#39;4</span>
+<span class="sd">                }</span>
+<span class="sd">                \new Staff</span>
+<span class="sd">                {</span>
+<span class="sd">                    r2.</span>
+<span class="sd">                    f&#39;4</span>
+<span class="sd">                }</span>
+<span class="sd">                \new Staff</span>
+<span class="sd">                {</span>
+<span class="sd">                    r4</span>
+<span class="sd">                    d&#39;4</span>
+<span class="sd">                    r2</span>
+<span class="sd">                }</span>
+<span class="sd">            &gt;&gt;</span>
+
+<span class="sd">        ..  figure:: ../_images/Hocketer-ytjqsp7r2bn.png</span>
 
 <span class="sd">    :attr:`force_k_voices`:</span>
 <span class="sd">        It is important to note that changing :attr:`k` to a higher value does</span>
@@ -725,46 +763,49 @@
 <span class="sd">        &gt;&gt;&gt; score = abjad.Score()</span>
 <span class="sd">        &gt;&gt;&gt; for selection in music:</span>
 <span class="sd">        ...     score.append(abjad.Staff(selection))</span>
-<span class="sd">        &gt;&gt;&gt; abjad.f(score)</span>
-<span class="sd">        \new Score</span>
-<span class="sd">        &lt;&lt;</span>
-<span class="sd">            \new Staff</span>
-<span class="sd">            {</span>
-<span class="sd">                c&#39;8</span>
-<span class="sd">                d&#39;8</span>
-<span class="sd">                r8</span>
-<span class="sd">                f&#39;8</span>
-<span class="sd">                g&#39;8</span>
-<span class="sd">                a&#39;8</span>
-<span class="sd">                b&#39;8</span>
-<span class="sd">                c&#39;&#39;8</span>
-<span class="sd">            }</span>
-<span class="sd">            \new Staff</span>
-<span class="sd">            {</span>
-<span class="sd">                c&#39;8</span>
-<span class="sd">                r8</span>
-<span class="sd">                e&#39;8</span>
-<span class="sd">                f&#39;8</span>
-<span class="sd">                r4</span>
-<span class="sd">                b&#39;8</span>
-<span class="sd">                r8</span>
-<span class="sd">            }</span>
-<span class="sd">            \new Staff</span>
-<span class="sd">            {</span>
-<span class="sd">                r8</span>
-<span class="sd">                d&#39;8</span>
-<span class="sd">                e&#39;8</span>
-<span class="sd">                r8</span>
-<span class="sd">                g&#39;8</span>
-<span class="sd">                a&#39;8</span>
-<span class="sd">                r8</span>
-<span class="sd">                c&#39;&#39;8</span>
-<span class="sd">            }</span>
-<span class="sd">        &gt;&gt;</span>
+<span class="sd">        &gt;&gt;&gt; abjad.show(score)</span>
 
-<span class="sd">        .. figure:: ../_images/Hocketer-9limlogk0b8.png</span>
+<span class="sd">        ..  docs::</span>
 
-<span class="sd">    .. error::</span>
+<span class="sd">            \new Score</span>
+<span class="sd">            &lt;&lt;</span>
+<span class="sd">                \new Staff</span>
+<span class="sd">                {</span>
+<span class="sd">                    c&#39;8</span>
+<span class="sd">                    d&#39;8</span>
+<span class="sd">                    r8</span>
+<span class="sd">                    f&#39;8</span>
+<span class="sd">                    g&#39;8</span>
+<span class="sd">                    a&#39;8</span>
+<span class="sd">                    b&#39;8</span>
+<span class="sd">                    c&#39;&#39;8</span>
+<span class="sd">                }</span>
+<span class="sd">                \new Staff</span>
+<span class="sd">                {</span>
+<span class="sd">                    c&#39;8</span>
+<span class="sd">                    r8</span>
+<span class="sd">                    e&#39;8</span>
+<span class="sd">                    f&#39;8</span>
+<span class="sd">                    r4</span>
+<span class="sd">                    b&#39;8</span>
+<span class="sd">                    r8</span>
+<span class="sd">                }</span>
+<span class="sd">                \new Staff</span>
+<span class="sd">                {</span>
+<span class="sd">                    r8</span>
+<span class="sd">                    d&#39;8</span>
+<span class="sd">                    e&#39;8</span>
+<span class="sd">                    r8</span>
+<span class="sd">                    g&#39;8</span>
+<span class="sd">                    a&#39;8</span>
+<span class="sd">                    r8</span>
+<span class="sd">                    c&#39;&#39;8</span>
+<span class="sd">                }</span>
+<span class="sd">            &gt;&gt;</span>
+
+<span class="sd">        ..  figure:: ../_images/Hocketer-9limlogk0b8.png</span>
+
+<span class="sd">    ..  error::</span>
 
 <span class="sd">        Setting :attr:`force_k_voices` to ``True`` when :attr:`k` is larger</span>
 <span class="sd">        than :attr:`n_voices` will raise a :exc:`ValueError` exception:</span>
@@ -791,29 +832,32 @@
 <span class="sd">        &gt;&gt;&gt; score = abjad.Score()</span>
 <span class="sd">        &gt;&gt;&gt; for selection in music:</span>
 <span class="sd">        ...     score.append(abjad.Staff(selection))</span>
-<span class="sd">        &gt;&gt;&gt; abjad.f(score)</span>
-<span class="sd">        \new Score</span>
-<span class="sd">        &lt;&lt;</span>
-<span class="sd">            \new Staff</span>
-<span class="sd">            {</span>
-<span class="sd">                r2</span>
-<span class="sd">                &lt;e&#39; g&#39; b&#39;&gt;4</span>
-<span class="sd">                r4</span>
-<span class="sd">            }</span>
-<span class="sd">            \new Staff</span>
-<span class="sd">            {</span>
-<span class="sd">                &lt;c&#39; e&#39; g&#39;&gt;4</span>
-<span class="sd">                &lt;d&#39; f&#39; a&#39;&gt;4</span>
-<span class="sd">                r2</span>
-<span class="sd">            }</span>
-<span class="sd">            \new Staff</span>
-<span class="sd">            {</span>
-<span class="sd">                r2.</span>
-<span class="sd">                &lt;c&#39; f&#39; a&#39;&gt;4</span>
-<span class="sd">            }</span>
-<span class="sd">        &gt;&gt;</span>
+<span class="sd">        &gt;&gt;&gt; abjad.show(score)</span>
 
-<span class="sd">        .. figure:: ../_images/Hocketer-6gwHXAs6IY.png</span>
+<span class="sd">        ..  docs::</span>
+
+<span class="sd">            \new Score</span>
+<span class="sd">            &lt;&lt;</span>
+<span class="sd">                \new Staff</span>
+<span class="sd">                {</span>
+<span class="sd">                    r2</span>
+<span class="sd">                    &lt;e&#39; g&#39; b&#39;&gt;4</span>
+<span class="sd">                    r4</span>
+<span class="sd">                }</span>
+<span class="sd">                \new Staff</span>
+<span class="sd">                {</span>
+<span class="sd">                    &lt;c&#39; e&#39; g&#39;&gt;4</span>
+<span class="sd">                    &lt;d&#39; f&#39; a&#39;&gt;4</span>
+<span class="sd">                    r2</span>
+<span class="sd">                }</span>
+<span class="sd">                \new Staff</span>
+<span class="sd">                {</span>
+<span class="sd">                    r2.</span>
+<span class="sd">                    &lt;c&#39; f&#39; a&#39;&gt;4</span>
+<span class="sd">                }</span>
+<span class="sd">            &gt;&gt;</span>
+
+<span class="sd">        ..  figure:: ../_images/Hocketer-6gwHXAs6IY.png</span>
 
 <span class="sd">        &gt;&gt;&gt; container = abjad.Container(</span>
 <span class="sd">        ...     r&quot;&lt;c&#39; e&#39; g&#39;&gt;4 &lt;d&#39; f&#39; a&#39;&gt;4 &lt;e&#39; g&#39; b&#39;&gt;4 &lt;f&#39; a&#39; c&#39;&gt;4&quot;</span>
@@ -826,35 +870,38 @@
 <span class="sd">        &gt;&gt;&gt; score = abjad.Score()</span>
 <span class="sd">        &gt;&gt;&gt; for selection in music:</span>
 <span class="sd">        ...     score.append(abjad.Staff(selection))</span>
-<span class="sd">        &gt;&gt;&gt; abjad.f(score)</span>
-<span class="sd">        \new Score</span>
-<span class="sd">        &lt;&lt;</span>
-<span class="sd">            \new Staff</span>
-<span class="sd">            {</span>
-<span class="sd">                e&#39;4</span>
-<span class="sd">                f&#39;4</span>
-<span class="sd">                e&#39;4</span>
-<span class="sd">                a&#39;4</span>
-<span class="sd">            }</span>
-<span class="sd">            \new Staff</span>
-<span class="sd">            {</span>
-<span class="sd">                g&#39;4</span>
-<span class="sd">                d&#39;4</span>
-<span class="sd">                b&#39;4</span>
-<span class="sd">                c&#39;4</span>
-<span class="sd">            }</span>
-<span class="sd">            \new Staff</span>
-<span class="sd">            {</span>
-<span class="sd">                c&#39;4</span>
-<span class="sd">                a&#39;4</span>
-<span class="sd">                g&#39;4</span>
-<span class="sd">                f&#39;4</span>
-<span class="sd">            }</span>
-<span class="sd">        &gt;&gt;</span>
+<span class="sd">        &gt;&gt;&gt; abjad.show(score)</span>
 
-<span class="sd">        .. figure:: ../_images/Hocketer-gGsBUch6Ai.png</span>
+<span class="sd">        ..  docs::</span>
 
-<span class="sd">    .. note::</span>
+<span class="sd">            \new Score</span>
+<span class="sd">            &lt;&lt;</span>
+<span class="sd">                \new Staff</span>
+<span class="sd">                {</span>
+<span class="sd">                    e&#39;4</span>
+<span class="sd">                    f&#39;4</span>
+<span class="sd">                    e&#39;4</span>
+<span class="sd">                    a&#39;4</span>
+<span class="sd">                }</span>
+<span class="sd">                \new Staff</span>
+<span class="sd">                {</span>
+<span class="sd">                    g&#39;4</span>
+<span class="sd">                    d&#39;4</span>
+<span class="sd">                    b&#39;4</span>
+<span class="sd">                    c&#39;4</span>
+<span class="sd">                }</span>
+<span class="sd">                \new Staff</span>
+<span class="sd">                {</span>
+<span class="sd">                    c&#39;4</span>
+<span class="sd">                    a&#39;4</span>
+<span class="sd">                    g&#39;4</span>
+<span class="sd">                    f&#39;4</span>
+<span class="sd">                }</span>
+<span class="sd">            &gt;&gt;</span>
+
+<span class="sd">        ..  figure:: ../_images/Hocketer-gGsBUch6Ai.png</span>
+
+<span class="sd">    ..  note::</span>
 
 <span class="sd">        It is very important to note that :attr:`explode_chords` does not take</span>
 <span class="sd">        :attr:`weights` nor :attr:`k` in consideration. It does, however, take</span>
@@ -876,42 +923,45 @@
 <span class="sd">        &gt;&gt;&gt; score = abjad.Score()</span>
 <span class="sd">        &gt;&gt;&gt; for selection in music:</span>
 <span class="sd">        ...     score.append(abjad.Staff(selection))</span>
-<span class="sd">        &gt;&gt;&gt; abjad.f(score)</span>
-<span class="sd">        \new Score</span>
-<span class="sd">        &lt;&lt;</span>
-<span class="sd">            \new Staff</span>
-<span class="sd">            {</span>
-<span class="sd">                e&#39;4</span>
-<span class="sd">                f&#39;4</span>
-<span class="sd">                g&#39;4</span>
-<span class="sd">                c&#39;&#39;4</span>
-<span class="sd">            }</span>
-<span class="sd">            \new Staff</span>
-<span class="sd">            {</span>
-<span class="sd">                g&#39;4</span>
-<span class="sd">                a&#39;4</span>
-<span class="sd">                b&#39;4</span>
-<span class="sd">                a&#39;4</span>
-<span class="sd">            }</span>
-<span class="sd">            \new Staff</span>
-<span class="sd">            {</span>
-<span class="sd">                c&#39;4</span>
-<span class="sd">                d&#39;4</span>
-<span class="sd">                e&#39;4</span>
-<span class="sd">                f&#39;4</span>
-<span class="sd">            }</span>
-<span class="sd">        &gt;&gt;</span>
+<span class="sd">        &gt;&gt;&gt; abjad.show(score)</span>
 
-<span class="sd">        .. figure:: ../_images/Hocketer-Rycx76se89.png</span>
+<span class="sd">        ..  docs::</span>
 
-<span class="sd">    .. warning::</span>
+<span class="sd">            \new Score</span>
+<span class="sd">            &lt;&lt;</span>
+<span class="sd">                \new Staff</span>
+<span class="sd">                {</span>
+<span class="sd">                    e&#39;4</span>
+<span class="sd">                    f&#39;4</span>
+<span class="sd">                    g&#39;4</span>
+<span class="sd">                    c&#39;&#39;4</span>
+<span class="sd">                }</span>
+<span class="sd">                \new Staff</span>
+<span class="sd">                {</span>
+<span class="sd">                    g&#39;4</span>
+<span class="sd">                    a&#39;4</span>
+<span class="sd">                    b&#39;4</span>
+<span class="sd">                    a&#39;4</span>
+<span class="sd">                }</span>
+<span class="sd">                \new Staff</span>
+<span class="sd">                {</span>
+<span class="sd">                    c&#39;4</span>
+<span class="sd">                    d&#39;4</span>
+<span class="sd">                    e&#39;4</span>
+<span class="sd">                    f&#39;4</span>
+<span class="sd">                }</span>
+<span class="sd">            &gt;&gt;</span>
+
+<span class="sd">        ..  figure:: ../_images/Hocketer-Rycx76se89.png</span>
+
+<span class="sd">    ..  warning::</span>
 
 <span class="sd">        When setting :attr:`explode_chords` to ``True``, if :attr:`n_voices` is</span>
 <span class="sd">        less than the number of pitches in a chord then only the first</span>
 <span class="sd">        :attr:`n_voices`-pitches will be considered in the distribution.</span>
 
 <span class="sd">    :attr:`disable_rewrite_meter`:</span>
-<span class="sd">        By default, this class uses the |abjad.mutate().rewrite_meter()|</span>
+<span class="sd">        By default, this class uses the |abjad.Meter.rewrite_meter()|</span>
 <span class="sd">        mutation, which is necessary for cleaning up the rests.</span>
 
 <span class="sd">        &gt;&gt;&gt; container = abjad.Container(r&quot;c&#39;8 d&#39;8 e&#39;8 f&#39;8 g&#39;8 a&#39;8 b&#39;8 c&#39;&#39;8&quot;)</span>
@@ -920,31 +970,34 @@
 <span class="sd">        &gt;&gt;&gt; score = abjad.Score()</span>
 <span class="sd">        &gt;&gt;&gt; for selection in music:</span>
 <span class="sd">        ...     score.append(abjad.Staff(selection))</span>
-<span class="sd">        &gt;&gt;&gt; abjad.f(score)</span>
-<span class="sd">        \new Score</span>
-<span class="sd">        &lt;&lt;</span>
-<span class="sd">            \new Staff</span>
-<span class="sd">            {</span>
-<span class="sd">                c&#39;8</span>
-<span class="sd">                d&#39;8</span>
-<span class="sd">                r4</span>
-<span class="sd">                r8</span>
-<span class="sd">                a&#39;8</span>
-<span class="sd">                r4</span>
-<span class="sd">            }</span>
-<span class="sd">            \new Staff</span>
-<span class="sd">            {</span>
-<span class="sd">                r4</span>
-<span class="sd">                e&#39;8</span>
-<span class="sd">                f&#39;8</span>
-<span class="sd">                g&#39;8</span>
-<span class="sd">                r8</span>
-<span class="sd">                b&#39;8</span>
-<span class="sd">                c&#39;&#39;8</span>
-<span class="sd">            }</span>
-<span class="sd">        &gt;&gt;</span>
+<span class="sd">        &gt;&gt;&gt; abjad.show(score)</span>
 
-<span class="sd">        .. figure:: ../_images/Hocketer-qtuvb2zrlz.png</span>
+<span class="sd">        ..  docs::</span>
+
+<span class="sd">            \new Score</span>
+<span class="sd">            &lt;&lt;</span>
+<span class="sd">                \new Staff</span>
+<span class="sd">                {</span>
+<span class="sd">                    c&#39;8</span>
+<span class="sd">                    d&#39;8</span>
+<span class="sd">                    r4</span>
+<span class="sd">                    r8</span>
+<span class="sd">                    a&#39;8</span>
+<span class="sd">                    r4</span>
+<span class="sd">                }</span>
+<span class="sd">                \new Staff</span>
+<span class="sd">                {</span>
+<span class="sd">                    r4</span>
+<span class="sd">                    e&#39;8</span>
+<span class="sd">                    f&#39;8</span>
+<span class="sd">                    g&#39;8</span>
+<span class="sd">                    r8</span>
+<span class="sd">                    b&#39;8</span>
+<span class="sd">                    c&#39;&#39;8</span>
+<span class="sd">                }</span>
+<span class="sd">            &gt;&gt;</span>
+
+<span class="sd">        ..  figure:: ../_images/Hocketer-qtuvb2zrlz.png</span>
 
 <span class="sd">        Set :attr:`disable_rewrite_meter` to ``True`` in order to disable this</span>
 <span class="sd">        behaviour.</span>
@@ -957,34 +1010,37 @@
 <span class="sd">        &gt;&gt;&gt; score = abjad.Score()</span>
 <span class="sd">        &gt;&gt;&gt; for selection in music:</span>
 <span class="sd">        ...     score.append(abjad.Staff(selection))</span>
-<span class="sd">        &gt;&gt;&gt; abjad.f(score)</span>
-<span class="sd">        \new Score</span>
-<span class="sd">        &lt;&lt;</span>
-<span class="sd">            \new Staff</span>
-<span class="sd">            {</span>
-<span class="sd">                c&#39;8</span>
-<span class="sd">                d&#39;8</span>
-<span class="sd">                r8</span>
-<span class="sd">                r8</span>
-<span class="sd">                r8</span>
-<span class="sd">                a&#39;8</span>
-<span class="sd">                r8</span>
-<span class="sd">                r8</span>
-<span class="sd">            }</span>
-<span class="sd">            \new Staff</span>
-<span class="sd">            {</span>
-<span class="sd">                r8</span>
-<span class="sd">                r8</span>
-<span class="sd">                e&#39;8</span>
-<span class="sd">                f&#39;8</span>
-<span class="sd">                g&#39;8</span>
-<span class="sd">                r8</span>
-<span class="sd">                b&#39;8</span>
-<span class="sd">                c&#39;&#39;8</span>
-<span class="sd">            }</span>
-<span class="sd">        &gt;&gt;</span>
+<span class="sd">        &gt;&gt;&gt; abjad.show(score)</span>
 
-<span class="sd">        .. figure:: ../_images/Hocketer-l8cn8w7cju.png</span>
+<span class="sd">        ..  docs::</span>
+
+<span class="sd">            \new Score</span>
+<span class="sd">            &lt;&lt;</span>
+<span class="sd">                \new Staff</span>
+<span class="sd">                {</span>
+<span class="sd">                    c&#39;8</span>
+<span class="sd">                    d&#39;8</span>
+<span class="sd">                    r8</span>
+<span class="sd">                    r8</span>
+<span class="sd">                    r8</span>
+<span class="sd">                    a&#39;8</span>
+<span class="sd">                    r8</span>
+<span class="sd">                    r8</span>
+<span class="sd">                }</span>
+<span class="sd">                \new Staff</span>
+<span class="sd">                {</span>
+<span class="sd">                    r8</span>
+<span class="sd">                    r8</span>
+<span class="sd">                    e&#39;8</span>
+<span class="sd">                    f&#39;8</span>
+<span class="sd">                    g&#39;8</span>
+<span class="sd">                    r8</span>
+<span class="sd">                    b&#39;8</span>
+<span class="sd">                    c&#39;&#39;8</span>
+<span class="sd">                }</span>
+<span class="sd">            &gt;&gt;</span>
+
+<span class="sd">        ..  figure:: ../_images/Hocketer-l8cn8w7cju.png</span>
 
 <span class="sd">    :attr:`use_multimeasure_rests`:</span>
 <span class="sd">        By default, this class rewrites all measures that are filled with</span>
@@ -996,29 +1052,32 @@
 <span class="sd">        &gt;&gt;&gt; score = abjad.Score()</span>
 <span class="sd">        &gt;&gt;&gt; for selection in music:</span>
 <span class="sd">        ...     score.append(abjad.Staff(selection))</span>
-<span class="sd">        &gt;&gt;&gt; abjad.f(score)</span>
-<span class="sd">        \new Score</span>
-<span class="sd">        &lt;&lt;</span>
-<span class="sd">            \new Staff</span>
-<span class="sd">            {</span>
-<span class="sd">                \time 3/4</span>
-<span class="sd">                R1 * 3/4</span>
-<span class="sd">                r4</span>
-<span class="sd">                g&#39;4</span>
-<span class="sd">                a&#39;4</span>
-<span class="sd">            }</span>
-<span class="sd">            \new Staff</span>
-<span class="sd">            {</span>
-<span class="sd">                \time 3/4</span>
-<span class="sd">                c&#39;4</span>
-<span class="sd">                d&#39;4</span>
-<span class="sd">                e&#39;4</span>
-<span class="sd">                f&#39;4</span>
-<span class="sd">                r2</span>
-<span class="sd">            }</span>
-<span class="sd">        &gt;&gt;</span>
+<span class="sd">        &gt;&gt;&gt; abjad.show(score)</span>
 
-<span class="sd">        .. figure:: ../_images/Hocketer-ri1ursa6esi.png</span>
+<span class="sd">        ..  docs::</span>
+
+<span class="sd">            \new Score</span>
+<span class="sd">            &lt;&lt;</span>
+<span class="sd">                \new Staff</span>
+<span class="sd">                {</span>
+<span class="sd">                    \time 3/4</span>
+<span class="sd">                    R1 * 3/4</span>
+<span class="sd">                    r4</span>
+<span class="sd">                    g&#39;4</span>
+<span class="sd">                    a&#39;4</span>
+<span class="sd">                }</span>
+<span class="sd">                \new Staff</span>
+<span class="sd">                {</span>
+<span class="sd">                    \time 3/4</span>
+<span class="sd">                    c&#39;4</span>
+<span class="sd">                    d&#39;4</span>
+<span class="sd">                    e&#39;4</span>
+<span class="sd">                    f&#39;4</span>
+<span class="sd">                    r2</span>
+<span class="sd">                }</span>
+<span class="sd">            &gt;&gt;</span>
+
+<span class="sd">        ..  figure:: ../_images/Hocketer-ri1ursa6esi.png</span>
 
 <span class="sd">        Set :attr:`use_multimeasure_rests` to ``False`` to disable this</span>
 <span class="sd">        behaviour.</span>
@@ -1031,29 +1090,32 @@
 <span class="sd">        &gt;&gt;&gt; score = abjad.Score()</span>
 <span class="sd">        &gt;&gt;&gt; for selection in music:</span>
 <span class="sd">        ...     score.append(abjad.Staff(selection))</span>
-<span class="sd">        &gt;&gt;&gt; abjad.f(score)</span>
-<span class="sd">        \new Score</span>
-<span class="sd">        &lt;&lt;</span>
-<span class="sd">            \new Staff</span>
-<span class="sd">            {</span>
-<span class="sd">                \time 3/4</span>
-<span class="sd">                r2.</span>
-<span class="sd">                r4</span>
-<span class="sd">                g&#39;4</span>
-<span class="sd">                a&#39;4</span>
-<span class="sd">            }</span>
-<span class="sd">            \new Staff</span>
-<span class="sd">            {</span>
-<span class="sd">                \time 3/4</span>
-<span class="sd">                c&#39;4</span>
-<span class="sd">                d&#39;4</span>
-<span class="sd">                e&#39;4</span>
-<span class="sd">                f&#39;4</span>
-<span class="sd">                r2</span>
-<span class="sd">            }</span>
-<span class="sd">        &gt;&gt;</span>
+<span class="sd">        &gt;&gt;&gt; abjad.show(score)</span>
 
-<span class="sd">        .. figure:: ../_images/Hocketer-20idpp518lf.png</span>
+<span class="sd">        ..  docs::</span>
+
+<span class="sd">            \new Score</span>
+<span class="sd">            &lt;&lt;</span>
+<span class="sd">                \new Staff</span>
+<span class="sd">                {</span>
+<span class="sd">                    \time 3/4</span>
+<span class="sd">                    r2.</span>
+<span class="sd">                    r4</span>
+<span class="sd">                    g&#39;4</span>
+<span class="sd">                    a&#39;4</span>
+<span class="sd">                }</span>
+<span class="sd">                \new Staff</span>
+<span class="sd">                {</span>
+<span class="sd">                    \time 3/4</span>
+<span class="sd">                    c&#39;4</span>
+<span class="sd">                    d&#39;4</span>
+<span class="sd">                    e&#39;4</span>
+<span class="sd">                    f&#39;4</span>
+<span class="sd">                    r2</span>
+<span class="sd">                }</span>
+<span class="sd">            &gt;&gt;</span>
+
+<span class="sd">        ..  figure:: ../_images/Hocketer-20idpp518lf.png</span>
 
 <span class="sd">    :attr:`contents`:</span>
 <span class="sd">        Use the property :attr:`contents` to get the input container upon which</span>
@@ -1064,39 +1126,48 @@
 
 <span class="sd">        &gt;&gt;&gt; container = abjad.Container(r&quot;c&#39;4 d&#39;4 e&#39;4 f&#39;4&quot;)</span>
 <span class="sd">        &gt;&gt;&gt; hocketer = auxjad.Hocketer(container)</span>
-<span class="sd">        &gt;&gt;&gt; abjad.f(hocketer.contents)</span>
-<span class="sd">        {</span>
-<span class="sd">            c&#39;4</span>
-<span class="sd">            d&#39;4</span>
-<span class="sd">            e&#39;4</span>
-<span class="sd">            f&#39;4</span>
-<span class="sd">        }</span>
+<span class="sd">        &gt;&gt;&gt; abjad.show(hocketer.contents)</span>
 
-<span class="sd">        .. figure:: ../_images/Hocketer-t07z297s2e.png</span>
+<span class="sd">        ..  docs::</span>
+
+<span class="sd">            {</span>
+<span class="sd">                c&#39;4</span>
+<span class="sd">                d&#39;4</span>
+<span class="sd">                e&#39;4</span>
+<span class="sd">                f&#39;4</span>
+<span class="sd">            }</span>
+
+<span class="sd">        ..  figure:: ../_images/Hocketer-t07z297s2e.png</span>
 
 <span class="sd">        &gt;&gt;&gt; hocketer()</span>
-<span class="sd">        &gt;&gt;&gt; abjad.f(hocketer.contents)</span>
-<span class="sd">        {</span>
-<span class="sd">            c&#39;4</span>
-<span class="sd">            d&#39;4</span>
-<span class="sd">            e&#39;4</span>
-<span class="sd">            f&#39;4</span>
-<span class="sd">        }</span>
+<span class="sd">        &gt;&gt;&gt; abjad.show(hocketer.contents)</span>
 
-<span class="sd">        .. figure:: ../_images/Hocketer-7g6cbvfgr1j.png</span>
+<span class="sd">        ..  docs::</span>
+
+<span class="sd">            {</span>
+<span class="sd">                c&#39;4</span>
+<span class="sd">                d&#39;4</span>
+<span class="sd">                e&#39;4</span>
+<span class="sd">                f&#39;4</span>
+<span class="sd">            }</span>
+
+<span class="sd">        ..  figure:: ../_images/Hocketer-7g6cbvfgr1j.png</span>
 
 <span class="sd">        &gt;&gt;&gt; hocketer.contents = abjad.Container(r&quot;cs2 ds2&quot;)</span>
-<span class="sd">        &gt;&gt;&gt; abjad.f(hocketer.contents)</span>
-<span class="sd">        {</span>
-<span class="sd">            cs2</span>
-<span class="sd">            ds2</span>
-<span class="sd">        }</span>
+<span class="sd">        &gt;&gt;&gt; abjad.show(hocketer.contents)</span>
 
-<span class="sd">        .. figure:: ../_images/Hocketer-2l7eywciib3.png</span>
+<span class="sd">        ..  docs::</span>
 
-<span class="sd">    Tweaking |abjad.mutate().rewrite_meter()|:</span>
+<span class="sd">            {</span>
+<span class="sd">                cs2</span>
+<span class="sd">                ds2</span>
+<span class="sd">            }</span>
+
+<span class="sd">        ..  figure:: ../_images/Hocketer-2l7eywciib3.png</span>
+
+<span class="sd">    Tweaking |abjad.Meter.rewrite_meter()|:</span>
 <span class="sd">        This function uses the default logical tie splitting algorithm from</span>
-<span class="sd">        |abjad.mutate().rewrite_meter()|.</span>
+<span class="sd">        |abjad.Meter.rewrite_meter()|.</span>
 
 <span class="sd">        &gt;&gt;&gt; container = abjad.Container(r&quot;c&#39;4. d&#39;8 e&#39;2&quot;)</span>
 <span class="sd">        &gt;&gt;&gt; hocketer = auxjad.Hocketer(container,</span>
@@ -1106,18 +1177,21 @@
 <span class="sd">        &gt;&gt;&gt; score = abjad.Score()</span>
 <span class="sd">        &gt;&gt;&gt; for selection in music:</span>
 <span class="sd">        ...     score.append(abjad.Staff(selection))</span>
-<span class="sd">        &gt;&gt;&gt; abjad.f(score)</span>
-<span class="sd">        \new Score</span>
-<span class="sd">        &lt;&lt;</span>
-<span class="sd">            \new Staff</span>
-<span class="sd">            {</span>
-<span class="sd">                c&#39;4.</span>
-<span class="sd">                d&#39;8</span>
-<span class="sd">                e&#39;2</span>
-<span class="sd">            }</span>
-<span class="sd">        &gt;&gt;</span>
+<span class="sd">        &gt;&gt;&gt; abjad.show(score)</span>
 
-<span class="sd">        .. figure:: ../_images/Hocketer-g3fmvrkd6nw.png</span>
+<span class="sd">        ..  docs::</span>
+
+<span class="sd">            \new Score</span>
+<span class="sd">            &lt;&lt;</span>
+<span class="sd">                \new Staff</span>
+<span class="sd">                {</span>
+<span class="sd">                    c&#39;4.</span>
+<span class="sd">                    d&#39;8</span>
+<span class="sd">                    e&#39;2</span>
+<span class="sd">                }</span>
+<span class="sd">            &gt;&gt;</span>
+
+<span class="sd">        ..  figure:: ../_images/Hocketer-g3fmvrkd6nw.png</span>
 
 <span class="sd">        Set :attr:`boundary_depth` to a different number to change its</span>
 <span class="sd">        behaviour.</span>
@@ -1130,30 +1204,33 @@
 <span class="sd">        &gt;&gt;&gt; score = abjad.Score()</span>
 <span class="sd">        &gt;&gt;&gt; for selection in music:</span>
 <span class="sd">        ...     score.append(abjad.Staff(selection))</span>
-<span class="sd">        &gt;&gt;&gt; abjad.f(staff)</span>
-<span class="sd">        \new Score</span>
-<span class="sd">        &lt;&lt;</span>
-<span class="sd">            \new Staff</span>
-<span class="sd">            {</span>
-<span class="sd">                c&#39;4</span>
-<span class="sd">                ~</span>
-<span class="sd">                c&#39;8</span>
-<span class="sd">                d&#39;8</span>
-<span class="sd">                e&#39;2</span>
-<span class="sd">            }</span>
-<span class="sd">        &gt;&gt;</span>
+<span class="sd">        &gt;&gt;&gt; abjad.show(staff)</span>
 
-<span class="sd">        .. figure:: ../_images/Hocketer-g7r2oxsx8zc.png</span>
+<span class="sd">        ..  docs::</span>
+
+<span class="sd">            \new Score</span>
+<span class="sd">            &lt;&lt;</span>
+<span class="sd">                \new Staff</span>
+<span class="sd">                {</span>
+<span class="sd">                    c&#39;4</span>
+<span class="sd">                    ~</span>
+<span class="sd">                    c&#39;8</span>
+<span class="sd">                    d&#39;8</span>
+<span class="sd">                    e&#39;2</span>
+<span class="sd">                }</span>
+<span class="sd">            &gt;&gt;</span>
+
+<span class="sd">        ..  figure:: ../_images/Hocketer-g7r2oxsx8zc.png</span>
 
 <span class="sd">        Other arguments available for tweaking the output of</span>
-<span class="sd">        |abjad.mutate().rewrite_meter()| are :attr:`maximum_dot_count` and</span>
+<span class="sd">        |abjad.Meter.rewrite_meter()| are :attr:`maximum_dot_count` and</span>
 <span class="sd">        :attr:`rewrite_tuplets`, which work exactly as the identically named</span>
-<span class="sd">        arguments of |abjad.mutate().rewrite_meter()|.</span>
+<span class="sd">        arguments of |abjad.Meter.rewrite_meter()|.</span>
 
 <span class="sd">        This class also accepts the arguments ``fuse_across_groups_of_beats``,</span>
 <span class="sd">        ``fuse_quadruple_meter``, ``fuse_triple_meter``, and</span>
 <span class="sd">        ``extract_trivial_tuplets``, which are passed on to</span>
-<span class="sd">        |auxjad.mutate().prettify_rewrite_meter()| (the latter can be disabled</span>
+<span class="sd">        |auxjad.mutate.prettify_rewrite_meter()| (the latter can be disabled</span>
 <span class="sd">        by setting ``prettify_rewrite_meter`` to ``False``). See the</span>
 <span class="sd">        documentation of this function for more details on these arguments.</span>
 
@@ -1172,77 +1249,89 @@
 <span class="sd">        &gt;&gt;&gt; score = abjad.Score()</span>
 <span class="sd">        &gt;&gt;&gt; for selection in music:</span>
 <span class="sd">        ...     score.append(abjad.Staff(selection))</span>
-<span class="sd">        &gt;&gt;&gt; abjad.f(score)</span>
-<span class="sd">        \new Score</span>
-<span class="sd">        &lt;&lt;</span>
-<span class="sd">            \new Staff</span>
-<span class="sd">            {</span>
-<span class="sd">                \time 5/4</span>
-<span class="sd">                r4</span>
-<span class="sd">                \times 2/3 {</span>
-<span class="sd">                    c&#39;4</span>
-<span class="sd">                    d&#39;2</span>
+<span class="sd">        &gt;&gt;&gt; abjad.show(score)</span>
+
+<span class="sd">        ..  docs::</span>
+
+<span class="sd">            \new Score</span>
+<span class="sd">            &lt;&lt;</span>
+<span class="sd">                \new Staff</span>
+<span class="sd">                {</span>
+<span class="sd">                    \time 5/4</span>
+<span class="sd">                    r4</span>
+<span class="sd">                    \times 2/3</span>
+<span class="sd">                    {</span>
+<span class="sd">                        c&#39;4</span>
+<span class="sd">                        d&#39;2</span>
+<span class="sd">                    }</span>
+<span class="sd">                    r4.</span>
+<span class="sd">                    f&#39;8</span>
+<span class="sd">                    \times 4/5</span>
+<span class="sd">                    {</span>
+<span class="sd">                        \time 4/4</span>
+<span class="sd">                        r2.</span>
+<span class="sd">                        \times 2/3</span>
+<span class="sd">                        {</span>
+<span class="sd">                            a&#39;8</span>
+<span class="sd">                            r8</span>
+<span class="sd">                            r2</span>
+<span class="sd">                        }</span>
+<span class="sd">                    }</span>
 <span class="sd">                }</span>
-<span class="sd">                r4.</span>
-<span class="sd">                f&#39;8</span>
-<span class="sd">                \times 4/5 {</span>
+<span class="sd">                \new Staff</span>
+<span class="sd">                {</span>
+<span class="sd">                    \time 5/4</span>
+<span class="sd">                    R1 * 5/4</span>
 <span class="sd">                    \time 4/4</span>
-<span class="sd">                    r2.</span>
-<span class="sd">                    \times 2/3 {</span>
-<span class="sd">                        a&#39;8</span>
-<span class="sd">                        r8</span>
+<span class="sd">                    R1</span>
+<span class="sd">                }</span>
+<span class="sd">                \new Staff</span>
+<span class="sd">                {</span>
+<span class="sd">                    \time 5/4</span>
+<span class="sd">                    r4</span>
+<span class="sd">                    \times 2/3</span>
+<span class="sd">                    {</span>
+<span class="sd">                        r4</span>
+<span class="sd">                        d&#39;2</span>
+<span class="sd">                    }</span>
+<span class="sd">                    e&#39;4.</span>
+<span class="sd">                    f&#39;8</span>
+<span class="sd">                    \times 4/5</span>
+<span class="sd">                    {</span>
+<span class="sd">                        \time 4/4</span>
+<span class="sd">                        r2.</span>
+<span class="sd">                        \times 2/3</span>
+<span class="sd">                        {</span>
+<span class="sd">                            a&#39;8</span>
+<span class="sd">                            r8</span>
+<span class="sd">                            b&#39;2</span>
+<span class="sd">                        }</span>
+<span class="sd">                    }</span>
+<span class="sd">                }</span>
+<span class="sd">                \new Staff</span>
+<span class="sd">                {</span>
+<span class="sd">                    \time 5/4</span>
+<span class="sd">                    r4</span>
+<span class="sd">                    \times 2/3</span>
+<span class="sd">                    {</span>
+<span class="sd">                        c&#39;4</span>
 <span class="sd">                        r2</span>
 <span class="sd">                    }</span>
-<span class="sd">                }</span>
-<span class="sd">            }</span>
-<span class="sd">            \new Staff</span>
-<span class="sd">            {</span>
-<span class="sd">                \time 5/4</span>
-<span class="sd">                R1 * 5/4</span>
-<span class="sd">                \time 4/4</span>
-<span class="sd">                R1</span>
-<span class="sd">            }</span>
-<span class="sd">            \new Staff</span>
-<span class="sd">            {</span>
-<span class="sd">                \time 5/4</span>
-<span class="sd">                r4</span>
-<span class="sd">                \times 2/3 {</span>
-<span class="sd">                    r4</span>
-<span class="sd">                    d&#39;2</span>
-<span class="sd">                }</span>
-<span class="sd">                e&#39;4.</span>
-<span class="sd">                f&#39;8</span>
-<span class="sd">                \times 4/5 {</span>
-<span class="sd">                    \time 4/4</span>
-<span class="sd">                    r2.</span>
-<span class="sd">                    \times 2/3 {</span>
-<span class="sd">                        a&#39;8</span>
-<span class="sd">                        r8</span>
-<span class="sd">                        b&#39;2</span>
-<span class="sd">                    }</span>
-<span class="sd">                }</span>
-<span class="sd">            }</span>
-<span class="sd">            \new Staff</span>
-<span class="sd">            {</span>
-<span class="sd">                \time 5/4</span>
-<span class="sd">                r4</span>
-<span class="sd">                \times 2/3 {</span>
-<span class="sd">                    c&#39;4</span>
 <span class="sd">                    r2</span>
-<span class="sd">                }</span>
-<span class="sd">                r2</span>
-<span class="sd">                \times 4/5 {</span>
-<span class="sd">                    \time 4/4</span>
-<span class="sd">                    g&#39;2.</span>
-<span class="sd">                    \times 2/3 {</span>
-<span class="sd">                        r4</span>
-<span class="sd">                        b&#39;2</span>
+<span class="sd">                    \times 4/5</span>
+<span class="sd">                    {</span>
+<span class="sd">                        \time 4/4</span>
+<span class="sd">                        g&#39;2.</span>
+<span class="sd">                        \times 2/3</span>
+<span class="sd">                        {</span>
+<span class="sd">                            r4</span>
+<span class="sd">                            b&#39;2</span>
+<span class="sd">                        }</span>
 <span class="sd">                    }</span>
 <span class="sd">                }</span>
-<span class="sd">            }</span>
-<span class="sd">        &gt;&gt;</span>
+<span class="sd">            &gt;&gt;</span>
 
-<span class="sd">        .. figure:: ../_images/Hocketer-seuga1yah9h.png</span>
+<span class="sd">        ..  figure:: ../_images/Hocketer-seuga1yah9h.png</span>
 
 <span class="sd">    :attr:`omit_time_signatures`:</span>
 <span class="sd">        To disable time signatures altogether, initialise this class with the</span>
@@ -1261,27 +1350,30 @@
 <span class="sd">        &gt;&gt;&gt; score = abjad.Score()</span>
 <span class="sd">        &gt;&gt;&gt; for selection in music:</span>
 <span class="sd">        ...     score.append(abjad.Staff(selection))</span>
-<span class="sd">        &gt;&gt;&gt; abjad.f(score)</span>
-<span class="sd">        \new Score</span>
-<span class="sd">        &lt;&lt;</span>
-<span class="sd">            \new Staff</span>
-<span class="sd">            {</span>
-<span class="sd">                r2.</span>
-<span class="sd">                r4</span>
-<span class="sd">                g&#39;4</span>
-<span class="sd">                a&#39;4</span>
-<span class="sd">            }</span>
-<span class="sd">            \new Staff</span>
-<span class="sd">            {</span>
-<span class="sd">                c&#39;4</span>
-<span class="sd">                d&#39;4</span>
-<span class="sd">                e&#39;4</span>
-<span class="sd">                f&#39;4</span>
-<span class="sd">                r2</span>
-<span class="sd">            }</span>
-<span class="sd">        &gt;&gt;</span>
+<span class="sd">        &gt;&gt;&gt; abjad.show(score)</span>
 
-<span class="sd">        .. figure:: ../_images/Hocketer-6w9r9iicp29.png</span>
+<span class="sd">        ..  docs::</span>
+
+<span class="sd">            \new Score</span>
+<span class="sd">            &lt;&lt;</span>
+<span class="sd">                \new Staff</span>
+<span class="sd">                {</span>
+<span class="sd">                    r2.</span>
+<span class="sd">                    r4</span>
+<span class="sd">                    g&#39;4</span>
+<span class="sd">                    a&#39;4</span>
+<span class="sd">                }</span>
+<span class="sd">                \new Staff</span>
+<span class="sd">                {</span>
+<span class="sd">                    c&#39;4</span>
+<span class="sd">                    d&#39;4</span>
+<span class="sd">                    e&#39;4</span>
+<span class="sd">                    f&#39;4</span>
+<span class="sd">                    r2</span>
+<span class="sd">                }</span>
+<span class="sd">            &gt;&gt;</span>
+
+<span class="sd">        ..  figure:: ../_images/Hocketer-6w9r9iicp29.png</span>
 
 <span class="sd">    Indicators:</span>
 <span class="sd">        Dynamics and hairpins are supported.</span>
@@ -1298,92 +1390,95 @@
 <span class="sd">        &gt;&gt;&gt; score = abjad.Score()</span>
 <span class="sd">        &gt;&gt;&gt; for selection in music:</span>
 <span class="sd">        ...     score.append(abjad.Staff(selection))</span>
-<span class="sd">        &gt;&gt;&gt; abjad.f(score)</span>
-<span class="sd">        \new Score</span>
-<span class="sd">        &lt;&lt;</span>
-<span class="sd">            \new Staff</span>
-<span class="sd">            {</span>
-<span class="sd">                c&#39;2</span>
-<span class="sd">                \p</span>
-<span class="sd">                - \staccato</span>
-<span class="sd">                \&lt;</span>
-<span class="sd">                d&#39;2</span>
-<span class="sd">                \f</span>
-<span class="sd">                - \staccato</span>
-<span class="sd">                \&gt;</span>
-<span class="sd">                e&#39;1</span>
-<span class="sd">                f&#39;2.</span>
-<span class="sd">                \pp</span>
-<span class="sd">                \&lt;</span>
-<span class="sd">                g&#39;4</span>
-<span class="sd">                \p</span>
-<span class="sd">                - \tenuto</span>
-<span class="sd">                a&#39;2</span>
-<span class="sd">                \ff</span>
-<span class="sd">                \&gt;</span>
-<span class="sd">                r2</span>
-<span class="sd">                \p</span>
-<span class="sd">                r2</span>
-<span class="sd">                c&#39;&#39;2</span>
-<span class="sd">                \ppp</span>
-<span class="sd">            }</span>
-<span class="sd">            \new Staff</span>
-<span class="sd">            {</span>
-<span class="sd">                r2</span>
-<span class="sd">                d&#39;2</span>
-<span class="sd">                \f</span>
-<span class="sd">                - \staccato</span>
-<span class="sd">                \&gt;</span>
-<span class="sd">                e&#39;1</span>
-<span class="sd">                r2.</span>
-<span class="sd">                \pp</span>
-<span class="sd">                g&#39;4</span>
-<span class="sd">                \p</span>
-<span class="sd">                - \tenuto</span>
-<span class="sd">                r2</span>
-<span class="sd">                b&#39;2</span>
-<span class="sd">                \&gt;</span>
-<span class="sd">                ~</span>
-<span class="sd">                b&#39;2</span>
-<span class="sd">                r2</span>
-<span class="sd">                \ppp</span>
-<span class="sd">            }</span>
-<span class="sd">            \new Staff</span>
-<span class="sd">            {</span>
-<span class="sd">                c&#39;2</span>
-<span class="sd">                \p</span>
-<span class="sd">                - \staccato</span>
-<span class="sd">                \&lt;</span>
-<span class="sd">                r2</span>
-<span class="sd">                \f</span>
-<span class="sd">                R1</span>
-<span class="sd">                f&#39;2.</span>
-<span class="sd">                \pp</span>
-<span class="sd">                \&lt;</span>
-<span class="sd">                r4</span>
-<span class="sd">                \p</span>
-<span class="sd">                a&#39;2</span>
-<span class="sd">                \ff</span>
-<span class="sd">                \&gt;</span>
-<span class="sd">                b&#39;2</span>
-<span class="sd">                \p</span>
-<span class="sd">                \&gt;</span>
-<span class="sd">                ~</span>
-<span class="sd">                b&#39;2</span>
-<span class="sd">                c&#39;&#39;2</span>
-<span class="sd">                \ppp</span>
-<span class="sd">            }</span>
-<span class="sd">        &gt;&gt;</span>
+<span class="sd">        &gt;&gt;&gt; abjad.show(score)</span>
 
-<span class="sd">        .. figure:: ../_images/Hocketer-zel37ga6xob.png</span>
+<span class="sd">        ..  docs::</span>
 
-<span class="sd">    .. tip::</span>
+<span class="sd">            \new Score</span>
+<span class="sd">            &lt;&lt;</span>
+<span class="sd">                \new Staff</span>
+<span class="sd">                {</span>
+<span class="sd">                    c&#39;2</span>
+<span class="sd">                    \p</span>
+<span class="sd">                    - \staccato</span>
+<span class="sd">                    \&lt;</span>
+<span class="sd">                    d&#39;2</span>
+<span class="sd">                    \f</span>
+<span class="sd">                    - \staccato</span>
+<span class="sd">                    \&gt;</span>
+<span class="sd">                    e&#39;1</span>
+<span class="sd">                    f&#39;2.</span>
+<span class="sd">                    \pp</span>
+<span class="sd">                    \&lt;</span>
+<span class="sd">                    g&#39;4</span>
+<span class="sd">                    \p</span>
+<span class="sd">                    - \tenuto</span>
+<span class="sd">                    a&#39;2</span>
+<span class="sd">                    \ff</span>
+<span class="sd">                    \&gt;</span>
+<span class="sd">                    r2</span>
+<span class="sd">                    \p</span>
+<span class="sd">                    r2</span>
+<span class="sd">                    c&#39;&#39;2</span>
+<span class="sd">                    \ppp</span>
+<span class="sd">                }</span>
+<span class="sd">                \new Staff</span>
+<span class="sd">                {</span>
+<span class="sd">                    r2</span>
+<span class="sd">                    d&#39;2</span>
+<span class="sd">                    \f</span>
+<span class="sd">                    - \staccato</span>
+<span class="sd">                    \&gt;</span>
+<span class="sd">                    e&#39;1</span>
+<span class="sd">                    r2.</span>
+<span class="sd">                    \pp</span>
+<span class="sd">                    g&#39;4</span>
+<span class="sd">                    \p</span>
+<span class="sd">                    - \tenuto</span>
+<span class="sd">                    r2</span>
+<span class="sd">                    b&#39;2</span>
+<span class="sd">                    \&gt;</span>
+<span class="sd">                    ~</span>
+<span class="sd">                    b&#39;2</span>
+<span class="sd">                    r2</span>
+<span class="sd">                    \ppp</span>
+<span class="sd">                }</span>
+<span class="sd">                \new Staff</span>
+<span class="sd">                {</span>
+<span class="sd">                    c&#39;2</span>
+<span class="sd">                    \p</span>
+<span class="sd">                    - \staccato</span>
+<span class="sd">                    \&lt;</span>
+<span class="sd">                    r2</span>
+<span class="sd">                    \f</span>
+<span class="sd">                    R1</span>
+<span class="sd">                    f&#39;2.</span>
+<span class="sd">                    \pp</span>
+<span class="sd">                    \&lt;</span>
+<span class="sd">                    r4</span>
+<span class="sd">                    \p</span>
+<span class="sd">                    a&#39;2</span>
+<span class="sd">                    \ff</span>
+<span class="sd">                    \&gt;</span>
+<span class="sd">                    b&#39;2</span>
+<span class="sd">                    \p</span>
+<span class="sd">                    \&gt;</span>
+<span class="sd">                    ~</span>
+<span class="sd">                    b&#39;2</span>
+<span class="sd">                    c&#39;&#39;2</span>
+<span class="sd">                    \ppp</span>
+<span class="sd">                }</span>
+<span class="sd">            &gt;&gt;</span>
 
-<span class="sd">        The functions |auxjad.mutate().remove_repeated_dynamics()| and</span>
-<span class="sd">        |auxjad.mutate().reposition_clefs()| can be used to clean the output</span>
+<span class="sd">        ..  figure:: ../_images/Hocketer-zel37ga6xob.png</span>
+
+<span class="sd">    ..  tip::</span>
+
+<span class="sd">        The functions |auxjad.mutate.remove_repeated_dynamics()| and</span>
+<span class="sd">        |auxjad.mutate.reposition_clefs()| can be used to clean the output</span>
 <span class="sd">        and remove repeated dynamics and unnecessary clef changes.</span>
 
-<span class="sd">    .. warning::</span>
+<span class="sd">    ..  warning::</span>
 
 <span class="sd">        Do note that some elements that span multiple notes (such as ottava</span>
 <span class="sd">        indicators, manual beams, etc.) can become problematic when notes</span>
@@ -1466,7 +1561,7 @@
 
 <div class="viewcode-block" id="Hocketer.__repr__"><a class="viewcode-back" href="../../../_api_members/auxjad.Hocketer.html#auxjad.Hocketer.__repr__">[docs]</a>    <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
         <span class="sa">r</span><span class="s1">&#39;Returns interpreter representation of :attr:`contents`.&#39;</span>
-        <span class="k">return</span> <span class="nb">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_contents</span><span class="p">)</span></div>
+        <span class="k">return</span> <span class="n">abjad</span><span class="o">.</span><span class="n">lilypond</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_contents</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="Hocketer.__len__"><a class="viewcode-back" href="../../../_api_members/auxjad.Hocketer.html#auxjad.Hocketer.__len__">[docs]</a>    <span class="k">def</span> <span class="fm">__len__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
         <span class="sa">r</span><span class="s1">&#39;Returns the number of voices of the hocketer.&#39;</span>
@@ -1485,7 +1580,7 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">output</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="k">for</span> <span class="n">voice</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_voices</span><span class="p">[</span><span class="n">key</span><span class="p">]:</span>
-            <span class="n">voice_</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">mutate</span><span class="p">(</span><span class="n">voice</span><span class="p">)</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+            <span class="n">voice_</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">mutate</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="n">voice</span><span class="p">)</span>
             <span class="n">output</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">voice_</span><span class="p">)</span>
         <span class="k">return</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">output</span><span class="p">)</span></div>
 
@@ -1508,12 +1603,13 @@
         <span class="n">dummy_voices</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_hocket_process</span><span class="p">()</span>
         <span class="c1"># handling dynamics and slurs</span>
         <span class="k">for</span> <span class="n">voice</span> <span class="ow">in</span> <span class="n">dummy_voices</span><span class="p">:</span>
-            <span class="n">mutate</span><span class="p">(</span><span class="n">voice</span><span class="p">[:])</span><span class="o">.</span><span class="n">reposition_dynamics</span><span class="p">()</span>
-            <span class="n">mutate</span><span class="p">(</span><span class="n">voice</span><span class="p">[:])</span><span class="o">.</span><span class="n">reposition_slurs</span><span class="p">()</span>
+            <span class="n">mutate</span><span class="o">.</span><span class="n">reposition_dynamics</span><span class="p">(</span><span class="n">voice</span><span class="p">[:])</span>
+            <span class="n">mutate</span><span class="o">.</span><span class="n">reposition_slurs</span><span class="p">(</span><span class="n">voice</span><span class="p">[:])</span>
         <span class="c1"># rewriting meter</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_disable_rewrite_meter</span><span class="p">:</span>
             <span class="k">for</span> <span class="n">voice</span> <span class="ow">in</span> <span class="n">dummy_voices</span><span class="p">:</span>
-                <span class="n">mutate</span><span class="p">(</span><span class="n">voice</span><span class="p">)</span><span class="o">.</span><span class="n">auto_rewrite_meter</span><span class="p">(</span>
+                <span class="n">mutate</span><span class="o">.</span><span class="n">auto_rewrite_meter</span><span class="p">(</span>
+                    <span class="n">voice</span><span class="p">,</span>
                     <span class="n">meter_list</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_time_signatures</span><span class="p">,</span>
                     <span class="n">boundary_depth</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_boundary_depth</span><span class="p">,</span>
                     <span class="n">maximum_dot_count</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_maximum_dot_count</span><span class="p">,</span>
@@ -1529,7 +1625,7 @@
         <span class="c1"># handling empty tuplets and multi-measure rests</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_use_multimeasure_rests</span><span class="p">:</span>
             <span class="k">for</span> <span class="n">voice</span> <span class="ow">in</span> <span class="n">dummy_voices</span><span class="p">:</span>
-                <span class="n">mutate</span><span class="p">(</span><span class="n">voice</span><span class="p">[:])</span><span class="o">.</span><span class="n">rests_to_multimeasure_rest</span><span class="p">()</span>
+                <span class="n">mutate</span><span class="o">.</span><span class="n">rests_to_multimeasure_rest</span><span class="p">(</span><span class="n">voice</span><span class="p">[:])</span>
         <span class="c1"># output</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_voices</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="k">for</span> <span class="n">voice</span> <span class="ow">in</span> <span class="n">dummy_voices</span><span class="p">:</span>
@@ -1562,7 +1658,7 @@
                             <span class="n">abjad</span><span class="o">.</span><span class="n">StopTextSpan</span><span class="p">,</span>
                             <span class="n">abjad</span><span class="o">.</span><span class="n">TimeSignature</span><span class="p">,</span>
                             <span class="p">)</span>
-        <span class="n">dummy_voices</span> <span class="o">=</span> <span class="p">[</span><span class="n">abjad</span><span class="o">.</span><span class="n">mutate</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_contents</span><span class="p">)</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+        <span class="n">dummy_voices</span> <span class="o">=</span> <span class="p">[</span><span class="n">abjad</span><span class="o">.</span><span class="n">mutate</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_contents</span><span class="p">)</span>
                         <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_n_voices</span><span class="p">)]</span>
         <span class="n">selected_voices</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_select_voices</span><span class="p">()</span>
         <span class="k">for</span> <span class="n">voice_index</span><span class="p">,</span> <span class="n">voice</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">dummy_voices</span><span class="p">):</span>
@@ -1573,19 +1669,19 @@
                 <span class="k">if</span> <span class="n">voice_index</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">selected_indeces</span><span class="p">:</span>
                     <span class="k">for</span> <span class="n">leaf</span> <span class="ow">in</span> <span class="n">logical_tie</span><span class="p">:</span>
                         <span class="n">rest</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Rest</span><span class="p">(</span><span class="n">leaf</span><span class="o">.</span><span class="n">written_duration</span><span class="p">)</span>
-                        <span class="k">for</span> <span class="n">indicator</span> <span class="ow">in</span> <span class="n">abjad</span><span class="o">.</span><span class="n">inspect</span><span class="p">(</span><span class="n">leaf</span><span class="p">)</span><span class="o">.</span><span class="n">indicators</span><span class="p">():</span>
+                        <span class="k">for</span> <span class="n">indicator</span> <span class="ow">in</span> <span class="n">abjad</span><span class="o">.</span><span class="n">get</span><span class="o">.</span><span class="n">indicators</span><span class="p">(</span><span class="n">leaf</span><span class="p">):</span>
                             <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">indicator</span><span class="p">,</span> <span class="n">indicators_tuple</span><span class="p">):</span>
                                 <span class="n">abjad</span><span class="o">.</span><span class="n">attach</span><span class="p">(</span><span class="n">indicator</span><span class="p">,</span> <span class="n">rest</span><span class="p">)</span>
-                        <span class="n">abjad</span><span class="o">.</span><span class="n">mutate</span><span class="p">(</span><span class="n">leaf</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="n">rest</span><span class="p">)</span>
+                        <span class="n">abjad</span><span class="o">.</span><span class="n">mutate</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="n">leaf</span><span class="p">,</span> <span class="n">rest</span><span class="p">)</span>
                 <span class="k">elif</span> <span class="p">(</span><span class="nb">isinstance</span><span class="p">(</span><span class="n">logical_tie</span><span class="o">.</span><span class="n">head</span><span class="p">,</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Chord</span><span class="p">)</span>
                         <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">_explode_chords</span><span class="p">):</span>
                     <span class="n">pitch_number</span> <span class="o">=</span> <span class="n">selected_indeces</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">voice_index</span><span class="p">)</span>
                     <span class="n">pitch</span> <span class="o">=</span> <span class="n">logical_tie</span><span class="o">.</span><span class="n">head</span><span class="o">.</span><span class="n">written_pitches</span><span class="p">[</span><span class="n">pitch_number</span><span class="p">]</span>
                     <span class="k">for</span> <span class="n">leaf</span> <span class="ow">in</span> <span class="n">logical_tie</span><span class="p">:</span>
                         <span class="n">note</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Note</span><span class="p">(</span><span class="n">pitch</span><span class="p">,</span> <span class="n">leaf</span><span class="o">.</span><span class="n">written_duration</span><span class="p">)</span>
-                        <span class="k">for</span> <span class="n">indicator</span> <span class="ow">in</span> <span class="n">abjad</span><span class="o">.</span><span class="n">inspect</span><span class="p">(</span><span class="n">leaf</span><span class="p">)</span><span class="o">.</span><span class="n">indicators</span><span class="p">():</span>
+                        <span class="k">for</span> <span class="n">indicator</span> <span class="ow">in</span> <span class="n">abjad</span><span class="o">.</span><span class="n">get</span><span class="o">.</span><span class="n">indicators</span><span class="p">(</span><span class="n">leaf</span><span class="p">):</span>
                             <span class="n">abjad</span><span class="o">.</span><span class="n">attach</span><span class="p">(</span><span class="n">indicator</span><span class="p">,</span> <span class="n">note</span><span class="p">)</span>
-                        <span class="n">abjad</span><span class="o">.</span><span class="n">mutate</span><span class="p">(</span><span class="n">leaf</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="n">note</span><span class="p">)</span>
+                        <span class="n">abjad</span><span class="o">.</span><span class="n">mutate</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="n">leaf</span><span class="p">,</span> <span class="n">note</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">dummy_voices</span>
 
     <span class="k">def</span> <span class="nf">_select_voices</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">]:</span>
@@ -1671,6 +1767,10 @@
             <span class="k">return</span> <span class="kc">True</span>
         <span class="k">return</span> <span class="kc">False</span>
 
+    <span class="k">def</span> <span class="nf">_get_lilypond_format</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="sa">r</span><span class="s1">&#39;Returns interpreter representation of  :attr:`contents`.&#39;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="fm">__repr__</span><span class="p">()</span>
+
     <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">_get_pitch_from_logical_tie</span><span class="p">(</span><span class="n">logical_tie</span><span class="p">:</span> <span class="n">abjad</span><span class="o">.</span><span class="n">LogicalTie</span><span class="p">,</span>
                                     <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Union</span><span class="p">[</span><span class="n">abjad</span><span class="o">.</span><span class="n">Pitch</span><span class="p">,</span>
@@ -1688,7 +1788,7 @@
     <span class="k">def</span> <span class="nf">_remove_all_time_signatures</span><span class="p">(</span><span class="n">container</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="sa">r</span><span class="s1">&#39;Removes all time signatures of an |abjad.Container|.&#39;</span>
         <span class="k">for</span> <span class="n">leaf</span> <span class="ow">in</span> <span class="n">abjad</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="n">container</span><span class="p">)</span><span class="o">.</span><span class="n">leaves</span><span class="p">():</span>
-            <span class="k">if</span> <span class="n">abjad</span><span class="o">.</span><span class="n">inspect</span><span class="p">(</span><span class="n">leaf</span><span class="p">)</span><span class="o">.</span><span class="n">effective</span><span class="p">(</span><span class="n">abjad</span><span class="o">.</span><span class="n">TimeSignature</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">abjad</span><span class="o">.</span><span class="n">get</span><span class="o">.</span><span class="n">effective</span><span class="p">(</span><span class="n">leaf</span><span class="p">,</span> <span class="n">abjad</span><span class="o">.</span><span class="n">TimeSignature</span><span class="p">):</span>
                 <span class="n">abjad</span><span class="o">.</span><span class="n">detach</span><span class="p">(</span><span class="n">abjad</span><span class="o">.</span><span class="n">TimeSignature</span><span class="p">,</span> <span class="n">leaf</span><span class="p">)</span>
 
     <span class="c1">### PUBLIC PROPERTIES ###</span>
@@ -1696,7 +1796,7 @@
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">contents</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">:</span>
         <span class="sa">r</span><span class="s1">&#39;The |abjad.Container| to be hocketed.&#39;</span>
-        <span class="k">return</span> <span class="n">abjad</span><span class="o">.</span><span class="n">mutate</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_contents</span><span class="p">)</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">abjad</span><span class="o">.</span><span class="n">mutate</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_contents</span><span class="p">)</span>
 
     <span class="nd">@contents</span><span class="o">.</span><span class="n">setter</span>
     <span class="k">def</span> <span class="nf">contents</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
@@ -1708,12 +1808,13 @@
         <span class="k">if</span> <span class="ow">not</span> <span class="n">abjad</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="n">contents</span><span class="p">)</span><span class="o">.</span><span class="n">leaves</span><span class="p">()</span><span class="o">.</span><span class="n">are_contiguous_logical_voice</span><span class="p">():</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;&#39;contents&#39; must be contiguous logical voice&quot;</span><span class="p">)</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">contents</span><span class="p">,</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Score</span><span class="p">):</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">_contents</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">mutate</span><span class="p">(</span><span class="n">contents</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_contents</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">mutate</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="n">contents</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
         <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">contents</span><span class="p">,</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Tuplet</span><span class="p">):</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">_contents</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">([</span><span class="n">abjad</span><span class="o">.</span><span class="n">mutate</span><span class="p">(</span><span class="n">contents</span><span class="p">)</span><span class="o">.</span><span class="n">copy</span><span class="p">()])</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_contents</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">([</span><span class="n">abjad</span><span class="o">.</span><span class="n">mutate</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="n">contents</span><span class="p">)])</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">_contents</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">mutate</span><span class="p">(</span><span class="n">contents</span><span class="p">)</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_time_signatures</span> <span class="o">=</span> <span class="n">inspect</span><span class="p">(</span><span class="n">contents</span><span class="p">)</span><span class="o">.</span><span class="n">extract_time_signatures</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_contents</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">mutate</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="n">contents</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_time_signatures</span> <span class="o">=</span> <span class="n">get</span><span class="o">.</span><span class="n">extract_time_signatures</span><span class="p">(</span>
+            <span class="n">contents</span><span class="p">,</span>
             <span class="n">do_not_use_none</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
         <span class="p">)</span>
 
@@ -1851,7 +1952,7 @@
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">disable_rewrite_meter</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
         <span class="sa">r</span><span class="sd">&quot;&quot;&quot;When ``True``, the durations of the notes in the output will not be</span>
-<span class="sd">        rewritten by the |abjad.mutate().rewrite_meter()| mutation. Rests will</span>
+<span class="sd">        rewritten by the |abjad.Meter.rewrite_meter()| mutation. Rests will</span>
 <span class="sd">        have the same duration as the logical ties they replaced.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_disable_rewrite_meter</span>
@@ -1880,7 +1981,7 @@
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">boundary_depth</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Union</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="kc">None</span><span class="p">]:</span>
         <span class="sa">r</span><span class="sd">&quot;&quot;&quot;Sets the argument ``boundary_depth`` of</span>
-<span class="sd">        |abjad.mutate().rewrite_meter()|.</span>
+<span class="sd">        |abjad.Meter.rewrite_meter()|.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_boundary_depth</span>
 
@@ -1896,7 +1997,7 @@
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">maximum_dot_count</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Union</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="kc">None</span><span class="p">]:</span>
         <span class="sa">r</span><span class="sd">&quot;&quot;&quot;Sets the argument ``maximum_dot_count`` of</span>
-<span class="sd">        |abjad.mutate().rewrite_meter()|.</span>
+<span class="sd">        |abjad.Meter.rewrite_meter()|.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_maximum_dot_count</span>
 
@@ -1912,7 +2013,7 @@
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">rewrite_tuplets</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
         <span class="sa">r</span><span class="sd">&quot;&quot;&quot;Sets the argument ``rewrite_tuplets`` of</span>
-<span class="sd">        |abjad.mutate().rewrite_meter()|.</span>
+<span class="sd">        |abjad.Meter.rewrite_meter()|.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_rewrite_tuplets</span>
 
@@ -1927,7 +2028,7 @@
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">prettify_rewrite_meter</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
         <span class="sa">r</span><span class="sd">&quot;&quot;&quot;Used to enable or disable the mutation</span>
-<span class="sd">        |auxjad.mutate().prettify_rewrite_meter()| (default ``True``).</span>
+<span class="sd">        |auxjad.mutate.prettify_rewrite_meter()| (default ``True``).</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_prettify_rewrite_meter</span>
 
@@ -1942,7 +2043,7 @@
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">extract_trivial_tuplets</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
         <span class="sa">r</span><span class="sd">&quot;&quot;&quot;Sets the argument ``extract_trivial_tuplets`` of</span>
-<span class="sd">        |auxjad.mutate().prettify_rewrite_meter()|.</span>
+<span class="sd">        |auxjad.mutate.prettify_rewrite_meter()|.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_extract_trivial_tuplets</span>
 
@@ -1957,7 +2058,7 @@
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">fuse_across_groups_of_beats</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
         <span class="sa">r</span><span class="sd">&quot;&quot;&quot;Sets the argument ``fuse_across_groups_of_beats`` of</span>
-<span class="sd">        |auxjad.mutate().prettify_rewrite_meter()|.</span>
+<span class="sd">        |auxjad.mutate.prettify_rewrite_meter()|.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_fuse_across_groups_of_beats</span>
 
@@ -1972,7 +2073,7 @@
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">fuse_quadruple_meter</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
         <span class="sa">r</span><span class="sd">&quot;&quot;&quot;Sets the argument ``fuse_quadruple_meter`` of</span>
-<span class="sd">        |auxjad.mutate().prettify_rewrite_meter()|.</span>
+<span class="sd">        |auxjad.mutate.prettify_rewrite_meter()|.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_fuse_quadruple_meter</span>
 
@@ -1987,7 +2088,7 @@
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">fuse_triple_meter</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
         <span class="sa">r</span><span class="sd">&quot;&quot;&quot;Sets the argument ``fuse_triple_meter`` of</span>
-<span class="sd">        |auxjad.mutate().prettify_rewrite_meter()|.</span>
+<span class="sd">        |auxjad.mutate.prettify_rewrite_meter()|.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_fuse_triple_meter</span>
 
@@ -2007,7 +2108,7 @@
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_voices</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">output</span> <span class="o">=</span> <span class="p">[]</span>
             <span class="k">for</span> <span class="n">voice</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_voices</span><span class="p">:</span>
-                <span class="n">voice_</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">mutate</span><span class="p">(</span><span class="n">voice</span><span class="p">)</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+                <span class="n">voice_</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">mutate</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="n">voice</span><span class="p">)</span>
                 <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_omit_time_signatures</span><span class="p">:</span>
                     <span class="bp">self</span><span class="o">.</span><span class="n">_remove_all_time_signatures</span><span class="p">(</span><span class="n">voice_</span><span class="p">)</span>
                 <span class="n">output</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">abjad</span><span class="o">.</span><span class="n">select</span><span class="p">([</span><span class="n">voice_</span><span class="p">]))</span>
@@ -2020,28 +2121,25 @@
            
           </div>
           <footer>
-  
 
   <hr/>
 
   <div role="contentinfo">
     <p>
-        
-        &copy; Copyright 2020, Gilberto Agostinho
+        &#169; Copyright 2020, Gilberto Agostinho.
 
     </p>
   </div>
     
     
     
-    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
     
-    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
     
     provided by <a href="https://readthedocs.org">Read the Docs</a>. 
 
 </footer>
-
         </div>
       </div>
 

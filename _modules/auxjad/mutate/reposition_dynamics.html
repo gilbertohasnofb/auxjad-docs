@@ -1,0 +1,787 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>auxjad.mutate.reposition_dynamics &mdash; auxjad 0.8.25 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+        <script src="../../../_static/jquery.js"></script>
+        <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/doctools.js"></script>
+    
+    <script type="text/javascript" src="../../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../../index.html" class="icon icon-home"> auxjad
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.8
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../index.html">Welcome to Auxjad’s documentation!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../examples/index.html">Examples of usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../score_gallery/index.html">Score gallery</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../api/index.html">Auxjad API</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">auxjad</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../../index.html">Module code</a> &raquo;</li>
+        
+      <li>auxjad.mutate.reposition_dynamics</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for auxjad.mutate.reposition_dynamics</h1><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">abjad</span>
+
+<span class="kn">from</span> <span class="nn">.remove_repeated_dynamics</span> <span class="kn">import</span> <span class="p">(</span>
+    <span class="n">remove_repeated_dynamics</span> <span class="k">as</span> <span class="n">remove_repeated_dynamics_</span><span class="p">,</span>
+<span class="p">)</span>
+
+
+<div class="viewcode-block" id="reposition_dynamics"><a class="viewcode-back" href="../../../_api_members/auxjad.mutate.reposition_dynamics.html#auxjad.mutate.reposition_dynamics">[docs]</a><span class="k">def</span> <span class="nf">reposition_dynamics</span><span class="p">(</span><span class="n">selection</span><span class="p">:</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Selection</span><span class="p">,</span>
+                        <span class="o">*</span><span class="p">,</span>
+                        <span class="n">allow_hairpins_under_rests</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+                        <span class="n">check_hairpin_trends</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+                        <span class="n">remove_repeated_dynamics</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+                        <span class="n">allow_hairpin_to_rest_with_dynamic</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+                        <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="sa">r</span><span class="sd">&quot;&quot;&quot;Mutates an input |abjad.Selection| in place and has no return value;</span>
+<span class="sd">    this function shifts all dynamics from rests to the next pitched leaves. It</span>
+<span class="sd">    will also adjust hairpins if necessary.</span>
+
+<span class="sd">    Basic usage:</span>
+<span class="sd">        This function will shift dynamics under rests to the next pitched leaf.</span>
+
+<span class="sd">        &gt;&gt;&gt; staff = abjad.Staff(r&quot;c&#39;1\p d&#39;2 r2\f r1 e&#39;1&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; abjad.show(staff)</span>
+
+<span class="sd">        ..  docs::</span>
+
+<span class="sd">            \new Staff</span>
+<span class="sd">            {</span>
+<span class="sd">                c&#39;1</span>
+<span class="sd">                \p</span>
+<span class="sd">                d&#39;2</span>
+<span class="sd">                r2</span>
+<span class="sd">                \f</span>
+<span class="sd">                r1</span>
+<span class="sd">                e&#39;1</span>
+<span class="sd">            }</span>
+
+<span class="sd">        ..  figure:: ../_images/reposition_dynamics-sqwvevg7o9.png</span>
+
+<span class="sd">        &gt;&gt;&gt; staff = abjad.Staff(r&quot;c&#39;1\p d&#39;2 r2\f r1 e&#39;1&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; auxjad.mutate.reposition_dynamics(staff[:])</span>
+<span class="sd">        &gt;&gt;&gt; abjad.show(staff)</span>
+
+<span class="sd">        ..  docs::</span>
+
+<span class="sd">            \new Staff</span>
+<span class="sd">            {</span>
+<span class="sd">                c&#39;1</span>
+<span class="sd">                \p</span>
+<span class="sd">                d&#39;2</span>
+<span class="sd">                r2</span>
+<span class="sd">                r1</span>
+<span class="sd">                e&#39;1</span>
+<span class="sd">                \f</span>
+<span class="sd">            }</span>
+
+<span class="sd">        ..  figure:: ../_images/reposition_dynamics-v18uzh1zjs.png</span>
+
+<span class="sd">    ..  note::</span>
+
+<span class="sd">        Auxjad automatically adds this function as an extension function to</span>
+<span class="sd">        |abjad.mutate|. It can thus be used from either |auxjad.mutate|_ or</span>
+<span class="sd">        |abjad.mutate| namespaces. Therefore, the two lines below are</span>
+<span class="sd">        equivalent:</span>
+
+<span class="sd">        &gt;&gt;&gt; auxjad.mutate.reposition_dynamics(staff[:])</span>
+<span class="sd">        &gt;&gt;&gt; abjad.mutate.reposition_dynamics(staff[:])</span>
+
+<span class="sd">    Removing dynamics:</span>
+<span class="sd">        If the next pitched leaf already contain a dynamic, this function will</span>
+<span class="sd">        simply remove the dynamic under the rest.</span>
+
+<span class="sd">        &gt;&gt;&gt; staff = abjad.Staff(r&quot;c&#39;1\p d&#39;2 r2\f r1\mf e&#39;1\pp&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; abjad.show(staff)</span>
+
+<span class="sd">        ..  docs::</span>
+
+<span class="sd">            \new Staff</span>
+<span class="sd">            {</span>
+<span class="sd">                c&#39;1</span>
+<span class="sd">                \p</span>
+<span class="sd">                d&#39;2</span>
+<span class="sd">                r2</span>
+<span class="sd">                \f</span>
+<span class="sd">                r1</span>
+<span class="sd">                \mf</span>
+<span class="sd">                e&#39;1</span>
+<span class="sd">                \pp</span>
+<span class="sd">            }</span>
+
+<span class="sd">        ..  figure:: ../_images/reposition_dynamics-aom2qywcn9m.png</span>
+
+<span class="sd">        &gt;&gt;&gt; staff = abjad.Staff(r&quot;c&#39;1\p d&#39;2 r2\f r1\mf e&#39;1\pp&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; auxjad.mutate.reposition_dynamics(staff[:])</span>
+<span class="sd">        &gt;&gt;&gt; abjad.show(staff)</span>
+
+<span class="sd">        ..  docs::</span>
+
+<span class="sd">            \new Staff</span>
+<span class="sd">            {</span>
+<span class="sd">                c&#39;1</span>
+<span class="sd">                \p</span>
+<span class="sd">                d&#39;2</span>
+<span class="sd">                r2</span>
+<span class="sd">                r1</span>
+<span class="sd">                e&#39;1</span>
+<span class="sd">                \pp</span>
+<span class="sd">            }</span>
+
+<span class="sd">        ..  figure:: ../_images/reposition_dynamics-2ua73x102fp.png</span>
+
+<span class="sd">    ``remove_repeated_dynamics``:</span>
+<span class="sd">        By default indentical repeated dynamics are omitted.</span>
+
+<span class="sd">        &gt;&gt;&gt; staff = abjad.Staff(r&quot;c&#39;1\p d&#39;1 r1\f e&#39;1\p&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; auxjad.mutate.reposition_dynamics(staff[:])</span>
+<span class="sd">        &gt;&gt;&gt; abjad.show(staff)</span>
+
+<span class="sd">        ..  docs::</span>
+
+<span class="sd">            \new Staff</span>
+<span class="sd">            {</span>
+<span class="sd">                c&#39;1</span>
+<span class="sd">                \p</span>
+<span class="sd">                d&#39;1</span>
+<span class="sd">                r1</span>
+<span class="sd">                e&#39;1</span>
+<span class="sd">            }</span>
+
+<span class="sd">        ..  figure:: ../_images/reposition_dynamics-i4x8b1z1ak.png</span>
+
+<span class="sd">        Set the optional keyword argument ``remove_repeated_dynamics`` to</span>
+<span class="sd">        ``False`` to disable this behaviour.</span>
+
+<span class="sd">        &gt;&gt;&gt; staff = abjad.Staff(r&quot;c&#39;1\p d&#39;1 r1\f e&#39;1\p&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; auxjad.mutate.reposition_dynamics(</span>
+<span class="sd">        ...     staff[:],</span>
+<span class="sd">        ...     remove_repeated_dynamics=False,</span>
+<span class="sd">        ... )</span>
+<span class="sd">        &gt;&gt;&gt; abjad.show(staff)</span>
+
+<span class="sd">        ..  docs::</span>
+
+<span class="sd">            \new Staff</span>
+<span class="sd">            {</span>
+<span class="sd">                c&#39;1</span>
+<span class="sd">                \p</span>
+<span class="sd">                d&#39;1</span>
+<span class="sd">                r1</span>
+<span class="sd">                e&#39;1</span>
+<span class="sd">                \p</span>
+<span class="sd">            }</span>
+
+<span class="sd">        ..  figure:: ../_images/reposition_dynamics-se8a5aeqer.png</span>
+
+<span class="sd">    ``allow_hairpins_under_rests``:</span>
+<span class="sd">        This function will shorten hairpins until rests by default.</span>
+
+<span class="sd">        &gt;&gt;&gt; staff = abjad.Staff(r&quot;c&#39;1\p\&lt; d&#39;2 r2 r1\f e&#39;1&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; abjad.show(staff)</span>
+
+<span class="sd">        ..  docs::</span>
+
+<span class="sd">            \new Staff</span>
+<span class="sd">            {</span>
+<span class="sd">                c&#39;1</span>
+<span class="sd">                \p</span>
+<span class="sd">                \&lt;</span>
+<span class="sd">                d&#39;2</span>
+<span class="sd">                r2</span>
+<span class="sd">                r1</span>
+<span class="sd">                \f</span>
+<span class="sd">                e&#39;1</span>
+<span class="sd">            }</span>
+
+<span class="sd">        ..  figure:: ../_images/reposition_dynamics-r28po3j3hd.png</span>
+
+<span class="sd">        &gt;&gt;&gt; staff = abjad.Staff(r&quot;c&#39;1\p\&lt; d&#39;2 r2 r1\f e&#39;1&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; auxjad.mutate.reposition_dynamics(staff[:])</span>
+<span class="sd">        &gt;&gt;&gt; abjad.show(staff)</span>
+
+<span class="sd">        ..  docs::</span>
+
+<span class="sd">            \new Staff</span>
+<span class="sd">            {</span>
+<span class="sd">                c&#39;1</span>
+<span class="sd">                \p</span>
+<span class="sd">                \&lt;</span>
+<span class="sd">                d&#39;2</span>
+<span class="sd">                r2</span>
+<span class="sd">                \!</span>
+<span class="sd">                r1</span>
+<span class="sd">                e&#39;1</span>
+<span class="sd">                \f</span>
+<span class="sd">            }</span>
+
+<span class="sd">        ..  figure:: ../_images/reposition_dynamics-n60vvnqrcnr.png</span>
+
+<span class="sd">        Set the optional keyword argument ``allow_hairpins_under_rests`` to</span>
+<span class="sd">        ``True`` to allow hairpins to extend cross rests.</span>
+
+<span class="sd">        &gt;&gt;&gt; staff = abjad.Staff(r&quot;c&#39;1\p\&lt; d&#39;2 r2 r1\f e&#39;1&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; auxjad.mutate.reposition_dynamics(</span>
+<span class="sd">        ...     staff[:],</span>
+<span class="sd">        ...     allow_hairpins_under_rests=True,</span>
+<span class="sd">        ... )</span>
+<span class="sd">        &gt;&gt;&gt; abjad.show(staff)</span>
+
+<span class="sd">        ..  docs::</span>
+
+<span class="sd">            \new Staff</span>
+<span class="sd">            {</span>
+<span class="sd">                c&#39;1</span>
+<span class="sd">                \p</span>
+<span class="sd">                \&lt;</span>
+<span class="sd">                d&#39;2</span>
+<span class="sd">                r2</span>
+<span class="sd">                r1</span>
+<span class="sd">                e&#39;1</span>
+<span class="sd">                \f</span>
+<span class="sd">            }</span>
+
+<span class="sd">        ..  figure:: ../_images/reposition_dynamics-ugit7ijz89h.png</span>
+
+<span class="sd">    ``allow_hairpin_to_rest_with_dynamic``:</span>
+<span class="sd">        Notice that if a hairpin leads to a rest with dynamic, that one is not</span>
+<span class="sd">        removed.</span>
+
+<span class="sd">        &gt;&gt;&gt; staff = abjad.Staff(r&quot;c&#39;1\p\&lt; d&#39;2 r2\f r1 e&#39;1&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; auxjad.mutate.reposition_dynamics(staff[:])</span>
+<span class="sd">        &gt;&gt;&gt; abjad.show(staff)</span>
+
+<span class="sd">        ..  docs::</span>
+
+<span class="sd">            \new Staff</span>
+<span class="sd">            {</span>
+<span class="sd">                c&#39;1</span>
+<span class="sd">                \p</span>
+<span class="sd">                \&lt;</span>
+<span class="sd">                d&#39;2</span>
+<span class="sd">                r2</span>
+<span class="sd">                \f</span>
+<span class="sd">                r1</span>
+<span class="sd">                e&#39;1</span>
+<span class="sd">            }</span>
+
+<span class="sd">        ..  figure:: ../_images/reposition_dynamics-t9z4y5zzj6.png</span>
+
+<span class="sd">        Set the argument ``allow_hairpin_to_rest_with_dynamic`` to ``False`` to</span>
+<span class="sd">        disable this behaviour.</span>
+
+<span class="sd">        &gt;&gt;&gt; staff = abjad.Staff(r&quot;c&#39;1\p\&lt; d&#39;2 r2\f r1 e&#39;1&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; auxjad.mutate.reposition_dynamics(</span>
+<span class="sd">        ...     staff[:],</span>
+<span class="sd">        ...     allow_hairpin_to_rest_with_dynamic=False,</span>
+<span class="sd">        ... )</span>
+<span class="sd">        &gt;&gt;&gt; abjad.show(staff)</span>
+
+<span class="sd">        ..  docs::</span>
+
+<span class="sd">            \new Staff</span>
+<span class="sd">            {</span>
+<span class="sd">                c&#39;1</span>
+<span class="sd">                \p</span>
+<span class="sd">                \&lt;</span>
+<span class="sd">                d&#39;2</span>
+<span class="sd">                r2</span>
+<span class="sd">                \!</span>
+<span class="sd">                r1</span>
+<span class="sd">                e&#39;1</span>
+<span class="sd">                \f</span>
+<span class="sd">            }</span>
+
+<span class="sd">        ..  figure:: ../_images/reposition_dynamics-wpwweov55qf.png</span>
+
+<span class="sd">    ``check_hairpin_trends``:</span>
+<span class="sd">        This function will remove any hairpins connecting dynamics that grow in</span>
+<span class="sd">        the opposite direction to the hairpin&#39;s trend, such as a diminuendo</span>
+<span class="sd">        hairpin from piano to forte.</span>
+
+<span class="sd">        &gt;&gt;&gt; staff = abjad.Staff(r&quot;c&#39;1\p\&gt; d&#39;1\f\&gt; e&#39;1\p&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; auxjad.mutate.reposition_dynamics(staff[:])</span>
+<span class="sd">        &gt;&gt;&gt; abjad.show(staff)</span>
+
+<span class="sd">        ..  docs::</span>
+
+<span class="sd">            \new Staff</span>
+<span class="sd">            {</span>
+<span class="sd">                c&#39;1</span>
+<span class="sd">                \p</span>
+<span class="sd">                d&#39;1</span>
+<span class="sd">                \f</span>
+<span class="sd">                \&gt;</span>
+<span class="sd">                e&#39;1</span>
+<span class="sd">                \p</span>
+<span class="sd">            }</span>
+
+<span class="sd">        ..  figure:: ../_images/reposition_dynamics-f0b4ppb71ii.png</span>
+
+<span class="sd">        This behaviour can be disabled by setting the argument</span>
+<span class="sd">        ``check_hairpin_trends`` to ``False``.</span>
+
+<span class="sd">        &gt;&gt;&gt; staff = abjad.Staff(r&quot;c&#39;1\p\&gt; d&#39;1\f\&gt; e&#39;1\p&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; auxjad.mutate.reposition_dynamics(</span>
+<span class="sd">        ...     staff[:],</span>
+<span class="sd">        ...     check_hairpin_trends=False,</span>
+<span class="sd">        ... )</span>
+<span class="sd">        &gt;&gt;&gt; abjad.show(staff)</span>
+
+<span class="sd">        ..  docs::</span>
+
+<span class="sd">            \new Staff</span>
+<span class="sd">            {</span>
+<span class="sd">                c&#39;1</span>
+<span class="sd">                \p</span>
+<span class="sd">                \&gt;</span>
+<span class="sd">                d&#39;1</span>
+<span class="sd">                \f</span>
+<span class="sd">                \&gt;</span>
+<span class="sd">                e&#39;1</span>
+<span class="sd">                \p</span>
+<span class="sd">            }</span>
+
+<span class="sd">        ..  figure:: ../_images/reposition_dynamics-1e2ugszm95fi.png</span>
+
+<span class="sd">    ..  note::</span>
+
+<span class="sd">        The behaviour described above is only applicable when a hairpin ends</span>
+<span class="sd">        on a dynamic. Using the hairpin terminator ``\!`` before a dynamic</span>
+<span class="sd">        change will not cause a hairpin to be removed as it is not considered</span>
+<span class="sd">        to be connecting dynamics of the opposite trend.</span>
+
+<span class="sd">        &gt;&gt;&gt; staff = abjad.Staff(r&quot;c&#39;1\p\&gt; d&#39;1\! e&#39;1\f\&gt; f&#39;1\p&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; auxjad.mutate.reposition_dynamics(staff[:])</span>
+<span class="sd">        &gt;&gt;&gt; abjad.show(staff)</span>
+
+<span class="sd">        ..  docs::</span>
+
+<span class="sd">            \new Staff</span>
+<span class="sd">            {</span>
+<span class="sd">                c&#39;1</span>
+<span class="sd">                \p</span>
+<span class="sd">                \&gt;</span>
+<span class="sd">                d&#39;1</span>
+<span class="sd">                \!</span>
+<span class="sd">                e&#39;1</span>
+<span class="sd">                \f</span>
+<span class="sd">                \&gt;</span>
+<span class="sd">                f&#39;1</span>
+<span class="sd">                \p</span>
+<span class="sd">            }</span>
+
+<span class="sd">        ..  figure:: ../_images/reposition_dynamics-77g0uwthbgd.png</span>
+
+<span class="sd">    Types of hairpins:</span>
+<span class="sd">        This function can handle multiple types of hairpins as well as niente</span>
+<span class="sd">        dynamics.</span>
+
+<span class="sd">        &gt;&gt;&gt; staff = abjad.Staff(r&quot;c&#39;1 d&#39;1 e&#39;1 r1\mf r1\ff f&#39;1 r1 g&#39;1&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; abjad.attach(abjad.Dynamic(&#39;niente&#39;, hide=True), staff[0])</span>
+<span class="sd">        &gt;&gt;&gt; abjad.attach(abjad.Dynamic(&#39;niente&#39;, hide=True), staff[7])</span>
+<span class="sd">        &gt;&gt;&gt; abjad.attach(abjad.StartHairpin(&#39;o&lt;&#39;), staff[0])</span>
+<span class="sd">        &gt;&gt;&gt; abjad.attach(abjad.StartHairpin(&#39;&gt;o&#39;), staff[4])</span>
+<span class="sd">        &gt;&gt;&gt; abjad.attach(abjad.StopHairpin(), staff[7])</span>
+<span class="sd">        &gt;&gt;&gt; auxjad.mutate.reposition_dynamics(staff[:])</span>
+<span class="sd">        &gt;&gt;&gt; abjad.show(staff)</span>
+
+<span class="sd">        ..  docs::</span>
+
+<span class="sd">            \new Staff</span>
+<span class="sd">            {</span>
+<span class="sd">                c&#39;1</span>
+<span class="sd">                - \tweak circled-tip ##t</span>
+<span class="sd">                \&lt;</span>
+<span class="sd">                d&#39;1</span>
+<span class="sd">                e&#39;1</span>
+<span class="sd">                r1</span>
+<span class="sd">                \mf</span>
+<span class="sd">                r1</span>
+<span class="sd">                f&#39;1</span>
+<span class="sd">                \ff</span>
+<span class="sd">                - \tweak circled-tip ##t</span>
+<span class="sd">                \&gt;</span>
+<span class="sd">                r1</span>
+<span class="sd">                \!</span>
+<span class="sd">                g&#39;1</span>
+<span class="sd">            }</span>
+
+<span class="sd">        ..  figure:: ../_images/reposition_dynamics-m8it9awv1ce.png</span>
+
+<span class="sd">        &gt;&gt;&gt; staff = abjad.Staff(</span>
+<span class="sd">        ...     r&quot;c&#39;1\p d&#39;1\f\&gt; e&#39;1\ff\&lt; r1\fff f&#39;1\p\&gt; g&#39;1\ppp&quot;</span>
+<span class="sd">        ... )</span>
+<span class="sd">        &gt;&gt;&gt; abjad.attach(abjad.StartHairpin(&#39;--&#39;), staff[0])</span>
+<span class="sd">        &gt;&gt;&gt; auxjad.mutate.reposition_dynamics(staff[:])</span>
+<span class="sd">        &gt;&gt;&gt; abjad.show(staff)</span>
+
+<span class="sd">        ..  docs::</span>
+
+<span class="sd">            \new Staff</span>
+<span class="sd">            {</span>
+<span class="sd">                c&#39;1</span>
+<span class="sd">                \p</span>
+<span class="sd">                - \tweak stencil #constante-hairpin</span>
+<span class="sd">                \&lt;</span>
+<span class="sd">                d&#39;1</span>
+<span class="sd">                \f</span>
+<span class="sd">                e&#39;1</span>
+<span class="sd">                \ff</span>
+<span class="sd">                \&lt;</span>
+<span class="sd">                r1</span>
+<span class="sd">                \fff</span>
+<span class="sd">                f&#39;1</span>
+<span class="sd">                \p</span>
+<span class="sd">                \&gt;</span>
+<span class="sd">                g&#39;1</span>
+<span class="sd">                \ppp</span>
+<span class="sd">            }</span>
+
+<span class="sd">        ..  figure:: ../_images/reposition_dynamics-fosad5ltzj.png</span>
+
+<span class="sd">    Multi-measure rests:</span>
+<span class="sd">        Multi-measure rests are also supported.</span>
+
+<span class="sd">        &gt;&gt;&gt; staff = abjad.Staff(r&quot;c&#39;1\p R1\f d&#39;1&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; abjad.show(staff)</span>
+
+<span class="sd">        ..  docs::</span>
+
+<span class="sd">            \new Staff</span>
+<span class="sd">            {</span>
+<span class="sd">                c&#39;1</span>
+<span class="sd">                \p</span>
+<span class="sd">                R1</span>
+<span class="sd">                \f</span>
+<span class="sd">                d&#39;1</span>
+<span class="sd">            }</span>
+
+<span class="sd">        ..  figure:: ../_images/reposition_dynamics-uj6jasfs2uh.png</span>
+
+<span class="sd">        &gt;&gt;&gt; staff = abjad.Staff(r&quot;c&#39;1\p R1\f d&#39;1&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; auxjad.mutate.reposition_dynamics(staff[:])</span>
+<span class="sd">        &gt;&gt;&gt; abjad.show(staff)</span>
+
+<span class="sd">        ..  docs::</span>
+
+<span class="sd">            \new Staff</span>
+<span class="sd">            {</span>
+<span class="sd">                c&#39;1</span>
+<span class="sd">                \p</span>
+<span class="sd">                R1</span>
+<span class="sd">                d&#39;1</span>
+<span class="sd">                \f</span>
+<span class="sd">            }</span>
+
+<span class="sd">        ..  figure:: ../_images/reposition_dynamics-axpcbm9hocd.png</span>
+
+<span class="sd">    ..  warning::</span>
+
+<span class="sd">        The input selection must be a contiguous logical voice. When dealing</span>
+<span class="sd">        with a container with multiple subcontainers (e.g. a score containing</span>
+<span class="sd">        multiple staves), the best approach is to cycle through these</span>
+<span class="sd">        subcontainers, applying this function to them individually.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">selection</span><span class="p">,</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Selection</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;argument must be &#39;abjad.Selection&#39;&quot;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">abjad</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="n">selection</span><span class="p">)</span><span class="o">.</span><span class="n">leaves</span><span class="p">()</span><span class="o">.</span><span class="n">are_contiguous_logical_voice</span><span class="p">():</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;argument must be contiguous logical voice&quot;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">allow_hairpins_under_rests</span><span class="p">,</span> <span class="nb">bool</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;&#39;allow_hairpins_under_rests&#39; must be &#39;bool&#39;&quot;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">check_hairpin_trends</span><span class="p">,</span> <span class="nb">bool</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;&#39;check_hairpin_trends&#39; must be &#39;bool&#39;&quot;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">remove_repeated_dynamics</span><span class="p">,</span> <span class="nb">bool</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;&#39;remove_repeated_dynamics&#39; must be &#39;bool&#39;&quot;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">allow_hairpin_to_rest_with_dynamic</span><span class="p">,</span> <span class="nb">bool</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;&#39;allow_hairpin_to_rest_with_dynamic&#39; must be &#39;bool&#39;&quot;</span><span class="p">)</span>
+
+    <span class="n">leaves</span> <span class="o">=</span> <span class="n">selection</span><span class="o">.</span><span class="n">leaves</span><span class="p">()</span>
+
+    <span class="c1"># shifting dynamics and hairpins from rests to notes</span>
+    <span class="n">shifted_dynamic</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="n">shifted_hairpin</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="n">active_hairpin</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="k">for</span> <span class="n">leaf</span> <span class="ow">in</span> <span class="n">leaves</span><span class="p">:</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">leaf</span><span class="p">,</span> <span class="p">(</span><span class="n">abjad</span><span class="o">.</span><span class="n">Rest</span><span class="p">,</span> <span class="n">abjad</span><span class="o">.</span><span class="n">MultimeasureRest</span><span class="p">)):</span>
+            <span class="k">if</span> <span class="n">abjad</span><span class="o">.</span><span class="n">get</span><span class="o">.</span><span class="n">indicator</span><span class="p">(</span><span class="n">leaf</span><span class="p">,</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Dynamic</span><span class="p">)</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="n">previous_leaf</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="n">leaf</span><span class="p">)</span><span class="o">.</span><span class="n">with_previous_leaf</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span>
+                <span class="k">if</span> <span class="p">(</span><span class="n">allow_hairpin_to_rest_with_dynamic</span>
+                        <span class="ow">and</span> <span class="n">active_hairpin</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span>
+                        <span class="ow">and</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span>
+                            <span class="n">previous_leaf</span><span class="p">,</span>
+                            <span class="p">(</span><span class="n">abjad</span><span class="o">.</span><span class="n">Rest</span><span class="p">,</span> <span class="n">abjad</span><span class="o">.</span><span class="n">MultimeasureRest</span><span class="p">),</span>
+                        <span class="p">)):</span>
+                    <span class="n">active_hairpin</span> <span class="o">=</span> <span class="kc">None</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">shifted_dynamic</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">get</span><span class="o">.</span><span class="n">indicator</span><span class="p">(</span><span class="n">leaf</span><span class="p">,</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Dynamic</span><span class="p">)</span>
+                    <span class="n">abjad</span><span class="o">.</span><span class="n">detach</span><span class="p">(</span><span class="n">abjad</span><span class="o">.</span><span class="n">Dynamic</span><span class="p">,</span> <span class="n">leaf</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">abjad</span><span class="o">.</span><span class="n">get</span><span class="o">.</span><span class="n">indicator</span><span class="p">(</span><span class="n">leaf</span><span class="p">,</span> <span class="n">abjad</span><span class="o">.</span><span class="n">StartHairpin</span><span class="p">)</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="n">shifted_hairpin</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">get</span><span class="o">.</span><span class="n">indicator</span><span class="p">(</span><span class="n">leaf</span><span class="p">,</span> <span class="n">abjad</span><span class="o">.</span><span class="n">StartHairpin</span><span class="p">)</span>
+                <span class="n">abjad</span><span class="o">.</span><span class="n">detach</span><span class="p">(</span><span class="n">abjad</span><span class="o">.</span><span class="n">StartHairpin</span><span class="p">,</span> <span class="n">leaf</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">abjad</span><span class="o">.</span><span class="n">get</span><span class="o">.</span><span class="n">indicator</span><span class="p">(</span><span class="n">leaf</span><span class="p">,</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Dynamic</span><span class="p">)</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">shifted_dynamic</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                    <span class="n">abjad</span><span class="o">.</span><span class="n">attach</span><span class="p">(</span><span class="n">shifted_dynamic</span><span class="p">,</span> <span class="n">leaf</span><span class="p">)</span>
+                    <span class="k">if</span> <span class="p">(</span><span class="n">abjad</span><span class="o">.</span><span class="n">get</span><span class="o">.</span><span class="n">indicator</span><span class="p">(</span><span class="n">leaf</span><span class="p">,</span> <span class="n">abjad</span><span class="o">.</span><span class="n">StopHairpin</span><span class="p">)</span>
+                            <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">):</span>
+                        <span class="n">abjad</span><span class="o">.</span><span class="n">detach</span><span class="p">(</span><span class="n">abjad</span><span class="o">.</span><span class="n">StopHairpin</span><span class="p">,</span> <span class="n">leaf</span><span class="p">)</span>
+                <span class="k">if</span> <span class="n">shifted_hairpin</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                    <span class="n">abjad</span><span class="o">.</span><span class="n">attach</span><span class="p">(</span><span class="n">shifted_hairpin</span><span class="p">,</span> <span class="n">leaf</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">active_hairpin</span> <span class="o">=</span> <span class="kc">None</span>
+            <span class="k">if</span> <span class="n">abjad</span><span class="o">.</span><span class="n">get</span><span class="o">.</span><span class="n">indicator</span><span class="p">(</span><span class="n">leaf</span><span class="p">,</span> <span class="n">abjad</span><span class="o">.</span><span class="n">StopHairpin</span><span class="p">)</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="n">active_hairpin</span> <span class="o">=</span> <span class="kc">None</span>
+            <span class="n">shifted_dynamic</span> <span class="o">=</span> <span class="kc">None</span>
+            <span class="n">shifted_hairpin</span> <span class="o">=</span> <span class="kc">None</span>
+            <span class="k">if</span> <span class="n">active_hairpin</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="n">active_hairpin</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">get</span><span class="o">.</span><span class="n">indicator</span><span class="p">(</span><span class="n">leaf</span><span class="p">,</span> <span class="n">abjad</span><span class="o">.</span><span class="n">StartHairpin</span><span class="p">)</span>
+
+    <span class="c1"># stopping hairpins under rests if not allowed</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">allow_hairpins_under_rests</span><span class="p">:</span>
+        <span class="n">effective_hairpin</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="k">for</span> <span class="n">leaf</span> <span class="ow">in</span> <span class="n">leaves</span><span class="p">:</span>
+            <span class="n">start_hairpin</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">get</span><span class="o">.</span><span class="n">indicator</span><span class="p">(</span><span class="n">leaf</span><span class="p">,</span> <span class="n">abjad</span><span class="o">.</span><span class="n">StartHairpin</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">start_hairpin</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="n">effective_hairpin</span> <span class="o">=</span> <span class="n">start_hairpin</span>
+                <span class="k">continue</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">leaf</span><span class="p">,</span> <span class="p">(</span><span class="n">abjad</span><span class="o">.</span><span class="n">Rest</span><span class="p">,</span> <span class="n">abjad</span><span class="o">.</span><span class="n">MultimeasureRest</span><span class="p">)):</span>
+                <span class="k">if</span> <span class="n">effective_hairpin</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                    <span class="k">if</span> <span class="n">abjad</span><span class="o">.</span><span class="n">get</span><span class="o">.</span><span class="n">indicator</span><span class="p">(</span><span class="n">leaf</span><span class="p">,</span> <span class="n">abjad</span><span class="o">.</span><span class="n">StopHairpin</span><span class="p">)</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                        <span class="n">abjad</span><span class="o">.</span><span class="n">attach</span><span class="p">(</span><span class="n">abjad</span><span class="o">.</span><span class="n">StopHairpin</span><span class="p">(),</span> <span class="n">leaf</span><span class="p">)</span>
+                    <span class="n">effective_hairpin</span> <span class="o">=</span> <span class="kc">None</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">dynamic</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">get</span><span class="o">.</span><span class="n">indicator</span><span class="p">(</span><span class="n">leaf</span><span class="p">,</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Dynamic</span><span class="p">)</span>
+                <span class="n">stop_hairpin</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">get</span><span class="o">.</span><span class="n">indicator</span><span class="p">(</span><span class="n">leaf</span><span class="p">,</span> <span class="n">abjad</span><span class="o">.</span><span class="n">StopHairpin</span><span class="p">)</span>
+                <span class="k">if</span> <span class="n">dynamic</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">or</span> <span class="n">stop_hairpin</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                    <span class="n">effective_hairpin</span> <span class="o">=</span> <span class="kc">None</span>
+
+    <span class="c1"># cleaning up hairpins</span>
+    <span class="n">effective_dynamic</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="k">for</span> <span class="n">index</span><span class="p">,</span> <span class="n">leaf</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">leaves</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]):</span>
+        <span class="k">if</span> <span class="n">abjad</span><span class="o">.</span><span class="n">get</span><span class="o">.</span><span class="n">indicator</span><span class="p">(</span><span class="n">leaf</span><span class="p">,</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Dynamic</span><span class="p">)</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">effective_dynamic</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">get</span><span class="o">.</span><span class="n">indicator</span><span class="p">(</span><span class="n">leaf</span><span class="p">,</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Dynamic</span><span class="p">)</span>
+        <span class="n">start_hairpin</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">get</span><span class="o">.</span><span class="n">indicator</span><span class="p">(</span><span class="n">leaf</span><span class="p">,</span> <span class="n">abjad</span><span class="o">.</span><span class="n">StartHairpin</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">start_hairpin</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">check_hairpin_trends</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">next_leaf</span> <span class="ow">in</span> <span class="n">leaves</span><span class="p">[</span><span class="n">index</span> <span class="o">+</span> <span class="mi">1</span><span class="p">:]:</span>
+                <span class="n">next_dynamic</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">get</span><span class="o">.</span><span class="n">indicator</span><span class="p">(</span><span class="n">next_leaf</span><span class="p">,</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Dynamic</span><span class="p">)</span>
+                <span class="k">if</span> <span class="n">next_dynamic</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">effective_dynamic</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                    <span class="k">if</span> <span class="s1">&#39;&lt;&#39;</span> <span class="ow">in</span> <span class="n">start_hairpin</span><span class="o">.</span><span class="n">shape</span><span class="p">:</span>
+                        <span class="k">if</span> <span class="n">next_dynamic</span><span class="o">.</span><span class="n">ordinal</span> <span class="o">&lt;=</span> <span class="n">effective_dynamic</span><span class="o">.</span><span class="n">ordinal</span><span class="p">:</span>
+                            <span class="n">abjad</span><span class="o">.</span><span class="n">detach</span><span class="p">(</span><span class="n">abjad</span><span class="o">.</span><span class="n">StartHairpin</span><span class="p">,</span> <span class="n">leaf</span><span class="p">)</span>
+                    <span class="k">elif</span> <span class="s1">&#39;&gt;&#39;</span> <span class="ow">in</span> <span class="n">start_hairpin</span><span class="o">.</span><span class="n">shape</span><span class="p">:</span>
+                        <span class="k">if</span> <span class="n">next_dynamic</span><span class="o">.</span><span class="n">ordinal</span> <span class="o">&gt;=</span> <span class="n">effective_dynamic</span><span class="o">.</span><span class="n">ordinal</span><span class="p">:</span>
+                            <span class="n">abjad</span><span class="o">.</span><span class="n">detach</span><span class="p">(</span><span class="n">abjad</span><span class="o">.</span><span class="n">StartHairpin</span><span class="p">,</span> <span class="n">leaf</span><span class="p">)</span>
+                    <span class="k">break</span>
+                <span class="k">elif</span> <span class="p">(</span><span class="n">abjad</span><span class="o">.</span><span class="n">get</span><span class="o">.</span><span class="n">indicator</span><span class="p">(</span><span class="n">next_leaf</span><span class="p">,</span> <span class="n">abjad</span><span class="o">.</span><span class="n">StopHairpin</span><span class="p">)</span>
+                        <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">):</span>
+                    <span class="k">break</span>
+    <span class="k">if</span> <span class="n">abjad</span><span class="o">.</span><span class="n">get</span><span class="o">.</span><span class="n">indicator</span><span class="p">(</span><span class="n">leaves</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">abjad</span><span class="o">.</span><span class="n">StartHairpin</span><span class="p">)</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">abjad</span><span class="o">.</span><span class="n">detach</span><span class="p">(</span><span class="n">abjad</span><span class="o">.</span><span class="n">StartHairpin</span><span class="p">,</span> <span class="n">leaves</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+
+    <span class="c1"># removing unecessary StopHairpin&#39;s</span>
+    <span class="k">for</span> <span class="n">leaf</span> <span class="ow">in</span> <span class="n">leaves</span><span class="p">:</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">abjad</span><span class="o">.</span><span class="n">get</span><span class="o">.</span><span class="n">indicator</span><span class="p">(</span><span class="n">leaf</span><span class="p">,</span> <span class="n">abjad</span><span class="o">.</span><span class="n">StopHairpin</span><span class="p">)</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span>
+                <span class="ow">and</span> <span class="n">abjad</span><span class="o">.</span><span class="n">get</span><span class="o">.</span><span class="n">indicator</span><span class="p">(</span><span class="n">leaf</span><span class="p">,</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Dynamic</span><span class="p">)</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">):</span>
+            <span class="n">abjad</span><span class="o">.</span><span class="n">detach</span><span class="p">(</span><span class="n">abjad</span><span class="o">.</span><span class="n">StopHairpin</span><span class="p">,</span> <span class="n">leaf</span><span class="p">)</span>
+    <span class="n">target_leaf</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="k">for</span> <span class="n">leaf</span> <span class="ow">in</span> <span class="n">leaves</span><span class="p">[::</span><span class="o">-</span><span class="mi">1</span><span class="p">]:</span>
+        <span class="k">if</span> <span class="n">abjad</span><span class="o">.</span><span class="n">get</span><span class="o">.</span><span class="n">indicator</span><span class="p">(</span><span class="n">leaf</span><span class="p">,</span> <span class="n">abjad</span><span class="o">.</span><span class="n">StopHairpin</span><span class="p">)</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">target_leaf</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="n">abjad</span><span class="o">.</span><span class="n">detach</span><span class="p">(</span><span class="n">abjad</span><span class="o">.</span><span class="n">StopHairpin</span><span class="p">,</span> <span class="n">target_leaf</span><span class="p">)</span>
+            <span class="n">target_leaf</span> <span class="o">=</span> <span class="n">leaf</span>
+        <span class="k">elif</span> <span class="p">(</span><span class="n">abjad</span><span class="o">.</span><span class="n">get</span><span class="o">.</span><span class="n">indicator</span><span class="p">(</span><span class="n">leaf</span><span class="p">,</span> <span class="n">abjad</span><span class="o">.</span><span class="n">StartHairpin</span><span class="p">)</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span>
+                <span class="ow">or</span> <span class="n">abjad</span><span class="o">.</span><span class="n">get</span><span class="o">.</span><span class="n">indicator</span><span class="p">(</span><span class="n">leaf</span><span class="p">,</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Dynamic</span><span class="p">))</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">target_leaf</span> <span class="o">=</span> <span class="kc">None</span>
+
+    <span class="c1"># removing repeated dynamics if required</span>
+    <span class="k">if</span> <span class="n">remove_repeated_dynamics</span><span class="p">:</span>
+        <span class="n">remove_repeated_dynamics_</span><span class="p">(</span><span class="n">selection</span><span class="p">)</span></div>
+</pre></div>
+
+           </div>
+           
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2020, Gilberto Agostinho.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

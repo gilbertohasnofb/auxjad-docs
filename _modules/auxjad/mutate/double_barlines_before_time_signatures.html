@@ -1,0 +1,477 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>auxjad.mutate.double_barlines_before_time_signatures &mdash; auxjad 0.8.25 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+        <script src="../../../_static/jquery.js"></script>
+        <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/doctools.js"></script>
+    
+    <script type="text/javascript" src="../../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../../index.html" class="icon icon-home"> auxjad
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.8
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../index.html">Welcome to Auxjad’s documentation!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../examples/index.html">Examples of usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../score_gallery/index.html">Score gallery</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../api/index.html">Auxjad API</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">auxjad</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../../index.html">Module code</a> &raquo;</li>
+        
+      <li>auxjad.mutate.double_barlines_before_time_signatures</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for auxjad.mutate.double_barlines_before_time_signatures</h1><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Optional</span>
+
+<span class="kn">import</span> <span class="nn">abjad</span>
+
+
+<div class="viewcode-block" id="double_barlines_before_time_signatures"><a class="viewcode-back" href="../../../_api_members/auxjad.mutate.double_barlines_before_time_signatures.html#auxjad.mutate.double_barlines_before_time_signatures">[docs]</a><span class="k">def</span> <span class="nf">double_barlines_before_time_signatures</span><span class="p">(</span><span class="n">selection</span><span class="p">:</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Selection</span><span class="p">,</span>
+                                           <span class="o">*</span><span class="p">,</span>
+                                           <span class="n">context</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+                                           <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="sa">r</span><span class="sd">&quot;&quot;&quot;Mutates an input |abjad.Selection| in place and has no return value;</span>
+<span class="sd">    this function adds double bar lines before all time signatures.</span>
+
+<span class="sd">    Basic usage:</span>
+<span class="sd">        Whenever a new time signature appears, the function adds a double bar</span>
+<span class="sd">        line before it:</span>
+
+<span class="sd">        &gt;&gt;&gt; staff = abjad.Staff(</span>
+<span class="sd">        ...     r&quot;\time 3/4 c&#39;2. \time 4/4 d&#39;1 e&#39;1 \time 6/4 f&#39;2. g&#39;2.&quot;</span>
+<span class="sd">        ... )</span>
+<span class="sd">        &gt;&gt;&gt; auxjad.mutate.double_barlines_before_time_signatures(staff[:])</span>
+<span class="sd">        &gt;&gt;&gt; abjad.show(staff)</span>
+
+<span class="sd">        ..  docs::</span>
+
+<span class="sd">            \new Staff</span>
+<span class="sd">            {</span>
+<span class="sd">                \time 3/4</span>
+<span class="sd">                c&#39;2.</span>
+<span class="sd">                \bar &quot;||&quot;</span>
+<span class="sd">                \time 4/4</span>
+<span class="sd">                d&#39;1</span>
+<span class="sd">                e&#39;1</span>
+<span class="sd">                \bar &quot;||&quot;</span>
+<span class="sd">                \time 6/4</span>
+<span class="sd">                f&#39;2.</span>
+<span class="sd">                g&#39;2.</span>
+<span class="sd">            }</span>
+
+<span class="sd">        ..  figure:: ../_images/remove_repeated_time_signatures-2O7JyxN1CS.png</span>
+
+<span class="sd">    ..  note::</span>
+
+<span class="sd">        Auxjad automatically adds this function as an extension function to</span>
+<span class="sd">        |abjad.mutate|. It can thus be used from either |auxjad.mutate|_ or</span>
+<span class="sd">        |abjad.mutate| namespaces. Therefore, the two lines below are</span>
+<span class="sd">        equivalent:</span>
+
+<span class="sd">        &gt;&gt;&gt; auxjad.mutate.double_barlines_before_time_signatures(staff[:])</span>
+<span class="sd">        &gt;&gt;&gt; abjad.mutate.double_barlines_before_time_signatures(staff[:])</span>
+
+<span class="sd">    Multi-measure rests:</span>
+<span class="sd">        This function can handle multi-measure rests too.</span>
+
+<span class="sd">        &gt;&gt;&gt; staff = abjad.Staff(</span>
+<span class="sd">        ...     r&quot;\time 3/4 R1 * 3/4 &quot;</span>
+<span class="sd">        ...     r&quot;\time 4/4 R1 * 2 &quot;</span>
+<span class="sd">        ...     r&quot;\time 6/4 R1 * 6/4 &quot;</span>
+<span class="sd">        ...     r&quot;\time 4/4 R1&quot;</span>
+<span class="sd">        ... )</span>
+<span class="sd">        &gt;&gt;&gt; auxjad.mutate.double_barlines_before_time_signatures(staff[:])</span>
+<span class="sd">        &gt;&gt;&gt; abjad.show(staff)</span>
+
+<span class="sd">        ..  docs::</span>
+
+<span class="sd">            \new Staff</span>
+<span class="sd">            {</span>
+<span class="sd">                \time 3/4</span>
+<span class="sd">                R1 * 3/4</span>
+<span class="sd">                \bar &quot;||&quot;</span>
+<span class="sd">                \time 4/4</span>
+<span class="sd">                R1 * 2</span>
+<span class="sd">                \bar &quot;||&quot;</span>
+<span class="sd">                \time 6/4</span>
+<span class="sd">                R1 * 3/2</span>
+<span class="sd">                \bar &quot;||&quot;</span>
+<span class="sd">                \time 4/4</span>
+<span class="sd">                R1</span>
+<span class="sd">            }</span>
+
+<span class="sd">        ..  figure:: ../_images/remove_repeated_time_signatures-aYmnnFDdRh.png</span>
+
+<span class="sd">    Input with bar lines:</span>
+<span class="sd">        If the input selection already contains bar lines at poinst where a</span>
+<span class="sd">        time signature change, the function will only replace those of type</span>
+<span class="sd">        ``&quot;|&quot;`` or ``&quot;&quot;``, keeping all others as they were.</span>
+
+<span class="sd">        &gt;&gt;&gt; staff = abjad.Staff(</span>
+<span class="sd">        ...     r&quot;R1 &quot;</span>
+<span class="sd">        ...     r&quot;\time 3/4 c&#39;2. &quot;</span>
+<span class="sd">        ...     r&quot;\time 4/4 d&#39;1 &quot;</span>
+<span class="sd">        ...     r&quot;e&#39;1 &quot;</span>
+<span class="sd">        ...     r&quot;\time 6/4 f&#39;2. g&#39;2. &quot;</span>
+<span class="sd">        ...     r&quot;\time 2/4 a&#39;2&quot;</span>
+<span class="sd">        ... )</span>
+<span class="sd">        &gt;&gt;&gt; abjad.attach(abjad.BarLine(&#39;.|:&#39;), staff[0])</span>
+<span class="sd">        &gt;&gt;&gt; abjad.attach(abjad.BarLine(&#39;:|.&#39;), staff[1])</span>
+<span class="sd">        &gt;&gt;&gt; abjad.attach(abjad.BarLine(&#39;|&#39;), staff[3])</span>
+<span class="sd">        &gt;&gt;&gt; abjad.attach(abjad.BarLine(&#39;!&#39;), staff[5])</span>
+<span class="sd">        &gt;&gt;&gt; auxjad.mutate.double_barlines_before_time_signatures(staff[:])</span>
+<span class="sd">        &gt;&gt;&gt; abjad.show(staff)</span>
+
+<span class="sd">        ..  docs::</span>
+
+<span class="sd">            \new Staff</span>
+<span class="sd">            {</span>
+<span class="sd">                R1</span>
+<span class="sd">                \bar &quot;.|:&quot;</span>
+<span class="sd">                \time 3/4</span>
+<span class="sd">                c&#39;2.</span>
+<span class="sd">                \bar &quot;:|.&quot;</span>
+<span class="sd">                \time 4/4</span>
+<span class="sd">                d&#39;1</span>
+<span class="sd">                e&#39;1</span>
+<span class="sd">                \bar &quot;||&quot;</span>
+<span class="sd">                \time 6/4</span>
+<span class="sd">                f&#39;2.</span>
+<span class="sd">                g&#39;2.</span>
+<span class="sd">                \bar &quot;!&quot;</span>
+<span class="sd">                \time 2/4</span>
+<span class="sd">                a&#39;2</span>
+<span class="sd">            }</span>
+
+<span class="sd">        ..  figure:: ../_images/remove_repeated_time_signatures-jUymJWLdR7.png</span>
+
+<span class="sd">    ..  warning::</span>
+
+<span class="sd">        Attempting to add barlines to multiple staves in an |abjad.Score| at</span>
+<span class="sd">        the same point in the score will raise an exception:</span>
+
+<span class="sd">        ..  code::</span>
+
+<span class="sd">            &gt;&gt;&gt; up = abjad.Staff(r&quot;\time 4/4 c&#39;1 d&#39;1 \time 6/4 e&#39;1.&quot;)</span>
+<span class="sd">            &gt;&gt;&gt; down = abjad.Staff(</span>
+<span class="sd">            ...     r&quot;\time 4/4 \clef bass c1 d1 \time 6/4 e1.&quot;</span>
+<span class="sd">            ... )</span>
+<span class="sd">            &gt;&gt;&gt; score = abjad.Score([up, down])</span>
+<span class="sd">            &gt;&gt;&gt; auxjad.mutate.double_barlines_before_time_signatures(up[:])</span>
+<span class="sd">            &gt;&gt;&gt; auxjad.mutate.double_barlines_before_time_signatures(down[:])</span>
+<span class="sd">            abjad.exceptions.PersistentIndicatorError:</span>
+
+<span class="sd">            Can not attach ...</span>
+
+<span class="sd">            abjad.Wrapper(</span>
+<span class="sd">                context=&#39;Score&#39;,</span>
+<span class="sd">                indicator=abjad.BarLine(&#39;||&#39;, format_slot=&#39;after&#39;, ),</span>
+<span class="sd">                tag=abjad.Tag(),</span>
+<span class="sd">                )</span>
+
+<span class="sd">            ... to Note(&#39;d1&#39;) in None because ...</span>
+
+<span class="sd">            abjad.Wrapper(</span>
+<span class="sd">                context=&#39;Score&#39;,</span>
+<span class="sd">                indicator=abjad.BarLine(&#39;||&#39;, format_slot=&#39;after&#39;, ),</span>
+<span class="sd">                tag=abjad.Tag(),</span>
+<span class="sd">                )</span>
+
+<span class="sd">            ... is already attached to Note(&quot;d&#39;1&quot;) in None.</span>
+
+<span class="sd">        This is because, by default, bar lines belong to the score scope. In</span>
+<span class="sd">        order to have bar lines on both staves (e.g. for easier part</span>
+<span class="sd">        extraction), invoke this mutation with the argument ``context`` set to</span>
+<span class="sd">        ``&#39;Staff&#39;`` so that the double bar lines become scoped to the staff</span>
+<span class="sd">        instead of the score:</span>
+
+<span class="sd">        &gt;&gt;&gt; up = abjad.Staff(r&quot;\time 4/4 c&#39;1 d&#39;1 \time 6/4 e&#39;1.&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; down = abjad.Staff(r&quot;\time 4/4 \clef bass c1 d1 \time 6/4 e1.&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; score = abjad.Score([up, down])</span>
+<span class="sd">        &gt;&gt;&gt; auxjad.mutate.double_barlines_before_time_signatures(</span>
+<span class="sd">        ...     up[:],</span>
+<span class="sd">        ...     context=&#39;Staff&#39;,</span>
+<span class="sd">        ... )</span>
+<span class="sd">        &gt;&gt;&gt; auxjad.mutate.double_barlines_before_time_signatures(</span>
+<span class="sd">        ...     down[:],</span>
+<span class="sd">        ...     context=&#39;Staff&#39;,</span>
+<span class="sd">        ... )</span>
+<span class="sd">        &gt;&gt;&gt; abjad.show(score)</span>
+
+<span class="sd">        ..  docs::</span>
+
+<span class="sd">            \new Score</span>
+<span class="sd">            &lt;&lt;</span>
+<span class="sd">                \new Staff</span>
+<span class="sd">                {</span>
+<span class="sd">                    \time 4/4</span>
+<span class="sd">                    c&#39;1</span>
+<span class="sd">                    d&#39;1</span>
+<span class="sd">                    \bar &quot;||&quot;</span>
+<span class="sd">                    \time 6/4</span>
+<span class="sd">                    e&#39;1.</span>
+<span class="sd">                }</span>
+<span class="sd">                \new Staff</span>
+<span class="sd">                {</span>
+<span class="sd">                    \time 4/4</span>
+<span class="sd">                    \clef &quot;bass&quot;</span>
+<span class="sd">                    c1</span>
+<span class="sd">                    d1</span>
+<span class="sd">                    \bar &quot;||&quot;</span>
+<span class="sd">                    \time 6/4</span>
+<span class="sd">                    e1.</span>
+<span class="sd">                }</span>
+<span class="sd">            &gt;&gt;</span>
+
+<span class="sd">        ..  figure:: ../_images/remove_repeated_time_signatures-yD6KL6xbrV.png</span>
+
+<span class="sd">        In this case, both individual staves will also have the bar lines:</span>
+
+<span class="sd">        &gt;&gt;&gt; abjad.show(up)</span>
+
+<span class="sd">        ..  docs::</span>
+
+<span class="sd">            \new Staff</span>
+<span class="sd">            {</span>
+<span class="sd">                \time 4/4</span>
+<span class="sd">                c&#39;1</span>
+<span class="sd">                d&#39;1</span>
+<span class="sd">                \bar &quot;||&quot;</span>
+<span class="sd">                \time 6/4</span>
+<span class="sd">                e&#39;1.</span>
+<span class="sd">            }</span>
+
+<span class="sd">        ..  figure:: ../_images/remove_repeated_time_signatures-Zs1hSq2uwY.png</span>
+
+<span class="sd">        &gt;&gt;&gt; abjad.show(down)</span>
+
+<span class="sd">        ..  docs::</span>
+
+<span class="sd">            \new Staff</span>
+<span class="sd">            {</span>
+<span class="sd">                \time 4/4</span>
+<span class="sd">                \clef &quot;bass&quot;</span>
+<span class="sd">                c1</span>
+<span class="sd">                d1</span>
+<span class="sd">                \bar &quot;||&quot;</span>
+<span class="sd">                \time 6/4</span>
+<span class="sd">                e1.</span>
+<span class="sd">            }</span>
+
+<span class="sd">        ..  figure:: ../_images/remove_repeated_time_signatures-QYOgyhLJ2f.png</span>
+
+<span class="sd">    ..  warning::</span>
+
+<span class="sd">        The input selection must be a contiguous logical voice. When dealing</span>
+<span class="sd">        with a container with multiple subcontainers (e.g. a score containing</span>
+<span class="sd">        multiple staves), the best approach is to cycle through these</span>
+<span class="sd">        subcontainers, applying this function to them individually.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">selection</span><span class="p">,</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Selection</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;argument must be &#39;abjad.Selection&#39;&quot;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">selection</span><span class="o">.</span><span class="n">leaves</span><span class="p">()</span><span class="o">.</span><span class="n">are_contiguous_logical_voice</span><span class="p">():</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;argument must be contiguous logical voice&quot;</span><span class="p">)</span>
+
+    <span class="n">leaves</span> <span class="o">=</span> <span class="n">selection</span><span class="o">.</span><span class="n">leaves</span><span class="p">()</span>
+
+    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">leaf</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">leaves</span><span class="p">[</span><span class="mi">1</span><span class="p">:],</span> <span class="mi">1</span><span class="p">):</span>
+        <span class="n">time_signature</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">get</span><span class="o">.</span><span class="n">indicator</span><span class="p">(</span><span class="n">leaf</span><span class="p">,</span> <span class="n">abjad</span><span class="o">.</span><span class="n">TimeSignature</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">time_signature</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">barline</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">get</span><span class="o">.</span><span class="n">indicator</span><span class="p">(</span><span class="n">leaves</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">],</span> <span class="n">abjad</span><span class="o">.</span><span class="n">BarLine</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">barline</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">barline</span><span class="o">.</span><span class="n">abbreviation</span> <span class="ow">in</span> <span class="p">(</span><span class="s1">&#39;|&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">):</span>
+                <span class="n">abjad</span><span class="o">.</span><span class="n">detach</span><span class="p">(</span><span class="n">abjad</span><span class="o">.</span><span class="n">BarLine</span><span class="p">,</span> <span class="n">leaves</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">])</span>
+                <span class="n">barline</span> <span class="o">=</span> <span class="kc">None</span>
+            <span class="k">if</span> <span class="n">barline</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">context</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                    <span class="n">abjad</span><span class="o">.</span><span class="n">attach</span><span class="p">(</span><span class="n">abjad</span><span class="o">.</span><span class="n">BarLine</span><span class="p">(</span><span class="s2">&quot;||&quot;</span><span class="p">),</span> <span class="n">leaves</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">])</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">abjad</span><span class="o">.</span><span class="n">attach</span><span class="p">(</span><span class="n">abjad</span><span class="o">.</span><span class="n">BarLine</span><span class="p">(</span><span class="s2">&quot;||&quot;</span><span class="p">),</span>
+                                 <span class="n">leaves</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">],</span>
+                                 <span class="n">context</span><span class="o">=</span><span class="n">context</span><span class="p">,</span>
+                                 <span class="p">)</span></div>
+</pre></div>
+
+           </div>
+           
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2020, Gilberto Agostinho.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

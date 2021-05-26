@@ -3,20 +3,25 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8">
+  <meta charset="utf-8" />
   
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>auxjad.core.FittestMeasureMaker &mdash; auxjad 0.8.24 documentation</title>
+  <title>auxjad.core.FittestMeasureMaker &mdash; auxjad 0.8.25 documentation</title>
   
 
   
   <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
 
   
   
+
   
+  
+
   
 
   
@@ -26,11 +31,10 @@
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
         <script src="../../../_static/jquery.js"></script>
         <script src="../../../_static/underscore.js"></script>
         <script src="../../../_static/doctools.js"></script>
-        <script src="../../../_static/language_data.js"></script>
-        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     
     <script type="text/javascript" src="../../../_static/js/theme.js"></script>
 
@@ -50,7 +54,7 @@
           
 
           
-            <a href="../../../index.html" class="icon icon-home" alt="Documentation Home"> auxjad
+            <a href="../../../index.html" class="icon icon-home"> auxjad
           
 
           
@@ -131,6 +135,8 @@
 
 
 
+
+
 <div role="navigation" aria-label="breadcrumbs navigation">
 
   <ul class="wy-breadcrumbs">
@@ -159,7 +165,7 @@
 
 <span class="kn">import</span> <span class="nn">abjad</span>
 
-<span class="kn">from</span> <span class="nn">..utilities.mutate</span> <span class="kn">import</span> <span class="n">mutate</span>
+<span class="kn">from</span> <span class="nn">..</span> <span class="kn">import</span> <span class="n">mutate</span>
 <span class="kn">from</span> <span class="nn">.GeneticAlgorithm</span> <span class="kn">import</span> <span class="n">GeneticAlgorithm</span>
 
 
@@ -170,7 +176,7 @@
 <span class="sd">    generation, and returns an |abjad.Selection| created with the fittest pitch</span>
 <span class="sd">    and attack point individuals.</span>
 
-<span class="sd">    .. note::</span>
+<span class="sd">    ..  note::</span>
 
 <span class="sd">        Many of the properties of this class reflect the behaviour of</span>
 <span class="sd">        properties of :class:`GeneticAlgorithm`. Some, such as</span>
@@ -205,17 +211,20 @@
 <span class="sd">        4</span>
 <span class="sd">        &gt;&gt;&gt; notes = measure_maker.target_music</span>
 <span class="sd">        &gt;&gt;&gt; staff = abjad.Staff(notes)</span>
-<span class="sd">        &gt;&gt;&gt; abjad.f(staff)</span>
-<span class="sd">        \new Staff</span>
-<span class="sd">        {</span>
-<span class="sd">            \time 4/4</span>
-<span class="sd">            c&#39;4</span>
-<span class="sd">            d&#39;4</span>
-<span class="sd">            e&#39;4</span>
-<span class="sd">            f&#39;4</span>
-<span class="sd">        }</span>
+<span class="sd">        &gt;&gt;&gt; abjad.show(staff)</span>
 
-<span class="sd">        .. figure:: ../_images/FittestMeasureMaker-ahfUfls3cq.png</span>
+<span class="sd">        ..  docs::</span>
+
+<span class="sd">            \new Staff</span>
+<span class="sd">            {</span>
+<span class="sd">                \time 4/4</span>
+<span class="sd">                c&#39;4</span>
+<span class="sd">                d&#39;4</span>
+<span class="sd">                e&#39;4</span>
+<span class="sd">                f&#39;4</span>
+<span class="sd">            }</span>
+
+<span class="sd">        ..  figure:: ../_images/FittestMeasureMaker-ahfUfls3cq.png</span>
 
 <span class="sd">        Calling the instance will apply the genetic algorithm process and</span>
 <span class="sd">        output an |abjad.Selection| with the fittest  individual in the</span>
@@ -225,21 +234,24 @@
 <span class="sd">        &gt;&gt;&gt; measure_maker.generation_number</span>
 <span class="sd">        0</span>
 <span class="sd">        &gt;&gt;&gt; staff = abjad.Staff(notes)</span>
-<span class="sd">        &gt;&gt;&gt; abjad.f(staff)</span>
-<span class="sd">        \new Staff</span>
-<span class="sd">        {</span>
-<span class="sd">            \time 4/4</span>
-<span class="sd">            c&#39;4</span>
-<span class="sd">            f&#39;4</span>
-<span class="sd">            ~</span>
-<span class="sd">            f&#39;8.</span>
-<span class="sd">            e&#39;16</span>
-<span class="sd">            ~</span>
-<span class="sd">            e&#39;8</span>
-<span class="sd">            a&#39;8</span>
-<span class="sd">        }</span>
+<span class="sd">        &gt;&gt;&gt; abjad.show(staff)</span>
 
-<span class="sd">        .. figure:: ../_images/FittestMeasureMaker-mIrHl4wwHA.png</span>
+<span class="sd">        ..  docs::</span>
+
+<span class="sd">            \new Staff</span>
+<span class="sd">            {</span>
+<span class="sd">                \time 4/4</span>
+<span class="sd">                c&#39;4</span>
+<span class="sd">                f&#39;4</span>
+<span class="sd">                ~</span>
+<span class="sd">                f&#39;8.</span>
+<span class="sd">                e&#39;16</span>
+<span class="sd">                ~</span>
+<span class="sd">                e&#39;8</span>
+<span class="sd">                a&#39;8</span>
+<span class="sd">            }</span>
+
+<span class="sd">        ..  figure:: ../_images/FittestMeasureMaker-mIrHl4wwHA.png</span>
 
 <span class="sd">        Subsequent calls will create new generations of individuals, always</span>
 <span class="sd">        outputting the fittest measure.</span>
@@ -248,21 +260,24 @@
 <span class="sd">        &gt;&gt;&gt; measure_maker.generation_number</span>
 <span class="sd">        1</span>
 <span class="sd">        &gt;&gt;&gt; staff = abjad.Staff(notes)</span>
-<span class="sd">        &gt;&gt;&gt; abjad.f(staff)</span>
-<span class="sd">        \new Staff</span>
-<span class="sd">        {</span>
-<span class="sd">            \time 4/4</span>
-<span class="sd">            c&#39;4</span>
-<span class="sd">            d&#39;16</span>
-<span class="sd">            e&#39;8.</span>
-<span class="sd">            ~</span>
-<span class="sd">            e&#39;4</span>
-<span class="sd">            ~</span>
-<span class="sd">            e&#39;16</span>
-<span class="sd">            g&#39;8.</span>
-<span class="sd">        }</span>
+<span class="sd">        &gt;&gt;&gt; abjad.show(staff)</span>
 
-<span class="sd">        .. figure:: ../_images/FittestMeasureMaker-hDxTq3Y2Ek.png</span>
+<span class="sd">        ..  docs::</span>
+
+<span class="sd">            \new Staff</span>
+<span class="sd">            {</span>
+<span class="sd">                \time 4/4</span>
+<span class="sd">                c&#39;4</span>
+<span class="sd">                d&#39;16</span>
+<span class="sd">                e&#39;8.</span>
+<span class="sd">                ~</span>
+<span class="sd">                e&#39;4</span>
+<span class="sd">                ~</span>
+<span class="sd">                e&#39;16</span>
+<span class="sd">                g&#39;8.</span>
+<span class="sd">            }</span>
+
+<span class="sd">        ..  figure:: ../_images/FittestMeasureMaker-hDxTq3Y2Ek.png</span>
 
 <span class="sd">    :meth:`output_n`:</span>
 <span class="sd">        The method :meth:`output_n` can be used to output `n` iterations of the</span>
@@ -276,40 +291,43 @@
 <span class="sd">        ... )</span>
 <span class="sd">        &gt;&gt;&gt; notes = measure_maker.output_n(5)</span>
 <span class="sd">        &gt;&gt;&gt; staff = abjad.Staff(notes)</span>
-<span class="sd">        &gt;&gt;&gt; abjad.f(staff)</span>
-<span class="sd">        \new Staff</span>
-<span class="sd">        {</span>
-<span class="sd">            \time 4/4</span>
-<span class="sd">            r4</span>
-<span class="sd">            r16</span>
-<span class="sd">            c&#39;8.</span>
-<span class="sd">            d&#39;16</span>
-<span class="sd">            d&#39;8.</span>
-<span class="sd">            f&#39;4</span>
-<span class="sd">            c&#39;2</span>
-<span class="sd">            d&#39;16</span>
-<span class="sd">            c&#39;&#39;8.</span>
-<span class="sd">            f&#39;4</span>
-<span class="sd">            r16</span>
-<span class="sd">            c&#39;8.</span>
-<span class="sd">            d&#39;4</span>
-<span class="sd">            f&#39;4.</span>
-<span class="sd">            f&#39;8</span>
-<span class="sd">            c&#39;4</span>
-<span class="sd">            d&#39;8.</span>
-<span class="sd">            e&#39;16</span>
-<span class="sd">            ~</span>
-<span class="sd">            e&#39;4</span>
-<span class="sd">            e&#39;4</span>
-<span class="sd">            c&#39;4</span>
-<span class="sd">            d&#39;4</span>
-<span class="sd">            ~</span>
-<span class="sd">            d&#39;16</span>
-<span class="sd">            e&#39;8.</span>
-<span class="sd">            e&#39;4</span>
-<span class="sd">        }</span>
+<span class="sd">        &gt;&gt;&gt; abjad.show(staff)</span>
 
-<span class="sd">        .. figure:: ../_images/FittestMeasureMaker-PrfaIjhEbL.png</span>
+<span class="sd">        ..  docs::</span>
+
+<span class="sd">            \new Staff</span>
+<span class="sd">            {</span>
+<span class="sd">                \time 4/4</span>
+<span class="sd">                r4</span>
+<span class="sd">                r16</span>
+<span class="sd">                c&#39;8.</span>
+<span class="sd">                d&#39;16</span>
+<span class="sd">                d&#39;8.</span>
+<span class="sd">                f&#39;4</span>
+<span class="sd">                c&#39;2</span>
+<span class="sd">                d&#39;16</span>
+<span class="sd">                c&#39;&#39;8.</span>
+<span class="sd">                f&#39;4</span>
+<span class="sd">                r16</span>
+<span class="sd">                c&#39;8.</span>
+<span class="sd">                d&#39;4</span>
+<span class="sd">                f&#39;4.</span>
+<span class="sd">                f&#39;8</span>
+<span class="sd">                c&#39;4</span>
+<span class="sd">                d&#39;8.</span>
+<span class="sd">                e&#39;16</span>
+<span class="sd">                ~</span>
+<span class="sd">                e&#39;4</span>
+<span class="sd">                e&#39;4</span>
+<span class="sd">                c&#39;4</span>
+<span class="sd">                d&#39;4</span>
+<span class="sd">                ~</span>
+<span class="sd">                d&#39;16</span>
+<span class="sd">                e&#39;8.</span>
+<span class="sd">                e&#39;4</span>
+<span class="sd">            }</span>
+
+<span class="sd">        ..  figure:: ../_images/FittestMeasureMaker-PrfaIjhEbL.png</span>
 
 <span class="sd">    :attr:`pitch_genes`:</span>
 <span class="sd">        While :attr:`attack_point_genes` must always take a :obj:`list` of</span>
@@ -337,40 +355,43 @@
 <span class="sd">        ... )</span>
 <span class="sd">        &gt;&gt;&gt; notes = measure_maker.output_n(5)</span>
 <span class="sd">        &gt;&gt;&gt; staff = abjad.Staff(notes)</span>
-<span class="sd">        &gt;&gt;&gt; abjad.f(staff)</span>
-<span class="sd">        \new Staff</span>
-<span class="sd">        {</span>
-<span class="sd">            \time 4/4</span>
-<span class="sd">            &lt;g&#39; c&#39;&#39;&gt;4</span>
-<span class="sd">            g&#39;4</span>
-<span class="sd">            ~</span>
-<span class="sd">            g&#39;16</span>
-<span class="sd">            &lt;g&#39; c&#39;&#39;&gt;8.</span>
-<span class="sd">            &lt;g&#39; c&#39;&#39;&gt;4</span>
-<span class="sd">            c&#39;2</span>
-<span class="sd">            e&#39;8.</span>
-<span class="sd">            r16</span>
-<span class="sd">            r4</span>
-<span class="sd">            c&#39;4</span>
-<span class="sd">            r4</span>
-<span class="sd">            r16</span>
-<span class="sd">            e&#39;8.</span>
-<span class="sd">            &lt;g&#39; a&#39;&gt;4</span>
-<span class="sd">            c&#39;4</span>
-<span class="sd">            r4</span>
-<span class="sd">            e&#39;8.</span>
-<span class="sd">            &lt;g&#39; a&#39;&gt;16</span>
-<span class="sd">            ~</span>
-<span class="sd">            &lt;g&#39; a&#39;&gt;4</span>
-<span class="sd">            c&#39;4</span>
-<span class="sd">            r4</span>
-<span class="sd">            e&#39;8.</span>
-<span class="sd">            &lt;g&#39; a&#39;&gt;16</span>
-<span class="sd">            ~</span>
-<span class="sd">            &lt;g&#39; a&#39;&gt;4</span>
-<span class="sd">        }</span>
+<span class="sd">        &gt;&gt;&gt; abjad.show(staff)</span>
 
-<span class="sd">        .. figure:: ../_images/FittestMeasureMaker-etoHzdnAIu.png</span>
+<span class="sd">        ..  docs::</span>
+
+<span class="sd">            \new Staff</span>
+<span class="sd">            {</span>
+<span class="sd">                \time 4/4</span>
+<span class="sd">                &lt;g&#39; c&#39;&#39;&gt;4</span>
+<span class="sd">                g&#39;4</span>
+<span class="sd">                ~</span>
+<span class="sd">                g&#39;16</span>
+<span class="sd">                &lt;g&#39; c&#39;&#39;&gt;8.</span>
+<span class="sd">                &lt;g&#39; c&#39;&#39;&gt;4</span>
+<span class="sd">                c&#39;2</span>
+<span class="sd">                e&#39;8.</span>
+<span class="sd">                r16</span>
+<span class="sd">                r4</span>
+<span class="sd">                c&#39;4</span>
+<span class="sd">                r4</span>
+<span class="sd">                r16</span>
+<span class="sd">                e&#39;8.</span>
+<span class="sd">                &lt;g&#39; a&#39;&gt;4</span>
+<span class="sd">                c&#39;4</span>
+<span class="sd">                r4</span>
+<span class="sd">                e&#39;8.</span>
+<span class="sd">                &lt;g&#39; a&#39;&gt;16</span>
+<span class="sd">                ~</span>
+<span class="sd">                &lt;g&#39; a&#39;&gt;4</span>
+<span class="sd">                c&#39;4</span>
+<span class="sd">                r4</span>
+<span class="sd">                e&#39;8.</span>
+<span class="sd">                &lt;g&#39; a&#39;&gt;16</span>
+<span class="sd">                ~</span>
+<span class="sd">                &lt;g&#39; a&#39;&gt;4</span>
+<span class="sd">            }</span>
+
+<span class="sd">        ..  figure:: ../_images/FittestMeasureMaker-etoHzdnAIu.png</span>
 
 <span class="sd">        Which is equivalent to:</span>
 
@@ -383,40 +404,43 @@
 <span class="sd">        ... )</span>
 <span class="sd">        &gt;&gt;&gt; notes = measure_maker.output_n(5)</span>
 <span class="sd">        &gt;&gt;&gt; staff = abjad.Staff(notes)</span>
-<span class="sd">        &gt;&gt;&gt; abjad.f(staff)</span>
-<span class="sd">        \new Staff</span>
-<span class="sd">        {</span>
-<span class="sd">            \time 4/4</span>
-<span class="sd">            &lt;g&#39; c&#39;&#39;&gt;4</span>
-<span class="sd">            g&#39;4</span>
-<span class="sd">            ~</span>
-<span class="sd">            g&#39;16</span>
-<span class="sd">            &lt;g&#39; c&#39;&#39;&gt;8.</span>
-<span class="sd">            &lt;g&#39; c&#39;&#39;&gt;4</span>
-<span class="sd">            c&#39;2</span>
-<span class="sd">            e&#39;8.</span>
-<span class="sd">            r16</span>
-<span class="sd">            r4</span>
-<span class="sd">            c&#39;4</span>
-<span class="sd">            r4</span>
-<span class="sd">            r16</span>
-<span class="sd">            e&#39;8.</span>
-<span class="sd">            &lt;g&#39; a&#39;&gt;4</span>
-<span class="sd">            c&#39;4</span>
-<span class="sd">            r4</span>
-<span class="sd">            e&#39;8.</span>
-<span class="sd">            &lt;g&#39; a&#39;&gt;16</span>
-<span class="sd">            ~</span>
-<span class="sd">            &lt;g&#39; a&#39;&gt;4</span>
-<span class="sd">            c&#39;4</span>
-<span class="sd">            r4</span>
-<span class="sd">            e&#39;8.</span>
-<span class="sd">            &lt;g&#39; a&#39;&gt;16</span>
-<span class="sd">            ~</span>
-<span class="sd">            &lt;g&#39; a&#39;&gt;4</span>
-<span class="sd">        }</span>
+<span class="sd">        &gt;&gt;&gt; abjad.show(staff)</span>
 
-<span class="sd">        .. figure:: ../_images/FittestMeasureMaker-AfDY1QYNhW.png</span>
+<span class="sd">        ..  docs::</span>
+
+<span class="sd">            \new Staff</span>
+<span class="sd">            {</span>
+<span class="sd">                \time 4/4</span>
+<span class="sd">                &lt;g&#39; c&#39;&#39;&gt;4</span>
+<span class="sd">                g&#39;4</span>
+<span class="sd">                ~</span>
+<span class="sd">                g&#39;16</span>
+<span class="sd">                &lt;g&#39; c&#39;&#39;&gt;8.</span>
+<span class="sd">                &lt;g&#39; c&#39;&#39;&gt;4</span>
+<span class="sd">                c&#39;2</span>
+<span class="sd">                e&#39;8.</span>
+<span class="sd">                r16</span>
+<span class="sd">                r4</span>
+<span class="sd">                c&#39;4</span>
+<span class="sd">                r4</span>
+<span class="sd">                r16</span>
+<span class="sd">                e&#39;8.</span>
+<span class="sd">                &lt;g&#39; a&#39;&gt;4</span>
+<span class="sd">                c&#39;4</span>
+<span class="sd">                r4</span>
+<span class="sd">                e&#39;8.</span>
+<span class="sd">                &lt;g&#39; a&#39;&gt;16</span>
+<span class="sd">                ~</span>
+<span class="sd">                &lt;g&#39; a&#39;&gt;4</span>
+<span class="sd">                c&#39;4</span>
+<span class="sd">                r4</span>
+<span class="sd">                e&#39;8.</span>
+<span class="sd">                &lt;g&#39; a&#39;&gt;16</span>
+<span class="sd">                ~</span>
+<span class="sd">                &lt;g&#39; a&#39;&gt;4</span>
+<span class="sd">            }</span>
+
+<span class="sd">        ..  figure:: ../_images/FittestMeasureMaker-AfDY1QYNhW.png</span>
 
 <span class="sd">    :attr:`units_per_window` and :attr:`duration_unit`:</span>
 <span class="sd">        By default, there are ``16`` attack points in a window, each lasting</span>
@@ -433,46 +457,49 @@
 <span class="sd">        ... )</span>
 <span class="sd">        &gt;&gt;&gt; notes = measure_maker.output_n(5)</span>
 <span class="sd">        &gt;&gt;&gt; staff = abjad.Staff(notes)</span>
-<span class="sd">        &gt;&gt;&gt; abjad.f(staff)</span>
-<span class="sd">        \new Staff</span>
-<span class="sd">        {</span>
-<span class="sd">            \time 4/4</span>
-<span class="sd">            c&#39;8.</span>
-<span class="sd">            e&#39;16</span>
-<span class="sd">            ~</span>
-<span class="sd">            e&#39;16.</span>
-<span class="sd">            e&#39;32</span>
-<span class="sd">            ~</span>
-<span class="sd">            e&#39;8</span>
-<span class="sd">            ~</span>
-<span class="sd">            e&#39;32</span>
-<span class="sd">            b&#39;4...</span>
-<span class="sd">            c&#39;8.</span>
-<span class="sd">            d&#39;16</span>
-<span class="sd">            ~</span>
-<span class="sd">            d&#39;2</span>
-<span class="sd">            f&#39;4</span>
-<span class="sd">            c&#39;4</span>
-<span class="sd">            d&#39;8..</span>
-<span class="sd">            e&#39;32</span>
-<span class="sd">            ~</span>
-<span class="sd">            e&#39;4</span>
-<span class="sd">            c&#39;4</span>
-<span class="sd">            c&#39;4</span>
-<span class="sd">            d&#39;8..</span>
-<span class="sd">            e&#39;32</span>
-<span class="sd">            ~</span>
-<span class="sd">            e&#39;4</span>
-<span class="sd">            e&#39;4</span>
-<span class="sd">            c&#39;4</span>
-<span class="sd">            d&#39;8..</span>
-<span class="sd">            e&#39;32</span>
-<span class="sd">            ~</span>
-<span class="sd">            e&#39;4</span>
-<span class="sd">            f&#39;4</span>
-<span class="sd">        }</span>
+<span class="sd">        &gt;&gt;&gt; abjad.show(staff)</span>
 
-<span class="sd">        .. figure:: ../_images/FittestMeasureMaker-AqHoQPgphf.png</span>
+<span class="sd">        ..  docs::</span>
+
+<span class="sd">            \new Staff</span>
+<span class="sd">            {</span>
+<span class="sd">                \time 4/4</span>
+<span class="sd">                c&#39;8.</span>
+<span class="sd">                e&#39;16</span>
+<span class="sd">                ~</span>
+<span class="sd">                e&#39;16.</span>
+<span class="sd">                e&#39;32</span>
+<span class="sd">                ~</span>
+<span class="sd">                e&#39;8</span>
+<span class="sd">                ~</span>
+<span class="sd">                e&#39;32</span>
+<span class="sd">                b&#39;4...</span>
+<span class="sd">                c&#39;8.</span>
+<span class="sd">                d&#39;16</span>
+<span class="sd">                ~</span>
+<span class="sd">                d&#39;2</span>
+<span class="sd">                f&#39;4</span>
+<span class="sd">                c&#39;4</span>
+<span class="sd">                d&#39;8..</span>
+<span class="sd">                e&#39;32</span>
+<span class="sd">                ~</span>
+<span class="sd">                e&#39;4</span>
+<span class="sd">                c&#39;4</span>
+<span class="sd">                c&#39;4</span>
+<span class="sd">                d&#39;8..</span>
+<span class="sd">                e&#39;32</span>
+<span class="sd">                ~</span>
+<span class="sd">                e&#39;4</span>
+<span class="sd">                e&#39;4</span>
+<span class="sd">                c&#39;4</span>
+<span class="sd">                d&#39;8..</span>
+<span class="sd">                e&#39;32</span>
+<span class="sd">                ~</span>
+<span class="sd">                e&#39;4</span>
+<span class="sd">                f&#39;4</span>
+<span class="sd">            }</span>
+
+<span class="sd">        ..  figure:: ../_images/FittestMeasureMaker-AqHoQPgphf.png</span>
 
 <span class="sd">    :attr:`omit_time_signature`:</span>
 <span class="sd">        By default, a time signature is added to the output automatically:</span>
@@ -486,53 +513,56 @@
 <span class="sd">        ... )</span>
 <span class="sd">        &gt;&gt;&gt; notes = measure_maker.output_n(5)</span>
 <span class="sd">        &gt;&gt;&gt; staff = abjad.Staff(notes)</span>
-<span class="sd">        &gt;&gt;&gt; abjad.f(staff)</span>
-<span class="sd">        \new Staff</span>
-<span class="sd">        {</span>
-<span class="sd">            \time 5/4</span>
-<span class="sd">            r8</span>
-<span class="sd">            c&#39;8</span>
-<span class="sd">            d&#39;8</span>
-<span class="sd">            f&#39;4.</span>
-<span class="sd">            e&#39;4..</span>
-<span class="sd">            g&#39;16</span>
-<span class="sd">            c&#39;8.</span>
-<span class="sd">            d&#39;16</span>
-<span class="sd">            ~</span>
-<span class="sd">            d&#39;4</span>
-<span class="sd">            ~</span>
-<span class="sd">            d&#39;16</span>
-<span class="sd">            g&#39;16</span>
-<span class="sd">            f&#39;8</span>
-<span class="sd">            ~</span>
-<span class="sd">            f&#39;4</span>
-<span class="sd">            g&#39;4</span>
-<span class="sd">            c&#39;4</span>
-<span class="sd">            d&#39;8.</span>
-<span class="sd">            e&#39;16</span>
-<span class="sd">            ~</span>
-<span class="sd">            e&#39;4</span>
-<span class="sd">            a&#39;4</span>
-<span class="sd">            f&#39;4</span>
-<span class="sd">            c&#39;4</span>
-<span class="sd">            d&#39;8.</span>
-<span class="sd">            g&#39;16</span>
-<span class="sd">            ~</span>
-<span class="sd">            g&#39;4</span>
-<span class="sd">            f&#39;4</span>
-<span class="sd">            g&#39;4</span>
-<span class="sd">            c&#39;4</span>
-<span class="sd">            d&#39;4</span>
-<span class="sd">            g&#39;4</span>
-<span class="sd">            f&#39;4</span>
-<span class="sd">            g&#39;4</span>
-<span class="sd">        }</span>
+<span class="sd">        &gt;&gt;&gt; abjad.show(staff)</span>
 
-<span class="sd">        .. figure:: ../_images/FittestMeasureMaker-bbsRWshiDI.png</span>
+<span class="sd">        ..  docs::</span>
+
+<span class="sd">            \new Staff</span>
+<span class="sd">            {</span>
+<span class="sd">                \time 5/4</span>
+<span class="sd">                r8</span>
+<span class="sd">                c&#39;8</span>
+<span class="sd">                d&#39;8</span>
+<span class="sd">                f&#39;4.</span>
+<span class="sd">                e&#39;4..</span>
+<span class="sd">                g&#39;16</span>
+<span class="sd">                c&#39;8.</span>
+<span class="sd">                d&#39;16</span>
+<span class="sd">                ~</span>
+<span class="sd">                d&#39;4</span>
+<span class="sd">                ~</span>
+<span class="sd">                d&#39;16</span>
+<span class="sd">                g&#39;16</span>
+<span class="sd">                f&#39;8</span>
+<span class="sd">                ~</span>
+<span class="sd">                f&#39;4</span>
+<span class="sd">                g&#39;4</span>
+<span class="sd">                c&#39;4</span>
+<span class="sd">                d&#39;8.</span>
+<span class="sd">                e&#39;16</span>
+<span class="sd">                ~</span>
+<span class="sd">                e&#39;4</span>
+<span class="sd">                a&#39;4</span>
+<span class="sd">                f&#39;4</span>
+<span class="sd">                c&#39;4</span>
+<span class="sd">                d&#39;8.</span>
+<span class="sd">                g&#39;16</span>
+<span class="sd">                ~</span>
+<span class="sd">                g&#39;4</span>
+<span class="sd">                f&#39;4</span>
+<span class="sd">                g&#39;4</span>
+<span class="sd">                c&#39;4</span>
+<span class="sd">                d&#39;4</span>
+<span class="sd">                g&#39;4</span>
+<span class="sd">                f&#39;4</span>
+<span class="sd">                g&#39;4</span>
+<span class="sd">            }</span>
+
+<span class="sd">        ..  figure:: ../_images/FittestMeasureMaker-bbsRWshiDI.png</span>
 
 <span class="sd">        Setting :attr:`omit_time_signature` to ``True`` will result in no time</span>
 <span class="sd">        signature. Note that the output might need to be cleaned up using</span>
-<span class="sd">        |abjad.mutate().rewrite_meter()|.</span>
+<span class="sd">        |abjad.Meter.rewrite_meter()|.</span>
 
 <span class="sd">        &gt;&gt;&gt; measure_maker = auxjad.FittestMeasureMaker(</span>
 <span class="sd">        ...     pitch_target=[&quot;c&#39;&quot;, &quot;d&#39;&quot;, &quot;e&#39;&quot;, &quot;f&#39;&quot;, &quot;g&#39;&quot;],</span>
@@ -544,42 +574,45 @@
 <span class="sd">        ... )</span>
 <span class="sd">        &gt;&gt;&gt; notes = measure_maker.output_n(5)</span>
 <span class="sd">        &gt;&gt;&gt; staff = abjad.Staff(notes)</span>
-<span class="sd">        &gt;&gt;&gt; abjad.f(staff)</span>
-<span class="sd">        \new Staff</span>
-<span class="sd">        {</span>
-<span class="sd">            r8</span>
-<span class="sd">            c&#39;8</span>
-<span class="sd">            d&#39;8</span>
-<span class="sd">            f&#39;4.</span>
-<span class="sd">            e&#39;4..</span>
-<span class="sd">            g&#39;16</span>
-<span class="sd">            c&#39;8.</span>
-<span class="sd">            d&#39;4.</span>
-<span class="sd">            g&#39;16</span>
-<span class="sd">            f&#39;4.</span>
-<span class="sd">            g&#39;4</span>
-<span class="sd">            c&#39;4</span>
-<span class="sd">            d&#39;8.</span>
-<span class="sd">            e&#39;4</span>
-<span class="sd">            ~</span>
-<span class="sd">            e&#39;16</span>
-<span class="sd">            a&#39;4</span>
-<span class="sd">            f&#39;4</span>
-<span class="sd">            c&#39;4</span>
-<span class="sd">            d&#39;8.</span>
-<span class="sd">            g&#39;4</span>
-<span class="sd">            ~</span>
-<span class="sd">            g&#39;16</span>
-<span class="sd">            f&#39;4</span>
-<span class="sd">            g&#39;4</span>
-<span class="sd">            c&#39;4</span>
-<span class="sd">            d&#39;4</span>
-<span class="sd">            g&#39;4</span>
-<span class="sd">            f&#39;4</span>
-<span class="sd">            g&#39;4</span>
-<span class="sd">        }</span>
+<span class="sd">        &gt;&gt;&gt; abjad.show(staff)</span>
 
-<span class="sd">        .. figure:: ../_images/FittestMeasureMaker-IVSrzPV4OT.png</span>
+<span class="sd">        ..  docs::</span>
+
+<span class="sd">            \new Staff</span>
+<span class="sd">            {</span>
+<span class="sd">                r8</span>
+<span class="sd">                c&#39;8</span>
+<span class="sd">                d&#39;8</span>
+<span class="sd">                f&#39;4.</span>
+<span class="sd">                e&#39;4..</span>
+<span class="sd">                g&#39;16</span>
+<span class="sd">                c&#39;8.</span>
+<span class="sd">                d&#39;4.</span>
+<span class="sd">                g&#39;16</span>
+<span class="sd">                f&#39;4.</span>
+<span class="sd">                g&#39;4</span>
+<span class="sd">                c&#39;4</span>
+<span class="sd">                d&#39;8.</span>
+<span class="sd">                e&#39;4</span>
+<span class="sd">                ~</span>
+<span class="sd">                e&#39;16</span>
+<span class="sd">                a&#39;4</span>
+<span class="sd">                f&#39;4</span>
+<span class="sd">                c&#39;4</span>
+<span class="sd">                d&#39;8.</span>
+<span class="sd">                g&#39;4</span>
+<span class="sd">                ~</span>
+<span class="sd">                g&#39;16</span>
+<span class="sd">                f&#39;4</span>
+<span class="sd">                g&#39;4</span>
+<span class="sd">                c&#39;4</span>
+<span class="sd">                d&#39;4</span>
+<span class="sd">                g&#39;4</span>
+<span class="sd">                f&#39;4</span>
+<span class="sd">                g&#39;4</span>
+<span class="sd">            }</span>
+
+<span class="sd">        ..  figure:: ../_images/FittestMeasureMaker-IVSrzPV4OT.png</span>
 
 <span class="sd">    :attr:`time_signatures`:</span>
 <span class="sd">        Time signatures can also be enforced in the output. Set</span>
@@ -598,48 +631,51 @@
 <span class="sd">        ... )</span>
 <span class="sd">        &gt;&gt;&gt; notes = measure_maker.output_n(5)</span>
 <span class="sd">        &gt;&gt;&gt; staff = abjad.Staff(notes)</span>
-<span class="sd">        &gt;&gt;&gt; abjad.f(staff)</span>
-<span class="sd">        \new Staff</span>
-<span class="sd">        {</span>
-<span class="sd">            \time 2/2</span>
-<span class="sd">            r32</span>
-<span class="sd">            c&#39;&#39;16.</span>
-<span class="sd">            ~</span>
-<span class="sd">            c&#39;&#39;32</span>
-<span class="sd">            f&#39;16.</span>
-<span class="sd">            ~</span>
-<span class="sd">            f&#39;32</span>
-<span class="sd">            e&#39;16.</span>
-<span class="sd">            f&#39;8</span>
-<span class="sd">            r2</span>
-<span class="sd">            r32</span>
-<span class="sd">            c&#39;16.</span>
-<span class="sd">            d&#39;8</span>
-<span class="sd">            ~</span>
-<span class="sd">            d&#39;16</span>
-<span class="sd">            e&#39;16</span>
-<span class="sd">            e&#39;8</span>
-<span class="sd">            r2</span>
-<span class="sd">            c&#39;8.</span>
-<span class="sd">            d&#39;16</span>
-<span class="sd">            e&#39;8</span>
-<span class="sd">            f&#39;8</span>
-<span class="sd">            r2</span>
-<span class="sd">            r32</span>
-<span class="sd">            c&#39;16.</span>
-<span class="sd">            d&#39;8</span>
-<span class="sd">            e&#39;8</span>
-<span class="sd">            f&#39;8</span>
-<span class="sd">            r2</span>
-<span class="sd">            r32</span>
-<span class="sd">            c&#39;16.</span>
-<span class="sd">            d&#39;8</span>
-<span class="sd">            e&#39;8</span>
-<span class="sd">            f&#39;8</span>
-<span class="sd">            r2</span>
-<span class="sd">        }</span>
+<span class="sd">        &gt;&gt;&gt; abjad.show(staff)</span>
 
-<span class="sd">        .. figure:: ../_images/FittestMeasureMaker-Xc9iKXJoEx.png</span>
+<span class="sd">        ..  docs::</span>
+
+<span class="sd">            \new Staff</span>
+<span class="sd">            {</span>
+<span class="sd">                \time 2/2</span>
+<span class="sd">                r32</span>
+<span class="sd">                c&#39;&#39;16.</span>
+<span class="sd">                ~</span>
+<span class="sd">                c&#39;&#39;32</span>
+<span class="sd">                f&#39;16.</span>
+<span class="sd">                ~</span>
+<span class="sd">                f&#39;32</span>
+<span class="sd">                e&#39;16.</span>
+<span class="sd">                f&#39;8</span>
+<span class="sd">                r2</span>
+<span class="sd">                r32</span>
+<span class="sd">                c&#39;16.</span>
+<span class="sd">                d&#39;8</span>
+<span class="sd">                ~</span>
+<span class="sd">                d&#39;16</span>
+<span class="sd">                e&#39;16</span>
+<span class="sd">                e&#39;8</span>
+<span class="sd">                r2</span>
+<span class="sd">                c&#39;8.</span>
+<span class="sd">                d&#39;16</span>
+<span class="sd">                e&#39;8</span>
+<span class="sd">                f&#39;8</span>
+<span class="sd">                r2</span>
+<span class="sd">                r32</span>
+<span class="sd">                c&#39;16.</span>
+<span class="sd">                d&#39;8</span>
+<span class="sd">                e&#39;8</span>
+<span class="sd">                f&#39;8</span>
+<span class="sd">                r2</span>
+<span class="sd">                r32</span>
+<span class="sd">                c&#39;16.</span>
+<span class="sd">                d&#39;8</span>
+<span class="sd">                e&#39;8</span>
+<span class="sd">                f&#39;8</span>
+<span class="sd">                r2</span>
+<span class="sd">            }</span>
+
+<span class="sd">        ..  figure:: ../_images/FittestMeasureMaker-Xc9iKXJoEx.png</span>
 
 <span class="sd">        A :obj:`list` of |abjad.TimeSignature|&#39;s is applied cyclically.</span>
 
@@ -656,58 +692,61 @@
 <span class="sd">        ... )</span>
 <span class="sd">        &gt;&gt;&gt; notes = measure_maker.output_n(5)</span>
 <span class="sd">        &gt;&gt;&gt; staff = abjad.Staff(notes)</span>
-<span class="sd">        &gt;&gt;&gt; abjad.f(staff)</span>
-<span class="sd">        \new Staff</span>
-<span class="sd">        {</span>
-<span class="sd">            \time 2/4</span>
-<span class="sd">            r8</span>
-<span class="sd">            c&#39;8</span>
-<span class="sd">            d&#39;8</span>
-<span class="sd">            f&#39;8</span>
-<span class="sd">            ~</span>
-<span class="sd">            \time 3/4</span>
-<span class="sd">            f&#39;4</span>
-<span class="sd">            e&#39;4..</span>
-<span class="sd">            g&#39;16</span>
-<span class="sd">            \time 2/4</span>
-<span class="sd">            c&#39;8.</span>
-<span class="sd">            d&#39;16</span>
-<span class="sd">            ~</span>
-<span class="sd">            d&#39;4</span>
-<span class="sd">            ~</span>
-<span class="sd">            \time 3/4</span>
-<span class="sd">            d&#39;16</span>
-<span class="sd">            g&#39;16</span>
-<span class="sd">            f&#39;4.</span>
-<span class="sd">            g&#39;4</span>
-<span class="sd">            \time 2/4</span>
-<span class="sd">            c&#39;4</span>
-<span class="sd">            d&#39;8.</span>
-<span class="sd">            e&#39;16</span>
-<span class="sd">            ~</span>
-<span class="sd">            \time 3/4</span>
-<span class="sd">            e&#39;4</span>
-<span class="sd">            a&#39;4</span>
-<span class="sd">            f&#39;4</span>
-<span class="sd">            \time 2/4</span>
-<span class="sd">            c&#39;4</span>
-<span class="sd">            d&#39;8.</span>
-<span class="sd">            g&#39;16</span>
-<span class="sd">            ~</span>
-<span class="sd">            \time 3/4</span>
-<span class="sd">            g&#39;4</span>
-<span class="sd">            f&#39;4</span>
-<span class="sd">            g&#39;4</span>
-<span class="sd">            \time 2/4</span>
-<span class="sd">            c&#39;4</span>
-<span class="sd">            d&#39;4</span>
-<span class="sd">            \time 3/4</span>
-<span class="sd">            g&#39;4</span>
-<span class="sd">            f&#39;4</span>
-<span class="sd">            g&#39;4</span>
-<span class="sd">        }</span>
+<span class="sd">        &gt;&gt;&gt; abjad.show(staff)</span>
 
-<span class="sd">        .. figure:: ../_images/FittestMeasureMaker-lJCYtjGY52.png</span>
+<span class="sd">        ..  docs::</span>
+
+<span class="sd">            \new Staff</span>
+<span class="sd">            {</span>
+<span class="sd">                \time 2/4</span>
+<span class="sd">                r8</span>
+<span class="sd">                c&#39;8</span>
+<span class="sd">                d&#39;8</span>
+<span class="sd">                f&#39;8</span>
+<span class="sd">                ~</span>
+<span class="sd">                \time 3/4</span>
+<span class="sd">                f&#39;4</span>
+<span class="sd">                e&#39;4..</span>
+<span class="sd">                g&#39;16</span>
+<span class="sd">                \time 2/4</span>
+<span class="sd">                c&#39;8.</span>
+<span class="sd">                d&#39;16</span>
+<span class="sd">                ~</span>
+<span class="sd">                d&#39;4</span>
+<span class="sd">                ~</span>
+<span class="sd">                \time 3/4</span>
+<span class="sd">                d&#39;16</span>
+<span class="sd">                g&#39;16</span>
+<span class="sd">                f&#39;4.</span>
+<span class="sd">                g&#39;4</span>
+<span class="sd">                \time 2/4</span>
+<span class="sd">                c&#39;4</span>
+<span class="sd">                d&#39;8.</span>
+<span class="sd">                e&#39;16</span>
+<span class="sd">                ~</span>
+<span class="sd">                \time 3/4</span>
+<span class="sd">                e&#39;4</span>
+<span class="sd">                a&#39;4</span>
+<span class="sd">                f&#39;4</span>
+<span class="sd">                \time 2/4</span>
+<span class="sd">                c&#39;4</span>
+<span class="sd">                d&#39;8.</span>
+<span class="sd">                g&#39;16</span>
+<span class="sd">                ~</span>
+<span class="sd">                \time 3/4</span>
+<span class="sd">                g&#39;4</span>
+<span class="sd">                f&#39;4</span>
+<span class="sd">                g&#39;4</span>
+<span class="sd">                \time 2/4</span>
+<span class="sd">                c&#39;4</span>
+<span class="sd">                d&#39;4</span>
+<span class="sd">                \time 3/4</span>
+<span class="sd">                g&#39;4</span>
+<span class="sd">                f&#39;4</span>
+<span class="sd">                g&#39;4</span>
+<span class="sd">            }</span>
+
+<span class="sd">        ..  figure:: ../_images/FittestMeasureMaker-lJCYtjGY52.png</span>
 
 <span class="sd">    :attr:`pitch_score_bias`:</span>
 <span class="sd">        Pitches and attack points are scored separately and, by default,</span>
@@ -725,41 +764,44 @@
 <span class="sd">        ... )</span>
 <span class="sd">        &gt;&gt;&gt; notes = measure_maker.output_n(5)</span>
 <span class="sd">        &gt;&gt;&gt; staff = abjad.Staff(notes)</span>
-<span class="sd">        &gt;&gt;&gt; abjad.f(staff)</span>
-<span class="sd">        \new Staff</span>
-<span class="sd">        {</span>
-<span class="sd">            \time 4/4</span>
-<span class="sd">            r16</span>
-<span class="sd">            c&#39;8</span>
-<span class="sd">            d&#39;16</span>
-<span class="sd">            ~</span>
-<span class="sd">            d&#39;4</span>
-<span class="sd">            f&#39;4</span>
-<span class="sd">            d&#39;4</span>
-<span class="sd">            r16</span>
-<span class="sd">            c&#39;8.</span>
-<span class="sd">            d&#39;8</span>
-<span class="sd">            e&#39;8</span>
-<span class="sd">            ~</span>
-<span class="sd">            e&#39;8.</span>
-<span class="sd">            f&#39;16</span>
-<span class="sd">            ~</span>
-<span class="sd">            f&#39;4</span>
-<span class="sd">            c&#39;4</span>
-<span class="sd">            d&#39;4</span>
-<span class="sd">            e&#39;4</span>
-<span class="sd">            f&#39;4</span>
-<span class="sd">            c&#39;4</span>
-<span class="sd">            d&#39;4</span>
-<span class="sd">            e&#39;4</span>
-<span class="sd">            f&#39;4</span>
-<span class="sd">            c&#39;4</span>
-<span class="sd">            d&#39;4</span>
-<span class="sd">            e&#39;4</span>
-<span class="sd">            f&#39;4</span>
-<span class="sd">        }</span>
+<span class="sd">        &gt;&gt;&gt; abjad.show(staff)</span>
 
-<span class="sd">        .. figure:: ../_images/FittestMeasureMaker-VEinjiTe3F.png</span>
+<span class="sd">        ..  docs::</span>
+
+<span class="sd">            \new Staff</span>
+<span class="sd">            {</span>
+<span class="sd">                \time 4/4</span>
+<span class="sd">                r16</span>
+<span class="sd">                c&#39;8</span>
+<span class="sd">                d&#39;16</span>
+<span class="sd">                ~</span>
+<span class="sd">                d&#39;4</span>
+<span class="sd">                f&#39;4</span>
+<span class="sd">                d&#39;4</span>
+<span class="sd">                r16</span>
+<span class="sd">                c&#39;8.</span>
+<span class="sd">                d&#39;8</span>
+<span class="sd">                e&#39;8</span>
+<span class="sd">                ~</span>
+<span class="sd">                e&#39;8.</span>
+<span class="sd">                f&#39;16</span>
+<span class="sd">                ~</span>
+<span class="sd">                f&#39;4</span>
+<span class="sd">                c&#39;4</span>
+<span class="sd">                d&#39;4</span>
+<span class="sd">                e&#39;4</span>
+<span class="sd">                f&#39;4</span>
+<span class="sd">                c&#39;4</span>
+<span class="sd">                d&#39;4</span>
+<span class="sd">                e&#39;4</span>
+<span class="sd">                f&#39;4</span>
+<span class="sd">                c&#39;4</span>
+<span class="sd">                d&#39;4</span>
+<span class="sd">                e&#39;4</span>
+<span class="sd">                f&#39;4</span>
+<span class="sd">            }</span>
+
+<span class="sd">        ..  figure:: ../_images/FittestMeasureMaker-VEinjiTe3F.png</span>
 
 <span class="sd">        With a high :attr:`pitch_score_bias`, pitch convergence will tend to be</span>
 <span class="sd">        faster at the expense of attack points:</span>
@@ -773,54 +815,57 @@
 <span class="sd">        ... )</span>
 <span class="sd">        &gt;&gt;&gt; notes = measure_maker.output_n(5)</span>
 <span class="sd">        &gt;&gt;&gt; staff = abjad.Staff(notes)</span>
-<span class="sd">        &gt;&gt;&gt; abjad.f(staff)</span>
-<span class="sd">        \new Staff</span>
-<span class="sd">        {</span>
-<span class="sd">            \time 4/4</span>
-<span class="sd">            r8</span>
-<span class="sd">            c&#39;16</span>
-<span class="sd">            d&#39;16</span>
-<span class="sd">            ~</span>
-<span class="sd">            d&#39;4</span>
-<span class="sd">            ~</span>
-<span class="sd">            d&#39;8</span>
-<span class="sd">            e&#39;4</span>
-<span class="sd">            d&#39;8</span>
-<span class="sd">            r8</span>
-<span class="sd">            c&#39;16</span>
-<span class="sd">            d&#39;16</span>
-<span class="sd">            ~</span>
-<span class="sd">            d&#39;2</span>
-<span class="sd">            ~</span>
-<span class="sd">            d&#39;16</span>
-<span class="sd">            e&#39;8.</span>
-<span class="sd">            c&#39;16</span>
-<span class="sd">            d&#39;8.</span>
-<span class="sd">            ~</span>
-<span class="sd">            d&#39;8.</span>
-<span class="sd">            e&#39;16</span>
-<span class="sd">            ~</span>
-<span class="sd">            e&#39;4</span>
-<span class="sd">            f&#39;4</span>
-<span class="sd">            c&#39;16</span>
-<span class="sd">            d&#39;8.</span>
-<span class="sd">            ~</span>
-<span class="sd">            d&#39;8.</span>
-<span class="sd">            e&#39;16</span>
-<span class="sd">            ~</span>
-<span class="sd">            e&#39;4</span>
-<span class="sd">            f&#39;4</span>
-<span class="sd">            c&#39;4</span>
-<span class="sd">            ~</span>
-<span class="sd">            c&#39;16</span>
-<span class="sd">            d&#39;8</span>
-<span class="sd">            e&#39;16</span>
-<span class="sd">            ~</span>
-<span class="sd">            e&#39;4</span>
-<span class="sd">            f&#39;4</span>
-<span class="sd">        }</span>
+<span class="sd">        &gt;&gt;&gt; abjad.show(staff)</span>
 
-<span class="sd">        .. figure:: ../_images/FittestMeasureMaker-iVD6l66hNl.png</span>
+<span class="sd">        ..  docs::</span>
+
+<span class="sd">            \new Staff</span>
+<span class="sd">            {</span>
+<span class="sd">                \time 4/4</span>
+<span class="sd">                r8</span>
+<span class="sd">                c&#39;16</span>
+<span class="sd">                d&#39;16</span>
+<span class="sd">                ~</span>
+<span class="sd">                d&#39;4</span>
+<span class="sd">                ~</span>
+<span class="sd">                d&#39;8</span>
+<span class="sd">                e&#39;4</span>
+<span class="sd">                d&#39;8</span>
+<span class="sd">                r8</span>
+<span class="sd">                c&#39;16</span>
+<span class="sd">                d&#39;16</span>
+<span class="sd">                ~</span>
+<span class="sd">                d&#39;2</span>
+<span class="sd">                ~</span>
+<span class="sd">                d&#39;16</span>
+<span class="sd">                e&#39;8.</span>
+<span class="sd">                c&#39;16</span>
+<span class="sd">                d&#39;8.</span>
+<span class="sd">                ~</span>
+<span class="sd">                d&#39;8.</span>
+<span class="sd">                e&#39;16</span>
+<span class="sd">                ~</span>
+<span class="sd">                e&#39;4</span>
+<span class="sd">                f&#39;4</span>
+<span class="sd">                c&#39;16</span>
+<span class="sd">                d&#39;8.</span>
+<span class="sd">                ~</span>
+<span class="sd">                d&#39;8.</span>
+<span class="sd">                e&#39;16</span>
+<span class="sd">                ~</span>
+<span class="sd">                e&#39;4</span>
+<span class="sd">                f&#39;4</span>
+<span class="sd">                c&#39;4</span>
+<span class="sd">                ~</span>
+<span class="sd">                c&#39;16</span>
+<span class="sd">                d&#39;8</span>
+<span class="sd">                e&#39;16</span>
+<span class="sd">                ~</span>
+<span class="sd">                e&#39;4</span>
+<span class="sd">                f&#39;4</span>
+<span class="sd">            }</span>
+
+<span class="sd">        ..  figure:: ../_images/FittestMeasureMaker-iVD6l66hNl.png</span>
 
 
 <span class="sd">        In contrast, a low :attr:`pitch_score_bias`, attack point convergence</span>
@@ -835,33 +880,36 @@
 <span class="sd">        ... )</span>
 <span class="sd">        &gt;&gt;&gt; notes = measure_maker.output_n(5)</span>
 <span class="sd">        &gt;&gt;&gt; staff = abjad.Staff(notes)</span>
-<span class="sd">        &gt;&gt;&gt; abjad.f(staff)</span>
-<span class="sd">        \new Staff</span>
-<span class="sd">        {</span>
-<span class="sd">            \time 4/4</span>
-<span class="sd">            e&#39;16</span>
-<span class="sd">            c&#39;&#39;4..</span>
-<span class="sd">            f&#39;4</span>
-<span class="sd">            c&#39;&#39;4</span>
-<span class="sd">            e&#39;4</span>
-<span class="sd">            d&#39;4</span>
-<span class="sd">            d&#39;4</span>
-<span class="sd">            f&#39;4</span>
-<span class="sd">            e&#39;4</span>
-<span class="sd">            d&#39;4</span>
-<span class="sd">            d&#39;4</span>
-<span class="sd">            f&#39;4</span>
-<span class="sd">            e&#39;4</span>
-<span class="sd">            d&#39;4</span>
-<span class="sd">            d&#39;4</span>
-<span class="sd">            f&#39;4</span>
-<span class="sd">            e&#39;4</span>
-<span class="sd">            d&#39;4</span>
-<span class="sd">            d&#39;4</span>
-<span class="sd">            f&#39;4</span>
-<span class="sd">        }</span>
+<span class="sd">        &gt;&gt;&gt; abjad.show(staff)</span>
 
-<span class="sd">        .. figure:: ../_images/FittestMeasureMaker-1Ex8sgcS2s.png</span>
+<span class="sd">        ..  docs::</span>
+
+<span class="sd">            \new Staff</span>
+<span class="sd">            {</span>
+<span class="sd">                \time 4/4</span>
+<span class="sd">                e&#39;16</span>
+<span class="sd">                c&#39;&#39;4..</span>
+<span class="sd">                f&#39;4</span>
+<span class="sd">                c&#39;&#39;4</span>
+<span class="sd">                e&#39;4</span>
+<span class="sd">                d&#39;4</span>
+<span class="sd">                d&#39;4</span>
+<span class="sd">                f&#39;4</span>
+<span class="sd">                e&#39;4</span>
+<span class="sd">                d&#39;4</span>
+<span class="sd">                d&#39;4</span>
+<span class="sd">                f&#39;4</span>
+<span class="sd">                e&#39;4</span>
+<span class="sd">                d&#39;4</span>
+<span class="sd">                d&#39;4</span>
+<span class="sd">                f&#39;4</span>
+<span class="sd">                e&#39;4</span>
+<span class="sd">                d&#39;4</span>
+<span class="sd">                d&#39;4</span>
+<span class="sd">                f&#39;4</span>
+<span class="sd">            }</span>
+
+<span class="sd">        ..  figure:: ../_images/FittestMeasureMaker-1Ex8sgcS2s.png</span>
 
 <span class="sd">    :attr:`attack_points_mode`:</span>
 <span class="sd">        When using this class in attack points mode, each note will last a</span>
@@ -876,56 +924,57 @@
 <span class="sd">        ... )</span>
 <span class="sd">        &gt;&gt;&gt; notes = measure_maker.output_n(5)</span>
 <span class="sd">        &gt;&gt;&gt; staff = abjad.Staff(notes)</span>
-<span class="sd">        &gt;&gt;&gt; abjad.f(staff)</span>
-<span class="sd">        \new Staff</span>
-<span class="sd">        {</span>
-<span class="sd">            \time 4/4</span>
-<span class="sd">            e&#39;16</span>
-<span class="sd">            r8.</span>
-<span class="sd">            c&#39;16</span>
-<span class="sd">            r16</span>
-<span class="sd">            r16</span>
-<span class="sd">            g&#39;16</span>
-<span class="sd">            r4</span>
-<span class="sd">            f&#39;16</span>
-<span class="sd">            r8.</span>
-<span class="sd">            c&#39;16</span>
-<span class="sd">            r8.</span>
-<span class="sd">            d&#39;16</span>
-<span class="sd">            r8.</span>
-<span class="sd">            e&#39;16</span>
-<span class="sd">            c&#39;16</span>
-<span class="sd">            r4.</span>
-<span class="sd">            c&#39;16</span>
-<span class="sd">            r8.</span>
-<span class="sd">            d&#39;16</span>
-<span class="sd">            r16</span>
-<span class="sd">            r16</span>
-<span class="sd">            e&#39;16</span>
-<span class="sd">            r4</span>
-<span class="sd">            f&#39;16</span>
-<span class="sd">            r8.</span>
-<span class="sd">            c&#39;16</span>
-<span class="sd">            r8.</span>
-<span class="sd">            d&#39;16</span>
-<span class="sd">            r8.</span>
-<span class="sd">            e&#39;16</span>
-<span class="sd">            r8.</span>
-<span class="sd">            f&#39;16</span>
-<span class="sd">            r8.</span>
-<span class="sd">            c&#39;16</span>
-<span class="sd">            r8.</span>
-<span class="sd">            d&#39;16</span>
-<span class="sd">            r8.</span>
-<span class="sd">            e&#39;16</span>
-<span class="sd">            r8.</span>
-<span class="sd">            f&#39;16</span>
-<span class="sd">            r8.</span>
-<span class="sd">        }</span>
+<span class="sd">        &gt;&gt;&gt; abjad.show(staff)</span>
 
-<span class="sd">        .. figure:: ../_images/FittestMeasureMaker-5aInHHwMol.png</span>
+<span class="sd">        ..  docs::</span>
 
+<span class="sd">            \new Staff</span>
+<span class="sd">            {</span>
+<span class="sd">                \time 4/4</span>
+<span class="sd">                e&#39;16</span>
+<span class="sd">                r8.</span>
+<span class="sd">                c&#39;16</span>
+<span class="sd">                r16</span>
+<span class="sd">                r16</span>
+<span class="sd">                g&#39;16</span>
+<span class="sd">                r4</span>
+<span class="sd">                f&#39;16</span>
+<span class="sd">                r8.</span>
+<span class="sd">                c&#39;16</span>
+<span class="sd">                r8.</span>
+<span class="sd">                d&#39;16</span>
+<span class="sd">                r8.</span>
+<span class="sd">                e&#39;16</span>
+<span class="sd">                c&#39;16</span>
+<span class="sd">                r4.</span>
+<span class="sd">                c&#39;16</span>
+<span class="sd">                r8.</span>
+<span class="sd">                d&#39;16</span>
+<span class="sd">                r16</span>
+<span class="sd">                r16</span>
+<span class="sd">                e&#39;16</span>
+<span class="sd">                r4</span>
+<span class="sd">                f&#39;16</span>
+<span class="sd">                r8.</span>
+<span class="sd">                c&#39;16</span>
+<span class="sd">                r8.</span>
+<span class="sd">                d&#39;16</span>
+<span class="sd">                r8.</span>
+<span class="sd">                e&#39;16</span>
+<span class="sd">                r8.</span>
+<span class="sd">                f&#39;16</span>
+<span class="sd">                r8.</span>
+<span class="sd">                c&#39;16</span>
+<span class="sd">                r8.</span>
+<span class="sd">                d&#39;16</span>
+<span class="sd">                r8.</span>
+<span class="sd">                e&#39;16</span>
+<span class="sd">                r8.</span>
+<span class="sd">                f&#39;16</span>
+<span class="sd">                r8.</span>
+<span class="sd">            }</span>
 
+<span class="sd">        ..  figure:: ../_images/FittestMeasureMaker-5aInHHwMol.png</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="c1">### CLASS VARIABLES ###</span>
 
@@ -1089,7 +1138,7 @@
         <span class="n">dummy_container</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">()</span>
         <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
             <span class="n">dummy_container</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="fm">__call__</span><span class="p">())</span>
-        <span class="n">mutate</span><span class="p">(</span><span class="n">dummy_container</span><span class="p">[:])</span><span class="o">.</span><span class="n">remove_repeated_time_signatures</span><span class="p">()</span>
+        <span class="n">mutate</span><span class="o">.</span><span class="n">remove_repeated_time_signatures</span><span class="p">(</span><span class="n">dummy_container</span><span class="p">[:])</span>
         <span class="n">output</span> <span class="o">=</span> <span class="n">dummy_container</span><span class="p">[:]</span>
         <span class="n">dummy_container</span><span class="p">[:]</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="k">return</span> <span class="n">output</span></div>
@@ -1220,10 +1269,11 @@
                 <span class="n">abjad</span><span class="o">.</span><span class="n">attach</span><span class="p">(</span><span class="n">time_signature</span><span class="p">,</span>
                              <span class="n">dummy_container</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
                              <span class="p">)</span>
-                <span class="n">mutate</span><span class="p">(</span><span class="n">dummy_container</span><span class="p">)</span><span class="o">.</span><span class="n">auto_rewrite_meter</span><span class="p">()</span>
+                <span class="n">mutate</span><span class="o">.</span><span class="n">auto_rewrite_meter</span><span class="p">(</span><span class="n">dummy_container</span><span class="p">)</span>
             <span class="k">else</span><span class="p">:</span>
-                <span class="n">mutate</span><span class="p">(</span><span class="n">dummy_container</span><span class="p">)</span><span class="o">.</span><span class="n">enforce_time_signature</span><span class="p">(</span>
-                    <span class="bp">self</span><span class="o">.</span><span class="n">_time_signatures</span>
+                <span class="n">mutate</span><span class="o">.</span><span class="n">enforce_time_signature</span><span class="p">(</span>
+                    <span class="n">dummy_container</span><span class="p">,</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">_time_signatures</span><span class="p">,</span>
                 <span class="p">)</span>
         <span class="k">return</span> <span class="n">dummy_container</span><span class="p">[:]</span>
 
@@ -1517,12 +1567,12 @@
         <span class="sa">r</span><span class="sd">&quot;&quot;&quot;Read-only property, returns the fittest individual of the current</span>
 <span class="sd">        population as an |abjad.Selection|.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="n">abjad</span><span class="o">.</span><span class="n">mutate</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_fittest_measure</span><span class="p">)</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">abjad</span><span class="o">.</span><span class="n">mutate</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_fittest_measure</span><span class="p">)</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">target_music</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Selection</span><span class="p">:</span>
         <span class="sa">r</span><span class="s1">&#39;Read-only property, returns the target as an |abjad.Selection|.&#39;</span>
-        <span class="k">return</span> <span class="n">abjad</span><span class="o">.</span><span class="n">mutate</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_target_music</span><span class="p">)</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">abjad</span><span class="o">.</span><span class="n">mutate</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_target_music</span><span class="p">)</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">total_duration</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">:</span>
@@ -1592,28 +1642,25 @@
            
           </div>
           <footer>
-  
 
   <hr/>
 
   <div role="contentinfo">
     <p>
-        
-        &copy; Copyright 2020, Gilberto Agostinho
+        &#169; Copyright 2020, Gilberto Agostinho.
 
     </p>
   </div>
     
     
     
-    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
     
-    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
     
     provided by <a href="https://readthedocs.org">Read the Docs</a>. 
 
 </footer>
-
         </div>
       </div>
 

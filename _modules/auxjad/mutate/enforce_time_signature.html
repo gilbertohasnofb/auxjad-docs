@@ -1,0 +1,1024 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>auxjad.mutate.enforce_time_signature &mdash; auxjad 0.8.25 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+        <script src="../../../_static/jquery.js"></script>
+        <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/doctools.js"></script>
+    
+    <script type="text/javascript" src="../../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../../index.html" class="icon icon-home"> auxjad
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.8
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../index.html">Welcome to Auxjad’s documentation!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../examples/index.html">Examples of usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../score_gallery/index.html">Score gallery</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../api/index.html">Auxjad API</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">auxjad</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../../index.html">Module code</a> &raquo;</li>
+        
+      <li>auxjad.mutate.enforce_time_signature</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for auxjad.mutate.enforce_time_signature</h1><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Union</span>
+
+<span class="kn">import</span> <span class="nn">abjad</span>
+
+<span class="kn">from</span> <span class="nn">.auto_rewrite_meter</span> <span class="kn">import</span> <span class="n">auto_rewrite_meter</span>
+<span class="kn">from</span> <span class="nn">.close_container</span> <span class="kn">import</span> <span class="n">close_container</span> <span class="k">as</span> <span class="n">close_container_function</span>
+<span class="kn">from</span> <span class="nn">.fill_with_rests</span> <span class="kn">import</span> <span class="n">fill_with_rests</span> <span class="k">as</span> <span class="n">fill_with_rests_function</span>
+
+
+<div class="viewcode-block" id="enforce_time_signature"><a class="viewcode-back" href="../../../_api_members/auxjad.mutate.enforce_time_signature.html#auxjad.mutate.enforce_time_signature">[docs]</a><span class="k">def</span> <span class="nf">enforce_time_signature</span><span class="p">(</span><span class="n">container</span><span class="p">:</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">,</span>
+                           <span class="n">time_signatures</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">abjad</span><span class="o">.</span><span class="n">TimeSignature</span><span class="p">,</span>
+                                                  <span class="nb">tuple</span><span class="p">,</span>
+                                                  <span class="nb">list</span><span class="p">,</span>
+                                                  <span class="p">],</span>
+                           <span class="o">*</span><span class="p">,</span>
+                           <span class="n">cyclic</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+                           <span class="n">fill_with_rests</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+                           <span class="n">close_container</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+                           <span class="n">disable_rewrite_meter</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+                           <span class="n">prettify_rewrite_meter</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+                           <span class="n">boundary_depth</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+                           <span class="n">maximum_dot_count</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+                           <span class="n">rewrite_tuplets</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+                           <span class="n">extract_trivial_tuplets</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+                           <span class="n">fuse_across_groups_of_beats</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+                           <span class="n">fuse_quadruple_meter</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+                           <span class="n">fuse_triple_meter</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+                           <span class="n">split_quadruple_meter</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+                           <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="sa">r</span><span class="sd">&quot;&quot;&quot;Mutates an input container (of type |abjad.Container| or child class)</span>
+<span class="sd">    in place and has no return value; this function applies a time signature</span>
+<span class="sd">    (or a :obj:`list` of time signatures) to the input container.</span>
+
+<span class="sd">    Basic usage:</span>
+<span class="sd">        The function mutates a container in place, applying a time signature</span>
+<span class="sd">        to it.</span>
+
+<span class="sd">        &gt;&gt;&gt; staff = abjad.Staff(r&quot;c&#39;1 d&#39;1&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; abjad.show(staff)</span>
+
+<span class="sd">        ..  docs::</span>
+
+<span class="sd">            \new Staff</span>
+<span class="sd">            {</span>
+<span class="sd">                c&#39;1</span>
+<span class="sd">                d&#39;1</span>
+<span class="sd">            }</span>
+
+<span class="sd">        ..  figure:: ../_images/enforce_time_signature-9bf9zmnm19k.png</span>
+
+<span class="sd">        &gt;&gt;&gt; auxjad.mutate.enforce_time_signature(</span>
+<span class="sd">        ...     staff,</span>
+<span class="sd">        ...     abjad.TimeSignature((2, 4))</span>
+<span class="sd">        ... )</span>
+<span class="sd">        &gt;&gt;&gt; abjad.show(staff)</span>
+
+<span class="sd">        ..  docs::</span>
+
+<span class="sd">            \new Staff</span>
+<span class="sd">            {</span>
+<span class="sd">                \time 2/4</span>
+<span class="sd">                c&#39;2</span>
+<span class="sd">                ~</span>
+<span class="sd">                c&#39;2</span>
+<span class="sd">                d&#39;2</span>
+<span class="sd">                ~</span>
+<span class="sd">                d&#39;2</span>
+<span class="sd">            }</span>
+
+<span class="sd">        ..  figure:: ../_images/enforce_time_signature-kerf9uos62i.png</span>
+
+<span class="sd">    ..  note::</span>
+
+<span class="sd">        Auxjad automatically adds this function as an extension function to</span>
+<span class="sd">        |abjad.mutate|. It can thus be used from either |auxjad.mutate|_ or</span>
+<span class="sd">        |abjad.mutate| namespaces. Therefore, the two lines below are</span>
+<span class="sd">        equivalent:</span>
+
+<span class="sd">        &gt;&gt;&gt; auxjad.mutate.enforce_time_signature(</span>
+<span class="sd">        ...     staff,</span>
+<span class="sd">        ...     abjad.TimeSignature((2, 4))</span>
+<span class="sd">        ... )</span>
+<span class="sd">        &gt;&gt;&gt; abjad.mutate.enforce_time_signature(</span>
+<span class="sd">        ...     staff,</span>
+<span class="sd">        ...     abjad.TimeSignature((2, 4)),</span>
+<span class="sd">        ... )</span>
+
+<span class="sd">    Single value for second positional argument:</span>
+<span class="sd">        The second positional argument can take either |abjad.TimeSignature|</span>
+<span class="sd">        or a :obj:`tuple` for a single time signature (for multiple time</span>
+<span class="sd">        signatures, use a :obj:`list` as shown further below). By default,</span>
+<span class="sd">        rests will be appended to the end of the staff if necessary.</span>
+
+<span class="sd">        &gt;&gt;&gt; staff = abjad.Staff(r&quot;c&#39;1 d&#39;1&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; abjad.show(staff)</span>
+
+<span class="sd">        ..  docs::</span>
+
+<span class="sd">            \new Staff</span>
+<span class="sd">            {</span>
+<span class="sd">                c&#39;1</span>
+<span class="sd">                d&#39;1</span>
+<span class="sd">            }</span>
+
+<span class="sd">        ..  figure:: ../_images/enforce_time_signature-218f65bsco3.png</span>
+
+<span class="sd">        &gt;&gt;&gt; auxjad.mutate.enforce_time_signature(staff, (3, 4))</span>
+<span class="sd">        &gt;&gt;&gt; abjad.show(staff)</span>
+
+<span class="sd">        ..  docs::</span>
+
+<span class="sd">            \new Staff</span>
+<span class="sd">            {</span>
+<span class="sd">                \time 3/4</span>
+<span class="sd">                c&#39;2.</span>
+<span class="sd">                ~</span>
+<span class="sd">                c&#39;4</span>
+<span class="sd">                d&#39;2</span>
+<span class="sd">                ~</span>
+<span class="sd">                d&#39;2</span>
+<span class="sd">                r4</span>
+<span class="sd">            }</span>
+
+<span class="sd">        ..  figure:: ../_images/enforce_time_signature-u4p457k6ib7.png</span>
+
+<span class="sd">    ``close_container``:</span>
+<span class="sd">        Set the optional keyword argument ``close_container`` to ``True`` in</span>
+<span class="sd">        order to adjust the last measure&#39;s time signature instead of filling it</span>
+<span class="sd">        with rests.</span>
+
+<span class="sd">        &gt;&gt;&gt; staff = abjad.Staff(r&quot;c&#39;1 d&#39;1 e&#39;1 f&#39;1&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; abjad.show(staff)</span>
+
+<span class="sd">        ..  docs::</span>
+
+<span class="sd">            \new Staff</span>
+<span class="sd">            {</span>
+<span class="sd">                c&#39;1</span>
+<span class="sd">                d&#39;1</span>
+<span class="sd">                e&#39;1</span>
+<span class="sd">                f&#39;1</span>
+<span class="sd">            }</span>
+
+<span class="sd">        ..  figure:: ../_images/enforce_time_signature-tn1l53yimir.png</span>
+
+<span class="sd">        &gt;&gt;&gt; auxjad.mutate.enforce_time_signature(</span>
+<span class="sd">        ...     staff,</span>
+<span class="sd">        ...     abjad.TimeSignature((3, 4)),</span>
+<span class="sd">        ...     close_container=True,</span>
+<span class="sd">        ... )</span>
+<span class="sd">        &gt;&gt;&gt; abjad.show(staff)</span>
+
+<span class="sd">        ..  docs::</span>
+
+<span class="sd">            \new Staff</span>
+<span class="sd">            {</span>
+<span class="sd">                \time 3/4</span>
+<span class="sd">                c&#39;2.</span>
+<span class="sd">                ~</span>
+<span class="sd">                c&#39;4</span>
+<span class="sd">                d&#39;2</span>
+<span class="sd">                ~</span>
+<span class="sd">                d&#39;2</span>
+<span class="sd">                e&#39;4</span>
+<span class="sd">                ~</span>
+<span class="sd">                e&#39;2.</span>
+<span class="sd">                f&#39;2.</span>
+<span class="sd">                ~</span>
+<span class="sd">                \time 1/4</span>
+<span class="sd">                f&#39;4</span>
+<span class="sd">            }</span>
+
+<span class="sd">        ..  figure:: ../_images/enforce_time_signature-1uhp08fqlpl.png</span>
+
+<span class="sd">    ``fill_with_rests``:</span>
+<span class="sd">        Alternatively, to leave the last measure as it is input (i.e. not</span>
+<span class="sd">        filling it with rests nor adjusting the time signature), set the</span>
+<span class="sd">        optional keyword argument ``fill_with_rests`` to ``False`` (default</span>
+<span class="sd">        value is ``True``).</span>
+
+<span class="sd">        &gt;&gt;&gt; staff = abjad.Staff(r&quot;c&#39;1 d&#39;1 e&#39;1 f&#39;1&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; abjad.show(staff)</span>
+
+<span class="sd">        ..  docs::</span>
+
+<span class="sd">            \new Staff</span>
+<span class="sd">            {</span>
+<span class="sd">                c&#39;1</span>
+<span class="sd">                d&#39;1</span>
+<span class="sd">                e&#39;1</span>
+<span class="sd">                f&#39;1</span>
+<span class="sd">            }</span>
+
+<span class="sd">        ..  figure:: ../_images/enforce_time_signature-bit2y19hncr.png</span>
+
+<span class="sd">        &gt;&gt;&gt; auxjad.mutate.enforce_time_signature(</span>
+<span class="sd">        ...     staff,</span>
+<span class="sd">        ...     abjad.TimeSignature((3, 4)),</span>
+<span class="sd">        ...     fill_with_rests=False,</span>
+<span class="sd">        ... )</span>
+<span class="sd">        &gt;&gt;&gt; abjad.show(staff)</span>
+
+<span class="sd">        ..  docs::</span>
+
+<span class="sd">            \new Staff</span>
+<span class="sd">            {</span>
+<span class="sd">                \time 3/4</span>
+<span class="sd">                c&#39;2.</span>
+<span class="sd">                ~</span>
+<span class="sd">                c&#39;4</span>
+<span class="sd">                d&#39;2</span>
+<span class="sd">                ~</span>
+<span class="sd">                d&#39;2</span>
+<span class="sd">                e&#39;4</span>
+<span class="sd">                ~</span>
+<span class="sd">                e&#39;2.</span>
+<span class="sd">                f&#39;2.</span>
+<span class="sd">                ~</span>
+<span class="sd">                f&#39;4</span>
+<span class="sd">            }</span>
+
+<span class="sd">        ..  figure:: ../_images/enforce_time_signature-xo7fpeqsoek.png</span>
+
+<span class="sd">    Multiple values for second positional argument:</span>
+<span class="sd">        The second argument can also take a :obj:`list` of</span>
+<span class="sd">        |abjad.TimeSignature| or :obj:`tuple`.</span>
+
+<span class="sd">        &gt;&gt;&gt; staff = abjad.Staff(r&quot;c&#39;1 d&#39;1&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; abjad.show(staff)</span>
+
+<span class="sd">        ..  docs::</span>
+
+<span class="sd">            \new Staff</span>
+<span class="sd">            {</span>
+<span class="sd">                c&#39;1</span>
+<span class="sd">                d&#39;1</span>
+<span class="sd">            }</span>
+
+<span class="sd">        ..  figure:: ../_images/enforce_time_signature-rl1csjn9osl.png</span>
+
+<span class="sd">        &gt;&gt;&gt; time_signatures = [abjad.TimeSignature((3, 4)),</span>
+<span class="sd">        ...                    abjad.TimeSignature((5, 4)),</span>
+<span class="sd">        ...                    ]</span>
+<span class="sd">        &gt;&gt;&gt; auxjad.mutate.enforce_time_signature(staff, time_signatures)</span>
+<span class="sd">        &gt;&gt;&gt; abjad.show(staff)</span>
+
+<span class="sd">        ..  docs::</span>
+
+<span class="sd">            \new Staff</span>
+<span class="sd">            {</span>
+<span class="sd">                \time 3/4</span>
+<span class="sd">                c&#39;2.</span>
+<span class="sd">                ~</span>
+<span class="sd">                \time 5/4</span>
+<span class="sd">                c&#39;4</span>
+<span class="sd">                d&#39;1</span>
+<span class="sd">            }</span>
+
+<span class="sd">        ..  figure:: ../_images/enforce_time_signature-tqqrqi34bu.png</span>
+
+<span class="sd">    Repeated time signatures:</span>
+<span class="sd">        Consecutive identical time signatures are omitted. Also note that time</span>
+<span class="sd">        signatures can also be represented as a :obj:`list` of :obj:`tuple`&#39;s.</span>
+
+<span class="sd">        &gt;&gt;&gt; staff = abjad.Staff(r&quot;c&#39;1 d&#39;1 e&#39;1 f&#39;1&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; abjad.show(staff)</span>
+
+<span class="sd">        ..  docs::</span>
+
+<span class="sd">            \new Staff</span>
+<span class="sd">            {</span>
+<span class="sd">                c&#39;1</span>
+<span class="sd">                d&#39;1</span>
+<span class="sd">                e&#39;1</span>
+<span class="sd">                f&#39;1</span>
+<span class="sd">            }</span>
+
+<span class="sd">        ..  figure:: ../_images/enforce_time_signature-vn9ngz2k6cd.png</span>
+
+<span class="sd">        &gt;&gt;&gt; time_signatures = [(2, 4),</span>
+<span class="sd">        ...                    (2, 4),</span>
+<span class="sd">        ...                    (4, 4),</span>
+<span class="sd">        ...                    ]</span>
+<span class="sd">        &gt;&gt;&gt; auxjad.mutate.enforce_time_signature(staff, time_signatures)</span>
+<span class="sd">        &gt;&gt;&gt; abjad.show(staff)</span>
+
+<span class="sd">        ..  docs::</span>
+
+<span class="sd">            \new Staff</span>
+<span class="sd">            {</span>
+<span class="sd">                \time 2/4</span>
+<span class="sd">                c&#39;2</span>
+<span class="sd">                ~</span>
+<span class="sd">                c&#39;2</span>
+<span class="sd">                \time 4/4</span>
+<span class="sd">                d&#39;1</span>
+<span class="sd">                e&#39;1</span>
+<span class="sd">                f&#39;1</span>
+<span class="sd">            }</span>
+
+<span class="sd">        ..  figure:: ../_images/enforce_time_signature-nj2c90o0pe.png</span>
+
+<span class="sd">        Alternatively, use ``None`` to indicate repeated time signatures:</span>
+
+<span class="sd">        &gt;&gt;&gt; staff = abjad.Staff(r&quot;c&#39;1 d&#39;1 e&#39;1 f&#39;1&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; abjad.show(staff)</span>
+
+<span class="sd">        ..  docs::</span>
+
+<span class="sd">            \new Staff</span>
+<span class="sd">            {</span>
+<span class="sd">                c&#39;1</span>
+<span class="sd">                d&#39;1</span>
+<span class="sd">                e&#39;1</span>
+<span class="sd">                f&#39;1</span>
+<span class="sd">            }</span>
+
+<span class="sd">        ..  figure:: ../_images/enforce_time_signature-2og5ld8bkxe.png</span>
+
+<span class="sd">        &gt;&gt;&gt; time_signatures = [(2, 4),</span>
+<span class="sd">        ...                    None,</span>
+<span class="sd">        ...                    None,</span>
+<span class="sd">        ...                    (3, 4),</span>
+<span class="sd">        ...                    None,</span>
+<span class="sd">        ...                    (4, 4),</span>
+<span class="sd">        ...                    ]</span>
+<span class="sd">        &gt;&gt;&gt; auxjad.mutate.enforce_time_signature(staff, time_signatures)</span>
+<span class="sd">        &gt;&gt;&gt; abjad.show(staff)</span>
+
+<span class="sd">        ..  docs::</span>
+
+<span class="sd">            \new Staff</span>
+<span class="sd">            {</span>
+<span class="sd">                \time 2/4</span>
+<span class="sd">                c&#39;2</span>
+<span class="sd">                ~</span>
+<span class="sd">                c&#39;2</span>
+<span class="sd">                d&#39;2</span>
+<span class="sd">                ~</span>
+<span class="sd">                \time 3/4</span>
+<span class="sd">                d&#39;2</span>
+<span class="sd">                e&#39;4</span>
+<span class="sd">                ~</span>
+<span class="sd">                e&#39;2.</span>
+<span class="sd">                \time 4/4</span>
+<span class="sd">                f&#39;1</span>
+<span class="sd">            }</span>
+
+<span class="sd">        ..  figure:: ../_images/enforce_time_signature-3s9h7p1k05x.png</span>
+
+<span class="sd">    ``cyclic``:</span>
+<span class="sd">        To cycle through the :obj:`list` of time signatures until the container</span>
+<span class="sd">        is exhausted, set the optional keyword argument ``cyclic`` to ``True``.</span>
+
+<span class="sd">        &gt;&gt;&gt; staff = abjad.Staff(r&quot;c&#39;1 d&#39;1 e&#39;1 f&#39;1&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; abjad.show(staff)</span>
+
+<span class="sd">        ..  docs::</span>
+
+<span class="sd">            \new Staff</span>
+<span class="sd">            {</span>
+<span class="sd">                c&#39;1</span>
+<span class="sd">                d&#39;1</span>
+<span class="sd">                e&#39;1</span>
+<span class="sd">                f&#39;1</span>
+<span class="sd">            }</span>
+
+<span class="sd">        ..  figure:: ../_images/enforce_time_signature-vl1bwp21saq.png</span>
+
+<span class="sd">        &gt;&gt;&gt; time_signatures = [abjad.TimeSignature((3, 8)),</span>
+<span class="sd">        ...                    abjad.TimeSignature((2, 8)),</span>
+<span class="sd">        ...                    ]</span>
+<span class="sd">        &gt;&gt;&gt; auxjad.mutate.enforce_time_signature(</span>
+<span class="sd">        ...     staff,</span>
+<span class="sd">        ...     time_signatures,</span>
+<span class="sd">        ...     cyclic=True,</span>
+<span class="sd">        ... )</span>
+<span class="sd">        &gt;&gt;&gt; abjad.show(staff)</span>
+
+<span class="sd">        ..  docs::</span>
+
+<span class="sd">            \new Staff</span>
+<span class="sd">            {</span>
+<span class="sd">                \time 3/8</span>
+<span class="sd">                c&#39;4.</span>
+<span class="sd">                ~</span>
+<span class="sd">                \time 2/8</span>
+<span class="sd">                c&#39;4</span>
+<span class="sd">                ~</span>
+<span class="sd">                \time 3/8</span>
+<span class="sd">                c&#39;4.</span>
+<span class="sd">                \time 2/8</span>
+<span class="sd">                d&#39;4</span>
+<span class="sd">                ~</span>
+<span class="sd">                \time 3/8</span>
+<span class="sd">                d&#39;4.</span>
+<span class="sd">                ~</span>
+<span class="sd">                \time 2/8</span>
+<span class="sd">                d&#39;4</span>
+<span class="sd">                ~</span>
+<span class="sd">                \time 3/8</span>
+<span class="sd">                d&#39;8</span>
+<span class="sd">                e&#39;4</span>
+<span class="sd">                ~</span>
+<span class="sd">                \time 2/8</span>
+<span class="sd">                e&#39;4</span>
+<span class="sd">                ~</span>
+<span class="sd">                \time 3/8</span>
+<span class="sd">                e&#39;4.</span>
+<span class="sd">                ~</span>
+<span class="sd">                \time 2/8</span>
+<span class="sd">                e&#39;8</span>
+<span class="sd">                f&#39;8</span>
+<span class="sd">                ~</span>
+<span class="sd">                \time 3/8</span>
+<span class="sd">                f&#39;4.</span>
+<span class="sd">                ~</span>
+<span class="sd">                \time 2/8</span>
+<span class="sd">                f&#39;4</span>
+<span class="sd">                ~</span>
+<span class="sd">                \time 3/8</span>
+<span class="sd">                f&#39;4</span>
+<span class="sd">                r8</span>
+<span class="sd">            }</span>
+
+<span class="sd">        ..  figure:: ../_images/enforce_time_signature-9mq64erlth6.png</span>
+
+<span class="sd">    ``disable_rewrite_meter``:</span>
+<span class="sd">        By default, this function applies the mutation</span>
+<span class="sd">        |abjad.Meter.rewrite_meter()| to its output.</span>
+
+<span class="sd">        &gt;&gt;&gt; staff = abjad.Staff(r&quot;c&#39;1 ~ c&#39;4 r8 d&#39;4. e&#39;4&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; time_signatures = [abjad.TimeSignature((5, 4)),</span>
+<span class="sd">        ...                    abjad.TimeSignature((3, 4)),</span>
+<span class="sd">        ...                    ]</span>
+<span class="sd">        &gt;&gt;&gt; auxjad.mutate.enforce_time_signature(staff, time_signatures)</span>
+<span class="sd">        &gt;&gt;&gt; abjad.show(staff)</span>
+
+<span class="sd">        ..  docs::</span>
+
+<span class="sd">            \new Staff</span>
+<span class="sd">            {</span>
+<span class="sd">                \time 5/4</span>
+<span class="sd">                c&#39;2.</span>
+<span class="sd">                ~</span>
+<span class="sd">                c&#39;2</span>
+<span class="sd">                \time 3/4</span>
+<span class="sd">                r8</span>
+<span class="sd">                d&#39;4.</span>
+<span class="sd">                e&#39;4</span>
+<span class="sd">            }</span>
+
+<span class="sd">        ..  figure:: ../_images/enforce_time_signature-xsjbr0vnev9.png</span>
+
+<span class="sd">        To disable this, set the keyword argument ``disable_rewrite_meter`` to</span>
+<span class="sd">        ``True``.</span>
+
+<span class="sd">        &gt;&gt;&gt; staff = abjad.Staff(r&quot;c&#39;1 ~ c&#39;4 r8 d&#39;4. e&#39;4&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; time_signatures = [abjad.TimeSignature((5, 4)),</span>
+<span class="sd">        ...                    abjad.TimeSignature((3, 4)),</span>
+<span class="sd">        ...                    ]</span>
+<span class="sd">        &gt;&gt;&gt; auxjad.mutate.enforce_time_signature(</span>
+<span class="sd">        ...     staff,</span>
+<span class="sd">        ...     time_signatures,</span>
+<span class="sd">        ...     disable_rewrite_meter=True,</span>
+<span class="sd">        ... )</span>
+<span class="sd">        &gt;&gt;&gt; abjad.show(staff)</span>
+
+<span class="sd">        ..  docs::</span>
+
+<span class="sd">            \new Staff</span>
+<span class="sd">            {</span>
+<span class="sd">                \time 5/4</span>
+<span class="sd">                c&#39;1</span>
+<span class="sd">                ~</span>
+<span class="sd">                c&#39;4</span>
+<span class="sd">                \time 3/4</span>
+<span class="sd">                r8</span>
+<span class="sd">                d&#39;4.</span>
+<span class="sd">                e&#39;4</span>
+<span class="sd">            }</span>
+
+<span class="sd">        ..  figure:: ../_images/enforce_time_signature-ezjnpwjd3xu.png</span>
+
+<span class="sd">    Tuplets:</span>
+<span class="sd">        The function handles tuplets, even if they must be split.</span>
+
+<span class="sd">        &gt;&gt;&gt; staff = abjad.Staff(r&quot;\times 2/3 {c&#39;2 d&#39;2 e&#39;2} f&#39;1&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; abjad.show(staff)</span>
+
+<span class="sd">        ..  docs::</span>
+
+<span class="sd">            \new Staff</span>
+<span class="sd">            {</span>
+<span class="sd">                \times 2/3</span>
+<span class="sd">                {</span>
+<span class="sd">                    c&#39;2</span>
+<span class="sd">                    d&#39;2</span>
+<span class="sd">                    e&#39;2</span>
+<span class="sd">                }</span>
+<span class="sd">                f&#39;1</span>
+<span class="sd">            }</span>
+
+<span class="sd">        ..  figure:: ../_images/enforce_time_signature-v4ndqpmqjk.png</span>
+
+<span class="sd">        &gt;&gt;&gt; time_signatures = [abjad.TimeSignature((2, 4)),</span>
+<span class="sd">        ...                    abjad.TimeSignature((3, 4)),</span>
+<span class="sd">        ...                    ]</span>
+<span class="sd">        &gt;&gt;&gt; auxjad.mutate.enforce_time_signature(staff, time_signatures)</span>
+<span class="sd">        &gt;&gt;&gt; abjad.show(staff)</span>
+
+<span class="sd">        ..  docs::</span>
+
+<span class="sd">            \new Staff</span>
+<span class="sd">            {</span>
+<span class="sd">                \times 2/3</span>
+<span class="sd">                {</span>
+<span class="sd">                    \time 2/4</span>
+<span class="sd">                    c&#39;2</span>
+<span class="sd">                    d&#39;4</span>
+<span class="sd">                    ~</span>
+<span class="sd">                }</span>
+<span class="sd">                \times 2/3</span>
+<span class="sd">                {</span>
+<span class="sd">                    \time 3/4</span>
+<span class="sd">                    d&#39;4</span>
+<span class="sd">                    e&#39;2</span>
+<span class="sd">                }</span>
+<span class="sd">                f&#39;4</span>
+<span class="sd">                ~</span>
+<span class="sd">                f&#39;2.</span>
+<span class="sd">            }</span>
+
+<span class="sd">        ..  figure:: ../_images/enforce_time_signature-5jdoukq2rkd.png</span>
+
+<span class="sd">    Time signatures in the input container:</span>
+<span class="sd">        Note that any time signatures in the input container will be ignored.</span>
+
+<span class="sd">        &gt;&gt;&gt; staff = abjad.Staff(r&quot;\time 3/4 c&#39;2. d&#39;2. e&#39;2. f&#39;2.&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; abjad.show(staff)</span>
+
+<span class="sd">        ..  docs::</span>
+
+<span class="sd">            \new Staff</span>
+<span class="sd">            {</span>
+<span class="sd">                \time 3/4</span>
+<span class="sd">                c&#39;2.</span>
+<span class="sd">                d&#39;2.</span>
+<span class="sd">                e&#39;2.</span>
+<span class="sd">                f&#39;2.</span>
+<span class="sd">            }</span>
+
+<span class="sd">        ..  figure:: ../_images/enforce_time_signature-bnnz1hov5bu.png</span>
+
+<span class="sd">        &gt;&gt;&gt; time_signatures = [abjad.TimeSignature((5, 8)),</span>
+<span class="sd">        ...                    abjad.TimeSignature((1, 16)),</span>
+<span class="sd">        ...                    abjad.TimeSignature((2, 4)),</span>
+<span class="sd">        ...                    ]</span>
+<span class="sd">        &gt;&gt;&gt; auxjad.mutate.enforce_time_signature(</span>
+<span class="sd">        ...     staff,</span>
+<span class="sd">        ...     time_signatures,</span>
+<span class="sd">        ...     cyclic=True,</span>
+<span class="sd">        ... )</span>
+<span class="sd">        &gt;&gt;&gt; abjad.show(staff)</span>
+
+<span class="sd">        ..  docs::</span>
+
+<span class="sd">            \new Staff</span>
+<span class="sd">            {</span>
+<span class="sd">                \time 5/8</span>
+<span class="sd">                c&#39;4.</span>
+<span class="sd">                ~</span>
+<span class="sd">                c&#39;4</span>
+<span class="sd">                ~</span>
+<span class="sd">                \time 1/16</span>
+<span class="sd">                c&#39;16</span>
+<span class="sd">                ~</span>
+<span class="sd">                \time 2/4</span>
+<span class="sd">                c&#39;16</span>
+<span class="sd">                d&#39;4..</span>
+<span class="sd">                ~</span>
+<span class="sd">                \time 5/8</span>
+<span class="sd">                d&#39;4</span>
+<span class="sd">                ~</span>
+<span class="sd">                d&#39;16</span>
+<span class="sd">                e&#39;16</span>
+<span class="sd">                ~</span>
+<span class="sd">                e&#39;4</span>
+<span class="sd">                ~</span>
+<span class="sd">                \time 1/16</span>
+<span class="sd">                e&#39;16</span>
+<span class="sd">                ~</span>
+<span class="sd">                \time 2/4</span>
+<span class="sd">                e&#39;4.</span>
+<span class="sd">                f&#39;8</span>
+<span class="sd">                ~</span>
+<span class="sd">                \time 5/8</span>
+<span class="sd">                f&#39;4.</span>
+<span class="sd">                ~</span>
+<span class="sd">                f&#39;4</span>
+<span class="sd">            }</span>
+
+<span class="sd">        ..  figure:: ../_images/enforce_time_signature-2l289r8sdzl.png</span>
+
+<span class="sd">    Tweaking |abjad.Meter.rewrite_meter()|:</span>
+<span class="sd">        This function uses the default logical tie splitting algorithm from</span>
+<span class="sd">        |abjad.Meter.rewrite_meter()|.</span>
+
+<span class="sd">        &gt;&gt;&gt; staff = abjad.Staff(r&quot;c&#39;4. d&#39;8 e&#39;2&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; auxjad.mutate.enforce_time_signature(</span>
+<span class="sd">        ...     staff,</span>
+<span class="sd">        ...     abjad.TimeSignature((4, 4)),</span>
+<span class="sd">        ... )</span>
+<span class="sd">        &gt;&gt;&gt; abjad.show(staff)</span>
+
+<span class="sd">        ..  docs::</span>
+
+<span class="sd">            \new Staff</span>
+<span class="sd">            {</span>
+<span class="sd">                \time 4/4</span>
+<span class="sd">                c&#39;4.</span>
+<span class="sd">                d&#39;8</span>
+<span class="sd">                e&#39;2</span>
+<span class="sd">            }</span>
+
+<span class="sd">        ..  figure:: ../_images/enforce_time_signature-bykbobzx47.png</span>
+
+<span class="sd">        Set ``boundary_depth`` to a different number to change its behaviour.</span>
+
+<span class="sd">        &gt;&gt;&gt; staff = abjad.Staff(r&quot;c&#39;4. d&#39;8 e&#39;2&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; auxjad.mutate.enforce_time_signature(</span>
+<span class="sd">        ...     staff,</span>
+<span class="sd">        ...     abjad.TimeSignature((4, 4)),</span>
+<span class="sd">        ...     boundary_depth=1,</span>
+<span class="sd">        ... )</span>
+<span class="sd">        &gt;&gt;&gt; abjad.show(staff)</span>
+
+<span class="sd">        ..  docs::</span>
+
+<span class="sd">            \new Staff</span>
+<span class="sd">            {</span>
+<span class="sd">                \time 4/4</span>
+<span class="sd">                c&#39;4</span>
+<span class="sd">                ~</span>
+<span class="sd">                c&#39;8</span>
+<span class="sd">                d&#39;8</span>
+<span class="sd">                e&#39;2</span>
+<span class="sd">            }</span>
+
+<span class="sd">        ..  figure:: ../_images/enforce_time_signature-wljhgmjh9c.png</span>
+
+<span class="sd">        Other arguments available for tweaking the output of</span>
+<span class="sd">        |abjad.Meter.rewrite_meter()| are ``maximum_dot_count`` and</span>
+<span class="sd">        ``rewrite_tuplets``, which work exactly as the identically named</span>
+<span class="sd">        arguments of |abjad.Meter.rewrite_meter()|.</span>
+
+<span class="sd">        This function also accepts the arguments</span>
+<span class="sd">        ``fuse_across_groups_of_beats``, ``fuse_quadruple_meter``,</span>
+<span class="sd">        ``fuse_triple_meter``, ``extract_trivial_tuplets``, and</span>
+<span class="sd">        ``split_quadruple_meter``, which are passed on to</span>
+<span class="sd">        |auxjad.mutate.prettify_rewrite_meter()| (the latter can be disabled</span>
+<span class="sd">        by setting ``prettify_rewrite_meter`` to ``False``). See the</span>
+<span class="sd">        documentation of this function for more details on these arguments.</span>
+
+<span class="sd">    ..  note::</span>
+
+<span class="sd">        When using |abjad.Container|&#39;s, all time signatures in the output will</span>
+<span class="sd">        be commented out with ``%%%.`` This is because Abjad only applies time</span>
+<span class="sd">        signatures to containers that belong to a |abjad.Staff|. The present</span>
+<span class="sd">        function works with either |abjad.Container| and |abjad.Staff|.</span>
+
+<span class="sd">        &gt;&gt;&gt; container = abjad.Container(r&quot;\time 3/4 c&#39;4 d&#39;4 e&#39;4&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; abjad.show(container)</span>
+
+<span class="sd">        ..  docs::</span>
+
+<span class="sd">            {</span>
+<span class="sd">                %%% \time 3/4 %%%</span>
+<span class="sd">                c&#39;4</span>
+<span class="sd">                d&#39;4</span>
+<span class="sd">                e&#39;4</span>
+<span class="sd">            }</span>
+
+<span class="sd">        ..  figure:: ../_images/enforce_time_signature-ntl3jgbi7j.png</span>
+
+<span class="sd">        &gt;&gt;&gt; staff = abjad.Staff([container])</span>
+<span class="sd">        &gt;&gt;&gt; abjad.show(container)</span>
+
+<span class="sd">        ..  docs::</span>
+
+<span class="sd">            {</span>
+<span class="sd">                \time 3/4</span>
+<span class="sd">                c&#39;4</span>
+<span class="sd">                d&#39;4</span>
+<span class="sd">                e&#39;4</span>
+<span class="sd">            }</span>
+
+<span class="sd">        ..  figure:: ../_images/enforce_time_signature-y5sjtx3j0v.png</span>
+
+<span class="sd">    ..  warning::</span>
+
+<span class="sd">        The input container must be a contiguous logical voice. When dealing</span>
+<span class="sd">        with a container with multiple subcontainers (e.g. a score containing</span>
+<span class="sd">        multiple staves), the best approach is to cycle through these</span>
+<span class="sd">        subcontainers, applying this function to them individually.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">container</span><span class="p">,</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;first argument must be &#39;abjad.Container&#39; or &quot;</span>
+                        <span class="s2">&quot;child class&quot;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">abjad</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="n">container</span><span class="p">)</span><span class="o">.</span><span class="n">leaves</span><span class="p">()</span><span class="o">.</span><span class="n">are_contiguous_logical_voice</span><span class="p">():</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;first argument must be contiguous logical voice&quot;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">time_signatures</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
+        <span class="n">time_signatures_</span> <span class="o">=</span> <span class="n">time_signatures</span><span class="p">[:]</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">time_signatures_</span> <span class="o">=</span> <span class="p">[</span><span class="n">time_signatures</span><span class="p">]</span>
+    <span class="k">if</span> <span class="n">time_signatures_</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;first element of the input list must not be &#39;None&#39;&quot;</span><span class="p">)</span>
+    <span class="c1"># converting all elements to abjad.TimeSignature</span>
+    <span class="k">for</span> <span class="n">index</span><span class="p">,</span> <span class="n">time_signature</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">time_signatures_</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">time_signature</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">previous_ts_duration</span> <span class="o">=</span> <span class="n">time_signatures_</span><span class="p">[</span><span class="n">index</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">pair</span>
+            <span class="n">time_signatures_</span><span class="p">[</span><span class="n">index</span><span class="p">]</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">TimeSignature</span><span class="p">(</span><span class="n">previous_ts_duration</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">time_signature</span><span class="p">,</span> <span class="n">abjad</span><span class="o">.</span><span class="n">TimeSignature</span><span class="p">):</span>
+            <span class="n">time_signatures_</span><span class="p">[</span><span class="n">index</span><span class="p">]</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">TimeSignature</span><span class="p">(</span><span class="n">time_signature</span><span class="p">)</span>
+    <span class="n">partial_time_signature</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="k">if</span> <span class="n">time_signatures_</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">partial</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">partial_time_signature</span> <span class="o">=</span> <span class="n">time_signatures_</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">time_signatures_</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">TimeSignature</span><span class="p">(</span>
+            <span class="n">partial_time_signature</span><span class="o">.</span><span class="n">duration</span>
+        <span class="p">)</span>
+        <span class="n">partial_element</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">TimeSignature</span><span class="p">(</span><span class="n">partial_time_signature</span><span class="o">.</span><span class="n">partial</span><span class="p">)</span>
+        <span class="n">time_signatures_</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">partial_element</span><span class="p">)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">cyclic</span><span class="p">,</span> <span class="nb">bool</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;&#39;cyclic&#39; must be &#39;bool&#39;&quot;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">fill_with_rests</span><span class="p">,</span> <span class="nb">bool</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;&#39;fill_with_rests&#39; must be &#39;bool&#39;&quot;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">close_container</span><span class="p">,</span> <span class="nb">bool</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;&#39;close_container&#39; must be &#39;bool&#39;&quot;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">disable_rewrite_meter</span><span class="p">,</span> <span class="nb">bool</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;&#39;disable_rewrite_meter&#39; must be &#39;bool&#39;&quot;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">boundary_depth</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">boundary_depth</span><span class="p">,</span> <span class="nb">int</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;&#39;boundary_depth&#39; must be &#39;int&#39;&quot;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">maximum_dot_count</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">maximum_dot_count</span><span class="p">,</span> <span class="nb">int</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;&#39;maximum_dot_count&#39; must be &#39;int&#39;&quot;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">rewrite_tuplets</span><span class="p">,</span> <span class="nb">bool</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;&#39;rewrite_tuplets&#39; must be &#39;bool&#39;&quot;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">split_quadruple_meter</span><span class="p">,</span> <span class="nb">bool</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;&#39;split_quadruple_meter&#39; must be &#39;bool&#39;&quot;</span><span class="p">)</span>
+    <span class="c1"># remove all time signatures from container</span>
+    <span class="k">for</span> <span class="n">leaf</span> <span class="ow">in</span> <span class="n">abjad</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="n">container</span><span class="p">)</span><span class="o">.</span><span class="n">leaves</span><span class="p">():</span>
+        <span class="k">if</span> <span class="n">abjad</span><span class="o">.</span><span class="n">get</span><span class="o">.</span><span class="n">indicator</span><span class="p">(</span><span class="n">leaf</span><span class="p">,</span> <span class="n">abjad</span><span class="o">.</span><span class="n">TimeSignature</span><span class="p">):</span>
+            <span class="n">abjad</span><span class="o">.</span><span class="n">detach</span><span class="p">(</span><span class="n">abjad</span><span class="o">.</span><span class="n">TimeSignature</span><span class="p">,</span> <span class="n">leaf</span><span class="p">)</span>
+    <span class="c1"># slice container at the places where time signatures change</span>
+    <span class="n">durations</span> <span class="o">=</span> <span class="p">[</span><span class="n">time_signature</span><span class="o">.</span><span class="n">duration</span> <span class="k">for</span> <span class="n">time_signature</span>
+                 <span class="ow">in</span> <span class="n">time_signatures_</span><span class="p">]</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">cyclic</span><span class="p">:</span>
+        <span class="k">while</span> <span class="nb">sum</span><span class="p">(</span><span class="n">durations</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">abjad</span><span class="o">.</span><span class="n">get</span><span class="o">.</span><span class="n">duration</span><span class="p">(</span><span class="n">container</span><span class="p">):</span>
+            <span class="n">durations</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">durations</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+    <span class="n">abjad</span><span class="o">.</span><span class="n">mutate</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">container</span><span class="p">[:],</span> <span class="n">durations</span><span class="p">,</span> <span class="n">cyclic</span><span class="o">=</span><span class="n">cyclic</span><span class="p">)</span>
+    <span class="c1"># attach new time signatures</span>
+    <span class="n">previous_ts</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="n">index</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">duration</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Duration</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+    <span class="n">previous_ts_duration</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Duration</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">leaf</span> <span class="ow">in</span> <span class="n">abjad</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="n">container</span><span class="p">)</span><span class="o">.</span><span class="n">leaves</span><span class="p">():</span>
+        <span class="k">if</span> <span class="n">duration</span> <span class="o">==</span> <span class="n">previous_ts_duration</span><span class="p">:</span>
+            <span class="n">duration</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Duration</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+            <span class="n">previous_ts_duration</span> <span class="o">=</span> <span class="n">durations</span><span class="p">[</span><span class="n">index</span><span class="p">]</span>
+            <span class="k">if</span> <span class="n">partial_time_signature</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">index</span> <span class="ow">in</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">):</span>
+                <span class="n">ts</span> <span class="o">=</span> <span class="n">partial_time_signature</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">ts</span> <span class="o">=</span> <span class="n">time_signatures_</span><span class="p">[</span><span class="n">index</span><span class="p">]</span>
+            <span class="k">if</span> <span class="n">ts</span> <span class="o">!=</span> <span class="n">previous_ts</span><span class="p">:</span>
+                <span class="n">abjad</span><span class="o">.</span><span class="n">attach</span><span class="p">(</span><span class="n">ts</span><span class="p">,</span> <span class="n">leaf</span><span class="p">)</span>
+            <span class="n">previous_ts</span> <span class="o">=</span> <span class="n">ts</span>
+            <span class="n">index</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="k">if</span> <span class="n">index</span> <span class="o">==</span> <span class="nb">len</span><span class="p">(</span><span class="n">time_signatures_</span><span class="p">):</span>
+                <span class="k">if</span> <span class="n">cyclic</span><span class="p">:</span>
+                    <span class="n">index</span> <span class="o">=</span> <span class="mi">0</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="k">break</span>
+        <span class="n">duration</span> <span class="o">+=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">get</span><span class="o">.</span><span class="n">duration</span><span class="p">(</span><span class="n">leaf</span><span class="p">)</span>
+    <span class="c1"># filling with rests or closing container</span>
+    <span class="k">if</span> <span class="n">close_container</span><span class="p">:</span>
+        <span class="n">close_container_function</span><span class="p">(</span><span class="n">container</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">fill_with_rests</span><span class="p">:</span>
+        <span class="n">fill_with_rests_function</span><span class="p">(</span>
+            <span class="n">container</span><span class="p">,</span>
+            <span class="n">disable_rewrite_meter</span><span class="o">=</span><span class="n">disable_rewrite_meter</span><span class="p">,</span>
+        <span class="p">)</span>
+    <span class="c1"># rewrite meter</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">disable_rewrite_meter</span><span class="p">:</span>
+        <span class="n">measures</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="n">container</span><span class="p">[:])</span><span class="o">.</span><span class="n">group_by_measure</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">cyclic</span><span class="p">:</span>
+            <span class="n">pattern</span> <span class="o">=</span> <span class="n">time_signatures_</span><span class="p">[:]</span>
+            <span class="k">while</span> <span class="nb">len</span><span class="p">(</span><span class="n">time_signatures_</span><span class="p">)</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">measures</span><span class="p">):</span>
+                <span class="n">time_signatures_</span> <span class="o">+=</span> <span class="n">pattern</span><span class="p">[:]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">while</span> <span class="nb">len</span><span class="p">(</span><span class="n">time_signatures_</span><span class="p">)</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">measures</span><span class="p">):</span>
+                <span class="n">time_signatures_</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">time_signatures_</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+        <span class="n">auto_rewrite_meter</span><span class="p">(</span>
+            <span class="n">container</span><span class="p">,</span>
+            <span class="n">meter_list</span><span class="o">=</span><span class="n">time_signatures_</span><span class="p">,</span>
+            <span class="n">boundary_depth</span><span class="o">=</span><span class="n">boundary_depth</span><span class="p">,</span>
+            <span class="n">maximum_dot_count</span><span class="o">=</span><span class="n">maximum_dot_count</span><span class="p">,</span>
+            <span class="n">rewrite_tuplets</span><span class="o">=</span><span class="n">rewrite_tuplets</span><span class="p">,</span>
+            <span class="n">prettify_rewrite_meter</span><span class="o">=</span><span class="n">prettify_rewrite_meter</span><span class="p">,</span>
+            <span class="n">extract_trivial_tuplets</span><span class="o">=</span><span class="n">extract_trivial_tuplets</span><span class="p">,</span>
+            <span class="n">fuse_across_groups_of_beats</span><span class="o">=</span><span class="n">fuse_across_groups_of_beats</span><span class="p">,</span>
+            <span class="n">fuse_quadruple_meter</span><span class="o">=</span><span class="n">fuse_quadruple_meter</span><span class="p">,</span>
+            <span class="n">fuse_triple_meter</span><span class="o">=</span><span class="n">fuse_triple_meter</span><span class="p">,</span>
+            <span class="n">split_quadruple_meter</span><span class="o">=</span><span class="n">split_quadruple_meter</span><span class="p">,</span>
+        <span class="p">)</span></div>
+</pre></div>
+
+           </div>
+           
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2020, Gilberto Agostinho.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

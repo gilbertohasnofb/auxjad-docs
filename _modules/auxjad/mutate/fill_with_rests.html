@@ -1,0 +1,545 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>auxjad.mutate.fill_with_rests &mdash; auxjad 0.8.25 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+        <script src="../../../_static/jquery.js"></script>
+        <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/doctools.js"></script>
+    
+    <script type="text/javascript" src="../../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../../index.html" class="icon icon-home"> auxjad
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.8
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../index.html">Welcome to Auxjad’s documentation!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../examples/index.html">Examples of usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../score_gallery/index.html">Score gallery</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../api/index.html">Auxjad API</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">auxjad</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../../index.html">Module code</a> &raquo;</li>
+        
+      <li>auxjad.mutate.fill_with_rests</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for auxjad.mutate.fill_with_rests</h1><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Optional</span>
+
+<span class="kn">import</span> <span class="nn">abjad</span>
+
+<span class="kn">from</span> <span class="nn">..</span> <span class="kn">import</span> <span class="n">get</span>
+<span class="kn">from</span> <span class="nn">.prettify_rewrite_meter</span> <span class="kn">import</span> <span class="p">(</span>
+    <span class="n">prettify_rewrite_meter</span> <span class="k">as</span> <span class="n">prettify_rewrite_meter_function</span><span class="p">,</span>
+<span class="p">)</span>
+
+
+<div class="viewcode-block" id="fill_with_rests"><a class="viewcode-back" href="../../../_api_members/auxjad.mutate.fill_with_rests.html#auxjad.mutate.fill_with_rests">[docs]</a><span class="k">def</span> <span class="nf">fill_with_rests</span><span class="p">(</span><span class="n">container</span><span class="p">:</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">,</span>
+                    <span class="o">*</span><span class="p">,</span>
+                    <span class="n">disable_rewrite_meter</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+                    <span class="n">prettify_rewrite_meter</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+                    <span class="n">boundary_depth</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+                    <span class="n">maximum_dot_count</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+                    <span class="n">rewrite_tuplets</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+                    <span class="n">extract_trivial_tuplets</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+                    <span class="n">fuse_across_groups_of_beats</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+                    <span class="n">fuse_quadruple_meter</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+                    <span class="n">fuse_triple_meter</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+                    <span class="n">split_quadruple_meter</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+                    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="sa">r</span><span class="sd">&quot;&quot;&quot;Mutates an input container (of type |abjad.Container| or child class)</span>
+<span class="sd">    in place and has no return value; this function fills a container with</span>
+<span class="sd">    rests in order to make it full.</span>
+
+<span class="sd">    Basic usage:</span>
+<span class="sd">        Returns the missing duration of the last measure of any container or</span>
+<span class="sd">        child class. If no time signature is encountered, it uses LilyPond&#39;s</span>
+<span class="sd">        convention and considers the container as in 4/4.</span>
+
+<span class="sd">        &gt;&gt;&gt; container1 = abjad.Container(r&quot;c&#39;4 d&#39;4 e&#39;4 f&#39;4&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; container2 = abjad.Container(r&quot;c&#39;4 d&#39;4 e&#39;4&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; container3 = abjad.Container(r&quot;c&#39;4 d&#39;4 e&#39;4 f&#39;4 | c&#39;4&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; container4 = abjad.Container(r&quot;c&#39;4 d&#39;4 e&#39;4 f&#39;4 | c&#39;4 d&#39;4 e&#39;4 f&#39;4&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; auxjad.mutate.fill_with_rests(container1)</span>
+<span class="sd">        &gt;&gt;&gt; auxjad.mutate.fill_with_rests(container2)</span>
+<span class="sd">        &gt;&gt;&gt; auxjad.mutate.fill_with_rests(container3)</span>
+<span class="sd">        &gt;&gt;&gt; auxjad.mutate.fill_with_rests(container4)</span>
+<span class="sd">        &gt;&gt;&gt; abjad.show(container1)</span>
+
+<span class="sd">        ..  docs::</span>
+
+<span class="sd">            {</span>
+<span class="sd">                c&#39;4</span>
+<span class="sd">                d&#39;4</span>
+<span class="sd">                e&#39;4</span>
+<span class="sd">                f&#39;4</span>
+<span class="sd">            }</span>
+
+<span class="sd">        ..  figure:: ../_images/fill_with_rests-up297scg6t.png</span>
+
+<span class="sd">        &gt;&gt;&gt; abjad.show(container2)</span>
+
+<span class="sd">        ..  docs::</span>
+
+<span class="sd">            {</span>
+<span class="sd">                c&#39;4</span>
+<span class="sd">                d&#39;4</span>
+<span class="sd">                e&#39;4</span>
+<span class="sd">                r4</span>
+<span class="sd">            }</span>
+
+<span class="sd">        ..  figure:: ../_images/fill_with_rests-azrrw0z0buw.png</span>
+
+<span class="sd">        &gt;&gt;&gt; abjad.show(container3)</span>
+
+<span class="sd">        ..  docs::</span>
+
+<span class="sd">            {</span>
+<span class="sd">                c&#39;4</span>
+<span class="sd">                d&#39;4</span>
+<span class="sd">                e&#39;4</span>
+<span class="sd">                f&#39;4</span>
+<span class="sd">                c&#39;4</span>
+<span class="sd">                r2.</span>
+<span class="sd">            }</span>
+
+<span class="sd">        ..  figure:: ../_images/fill_with_rests-jtyw5ikc0k.png</span>
+
+<span class="sd">        &gt;&gt;&gt; abjad.show(container4)</span>
+
+<span class="sd">        ..  docs::</span>
+
+<span class="sd">            {</span>
+<span class="sd">                c&#39;4</span>
+<span class="sd">                d&#39;4</span>
+<span class="sd">                e&#39;4</span>
+<span class="sd">                f&#39;4</span>
+<span class="sd">                c&#39;4</span>
+<span class="sd">                d&#39;4</span>
+<span class="sd">                e&#39;4</span>
+<span class="sd">                f&#39;4</span>
+<span class="sd">            }</span>
+
+<span class="sd">        ..  figure:: ../_images/fill_with_rests-xjkm2vzjfpr.png</span>
+
+<span class="sd">    ..  note::</span>
+
+<span class="sd">        Auxjad automatically adds this function as an extension function to</span>
+<span class="sd">        |abjad.mutate|. It can thus be used from either |auxjad.mutate|_ or</span>
+<span class="sd">        |abjad.mutate| namespaces. Therefore, the two lines below are</span>
+<span class="sd">        equivalent:</span>
+
+<span class="sd">        &gt;&gt;&gt; auxjad.mutate.fill_with_rests(staff)</span>
+<span class="sd">        &gt;&gt;&gt; abjad.mutate.fill_with_rests(staff)</span>
+
+<span class="sd">    Time signature changes:</span>
+<span class="sd">        Handles any time signatures as well as changes of time signature.</span>
+
+<span class="sd">        &gt;&gt;&gt; staff1 = abjad.Staff(r&quot;\time 4/4 c&#39;4 d&#39;4 e&#39;4 f&#39;4 g&#39;&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; staff2 = abjad.Staff(r&quot;\time 3/4 a2. \time 2/4 c&#39;4&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; staff3 = abjad.Staff(r&quot;\time 5/4 g1 ~ g4 \time 4/4 af&#39;2&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; auxjad.mutate.fill_with_rests(staff1)</span>
+<span class="sd">        &gt;&gt;&gt; auxjad.mutate.fill_with_rests(staff2)</span>
+<span class="sd">        &gt;&gt;&gt; auxjad.mutate.fill_with_rests(staff3)</span>
+<span class="sd">        &gt;&gt;&gt; abjad.show(staff1)</span>
+
+<span class="sd">        ..  docs::</span>
+
+<span class="sd">            {</span>
+<span class="sd">                \time 4/4</span>
+<span class="sd">                c&#39;4</span>
+<span class="sd">                d&#39;4</span>
+<span class="sd">                e&#39;4</span>
+<span class="sd">                f&#39;4</span>
+<span class="sd">                g&#39;4</span>
+<span class="sd">                r2.</span>
+<span class="sd">            }</span>
+
+<span class="sd">        ..  figure:: ../_images/fill_with_rests-7zydps2jsb.png</span>
+
+<span class="sd">        &gt;&gt;&gt; abjad.show(staff2)</span>
+
+<span class="sd">        ..  docs::</span>
+
+<span class="sd">            {</span>
+<span class="sd">                \time 3/4</span>
+<span class="sd">                a2.</span>
+<span class="sd">                \time 2/4</span>
+<span class="sd">                c&#39;4</span>
+<span class="sd">                r4</span>
+<span class="sd">            }</span>
+
+<span class="sd">        ..  figure:: ../_images/fill_with_rests-1lphcrl5pnr.png</span>
+
+<span class="sd">        &gt;&gt;&gt; abjad.show(staff3)</span>
+
+<span class="sd">        ..  docs::</span>
+
+<span class="sd">            {</span>
+<span class="sd">                \time 5/4</span>
+<span class="sd">                g1</span>
+<span class="sd">                ~</span>
+<span class="sd">                g4</span>
+<span class="sd">                \time 4/4</span>
+<span class="sd">                af&#39;2</span>
+<span class="sd">                r2</span>
+<span class="sd">            }</span>
+
+<span class="sd">        ..  figure:: ../_images/fill_with_rests-e00jvx986r.png</span>
+
+<span class="sd">    ..  note::</span>
+
+<span class="sd">        When using |abjad.Container|&#39;s, all time signatures in the output will</span>
+<span class="sd">        be commented out with ``%%%.`` This is because Abjad only applies time</span>
+<span class="sd">        signatures to containers that belong to a |abjad.Staff|. The present</span>
+<span class="sd">        function works with either |abjad.Container| and |abjad.Staff|.</span>
+
+<span class="sd">        &gt;&gt;&gt; container = abjad.Container(r&quot;\time 3/4 c&#39;4 d&#39;4 e&#39;4&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; abjad.show(container)</span>
+
+<span class="sd">        ..  docs::</span>
+
+<span class="sd">            {</span>
+<span class="sd">                %%% \time 3/4 %%%</span>
+<span class="sd">                c&#39;4</span>
+<span class="sd">                d&#39;4</span>
+<span class="sd">                e&#39;4</span>
+<span class="sd">            }</span>
+
+<span class="sd">        ..  figure:: ../_images/fill_with_rests-b0qflg50qfn.png</span>
+
+<span class="sd">        &gt;&gt;&gt; staff = abjad.Staff([container])</span>
+<span class="sd">        &gt;&gt;&gt; abjad.show(container)</span>
+
+<span class="sd">        ..  docs::</span>
+
+<span class="sd">            {</span>
+<span class="sd">                \time 3/4</span>
+<span class="sd">                c&#39;4</span>
+<span class="sd">                d&#39;4</span>
+<span class="sd">                e&#39;4</span>
+<span class="sd">            }</span>
+
+<span class="sd">        ..  figure:: ../_images/fill_with_rests-qtaswjiecg.png</span>
+
+<span class="sd">    Partial time signatures:</span>
+<span class="sd">        Correctly handles partial time signatures.</span>
+
+<span class="sd">        &gt;&gt;&gt; staff = abjad.Staff(r&quot;c&#39;4 d&#39;4 e&#39;4 f&#39;4 g&#39;4&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; time_signature = abjad.TimeSignature((3, 4), partial=(1, 4))</span>
+<span class="sd">        &gt;&gt;&gt; abjad.attach(time_signature, staff[0])</span>
+<span class="sd">        &gt;&gt;&gt; auxjad.mutate.fill_with_rests(staff)</span>
+<span class="sd">        &gt;&gt;&gt; abjad.show(staff)</span>
+
+<span class="sd">        ..  docs::</span>
+
+<span class="sd">            {</span>
+<span class="sd">                \partial 4</span>
+<span class="sd">                \time 3/4</span>
+<span class="sd">                c&#39;4</span>
+<span class="sd">                d&#39;4</span>
+<span class="sd">                e&#39;4</span>
+<span class="sd">                f&#39;4</span>
+<span class="sd">                g&#39;4</span>
+<span class="sd">                r2</span>
+<span class="sd">            }</span>
+
+<span class="sd">        ..  figure:: ../_images/fill_with_rests-9smva9ajdi.png</span>
+
+<span class="sd">    ``disable_rewrite_meter``:</span>
+<span class="sd">        By default, this class applies the |abjad.Meter.rewrite_meter()|</span>
+<span class="sd">        mutation to the last measure when rests are added.</span>
+
+<span class="sd">        &gt;&gt;&gt; staff = abjad.Staff(r&quot;\time 4/4 c&#39;8 d&#39;4 e&#39;4&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; auxjad.mutate.fill_with_rests(staff)</span>
+<span class="sd">        &gt;&gt;&gt; abjad.show(staff)</span>
+
+<span class="sd">        ..  docs::</span>
+
+<span class="sd">            \new Staff</span>
+<span class="sd">            {</span>
+<span class="sd">                \time 4/4</span>
+<span class="sd">                c&#39;8</span>
+<span class="sd">                d&#39;4</span>
+<span class="sd">                e&#39;8</span>
+<span class="sd">                ~</span>
+<span class="sd">                e&#39;8</span>
+<span class="sd">                r4.</span>
+<span class="sd">            }</span>
+
+<span class="sd">        ..  figure:: ../_images/fill_with_rests-n83nmnfh92c.png</span>
+
+<span class="sd">        Call this function with the optional keyword argument</span>
+<span class="sd">        ``disable_rewrite_meter`` set to ``True`` in order to disable this</span>
+<span class="sd">        behaviour.</span>
+
+<span class="sd">        &gt;&gt;&gt; staff = abjad.Staff(r&quot;\time 4/4 c&#39;8 d&#39;4 e&#39;4&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; auxjad.mutate.fill_with_rests(staff, disable_rewrite_meter=True)</span>
+<span class="sd">        &gt;&gt;&gt; abjad.show(staff)</span>
+
+<span class="sd">        ..  docs::</span>
+
+<span class="sd">            \new Staff</span>
+<span class="sd">            {</span>
+<span class="sd">                \time 4/4</span>
+<span class="sd">                c&#39;8</span>
+<span class="sd">                d&#39;4</span>
+<span class="sd">                e&#39;4</span>
+<span class="sd">                r4.</span>
+<span class="sd">            }</span>
+
+<span class="sd">        ..  figure:: ../_images/fill_with_rests-9rg2i4n1vhr.png</span>
+
+<span class="sd">    ..  note::</span>
+
+<span class="sd">        This function also accepts the arguments ``boundary_depth``,</span>
+<span class="sd">        ``maximum_dot_count``, and ``rewrite_tuplets``, which are passed on to</span>
+<span class="sd">        |abjad.Meter.rewrite_meter()|, and ``fuse_across_groups_of_beats``,</span>
+<span class="sd">        ``fuse_quadruple_meter``, ``fuse_triple_meter``,</span>
+<span class="sd">        ``extract_trivial_tuplets``,  and ``split_quadruple_meter``, which are</span>
+<span class="sd">        passed on to |auxjad.mutate.prettify_rewrite_meter()| (the latter can</span>
+<span class="sd">        be disabled by setting ``prettify_rewrite_meter`` to ``False``). See</span>
+<span class="sd">        the documentation of those functions for more details on these</span>
+<span class="sd">        arguments.</span>
+
+<span class="sd">    ..  error::</span>
+
+<span class="sd">        If a container is malformed, i.e. it has an underfilled measure before</span>
+<span class="sd">        a time signature change, the function raises a :exc:`ValueError`</span>
+<span class="sd">        exception.</span>
+
+<span class="sd">        &gt;&gt;&gt; container = abjad.Container(r&quot;\time 5/4 g&#39;&#39;1 \time 4/4 f&#39;4&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; auxjad.mutate.fill_with_rests(container)</span>
+<span class="sd">        ValueError: &#39;container&#39; is malformed, with an underfull measure</span>
+<span class="sd">        preceding a time signature change</span>
+
+<span class="sd">    ..  warning::</span>
+
+<span class="sd">        The input container must be a contiguous logical voice. When dealing</span>
+<span class="sd">        with a container with multiple subcontainers (e.g. a score containing</span>
+<span class="sd">        multiple staves), the best approach is to cycle through these</span>
+<span class="sd">        subcontainers, applying this function to them individually.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">container</span><span class="p">,</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;argument must be &#39;abjad.Container&#39; or child class&quot;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">abjad</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="n">container</span><span class="p">)</span><span class="o">.</span><span class="n">leaves</span><span class="p">()</span><span class="o">.</span><span class="n">are_contiguous_logical_voice</span><span class="p">():</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;argument must be contiguous logical voice&quot;</span><span class="p">)</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">get</span><span class="o">.</span><span class="n">selection_is_full</span><span class="p">(</span><span class="n">container</span><span class="p">[:]):</span>
+            <span class="n">underfull_rests</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">LeafMaker</span><span class="p">()(</span>
+                <span class="kc">None</span><span class="p">,</span>
+                <span class="n">get</span><span class="o">.</span><span class="n">underfull_duration</span><span class="p">(</span><span class="n">container</span><span class="p">[:]),</span>
+            <span class="p">)</span>
+            <span class="n">container</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">underfull_rests</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span>
+    <span class="k">except</span> <span class="ne">ValueError</span> <span class="k">as</span> <span class="n">err</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;&#39;container&#39; is malformed, with an underfull measure &quot;</span>
+                         <span class="s2">&quot;preceding a time signature change&quot;</span><span class="p">)</span> <span class="kn">from</span> <span class="nn">err</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">disable_rewrite_meter</span><span class="p">:</span>
+        <span class="n">time_signatures</span> <span class="o">=</span> <span class="n">get</span><span class="o">.</span><span class="n">extract_time_signatures</span><span class="p">(</span>
+            <span class="n">container</span><span class="p">,</span>
+            <span class="n">do_not_use_none</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="n">measures</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="n">container</span><span class="p">[:])</span><span class="o">.</span><span class="n">group_by_measure</span><span class="p">()</span>
+        <span class="n">abjad</span><span class="o">.</span><span class="n">Meter</span><span class="o">.</span><span class="n">rewrite_meter</span><span class="p">(</span>
+            <span class="n">measures</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span>
+            <span class="n">time_signatures</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span>
+            <span class="n">boundary_depth</span><span class="o">=</span><span class="n">boundary_depth</span><span class="p">,</span>
+            <span class="n">maximum_dot_count</span><span class="o">=</span><span class="n">maximum_dot_count</span><span class="p">,</span>
+            <span class="n">rewrite_tuplets</span><span class="o">=</span><span class="n">rewrite_tuplets</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="k">if</span> <span class="n">prettify_rewrite_meter</span><span class="p">:</span>
+            <span class="n">measures</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="n">container</span><span class="p">[:])</span><span class="o">.</span><span class="n">group_by_measure</span><span class="p">()</span>
+            <span class="n">prettify_rewrite_meter_function</span><span class="p">(</span>
+                <span class="n">measures</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span>
+                <span class="n">time_signatures</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span>
+                <span class="n">extract_trivial_tuplets</span><span class="o">=</span><span class="n">extract_trivial_tuplets</span><span class="p">,</span>
+                <span class="n">fuse_across_groups_of_beats</span><span class="o">=</span><span class="n">fuse_across_groups_of_beats</span><span class="p">,</span>
+                <span class="n">fuse_quadruple_meter</span><span class="o">=</span><span class="n">fuse_quadruple_meter</span><span class="p">,</span>
+                <span class="n">fuse_triple_meter</span><span class="o">=</span><span class="n">fuse_triple_meter</span><span class="p">,</span>
+                <span class="n">split_quadruple_meter</span><span class="o">=</span><span class="n">split_quadruple_meter</span><span class="p">,</span>
+            <span class="p">)</span></div>
+</pre></div>
+
+           </div>
+           
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2020, Gilberto Agostinho.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

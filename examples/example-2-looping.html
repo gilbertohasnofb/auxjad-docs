@@ -3,20 +3,25 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8">
+  <meta charset="utf-8" />
   
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>Looping with auxjad.LeafLooper &mdash; auxjad 0.8.24 documentation</title>
+  <title>Looping with auxjad.LeafLooper &mdash; auxjad 0.8.25 documentation</title>
   
 
   
   <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
 
   
   
+
   
+  
+
   
 
   
@@ -26,11 +31,10 @@
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
         <script src="../_static/jquery.js"></script>
         <script src="../_static/underscore.js"></script>
         <script src="../_static/doctools.js"></script>
-        <script src="../_static/language_data.js"></script>
-        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     
     <script type="text/javascript" src="../_static/js/theme.js"></script>
 
@@ -52,7 +56,7 @@
           
 
           
-            <a href="../index.html" class="icon icon-home" alt="Documentation Home"> auxjad
+            <a href="../index.html" class="icon icon-home"> auxjad
           
 
           
@@ -140,6 +144,8 @@
 
 
 
+
+
 <div role="navigation" aria-label="breadcrumbs navigation">
 
   <ul class="wy-breadcrumbs">
@@ -153,7 +159,7 @@
     
       <li class="wy-breadcrumbs-aside">
         
-            
+          
             <a href="../_sources/examples/example-2-looping.rst.txt" rel="nofollow"> View page source</a>
           
         
@@ -205,40 +211,22 @@ as our basic material.</p>
 <span class="gp">... </span>    <span class="n">durations</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">duration_selector</span><span class="p">())</span>
 </pre></div>
 </div>
-<p>We can now use <code class="xref py py-class docutils literal notranslate"><span class="pre">abjad.LeafMaker</span></code> to convert those two <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.9)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code></a>’s of pitches
+<p>We can now use <a class="reference external" href="https://abjad.github.io/api/abjad/makers.html#abjad.makers.LeafMaker" title="(in Abjad v3.4)"><code class="xref py py-class docutils literal notranslate"><span class="pre">abjad.LeafMaker</span></code></a> to convert those two <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.9)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code></a>’s of pitches
 and durations into notes. It’s important to note that there is no time
 signature being imposed at this point, so LilyPond will fallback to a four by
 four when displaying the container below. This is not a problem since this will
 be used as the basic material for the looper, which will then automatically
 take care of time signatures.</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">notes</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">LeafMaker</span><span class="p">()(</span><span class="n">pitches</span><span class="p">,</span> <span class="n">durations</span><span class="p">)</span>
+<blockquote>
+<div><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">notes</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">LeafMaker</span><span class="p">()(</span><span class="n">pitches</span><span class="p">,</span> <span class="n">durations</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">container</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">(</span><span class="n">notes</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">f</span><span class="p">(</span><span class="n">container</span><span class="p">)</span>
-<span class="go">{</span>
-<span class="go">    a&#39;&#39;16</span>
-<span class="go">    d&#39;&#39;&#39;4</span>
-<span class="go">    ~</span>
-<span class="go">    d&#39;&#39;&#39;16</span>
-<span class="go">    c&#39;4</span>
-<span class="go">    e&#39;&#39;16</span>
-<span class="go">    bf&#39;4</span>
-<span class="go">    fs&#39;8.</span>
-<span class="go">    a&#39;&#39;8</span>
-<span class="go">    d&#39;&#39;&#39;4</span>
-<span class="go">    ~</span>
-<span class="go">    d&#39;&#39;&#39;16</span>
-<span class="go">    c&#39;16</span>
-<span class="go">    d&#39;&#39;&#39;4</span>
-<span class="go">    a&#39;&#39;4.</span>
-<span class="go">    e&#39;&#39;4</span>
-<span class="go">    ~</span>
-<span class="go">    e&#39;&#39;16</span>
-<span class="go">}</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">container</span><span class="p">)</span>
 </pre></div>
 </div>
 <div class="figure align-default">
 <img alt="../_images/example-2-looping-4qwapicxjz3.png" src="../_images/example-2-looping-4qwapicxjz3.png" />
 </div>
+</div></blockquote>
 <p>At this point, we can create the <a class="reference internal" href="../_api_members/auxjad.LeafLooper.html#auxjad.LeafLooper" title="auxjad.LeafLooper"><code class="xref py py-class docutils literal notranslate"><span class="pre">auxjad.LeafLooper</span></code></a> and initialise it
 using the material we generated above. A <a class="reference internal" href="../_api_members/auxjad.LeafLooper.html#auxjad.LeafLooper.window_size" title="auxjad.LeafLooper.window_size"><code class="xref py py-attr docutils literal notranslate"><span class="pre">window_size</span></code></a>
 of size <code class="docutils literal notranslate"><span class="pre">4</span></code> will select four notes at each iteration.</p>
@@ -248,73 +236,15 @@ of size <code class="docutils literal notranslate"><span class="pre">4</span></c
 <p>We can now use the <a class="reference internal" href="../_api_members/auxjad.LeafLooper.html#auxjad.LeafLooper.output_n" title="auxjad.LeafLooper.output_n"><code class="xref py py-meth docutils literal notranslate"><span class="pre">output_n()</span></code></a> to output several
 measures of the looping process for us. In this case, let’s output seven
 measures.</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">staff</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span><span class="n">looper</span><span class="o">.</span><span class="n">output_n</span><span class="p">(</span><span class="mi">7</span><span class="p">))</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">f</span><span class="p">(</span><span class="n">container</span><span class="p">)</span>
-<span class="go">\new Staff</span>
-<span class="go">{</span>
-<span class="go">    \time 11/16</span>
-<span class="go">    a&#39;&#39;16</span>
-<span class="go">    d&#39;&#39;&#39;8</span>
-<span class="go">    ~</span>
-<span class="go">    d&#39;&#39;&#39;8.</span>
-<span class="go">    c&#39;16</span>
-<span class="go">    ~</span>
-<span class="go">    c&#39;8.</span>
-<span class="go">    e&#39;&#39;16</span>
-<span class="go">    \time 7/8</span>
-<span class="go">    d&#39;&#39;&#39;4</span>
-<span class="go">    ~</span>
-<span class="go">    d&#39;&#39;&#39;16</span>
-<span class="go">    c&#39;16</span>
-<span class="go">    ~</span>
-<span class="go">    c&#39;8.</span>
-<span class="go">    e&#39;&#39;16</span>
-<span class="go">    bf&#39;4</span>
-<span class="go">    \time 3/4</span>
-<span class="go">    c&#39;4</span>
-<span class="go">    e&#39;&#39;16</span>
-<span class="go">    bf&#39;8.</span>
-<span class="go">    ~</span>
-<span class="go">    bf&#39;16</span>
-<span class="go">    fs&#39;8.</span>
-<span class="go">    \time 5/8</span>
-<span class="go">    e&#39;&#39;16</span>
-<span class="go">    bf&#39;16</span>
-<span class="go">    ~</span>
-<span class="go">    bf&#39;8.</span>
-<span class="go">    fs&#39;16</span>
-<span class="go">    ~</span>
-<span class="go">    fs&#39;8</span>
-<span class="go">    a&#39;&#39;8</span>
-<span class="go">    \time 7/8</span>
-<span class="go">    bf&#39;4</span>
-<span class="go">    fs&#39;8</span>
-<span class="go">    ~</span>
-<span class="go">    fs&#39;16</span>
-<span class="go">    a&#39;&#39;8</span>
-<span class="go">    d&#39;&#39;&#39;16</span>
-<span class="go">    ~</span>
-<span class="go">    d&#39;&#39;&#39;4</span>
-<span class="go">    \time 11/16</span>
-<span class="go">    fs&#39;8.</span>
-<span class="go">    a&#39;&#39;8</span>
-<span class="go">    d&#39;&#39;&#39;4</span>
-<span class="go">    ~</span>
-<span class="go">    d&#39;&#39;&#39;16</span>
-<span class="go">    c&#39;16</span>
-<span class="go">    \time 3/4</span>
-<span class="go">    a&#39;&#39;8</span>
-<span class="go">    d&#39;&#39;&#39;8</span>
-<span class="go">    ~</span>
-<span class="go">    d&#39;&#39;&#39;8.</span>
-<span class="go">    c&#39;16</span>
-<span class="go">    d&#39;&#39;&#39;4</span>
-<span class="go">}</span>
+<blockquote>
+<div><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">staff</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span><span class="n">looper</span><span class="o">.</span><span class="n">output_n</span><span class="p">(</span><span class="mi">7</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">container</span><span class="p">)</span>
 </pre></div>
 </div>
 <div class="figure align-default">
 <img alt="../_images/example-2-looping-9mzjqtfcru8.png" src="../_images/example-2-looping-9mzjqtfcru8.png" />
 </div>
+</div></blockquote>
 <p>At this point, let’s change the <a class="reference internal" href="../_api_members/auxjad.LeafLooper.html#auxjad.LeafLooper.window_size" title="auxjad.LeafLooper.window_size"><code class="xref py py-attr docutils literal notranslate"><span class="pre">window_size</span></code></a> to a
 smaller value and output some more measures.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">looper</span><span class="o">.</span><span class="n">window_size</span> <span class="o">=</span> <span class="mi">2</span>
@@ -322,88 +252,14 @@ smaller value and output some more measures.</p>
 </pre></div>
 </div>
 <p>This is the final result.</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">f</span><span class="p">(</span><span class="n">container</span><span class="p">)</span>
-<span class="go">\new Staff</span>
-<span class="go">{</span>
-<span class="go">    \time 11/16</span>
-<span class="go">    a&#39;&#39;16</span>
-<span class="go">    d&#39;&#39;&#39;8</span>
-<span class="go">    ~</span>
-<span class="go">    d&#39;&#39;&#39;8.</span>
-<span class="go">    c&#39;16</span>
-<span class="go">    ~</span>
-<span class="go">    c&#39;8.</span>
-<span class="go">    e&#39;&#39;16</span>
-<span class="go">    \time 7/8</span>
-<span class="go">    d&#39;&#39;&#39;4</span>
-<span class="go">    ~</span>
-<span class="go">    d&#39;&#39;&#39;16</span>
-<span class="go">    c&#39;16</span>
-<span class="go">    ~</span>
-<span class="go">    c&#39;8.</span>
-<span class="go">    e&#39;&#39;16</span>
-<span class="go">    bf&#39;4</span>
-<span class="go">    \time 3/4</span>
-<span class="go">    c&#39;4</span>
-<span class="go">    e&#39;&#39;16</span>
-<span class="go">    bf&#39;8.</span>
-<span class="go">    ~</span>
-<span class="go">    bf&#39;16</span>
-<span class="go">    fs&#39;8.</span>
-<span class="go">    \time 5/8</span>
-<span class="go">    e&#39;&#39;16</span>
-<span class="go">    bf&#39;16</span>
-<span class="go">    ~</span>
-<span class="go">    bf&#39;8.</span>
-<span class="go">    fs&#39;16</span>
-<span class="go">    ~</span>
-<span class="go">    fs&#39;8</span>
-<span class="go">    a&#39;&#39;8</span>
-<span class="go">    \time 7/8</span>
-<span class="go">    bf&#39;4</span>
-<span class="go">    fs&#39;8</span>
-<span class="go">    ~</span>
-<span class="go">    fs&#39;16</span>
-<span class="go">    a&#39;&#39;8</span>
-<span class="go">    d&#39;&#39;&#39;16</span>
-<span class="go">    ~</span>
-<span class="go">    d&#39;&#39;&#39;4</span>
-<span class="go">    \time 11/16</span>
-<span class="go">    fs&#39;8.</span>
-<span class="go">    a&#39;&#39;8</span>
-<span class="go">    d&#39;&#39;&#39;4</span>
-<span class="go">    ~</span>
-<span class="go">    d&#39;&#39;&#39;16</span>
-<span class="go">    c&#39;16</span>
-<span class="go">    \time 3/4</span>
-<span class="go">    a&#39;&#39;8</span>
-<span class="go">    d&#39;&#39;&#39;8</span>
-<span class="go">    ~</span>
-<span class="go">    d&#39;&#39;&#39;8.</span>
-<span class="go">    c&#39;16</span>
-<span class="go">    d&#39;&#39;&#39;4</span>
-<span class="go">    \time 3/8</span>
-<span class="go">    d&#39;&#39;&#39;4</span>
-<span class="go">    ~</span>
-<span class="go">    d&#39;&#39;&#39;16</span>
-<span class="go">    c&#39;16</span>
-<span class="go">    \time 5/16</span>
-<span class="go">    c&#39;16</span>
-<span class="go">    d&#39;&#39;&#39;4</span>
-<span class="go">    \time 5/8</span>
-<span class="go">    d&#39;&#39;&#39;4</span>
-<span class="go">    a&#39;&#39;4.</span>
-<span class="go">    \time 11/16</span>
-<span class="go">    a&#39;&#39;4.</span>
-<span class="go">    e&#39;&#39;16</span>
-<span class="go">    ~</span>
-<span class="go">    e&#39;&#39;4</span>
-<span class="go">}</span>
+<blockquote>
+<div><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">container</span><span class="p">)</span>
 </pre></div>
 </div>
 <div class="figure align-default">
 <img alt="../_images/example-2-looping-v5h9hyfmjj.png" src="../_images/example-2-looping-v5h9hyfmjj.png" />
 </div>
+</div></blockquote>
 </div>
 
 
@@ -411,37 +267,29 @@ smaller value and output some more measures.</p>
            
           </div>
           <footer>
-  
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-      
-        <a href="example-3-looping.html" class="btn btn-neutral float-right" title="Looping with auxjad.WindowLooper" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
-      
-      
-        <a href="example-1-clapping-music.html" class="btn btn-neutral float-left" title="Steve Reich’s Clapping Music" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
-      
+        <a href="example-3-looping.html" class="btn btn-neutral float-right" title="Looping with auxjad.WindowLooper" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="example-1-clapping-music.html" class="btn btn-neutral float-left" title="Steve Reich’s Clapping Music" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
     </div>
-  
 
   <hr/>
 
   <div role="contentinfo">
     <p>
-        
-        &copy; Copyright 2020, Gilberto Agostinho
+        &#169; Copyright 2020, Gilberto Agostinho.
 
     </p>
   </div>
     
     
     
-    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
     
-    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
     
     provided by <a href="https://readthedocs.org">Read the Docs</a>. 
 
 </footer>
-
         </div>
       </div>
 

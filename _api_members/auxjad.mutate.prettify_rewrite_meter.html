@@ -1,0 +1,620 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>prettify_rewrite_meter &mdash; auxjad 0.8.25 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="remove_repeated_dynamics" href="auxjad.mutate.remove_repeated_dynamics.html" />
+    <link rel="prev" title="merge_partial_tuplets" href="auxjad.mutate.merge_partial_tuplets.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> auxjad
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.8
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../index.html">Welcome to Auxjad’s documentation!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../examples/index.html">Examples of usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../score_gallery/index.html">Score gallery</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../api/index.html">Auxjad API</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../api/api-core.html">core</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/api-get.html">get</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/api-indicators.html">indicators</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../api/api-mutate.html">mutate</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="auxjad.mutate.auto_rewrite_meter.html">auto_rewrite_meter</a></li>
+<li class="toctree-l3"><a class="reference internal" href="auxjad.mutate.close_container.html">close_container</a></li>
+<li class="toctree-l3"><a class="reference internal" href="auxjad.mutate.double_barlines_before_time_signatures.html">double_barlines_before_time_signatures</a></li>
+<li class="toctree-l3"><a class="reference internal" href="auxjad.mutate.enforce_time_signature.html">enforce_time_signature</a></li>
+<li class="toctree-l3"><a class="reference internal" href="auxjad.mutate.extract_trivial_tuplets.html">extract_trivial_tuplets</a></li>
+<li class="toctree-l3"><a class="reference internal" href="auxjad.mutate.fill_with_rests.html">fill_with_rests</a></li>
+<li class="toctree-l3"><a class="reference internal" href="auxjad.mutate.merge_partial_tuplets.html">merge_partial_tuplets</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">prettify_rewrite_meter</a></li>
+<li class="toctree-l3"><a class="reference internal" href="auxjad.mutate.remove_repeated_dynamics.html">remove_repeated_dynamics</a></li>
+<li class="toctree-l3"><a class="reference internal" href="auxjad.mutate.remove_repeated_time_signatures.html">remove_repeated_time_signatures</a></li>
+<li class="toctree-l3"><a class="reference internal" href="auxjad.mutate.reposition_clefs.html">reposition_clefs</a></li>
+<li class="toctree-l3"><a class="reference internal" href="auxjad.mutate.reposition_dynamics.html">reposition_dynamics</a></li>
+<li class="toctree-l3"><a class="reference internal" href="auxjad.mutate.reposition_slurs.html">reposition_slurs</a></li>
+<li class="toctree-l3"><a class="reference internal" href="auxjad.mutate.respell_accidentals.html">respell_accidentals</a></li>
+<li class="toctree-l3"><a class="reference internal" href="auxjad.mutate.rests_to_multimeasure_rest.html">rests_to_multimeasure_rest</a></li>
+<li class="toctree-l3"><a class="reference internal" href="auxjad.mutate.sustain_notes.html">sustain_notes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="auxjad.mutate.sync_containers.html">sync_containers</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../api/api-score.html">score</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/api-spanners.html">spanners</a></li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">auxjad</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../api/index.html">Auxjad API</a> &raquo;</li>
+        
+          <li><a href="../api/api-mutate.html">mutate</a> &raquo;</li>
+        
+      <li>prettify_rewrite_meter</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="../_sources/_api_members/auxjad.mutate.prettify_rewrite_meter.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="prettify-rewrite-meter">
+<h1>prettify_rewrite_meter<a class="headerlink" href="#prettify-rewrite-meter" title="Permalink to this headline">¶</a></h1>
+<dl class="py function">
+<dt class="sig sig-object py" id="auxjad.mutate.prettify_rewrite_meter">
+<span class="sig-prename descclassname"><span class="pre">auxjad.mutate.</span></span><span class="sig-name descname"><span class="pre">prettify_rewrite_meter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">selection</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference external" href="https://abjad.github.io/api/abjad/select.html#abjad.select.Selection" title="(in Abjad v3.4)"><span class="pre">abjad.select.Selection</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">meter</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://abjad.github.io/api/abjad/meter.html#abjad.meter.Meter" title="(in Abjad v3.4)"><span class="pre">abjad.meter.Meter</span></a><span class="p"><span class="pre">,</span> </span><a class="reference external" href="https://abjad.github.io/api/abjad/indicators/TimeSignature.html#abjad.indicators.TimeSignature.TimeSignature" title="(in Abjad v3.4)"><span class="pre">abjad.indicators.TimeSignature.TimeSignature</span></a><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fuse_across_groups_of_beats</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)"><span class="pre">bool</span></a></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fuse_quadruple_meter</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)"><span class="pre">bool</span></a></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fuse_triple_meter</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)"><span class="pre">bool</span></a></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">extract_trivial_tuplets</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)"><span class="pre">bool</span></a></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">split_quadruple_meter</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)"><span class="pre">bool</span></a></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)"><span class="pre">None</span></a><a class="reference internal" href="../_modules/auxjad/mutate/prettify_rewrite_meter.html#prettify_rewrite_meter"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#auxjad.mutate.prettify_rewrite_meter" title="Permalink to this definition">¶</a></dt>
+<dd><p>Mutates an input <a class="reference external" href="https://abjad.github.io/api/abjad/select.html#abjad.select.Selection" title="(in Abjad v3.4)"><code class="xref py py-class docutils literal notranslate"><span class="pre">abjad.Selection</span></code></a> in place and has no return value;
+this function fuses pitched leaves according to the rules shown below,
+improving the default output of <a class="reference external" href="https://abjad.github.io/api/abjad/meter.html#abjad.meter.Meter.rewrite_meter" title="(in Abjad v3.4)"><code class="xref py py-meth docutils literal notranslate"><span class="pre">abjad.Meter.rewrite_meter()</span></code></a>.</p>
+<dl>
+<dt>Basic usage:</dt><dd><p>Meters whose denominators are a crotchet or longer get tied notes
+within a beat after <a class="reference external" href="https://abjad.github.io/api/abjad/meter.html#abjad.meter.Meter.rewrite_meter" title="(in Abjad v3.4)"><code class="xref py py-meth docutils literal notranslate"><span class="pre">abjad.Meter.rewrite_meter()</span></code></a> when they are at
+an offset <code class="docutils literal notranslate"><span class="pre">denominator</span> <span class="pre">/</span> <span class="pre">4</span></code>, so a rhythm such as  <code class="docutils literal notranslate"><span class="pre">denominator</span> <span class="pre">/</span> <span class="pre">4</span></code>
+<code class="docutils literal notranslate"><span class="pre">denominator</span> <span class="pre">/</span> <span class="pre">2</span></code> <code class="docutils literal notranslate"><span class="pre">denominator</span> <span class="pre">/</span> <span class="pre">4</span></code> becomes <code class="docutils literal notranslate"><span class="pre">denominator</span> <span class="pre">/</span> <span class="pre">4</span></code>
+<code class="docutils literal notranslate"><span class="pre">denominator</span> <span class="pre">/</span> <span class="pre">4</span></code> <code class="docutils literal notranslate"><span class="pre">~</span></code> <code class="docutils literal notranslate"><span class="pre">denominator</span> <span class="pre">/</span> <span class="pre">4</span></code> <code class="docutils literal notranslate"><span class="pre">denominator</span> <span class="pre">/</span> <span class="pre">4</span></code>. This
+function looks for those specific cases and fuses them, generating an
+output which is often more readable.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">staff</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="sa">r</span><span class="s2">&quot;\time 3/4 c&#39;16 d&#39;8 e&#39;16 f&#39;16 g&#39;16 a&#39;8 b&#39;8 c&#39;&#39;16 d&#39;&#39;16&quot;</span>
+<span class="gp">... </span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">meter</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Meter</span><span class="p">((</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">mutate</span><span class="o">.</span><span class="n">rewrite_meter</span><span class="p">(</span><span class="n">staff</span><span class="p">[:],</span> <span class="n">meter</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">staff</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="figure align-default">
+<img alt="../_images/prettify_rewrite_meter-vlnd7l5fb7s.png" src="../_images/prettify_rewrite_meter-vlnd7l5fb7s.png" />
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">auxjad</span><span class="o">.</span><span class="n">mutate</span><span class="o">.</span><span class="n">prettify_rewrite_meter</span><span class="p">(</span><span class="n">staff</span><span class="p">[:],</span> <span class="n">meter</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">staff</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="figure align-default">
+<img alt="../_images/prettify_rewrite_meter-e7vfnese0ut.png" src="../_images/prettify_rewrite_meter-e7vfnese0ut.png" />
+</div>
+</dd>
+</dl>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Auxjad automatically adds this function as an extension function to
+<a class="reference external" href="https://abjad.github.io/api/abjad/mutate.html#module-abjad.mutate" title="(in Abjad v3.4)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">abjad.mutate</span></code></a>. It can thus be used from either <a class="reference external" href="../api/api-mutate.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">auxjad.mutate</span></code></a> or
+<a class="reference external" href="https://abjad.github.io/api/abjad/mutate.html#module-abjad.mutate" title="(in Abjad v3.4)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">abjad.mutate</span></code></a> namespaces. Therefore, the two lines below are
+equivalent:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">auxjad</span><span class="o">.</span><span class="n">mutate</span><span class="o">.</span><span class="n">prettify_rewrite_meter</span><span class="p">(</span><span class="n">staff</span><span class="p">[:],</span> <span class="n">meter</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">mutate</span><span class="o">.</span><span class="n">prettify_rewrite_meter</span><span class="p">(</span><span class="n">staff</span><span class="p">[:],</span> <span class="n">meter</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<dl>
+<dt>Other examples:</dt><dd><p>The rhythm of the leaves just before and after the two leaves to be
+fused can be different than <code class="docutils literal notranslate"><span class="pre">denominator</span> <span class="pre">/</span> <span class="pre">4</span></code>, as the function
+searches for logical ties of specific length and offset, and its
+surroundings do not matter.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">staff</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;\time 3/4 c&#39;32 d&#39;32 e&#39;8 f&#39;16 &quot;</span>
+<span class="gp">... </span>                    <span class="sa">r</span><span class="s2">&quot;\times 2/3 {g&#39;32 a&#39;32 b&#39;32} c&#39;&#39;8 &quot;</span>
+<span class="gp">... </span>                    <span class="sa">r</span><span class="s2">&quot;r16 r32. d&#39;&#39;64 e&#39;&#39;8 f&#39;&#39;32 g&#39;&#39;32&quot;</span>
+<span class="gp">... </span>                    <span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">meter</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Meter</span><span class="p">((</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">mutate</span><span class="o">.</span><span class="n">rewrite_meter</span><span class="p">(</span><span class="n">staff</span><span class="p">[:],</span> <span class="n">meter</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">staff</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="figure align-default">
+<img alt="../_images/prettify_rewrite_meter-kw09gse2zxj.png" src="../_images/prettify_rewrite_meter-kw09gse2zxj.png" />
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">auxjad</span><span class="o">.</span><span class="n">mutate</span><span class="o">.</span><span class="n">prettify_rewrite_meter</span><span class="p">(</span><span class="n">staff</span><span class="p">[:],</span> <span class="n">meter</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">staff</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="figure align-default">
+<img alt="../_images/prettify_rewrite_meter-u5gmtdippsa.png" src="../_images/prettify_rewrite_meter-u5gmtdippsa.png" />
+</div>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">fuse_across_groups_of_beats</span></code>:</dt><dd><p>By default, this function also fuses rhythms of type
+<code class="docutils literal notranslate"><span class="pre">denominator</span> <span class="pre">/</span> <span class="pre">2</span></code> <code class="docutils literal notranslate"><span class="pre">denominator</span> <span class="pre">/</span> <span class="pre">2</span></code> <code class="docutils literal notranslate"><span class="pre">~</span></code> <code class="docutils literal notranslate"><span class="pre">denominator</span> <span class="pre">/</span> <span class="pre">2</span></code>
+<code class="docutils literal notranslate"><span class="pre">denominator</span> <span class="pre">/</span> <span class="pre">2</span></code>, becoming <code class="docutils literal notranslate"><span class="pre">denominator</span> <span class="pre">/</span> <span class="pre">2</span></code> <code class="docutils literal notranslate"><span class="pre">denominator</span></code>
+<code class="docutils literal notranslate"><span class="pre">denominator</span> <span class="pre">/</span> <span class="pre">2</span></code>. This is only applied when the meter’s structure
+has a depth of 2, which is the case for meters with numerators equal to
+or larger than <code class="docutils literal notranslate"><span class="pre">5</span></code>.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">staff</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;\time 6/4 c&#39;8 d&#39;4 e&#39;4 f&#39;4 g&#39;4 a&#39;4 b&#39;8&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">meter</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Meter</span><span class="p">((</span><span class="mi">6</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">mutate</span><span class="o">.</span><span class="n">rewrite_meter</span><span class="p">(</span><span class="n">staff</span><span class="p">[:],</span> <span class="n">meter</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">staff</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="figure align-default">
+<img alt="../_images/prettify_rewrite_meter-tqi4p0u8qog.png" src="../_images/prettify_rewrite_meter-tqi4p0u8qog.png" />
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">auxjad</span><span class="o">.</span><span class="n">mutate</span><span class="o">.</span><span class="n">prettify_rewrite_meter</span><span class="p">(</span><span class="n">staff</span><span class="p">[:],</span> <span class="n">meter</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">staff</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="figure align-default">
+<img alt="../_images/prettify_rewrite_meter-riif1glyqpo.png" src="../_images/prettify_rewrite_meter-riif1glyqpo.png" />
+</div>
+<p>to disable this behaviour, set the optional keyword argument
+<code class="docutils literal notranslate"><span class="pre">fuse_across_groups_of_beats</span></code> to <code class="docutils literal notranslate"><span class="pre">False</span></code>.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">staff</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;\time 6/4 c&#39;8 d&#39;4 e&#39;4 f&#39;4 g&#39;4 a&#39;4 b&#39;8&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">meter</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Meter</span><span class="p">((</span><span class="mi">6</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">mutate</span><span class="o">.</span><span class="n">rewrite_meter</span><span class="p">(</span><span class="n">staff</span><span class="p">[:],</span> <span class="n">meter</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">auxjad</span><span class="o">.</span><span class="n">mutate</span><span class="o">.</span><span class="n">prettify_rewrite_meter</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="n">staff</span><span class="p">[:],</span>
+<span class="gp">... </span>    <span class="n">meter</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">fuse_across_groups_of_beats</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+<span class="gp">... </span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">staff</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="figure align-default">
+<img alt="../_images/prettify_rewrite_meter-ki5xbiteij.png" src="../_images/prettify_rewrite_meter-ki5xbiteij.png" />
+</div>
+</dd>
+<dt><a class="reference external" href="https://abjad.github.io/api/abjad/meter.html#abjad.meter.Meter" title="(in Abjad v3.4)"><code class="xref py py-class docutils literal notranslate"><span class="pre">abjad.Meter</span></code></a> with <code class="docutils literal notranslate"><span class="pre">increase_monotonic=True</span></code>:</dt><dd><p>The fused notes will respect the beat structures of such meters, even
+when <code class="docutils literal notranslate"><span class="pre">increase_monotonic</span></code> is set to the non-default value <code class="docutils literal notranslate"><span class="pre">True</span></code>.
+Compare the outputs below.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">staff</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;\time 7/4 c&#39;8 d&#39;4 e&#39;4 f&#39;4 g&#39;4 a&#39;4 b&#39;4 c&#39;&#39;8&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">meter</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Meter</span><span class="p">((</span><span class="mi">7</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">mutate</span><span class="o">.</span><span class="n">rewrite_meter</span><span class="p">(</span><span class="n">staff</span><span class="p">[:],</span> <span class="n">meter</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">auxjad</span><span class="o">.</span><span class="n">mutate</span><span class="o">.</span><span class="n">prettify_rewrite_meter</span><span class="p">(</span><span class="n">staff</span><span class="p">[:],</span> <span class="n">meter</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">staff</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="figure align-default">
+<img alt="../_images/prettify_rewrite_meter-bud0jhkvvl.png" src="../_images/prettify_rewrite_meter-bud0jhkvvl.png" />
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">staff</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;\time 7/4 c&#39;8 d&#39;4 e&#39;4 f&#39;4 g&#39;4 a&#39;4 b&#39;4 c&#39;&#39;8&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">meter</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Meter</span><span class="p">((</span><span class="mi">7</span><span class="p">,</span> <span class="mi">4</span><span class="p">),</span> <span class="n">increase_monotonic</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">mutate</span><span class="o">.</span><span class="n">rewrite_meter</span><span class="p">(</span><span class="n">staff</span><span class="p">[:],</span> <span class="n">meter</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">auxjad</span><span class="o">.</span><span class="n">mutate</span><span class="o">.</span><span class="n">prettify_rewrite_meter</span><span class="p">(</span><span class="n">staff</span><span class="p">[:],</span> <span class="n">meter</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">staff</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="figure align-default">
+<img alt="../_images/prettify_rewrite_meter-47y86pbwwv5.png" src="../_images/prettify_rewrite_meter-47y86pbwwv5.png" />
+</div>
+</dd>
+<dt>Multiple measures at once:</dt><dd><p>This function can take handle multiple measures at once, as long as
+they share the same meter.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">staff</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;\time 5/8 c&#39;16 d&#39;8 e&#39;8 f&#39;8 g&#39;8 a&#39;16 ~ &quot;</span>
+<span class="gp">... </span>                    <span class="sa">r</span><span class="s2">&quot;a&#39;16 b&#39;8 c&#39;&#39;8 d&#39;&#39;8 e&#39;&#39;8 f&#39;&#39;16&quot;</span>
+<span class="gp">... </span>                    <span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">meter</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Meter</span><span class="p">((</span><span class="mi">5</span><span class="p">,</span> <span class="mi">8</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">measure</span> <span class="ow">in</span> <span class="n">abjad</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="n">staff</span><span class="p">[:])</span><span class="o">.</span><span class="n">group_by_measure</span><span class="p">():</span>
+<span class="gp">... </span>    <span class="n">abjad</span><span class="o">.</span><span class="n">mutate</span><span class="o">.</span><span class="n">rewrite_meter</span><span class="p">(</span><span class="n">staff</span><span class="p">[:],</span> <span class="n">meter</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">staff</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="figure align-default">
+<img alt="../_images/prettify_rewrite_meter-8jdzmvf9yl.png" src="../_images/prettify_rewrite_meter-8jdzmvf9yl.png" />
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">auxjad</span><span class="o">.</span><span class="n">mutate</span><span class="o">.</span><span class="n">prettify_rewrite_meter</span><span class="p">(</span><span class="n">staff</span><span class="p">[:],</span> <span class="n">meter</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">staff</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="figure align-default">
+<img alt="../_images/prettify_rewrite_meter-pcn8x9hr6bb.png" src="../_images/prettify_rewrite_meter-pcn8x9hr6bb.png" />
+</div>
+</dd>
+<dt>Multiple measures:</dt><dd><p>Similarly to <a class="reference external" href="https://abjad.github.io/api/abjad/meter.html#abjad.meter.Meter.rewrite_meter" title="(in Abjad v3.4)"><code class="xref py py-meth docutils literal notranslate"><span class="pre">abjad.Meter.rewrite_meter()</span></code></a>, this function accepts
+selections of multiple measures:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">staff</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;\time 4/4 c&#39;8 d&#39;4 e&#39;4 f&#39;4 g&#39;8 | &quot;</span>
+<span class="gp">... </span>                    <span class="sa">r</span><span class="s2">&quot;a&#39;8 b&#39;4 c&#39;&#39;8 d&#39;&#39;16 e&#39;&#39;4 f&#39;&#39;8.&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">meter</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Meter</span><span class="p">((</span><span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">measure</span> <span class="ow">in</span> <span class="n">abjad</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="n">staff</span><span class="p">[:])</span><span class="o">.</span><span class="n">group_by_measure</span><span class="p">():</span>
+<span class="gp">... </span>    <span class="n">abjad</span><span class="o">.</span><span class="n">mutate</span><span class="o">.</span><span class="n">rewrite_meter</span><span class="p">(</span><span class="n">measure</span><span class="p">,</span> <span class="n">meter</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">staff</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="figure align-default">
+<img alt="../_images/prettify_rewrite_meter-s8fg7a2k0tr.png" src="../_images/prettify_rewrite_meter-s8fg7a2k0tr.png" />
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">measure</span> <span class="ow">in</span> <span class="n">abjad</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="n">staff</span><span class="p">[:])</span><span class="o">.</span><span class="n">group_by_measure</span><span class="p">():</span>
+<span class="gp">... </span>    <span class="n">auxjad</span><span class="o">.</span><span class="n">mutate</span><span class="o">.</span><span class="n">prettify_rewrite_meter</span><span class="p">(</span><span class="n">measure</span><span class="p">,</span> <span class="n">meter</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">staff</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="figure align-default">
+<img alt="../_images/prettify_rewrite_meter-rgd7ok7fkq.png" src="../_images/prettify_rewrite_meter-rgd7ok7fkq.png" />
+</div>
+</dd>
+<dt>Multiple measures with different meters:</dt><dd><p>If the measures have different meters, they can be passed on
+individually using <a class="reference external" href="https://docs.python.org/3/library/functions.html#zip" title="(in Python v3.9)"><code class="xref py py-func docutils literal notranslate"><span class="pre">zip()</span></code></a> as shown below.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">staff</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;\time 3/4 c&#39;8 d&#39;4 e&#39;4 f&#39;16 g&#39;16 | &quot;</span>
+<span class="gp">... </span>                    <span class="sa">r</span><span class="s2">&quot;\time 4/4 a&#39;8 b&#39;4 c&#39;&#39;8 d&#39;&#39;16 e&#39;&#39;4 f&#39;&#39;8.&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">meters</span> <span class="o">=</span> <span class="p">[</span><span class="n">abjad</span><span class="o">.</span><span class="n">Meter</span><span class="p">((</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">)),</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Meter</span><span class="p">((</span><span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">))]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">meter</span><span class="p">,</span> <span class="n">measure</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="n">meters</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">abjad</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="n">staff</span><span class="p">[:])</span><span class="o">.</span><span class="n">group_by_measure</span><span class="p">(),</span>
+<span class="gp">... </span><span class="p">):</span>
+<span class="gp">... </span>    <span class="n">abjad</span><span class="o">.</span><span class="n">mutate</span><span class="o">.</span><span class="n">rewrite_meter</span><span class="p">(</span><span class="n">measure</span><span class="p">,</span> <span class="n">meter</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">staff</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="figure align-default">
+<img alt="../_images/prettify_rewrite_meter-o2izz0m7s9k.png" src="../_images/prettify_rewrite_meter-o2izz0m7s9k.png" />
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">meter</span><span class="p">,</span> <span class="n">measure</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="n">meters</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">abjad</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="n">staff</span><span class="p">[:])</span><span class="o">.</span><span class="n">group_by_measure</span><span class="p">(),</span>
+<span class="gp">... </span><span class="p">):</span>
+<span class="gp">... </span>    <span class="n">auxjad</span><span class="o">.</span><span class="n">mutate</span><span class="o">.</span><span class="n">prettify_rewrite_meter</span><span class="p">(</span><span class="n">measure</span><span class="p">,</span> <span class="n">meter</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">staff</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="figure align-default">
+<img alt="../_images/prettify_rewrite_meter-zh89kk66zon.png" src="../_images/prettify_rewrite_meter-zh89kk66zon.png" />
+</div>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">fuse_quadruple_meter</span></code>:</dt><dd><p>This function also takes care of two special cases, namely quadruple
+and triple meters. By default, it will fuse leaves in quadruple meters
+across beats 1 and 2, and across beats 3 and 4 (as long as they fulfil
+the other requirements of duration and offset).</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">staff</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;\time 4/4 c&#39;8 d&#39;4 e&#39;4 f&#39;4 g&#39;8&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">meter</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Meter</span><span class="p">((</span><span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">mutate</span><span class="o">.</span><span class="n">rewrite_meter</span><span class="p">(</span><span class="n">staff</span><span class="p">[:],</span> <span class="n">meter</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">auxjad</span><span class="o">.</span><span class="n">mutate</span><span class="o">.</span><span class="n">prettify_rewrite_meter</span><span class="p">(</span><span class="n">staff</span><span class="p">[:],</span> <span class="n">meter</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">staff</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="figure align-default">
+<img alt="../_images/prettify_rewrite_meter-nap4bbf7mxe.png" src="../_images/prettify_rewrite_meter-nap4bbf7mxe.png" />
+</div>
+<p>Set <code class="docutils literal notranslate"><span class="pre">fuse_quadruple_meter</span></code> to <code class="docutils literal notranslate"><span class="pre">False</span></code> to disable this behaviour.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">staff</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;\time 4/4 c&#39;8 d&#39;4 e&#39;4 f&#39;4 g&#39;8&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">meter</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Meter</span><span class="p">((</span><span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">mutate</span><span class="o">.</span><span class="n">rewrite_meter</span><span class="p">(</span><span class="n">staff</span><span class="p">[:],</span> <span class="n">meter</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">auxjad</span><span class="o">.</span><span class="n">mutate</span><span class="o">.</span><span class="n">prettify_rewrite_meter</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="n">staff</span><span class="p">[:],</span>
+<span class="gp">... </span>    <span class="n">meter</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">fuse_quadruple_meter</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+<span class="gp">... </span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">staff</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="figure align-default">
+<img alt="../_images/prettify_rewrite_meter-juipg9nzna.png" src="../_images/prettify_rewrite_meter-juipg9nzna.png" />
+</div>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">fuse_triple_meter</span></code>:</dt><dd><p>In the case of triple meters, it will fuse leaves across any beat as
+long as the previously mentioned conditions of offset and duration are
+met.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">staff</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;\time 3/4 c&#39;8 d&#39;4 e&#39;4 f&#39;8&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">meter</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Meter</span><span class="p">((</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">mutate</span><span class="o">.</span><span class="n">rewrite_meter</span><span class="p">(</span><span class="n">staff</span><span class="p">[:],</span> <span class="n">meter</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">auxjad</span><span class="o">.</span><span class="n">mutate</span><span class="o">.</span><span class="n">prettify_rewrite_meter</span><span class="p">(</span><span class="n">staff</span><span class="p">[:],</span> <span class="n">meter</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">staff</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="figure align-default">
+<img alt="../_images/prettify_rewrite_meter-4wg3grpb94p.png" src="../_images/prettify_rewrite_meter-4wg3grpb94p.png" />
+</div>
+<p>Similarly to the example before, set <code class="docutils literal notranslate"><span class="pre">fuse_triple_meter</span></code> to <code class="docutils literal notranslate"><span class="pre">False</span></code>
+to disable this behaviour.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">staff</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;\time 3/4 c&#39;8 d&#39;4 e&#39;4 f&#39;8&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">meter</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Meter</span><span class="p">((</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">mutate</span><span class="o">.</span><span class="n">rewrite_meter</span><span class="p">(</span><span class="n">staff</span><span class="p">[:],</span> <span class="n">meter</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">auxjad</span><span class="o">.</span><span class="n">mutate</span><span class="o">.</span><span class="n">prettify_rewrite_meter</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="n">staff</span><span class="p">[:],</span>
+<span class="gp">... </span>    <span class="n">meter</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">fuse_triple_meter</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+<span class="gp">... </span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">staff</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="figure align-default">
+<img alt="../_images/prettify_rewrite_meter-l16ostzscta.png" src="../_images/prettify_rewrite_meter-l16ostzscta.png" />
+</div>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">extract_trivial_tuplets</span></code>:</dt><dd><p>By default, this function extracts the contents of tuples that consist
+solely of rests, or solely of tied notes and chords.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">staff</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="sa">r</span><span class="s2">&quot;\times 2/3 {c&#39;4 ~ c&#39;8} \times 2/3 {d&#39;8 r4} &quot;</span>
+<span class="gp">... </span>    <span class="sa">r</span><span class="s2">&quot;\times 2/3 {r8 r8 r8} \times 2/3 {&lt;e&#39; g&#39;&gt;8 ~ &lt;e&#39; g&#39;&gt;4}&quot;</span>
+<span class="gp">... </span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">meter</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Meter</span><span class="p">((</span><span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">mutate</span><span class="o">.</span><span class="n">rewrite_meter</span><span class="p">(</span><span class="n">staff</span><span class="p">[:],</span> <span class="n">meter</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">mutate</span><span class="o">.</span><span class="n">prettify_rewrite_meter</span><span class="p">(</span><span class="n">staff</span><span class="p">[:],</span> <span class="n">meter</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">staff</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="figure align-default">
+<img alt="../_images/prettify_rewrite_meter-a72jx4fc1xd.png" src="../_images/prettify_rewrite_meter-a72jx4fc1xd.png" />
+</div>
+<p>Set <code class="docutils literal notranslate"><span class="pre">extract_trivial_tuplets</span></code> to <code class="docutils literal notranslate"><span class="pre">False</span></code> to disable this behaviour.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">staff</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="sa">r</span><span class="s2">&quot;\times 2/3 {c&#39;4 ~ c&#39;8} \times 2/3 {d&#39;8 r4} &quot;</span>
+<span class="gp">... </span>    <span class="sa">r</span><span class="s2">&quot;\times 2/3 {r8 r8 r8} \times 2/3 {&lt;e&#39; g&#39;&gt;8 ~ &lt;e&#39; g&#39;&gt;4}&quot;</span>
+<span class="gp">... </span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">meter</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Meter</span><span class="p">((</span><span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">mutate</span><span class="o">.</span><span class="n">rewrite_meter</span><span class="p">(</span><span class="n">staff</span><span class="p">[:],</span> <span class="n">meter</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">mutate</span><span class="o">.</span><span class="n">prettify_rewrite_meter</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="n">staff</span><span class="p">[:]</span>
+<span class="gp">... </span>    <span class="n">meter</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">extract_trivial_tuplets</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+<span class="gp">... </span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">staff</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="figure align-default">
+<img alt="../_images/prettify_rewrite_meter-v9q0ka94qcd.png" src="../_images/prettify_rewrite_meter-v9q0ka94qcd.png" />
+</div>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">split_quadruple_meter</span></code></dt><dd><p>When applying <a class="reference external" href="https://abjad.github.io/api/abjad/meter.html#abjad.meter.Meter.rewrite_meter" title="(in Abjad v3.4)"><code class="xref py py-meth docutils literal notranslate"><span class="pre">abjad.Meter.rewrite_meter()</span></code></a> to a selection with
+quadruple meter and without using a deeper <code class="docutils literal notranslate"><span class="pre">boundary_depth</span></code> than the
+default, the resulting notation will often have leaves crossing the
+third beat of the measure, as shown below.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">staff</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="sa">r</span><span class="s2">&quot;c&#39;4 d&#39;2 r4&quot;</span>
+<span class="gp">... </span>    <span class="sa">r</span><span class="s2">&quot;e&#39;4. f&#39;2 g&#39;8&quot;</span>
+<span class="gp">... </span>    <span class="sa">r</span><span class="s2">&quot;a&#39;4. b&#39;4. c&#39;&#39;4&quot;</span>
+<span class="gp">... </span>    <span class="sa">r</span><span class="s2">&quot;d&#39;&#39;16 e&#39;&#39;8. f&#39;&#39;4. g&#39;&#39;4 a&#39;&#39;8&quot;</span>
+<span class="gp">... </span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">meter</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Meter</span><span class="p">((</span><span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">measure</span> <span class="ow">in</span> <span class="n">abjad</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="n">staff</span><span class="p">[:])</span><span class="o">.</span><span class="n">group_by_measure</span><span class="p">():</span>
+<span class="gp">... </span>    <span class="n">abjad</span><span class="o">.</span><span class="n">mutate</span><span class="o">.</span><span class="n">rewrite_meter</span><span class="p">(</span><span class="n">measure</span><span class="p">,</span> <span class="n">meter</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">staff</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="figure align-default">
+<img alt="../_images/prettify_rewrite_meter-1wvhrjife1i.png" src="../_images/prettify_rewrite_meter-1wvhrjife1i.png" />
+</div>
+<p>This function tests those leaves against a series of rules, splitting
+them when the tests fails. In the case shown above, the first two bars
+are very easy to read rhythmically, but the third and fourth are less
+so. This is due to the dotted crotchet, which starts off a beat,
+crossing the third beat of the measure. This function will split these
+sort of leaves as shown below.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">mutate</span><span class="o">.</span><span class="n">prettify_rewrite_meter</span><span class="p">(</span><span class="n">staff</span><span class="p">[:],</span> <span class="n">meter</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">staff</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="figure align-default">
+<img alt="../_images/prettify_rewrite_meter-56dy04wjzg.png" src="../_images/prettify_rewrite_meter-56dy04wjzg.png" />
+</div>
+<p>Set <code class="docutils literal notranslate"><span class="pre">split_quadruple_meter</span></code> to <code class="docutils literal notranslate"><span class="pre">False</span></code> to disable this behaviour.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">staff</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="sa">r</span><span class="s2">&quot;c&#39;4 d&#39;2 r4&quot;</span>
+<span class="gp">... </span>    <span class="sa">r</span><span class="s2">&quot;e&#39;4. f&#39;2 g&#39;8&quot;</span>
+<span class="gp">... </span>    <span class="sa">r</span><span class="s2">&quot;a&#39;4. b&#39;4. c&#39;&#39;4&quot;</span>
+<span class="gp">... </span>    <span class="sa">r</span><span class="s2">&quot;d&#39;&#39;16 e&#39;&#39;8. f&#39;&#39;4. g&#39;&#39;4 a&#39;&#39;8&quot;</span>
+<span class="gp">... </span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">meter</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Meter</span><span class="p">((</span><span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">measure</span> <span class="ow">in</span> <span class="n">abjad</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="n">staff</span><span class="p">[:])</span><span class="o">.</span><span class="n">group_by_measure</span><span class="p">():</span>
+<span class="gp">... </span>    <span class="n">abjad</span><span class="o">.</span><span class="n">mutate</span><span class="o">.</span><span class="n">rewrite_meter</span><span class="p">(</span><span class="n">measure</span><span class="p">,</span> <span class="n">meter</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">mutate</span><span class="o">.</span><span class="n">prettify_rewrite_meter</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="n">staff</span><span class="p">[:]</span>
+<span class="gp">... </span>    <span class="n">meter</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">split_quadruple_meter</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+<span class="gp">... </span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">staff</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="figure align-default">
+<img alt="../_images/prettify_rewrite_meter-ww1x0zsxlnd.png" src="../_images/prettify_rewrite_meter-ww1x0zsxlnd.png" />
+</div>
+</dd>
+</dl>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>Use <code class="xref py py-func docutils literal notranslate"><span class="pre">auxjad.auto_rewrite_meter()</span></code> to automatically apply
+<a class="reference external" href="https://abjad.github.io/api/abjad/meter.html#abjad.meter.Meter.rewrite_meter" title="(in Abjad v3.4)"><code class="xref py py-meth docutils literal notranslate"><span class="pre">abjad.Meter.rewrite_meter()</span></code></a> and
+<a class="reference internal" href="#auxjad.mutate.prettify_rewrite_meter" title="auxjad.mutate.prettify_rewrite_meter"><code class="xref py py-func docutils literal notranslate"><span class="pre">auxjad.mutate.prettify_rewrite_meter()</span></code></a> to a container with multiple
+time signatures.</p>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>The input selection must be a contiguous logical voice. When dealing
+with a container with multiple subcontainers (e.g. a score containing
+multiple staves), the best approach is to cycle through these
+subcontainers, applying this function to them individually.</p>
+</div>
+</dd></dl>
+
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+        <a href="auxjad.mutate.remove_repeated_dynamics.html" class="btn btn-neutral float-right" title="remove_repeated_dynamics" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="auxjad.mutate.merge_partial_tuplets.html" class="btn btn-neutral float-left" title="merge_partial_tuplets" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2020, Gilberto Agostinho.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>
