@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>reposition_clefs &mdash; auxjad 0.9.1 documentation</title>
+  <title>reposition_clefs &mdash; auxjad 0.9.2 documentation</title>
   
 
   
@@ -100,13 +100,15 @@
 <li class="toctree-l2"><a class="reference internal" href="../api/api-core.html">core</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../api/api-get.html">get</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../api/api-indicators.html">indicators</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/api-makers.html">makers</a></li>
 <li class="toctree-l2 current"><a class="reference internal" href="../api/api-mutate.html">mutate</a><ul class="current">
 <li class="toctree-l3"><a class="reference internal" href="auxjad.mutate.auto_rewrite_meter.html">auto_rewrite_meter</a></li>
 <li class="toctree-l3"><a class="reference internal" href="auxjad.mutate.close_container.html">close_container</a></li>
-<li class="toctree-l3"><a class="reference internal" href="auxjad.mutate.double_barlines_before_time_signatures.html">double_barlines_before_time_signatures</a></li>
 <li class="toctree-l3"><a class="reference internal" href="auxjad.mutate.enforce_time_signature.html">enforce_time_signature</a></li>
+<li class="toctree-l3"><a class="reference internal" href="auxjad.mutate.extend_notes.html">extend_notes</a></li>
 <li class="toctree-l3"><a class="reference internal" href="auxjad.mutate.extract_trivial_tuplets.html">extract_trivial_tuplets</a></li>
 <li class="toctree-l3"><a class="reference internal" href="auxjad.mutate.fill_with_rests.html">fill_with_rests</a></li>
+<li class="toctree-l3"><a class="reference internal" href="auxjad.mutate.merge_hairpins.html">merge_hairpins</a></li>
 <li class="toctree-l3"><a class="reference internal" href="auxjad.mutate.merge_partial_tuplets.html">merge_partial_tuplets</a></li>
 <li class="toctree-l3"><a class="reference internal" href="auxjad.mutate.prettify_rewrite_meter.html">prettify_rewrite_meter</a></li>
 <li class="toctree-l3"><a class="reference internal" href="auxjad.mutate.remove_repeated_dynamics.html">remove_repeated_dynamics</a></li>
@@ -114,7 +116,7 @@
 <li class="toctree-l3 current"><a class="current reference internal" href="#">reposition_clefs</a></li>
 <li class="toctree-l3"><a class="reference internal" href="auxjad.mutate.reposition_dynamics.html">reposition_dynamics</a></li>
 <li class="toctree-l3"><a class="reference internal" href="auxjad.mutate.reposition_slurs.html">reposition_slurs</a></li>
-<li class="toctree-l3"><a class="reference internal" href="auxjad.mutate.respell_accidentals.html">respell_accidentals</a></li>
+<li class="toctree-l3"><a class="reference internal" href="auxjad.mutate.respell_augmented_unisons.html">respell_augmented_unisons</a></li>
 <li class="toctree-l3"><a class="reference internal" href="auxjad.mutate.rests_to_multimeasure_rest.html">rests_to_multimeasure_rest</a></li>
 <li class="toctree-l3"><a class="reference internal" href="auxjad.mutate.sustain_notes.html">sustain_notes</a></li>
 <li class="toctree-l3"><a class="reference internal" href="auxjad.mutate.sync_containers.html">sync_containers</a></li>
@@ -122,6 +124,7 @@
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../api/api-score.html">score</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../api/api-spanners.html">spanners</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/api-utilities.html">utilities</a></li>
 </ul>
 </li>
 </ul>
@@ -208,6 +211,15 @@ to shift clefs from rests to pitched leaves.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">staff</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;c&#39;1 | d&#39;1&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">attach</span><span class="p">(</span><span class="n">abjad</span><span class="o">.</span><span class="n">Clef</span><span class="p">(</span><span class="s1">&#39;treble&#39;</span><span class="p">),</span> <span class="n">staff</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">attach</span><span class="p">(</span><span class="n">abjad</span><span class="o">.</span><span class="n">Clef</span><span class="p">(</span><span class="s1">&#39;treble&#39;</span><span class="p">),</span> <span class="n">staff</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">string</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">lilypond</span><span class="p">(</span><span class="n">staff</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">string</span><span class="p">)</span>
+<span class="go">\new Staff</span>
+<span class="go">{</span>
+<span class="go">    \clef &quot;treble&quot;</span>
+<span class="go">    c&#39;1</span>
+<span class="go">    \clef &quot;treble&quot;</span>
+<span class="go">    d&#39;1</span>
+<span class="go">}</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">staff</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -215,6 +227,14 @@ to shift clefs from rests to pitched leaves.</p>
 <img alt="../_images/reposition_clefs-ve7c2iykuyb.png" src="../_images/reposition_clefs-ve7c2iykuyb.png" />
 </div>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">auxjad</span><span class="o">.</span><span class="n">mutate</span><span class="o">.</span><span class="n">reposition_clefs</span><span class="p">(</span><span class="n">staff</span><span class="p">[:])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">string</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">lilypond</span><span class="p">(</span><span class="n">staff</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">string</span><span class="p">)</span>
+<span class="go">\new Staff</span>
+<span class="go">{</span>
+<span class="go">    \clef &quot;treble&quot;</span>
+<span class="go">    c&#39;1</span>
+<span class="go">    d&#39;1</span>
+<span class="go">}</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">staff</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -225,17 +245,7 @@ to shift clefs from rests to pitched leaves.</p>
 </dl>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>Auxjad automatically adds this function as an extension function to
-<a class="reference external" href="https://abjad.github.io/api/abjad/mutate.html#module-abjad.mutate" title="(in Abjad v3.4)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">abjad.mutate</span></code></a>. It can thus be used from either <a class="reference external" href="../api/api-mutate.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">auxjad.mutate</span></code></a> or
-<a class="reference external" href="https://abjad.github.io/api/abjad/mutate.html#module-abjad.mutate" title="(in Abjad v3.4)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">abjad.mutate</span></code></a> namespaces. Therefore, the two lines below are
-equivalent:</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">auxjad</span><span class="o">.</span><span class="n">mutate</span><span class="o">.</span><span class="n">reposition_clefs</span><span class="p">(</span><span class="n">staff</span><span class="p">[:])</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">mutate</span><span class="o">.</span><span class="n">reposition_clefs</span><span class="p">(</span><span class="n">staff</span><span class="p">[:])</span>
-</pre></div>
-</div>
-</div>
-<dl>
-<dt>LilyPond’s fallback clef:</dt><dd><p>As seen above, LilyPond automatically omits repeated clefs unless the
+<p>As seen above, LilyPond automatically omits repeated clefs unless the
 first clef is omitted. In that case, it uses a treble clef as fallback,
 although it won’t then remove a subsequent repeated treble clef:</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">staff</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;c&#39;1 | d&#39;1&quot;</span><span class="p">)</span>
@@ -254,7 +264,19 @@ although it won’t then remove a subsequent repeated treble clef:</p>
 <div class="figure align-default">
 <img alt="../_images/reposition_clefs-0620w7q00lsr.png" src="../_images/reposition_clefs-0620w7q00lsr.png" />
 </div>
-</dd>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Auxjad automatically adds this function as an extension function to
+<a class="reference external" href="https://abjad.github.io/api/abjad/mutate.html#module-abjad.mutate" title="(in Abjad v3.4)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">abjad.mutate</span></code></a>. It can thus be used from either <a class="reference external" href="../api/api-mutate.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">auxjad.mutate</span></code></a> or
+<a class="reference external" href="https://abjad.github.io/api/abjad/mutate.html#module-abjad.mutate" title="(in Abjad v3.4)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">abjad.mutate</span></code></a> namespaces. Therefore, the two lines below are
+equivalent:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">auxjad</span><span class="o">.</span><span class="n">mutate</span><span class="o">.</span><span class="n">reposition_clefs</span><span class="p">(</span><span class="n">staff</span><span class="p">[:])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">mutate</span><span class="o">.</span><span class="n">reposition_clefs</span><span class="p">(</span><span class="n">staff</span><span class="p">[:])</span>
+</pre></div>
+</div>
+</div>
+<dl>
 <dt>Clef structure:</dt><dd><p>The function also removes clefs that are separated by an arbitrary
 number of leaves without clefs:</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">staff</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;c&#39;1 | d&#39;2 e&#39;4 r4 | f&#39;1&quot;</span><span class="p">)</span>

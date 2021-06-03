@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>auxjad.mutate.rests_to_multimeasure_rest &mdash; auxjad 0.8.25 documentation</title>
+  <title>auxjad.mutate.rests_to_multimeasure_rest &mdash; auxjad 0.9.2 documentation</title>
   
 
   
@@ -64,7 +64,7 @@
             
             
               <div class="version">
-                0.8
+                0.9
               </div>
             
           
@@ -167,6 +167,7 @@
 <div class="viewcode-block" id="rests_to_multimeasure_rest"><a class="viewcode-back" href="../../../_api_members/auxjad.mutate.rests_to_multimeasure_rest.html#auxjad.mutate.rests_to_multimeasure_rest">[docs]</a><span class="k">def</span> <span class="nf">rests_to_multimeasure_rest</span><span class="p">(</span><span class="n">selection</span><span class="p">:</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Selection</span><span class="p">,</span>
                                <span class="o">*</span><span class="p">,</span>
                                <span class="n">ignore_clefs</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+                               <span class="n">ignore_dynamics</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
                                <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
     <span class="sa">r</span><span class="sd">&quot;&quot;&quot;Mutates an input |abjad.Selection| in place and has no return value;</span>
 <span class="sd">    this function looks for measures filled with regular rests and converts</span>
@@ -176,14 +177,26 @@
 <span class="sd">        Converts any measure filled with regular rests into a measure with a</span>
 <span class="sd">        single multi-measure rest.</span>
 
-<span class="sd">        &gt;&gt;&gt; container = abjad.Container(r&quot;r1&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; container = abjad.Container(r&quot;\time 3/4 r2.&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; abjad.show(container)</span>
+
+<span class="sd">        ..  docs::</span>
+
+<span class="sd">            {</span>
+<span class="sd">                \time 3/4</span>
+<span class="sd">                r2.</span>
+<span class="sd">            }</span>
+
+<span class="sd">        ..  figure:: ../_images/rests_to_multimeasure_rest-VIj5iWyLCG.png</span>
+
 <span class="sd">        &gt;&gt;&gt; auxjad.mutate.rests_to_multimeasure_rest(container[:])</span>
 <span class="sd">        &gt;&gt;&gt; abjad.show(container)</span>
 
 <span class="sd">        ..  docs::</span>
 
 <span class="sd">            {</span>
-<span class="sd">                R1</span>
+<span class="sd">                \time 3/4</span>
+<span class="sd">                R1 * 3/4</span>
 <span class="sd">            }</span>
 
 <span class="sd">        ..  figure:: ../_images/rests_to_multimeasure_rest-uvebc7ft1zo.png</span>
@@ -271,6 +284,26 @@
 <span class="sd">        ...                         &quot;\time 6/8 r2. | &quot;</span>
 <span class="sd">        ...                         &quot;\time 5/4 c&#39;1 ~ c&#39;4 | r1 r4&quot;</span>
 <span class="sd">        ...                         )</span>
+<span class="sd">        &gt;&gt;&gt; abjad.show(container)</span>
+
+<span class="sd">        ..  docs::</span>
+
+<span class="sd">            \new Staff</span>
+<span class="sd">            {</span>
+<span class="sd">                \time 3/4</span>
+<span class="sd">                r2.</span>
+<span class="sd">                \time 6/8</span>
+<span class="sd">                r2.</span>
+<span class="sd">                \time 5/4</span>
+<span class="sd">                c&#39;1</span>
+<span class="sd">                ~</span>
+<span class="sd">                c&#39;4</span>
+<span class="sd">                r1</span>
+<span class="sd">                r4</span>
+<span class="sd">            }</span>
+
+<span class="sd">        ..  figure:: ../_images/rests_to_multimeasure_rest-oQfFRihzEY.png</span>
+
 <span class="sd">        &gt;&gt;&gt; auxjad.mutate.rests_to_multimeasure_rest(container[:])</span>
 <span class="sd">        &gt;&gt;&gt; abjad.show(container)</span>
 
@@ -441,6 +474,109 @@
 
 <span class="sd">        ..  figure:: ../_images/rests_to_multimeasure_rest-KGRZJ8fvQF.png</span>
 
+<span class="sd">    ``ignore_dynamics``</span>
+<span class="sd">        By default, the last dynamic or hairpin of an empty measure is</span>
+<span class="sd">        preserved when replacing it with a multi-measure rest:</span>
+
+<span class="sd">        &gt;&gt;&gt; staff = abjad.Staff(r&quot;c&#39;1\p\&lt; r2\! r2 d&#39;1\f\&gt; r2 r2\ppp&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; abjad.show(staff)</span>
+
+<span class="sd">        ..  docs::</span>
+
+<span class="sd">            \new Staff</span>
+<span class="sd">            {</span>
+<span class="sd">                c&#39;1</span>
+<span class="sd">                \p</span>
+<span class="sd">                \&lt;</span>
+<span class="sd">                r2</span>
+<span class="sd">                \!</span>
+<span class="sd">                r2</span>
+<span class="sd">                d&#39;1</span>
+<span class="sd">                \f</span>
+<span class="sd">                \&gt;</span>
+<span class="sd">                r2</span>
+<span class="sd">                r2</span>
+<span class="sd">                \ppp</span>
+<span class="sd">            }</span>
+
+
+<span class="sd">        ..  figure:: ../_images/rests_to_multimeasure_rest-J9T5UY8r9w.png</span>
+
+<span class="sd">        &gt;&gt;&gt; abjad.mutate.rests_to_multimeasure_rest(staff[:])</span>
+<span class="sd">        &gt;&gt;&gt; abjad.show(staff)</span>
+
+<span class="sd">        ..  docs::</span>
+
+<span class="sd">            \new Staff</span>
+<span class="sd">            {</span>
+<span class="sd">                c&#39;1</span>
+<span class="sd">                \p</span>
+<span class="sd">                \&lt;</span>
+<span class="sd">                R1</span>
+<span class="sd">                \!</span>
+<span class="sd">                d&#39;1</span>
+<span class="sd">                \f</span>
+<span class="sd">                \&gt;</span>
+<span class="sd">                R1</span>
+<span class="sd">                \ppp</span>
+<span class="sd">            }</span>
+
+<span class="sd">        ..  figure:: ../_images/rests_to_multimeasure_rest-77r9QeaZBA.png</span>
+
+<span class="sd">        Invoke the mutation with ``ignore_dynamics`` set to ``True`` to disable</span>
+<span class="sd">        this behaviour and ignore all dynamics and hairpins:</span>
+
+<span class="sd">        &gt;&gt;&gt; staff = abjad.Staff(r&quot;c&#39;1\p\&lt; r2\! r2 d&#39;1\f\&gt; r2 r2\ppp&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; abjad.mutate.rests_to_multimeasure_rest(</span>
+<span class="sd">        ...     staff[:],</span>
+<span class="sd">        ...     ignore_dynamics=True,</span>
+<span class="sd">        ... )</span>
+<span class="sd">        &gt;&gt;&gt; abjad.show(staff)</span>
+
+<span class="sd">        ..  docs::</span>
+
+<span class="sd">            \new Staff</span>
+<span class="sd">            {</span>
+<span class="sd">                c&#39;1</span>
+<span class="sd">                \p</span>
+<span class="sd">                \&lt;</span>
+<span class="sd">                R1</span>
+<span class="sd">                d&#39;1</span>
+<span class="sd">                \f</span>
+<span class="sd">                \&gt;</span>
+<span class="sd">                R1</span>
+<span class="sd">            }</span>
+
+<span class="sd">        ..  figure:: ../_images/rests_to_multimeasure_rest-3UhZukx9Pw.png</span>
+
+<span class="sd">        ..  warning::</span>
+
+<span class="sd">            Note that dynamics are only ignored when converting rests to</span>
+<span class="sd">            multi-measure rests. All other dynamics are preserved in the score.</span>
+<span class="sd">            This can result in problems displaying dynamics when one or more</span>
+<span class="sd">            unterminated hairpins is present. In the example above, the last</span>
+<span class="sd">            note&#39;s hairpin is unterminated and, because of that, LilyPond</span>
+<span class="sd">            ignores all dynamics in that staff:</span>
+
+<span class="sd">            &gt;&gt;&gt; staff = abjad.Staff(r&quot;c&#39;1\p\&lt; r2\! r2 d&#39;1\f\&gt; r2 r2\ppp&quot;)</span>
+<span class="sd">            &gt;&gt;&gt; abjad.mutate.rests_to_multimeasure_rest(</span>
+<span class="sd">            ...     staff[:],</span>
+<span class="sd">            ...     ignore_dynamics=True,</span>
+<span class="sd">            ... )</span>
+<span class="sd">            &gt;&gt;&gt; string = abjad.lilypond(staff)</span>
+<span class="sd">            &gt;&gt;&gt; print(string)</span>
+<span class="sd">            \new Staff</span>
+<span class="sd">            {</span>
+<span class="sd">                c&#39;1</span>
+<span class="sd">                \p</span>
+<span class="sd">                \&lt;</span>
+<span class="sd">                R1</span>
+<span class="sd">                d&#39;1</span>
+<span class="sd">                \f</span>
+<span class="sd">                \&gt;</span>
+<span class="sd">                R1</span>
+<span class="sd">            }</span>
+
 <span class="sd">    ..  warning::</span>
 
 <span class="sd">        The input selection must be a contiguous logical voice. When dealing</span>
@@ -454,6 +590,8 @@
         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;argument must be contiguous logical voice&quot;</span><span class="p">)</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">ignore_clefs</span><span class="p">,</span> <span class="nb">bool</span><span class="p">):</span>
         <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;&#39;ignore_clefs&#39; must be &#39;bool&#39;&quot;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">ignore_dynamics</span><span class="p">,</span> <span class="nb">bool</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;&#39;ignore_dynamics&#39; must be &#39;bool&#39;&quot;</span><span class="p">)</span>
 
     <span class="n">measures</span> <span class="o">=</span> <span class="n">selection</span><span class="o">.</span><span class="n">group_by_measure</span><span class="p">()</span>
     <span class="n">effective_time_signature</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">TimeSignature</span><span class="p">((</span><span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
@@ -481,6 +619,14 @@
                     <span class="n">clef</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">get</span><span class="o">.</span><span class="n">indicator</span><span class="p">(</span><span class="n">leaf</span><span class="p">,</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Clef</span><span class="p">)</span>
                     <span class="k">if</span> <span class="n">clef</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
                         <span class="k">break</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">ignore_dynamics</span><span class="p">:</span>
+                <span class="k">for</span> <span class="n">leaf</span> <span class="ow">in</span> <span class="n">measure</span><span class="o">.</span><span class="n">leaves</span><span class="p">()[::</span><span class="o">-</span><span class="mi">1</span><span class="p">]:</span>
+                    <span class="n">dynamics</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">get</span><span class="o">.</span><span class="n">indicator</span><span class="p">(</span><span class="n">leaf</span><span class="p">,</span> <span class="p">(</span><span class="n">abjad</span><span class="o">.</span><span class="n">Dynamic</span><span class="p">,</span>
+                                                          <span class="n">abjad</span><span class="o">.</span><span class="n">StartHairpin</span><span class="p">,</span>
+                                                          <span class="n">abjad</span><span class="o">.</span><span class="n">StopHairpin</span><span class="p">,</span>
+                                                          <span class="p">))</span>
+                    <span class="k">if</span> <span class="n">dynamics</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                        <span class="k">break</span>
             <span class="n">duration</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">get</span><span class="o">.</span><span class="n">duration</span><span class="p">(</span><span class="n">measure</span><span class="p">)</span>
             <span class="k">if</span> <span class="n">duration</span> <span class="o">==</span> <span class="n">effective_time_signature</span><span class="o">.</span><span class="n">duration</span><span class="p">:</span>
                 <span class="k">if</span> <span class="n">duration</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
@@ -495,6 +641,8 @@
                     <span class="n">abjad</span><span class="o">.</span><span class="n">attach</span><span class="p">(</span><span class="n">time_signature</span><span class="p">,</span> <span class="n">multimeasure_rest</span><span class="p">)</span>
                 <span class="k">if</span> <span class="ow">not</span> <span class="n">ignore_clefs</span> <span class="ow">and</span> <span class="n">clef</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
                     <span class="n">abjad</span><span class="o">.</span><span class="n">attach</span><span class="p">(</span><span class="n">clef</span><span class="p">,</span> <span class="n">multimeasure_rest</span><span class="p">)</span>
+                <span class="k">if</span> <span class="ow">not</span> <span class="n">ignore_dynamics</span> <span class="ow">and</span> <span class="n">dynamics</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                    <span class="n">abjad</span><span class="o">.</span><span class="n">attach</span><span class="p">(</span><span class="n">dynamics</span><span class="p">,</span> <span class="n">multimeasure_rest</span><span class="p">)</span>
                 <span class="k">for</span> <span class="n">indicator</span> <span class="ow">in</span> <span class="n">abjad</span><span class="o">.</span><span class="n">get</span><span class="o">.</span><span class="n">indicators</span><span class="p">(</span><span class="n">head</span><span class="p">):</span>
                     <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">indicator</span><span class="p">,</span> <span class="n">indicators_tuple</span><span class="p">):</span>
                         <span class="n">abjad</span><span class="o">.</span><span class="n">attach</span><span class="p">(</span><span class="n">indicator</span><span class="p">,</span> <span class="n">multimeasure_rest</span><span class="p">)</span>

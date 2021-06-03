@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>core &mdash; auxjad 0.9.1 documentation</title>
+  <title>core &mdash; auxjad 0.9.2 documentation</title>
   
 
   
@@ -101,8 +101,8 @@
 <li class="toctree-l3"><a class="reference internal" href="../_api_members/auxjad.CartographySelector.html">CartographySelector</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../_api_members/auxjad.CrossFader.html">CrossFader</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../_api_members/auxjad.Fader.html">Fader</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../_api_members/auxjad.FittestMeasureMaker.html">FittestMeasureMaker</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../_api_members/auxjad.GeneticAlgorithm.html">GeneticAlgorithm</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../_api_members/auxjad.GeneticAlgorithmMusicMaker.html">GeneticAlgorithmMusicMaker</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../_api_members/auxjad.Hocketer.html">Hocketer</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../_api_members/auxjad.LeafLooper.html">LeafLooper</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../_api_members/auxjad.ListLooper.html">ListLooper</a></li>
@@ -116,9 +116,11 @@
 </li>
 <li class="toctree-l2"><a class="reference internal" href="api-get.html">get</a></li>
 <li class="toctree-l2"><a class="reference internal" href="api-indicators.html">indicators</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-makers.html">makers</a></li>
 <li class="toctree-l2"><a class="reference internal" href="api-mutate.html">mutate</a></li>
 <li class="toctree-l2"><a class="reference internal" href="api-score.html">score</a></li>
 <li class="toctree-l2"><a class="reference internal" href="api-spanners.html">spanners</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-utilities.html">utilities</a></li>
 </ul>
 </li>
 </ul>
@@ -217,43 +219,43 @@ for their individual documentation.</p>
 <td><p>A selector used to store, manipulate, and select objects using a weighted function constructed with a fixed decay rate.</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="../_api_members/auxjad.CrossFader.html#auxjad.CrossFader" title="auxjad.CrossFader"><code class="xref py py-obj docutils literal notranslate"><span class="pre">CrossFader</span></code></a>(fade_out_contents, …)</p></td>
-<td><p>This class takes two <a class="reference external" href="https://abjad.github.io/api/abjad/score.html#abjad.score.Container" title="(in Abjad v3.4)"><code class="xref py py-class docutils literal notranslate"><span class="pre">abjad.Container</span></code></a>’s and gradually cross fades from one into the other, by fading out the first while fading in the second.</p></td>
+<td><p>Takes two <a class="reference external" href="https://abjad.github.io/api/abjad/score.html#abjad.score.Container" title="(in Abjad v3.4)"><code class="xref py py-class docutils literal notranslate"><span class="pre">abjad.Container</span></code></a>’s’ (or child class) and gradually crossfades from one into the other, by fading out the first while fading in the second.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="../_api_members/auxjad.Fader.html#auxjad.Fader" title="auxjad.Fader"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Fader</span></code></a>(contents, *, fader_type, max_steps, …)</p></td>
-<td><p>This class takes an <a class="reference external" href="https://abjad.github.io/api/abjad/score.html#abjad.score.Container" title="(in Abjad v3.4)"><code class="xref py py-class docutils literal notranslate"><span class="pre">abjad.Container</span></code></a> (or child class) as input and gradually removes or adds notes one by one.</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="../_api_members/auxjad.Fader.html#auxjad.Fader" title="auxjad.Fader"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Fader</span></code></a>(contents, *, mode, max_steps, …)</p></td>
+<td><p>Takes an <a class="reference external" href="https://abjad.github.io/api/abjad/score.html#abjad.score.Container" title="(in Abjad v3.4)"><code class="xref py py-class docutils literal notranslate"><span class="pre">abjad.Container</span></code></a> (or child class) as input and, using it as reference, gradually removes or adds notes one by one to an output <a class="reference external" href="https://abjad.github.io/api/abjad/select.html#abjad.select.Selection" title="(in Abjad v3.4)"><code class="xref py py-class docutils literal notranslate"><span class="pre">abjad.Selection</span></code></a>.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="../_api_members/auxjad.FittestMeasureMaker.html#auxjad.FittestMeasureMaker" title="auxjad.FittestMeasureMaker"><code class="xref py py-obj docutils literal notranslate"><span class="pre">FittestMeasureMaker</span></code></a>(*, pitch_target, …)</p></td>
-<td><p>This classes uses two <a class="reference internal" href="../_api_members/auxjad.GeneticAlgorithm.html#auxjad.GeneticAlgorithm" title="auxjad.GeneticAlgorithm"><code class="xref py py-class docutils literal notranslate"><span class="pre">GeneticAlgorithm</span></code></a>’s, one for pitch and another for attack points, in order to create musical measures.</p></td>
-</tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="../_api_members/auxjad.GeneticAlgorithm.html#auxjad.GeneticAlgorithm" title="auxjad.GeneticAlgorithm"><code class="xref py py-obj docutils literal notranslate"><span class="pre">GeneticAlgorithm</span></code></a>(*, target, genes, …)</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="../_api_members/auxjad.GeneticAlgorithm.html#auxjad.GeneticAlgorithm" title="auxjad.GeneticAlgorithm"><code class="xref py py-obj docutils literal notranslate"><span class="pre">GeneticAlgorithm</span></code></a>(*, target, genes, …)</p></td>
 <td><p>An implementation of a genetic algorithm.</p></td>
 </tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="../_api_members/auxjad.GeneticAlgorithmMusicMaker.html#auxjad.GeneticAlgorithmMusicMaker" title="auxjad.GeneticAlgorithmMusicMaker"><code class="xref py py-obj docutils literal notranslate"><span class="pre">GeneticAlgorithmMusicMaker</span></code></a>(*, pitch_target, …)</p></td>
+<td><p>Uses two <a class="reference internal" href="../_api_members/auxjad.GeneticAlgorithm.html#auxjad.GeneticAlgorithm" title="auxjad.GeneticAlgorithm"><code class="xref py py-class docutils literal notranslate"><span class="pre">auxjad.GeneticAlgorithm</span></code></a>’s, one for pitch and another for attack points, in order to create musical cells.</p></td>
+</tr>
 <tr class="row-even"><td><p><a class="reference internal" href="../_api_members/auxjad.Hocketer.html#auxjad.Hocketer" title="auxjad.Hocketer"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Hocketer</span></code></a>(contents, *, n_voices, …)</p></td>
-<td><p>This class is a hocket generator that takes a container as input and randomly distributes its logical ties among different staves.</p></td>
+<td><p>A hocket generator that takes an <a class="reference external" href="https://abjad.github.io/api/abjad/score.html#abjad.score.Container" title="(in Abjad v3.4)"><code class="xref py py-class docutils literal notranslate"><span class="pre">abjad.Container</span></code></a> (or child class) as input and randomly distributes its logical ties among different staves.</p></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="../_api_members/auxjad.LeafLooper.html#auxjad.LeafLooper" title="auxjad.LeafLooper"><code class="xref py py-obj docutils literal notranslate"><span class="pre">LeafLooper</span></code></a>(contents, *, window_size, …)</p></td>
-<td><p>This class outputs slices of an <a class="reference external" href="https://abjad.github.io/api/abjad/score.html#abjad.score.Container" title="(in Abjad v3.4)"><code class="xref py py-class docutils literal notranslate"><span class="pre">abjad.Container</span></code></a> using the metaphor of a looping window of a constant number of elements.</p></td>
+<td><p>Outputs slices of an <a class="reference external" href="https://abjad.github.io/api/abjad/score.html#abjad.score.Container" title="(in Abjad v3.4)"><code class="xref py py-class docutils literal notranslate"><span class="pre">abjad.Container</span></code></a> (or child class) using the metaphor of a looping window of a constant number of elements.</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="../_api_members/auxjad.ListLooper.html#auxjad.ListLooper" title="auxjad.ListLooper"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ListLooper</span></code></a>(contents, *, window_size, …)</p></td>
-<td><p>This class outputs slices of a <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.9)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code></a> using the metaphor of a looping window of a constant number of elements.</p></td>
+<td><p>Outputs slices of a <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.9)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code></a> using the metaphor of a looping window of a constant number of elements.</p></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="../_api_members/auxjad.Phaser.html#auxjad.Phaser" title="auxjad.Phaser"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Phaser</span></code></a>(contents, *, step_size, float, str, …)</p></td>
-<td><p>This class will shift all leaves of an <a class="reference external" href="https://abjad.github.io/api/abjad/score.html#abjad.score.Container" title="(in Abjad v3.4)"><code class="xref py py-class docutils literal notranslate"><span class="pre">abjad.Container</span></code></a> by a fixed amount.</p></td>
+<td><p>Takes an <a class="reference external" href="https://abjad.github.io/api/abjad/score.html#abjad.score.Container" title="(in Abjad v3.4)"><code class="xref py py-class docutils literal notranslate"><span class="pre">abjad.Container</span></code></a> (or child class) as input and outputs an <a class="reference external" href="https://abjad.github.io/api/abjad/select.html#abjad.select.Selection" title="(in Abjad v3.4)"><code class="xref py py-class docutils literal notranslate"><span class="pre">abjad.Selection</span></code></a> with leaves shifted by a fixed amount.</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="../_api_members/auxjad.PitchRandomiser.html#auxjad.PitchRandomiser" title="auxjad.PitchRandomiser"><code class="xref py py-obj docutils literal notranslate"><span class="pre">PitchRandomiser</span></code></a>(contents, pitches, tuple, …)</p></td>
-<td><p>This class takes an input <a class="reference external" href="https://abjad.github.io/api/abjad/score.html#abjad.score.Container" title="(in Abjad v3.4)"><code class="xref py py-class docutils literal notranslate"><span class="pre">abjad.Container</span></code></a> (or child class) and a series of pitches and randomises the container’s pitches using that series.</p></td>
+<td><p>Takes an input <a class="reference external" href="https://abjad.github.io/api/abjad/score.html#abjad.score.Container" title="(in Abjad v3.4)"><code class="xref py py-class docutils literal notranslate"><span class="pre">abjad.Container</span></code></a> (or child class) together with a  list of pitches and randomises the container’s pitch content using the list of pitches.</p></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="../_api_members/auxjad.Repeater.html#auxjad.Repeater" title="auxjad.Repeater"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Repeater</span></code></a>(contents, *, omit_time_signatures, …)</p></td>
-<td><p>This class takes an <a class="reference external" href="https://abjad.github.io/api/abjad/score.html#abjad.score.Container" title="(in Abjad v3.4)"><code class="xref py py-class docutils literal notranslate"><span class="pre">abjad.Container</span></code></a> (or child class) as input and outputs an <a class="reference external" href="https://abjad.github.io/api/abjad/select.html#abjad.select.Selection" title="(in Abjad v3.4)"><code class="xref py py-class docutils literal notranslate"><span class="pre">abjad.Selection</span></code></a> with <code class="docutils literal notranslate"><span class="pre">n</span></code> repetitions of it.</p></td>
+<td><p>Takes an <a class="reference external" href="https://abjad.github.io/api/abjad/score.html#abjad.score.Container" title="(in Abjad v3.4)"><code class="xref py py-class docutils literal notranslate"><span class="pre">abjad.Container</span></code></a> (or child class) as input and outputs an <a class="reference external" href="https://abjad.github.io/api/abjad/select.html#abjad.select.Selection" title="(in Abjad v3.4)"><code class="xref py py-class docutils literal notranslate"><span class="pre">abjad.Selection</span></code></a> with <code class="docutils literal notranslate"><span class="pre">n</span></code> repetitions of it.</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="../_api_members/auxjad.Shuffler.html#auxjad.Shuffler" title="auxjad.Shuffler"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Shuffler</span></code></a>(contents, *, pitch_only, …)</p></td>
-<td><p>This class takes an input <a class="reference external" href="https://abjad.github.io/api/abjad/score.html#abjad.score.Container" title="(in Abjad v3.4)"><code class="xref py py-class docutils literal notranslate"><span class="pre">abjad.Container</span></code></a> (or child class) and shuffles or rotates its logical ties or pitches.</p></td>
+<td><p>Takes an <a class="reference external" href="https://abjad.github.io/api/abjad/score.html#abjad.score.Container" title="(in Abjad v3.4)"><code class="xref py py-class docutils literal notranslate"><span class="pre">abjad.Container</span></code></a> (or child class) and shuffles or rotates its logical ties or pitches.</p></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="../_api_members/auxjad.TenneySelector.html#auxjad.TenneySelector" title="auxjad.TenneySelector"><code class="xref py py-obj docutils literal notranslate"><span class="pre">TenneySelector</span></code></a>(contents, *, weights, curvature)</p></td>
-<td><p>This class is an implementation of the Dissonant Counterpoint Algorithm by James Tenney.</p></td>
+<td><p>An implementation of the Dissonant Counterpoint Algorithm by James Tenney.</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="../_api_members/auxjad.WindowLooper.html#auxjad.WindowLooper" title="auxjad.WindowLooper"><code class="xref py py-obj docutils literal notranslate"><span class="pre">WindowLooper</span></code></a>(contents, *, window_size, …)</p></td>
-<td><p>This class outputs slices of an <a class="reference external" href="https://abjad.github.io/api/abjad/score.html#abjad.score.Container" title="(in Abjad v3.4)"><code class="xref py py-class docutils literal notranslate"><span class="pre">abjad.Container</span></code></a> using the metaphor of a looping window of a constant size (given by an <a class="reference external" href="https://abjad.github.io/api/abjad/duration.html#abjad.duration.Duration" title="(in Abjad v3.4)"><code class="xref py py-class docutils literal notranslate"><span class="pre">abjad.Duration</span></code></a>).</p></td>
+<td><p>Outputs slices of an <a class="reference external" href="https://abjad.github.io/api/abjad/score.html#abjad.score.Container" title="(in Abjad v3.4)"><code class="xref py py-class docutils literal notranslate"><span class="pre">abjad.Container</span></code></a> (or child class) using the metaphor of a looping window of a constant size (given by an <a class="reference external" href="https://abjad.github.io/api/abjad/duration.html#abjad.duration.Duration" title="(in Abjad v3.4)"><code class="xref py py-class docutils literal notranslate"><span class="pre">abjad.Duration</span></code></a>).</p></td>
 </tr>
 </tbody>
 </table>

@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>rests_to_multimeasure_rest &mdash; auxjad 0.9.1 documentation</title>
+  <title>rests_to_multimeasure_rest &mdash; auxjad 0.9.2 documentation</title>
   
 
   
@@ -42,7 +42,7 @@
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="sustain_notes" href="auxjad.mutate.sustain_notes.html" />
-    <link rel="prev" title="respell_accidentals" href="auxjad.mutate.respell_accidentals.html" /> 
+    <link rel="prev" title="respell_augmented_unisons" href="auxjad.mutate.respell_augmented_unisons.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -100,13 +100,15 @@
 <li class="toctree-l2"><a class="reference internal" href="../api/api-core.html">core</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../api/api-get.html">get</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../api/api-indicators.html">indicators</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/api-makers.html">makers</a></li>
 <li class="toctree-l2 current"><a class="reference internal" href="../api/api-mutate.html">mutate</a><ul class="current">
 <li class="toctree-l3"><a class="reference internal" href="auxjad.mutate.auto_rewrite_meter.html">auto_rewrite_meter</a></li>
 <li class="toctree-l3"><a class="reference internal" href="auxjad.mutate.close_container.html">close_container</a></li>
-<li class="toctree-l3"><a class="reference internal" href="auxjad.mutate.double_barlines_before_time_signatures.html">double_barlines_before_time_signatures</a></li>
 <li class="toctree-l3"><a class="reference internal" href="auxjad.mutate.enforce_time_signature.html">enforce_time_signature</a></li>
+<li class="toctree-l3"><a class="reference internal" href="auxjad.mutate.extend_notes.html">extend_notes</a></li>
 <li class="toctree-l3"><a class="reference internal" href="auxjad.mutate.extract_trivial_tuplets.html">extract_trivial_tuplets</a></li>
 <li class="toctree-l3"><a class="reference internal" href="auxjad.mutate.fill_with_rests.html">fill_with_rests</a></li>
+<li class="toctree-l3"><a class="reference internal" href="auxjad.mutate.merge_hairpins.html">merge_hairpins</a></li>
 <li class="toctree-l3"><a class="reference internal" href="auxjad.mutate.merge_partial_tuplets.html">merge_partial_tuplets</a></li>
 <li class="toctree-l3"><a class="reference internal" href="auxjad.mutate.prettify_rewrite_meter.html">prettify_rewrite_meter</a></li>
 <li class="toctree-l3"><a class="reference internal" href="auxjad.mutate.remove_repeated_dynamics.html">remove_repeated_dynamics</a></li>
@@ -114,7 +116,7 @@
 <li class="toctree-l3"><a class="reference internal" href="auxjad.mutate.reposition_clefs.html">reposition_clefs</a></li>
 <li class="toctree-l3"><a class="reference internal" href="auxjad.mutate.reposition_dynamics.html">reposition_dynamics</a></li>
 <li class="toctree-l3"><a class="reference internal" href="auxjad.mutate.reposition_slurs.html">reposition_slurs</a></li>
-<li class="toctree-l3"><a class="reference internal" href="auxjad.mutate.respell_accidentals.html">respell_accidentals</a></li>
+<li class="toctree-l3"><a class="reference internal" href="auxjad.mutate.respell_augmented_unisons.html">respell_augmented_unisons</a></li>
 <li class="toctree-l3 current"><a class="current reference internal" href="#">rests_to_multimeasure_rest</a></li>
 <li class="toctree-l3"><a class="reference internal" href="auxjad.mutate.sustain_notes.html">sustain_notes</a></li>
 <li class="toctree-l3"><a class="reference internal" href="auxjad.mutate.sync_containers.html">sync_containers</a></li>
@@ -122,6 +124,7 @@
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../api/api-score.html">score</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../api/api-spanners.html">spanners</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/api-utilities.html">utilities</a></li>
 </ul>
 </li>
 </ul>
@@ -199,15 +202,21 @@
 <h1>rests_to_multimeasure_rest<a class="headerlink" href="#rests-to-multimeasure-rest" title="Permalink to this headline">¶</a></h1>
 <dl class="py function">
 <dt class="sig sig-object py" id="auxjad.mutate.rests_to_multimeasure_rest">
-<span class="sig-prename descclassname"><span class="pre">auxjad.mutate.</span></span><span class="sig-name descname"><span class="pre">rests_to_multimeasure_rest</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">selection</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference external" href="https://abjad.github.io/api/abjad/select.html#abjad.select.Selection" title="(in Abjad v3.4)"><span class="pre">abjad.select.Selection</span></a></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ignore_clefs</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)"><span class="pre">bool</span></a></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)"><span class="pre">None</span></a><a class="reference internal" href="../_modules/auxjad/mutate/rests_to_multimeasure_rest.html#rests_to_multimeasure_rest"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#auxjad.mutate.rests_to_multimeasure_rest" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">auxjad.mutate.</span></span><span class="sig-name descname"><span class="pre">rests_to_multimeasure_rest</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">selection</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference external" href="https://abjad.github.io/api/abjad/select.html#abjad.select.Selection" title="(in Abjad v3.4)"><span class="pre">abjad.select.Selection</span></a></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ignore_clefs</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)"><span class="pre">bool</span></a></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ignore_dynamics</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)"><span class="pre">bool</span></a></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)"><span class="pre">None</span></a><a class="reference internal" href="../_modules/auxjad/mutate/rests_to_multimeasure_rest.html#rests_to_multimeasure_rest"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#auxjad.mutate.rests_to_multimeasure_rest" title="Permalink to this definition">¶</a></dt>
 <dd><p>Mutates an input <a class="reference external" href="https://abjad.github.io/api/abjad/select.html#abjad.select.Selection" title="(in Abjad v3.4)"><code class="xref py py-class docutils literal notranslate"><span class="pre">abjad.Selection</span></code></a> in place and has no return value;
 this function looks for measures filled with regular rests and converts
 them into an <a class="reference external" href="https://abjad.github.io/api/abjad/score.html#abjad.score.MultimeasureRest" title="(in Abjad v3.4)"><code class="xref py py-class docutils literal notranslate"><span class="pre">abjad.MultimeasureRest</span></code></a>.</p>
 <dl>
 <dt>Basic usage:</dt><dd><p>Converts any measure filled with regular rests into a measure with a
 single multi-measure rest.</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">container</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;r1&quot;</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">auxjad</span><span class="o">.</span><span class="n">mutate</span><span class="o">.</span><span class="n">rests_to_multimeasure_rest</span><span class="p">(</span><span class="n">container</span><span class="p">[:])</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">container</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;\time 3/4 r2.&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">container</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="figure align-default">
+<img alt="../_images/rests_to_multimeasure_rest-VIj5iWyLCG.png" src="../_images/rests_to_multimeasure_rest-VIj5iWyLCG.png" />
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">auxjad</span><span class="o">.</span><span class="n">mutate</span><span class="o">.</span><span class="n">rests_to_multimeasure_rest</span><span class="p">(</span><span class="n">container</span><span class="p">[:])</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">container</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -273,7 +282,13 @@ well as notes.</p>
 <span class="gp">... </span>                        <span class="s2">&quot;</span><span class="se">\t</span><span class="s2">ime 6/8 r2. | &quot;</span>
 <span class="gp">... </span>                        <span class="s2">&quot;</span><span class="se">\t</span><span class="s2">ime 5/4 c&#39;1 ~ c&#39;4 | r1 r4&quot;</span>
 <span class="gp">... </span>                        <span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">auxjad</span><span class="o">.</span><span class="n">mutate</span><span class="o">.</span><span class="n">rests_to_multimeasure_rest</span><span class="p">(</span><span class="n">container</span><span class="p">[:])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">container</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="figure align-default">
+<img alt="../_images/rests_to_multimeasure_rest-oQfFRihzEY.png" src="../_images/rests_to_multimeasure_rest-oQfFRihzEY.png" />
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">auxjad</span><span class="o">.</span><span class="n">mutate</span><span class="o">.</span><span class="n">rests_to_multimeasure_rest</span><span class="p">(</span><span class="n">container</span><span class="p">[:])</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">container</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -350,6 +365,65 @@ this behaviour and ignore all clefs:</p>
 <img alt="../_images/rests_to_multimeasure_rest-KGRZJ8fvQF.png" src="../_images/rests_to_multimeasure_rest-KGRZJ8fvQF.png" />
 </div>
 </dd>
+<dt><code class="docutils literal notranslate"><span class="pre">ignore_dynamics</span></code></dt><dd><p>By default, the last dynamic or hairpin of an empty measure is
+preserved when replacing it with a multi-measure rest:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">staff</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;c&#39;1\p\&lt; r2\! r2 d&#39;1\f\&gt; r2 r2\ppp&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">staff</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="figure align-default">
+<img alt="../_images/rests_to_multimeasure_rest-J9T5UY8r9w.png" src="../_images/rests_to_multimeasure_rest-J9T5UY8r9w.png" />
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">mutate</span><span class="o">.</span><span class="n">rests_to_multimeasure_rest</span><span class="p">(</span><span class="n">staff</span><span class="p">[:])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">staff</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="figure align-default">
+<img alt="../_images/rests_to_multimeasure_rest-77r9QeaZBA.png" src="../_images/rests_to_multimeasure_rest-77r9QeaZBA.png" />
+</div>
+<p>Invoke the mutation with <code class="docutils literal notranslate"><span class="pre">ignore_dynamics</span></code> set to <code class="docutils literal notranslate"><span class="pre">True</span></code> to disable
+this behaviour and ignore all dynamics and hairpins:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">staff</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;c&#39;1\p\&lt; r2\! r2 d&#39;1\f\&gt; r2 r2\ppp&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">mutate</span><span class="o">.</span><span class="n">rests_to_multimeasure_rest</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="n">staff</span><span class="p">[:],</span>
+<span class="gp">... </span>    <span class="n">ignore_dynamics</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+<span class="gp">... </span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">staff</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="figure align-default">
+<img alt="../_images/rests_to_multimeasure_rest-3UhZukx9Pw.png" src="../_images/rests_to_multimeasure_rest-3UhZukx9Pw.png" />
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Note that dynamics are only ignored when converting rests to
+multi-measure rests. All other dynamics are preserved in the score.
+This can result in problems displaying dynamics when one or more
+unterminated hairpins is present. In the example above, the last
+note’s hairpin is unterminated and, because of that, LilyPond
+ignores all dynamics in that staff:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">staff</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;c&#39;1\p\&lt; r2\! r2 d&#39;1\f\&gt; r2 r2\ppp&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">mutate</span><span class="o">.</span><span class="n">rests_to_multimeasure_rest</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="n">staff</span><span class="p">[:],</span>
+<span class="gp">... </span>    <span class="n">ignore_dynamics</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+<span class="gp">... </span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">string</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">lilypond</span><span class="p">(</span><span class="n">staff</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">string</span><span class="p">)</span>
+<span class="go">\new Staff</span>
+<span class="go">{</span>
+<span class="go">    c&#39;1</span>
+<span class="go">    \p</span>
+<span class="go">    \&lt;</span>
+<span class="go">    R1</span>
+<span class="go">    d&#39;1</span>
+<span class="go">    \f</span>
+<span class="go">    \&gt;</span>
+<span class="go">    R1</span>
+<span class="go">}</span>
+</pre></div>
+</div>
+</div>
+</dd>
 </dl>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
@@ -369,7 +443,7 @@ subcontainers, applying this function to them individually.</p>
           <footer>
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
         <a href="auxjad.mutate.sustain_notes.html" class="btn btn-neutral float-right" title="sustain_notes" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
-        <a href="auxjad.mutate.respell_accidentals.html" class="btn btn-neutral float-left" title="respell_accidentals" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="auxjad.mutate.respell_augmented_unisons.html" class="btn btn-neutral float-left" title="respell_augmented_unisons" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
     </div>
 
   <hr/>

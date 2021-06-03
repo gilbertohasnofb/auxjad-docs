@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>auxjad.mutate.reposition_clefs &mdash; auxjad 0.8.25 documentation</title>
+  <title>auxjad.mutate.reposition_clefs &mdash; auxjad 0.9.2 documentation</title>
   
 
   
@@ -64,7 +64,7 @@
             
             
               <div class="version">
-                0.8
+                0.9
               </div>
             
           
@@ -179,6 +179,15 @@
 <span class="sd">        &gt;&gt;&gt; staff = abjad.Staff(r&quot;c&#39;1 | d&#39;1&quot;)</span>
 <span class="sd">        &gt;&gt;&gt; abjad.attach(abjad.Clef(&#39;treble&#39;), staff[0])</span>
 <span class="sd">        &gt;&gt;&gt; abjad.attach(abjad.Clef(&#39;treble&#39;), staff[1])</span>
+<span class="sd">        &gt;&gt;&gt; string = abjad.lilypond(staff)</span>
+<span class="sd">        &gt;&gt;&gt; print(string)</span>
+<span class="sd">        \new Staff</span>
+<span class="sd">        {</span>
+<span class="sd">            \clef &quot;treble&quot;</span>
+<span class="sd">            c&#39;1</span>
+<span class="sd">            \clef &quot;treble&quot;</span>
+<span class="sd">            d&#39;1</span>
+<span class="sd">        }</span>
 <span class="sd">        &gt;&gt;&gt; abjad.show(staff)</span>
 
 <span class="sd">        ..  docs::</span>
@@ -194,6 +203,14 @@
 <span class="sd">        ..  figure:: ../_images/reposition_clefs-ve7c2iykuyb.png</span>
 
 <span class="sd">        &gt;&gt;&gt; auxjad.mutate.reposition_clefs(staff[:])</span>
+<span class="sd">        &gt;&gt;&gt; string = abjad.lilypond(staff)</span>
+<span class="sd">        &gt;&gt;&gt; print(string)</span>
+<span class="sd">        \new Staff</span>
+<span class="sd">        {</span>
+<span class="sd">            \clef &quot;treble&quot;</span>
+<span class="sd">            c&#39;1</span>
+<span class="sd">            d&#39;1</span>
+<span class="sd">        }</span>
 <span class="sd">        &gt;&gt;&gt; abjad.show(staff)</span>
 
 <span class="sd">        ..  docs::</span>
@@ -209,15 +226,6 @@
 
 <span class="sd">    ..  note::</span>
 
-<span class="sd">        Auxjad automatically adds this function as an extension function to</span>
-<span class="sd">        |abjad.mutate|. It can thus be used from either |auxjad.mutate|_ or</span>
-<span class="sd">        |abjad.mutate| namespaces. Therefore, the two lines below are</span>
-<span class="sd">        equivalent:</span>
-
-<span class="sd">        &gt;&gt;&gt; auxjad.mutate.reposition_clefs(staff[:])</span>
-<span class="sd">        &gt;&gt;&gt; abjad.mutate.reposition_clefs(staff[:])</span>
-
-<span class="sd">    LilyPond&#39;s fallback clef:</span>
 <span class="sd">        As seen above, LilyPond automatically omits repeated clefs unless the</span>
 <span class="sd">        first clef is omitted. In that case, it uses a treble clef as fallback,</span>
 <span class="sd">        although it won&#39;t then remove a subsequent repeated treble clef:</span>
@@ -251,6 +259,17 @@
 <span class="sd">            }</span>
 
 <span class="sd">        ..  figure:: ../_images/reposition_clefs-0620w7q00lsr.png</span>
+
+<span class="sd">    ..  note::</span>
+
+<span class="sd">        Auxjad automatically adds this function as an extension function to</span>
+<span class="sd">        |abjad.mutate|. It can thus be used from either |auxjad.mutate|_ or</span>
+<span class="sd">        |abjad.mutate| namespaces. Therefore, the two lines below are</span>
+<span class="sd">        equivalent:</span>
+
+<span class="sd">        &gt;&gt;&gt; auxjad.mutate.reposition_clefs(staff[:])</span>
+<span class="sd">        &gt;&gt;&gt; abjad.mutate.reposition_clefs(staff[:])</span>
+
 
 <span class="sd">    Clef structure:</span>
 <span class="sd">        The function also removes clefs that are separated by an arbitrary</span>

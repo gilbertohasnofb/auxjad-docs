@@ -1,0 +1,674 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>auxjad.makers.LeafDynMaker &mdash; auxjad 0.9.2 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+        <script src="../../../_static/jquery.js"></script>
+        <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/doctools.js"></script>
+    
+    <script type="text/javascript" src="../../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../../index.html" class="icon icon-home"> auxjad
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.9
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../index.html">Welcome to Auxjad’s documentation!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../examples/index.html">Examples of usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../score_gallery/index.html">Score gallery</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../api/index.html">Auxjad API</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">auxjad</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../../index.html">Module code</a> &raquo;</li>
+        
+      <li>auxjad.makers.LeafDynMaker</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for auxjad.makers.LeafDynMaker</h1><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Union</span>
+
+<span class="kn">import</span> <span class="nn">abjad</span>
+
+
+<div class="viewcode-block" id="LeafDynMaker"><a class="viewcode-back" href="../../../_api_members/auxjad.LeafDynMaker.html#auxjad.LeafDynMaker">[docs]</a><span class="k">class</span> <span class="nc">LeafDynMaker</span><span class="p">(</span><span class="n">abjad</span><span class="o">.</span><span class="n">LeafMaker</span><span class="p">):</span>
+    <span class="sa">r</span><span class="sd">&quot;&quot;&quot;Creates leaves and logical ties from :obj:`list`&#39;s of pitches,</span>
+<span class="sd">    durations, dynamics, and articulations. It is an extension of</span>
+<span class="sd">    |abjad.LeafMaker| which can take optional :obj:`list`&#39;s of dynamics and</span>
+<span class="sd">    articulations.</span>
+
+<span class="sd">    Basic usage:</span>
+<span class="sd">        Usage is similar to |abjad.LeafMaker|:</span>
+
+<span class="sd">        &gt;&gt;&gt; pitches = [0, 2, 4, 5, 7, 9]</span>
+<span class="sd">        &gt;&gt;&gt; durations = [(1, 32), (2, 32), (3, 32), (4, 32), (5, 32), (6, 32)]</span>
+<span class="sd">        &gt;&gt;&gt; dynamics = [&#39;pp&#39;, &#39;p&#39;, &#39;mp&#39;, &#39;mf&#39;, &#39;f&#39;, &#39;ff&#39;]</span>
+<span class="sd">        &gt;&gt;&gt; articulations = [&#39;.&#39;, &#39;&gt;&#39;, &#39;-&#39;, &#39;_&#39;, &#39;^&#39;, &#39;+&#39;]</span>
+<span class="sd">        &gt;&gt;&gt; maker = auxjad.LeafDynMaker()</span>
+<span class="sd">        &gt;&gt;&gt; notes = maker(pitches, durations, dynamics, articulations)</span>
+<span class="sd">        &gt;&gt;&gt; staff = abjad.Staff(notes)</span>
+<span class="sd">        &gt;&gt;&gt; abjad.show(staff)</span>
+
+<span class="sd">        ..  docs::</span>
+
+<span class="sd">            \new Staff</span>
+<span class="sd">            {</span>
+<span class="sd">                c&#39;32</span>
+<span class="sd">                \pp</span>
+<span class="sd">                -\staccato</span>
+<span class="sd">                d&#39;16</span>
+<span class="sd">                \p</span>
+<span class="sd">                -\accent</span>
+<span class="sd">                e&#39;16.</span>
+<span class="sd">                \mp</span>
+<span class="sd">                -\tenuto</span>
+<span class="sd">                f&#39;8</span>
+<span class="sd">                \mf</span>
+<span class="sd">                -\portato</span>
+<span class="sd">                g&#39;8</span>
+<span class="sd">                \f</span>
+<span class="sd">                -\marcato</span>
+<span class="sd">                ~</span>
+<span class="sd">                g&#39;32</span>
+<span class="sd">                a&#39;8.</span>
+<span class="sd">                \ff</span>
+<span class="sd">                -\stopped</span>
+<span class="sd">            }</span>
+
+<span class="sd">        ..  figure:: ../_images/LeafDynMaker-iv96zmptned.png</span>
+
+<span class="sd">    ``pitches``:</span>
+<span class="sd">        Tuple elements in ``pitches`` result in chords. None-valued elements</span>
+<span class="sd">        in ``pitches`` result in rests:</span>
+
+<span class="sd">        &gt;&gt;&gt; pitches = [5, None, (0, 2, 7)]</span>
+<span class="sd">        &gt;&gt;&gt; durations = [(1, 4), (1, 8), (1, 16)]</span>
+<span class="sd">        &gt;&gt;&gt; dynamics = [&#39;p&#39;, None, &#39;f&#39;]</span>
+<span class="sd">        &gt;&gt;&gt; articulations = [&#39;staccato&#39;, None, &#39;tenuto&#39;]</span>
+<span class="sd">        &gt;&gt;&gt; maker = auxjad.LeafDynMaker()</span>
+<span class="sd">        &gt;&gt;&gt; notes = maker(pitches, durations, dynamics, articulations)</span>
+<span class="sd">        &gt;&gt;&gt; staff = abjad.Staff(notes)</span>
+<span class="sd">        &gt;&gt;&gt; abjad.show(staff)</span>
+
+<span class="sd">        ..  docs::</span>
+
+<span class="sd">            \new Staff</span>
+<span class="sd">            {</span>
+<span class="sd">                f&#39;4</span>
+<span class="sd">                \p</span>
+<span class="sd">                -\staccato</span>
+<span class="sd">                r8</span>
+<span class="sd">                &lt;c&#39; d&#39; g&#39;&gt;16</span>
+<span class="sd">                \f</span>
+<span class="sd">                -\tenuto</span>
+<span class="sd">            }</span>
+
+<span class="sd">        ..  figure:: ../_images/LeafDynMaker-odpaavswk29.png</span>
+
+<span class="sd">    ``omit_repeated_dynamics``:</span>
+<span class="sd">        Can omit repeated dynamics with the keyword argument</span>
+<span class="sd">        ``omit_repeated_dynamics``:</span>
+
+<span class="sd">        &gt;&gt;&gt; pitches = [0, 2, 4, 5, 7, 9]</span>
+<span class="sd">        &gt;&gt;&gt; durations = [(1, 32), (2, 32), (3, 32), (4, 32), (5, 32), (6, 32)]</span>
+<span class="sd">        &gt;&gt;&gt; dynamics = [&#39;pp&#39;, &#39;pp&#39;, &#39;mp&#39;, &#39;f&#39;, &#39;f&#39;, &#39;p&#39;]</span>
+<span class="sd">        &gt;&gt;&gt; maker = auxjad.LeafDynMaker()</span>
+<span class="sd">        &gt;&gt;&gt; notes = maker(pitches,</span>
+<span class="sd">        ...               durations,</span>
+<span class="sd">        ...               dynamics,</span>
+<span class="sd">        ...               omit_repeated_dynamics=True,</span>
+<span class="sd">        ...               )</span>
+<span class="sd">        &gt;&gt;&gt; staff = abjad.Staff(notes)</span>
+<span class="sd">        &gt;&gt;&gt; abjad.show(staff)</span>
+
+<span class="sd">        ..  docs::</span>
+
+<span class="sd">            \new Staff</span>
+<span class="sd">            {</span>
+<span class="sd">                c&#39;32</span>
+<span class="sd">                \pp</span>
+<span class="sd">                d&#39;16</span>
+<span class="sd">                e&#39;16.</span>
+<span class="sd">                \mp</span>
+<span class="sd">                f&#39;8</span>
+<span class="sd">                \f</span>
+<span class="sd">                g&#39;8</span>
+<span class="sd">                ~</span>
+<span class="sd">                g&#39;32</span>
+<span class="sd">                a&#39;8.</span>
+<span class="sd">                \p</span>
+<span class="sd">            }</span>
+
+<span class="sd">        ..  figure:: ../_images/LeafDynMaker-jryhls4d6ic.png</span>
+
+<span class="sd">    ``dynamics`` and ``articulations``:</span>
+<span class="sd">        The lengths ``dynamics`` and ``articulations`` can be shorter than the</span>
+<span class="sd">        lengths of ``pitches`` and ``durations`` (whatever is the greatest):</span>
+
+<span class="sd">        &gt;&gt;&gt; pitches = [0, 2, 4, 5, 7, 9, 11, 12]</span>
+<span class="sd">        &gt;&gt;&gt; durations = (1, 4)</span>
+<span class="sd">        &gt;&gt;&gt; dynamics = [&#39;p&#39;, &#39;f&#39;, &#39;ff&#39;]</span>
+<span class="sd">        &gt;&gt;&gt; articulations = [&#39;.&#39;, &#39;&gt;&#39;]</span>
+<span class="sd">        &gt;&gt;&gt; maker = auxjad.LeafDynMaker()</span>
+<span class="sd">        &gt;&gt;&gt; notes = maker(pitches, durations, dynamics, articulations)</span>
+<span class="sd">        &gt;&gt;&gt; staff = abjad.Staff(notes)</span>
+<span class="sd">        &gt;&gt;&gt; abjad.show(staff)</span>
+
+<span class="sd">        ..  docs::</span>
+
+<span class="sd">            \new Staff</span>
+<span class="sd">            {</span>
+<span class="sd">                c&#39;4</span>
+<span class="sd">                \p</span>
+<span class="sd">                -\staccato</span>
+<span class="sd">                d&#39;4</span>
+<span class="sd">                \f</span>
+<span class="sd">                -\accent</span>
+<span class="sd">                e&#39;4</span>
+<span class="sd">                \ff</span>
+<span class="sd">                f&#39;4</span>
+<span class="sd">                g&#39;4</span>
+<span class="sd">                a&#39;4</span>
+<span class="sd">                b&#39;4</span>
+<span class="sd">                c&#39;&#39;4</span>
+<span class="sd">            }</span>
+
+<span class="sd">        ..  figure:: ../_images/LeafDynMaker-1losyp9vc1di.png</span>
+
+<span class="sd">    ``cyclic_dynamics`` and ``cyclic_articulations``:</span>
+<span class="sd">        If the lengths of either ``dynamics`` and ``articulations`` are shorter</span>
+<span class="sd">        than the lengths of ``pitches`` and ``durations`` (whatever is the</span>
+<span class="sd">        greatest), use the optional keyword arguments ``cyclic_dynamics`` and</span>
+<span class="sd">        ``cyclic_articulations`` to apply those parameters cyclically:</span>
+
+<span class="sd">        &gt;&gt;&gt; pitches = [0, 2, 4, 5, 7, 9, 11, 12]</span>
+<span class="sd">        &gt;&gt;&gt; durations = (1, 4)</span>
+<span class="sd">        &gt;&gt;&gt; dynamics = [&#39;p&#39;, &#39;f&#39;, &#39;ff&#39;]</span>
+<span class="sd">        &gt;&gt;&gt; articulations = [&#39;.&#39;, &#39;&gt;&#39;]</span>
+<span class="sd">        &gt;&gt;&gt; maker = auxjad.LeafDynMaker()</span>
+<span class="sd">        &gt;&gt;&gt; notes = maker(pitches,</span>
+<span class="sd">        ...               durations,</span>
+<span class="sd">        ...               dynamics,</span>
+<span class="sd">        ...               articulations,</span>
+<span class="sd">        ...               cyclic_dynamics=True,</span>
+<span class="sd">        ...               cyclic_articulations=True,</span>
+<span class="sd">        ...               )</span>
+<span class="sd">        &gt;&gt;&gt; staff = abjad.Staff(notes)</span>
+<span class="sd">        &gt;&gt;&gt; abjad.show(staff)</span>
+
+<span class="sd">        ..  docs::</span>
+
+<span class="sd">            \new Staff</span>
+<span class="sd">            {</span>
+<span class="sd">                c&#39;4</span>
+<span class="sd">                \p</span>
+<span class="sd">                - \staccato</span>
+<span class="sd">                d&#39;4</span>
+<span class="sd">                \f</span>
+<span class="sd">                - \accent</span>
+<span class="sd">                e&#39;4</span>
+<span class="sd">                \ff</span>
+<span class="sd">                - \staccato</span>
+<span class="sd">                f&#39;4</span>
+<span class="sd">                \p</span>
+<span class="sd">                - \accent</span>
+<span class="sd">                g&#39;4</span>
+<span class="sd">                \f</span>
+<span class="sd">                - \staccato</span>
+<span class="sd">                a&#39;4</span>
+<span class="sd">                \ff</span>
+<span class="sd">                - \accent</span>
+<span class="sd">                b&#39;4</span>
+<span class="sd">                \p</span>
+<span class="sd">                - \staccato</span>
+<span class="sd">                c&#39;&#39;4</span>
+<span class="sd">                \f</span>
+<span class="sd">                - \accent</span>
+<span class="sd">            }</span>
+
+<span class="sd">        ..  figure:: ../_images/LeafDynMaker-x8zhyel42i.png</span>
+
+<span class="sd">    ``articulations`` and ``dynamics`` of length ``1``:</span>
+<span class="sd">        If the length of ``articulations`` or ``dynamics`` is ``1``, they will</span>
+<span class="sd">        be applied only to the first element.</span>
+
+<span class="sd">        &gt;&gt;&gt; pitches = [0, 2, 4, 5, 7, 9, 11, 12]</span>
+<span class="sd">        &gt;&gt;&gt; durations = (1, 4)</span>
+<span class="sd">        &gt;&gt;&gt; dynamics = &#39;p&#39;</span>
+<span class="sd">        &gt;&gt;&gt; articulations = &#39;.&#39;</span>
+<span class="sd">        &gt;&gt;&gt; maker = auxjad.LeafDynMaker()</span>
+<span class="sd">        &gt;&gt;&gt; notes = maker(pitches, durations, dynamics, articulations)</span>
+<span class="sd">        &gt;&gt;&gt; staff = abjad.Staff(notes)</span>
+<span class="sd">        &gt;&gt;&gt; abjad.show(staff)</span>
+
+<span class="sd">        ..  docs::</span>
+
+<span class="sd">            \new Staff</span>
+<span class="sd">            {</span>
+<span class="sd">                c&#39;4</span>
+<span class="sd">                \p</span>
+<span class="sd">                -\staccato</span>
+<span class="sd">                d&#39;4</span>
+<span class="sd">                e&#39;4</span>
+<span class="sd">                f&#39;4</span>
+<span class="sd">                g&#39;4</span>
+<span class="sd">                a&#39;4</span>
+<span class="sd">                b&#39;4</span>
+<span class="sd">                c&#39;&#39;4</span>
+<span class="sd">            }</span>
+
+<span class="sd">        ..  figure:: ../_images/LeafDynMaker-wwl4pcpmwhv232n7j7ws.png</span>
+
+<span class="sd">    ``cyclic_dynamics`` and ``cyclic_articulations`` of length ``1``:</span>
+<span class="sd">        To apply them to all elements, use the ``cyclic_dynamics`` and</span>
+<span class="sd">        ``cyclic_articulations`` optioanl keywords.</span>
+
+<span class="sd">        &gt;&gt;&gt; pitches = [0, 2, 4, 5, 7, 9, 11, 12]</span>
+<span class="sd">        &gt;&gt;&gt; durations = (1, 4)</span>
+<span class="sd">        &gt;&gt;&gt; dynamics = &#39;p&#39;</span>
+<span class="sd">        &gt;&gt;&gt; articulations = &#39;.&#39;</span>
+<span class="sd">        &gt;&gt;&gt; maker = auxjad.LeafDynMaker()</span>
+<span class="sd">        &gt;&gt;&gt; notes = maker(pitches,</span>
+<span class="sd">        ...               durations,</span>
+<span class="sd">        ...               dynamics,</span>
+<span class="sd">        ...               articulations,</span>
+<span class="sd">        ...               cyclic_articulations=True,</span>
+<span class="sd">        ...               )</span>
+<span class="sd">        &gt;&gt;&gt; staff = abjad.Staff(notes)</span>
+<span class="sd">        &gt;&gt;&gt; abjad.show(staff)</span>
+
+<span class="sd">        ..  docs::</span>
+
+<span class="sd">            \new Staff</span>
+<span class="sd">            {</span>
+<span class="sd">                c&#39;4</span>
+<span class="sd">                \p</span>
+<span class="sd">                -\staccato</span>
+<span class="sd">                d&#39;4</span>
+<span class="sd">                -\staccato</span>
+<span class="sd">                e&#39;4</span>
+<span class="sd">                -\staccato</span>
+<span class="sd">                f&#39;4</span>
+<span class="sd">                -\staccato</span>
+<span class="sd">                g&#39;4</span>
+<span class="sd">                -\staccato</span>
+<span class="sd">                a&#39;4</span>
+<span class="sd">                -\staccato</span>
+<span class="sd">                b&#39;4</span>
+<span class="sd">                - \staccato</span>
+<span class="sd">                c&#39;&#39;4</span>
+<span class="sd">                - \staccato</span>
+<span class="sd">            }</span>
+
+<span class="sd">        ..  figure:: ../_images/LeafDynMaker-s5ic146v4qb.png</span>
+
+<span class="sd">    Accepted types:</span>
+<span class="sd">        Similarly to Abjad&#39;s native classes, it accepts many types of elements</span>
+<span class="sd">        in its input :obj:`list`&#39;s:</span>
+
+<span class="sd">        &gt;&gt;&gt; pitches = [0,</span>
+<span class="sd">        ...            &quot;d&#39;&quot;,</span>
+<span class="sd">        ...            &#39;E4&#39;,</span>
+<span class="sd">        ...            abjad.NumberedPitch(5),</span>
+<span class="sd">        ...            abjad.NamedPitch(&quot;g&#39;&quot;),</span>
+<span class="sd">        ...            abjad.NamedPitch(&#39;A4&#39;),</span>
+<span class="sd">        ...            ]</span>
+<span class="sd">        &gt;&gt;&gt; durations = [(1, 32),</span>
+<span class="sd">        ...              &#39;2/32&#39;,</span>
+<span class="sd">        ...              abjad.Duration(&#39;3/32&#39;),</span>
+<span class="sd">        ...              abjad.Duration(0.125),</span>
+<span class="sd">        ...              abjad.Duration(5, 32),</span>
+<span class="sd">        ...              abjad.Duration(6 / 32),</span>
+<span class="sd">        ...              ]</span>
+<span class="sd">        &gt;&gt;&gt; dynamics = [&#39;p&#39;,</span>
+<span class="sd">        ...             abjad.Dynamic(&#39;f&#39;),</span>
+<span class="sd">        ...             ]</span>
+<span class="sd">        &gt;&gt;&gt; articulations = [&#39;&gt;&#39;,</span>
+<span class="sd">        ...                  abjad.Articulation(&#39;-&#39;),</span>
+<span class="sd">        ...                  abjad.Articulation(&#39;.&#39;),</span>
+<span class="sd">        ...                  ]</span>
+<span class="sd">        &gt;&gt;&gt; maker = auxjad.LeafDynMaker()</span>
+<span class="sd">        &gt;&gt;&gt; notes = maker(pitches, durations, dynamics, articulations)</span>
+<span class="sd">        &gt;&gt;&gt; staff = abjad.Staff(notes)</span>
+<span class="sd">        &gt;&gt;&gt; abjad.show(staff)</span>
+
+<span class="sd">        ..  docs::</span>
+
+<span class="sd">            \new Staff</span>
+<span class="sd">            {</span>
+<span class="sd">                c&#39;32</span>
+<span class="sd">                \p</span>
+<span class="sd">                - \accent</span>
+<span class="sd">                d&#39;16</span>
+<span class="sd">                \f</span>
+<span class="sd">                - \tenuto</span>
+<span class="sd">                e&#39;16.</span>
+<span class="sd">                - \staccato</span>
+<span class="sd">                f&#39;8</span>
+<span class="sd">                g&#39;8</span>
+<span class="sd">                ~</span>
+<span class="sd">                g&#39;32</span>
+<span class="sd">                a&#39;8.</span>
+<span class="sd">            }</span>
+
+<span class="sd">        ..  figure:: ../_images/LeafDynMaker-79n2uz1n8j3.png</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="c1">### CLASS VARIABLES ###</span>
+
+    <span class="vm">__slots__</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;_omit_repeated_dynamics&#39;</span><span class="p">,</span>
+                 <span class="s1">&#39;_cyclic_dynamics&#39;</span><span class="p">,</span>
+                 <span class="s1">&#39;_cyclic_articulations&#39;</span><span class="p">,</span>
+                 <span class="p">)</span>
+
+    <span class="c1">### INITIALISER ###</span>
+
+<div class="viewcode-block" id="LeafDynMaker.__init__"><a class="viewcode-back" href="../../../_api_members/auxjad.LeafDynMaker.html#auxjad.LeafDynMaker.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sa">r</span><span class="s1">&#39;Initialises self.&#39;</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span></div>
+
+    <span class="c1">### SPECIAL METHODS ###</span>
+
+<div class="viewcode-block" id="LeafDynMaker.__call__"><a class="viewcode-back" href="../../../_api_members/auxjad.LeafDynMaker.html#auxjad.LeafDynMaker.__call__">[docs]</a>    <span class="k">def</span> <span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+                 <span class="n">pitches</span><span class="p">,</span>
+                 <span class="n">durations</span><span class="p">,</span>
+                 <span class="n">dynamics</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                 <span class="n">articulations</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                 <span class="o">*</span><span class="p">,</span>
+                 <span class="n">omit_repeated_dynamics</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+                 <span class="n">cyclic_dynamics</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+                 <span class="n">cyclic_articulations</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+                 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Selection</span><span class="p">:</span>
+        <span class="sa">r</span><span class="sd">&quot;&quot;&quot;Calls the leaf-maker on ``pitches``, ``durations``, ``dynamics``,</span>
+<span class="sd">        and ``articulations``, returning an |abjad.Selection|.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">dynamics</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">dynamic</span> <span class="ow">in</span> <span class="n">dynamics</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">dynamic</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                    <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">dynamic</span><span class="p">,</span> <span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Dynamic</span><span class="p">)):</span>
+                        <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;dynamics must be &#39;str&#39; or &quot;</span>
+                                        <span class="s2">&quot;&#39;abjad.Dynamic&#39;&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">articulations</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">articulation</span> <span class="ow">in</span> <span class="n">articulations</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">articulation</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                    <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">articulation</span><span class="p">,</span> <span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Articulation</span><span class="p">)):</span>
+                        <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;articulations must be &#39;str&#39; or &quot;</span>
+                                        <span class="s2">&quot;&#39;abjad.Articulation&#39;&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">omit_repeated_dynamics</span><span class="p">,</span> <span class="nb">bool</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;&#39;omit_repeated_dynamics&#39; must be &#39;bool&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">cyclic_dynamics</span><span class="p">,</span> <span class="nb">bool</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;&#39;cyclic_dynamics&#39; must be &#39;bool&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">cyclic_articulations</span><span class="p">,</span> <span class="nb">bool</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;&#39;cyclic_articulations&#39; must be &#39;bool&quot;</span><span class="p">)</span>
+
+        <span class="n">leaves</span> <span class="o">=</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__call__</span><span class="p">(</span><span class="n">pitches</span><span class="p">,</span> <span class="n">durations</span><span class="p">)</span>
+        <span class="n">dummy_container</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">(</span><span class="n">leaves</span><span class="p">)</span>
+        <span class="n">logical_ties</span> <span class="o">=</span> <span class="n">leaves</span><span class="o">.</span><span class="n">logical_ties</span><span class="p">()</span>
+
+        <span class="n">pitches_</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_listify</span><span class="p">(</span><span class="n">pitches</span><span class="p">)</span>
+        <span class="n">durations_</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_listify</span><span class="p">(</span><span class="n">durations</span><span class="p">)</span>
+        <span class="n">dynamics_</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_listify</span><span class="p">(</span><span class="n">dynamics</span><span class="p">)</span>
+        <span class="n">articulations_</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_listify</span><span class="p">(</span><span class="n">articulations</span><span class="p">)</span>
+
+        <span class="n">greatest_len</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">pitches_</span><span class="p">),</span> <span class="nb">len</span><span class="p">(</span><span class="n">durations_</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_fill_list</span><span class="p">(</span><span class="n">dynamics_</span><span class="p">,</span>
+                        <span class="n">greatest_len</span><span class="p">,</span>
+                        <span class="n">cyclic</span><span class="o">=</span><span class="n">cyclic_dynamics</span><span class="p">,</span>
+                        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_fill_list</span><span class="p">(</span><span class="n">articulations_</span><span class="p">,</span>
+                        <span class="n">greatest_len</span><span class="p">,</span>
+                        <span class="n">cyclic</span><span class="o">=</span><span class="n">cyclic_articulations</span><span class="p">,</span>
+                        <span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_add_dynamics_and_articulations</span><span class="p">(</span><span class="n">logical_ties</span><span class="p">,</span>
+                                             <span class="n">dynamics_</span><span class="p">,</span>
+                                             <span class="n">articulations_</span><span class="p">,</span>
+                                             <span class="n">omit_repeated_dynamics</span><span class="p">,</span>
+                                             <span class="p">)</span>
+
+        <span class="n">output</span> <span class="o">=</span> <span class="n">dummy_container</span><span class="p">[:]</span>
+        <span class="n">dummy_container</span><span class="p">[:]</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">return</span> <span class="n">output</span></div>
+
+    <span class="c1">### PRIVATE METHODS ###</span>
+
+    <span class="k">def</span> <span class="nf">_add_dynamics_and_articulations</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+                                        <span class="n">logical_ties</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">abjad</span><span class="o">.</span><span class="n">LogicalTie</span><span class="p">],</span>
+                                        <span class="n">dynamics_</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span>
+                                                              <span class="n">abjad</span><span class="o">.</span><span class="n">Dynamic</span><span class="p">,</span>
+                                                              <span class="p">]],</span>
+                                        <span class="n">articulations_</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span>
+                                            <span class="nb">str</span><span class="p">,</span>
+                                            <span class="n">abjad</span><span class="o">.</span><span class="n">Articulation</span><span class="p">,</span>
+                                        <span class="p">]],</span>
+                                        <span class="n">omit_repeated_dynamics</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
+                                        <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sa">r</span><span class="s1">&#39;Adds dynamics and articulations to logical ties.&#39;</span>
+        <span class="n">previous_dynamic</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="k">for</span> <span class="n">logical_tie</span><span class="p">,</span> <span class="n">dynamic</span><span class="p">,</span> <span class="n">articulation</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">logical_ties</span><span class="p">,</span>
+                                                      <span class="n">dynamics_</span><span class="p">,</span>
+                                                      <span class="n">articulations_</span><span class="p">,</span>
+                                                      <span class="p">):</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">dynamic</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="p">(</span><span class="ow">not</span> <span class="n">omit_repeated_dynamics</span>
+                                         <span class="ow">or</span> <span class="n">dynamic</span> <span class="o">!=</span> <span class="n">previous_dynamic</span><span class="p">)):</span>
+                <span class="n">abjad</span><span class="o">.</span><span class="n">attach</span><span class="p">(</span><span class="n">abjad</span><span class="o">.</span><span class="n">Dynamic</span><span class="p">(</span><span class="n">dynamic</span><span class="p">),</span> <span class="n">logical_tie</span><span class="o">.</span><span class="n">head</span><span class="p">)</span>
+                <span class="n">previous_dynamic</span> <span class="o">=</span> <span class="n">dynamic</span>
+            <span class="k">if</span> <span class="n">articulation</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">articulation</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+                    <span class="n">abjad</span><span class="o">.</span><span class="n">attach</span><span class="p">(</span><span class="n">abjad</span><span class="o">.</span><span class="n">Articulation</span><span class="p">(</span><span class="n">articulation</span><span class="p">),</span>
+                                 <span class="n">logical_tie</span><span class="o">.</span><span class="n">head</span><span class="p">,</span>
+                                 <span class="p">)</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">abjad</span><span class="o">.</span><span class="n">attach</span><span class="p">(</span><span class="n">articulation</span><span class="p">,</span> <span class="n">logical_tie</span><span class="o">.</span><span class="n">head</span><span class="p">)</span>
+
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">_listify</span><span class="p">(</span><span class="n">argument</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="n">Any</span><span class="p">]:</span>
+        <span class="sa">r</span><span class="s1">&#39;Returns a :obj:`list` if argument is not a :obj:`list`.&#39;</span>
+        <span class="k">if</span> <span class="n">argument</span><span class="p">:</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">argument</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
+                <span class="k">return</span> <span class="n">argument</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">return</span> <span class="p">[</span><span class="n">argument</span><span class="p">]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="p">[]</span>
+
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">_fill_list</span><span class="p">(</span><span class="n">input_list</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">Any</span><span class="p">],</span>
+                   <span class="n">length</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+                   <span class="o">*</span><span class="p">,</span>
+                   <span class="n">cyclic</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+                   <span class="n">default</span><span class="p">:</span> <span class="n">Any</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+                   <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sa">r</span><span class="sd">&quot;&quot;&quot;Extends a :obj:`list` to a certain length, filling it with a</span>
+<span class="sd">        default value. If ``cyclic`` is ``True``, then it fills the :obj:`list`</span>
+<span class="sd">        by cycling the original ``input_list``.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">cyclic</span><span class="p">:</span>
+            <span class="k">while</span> <span class="nb">len</span><span class="p">(</span><span class="n">input_list</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">length</span><span class="p">:</span>
+                <span class="n">input_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">default</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">original_length</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">input_list</span><span class="p">)</span>
+            <span class="k">while</span> <span class="nb">len</span><span class="p">(</span><span class="n">input_list</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">length</span><span class="p">:</span>
+                <span class="n">current_length</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">input_list</span><span class="p">)</span>
+                <span class="n">input_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">input_list</span><span class="p">[</span><span class="n">current_length</span> <span class="o">%</span> <span class="n">original_length</span><span class="p">])</span></div>
+</pre></div>
+
+           </div>
+           
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2020, Gilberto Agostinho.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

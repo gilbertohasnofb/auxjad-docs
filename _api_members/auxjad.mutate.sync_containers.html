@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>sync_containers &mdash; auxjad 0.9.1 documentation</title>
+  <title>sync_containers &mdash; auxjad 0.9.2 documentation</title>
   
 
   
@@ -100,13 +100,15 @@
 <li class="toctree-l2"><a class="reference internal" href="../api/api-core.html">core</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../api/api-get.html">get</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../api/api-indicators.html">indicators</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/api-makers.html">makers</a></li>
 <li class="toctree-l2 current"><a class="reference internal" href="../api/api-mutate.html">mutate</a><ul class="current">
 <li class="toctree-l3"><a class="reference internal" href="auxjad.mutate.auto_rewrite_meter.html">auto_rewrite_meter</a></li>
 <li class="toctree-l3"><a class="reference internal" href="auxjad.mutate.close_container.html">close_container</a></li>
-<li class="toctree-l3"><a class="reference internal" href="auxjad.mutate.double_barlines_before_time_signatures.html">double_barlines_before_time_signatures</a></li>
 <li class="toctree-l3"><a class="reference internal" href="auxjad.mutate.enforce_time_signature.html">enforce_time_signature</a></li>
+<li class="toctree-l3"><a class="reference internal" href="auxjad.mutate.extend_notes.html">extend_notes</a></li>
 <li class="toctree-l3"><a class="reference internal" href="auxjad.mutate.extract_trivial_tuplets.html">extract_trivial_tuplets</a></li>
 <li class="toctree-l3"><a class="reference internal" href="auxjad.mutate.fill_with_rests.html">fill_with_rests</a></li>
+<li class="toctree-l3"><a class="reference internal" href="auxjad.mutate.merge_hairpins.html">merge_hairpins</a></li>
 <li class="toctree-l3"><a class="reference internal" href="auxjad.mutate.merge_partial_tuplets.html">merge_partial_tuplets</a></li>
 <li class="toctree-l3"><a class="reference internal" href="auxjad.mutate.prettify_rewrite_meter.html">prettify_rewrite_meter</a></li>
 <li class="toctree-l3"><a class="reference internal" href="auxjad.mutate.remove_repeated_dynamics.html">remove_repeated_dynamics</a></li>
@@ -114,7 +116,7 @@
 <li class="toctree-l3"><a class="reference internal" href="auxjad.mutate.reposition_clefs.html">reposition_clefs</a></li>
 <li class="toctree-l3"><a class="reference internal" href="auxjad.mutate.reposition_dynamics.html">reposition_dynamics</a></li>
 <li class="toctree-l3"><a class="reference internal" href="auxjad.mutate.reposition_slurs.html">reposition_slurs</a></li>
-<li class="toctree-l3"><a class="reference internal" href="auxjad.mutate.respell_accidentals.html">respell_accidentals</a></li>
+<li class="toctree-l3"><a class="reference internal" href="auxjad.mutate.respell_augmented_unisons.html">respell_augmented_unisons</a></li>
 <li class="toctree-l3"><a class="reference internal" href="auxjad.mutate.rests_to_multimeasure_rest.html">rests_to_multimeasure_rest</a></li>
 <li class="toctree-l3"><a class="reference internal" href="auxjad.mutate.sustain_notes.html">sustain_notes</a></li>
 <li class="toctree-l3 current"><a class="current reference internal" href="#">sync_containers</a></li>
@@ -122,6 +124,7 @@
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../api/api-score.html">score</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../api/api-spanners.html">spanners</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/api-utilities.html">utilities</a></li>
 </ul>
 </li>
 </ul>
@@ -210,7 +213,19 @@ elements of type <a class="reference external" href="https://abjad.github.io/api
 with rests ensuring all their lengths become the same.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">staff1</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;\time 4/4 g&#39;2.&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">staff2</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;\time 4/4 c&#39;1&quot;</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">auxjad</span><span class="o">.</span><span class="n">mutate</span><span class="o">.</span><span class="n">sync_containers</span><span class="p">([</span><span class="n">staff1</span><span class="p">,</span> <span class="n">staff2</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">staff1</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="figure align-default">
+<img alt="../_images/sync_containers-H7jNwGEtFQ.png" src="../_images/sync_containers-H7jNwGEtFQ.png" />
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">staff2</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="figure align-default">
+<img alt="../_images/sync_containers-EjKqQCinPy.png" src="../_images/sync_containers-EjKqQCinPy.png" />
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">auxjad</span><span class="o">.</span><span class="n">mutate</span><span class="o">.</span><span class="n">sync_containers</span><span class="p">([</span><span class="n">staff1</span><span class="p">,</span> <span class="n">staff2</span><span class="p">])</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">staff1</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -280,7 +295,19 @@ time signature of its last measure if necessary (if it is underfull),
 and uses multi-measure rests whenever possible.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">container1</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;\time 4/4 g&#39;1 | f&#39;4&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">container2</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;\time 4/4 c&#39;1&quot;</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">auxjad</span><span class="o">.</span><span class="n">mutate</span><span class="o">.</span><span class="n">sync_containers</span><span class="p">([</span><span class="n">container1</span><span class="p">,</span> <span class="n">container2</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">container1</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="figure align-default">
+<img alt="../_images/sync_containers-udnAjAZtkw.png" src="../_images/sync_containers-udnAjAZtkw.png" />
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">container2</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="figure align-default">
+<img alt="../_images/sync_containers-cy8dL4UUWV.png" src="../_images/sync_containers-cy8dL4UUWV.png" />
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">auxjad</span><span class="o">.</span><span class="n">mutate</span><span class="o">.</span><span class="n">sync_containers</span><span class="p">([</span><span class="n">container1</span><span class="p">,</span> <span class="n">container2</span><span class="p">])</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">container1</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -298,7 +325,19 @@ and uses multi-measure rests whenever possible.</p>
 keyword argument <code class="docutils literal notranslate"><span class="pre">adjust_last_time_signature</span></code> to <code class="docutils literal notranslate"><span class="pre">False</span></code>.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">container1</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;\time 4/4 g&#39;1 | f&#39;4&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">container2</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;\time 4/4 c&#39;1&quot;</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">auxjad</span><span class="o">.</span><span class="n">mutate</span><span class="o">.</span><span class="n">sync_containers</span><span class="p">(</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">container1</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="figure align-default">
+<img alt="../_images/sync_containers-uldd5Vni8a.png" src="../_images/sync_containers-uldd5Vni8a.png" />
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">container2</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="figure align-default">
+<img alt="../_images/sync_containers-eTCrjHBr39.png" src="../_images/sync_containers-eTCrjHBr39.png" />
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">auxjad</span><span class="o">.</span><span class="n">mutate</span><span class="o">.</span><span class="n">sync_containers</span><span class="p">(</span>
 <span class="gp">... </span>    <span class="p">[</span><span class="n">container1</span><span class="p">,</span> <span class="n">container2</span><span class="p">],</span>
 <span class="gp">... </span>    <span class="n">adjust_last_time_signature</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
 <span class="gp">... </span><span class="p">)</span>
@@ -319,7 +358,19 @@ keyword argument <code class="docutils literal notranslate"><span class="pre">ad
 <code class="docutils literal notranslate"><span class="pre">use_multimeasure_rests</span></code> to <code class="docutils literal notranslate"><span class="pre">False</span></code>.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">container1</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;\time 4/4 g&#39;1 | f&#39;4&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">container2</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;\time 4/4 c&#39;1&quot;</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">auxjad</span><span class="o">.</span><span class="n">mutate</span><span class="o">.</span><span class="n">sync_containers</span><span class="p">(</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">container1</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="figure align-default">
+<img alt="../_images/sync_containers-Mbmjf7JLH8.png" src="../_images/sync_containers-Mbmjf7JLH8.png" />
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">container2</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="figure align-default">
+<img alt="../_images/sync_containers-3RZwROEIt1.png" src="../_images/sync_containers-3RZwROEIt1.png" />
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">auxjad</span><span class="o">.</span><span class="n">mutate</span><span class="o">.</span><span class="n">sync_containers</span><span class="p">(</span>
 <span class="gp">... </span>    <span class="p">[</span><span class="n">container1</span><span class="p">,</span> <span class="n">container2</span><span class="p">],</span>
 <span class="gp">... </span>    <span class="n">use_multimeasure_rests</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
 <span class="gp">... </span><span class="p">)</span>
@@ -341,8 +392,26 @@ same time effective signature for as long as possible and only add a
 new one at the last measure if its duration is shorter.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">container1</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;\time 7/4 a&#39;1 ~ a&#39;2.&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">container2</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;\time 3/4 c&#39;2.&quot;</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">auxjad</span><span class="o">.</span><span class="n">mutate</span><span class="o">.</span><span class="n">sync_containers</span><span class="p">([</span><span class="n">container1</span><span class="p">,</span> <span class="n">container2</span><span class="p">])</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">container2</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">container1</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="figure align-default">
+<img alt="../_images/sync_containers-g61gTyfZGV.png" src="../_images/sync_containers-g61gTyfZGV.png" />
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">container2</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="figure align-default">
+<img alt="../_images/sync_containers-UZvmef5N16.png" src="../_images/sync_containers-UZvmef5N16.png" />
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">auxjad</span><span class="o">.</span><span class="n">mutate</span><span class="o">.</span><span class="n">sync_containers</span><span class="p">([</span><span class="n">container1</span><span class="p">,</span> <span class="n">container2</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">container1</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="figure align-default">
+<img alt="../_images/sync_containers-dQnq2ASkTu.png" src="../_images/sync_containers-dQnq2ASkTu.png" />
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">container2</span><span class="p">)</span>
 </pre></div>
 </div>
 <div class="figure align-default">
@@ -354,7 +423,31 @@ new one at the last measure if its duration is shorter.</p>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">container2</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;\time 4/4 c&#39;1 | g&#39;2&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">container3</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;\time 4/4 c&#39;1 | g&#39;2.&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">container4</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;\time 4/4 c&#39;1&quot;</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">containers</span> <span class="o">=</span> <span class="p">[</span><span class="n">container1</span><span class="p">,</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">container1</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="figure align-default">
+<img alt="../_images/sync_containers-epvaWYPYT7.png" src="../_images/sync_containers-epvaWYPYT7.png" />
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">container2</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="figure align-default">
+<img alt="../_images/sync_containers-Yja5mx93Fi.png" src="../_images/sync_containers-Yja5mx93Fi.png" />
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">container3</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="figure align-default">
+<img alt="../_images/sync_containers-GTtAEELheA.png" src="../_images/sync_containers-GTtAEELheA.png" />
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">container4</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="figure align-default">
+<img alt="../_images/sync_containers-VCFpuJX7ID.png" src="../_images/sync_containers-VCFpuJX7ID.png" />
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">containers</span> <span class="o">=</span> <span class="p">[</span><span class="n">container1</span><span class="p">,</span>
 <span class="gp">... </span>              <span class="n">container2</span><span class="p">,</span>
 <span class="gp">... </span>              <span class="n">container3</span><span class="p">,</span>
 <span class="gp">... </span>              <span class="n">container4</span><span class="p">,</span>
@@ -410,7 +503,31 @@ signatures, and can contain time signature changes as well.</p>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">container2</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;\time 3/4 a2. \time 4/4 c&#39;4&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">container3</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;\time 5/4 g&#39;&#39;1 ~ g&#39;&#39;4&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">container4</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;\time 6/8 c&#39;2&quot;</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">containers</span> <span class="o">=</span> <span class="p">[</span><span class="n">container1</span><span class="p">,</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">container1</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="figure align-default">
+<img alt="../_images/sync_containers-qAt4FSyAIl.png" src="../_images/sync_containers-qAt4FSyAIl.png" />
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">container2</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="figure align-default">
+<img alt="../_images/sync_containers-EKrqsCDVNs.png" src="../_images/sync_containers-EKrqsCDVNs.png" />
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">container3</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="figure align-default">
+<img alt="../_images/sync_containers-lw5fknvt4o.png" src="../_images/sync_containers-lw5fknvt4o.png" />
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">container4</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="figure align-default">
+<img alt="../_images/sync_containers-iXGajGKBZl.png" src="../_images/sync_containers-iXGajGKBZl.png" />
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">containers</span> <span class="o">=</span> <span class="p">[</span><span class="n">container1</span><span class="p">,</span>
 <span class="gp">... </span>              <span class="n">container2</span><span class="p">,</span>
 <span class="gp">... </span>              <span class="n">container3</span><span class="p">,</span>
 <span class="gp">... </span>              <span class="n">container4</span><span class="p">,</span>

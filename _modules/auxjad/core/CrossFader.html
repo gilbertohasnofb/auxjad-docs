@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>auxjad.core.CrossFader &mdash; auxjad 0.8.25 documentation</title>
+  <title>auxjad.core.CrossFader &mdash; auxjad 0.9.2 documentation</title>
   
 
   
@@ -64,7 +64,7 @@
             
             
               <div class="version">
-                0.8
+                0.9
               </div>
             
           
@@ -171,9 +171,9 @@
 
 
 <div class="viewcode-block" id="CrossFader"><a class="viewcode-back" href="../../../_api_members/auxjad.CrossFader.html#auxjad.CrossFader">[docs]</a><span class="k">class</span> <span class="nc">CrossFader</span><span class="p">():</span>
-    <span class="sa">r</span><span class="sd">&quot;&quot;&quot;This class takes two |abjad.Container|&#39;s and gradually cross fades from</span>
-<span class="sd">    one into the other, by fading out the first while fading in the</span>
-<span class="sd">    second. It makes use of two :class:`auxjad.Fader` for that.</span>
+    <span class="sa">r</span><span class="sd">&quot;&quot;&quot;Takes two |abjad.Container|&#39;s&#39; (or child class) and gradually</span>
+<span class="sd">    crossfades from one into the other, by fading out the first while fading in</span>
+<span class="sd">    the second. It makes use of two :class:`auxjad.Fader` for that.</span>
 
 <span class="sd">    Basic usage:</span>
 <span class="sd">        Calling the object will return a :obj:`tuple` of two</span>
@@ -1843,8 +1843,8 @@
                             <span class="s2">&quot;child class&quot;</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_fade_out_contents</span> <span class="o">=</span> <span class="n">fade_out_contents</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_fade_in_contents</span> <span class="o">=</span> <span class="n">fade_in_contents</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_fader_out</span> <span class="o">=</span> <span class="n">Fader</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_fade_out_contents</span><span class="p">,</span> <span class="n">fader_type</span><span class="o">=</span><span class="s1">&#39;out&#39;</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_fader_in</span> <span class="o">=</span> <span class="n">Fader</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_fade_in_contents</span><span class="p">,</span> <span class="n">fader_type</span><span class="o">=</span><span class="s1">&#39;in&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_fader_out</span> <span class="o">=</span> <span class="n">Fader</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_fade_out_contents</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;out&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_fader_in</span> <span class="o">=</span> <span class="n">Fader</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_fade_in_contents</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;in&#39;</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_faders</span> <span class="o">=</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_fader_in</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_fader_out</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_is_first_window</span> <span class="o">=</span> <span class="kc">True</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_is_first_process</span> <span class="o">=</span> <span class="kc">True</span>

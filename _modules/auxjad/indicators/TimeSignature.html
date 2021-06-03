@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>auxjad.indicators.TimeSignature &mdash; auxjad 0.8.25 documentation</title>
+  <title>auxjad.indicators.TimeSignature &mdash; auxjad 0.9.2 documentation</title>
   
 
   
@@ -64,7 +64,7 @@
             
             
               <div class="version">
-                0.8
+                0.9
               </div>
             
           
@@ -176,48 +176,51 @@
 <span class="sd">        value. Note that Auxjad adds this function as an extension method to</span>
 <span class="sd">        |abjad.TimeSignature| (see usage below).</span>
 
-<span class="sd">        By default, this method simplifies the ratio of `numerator/denominator`</span>
-<span class="sd">        using a minimum denominator value of `4` (that is, the denominator will</span>
-<span class="sd">        not get smaller than `4`). In the case below, `(2, 4)` is the simplest</span>
-<span class="sd">        representation of the ratio `(4, 8)` with a denominator equal to or</span>
-<span class="sd">        larger than `4`.</span>
+<span class="sd">        Basic usage:</span>
+<span class="sd">            By default, this method simplifies the ratio of</span>
+<span class="sd">            ``numerator / denominator`` using a minimum denominator value of</span>
+<span class="sd">            ``4`` (that is, the denominator will not get smaller than ``4``).</span>
+<span class="sd">            In the case below, ``(2, 4)`` is the simplest representation of the</span>
+<span class="sd">            ratio ``(4, 8)`` with a denominator equal to or larger than ``4``.</span>
 
-<span class="sd">        &gt;&gt;&gt; time_signature = abjad.TimeSignature((4, 8))</span>
-<span class="sd">        &gt;&gt;&gt; time_signature.simplify_ratio()</span>
-<span class="sd">        &gt;&gt;&gt; time_signature</span>
-<span class="sd">        abjad.TimeSignature((2, 4))</span>
-<span class="sd">        &gt;&gt;&gt; time_signature = abjad.TimeSignature((1, 1))</span>
-<span class="sd">        &gt;&gt;&gt; time_signature.simplify_ratio()</span>
-<span class="sd">        &gt;&gt;&gt; time_signature</span>
-<span class="sd">        abjad.TimeSignature((4, 4))</span>
+<span class="sd">            &gt;&gt;&gt; time_signature = abjad.TimeSignature((4, 8))</span>
+<span class="sd">            &gt;&gt;&gt; time_signature.simplify_ratio()</span>
+<span class="sd">            &gt;&gt;&gt; time_signature</span>
+<span class="sd">            abjad.TimeSignature((2, 4))</span>
+<span class="sd">            &gt;&gt;&gt; time_signature = abjad.TimeSignature((1, 1))</span>
+<span class="sd">            &gt;&gt;&gt; time_signature.simplify_ratio()</span>
+<span class="sd">            &gt;&gt;&gt; time_signature</span>
+<span class="sd">            abjad.TimeSignature((4, 4))</span>
 
-<span class="sd">        If a ratio cannot be simplified at all, the function returns a time</span>
-<span class="sd">        signature with the original ratio.</span>
+<span class="sd">            If a ratio cannot be simplified at all, the function returns a time</span>
+<span class="sd">            signature with the original ratio.</span>
 
-<span class="sd">        &gt;&gt;&gt; time_signature = abjad.TimeSignature((7, 8))</span>
-<span class="sd">        &gt;&gt;&gt; time_signature.simplify_ratio()</span>
-<span class="sd">        &gt;&gt;&gt; time_signature</span>
-<span class="sd">        abjad.TimeSignature((7, 8))</span>
+<span class="sd">            &gt;&gt;&gt; time_signature = abjad.TimeSignature((7, 8))</span>
+<span class="sd">            &gt;&gt;&gt; time_signature.simplify_ratio()</span>
+<span class="sd">            &gt;&gt;&gt; time_signature</span>
+<span class="sd">            abjad.TimeSignature((7, 8))</span>
 
-<span class="sd">        It also simplifies ratios even if the minimum denominator cannot be</span>
-<span class="sd">        reached.</span>
+<span class="sd">            It also simplifies ratios even if the minimum denominator cannot be</span>
+<span class="sd">            reached.</span>
 
-<span class="sd">        &gt;&gt;&gt; time_signature = abjad.TimeSignature((10, 16))</span>
-<span class="sd">        &gt;&gt;&gt; time_signature.simplify_ratio()</span>
-<span class="sd">        &gt;&gt;&gt; time_signature</span>
-<span class="sd">        abjad.TimeSignature((5, 8))</span>
+<span class="sd">            &gt;&gt;&gt; time_signature = abjad.TimeSignature((10, 16))</span>
+<span class="sd">            &gt;&gt;&gt; time_signature.simplify_ratio()</span>
+<span class="sd">            &gt;&gt;&gt; time_signature</span>
+<span class="sd">            abjad.TimeSignature((5, 8))</span>
 
-<span class="sd">        The ``min_denominator`` can be set to values other than `4`. If set to</span>
-<span class="sd">        `2`, the simplest representaion of the ratio `(4, 8)` becomes `(1, 2)`.</span>
+<span class="sd">        ``min_denominator``:</span>
+<span class="sd">            The ``min_denominator`` can be set to values other than ``4``. If</span>
+<span class="sd">            set to ``2``, the simplest representaion of the ratio ``(4, 8)``</span>
+<span class="sd">            becomes ``(1, 2)``.</span>
 
-<span class="sd">        &gt;&gt;&gt; time_signature = abjad.TimeSignature((4, 8))</span>
-<span class="sd">        &gt;&gt;&gt; time_signature.simplify_ratio(min_denominator=2)</span>
-<span class="sd">        &gt;&gt;&gt; time_signature</span>
-<span class="sd">        abjad.TimeSignature((1, 2))</span>
-<span class="sd">        &gt;&gt;&gt; time_signature = abjad.TimeSignature((1, 1))</span>
-<span class="sd">        &gt;&gt;&gt; time_signature.simplify_ratio(min_denominator=1)</span>
-<span class="sd">        &gt;&gt;&gt; time_signature</span>
-<span class="sd">        abjad.TimeSignature((1, 1))</span>
+<span class="sd">            &gt;&gt;&gt; time_signature = abjad.TimeSignature((4, 8))</span>
+<span class="sd">            &gt;&gt;&gt; time_signature.simplify_ratio(min_denominator=2)</span>
+<span class="sd">            &gt;&gt;&gt; time_signature</span>
+<span class="sd">            abjad.TimeSignature((1, 2))</span>
+<span class="sd">            &gt;&gt;&gt; time_signature = abjad.TimeSignature((1, 1))</span>
+<span class="sd">            &gt;&gt;&gt; time_signature.simplify_ratio(min_denominator=1)</span>
+<span class="sd">            &gt;&gt;&gt; time_signature</span>
+<span class="sd">            abjad.TimeSignature((1, 1))</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">min_denominator</span><span class="p">,</span> <span class="nb">int</span><span class="p">):</span>
             <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;&#39;min_denominator&#39; must be &#39;int&#39;&quot;</span><span class="p">)</span>
