@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>auxjad.mutate.enforce_time_signature &mdash; auxjad 0.9.3 documentation</title>
+  <title>auxjad.mutate.enforce_time_signature &mdash; auxjad 0.9.4 documentation</title>
   
 
   
@@ -241,7 +241,7 @@
 
 <span class="sd">        &gt;&gt;&gt; auxjad.mutate.enforce_time_signature(</span>
 <span class="sd">        ...     staff,</span>
-<span class="sd">        ...     abjad.TimeSignature((2, 4))</span>
+<span class="sd">        ...     abjad.TimeSignature((2, 4)),</span>
 <span class="sd">        ... )</span>
 <span class="sd">        &gt;&gt;&gt; abjad.mutate.enforce_time_signature(</span>
 <span class="sd">        ...     staff,</span>
@@ -510,6 +510,34 @@
 <span class="sd">            }</span>
 
 <span class="sd">        ..  figure:: ../_images/enforce_time_signature-3s9h7p1k05x.png</span>
+
+<span class="sd">    Implicit time signature:</span>
+<span class="sd">        If the first time signature in a list is ``None``, this function</span>
+<span class="sd">        assumes the music is written in 4/4 time signature, although it does</span>
+<span class="sd">        not force it in the output. This is similar to LilyPond&#39;s behaviour,</span>
+<span class="sd">        which fallbacks to a 4/4 time signature when none is present.</span>
+
+<span class="sd">        &gt;&gt;&gt; staff = abjad.Staff(r&quot;c&#39;1 d&#39;1 e&#39;2. f&#39;2.&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; time_signatures = [None,</span>
+<span class="sd">        ...                    None,</span>
+<span class="sd">        ...                    (3, 4),</span>
+<span class="sd">        ...                    None,</span>
+<span class="sd">        ...                    ]</span>
+<span class="sd">        &gt;&gt;&gt; auxjad.mutate.enforce_time_signature(staff, time_signatures)</span>
+<span class="sd">        &gt;&gt;&gt; abjad.show(staff)</span>
+
+<span class="sd">        ..  docs::</span>
+
+<span class="sd">            \new Staff</span>
+<span class="sd">            {</span>
+<span class="sd">                c&#39;1</span>
+<span class="sd">                d&#39;1</span>
+<span class="sd">                \time 3/4</span>
+<span class="sd">                e&#39;2.</span>
+<span class="sd">                f&#39;2.</span>
+<span class="sd">            }</span>
+
+<span class="sd">        ..  figure:: ../_images/enforce_time_signature-cJe2YevEo7.png</span>
 
 <span class="sd">    ``cyclic``:</span>
 <span class="sd">        To cycle through the :obj:`list` of time signatures until the container</span>
@@ -876,8 +904,10 @@
         <span class="n">time_signatures_</span> <span class="o">=</span> <span class="n">time_signatures</span><span class="p">[:]</span>
     <span class="k">else</span><span class="p">:</span>
         <span class="n">time_signatures_</span> <span class="o">=</span> <span class="p">[</span><span class="n">time_signatures</span><span class="p">]</span>
+    <span class="n">implicit_first_time_signature</span> <span class="o">=</span> <span class="kc">False</span>
     <span class="k">if</span> <span class="n">time_signatures_</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;first element of the input list must not be &#39;None&#39;&quot;</span><span class="p">)</span>
+        <span class="n">time_signatures_</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">TimeSignature</span><span class="p">((</span><span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+        <span class="n">implicit_first_time_signature</span> <span class="o">=</span> <span class="kc">True</span>
     <span class="c1"># converting all elements to abjad.TimeSignature</span>
     <span class="k">for</span> <span class="n">index</span><span class="p">,</span> <span class="n">time_signature</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">time_signatures_</span><span class="p">):</span>
         <span class="k">if</span> <span class="n">time_signature</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
@@ -953,6 +983,9 @@
             <span class="n">container</span><span class="p">,</span>
             <span class="n">disable_rewrite_meter</span><span class="o">=</span><span class="n">disable_rewrite_meter</span><span class="p">,</span>
         <span class="p">)</span>
+    <span class="c1"># removing first time signature if implicit</span>
+    <span class="k">if</span> <span class="n">implicit_first_time_signature</span><span class="p">:</span>
+        <span class="n">abjad</span><span class="o">.</span><span class="n">detach</span><span class="p">(</span><span class="n">abjad</span><span class="o">.</span><span class="n">TimeSignature</span><span class="p">,</span> <span class="n">abjad</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="n">container</span><span class="p">)</span><span class="o">.</span><span class="n">leaf</span><span class="p">(</span><span class="mi">0</span><span class="p">))</span>
     <span class="c1"># rewrite meter</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="n">disable_rewrite_meter</span><span class="p">:</span>
         <span class="n">measures</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="n">container</span><span class="p">[:])</span><span class="o">.</span><span class="n">group_by_measure</span><span class="p">()</span>

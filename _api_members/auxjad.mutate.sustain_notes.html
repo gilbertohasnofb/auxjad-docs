@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>sustain_notes &mdash; auxjad 0.9.3 documentation</title>
+  <title>sustain_notes &mdash; auxjad 0.9.4 documentation</title>
   
 
   
@@ -292,11 +292,12 @@ the same.</p>
 </dd>
 <dt>Complex example:</dt><dd><p>This function can handle containers with a mixture of notes, chords,
 and rests, as well as tuplets.</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">staff</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;c&#39;16 r8. d&#39;16 r8. r8 r32 &lt;e&#39; g&#39;&gt;32 r16 r4 &quot;</span>
-<span class="gp">... </span>                    <span class="sa">r</span><span class="s2">&quot;\times 2/3 {r4 f&#39;4 r4} r4 g&#39;8 r8 a&#39;4 ~ &quot;</span>
-<span class="gp">... </span>                    <span class="sa">r</span><span class="s2">&quot;a&#39;16 r8. b&#39;4 c&#39;&#39;8 r8 &quot;</span>
-<span class="gp">... </span>                    <span class="sa">r</span><span class="s2">&quot;r4. d&#39;&#39;8 \times 4/5 {r8 d&#39;&#39;2}&quot;</span>
-<span class="gp">... </span>                    <span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">staff</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="sa">r</span><span class="s2">&quot;c&#39;16 r8. d&#39;16 r8. r8 r32 &lt;e&#39; g&#39;&gt;32 r16 r4 &quot;</span>
+<span class="gp">... </span>    <span class="sa">r</span><span class="s2">&quot;\times 2/3 {r4 f&#39;4 r4} r4 g&#39;8 r8 a&#39;4 ~ &quot;</span>
+<span class="gp">... </span>    <span class="sa">r</span><span class="s2">&quot;a&#39;16 r8. b&#39;4 c&#39;&#39;8 r8 &quot;</span>
+<span class="gp">... </span>    <span class="sa">r</span><span class="s2">&quot;r4. d&#39;&#39;8 \times 4/5 {r8 d&#39;&#39;2}&quot;</span>
+<span class="gp">... </span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">staff</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -313,13 +314,14 @@ and rests, as well as tuplets.</p>
 </dd>
 <dt>Multi-measure rests:</dt><dd><p>This mutation also handles multi-measure rests, including ones with
 non-assignable durations:</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">staff</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;r4 c&#39;16 r8. d&#39;16 r4.. &quot;</span>
-<span class="gp">... </span>                    <span class="sa">r</span><span class="s2">&quot;R1&quot;</span>
-<span class="gp">... </span>                    <span class="sa">r</span><span class="s2">&quot;r4 e&#39;4 r2&quot;</span>
-<span class="gp">... </span>                    <span class="sa">r</span><span class="s2">&quot;\time 5/8 r8 f&#39;4 r4&quot;</span>
-<span class="gp">... </span>                    <span class="sa">r</span><span class="s2">&quot;R1 * 5/8 &quot;</span>
-<span class="gp">... </span>                    <span class="sa">r</span><span class="s2">&quot;r8 g&#39;8 a&#39;8 r4&quot;</span>
-<span class="gp">... </span>                    <span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">staff</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="sa">r</span><span class="s2">&quot;r4 c&#39;16 r8. d&#39;16 r4.. &quot;</span>
+<span class="gp">... </span>    <span class="sa">r</span><span class="s2">&quot;R1&quot;</span>
+<span class="gp">... </span>    <span class="sa">r</span><span class="s2">&quot;r4 e&#39;4 r2&quot;</span>
+<span class="gp">... </span>    <span class="sa">r</span><span class="s2">&quot;\time 5/8 r8 f&#39;4 r4&quot;</span>
+<span class="gp">... </span>    <span class="sa">r</span><span class="s2">&quot;R1 * 5/8 &quot;</span>
+<span class="gp">... </span>    <span class="sa">r</span><span class="s2">&quot;r8 g&#39;8 a&#39;8 r4&quot;</span>
+<span class="gp">... </span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">staff</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -335,13 +337,14 @@ non-assignable durations:</p>
 </div>
 </dd>
 <dt><code class="docutils literal notranslate"><span class="pre">sustain_multimeasure_rests</span></code>:</dt><dd><p>By default, notes are tied across multi-measure rests.</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">staff</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;r4 c&#39;16 r8. d&#39;16 r4.. &quot;</span>
-<span class="gp">... </span>                    <span class="sa">r</span><span class="s2">&quot;R1&quot;</span>
-<span class="gp">... </span>                    <span class="sa">r</span><span class="s2">&quot;r4 e&#39;4 r2&quot;</span>
-<span class="gp">... </span>                    <span class="sa">r</span><span class="s2">&quot;\time 5/8 r8 f&#39;4 r4&quot;</span>
-<span class="gp">... </span>                    <span class="sa">r</span><span class="s2">&quot;R1 * 5/8 &quot;</span>
-<span class="gp">... </span>                    <span class="sa">r</span><span class="s2">&quot;r8 g&#39;8 a&#39;8 r4&quot;</span>
-<span class="gp">... </span>                    <span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">staff</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="sa">r</span><span class="s2">&quot;r4 c&#39;16 r8. d&#39;16 r4.. &quot;</span>
+<span class="gp">... </span>    <span class="sa">r</span><span class="s2">&quot;R1&quot;</span>
+<span class="gp">... </span>    <span class="sa">r</span><span class="s2">&quot;r4 e&#39;4 r2&quot;</span>
+<span class="gp">... </span>    <span class="sa">r</span><span class="s2">&quot;\time 5/8 r8 f&#39;4 r4&quot;</span>
+<span class="gp">... </span>    <span class="sa">r</span><span class="s2">&quot;R1 * 5/8 &quot;</span>
+<span class="gp">... </span>    <span class="sa">r</span><span class="s2">&quot;r8 g&#39;8 a&#39;8 r4&quot;</span>
+<span class="gp">... </span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">staff</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -360,18 +363,19 @@ to  <code class="docutils literal notranslate"><span class="pre">False</span></c
 </dd>
 <dt><code class="docutils literal notranslate"><span class="pre">rewrite_meter</span></code>:</dt><dd><p>By default, <a class="reference internal" href="auxjad.mutate.auto_rewrite_meter.html#auxjad.mutate.auto_rewrite_meter" title="auxjad.mutate.auto_rewrite_meter"><code class="xref py py-func docutils literal notranslate"><span class="pre">auxjad.mutate.auto_rewrite_meter()</span></code></a> is summoned after
 notes are sustained.</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">staff</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;r4 c&#39;16 r8. d&#39;16 r4.. &quot;</span>
-<span class="gp">... </span>                    <span class="sa">r</span><span class="s2">&quot;R1&quot;</span>
-<span class="gp">... </span>                    <span class="sa">r</span><span class="s2">&quot;r4 e&#39;4 r2&quot;</span>
-<span class="gp">... </span>                    <span class="sa">r</span><span class="s2">&quot;\time 5/8 r8 f&#39;4 r4&quot;</span>
-<span class="gp">... </span>                    <span class="sa">r</span><span class="s2">&quot;R1 * 5/8 &quot;</span>
-<span class="gp">... </span>                    <span class="sa">r</span><span class="s2">&quot;r8 g&#39;8 a&#39;8 r4&quot;</span>
-<span class="gp">... </span>                    <span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">staff</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="sa">r</span><span class="s2">&quot;r4 c&#39;16 r8. d&#39;16 r4.. &quot;</span>
+<span class="gp">... </span>    <span class="sa">r</span><span class="s2">&quot;R1&quot;</span>
+<span class="gp">... </span>    <span class="sa">r</span><span class="s2">&quot;r4 e&#39;4 r2&quot;</span>
+<span class="gp">... </span>    <span class="sa">r</span><span class="s2">&quot;\time 5/8 r8 f&#39;4 r4&quot;</span>
+<span class="gp">... </span>    <span class="sa">r</span><span class="s2">&quot;R1 * 5/8 &quot;</span>
+<span class="gp">... </span>    <span class="sa">r</span><span class="s2">&quot;r8 g&#39;8 a&#39;8 r4&quot;</span>
+<span class="gp">... </span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">staff</span><span class="p">)</span>
 </pre></div>
 </div>
 <div class="figure align-default">
-<img alt="../_images/sustain_notes-P2CLdKi6Cs.png" src="../_images/sustain_notes-P2CLdKi6Cs.png" />
+<img alt="../_images/sustain_notes-Egibb7mRfJ.png" src="../_images/sustain_notes-Egibb7mRfJ.png" />
 </div>
 <p>To disable this behaviour, set <code class="docutils literal notranslate"><span class="pre">rewrite_meter</span></code> to <code class="docutils literal notranslate"><span class="pre">False</span></code>:</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">auxjad</span><span class="o">.</span><span class="n">mutate</span><span class="o">.</span><span class="n">sustain_notes</span><span class="p">(</span><span class="n">staff</span><span class="p">,</span> <span class="n">rewrite_meter</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
@@ -379,7 +383,7 @@ notes are sustained.</p>
 </pre></div>
 </div>
 <div class="figure align-default">
-<img alt="../_images/sustain_notes-9WeilArLex.png" src="../_images/sustain_notes-9WeilArLex.png" />
+<img alt="../_images/sustain_notes-iTuoVMoWgm.png" src="../_images/sustain_notes-iTuoVMoWgm.png" />
 </div>
 </dd>
 </dl>

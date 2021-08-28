@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>auxjad.get.selections_are_identical &mdash; auxjad 0.9.3 documentation</title>
+  <title>auxjad.get.selections_are_identical &mdash; auxjad 0.9.4 documentation</title>
   
 
   
@@ -208,8 +208,9 @@
 <span class="sd">        false positive:</span>
 
 <span class="sd">        &gt;&gt;&gt; container1 = abjad.Staff(r&quot;c&#39;4 d&#39;4 e&#39;4 f&#39;4 &lt;g&#39; a&#39;&gt;2 r2&quot;)</span>
-<span class="sd">        &gt;&gt;&gt; container2 = abjad.Staff(r&quot;\times 3/2 {c&#39;4 d&#39;4 e&#39;4} &quot;</span>
-<span class="sd">        ...                          &quot;f&#39;4 &lt;g&#39; a&#39;&gt;2 r2&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; container2 = abjad.Staff(</span>
+<span class="sd">        ...     r&quot;\times 3/2 {c&#39;4 d&#39;4 e&#39;4} f&#39;4 &lt;g&#39; a&#39;&gt;2 r2&quot;</span>
+<span class="sd">        ... )</span>
 <span class="sd">        &gt;&gt;&gt; selections = [container1[:], container2[:]]</span>
 <span class="sd">        &gt;&gt;&gt; auxjad.get.selections_are_identical(selections)</span>
 <span class="sd">        False</span>
@@ -249,28 +250,33 @@
 <span class="sd">        False</span>
 
 <span class="sd">        &gt;&gt;&gt; container1 = abjad.Staff(r&quot;c&#39;4 d&#39;4 e&#39;4 f&#39;4 &lt;g&#39; a&#39;&gt;2 r2&quot;)</span>
-<span class="sd">        &gt;&gt;&gt; container2 = abjad.Staff(r&quot;c&#39;4 \grace{c&#39;&#39;4} d&#39;4 e&#39;4 &quot;</span>
-<span class="sd">        ...                          r&quot;f&#39;4 &lt;g&#39; a&#39;&gt;2 r2&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; container2 = abjad.Staff(</span>
+<span class="sd">        ...     r&quot;c&#39;4 \grace{c&#39;&#39;4} d&#39;4 e&#39;4 f&#39;4 &lt;g&#39; a&#39;&gt;2 r2&quot;</span>
+<span class="sd">        ... )</span>
 <span class="sd">        &gt;&gt;&gt; selection1 = abjad.select(container1)</span>
 <span class="sd">        &gt;&gt;&gt; selection2 = abjad.select(container2)</span>
 <span class="sd">        &gt;&gt;&gt; selections = [selection1, selection2]</span>
 <span class="sd">        &gt;&gt;&gt; auxjad.get.selections_are_identical(selections)</span>
 <span class="sd">        False</span>
 
-<span class="sd">        &gt;&gt;&gt; container1 = abjad.Staff(r&quot;c&#39;4 \grace{c&#39;&#39;4} d&#39;4 e&#39;4 &quot;</span>
-<span class="sd">        ...                          r&quot;f&#39;4 &lt;g&#39; a&#39;&gt;2 r2&quot;)</span>
-<span class="sd">        &gt;&gt;&gt; container2 = abjad.Staff(r&quot;c&#39;4 \grace{c&#39;&#39;8} d&#39;4 e&#39;4 &quot;</span>
-<span class="sd">        ...                          r&quot;f&#39;4 &lt;g&#39; a&#39;&gt;2 r2&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; container1 = abjad.Staff(</span>
+<span class="sd">        ...     r&quot;c&#39;4 \grace{c&#39;&#39;4} d&#39;4 e&#39;4 f&#39;4 &lt;g&#39; a&#39;&gt;2 r2&quot;</span>
+<span class="sd">        ... )</span>
+<span class="sd">        &gt;&gt;&gt; container2 = abjad.Staff(</span>
+<span class="sd">        ...     r&quot;c&#39;4 \grace{c&#39;&#39;8} d&#39;4 e&#39;4 f&#39;4 &lt;g&#39; a&#39;&gt;2 r2&quot;</span>
+<span class="sd">        ... )</span>
 <span class="sd">        &gt;&gt;&gt; selection1 = abjad.select(container1)</span>
 <span class="sd">        &gt;&gt;&gt; selection2 = abjad.select(container2)</span>
 <span class="sd">        &gt;&gt;&gt; selections = [selection1, selection2]</span>
 <span class="sd">        &gt;&gt;&gt; auxjad.get.selections_are_identical(selections)</span>
 <span class="sd">        False</span>
 
-<span class="sd">        &gt;&gt;&gt; container1 = abjad.Staff(r&quot;c&#39;4 \grace{c&#39;&#39;16} d&#39;4 e&#39;4 &quot;</span>
-<span class="sd">        ...                          r&quot;f&#39;4 &lt;g&#39; a&#39;&gt;2 r2&quot;)</span>
-<span class="sd">        &gt;&gt;&gt; container2 = abjad.Staff(r&quot;c&#39;4 \grace{c&#39;&#39;16} d&#39;4 e&#39;4 &quot;</span>
-<span class="sd">        ...                          r&quot;f&#39;4 &lt;g&#39; a&#39;&gt;2 r2&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; container1 = abjad.Staff(</span>
+<span class="sd">        ...     r&quot;c&#39;4 \grace{c&#39;&#39;16} d&#39;4 e&#39;4 f&#39;4 &lt;g&#39; a&#39;&gt;2 r2&quot;</span>
+<span class="sd">        ... )</span>
+<span class="sd">        &gt;&gt;&gt; container2 = abjad.Staff(</span>
+<span class="sd">        ...     r&quot;c&#39;4 \grace{c&#39;&#39;16} d&#39;4 e&#39;4 f&#39;4 &lt;g&#39; a&#39;&gt;2 r2&quot;</span>
+<span class="sd">        ... )</span>
 <span class="sd">        &gt;&gt;&gt; selection1 = abjad.select(container1)</span>
 <span class="sd">        &gt;&gt;&gt; selection2 = abjad.select(container2)</span>
 <span class="sd">        &gt;&gt;&gt; selections = [selection1, selection2]</span>

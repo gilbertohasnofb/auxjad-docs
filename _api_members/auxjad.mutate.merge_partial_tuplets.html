@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>merge_partial_tuplets &mdash; auxjad 0.9.3 documentation</title>
+  <title>merge_partial_tuplets &mdash; auxjad 0.9.4 documentation</title>
   
 
   
@@ -257,9 +257,11 @@ equivalent:</p>
 </div>
 </dd>
 <dt><code class="docutils literal notranslate"><span class="pre">merge_across_barlines</span></code>:</dt><dd><p>By default, partial tuplets are not merged across barlines.</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">staff</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;\time 3/4 c&#39;2. &quot;</span>
-<span class="gp">... </span>                    <span class="sa">r</span><span class="s2">&quot;\times 2/3 {d&#39;4} r4 \times 2/3 {e&#39;2} &quot;</span>
-<span class="gp">... </span>                    <span class="sa">r</span><span class="s2">&quot;\times 2/3 {f&#39;4} r4 \times 2/3 {g&#39;2}&quot;</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">staff</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="sa">r</span><span class="s2">&quot;\time 3/4 c&#39;2. &quot;</span>
+<span class="gp">... </span>    <span class="sa">r</span><span class="s2">&quot;\times 2/3 {d&#39;4} r4 \times 2/3 {e&#39;2} &quot;</span>
+<span class="gp">... </span>    <span class="sa">r</span><span class="s2">&quot;\times 2/3 {f&#39;4} r4 \times 2/3 {g&#39;2}&quot;</span>
+<span class="gp">... </span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">auxjad</span><span class="o">.</span><span class="n">mutate</span><span class="o">.</span><span class="n">merge_partial_tuplets</span><span class="p">(</span><span class="n">staff</span><span class="p">[:])</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">staff</span><span class="p">)</span>
 </pre></div>
@@ -268,9 +270,11 @@ equivalent:</p>
 <img alt="../_images/merge_partial_tuplets-3rjib7pctml.png" src="../_images/merge_partial_tuplets-3rjib7pctml.png" />
 </div>
 <p>To change  this behaviour, set <code class="docutils literal notranslate"><span class="pre">merge_across_barlines</span></code> to <code class="docutils literal notranslate"><span class="pre">True</span></code>.</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">staff</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;\time 3/4 c&#39;2. &quot;</span>
-<span class="gp">... </span>                    <span class="sa">r</span><span class="s2">&quot;\times 2/3 {d&#39;4} r4 \times 2/3 {e&#39;2} &quot;</span>
-<span class="gp">... </span>                    <span class="sa">r</span><span class="s2">&quot;\times 2/3 {f&#39;4} r4 \times 2/3 {g&#39;2}&quot;</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">staff</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="sa">r</span><span class="s2">&quot;\time 3/4 c&#39;2. &quot;</span>
+<span class="gp">... </span>    <span class="sa">r</span><span class="s2">&quot;\times 2/3 {d&#39;4} r4 \times 2/3 {e&#39;2} &quot;</span>
+<span class="gp">... </span>    <span class="sa">r</span><span class="s2">&quot;\times 2/3 {f&#39;4} r4 \times 2/3 {g&#39;2}&quot;</span>
+<span class="gp">... </span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">auxjad</span><span class="o">.</span><span class="n">mutate</span><span class="o">.</span><span class="n">merge_partial_tuplets</span><span class="p">(</span>
 <span class="gp">... </span>    <span class="n">staff</span><span class="p">[:],</span>
 <span class="gp">... </span>    <span class="n">merge_across_barlines</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
@@ -283,8 +287,10 @@ equivalent:</p>
 </div>
 </dd>
 <dt>Tied partial tuplets:</dt><dd><p>Tied partial tuplets are also handled by this function.</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">staff</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;\times 2/3 </span><span class="si">{r4}</span><span class="s2"> \times 2/3 {c&#39;2} &quot;</span>
-<span class="gp">... </span>                    <span class="sa">r</span><span class="s2">&quot;\times 4/5 {d&#39;2~} \times 4/5{d&#39;8}&quot;</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">staff</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="sa">r</span><span class="s2">&quot;\times 2/3 </span><span class="si">{r4}</span><span class="s2"> \times 2/3 {c&#39;2} &quot;</span>
+<span class="gp">... </span>    <span class="sa">r</span><span class="s2">&quot;\times 4/5 {d&#39;2~} \times 4/5{d&#39;8}&quot;</span>
+<span class="gp">... </span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">staff</span><span class="p">)</span>
 </pre></div>
 </div>

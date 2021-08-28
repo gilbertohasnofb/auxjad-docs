@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>enforce_time_signature &mdash; auxjad 0.9.3 documentation</title>
+  <title>enforce_time_signature &mdash; auxjad 0.9.4 documentation</title>
   
 
   
@@ -236,7 +236,7 @@ to it.</p>
 equivalent:</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">auxjad</span><span class="o">.</span><span class="n">mutate</span><span class="o">.</span><span class="n">enforce_time_signature</span><span class="p">(</span>
 <span class="gp">... </span>    <span class="n">staff</span><span class="p">,</span>
-<span class="gp">... </span>    <span class="n">abjad</span><span class="o">.</span><span class="n">TimeSignature</span><span class="p">((</span><span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+<span class="gp">... </span>    <span class="n">abjad</span><span class="o">.</span><span class="n">TimeSignature</span><span class="p">((</span><span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">)),</span>
 <span class="gp">... </span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">mutate</span><span class="o">.</span><span class="n">enforce_time_signature</span><span class="p">(</span>
 <span class="gp">... </span>    <span class="n">staff</span><span class="p">,</span>
@@ -371,6 +371,24 @@ signatures can also be represented as a <a class="reference external" href="http
 </div>
 <div class="figure align-default">
 <img alt="../_images/enforce_time_signature-3s9h7p1k05x.png" src="../_images/enforce_time_signature-3s9h7p1k05x.png" />
+</div>
+</dd>
+<dt>Implicit time signature:</dt><dd><p>If the first time signature in a list is <code class="docutils literal notranslate"><span class="pre">None</span></code>, this function
+assumes the music is written in 4/4 time signature, although it does
+not force it in the output. This is similar to LilyPond’s behaviour,
+which fallbacks to a 4/4 time signature when none is present.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">staff</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;c&#39;1 d&#39;1 e&#39;2. f&#39;2.&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">time_signatures</span> <span class="o">=</span> <span class="p">[</span><span class="kc">None</span><span class="p">,</span>
+<span class="gp">... </span>                   <span class="kc">None</span><span class="p">,</span>
+<span class="gp">... </span>                   <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">),</span>
+<span class="gp">... </span>                   <span class="kc">None</span><span class="p">,</span>
+<span class="gp">... </span>                   <span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">auxjad</span><span class="o">.</span><span class="n">mutate</span><span class="o">.</span><span class="n">enforce_time_signature</span><span class="p">(</span><span class="n">staff</span><span class="p">,</span> <span class="n">time_signatures</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">staff</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="figure align-default">
+<img alt="../_images/enforce_time_signature-cJe2YevEo7.png" src="../_images/enforce_time_signature-cJe2YevEo7.png" />
 </div>
 </dd>
 <dt><code class="docutils literal notranslate"><span class="pre">cyclic</span></code>:</dt><dd><p>To cycle through the <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.9)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code></a> of time signatures until the container

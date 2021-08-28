@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>prettify_rewrite_meter &mdash; auxjad 0.9.3 documentation</title>
+  <title>prettify_rewrite_meter &mdash; auxjad 0.9.4 documentation</title>
   
 
   
@@ -250,10 +250,11 @@ equivalent:</p>
 fused can be different than <code class="docutils literal notranslate"><span class="pre">denominator</span> <span class="pre">/</span> <span class="pre">4</span></code>, as the function
 searches for logical ties of specific length and offset, and its
 surroundings do not matter.</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">staff</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;\time 3/4 c&#39;32 d&#39;32 e&#39;8 f&#39;16 &quot;</span>
-<span class="gp">... </span>                    <span class="sa">r</span><span class="s2">&quot;\times 2/3 {g&#39;32 a&#39;32 b&#39;32} c&#39;&#39;8 &quot;</span>
-<span class="gp">... </span>                    <span class="sa">r</span><span class="s2">&quot;r16 r32. d&#39;&#39;64 e&#39;&#39;8 f&#39;&#39;32 g&#39;&#39;32&quot;</span>
-<span class="gp">... </span>                    <span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">staff</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="sa">r</span><span class="s2">&quot;\time 3/4 c&#39;32 d&#39;32 e&#39;8 f&#39;16 &quot;</span>
+<span class="gp">... </span>    <span class="sa">r</span><span class="s2">&quot;\times 2/3 {g&#39;32 a&#39;32 b&#39;32} c&#39;&#39;8 &quot;</span>
+<span class="gp">... </span>    <span class="sa">r</span><span class="s2">&quot;r16 r32. d&#39;&#39;64 e&#39;&#39;8 f&#39;&#39;32 g&#39;&#39;32&quot;</span>
+<span class="gp">... </span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">meter</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Meter</span><span class="p">((</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">mutate</span><span class="o">.</span><span class="n">rewrite_meter</span><span class="p">(</span><span class="n">staff</span><span class="p">[:],</span> <span class="n">meter</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">staff</span><span class="p">)</span>
@@ -335,9 +336,10 @@ Compare the outputs below.</p>
 </dd>
 <dt>Multiple measures at once:</dt><dd><p>This function can take handle multiple measures at once, as long as
 they share the same meter.</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">staff</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;\time 5/8 c&#39;16 d&#39;8 e&#39;8 f&#39;8 g&#39;8 a&#39;16 ~ &quot;</span>
-<span class="gp">... </span>                    <span class="sa">r</span><span class="s2">&quot;a&#39;16 b&#39;8 c&#39;&#39;8 d&#39;&#39;8 e&#39;&#39;8 f&#39;&#39;16&quot;</span>
-<span class="gp">... </span>                    <span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">staff</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="sa">r</span><span class="s2">&quot;\time 5/8 c&#39;16 d&#39;8 e&#39;8 f&#39;8 g&#39;8 a&#39;16 ~ &quot;</span>
+<span class="gp">... </span>    <span class="sa">r</span><span class="s2">&quot;a&#39;16 b&#39;8 c&#39;&#39;8 d&#39;&#39;8 e&#39;&#39;8 f&#39;&#39;16&quot;</span>
+<span class="gp">... </span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">meter</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Meter</span><span class="p">((</span><span class="mi">5</span><span class="p">,</span> <span class="mi">8</span><span class="p">))</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">measure</span> <span class="ow">in</span> <span class="n">abjad</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="n">staff</span><span class="p">[:])</span><span class="o">.</span><span class="n">group_by_measure</span><span class="p">():</span>
 <span class="gp">... </span>    <span class="n">abjad</span><span class="o">.</span><span class="n">mutate</span><span class="o">.</span><span class="n">rewrite_meter</span><span class="p">(</span><span class="n">staff</span><span class="p">[:],</span> <span class="n">meter</span><span class="p">)</span>
@@ -357,8 +359,10 @@ they share the same meter.</p>
 </dd>
 <dt>Multiple measures:</dt><dd><p>Similarly to <a class="reference external" href="https://abjad.github.io/api/abjad/meter.html#abjad.meter.Meter.rewrite_meter" title="(in Abjad v3.4)"><code class="xref py py-meth docutils literal notranslate"><span class="pre">abjad.Meter.rewrite_meter()</span></code></a>, this function accepts
 selections of multiple measures:</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">staff</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;\time 4/4 c&#39;8 d&#39;4 e&#39;4 f&#39;4 g&#39;8 | &quot;</span>
-<span class="gp">... </span>                    <span class="sa">r</span><span class="s2">&quot;a&#39;8 b&#39;4 c&#39;&#39;8 d&#39;&#39;16 e&#39;&#39;4 f&#39;&#39;8.&quot;</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">staff</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="sa">r</span><span class="s2">&quot;\time 4/4 c&#39;8 d&#39;4 e&#39;4 f&#39;4 g&#39;8 | &quot;</span>
+<span class="gp">... </span>    <span class="sa">r</span><span class="s2">&quot;a&#39;8 b&#39;4 c&#39;&#39;8 d&#39;&#39;16 e&#39;&#39;4 f&#39;&#39;8.&quot;</span>
+<span class="gp">... </span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">meter</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Meter</span><span class="p">((</span><span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">measure</span> <span class="ow">in</span> <span class="n">abjad</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="n">staff</span><span class="p">[:])</span><span class="o">.</span><span class="n">group_by_measure</span><span class="p">():</span>
 <span class="gp">... </span>    <span class="n">abjad</span><span class="o">.</span><span class="n">mutate</span><span class="o">.</span><span class="n">rewrite_meter</span><span class="p">(</span><span class="n">measure</span><span class="p">,</span> <span class="n">meter</span><span class="p">)</span>
@@ -379,8 +383,10 @@ selections of multiple measures:</p>
 </dd>
 <dt>Multiple measures with different meters:</dt><dd><p>If the measures have different meters, they can be passed on
 individually using <a class="reference external" href="https://docs.python.org/3/library/functions.html#zip" title="(in Python v3.9)"><code class="xref py py-func docutils literal notranslate"><span class="pre">zip()</span></code></a> as shown below.</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">staff</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;\time 3/4 c&#39;8 d&#39;4 e&#39;4 f&#39;16 g&#39;16 | &quot;</span>
-<span class="gp">... </span>                    <span class="sa">r</span><span class="s2">&quot;\time 4/4 a&#39;8 b&#39;4 c&#39;&#39;8 d&#39;&#39;16 e&#39;&#39;4 f&#39;&#39;8.&quot;</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">staff</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="sa">r</span><span class="s2">&quot;\time 3/4 c&#39;8 d&#39;4 e&#39;4 f&#39;16 g&#39;16 | &quot;</span>
+<span class="gp">... </span>    <span class="sa">r</span><span class="s2">&quot;\time 4/4 a&#39;8 b&#39;4 c&#39;&#39;8 d&#39;&#39;16 e&#39;&#39;4 f&#39;&#39;8.&quot;</span>
+<span class="gp">... </span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">meters</span> <span class="o">=</span> <span class="p">[</span><span class="n">abjad</span><span class="o">.</span><span class="n">Meter</span><span class="p">((</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">)),</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Meter</span><span class="p">((</span><span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">))]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">meter</span><span class="p">,</span> <span class="n">measure</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span>
 <span class="gp">... </span>    <span class="n">meters</span><span class="p">,</span>

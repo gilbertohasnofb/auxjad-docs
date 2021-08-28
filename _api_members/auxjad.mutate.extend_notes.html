@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>extend_notes &mdash; auxjad 0.9.3 documentation</title>
+  <title>extend_notes &mdash; auxjad 0.9.4 documentation</title>
   
 
   
@@ -202,13 +202,13 @@
 <h1>extend_notes<a class="headerlink" href="#extend-notes" title="Permalink to this headline">¶</a></h1>
 <dl class="py function">
 <dt class="sig sig-object py" id="auxjad.mutate.extend_notes">
-<span class="sig-prename descclassname"><span class="pre">auxjad.mutate.</span></span><span class="sig-name descname"><span class="pre">extend_notes</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">container</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference external" href="https://abjad.github.io/api/abjad/score.html#abjad.score.Container" title="(in Abjad v3.4)"><span class="pre">abjad.score.Container</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_note_duration</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference external" href="https://abjad.github.io/api/abjad/duration.html#abjad.duration.Duration" title="(in Abjad v3.4)"><span class="pre">abjad.duration.Duration</span></a></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rewrite_meter</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)"><span class="pre">bool</span></a></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)"><span class="pre">None</span></a><a class="reference internal" href="../_modules/auxjad/mutate/extend_notes.html#extend_notes"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#auxjad.mutate.extend_notes" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">auxjad.mutate.</span></span><span class="sig-name descname"><span class="pre">extend_notes</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">container</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference external" href="https://abjad.github.io/api/abjad/score.html#abjad.score.Container" title="(in Abjad v3.4)"><span class="pre">abjad.score.Container</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_note_duration</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference external" href="https://abjad.github.io/api/abjad/duration.html#abjad.duration.Duration" title="(in Abjad v3.4)"><span class="pre">abjad.duration.Duration</span></a></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gap</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference external" href="https://abjad.github.io/api/abjad/duration.html#abjad.duration.Duration" title="(in Abjad v3.4)"><span class="pre">abjad.duration.Duration</span></a></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">Duration(0,</span> <span class="pre">1)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gap_before_end</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)"><span class="pre">bool</span></a></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">use_multimeasure_rests</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)"><span class="pre">bool</span></a></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rewrite_meter</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)"><span class="pre">bool</span></a></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)"><span class="pre">None</span></a><a class="reference internal" href="../_modules/auxjad/mutate/extend_notes.html#extend_notes"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#auxjad.mutate.extend_notes" title="Permalink to this definition">¶</a></dt>
 <dd><p>Mutates an input <a class="reference external" href="https://abjad.github.io/api/abjad/score.html#abjad.score.Container" title="(in Abjad v3.4)"><code class="xref py py-class docutils literal notranslate"><span class="pre">abjad.Container</span></code></a> (or child class) in place and has no
-return value; this function extends all notes and chords up to a given
-maximum note duration.</p>
+return value; this function extends all logical ties (notes and chords) up
+to a given maximum note duration.</p>
 <dl>
-<dt>Basic usage:</dt><dd><p>This function will extend each note’s duration up until a allowed
-maximum duration.</p>
+<dt>Basic usage:</dt><dd><p>This function will extend the duration of each logical tie up until the
+allowed maximum duration.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">staff</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;c&#39;16 r2... d&#39;8 r2.. e&#39;8. r16 r2. f&#39;4 r2.&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">staff</span><span class="p">)</span>
 </pre></div>
@@ -237,6 +237,23 @@ equivalent:</p>
 </div>
 </div>
 <dl>
+<dt>Longer notes:</dt><dd><p>This function will not alter the length of logical ties that are
+already equal to or larger than the maximum extension duration.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">staff</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;c&#39;16 r2... d&#39;2 r2 e&#39;2. r4 f&#39;1&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">staff</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="figure align-default">
+<img alt="../_images/extend_notes-56rOAsxHPP.png" src="../_images/extend_notes-56rOAsxHPP.png" />
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">auxjad</span><span class="o">.</span><span class="n">mutate</span><span class="o">.</span><span class="n">extend_notes</span><span class="p">(</span><span class="n">staff</span><span class="p">,</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Duration</span><span class="p">((</span><span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">)))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">staff</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="figure align-default">
+<img alt="../_images/extend_notes-egF496w5Bs.png" src="../_images/extend_notes-egF496w5Bs.png" />
+</div>
+</dd>
 <dt>Chords:</dt><dd><p>This function works with chords:</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">staff</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span>
 <span class="gp">... </span>    <span class="sa">r</span><span class="s2">&quot;\time 3/4 c&#39;8 r8 r2 r4 &lt;d&#39; e&#39; f&#39;&gt;4 r4 r8 g&#39;16 r16 r2&quot;</span>
@@ -315,6 +332,97 @@ possible:</p>
 <img alt="../_images/extend_notes-5eDO8ehSld.png" src="../_images/extend_notes-5eDO8ehSld.png" />
 </div>
 </dd>
+<dt><code class="docutils literal notranslate"><span class="pre">gap</span></code>:</dt><dd><p>Use the argument <code class="docutils literal notranslate"><span class="pre">gap</span></code> to ensure that there a minimum gap is left
+between leaves when extending them:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">staff</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;c&#39;4 r4 d&#39;4 r4 e&#39;4 r2.&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">staff</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="figure align-default">
+<img alt="../_images/extend_notes-zpAx8NYXof.png" src="../_images/extend_notes-zpAx8NYXof.png" />
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">auxjad</span><span class="o">.</span><span class="n">mutate</span><span class="o">.</span><span class="n">extend_notes</span><span class="p">(</span><span class="n">staff</span><span class="p">,</span>
+<span class="gp">... </span>                           <span class="n">abjad</span><span class="o">.</span><span class="n">Duration</span><span class="p">((</span><span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">)),</span>
+<span class="gp">... </span>                           <span class="n">gap</span><span class="o">=</span><span class="n">abjad</span><span class="o">.</span><span class="n">Duration</span><span class="p">((</span><span class="mi">1</span><span class="p">,</span> <span class="mi">16</span><span class="p">)),</span>
+<span class="gp">... </span>                           <span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">staff</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="figure align-default">
+<img alt="../_images/extend_notes-t1HIPtyJkn.png" src="../_images/extend_notes-t1HIPtyJkn.png" />
+</div>
+<p>Note that this function will not shorten leaves, so previous leaves
+that had no gaps will still have no gaps between them. <code class="docutils literal notranslate"><span class="pre">gap</span></code> will
+only affect leaves that are extended by the function.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">staff</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;c&#39;2 d&#39;4 r4 e&#39;4 r4 f&#39;2 ~ f&#39;2 r2&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">staff</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="figure align-default">
+<img alt="../_images/extend_notes-ZfrusN3f8T.png" src="../_images/extend_notes-ZfrusN3f8T.png" />
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">auxjad</span><span class="o">.</span><span class="n">mutate</span><span class="o">.</span><span class="n">extend_notes</span><span class="p">(</span><span class="n">staff</span><span class="p">,</span>
+<span class="gp">... </span>                           <span class="n">abjad</span><span class="o">.</span><span class="n">Duration</span><span class="p">((</span><span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">)),</span>
+<span class="gp">... </span>                           <span class="n">gap</span><span class="o">=</span><span class="n">abjad</span><span class="o">.</span><span class="n">Duration</span><span class="p">((</span><span class="mi">1</span><span class="p">,</span> <span class="mi">16</span><span class="p">)),</span>
+<span class="gp">... </span>                           <span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">staff</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="figure align-default">
+<img alt="../_images/extend_notes-5iteVkhz3l.png" src="../_images/extend_notes-5iteVkhz3l.png" />
+</div>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">gap_before_end</span></code>:</dt><dd><p>By default, a when <code class="docutils literal notranslate"><span class="pre">gap</span></code> is present it is not applied to the last
+pitched at the end of the container.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">staff</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;c&#39;16 r8. d&#39;16 r8. e&#39;16 r8. f&#39;16 r8.&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">auxjad</span><span class="o">.</span><span class="n">mutate</span><span class="o">.</span><span class="n">extend_notes</span><span class="p">(</span><span class="n">staff</span><span class="p">,</span>
+<span class="gp">... </span>                           <span class="n">abjad</span><span class="o">.</span><span class="n">Duration</span><span class="p">((</span><span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">)),</span>
+<span class="gp">... </span>                           <span class="n">gap</span><span class="o">=</span><span class="n">abjad</span><span class="o">.</span><span class="n">Duration</span><span class="p">((</span><span class="mi">1</span><span class="p">,</span> <span class="mi">16</span><span class="p">)),</span>
+<span class="gp">... </span>                           <span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">staff</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="figure align-default">
+<img alt="../_images/extend_notes-LuCN8pgjLH.png" src="../_images/extend_notes-LuCN8pgjLH.png" />
+</div>
+<p>Set <code class="docutils literal notranslate"><span class="pre">gap_before_end</span></code> to <code class="docutils literal notranslate"><span class="pre">True</span></code> to ensure that there is also a
+minimum gap at the end of the container.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">staff</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;c&#39;16 r8. d&#39;16 r8. e&#39;16 r8. f&#39;16 r8.&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">auxjad</span><span class="o">.</span><span class="n">mutate</span><span class="o">.</span><span class="n">extend_notes</span><span class="p">(</span><span class="n">staff</span><span class="p">,</span>
+<span class="gp">... </span>                           <span class="n">abjad</span><span class="o">.</span><span class="n">Duration</span><span class="p">((</span><span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">)),</span>
+<span class="gp">... </span>                           <span class="n">gap</span><span class="o">=</span><span class="n">abjad</span><span class="o">.</span><span class="n">Duration</span><span class="p">((</span><span class="mi">1</span><span class="p">,</span> <span class="mi">16</span><span class="p">)),</span>
+<span class="gp">... </span>                           <span class="n">gap_before_end</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+<span class="gp">... </span>                           <span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">staff</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="figure align-default">
+<img alt="../_images/extend_notes-LppuegmkEP.png" src="../_images/extend_notes-LppuegmkEP.png" />
+</div>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">use_multimeasure_rests</span></code>:</dt><dd><p>By default, this function uses multi-measure rests</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">staff</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;\time 3/4 r8 c&#39;8 r4 c&#39;4 r2. r8 c&#39;8 r2 r2.&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">auxjad</span><span class="o">.</span><span class="n">mutate</span><span class="o">.</span><span class="n">extend_notes</span><span class="p">(</span><span class="n">staff</span><span class="p">,</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Duration</span><span class="p">((</span><span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">)))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">staff</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="figure align-default">
+<img alt="../_images/extend_notes-WaLYhL24UG.png" src="../_images/extend_notes-WaLYhL24UG.png" />
+</div>
+<p>Set the keyword argument <code class="docutils literal notranslate"><span class="pre">use_multimeasure_rests</span></code> to <code class="docutils literal notranslate"><span class="pre">False</span></code> to
+disable this behaviour.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">staff</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;\time 3/4 r8 c&#39;8 r4 c&#39;4 r2. r8 c&#39;8 r2 r2.&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">auxjad</span><span class="o">.</span><span class="n">mutate</span><span class="o">.</span><span class="n">extend_notes</span><span class="p">(</span><span class="n">staff</span><span class="p">,</span>
+<span class="gp">... </span>                           <span class="n">abjad</span><span class="o">.</span><span class="n">Duration</span><span class="p">((</span><span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">)),</span>
+<span class="gp">... </span>                           <span class="n">use_multimeasure_rests</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+<span class="gp">... </span>                           <span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">staff</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="figure align-default">
+<img alt="../_images/extend_notes-H1uDCqQ8iz.png" src="../_images/extend_notes-H1uDCqQ8iz.png" />
+</div>
+</dd>
 <dt><code class="docutils literal notranslate"><span class="pre">rewrite_meter</span></code></dt><dd><p>By default, this function applies <a class="reference internal" href="auxjad.mutate.auto_rewrite_meter.html#auxjad.mutate.auto_rewrite_meter" title="auxjad.mutate.auto_rewrite_meter"><code class="xref py py-func docutils literal notranslate"><span class="pre">auxjad.mutate.auto_rewrite_meter()</span></code></a>
 at the end of its process.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">staff</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;c&#39;16 r4.. d&#39;16 r4..&quot;</span><span class="p">)</span>
@@ -331,12 +439,9 @@ at the end of its process.</p>
 <div class="figure align-default">
 <img alt="../_images/extend_notes-QNEks8lUXB.png" src="../_images/extend_notes-QNEks8lUXB.png" />
 </div>
-<p>Set <code class="docutils literal notranslate"><span class="pre">rewrite_meter</span></code> to <code class="docutils literal notranslate"><span class="pre">False</span></code> to disable this. Note that this
-function works by slicing a container into very thin slices, which are
-then tied together according to the maximum duration. The main reason
-for setting <code class="docutils literal notranslate"><span class="pre">rewrite_meter</span></code> to <code class="docutils literal notranslate"><span class="pre">False</span></code> is thus performance: when
-multiple mutations are being applied, it’s faster to rewrite the meter
-just once.</p>
+<p>Set <code class="docutils literal notranslate"><span class="pre">rewrite_meter</span></code> to <code class="docutils literal notranslate"><span class="pre">False</span></code> to disable this. The main reason for
+doing this is performance: when multiple mutations are being applied,
+it is faster to rewrite the meter just once at the end.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">staff</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;c&#39;16 r4.. d&#39;16 r4..&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">auxjad</span><span class="o">.</span><span class="n">mutate</span><span class="o">.</span><span class="n">extend_notes</span><span class="p">(</span><span class="n">staff</span><span class="p">,</span>
 <span class="gp">... </span>                           <span class="n">abjad</span><span class="o">.</span><span class="n">Duration</span><span class="p">((</span><span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">)),</span>
@@ -350,6 +455,17 @@ just once.</p>
 </div>
 </dd>
 </dl>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>This function does not support tuplets. Using a container with one or
+more tuplets will result in a <a class="reference external" href="https://docs.python.org/3/library/exceptions.html#ValueError" title="(in Python v3.9)"><code class="xref py py-exc docutils literal notranslate"><span class="pre">ValueError</span></code></a> exception being raised:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">staff</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;c&#39;4 r4 \times 2/3 {r4 d&#39;4 r4} e&#39;4 r2.&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">auxjad</span><span class="o">.</span><span class="n">mutate</span><span class="o">.</span><span class="n">extend_notes</span><span class="p">(</span><span class="n">staff</span><span class="p">,</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Duration</span><span class="p">((</span><span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">)))</span>
+<span class="go">ValueError: first positional argument contains one ore more tuplets,</span>
+<span class="go">which are not currently supported</span>
+</pre></div>
+</div>
+</div>
 </dd></dl>
 
 </div>

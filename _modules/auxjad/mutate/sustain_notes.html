@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>auxjad.mutate.sustain_notes &mdash; auxjad 0.9.3 documentation</title>
+  <title>auxjad.mutate.sustain_notes &mdash; auxjad 0.9.4 documentation</title>
   
 
   
@@ -351,11 +351,12 @@
 <span class="sd">        This function can handle containers with a mixture of notes, chords,</span>
 <span class="sd">        and rests, as well as tuplets.</span>
 
-<span class="sd">        &gt;&gt;&gt; staff = abjad.Staff(r&quot;c&#39;16 r8. d&#39;16 r8. r8 r32 &lt;e&#39; g&#39;&gt;32 r16 r4 &quot;</span>
-<span class="sd">        ...                     r&quot;\times 2/3 {r4 f&#39;4 r4} r4 g&#39;8 r8 a&#39;4 ~ &quot;</span>
-<span class="sd">        ...                     r&quot;a&#39;16 r8. b&#39;4 c&#39;&#39;8 r8 &quot;</span>
-<span class="sd">        ...                     r&quot;r4. d&#39;&#39;8 \times 4/5 {r8 d&#39;&#39;2}&quot;</span>
-<span class="sd">        ...                     )</span>
+<span class="sd">        &gt;&gt;&gt; staff = abjad.Staff(</span>
+<span class="sd">        ...     r&quot;c&#39;16 r8. d&#39;16 r8. r8 r32 &lt;e&#39; g&#39;&gt;32 r16 r4 &quot;</span>
+<span class="sd">        ...     r&quot;\times 2/3 {r4 f&#39;4 r4} r4 g&#39;8 r8 a&#39;4 ~ &quot;</span>
+<span class="sd">        ...     r&quot;a&#39;16 r8. b&#39;4 c&#39;&#39;8 r8 &quot;</span>
+<span class="sd">        ...     r&quot;r4. d&#39;&#39;8 \times 4/5 {r8 d&#39;&#39;2}&quot;</span>
+<span class="sd">        ... )</span>
 <span class="sd">        &gt;&gt;&gt; abjad.show(staff)</span>
 
 <span class="sd">        ..  docs::</span>
@@ -443,13 +444,14 @@
 <span class="sd">        This mutation also handles multi-measure rests, including ones with</span>
 <span class="sd">        non-assignable durations:</span>
 
-<span class="sd">        &gt;&gt;&gt; staff = abjad.Staff(r&quot;r4 c&#39;16 r8. d&#39;16 r4.. &quot;</span>
-<span class="sd">        ...                     r&quot;R1&quot;</span>
-<span class="sd">        ...                     r&quot;r4 e&#39;4 r2&quot;</span>
-<span class="sd">        ...                     r&quot;\time 5/8 r8 f&#39;4 r4&quot;</span>
-<span class="sd">        ...                     r&quot;R1 * 5/8 &quot;</span>
-<span class="sd">        ...                     r&quot;r8 g&#39;8 a&#39;8 r4&quot;</span>
-<span class="sd">        ...                     )</span>
+<span class="sd">        &gt;&gt;&gt; staff = abjad.Staff(</span>
+<span class="sd">        ...     r&quot;r4 c&#39;16 r8. d&#39;16 r4.. &quot;</span>
+<span class="sd">        ...     r&quot;R1&quot;</span>
+<span class="sd">        ...     r&quot;r4 e&#39;4 r2&quot;</span>
+<span class="sd">        ...     r&quot;\time 5/8 r8 f&#39;4 r4&quot;</span>
+<span class="sd">        ...     r&quot;R1 * 5/8 &quot;</span>
+<span class="sd">        ...     r&quot;r8 g&#39;8 a&#39;8 r4&quot;</span>
+<span class="sd">        ... )</span>
 <span class="sd">        &gt;&gt;&gt; abjad.show(staff)</span>
 
 <span class="sd">        ..  docs::</span>
@@ -511,13 +513,14 @@
 <span class="sd">    ``sustain_multimeasure_rests``:</span>
 <span class="sd">        By default, notes are tied across multi-measure rests.</span>
 
-<span class="sd">        &gt;&gt;&gt; staff = abjad.Staff(r&quot;r4 c&#39;16 r8. d&#39;16 r4.. &quot;</span>
-<span class="sd">        ...                     r&quot;R1&quot;</span>
-<span class="sd">        ...                     r&quot;r4 e&#39;4 r2&quot;</span>
-<span class="sd">        ...                     r&quot;\time 5/8 r8 f&#39;4 r4&quot;</span>
-<span class="sd">        ...                     r&quot;R1 * 5/8 &quot;</span>
-<span class="sd">        ...                     r&quot;r8 g&#39;8 a&#39;8 r4&quot;</span>
-<span class="sd">        ...                     )</span>
+<span class="sd">        &gt;&gt;&gt; staff = abjad.Staff(</span>
+<span class="sd">        ...     r&quot;r4 c&#39;16 r8. d&#39;16 r4.. &quot;</span>
+<span class="sd">        ...     r&quot;R1&quot;</span>
+<span class="sd">        ...     r&quot;r4 e&#39;4 r2&quot;</span>
+<span class="sd">        ...     r&quot;\time 5/8 r8 f&#39;4 r4&quot;</span>
+<span class="sd">        ...     r&quot;R1 * 5/8 &quot;</span>
+<span class="sd">        ...     r&quot;r8 g&#39;8 a&#39;8 r4&quot;</span>
+<span class="sd">        ... )</span>
 <span class="sd">        &gt;&gt;&gt; abjad.show(staff)</span>
 
 <span class="sd">        ..  docs::</span>
@@ -578,13 +581,14 @@
 <span class="sd">        By default, |auxjad.mutate.auto_rewrite_meter()| is summoned after</span>
 <span class="sd">        notes are sustained.</span>
 
-<span class="sd">        &gt;&gt;&gt; staff = abjad.Staff(r&quot;r4 c&#39;16 r8. d&#39;16 r4.. &quot;</span>
-<span class="sd">        ...                     r&quot;R1&quot;</span>
-<span class="sd">        ...                     r&quot;r4 e&#39;4 r2&quot;</span>
-<span class="sd">        ...                     r&quot;\time 5/8 r8 f&#39;4 r4&quot;</span>
-<span class="sd">        ...                     r&quot;R1 * 5/8 &quot;</span>
-<span class="sd">        ...                     r&quot;r8 g&#39;8 a&#39;8 r4&quot;</span>
-<span class="sd">        ...                     )</span>
+<span class="sd">        &gt;&gt;&gt; staff = abjad.Staff(</span>
+<span class="sd">        ...     r&quot;r4 c&#39;16 r8. d&#39;16 r4.. &quot;</span>
+<span class="sd">        ...     r&quot;R1&quot;</span>
+<span class="sd">        ...     r&quot;r4 e&#39;4 r2&quot;</span>
+<span class="sd">        ...     r&quot;\time 5/8 r8 f&#39;4 r4&quot;</span>
+<span class="sd">        ...     r&quot;R1 * 5/8 &quot;</span>
+<span class="sd">        ...     r&quot;r8 g&#39;8 a&#39;8 r4&quot;</span>
+<span class="sd">        ... )</span>
 <span class="sd">        &gt;&gt;&gt; abjad.show(staff)</span>
 
 <span class="sd">        ..  docs::</span>
@@ -611,7 +615,7 @@
 <span class="sd">                r4</span>
 <span class="sd">            }</span>
 
-<span class="sd">        ..  figure:: ../_images/sustain_notes-P2CLdKi6Cs.png</span>
+<span class="sd">        ..  figure:: ../_images/sustain_notes-Egibb7mRfJ.png</span>
 
 <span class="sd">        To disable this behaviour, set ``rewrite_meter`` to ``False``:</span>
 
@@ -653,7 +657,7 @@
 <span class="sd">                a&#39;4</span>
 <span class="sd">            }</span>
 
-<span class="sd">        ..  figure:: ../_images/sustain_notes-9WeilArLex.png</span>
+<span class="sd">        ..  figure:: ../_images/sustain_notes-iTuoVMoWgm.png</span>
 
 <span class="sd">    ..  warning::</span>
 

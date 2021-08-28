@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>LeafLooper &mdash; auxjad 0.9.3 documentation</title>
+  <title>LeafLooper &mdash; auxjad 0.9.4 documentation</title>
   
 
   
@@ -222,8 +222,14 @@ and the looping window was size <code class="docutils literal notranslate"><span
 looping process. It takes a container (or child class equivalent) and
 the number of elements of the window as arguments. Each call of the
 object will move the window forwards and output the result.</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">container</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;c&#39;4 d&#39;2 e&#39;4 f&#39;2 ~ f&#39;8 g&#39;1&quot;</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">looper</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">LeafLooper</span><span class="p">(</span><span class="n">container</span><span class="p">,</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">container</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;c&#39;4 d&#39;2 e&#39;4 f&#39;2 ~ f&#39;8 g&#39;4.&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">container</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="figure align-default">
+<img alt="../_images/LeafLooper-IKft5wLQ8J.png" src="../_images/LeafLooper-IKft5wLQ8J.png" />
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">looper</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">LeafLooper</span><span class="p">(</span><span class="n">container</span><span class="p">,</span>
 <span class="gp">... </span>                           <span class="n">window_size</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>
 <span class="gp">... </span>                           <span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">notes</span> <span class="o">=</span> <span class="n">looper</span><span class="p">()</span>
@@ -309,7 +315,7 @@ value of <code class="docutils literal notranslate"><span class="pre">0.0</span>
 the looping window. It must be an <a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">int</span></code></a> and its default value is
 <code class="docutils literal notranslate"><span class="pre">0</span></code>. Lastly, set <a class="reference internal" href="#auxjad.LeafLooper.end_with_max_n_leaves" title="auxjad.LeafLooper.end_with_max_n_leaves"><code class="xref py py-attr docutils literal notranslate"><span class="pre">end_with_max_n_leaves</span></code></a> to <code class="docutils literal notranslate"><span class="pre">True</span></code> to end the
 process when the final window has the maximum number of leaves.</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">container</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;c&#39;4 d&#39;2 e&#39;4 f&#39;2 ~ f&#39;8 g&#39;1&quot;</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">container</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;c&#39;4 d&#39;2 e&#39;4 f&#39;2 ~ f&#39;8 g&#39;4.&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">looper</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">LeafLooper</span><span class="p">(</span><span class="n">container</span><span class="p">,</span>
 <span class="gp">... </span>                           <span class="n">window_size</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>
 <span class="gp">... </span>                           <span class="n">step_size</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
@@ -434,7 +440,7 @@ looper attempts to move backwards after reaching the head position
 </dd>
 <dt><a class="reference external" href="https://docs.python.org/3/library/functions.html#len" title="(in Python v3.9)"><code class="xref py py-func docutils literal notranslate"><span class="pre">len()</span></code></a>:</dt><dd><p>The function <a class="reference external" href="https://docs.python.org/3/library/functions.html#len" title="(in Python v3.9)"><code class="xref py py-func docutils literal notranslate"><span class="pre">len()</span></code></a> can be used to get the total number of
 elements in the contents.</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">container</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;c&#39;4 d&#39;2 e&#39;4 f&#39;2 ~ f&#39;8 g&#39;1&quot;</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">container</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;c&#39;4 d&#39;2 e&#39;4 f&#39;2 ~ f&#39;8 g&#39;4.&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">looper</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">LeafLooper</span><span class="p">(</span><span class="n">container</span><span class="p">,</span>
 <span class="gp">... </span>                           <span class="n">window_size</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>
 <span class="gp">... </span>                           <span class="p">)</span>
@@ -500,7 +506,7 @@ Similarly to <a class="reference internal" href="#auxjad.LeafLooper.output_all" 
 keyword argument <a class="reference internal" href="#auxjad.LeafLooper.omit_time_signatures" title="auxjad.LeafLooper.omit_time_signatures"><code class="xref py py-attr docutils literal notranslate"><span class="pre">omit_time_signatures</span></code></a> set to <code class="docutils literal notranslate"><span class="pre">True</span></code> (default
 is <code class="docutils literal notranslate"><span class="pre">False</span></code>), or use the <a class="reference internal" href="#auxjad.LeafLooper.omit_time_signatures" title="auxjad.LeafLooper.omit_time_signatures"><code class="xref py py-attr docutils literal notranslate"><span class="pre">omit_time_signatures</span></code></a> property after
 initialisation.</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">container</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;c&#39;4 d&#39;2 e&#39;4 f&#39;2 ~ f&#39;8 g&#39;1&quot;</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">container</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;c&#39;4 d&#39;2 e&#39;4 f&#39;2 ~ f&#39;8 g&#39;4.&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">looper</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">LeafLooper</span><span class="p">(</span><span class="n">container</span><span class="p">,</span>
 <span class="gp">... </span>                           <span class="n">window_size</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>
 <span class="gp">... </span>                           <span class="n">omit_time_signatures</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>

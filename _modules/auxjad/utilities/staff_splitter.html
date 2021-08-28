@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>auxjad.utilities.staff_splitter &mdash; auxjad 0.9.3 documentation</title>
+  <title>auxjad.utilities.staff_splitter &mdash; auxjad 0.9.4 documentation</title>
   
 
   
@@ -188,7 +188,9 @@
                                   <span class="n">abjad</span><span class="o">.</span><span class="n">Repeat</span><span class="p">,</span>
                                   <span class="n">abjad</span><span class="o">.</span><span class="n">StaffChange</span><span class="p">,</span>
                                   <span class="n">abjad</span><span class="o">.</span><span class="n">StartHairpin</span><span class="p">,</span>
+                                  <span class="n">abjad</span><span class="o">.</span><span class="n">StartSlur</span><span class="p">,</span>
                                   <span class="n">abjad</span><span class="o">.</span><span class="n">StopHairpin</span><span class="p">,</span>
+                                  <span class="n">abjad</span><span class="o">.</span><span class="n">StopSlur</span><span class="p">,</span>
                                   <span class="n">abjad</span><span class="o">.</span><span class="n">TimeSignature</span><span class="p">,</span>
                                   <span class="p">)):</span>
             <span class="n">abjad</span><span class="o">.</span><span class="n">attach</span><span class="p">(</span><span class="n">indicator</span><span class="p">,</span> <span class="n">rest</span><span class="p">)</span>
@@ -427,7 +429,7 @@
 
 <span class="sd">        &gt;&gt;&gt; staves = auxjad.staff_splitter(staff,</span>
 <span class="sd">        ...                                threshold=&#39;g&#39;,</span>
-<span class="sd">        ...                                lower_clef=&#39;bass&#39;,</span>
+<span class="sd">        ...                                upper_clef=&#39;bass&#39;,</span>
 <span class="sd">        ...                                )</span>
 <span class="sd">        &gt;&gt;&gt; score = abjad.Score(staves)</span>
 <span class="sd">        &gt;&gt;&gt; abjad.show(score)</span>
@@ -474,8 +476,8 @@
 <span class="sd">        ..  figure:: ../_images/staff_splitter-uoSjmalLzc.png</span>
 
 <span class="sd">        &gt;&gt;&gt; staves = auxjad.staff_splitter(staff,</span>
-<span class="sd">        ...                                threshold=&#39;g&#39;,</span>
-<span class="sd">        ...                                lower_clef=&#39;bass&#39;,</span>
+<span class="sd">        ...                                threshold=&quot;e&#39;&quot;,</span>
+<span class="sd">        ...                                add_clefs=False,</span>
 <span class="sd">        ...                                )</span>
 <span class="sd">        &gt;&gt;&gt; score = abjad.Score(staves)</span>
 <span class="sd">        &gt;&gt;&gt; abjad.show(score)</span>
@@ -509,8 +511,8 @@
 
 <span class="sd">            &gt;&gt;&gt; staff = abjad.Staff(r&quot;c&#39;4 d&#39;4 e&#39;4 &lt;d&#39; f&#39; a&#39;&gt;4&quot;)</span>
 <span class="sd">            &gt;&gt;&gt; staves = auxjad.staff_splitter(staff,</span>
-<span class="sd">            ...                                threshold=&#39;g&#39;,</span>
-<span class="sd">            ...                                lower_clef=&#39;bass&#39;,</span>
+<span class="sd">            ...                                threshold=&quot;e&#39;&quot;,</span>
+<span class="sd">            ...                                add_clefs=False,</span>
 <span class="sd">            ...                                )</span>
 <span class="sd">            &gt;&gt;&gt; string = abjad.lilypond(score)</span>
 <span class="sd">            &gt;&gt;&gt; print(string)</span>
@@ -933,6 +935,91 @@
 <span class="sd">            the output. If there are rests or multi-measure rests in the upper</span>
 <span class="sd">            staff, the dynamics can get lost. The best approach is to add them</span>
 <span class="sd">            after the split.</span>
+
+<span class="sd">    Slurs and articulations:</span>
+<span class="sd">        This function will automatically handle slurs and articulations:</span>
+
+<span class="sd">        &gt;&gt;&gt; staff = abjad.Staff(</span>
+<span class="sd">        ...     r&quot;\time 2/4 a8( b c&#39; d&#39;) \times 2/3 {&lt;g b d&#39;&gt;2 &lt;e&#39; f&#39;&gt;4}&quot;</span>
+<span class="sd">        ...     r&quot;\time 3/4 &lt;d a c&#39; g&#39;&gt;4--  r8 &lt;f a bf&gt;4.&quot;</span>
+<span class="sd">        ... )</span>
+<span class="sd">        &gt;&gt;&gt; abjad.show(staff)</span>
+
+<span class="sd">        ..  docs::</span>
+
+<span class="sd">            \new Staff</span>
+<span class="sd">            {</span>
+<span class="sd">                \time 2/4</span>
+<span class="sd">                a8</span>
+<span class="sd">                (</span>
+<span class="sd">                b8</span>
+<span class="sd">                c&#39;8</span>
+<span class="sd">                d&#39;8</span>
+<span class="sd">                )</span>
+<span class="sd">                \times 2/3</span>
+<span class="sd">                {</span>
+<span class="sd">                    &lt;g b d&#39;&gt;2</span>
+<span class="sd">                    &lt;e&#39; f&#39;&gt;4</span>
+<span class="sd">                }</span>
+<span class="sd">                \time 3/4</span>
+<span class="sd">                &lt;d a c&#39; g&#39;&gt;4</span>
+<span class="sd">                - \tenuto</span>
+<span class="sd">                r8</span>
+<span class="sd">                &lt;f a bf&gt;4.</span>
+<span class="sd">            }</span>
+
+<span class="sd">        ..  figure:: ../_images/staff_splitter-SZjT1IJCsn.png</span>
+
+<span class="sd">        &gt;&gt;&gt; staves = auxjad.staff_splitter(staff)</span>
+<span class="sd">        &gt;&gt;&gt; score = abjad.Score(staves)</span>
+<span class="sd">        &gt;&gt;&gt; abjad.show(score)</span>
+
+<span class="sd">        ..  docs::</span>
+
+<span class="sd">            \new Score</span>
+<span class="sd">            &lt;&lt;</span>
+<span class="sd">                \new Staff</span>
+<span class="sd">                {</span>
+<span class="sd">                    \time 2/4</span>
+<span class="sd">                    \clef &quot;treble&quot;</span>
+<span class="sd">                    r4</span>
+<span class="sd">                    c&#39;8</span>
+<span class="sd">                    (</span>
+<span class="sd">                    d&#39;8</span>
+<span class="sd">                    )</span>
+<span class="sd">                    \times 2/3</span>
+<span class="sd">                    {</span>
+<span class="sd">                        d&#39;2</span>
+<span class="sd">                        &lt;e&#39; f&#39;&gt;4</span>
+<span class="sd">                    }</span>
+<span class="sd">                    \time 3/4</span>
+<span class="sd">                    &lt;c&#39; g&#39;&gt;4</span>
+<span class="sd">                    - \tenuto</span>
+<span class="sd">                    r2</span>
+<span class="sd">                }</span>
+<span class="sd">                \new Staff</span>
+<span class="sd">                {</span>
+<span class="sd">                    \time 2/4</span>
+<span class="sd">                    \clef &quot;bass&quot;</span>
+<span class="sd">                    a8</span>
+<span class="sd">                    (</span>
+<span class="sd">                    b8</span>
+<span class="sd">                    )</span>
+<span class="sd">                    r4</span>
+<span class="sd">                    \times 2/3</span>
+<span class="sd">                    {</span>
+<span class="sd">                        &lt;g b&gt;2</span>
+<span class="sd">                        r4</span>
+<span class="sd">                    }</span>
+<span class="sd">                    \time 3/4</span>
+<span class="sd">                    &lt;d a&gt;4</span>
+<span class="sd">                    - \tenuto</span>
+<span class="sd">                    r8</span>
+<span class="sd">                    &lt;f a bf&gt;4.</span>
+<span class="sd">                }</span>
+<span class="sd">            &gt;&gt;</span>
+
+<span class="sd">        ..  figure:: ../_images/staff_splitter-RbPPaLUzjO.png</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">staff</span><span class="p">,</span> <span class="p">(</span><span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">,</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Selection</span><span class="p">)):</span>
         <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;&#39;staff&#39; must be &#39;abjad.Staff&#39; or &#39;abjad.Selection&#39;&quot;</span><span class="p">)</span>

@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>rests_to_multimeasure_rest &mdash; auxjad 0.9.3 documentation</title>
+  <title>rests_to_multimeasure_rest &mdash; auxjad 0.9.4 documentation</title>
   
 
   
@@ -278,10 +278,11 @@ function works with either <a class="reference external" href="https://abjad.git
 <dl>
 <dt>Time signature changes:</dt><dd><p>Works with selections from containers with multiple time signatures as
 well as notes.</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">container</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;\time 3/4 r2. | &quot;</span>
-<span class="gp">... </span>                        <span class="s2">&quot;</span><span class="se">\t</span><span class="s2">ime 6/8 r2. | &quot;</span>
-<span class="gp">... </span>                        <span class="s2">&quot;</span><span class="se">\t</span><span class="s2">ime 5/4 c&#39;1 ~ c&#39;4 | r1 r4&quot;</span>
-<span class="gp">... </span>                        <span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">container</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="sa">r</span><span class="s2">&quot;\time 3/4 r2. | &quot;</span>
+<span class="gp">... </span>    <span class="s2">&quot;</span><span class="se">\t</span><span class="s2">ime 6/8 r2. | &quot;</span>
+<span class="gp">... </span>    <span class="s2">&quot;</span><span class="se">\t</span><span class="s2">ime 5/4 c&#39;1 ~ c&#39;4 | r1 r4&quot;</span>
+<span class="gp">... </span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">container</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -331,10 +332,11 @@ well as notes.</p>
 </dd>
 <dt><code class="docutils literal notranslate"><span class="pre">ignore_clefs</span></code></dt><dd><p>By default, the last clef of an empty measure is preserved when
 replacing it with a multi-measure rest:</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">staff</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;\clef bass r4 r4 \times 2/3 {r4 r8} r4 &quot;</span>
-<span class="gp">... </span>                    <span class="sa">r</span><span class="s2">&quot;\time 3/4 \clef treble r2. &quot;</span>
-<span class="gp">... </span>                    <span class="sa">r</span><span class="s2">&quot;\time 5/4 r2 \clef bass r2.&quot;</span>
-<span class="gp">... </span>                    <span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">staff</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="sa">r</span><span class="s2">&quot;\clef bass r4 r4 \times 2/3 {r4 r8} r4 &quot;</span>
+<span class="gp">... </span>    <span class="sa">r</span><span class="s2">&quot;\time 3/4 \clef treble r2. &quot;</span>
+<span class="gp">... </span>    <span class="sa">r</span><span class="s2">&quot;\time 5/4 r2 \clef bass r2.&quot;</span>
+<span class="gp">... </span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">staff</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -350,10 +352,11 @@ replacing it with a multi-measure rest:</p>
 </div>
 <p>Invoke the mutation with <code class="docutils literal notranslate"><span class="pre">ignore_clefs</span></code> set to <code class="docutils literal notranslate"><span class="pre">True</span></code> to disable
 this behaviour and ignore all clefs:</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">staff</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;\clef bass r4 r4 \times 2/3 {r4 r8} r4 &quot;</span>
-<span class="gp">... </span>                    <span class="sa">r</span><span class="s2">&quot;\time 3/4 \clef treble r2. &quot;</span>
-<span class="gp">... </span>                    <span class="sa">r</span><span class="s2">&quot;\time 5/4 r2 \clef bass r2.&quot;</span>
-<span class="gp">... </span>                    <span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">staff</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="sa">r</span><span class="s2">&quot;\clef bass r4 r4 \times 2/3 {r4 r8} r4 &quot;</span>
+<span class="gp">... </span>    <span class="sa">r</span><span class="s2">&quot;\time 3/4 \clef treble r2. &quot;</span>
+<span class="gp">... </span>    <span class="sa">r</span><span class="s2">&quot;\time 5/4 r2 \clef bass r2.&quot;</span>
+<span class="gp">... </span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">mutate</span><span class="o">.</span><span class="n">rests_to_multimeasure_rest</span><span class="p">(</span>
 <span class="gp">... </span>    <span class="n">staff</span><span class="p">[:],</span>
 <span class="gp">... </span>    <span class="n">ignore_clefs</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>

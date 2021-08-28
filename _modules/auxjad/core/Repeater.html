@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>auxjad.core.Repeater &mdash; auxjad 0.9.3 documentation</title>
+  <title>auxjad.core.Repeater &mdash; auxjad 0.9.4 documentation</title>
   
 
   
@@ -176,6 +176,19 @@
 <span class="sd">        number of repetitions.</span>
 
 <span class="sd">        &gt;&gt;&gt; container = abjad.Container(r&quot;c&#39;4 d&#39;4 e&#39;4 f&#39;4&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; abjad.show(container)</span>
+
+<span class="sd">        ..  docs::</span>
+
+<span class="sd">            {</span>
+<span class="sd">                c&#39;4</span>
+<span class="sd">                d&#39;4</span>
+<span class="sd">                e&#39;4</span>
+<span class="sd">                f&#39;4</span>
+<span class="sd">            }</span>
+
+<span class="sd">        ..  figure:: ../_images/Repeater-aK6JHsJPDM.png</span>
+
 <span class="sd">        &gt;&gt;&gt; repeater = auxjad.Repeater(container)</span>
 <span class="sd">        &gt;&gt;&gt; notes = repeater(2)</span>
 <span class="sd">        &gt;&gt;&gt; staff = abjad.Staff(notes)</span>
@@ -223,7 +236,7 @@
 <span class="sd">    Time signatures:</span>
 <span class="sd">        This class handles different time signatures.</span>
 
-<span class="sd">        &gt;&gt;&gt; container = abjad.Staff(r&quot;\time 3/4 c&#39;2. \time 2/4 r2 g&#39;2&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; container = abjad.Container(r&quot;\time 3/4 c&#39;2. \time 2/4 r2 g&#39;2&quot;)</span>
 <span class="sd">        &gt;&gt;&gt; repeater = auxjad.Repeater(container)</span>
 <span class="sd">        &gt;&gt;&gt; notes = repeater(3)</span>
 <span class="sd">        &gt;&gt;&gt; staff = abjad.Staff(notes)</span>
@@ -281,7 +294,7 @@
 
 <span class="sd">        ..  figure:: ../_images/Repeater-k4hxxghalwh.png</span>
 
-<span class="sd">        &gt;&gt;&gt; container = abjad.Staff(r&quot;\time 3/4 c&#39;4 d&#39;4 e&#39;4 f&#39;2&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; container = abjad.Container(r&quot;\time 3/4 c&#39;4 d&#39;4 e&#39;4 f&#39;2&quot;)</span>
 <span class="sd">        &gt;&gt;&gt; repeater = auxjad.Repeater(container)</span>
 <span class="sd">        &gt;&gt;&gt; notes = repeater(2)</span>
 <span class="sd">        &gt;&gt;&gt; staff = abjad.Staff(notes)</span>
@@ -477,7 +490,7 @@
 <span class="sd">        is ``False``), or use the :attr:`omit_time_signatures` property after</span>
 <span class="sd">        initialisation.</span>
 
-<span class="sd">        &gt;&gt;&gt; container = abjad.Staff(r&quot;c&#39;4 d&#39;4 e&#39;4&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; container = abjad.Container(r&quot;c&#39;4 d&#39;4 e&#39;4&quot;)</span>
 <span class="sd">        &gt;&gt;&gt; repeater = auxjad.Repeater(container,</span>
 <span class="sd">        ...                            omit_time_signatures=True,</span>
 <span class="sd">        ...                            )</span>
@@ -509,7 +522,7 @@
 <span class="sd">        ``False``), or use the :attr:`force_identical_time_signatures` property</span>
 <span class="sd">        after initialisation.</span>
 
-<span class="sd">        &gt;&gt;&gt; container = abjad.Staff(r&quot;\time 5/4 c&#39;2. d&#39;4 e&#39;4&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; container = abjad.Container(r&quot;\time 5/4 c&#39;2. d&#39;4 e&#39;4&quot;)</span>
 <span class="sd">        &gt;&gt;&gt; repeater = auxjad.Repeater(container,</span>
 <span class="sd">        ...                            force_identical_time_signatures=True,</span>
 <span class="sd">        ...                            )</span>
@@ -541,7 +554,7 @@
 <span class="sd">        By default, this class automatically handles dynamics, slurs, and</span>
 <span class="sd">        clefs, optimising their position and omitting repetitions.</span>
 
-<span class="sd">        &gt;&gt;&gt; container = abjad.Staff(r&quot;\clef bass f4\pp( e4) d4(&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; container = abjad.Container(r&quot;\clef bass f4\pp( e4) d4(&quot;)</span>
 <span class="sd">        &gt;&gt;&gt; abjad.show(staff)</span>
 
 <span class="sd">        ..  docs::</span>

@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>staff_splitter &mdash; auxjad 0.9.3 documentation</title>
+  <title>staff_splitter &mdash; auxjad 0.9.4 documentation</title>
   
 
   
@@ -280,7 +280,7 @@ or an <a class="reference external" href="https://docs.python.org/3/library/stdt
 </div>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">staves</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">staff_splitter</span><span class="p">(</span><span class="n">staff</span><span class="p">,</span>
 <span class="gp">... </span>                               <span class="n">threshold</span><span class="o">=</span><span class="s1">&#39;g&#39;</span><span class="p">,</span>
-<span class="gp">... </span>                               <span class="n">lower_clef</span><span class="o">=</span><span class="s1">&#39;bass&#39;</span><span class="p">,</span>
+<span class="gp">... </span>                               <span class="n">upper_clef</span><span class="o">=</span><span class="s1">&#39;bass&#39;</span><span class="p">,</span>
 <span class="gp">... </span>                               <span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">score</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Score</span><span class="p">(</span><span class="n">staves</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">score</span><span class="p">)</span>
@@ -299,8 +299,8 @@ or an <a class="reference external" href="https://docs.python.org/3/library/stdt
 <img alt="../_images/staff_splitter-uoSjmalLzc.png" src="../_images/staff_splitter-uoSjmalLzc.png" />
 </div>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">staves</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">staff_splitter</span><span class="p">(</span><span class="n">staff</span><span class="p">,</span>
-<span class="gp">... </span>                               <span class="n">threshold</span><span class="o">=</span><span class="s1">&#39;g&#39;</span><span class="p">,</span>
-<span class="gp">... </span>                               <span class="n">lower_clef</span><span class="o">=</span><span class="s1">&#39;bass&#39;</span><span class="p">,</span>
+<span class="gp">... </span>                               <span class="n">threshold</span><span class="o">=</span><span class="s2">&quot;e&#39;&quot;</span><span class="p">,</span>
+<span class="gp">... </span>                               <span class="n">add_clefs</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
 <span class="gp">... </span>                               <span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">score</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Score</span><span class="p">(</span><span class="n">staves</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">score</span><span class="p">)</span>
@@ -316,8 +316,8 @@ in the image above that LilyPond automatically fallbacks to treble
 clefs when no clef is present in the input code.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">staff</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;c&#39;4 d&#39;4 e&#39;4 &lt;d&#39; f&#39; a&#39;&gt;4&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">staves</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">staff_splitter</span><span class="p">(</span><span class="n">staff</span><span class="p">,</span>
-<span class="gp">... </span>                               <span class="n">threshold</span><span class="o">=</span><span class="s1">&#39;g&#39;</span><span class="p">,</span>
-<span class="gp">... </span>                               <span class="n">lower_clef</span><span class="o">=</span><span class="s1">&#39;bass&#39;</span><span class="p">,</span>
+<span class="gp">... </span>                               <span class="n">threshold</span><span class="o">=</span><span class="s2">&quot;e&#39;&quot;</span><span class="p">,</span>
+<span class="gp">... </span>                               <span class="n">add_clefs</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
 <span class="gp">... </span>                               <span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">string</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">lilypond</span><span class="p">(</span><span class="n">score</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">string</span><span class="p">)</span>
@@ -465,6 +465,26 @@ note that, once again, dynamics can easily become problematic in
 the output. If there are rests or multi-measure rests in the upper
 staff, the dynamics can get lost. The best approach is to add them
 after the split.</p>
+</div>
+</dd>
+<dt>Slurs and articulations:</dt><dd><p>This function will automatically handle slurs and articulations:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">staff</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="sa">r</span><span class="s2">&quot;\time 2/4 a8( b c&#39; d&#39;) \times 2/3 {&lt;g b d&#39;&gt;2 &lt;e&#39; f&#39;&gt;4}&quot;</span>
+<span class="gp">... </span>    <span class="sa">r</span><span class="s2">&quot;\time 3/4 &lt;d a c&#39; g&#39;&gt;4--  r8 &lt;f a bf&gt;4.&quot;</span>
+<span class="gp">... </span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">staff</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="figure align-default">
+<img alt="../_images/staff_splitter-SZjT1IJCsn.png" src="../_images/staff_splitter-SZjT1IJCsn.png" />
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">staves</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">staff_splitter</span><span class="p">(</span><span class="n">staff</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">score</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Score</span><span class="p">(</span><span class="n">staves</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">score</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="figure align-default">
+<img alt="../_images/staff_splitter-RbPPaLUzjO.png" src="../_images/staff_splitter-RbPPaLUzjO.png" />
 </div>
 </dd>
 </dl>

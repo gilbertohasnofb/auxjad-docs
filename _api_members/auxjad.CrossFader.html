@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>CrossFader &mdash; auxjad 0.9.3 documentation</title>
+  <title>CrossFader &mdash; auxjad 0.9.4 documentation</title>
   
 
   
@@ -209,7 +209,19 @@ the previous results. That is, either a note of the first container is
 removed or a note of the second container is added.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">fade_out_container</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;fs&#39;4 g&#39;2 bf&#39;4&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">fade_in_container</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;\times 4/5 {cs&#39;&#39;4 d&#39;&#39;1}&quot;</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">fader</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">CrossFader</span><span class="p">(</span><span class="n">fade_out_container</span><span class="p">,</span> <span class="n">fade_in_container</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">fade_out_container</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="figure align-default">
+<img alt="../_images/CrossFader-7yWgnyhyA3.png" src="../_images/CrossFader-7yWgnyhyA3.png" />
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">fade_in_container</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="figure align-default">
+<img alt="../_images/CrossFader-aS29mS1xIB.png" src="../_images/CrossFader-aS29mS1xIB.png" />
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">fader</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">CrossFader</span><span class="p">(</span><span class="n">fade_out_container</span><span class="p">,</span> <span class="n">fade_in_container</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">selection_a</span><span class="p">,</span> <span class="n">selection_b</span> <span class="o">=</span> <span class="n">fader</span><span class="p">()</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">score</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Score</span><span class="p">([</span>
 <span class="gp">... </span>    <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span><span class="n">selection_a</span><span class="p">),</span>

@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>auxjad.core.CrossFader &mdash; auxjad 0.9.3 documentation</title>
+  <title>auxjad.core.CrossFader &mdash; auxjad 0.9.4 documentation</title>
   
 
   
@@ -184,6 +184,31 @@
 
 <span class="sd">        &gt;&gt;&gt; fade_out_container = abjad.Container(r&quot;fs&#39;4 g&#39;2 bf&#39;4&quot;)</span>
 <span class="sd">        &gt;&gt;&gt; fade_in_container = abjad.Container(r&quot;\times 4/5 {cs&#39;&#39;4 d&#39;&#39;1}&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; abjad.show(fade_out_container)</span>
+
+<span class="sd">        ..  docs::</span>
+
+<span class="sd">            {</span>
+<span class="sd">                fs&#39;4</span>
+<span class="sd">                g&#39;2</span>
+<span class="sd">                bf&#39;4</span>
+<span class="sd">            }</span>
+
+<span class="sd">        ..  figure:: ../_images/CrossFader-7yWgnyhyA3.png</span>
+
+<span class="sd">        &gt;&gt;&gt; abjad.show(fade_in_container)</span>
+
+<span class="sd">        ..  docs::</span>
+
+<span class="sd">            {</span>
+<span class="sd">                \times 4/5 {</span>
+<span class="sd">                    cs&#39;&#39;4</span>
+<span class="sd">                    d&#39;&#39;1</span>
+<span class="sd">                }</span>
+<span class="sd">            }</span>
+
+<span class="sd">        ..  figure:: ../_images/CrossFader-aS29mS1xIB.png</span>
+
 <span class="sd">        &gt;&gt;&gt; fader = auxjad.CrossFader(fade_out_container, fade_in_container)</span>
 <span class="sd">        &gt;&gt;&gt; selection_a, selection_b = fader()</span>
 <span class="sd">        &gt;&gt;&gt; score = abjad.Score([</span>
@@ -2020,7 +2045,7 @@
         <span class="n">leaves</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="n">fade_out_contents</span><span class="p">)</span><span class="o">.</span><span class="n">leaves</span><span class="p">()</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="n">leaves</span><span class="o">.</span><span class="n">are_contiguous_logical_voice</span><span class="p">():</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;&#39;fade_out_contents&#39; must be contiguous logical &quot;</span>
-                             <span class="s2">&quot; voice&quot;</span><span class="p">)</span>
+                             <span class="s2">&quot;voice&quot;</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_fade_out_contents</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">mutate</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="n">fade_out_contents</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_fader_out</span><span class="o">.</span><span class="n">contents</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_fade_out_contents</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">reset</span><span class="p">()</span>
@@ -2040,7 +2065,7 @@
         <span class="n">leaves</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="n">fade_in_contents</span><span class="p">)</span><span class="o">.</span><span class="n">leaves</span><span class="p">()</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="n">leaves</span><span class="o">.</span><span class="n">are_contiguous_logical_voice</span><span class="p">():</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;&#39;fade_in_contents&#39; must be contiguous logical &quot;</span>
-                             <span class="s2">&quot; voice&quot;</span><span class="p">)</span>
+                             <span class="s2">&quot;voice&quot;</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_fade_in_contents</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">mutate</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="n">fade_in_contents</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_fader_in</span><span class="o">.</span><span class="n">contents</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_fade_in_contents</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">reset</span><span class="p">()</span>

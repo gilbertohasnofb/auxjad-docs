@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>auxjad.core.Shuffler &mdash; auxjad 0.9.3 documentation</title>
+  <title>auxjad.core.Shuffler &mdash; auxjad 0.9.4 documentation</title>
   
 
   
@@ -179,6 +179,19 @@
 <span class="sd">        container.</span>
 
 <span class="sd">        &gt;&gt;&gt; container = abjad.Container(r&quot;c&#39;4 d&#39;4 e&#39;4 f&#39;4&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; abjad.show(container)</span>
+
+<span class="sd">        ..  docs::</span>
+
+<span class="sd">            {</span>
+<span class="sd">                c&#39;4</span>
+<span class="sd">                d&#39;4</span>
+<span class="sd">                e&#39;4</span>
+<span class="sd">                f&#39;4</span>
+<span class="sd">            }</span>
+
+<span class="sd">        ..  figure:: ../_images/Shuffler-1oLQZeQNPo.png</span>
+
 <span class="sd">        &gt;&gt;&gt; shuffler = auxjad.Shuffler(container)</span>
 <span class="sd">        &gt;&gt;&gt; notes = shuffler()</span>
 <span class="sd">        &gt;&gt;&gt; staff = abjad.Staff(notes)</span>
@@ -1121,9 +1134,7 @@
 
 <span class="sd">        ..  docs::</span>
 
-<span class="sd">            \new Staff</span>
 <span class="sd">            {</span>
-<span class="sd">                \time 4/4</span>
 <span class="sd">                e&#39;16</span>
 <span class="sd">                f&#39;8.</span>
 <span class="sd">                ~</span>
@@ -1603,7 +1614,7 @@
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="fm">__repr__</span><span class="p">()</span>
 
     <span class="nd">@staticmethod</span>
-    <span class="k">def</span> <span class="nf">_get_logical_selections</span><span class="p">(</span><span class="n">container</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">_get_logical_selections</span><span class="p">(</span><span class="n">container</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Selection</span><span class="p">:</span>
         <span class="sa">r</span><span class="s1">&#39;Updates the selection of logical ties of a container.&#39;</span>
         <span class="k">def</span> <span class="nf">group_logical_ties</span><span class="p">(</span><span class="n">logical_tie</span><span class="p">):</span>
             <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">logical_tie</span><span class="o">.</span><span class="n">head</span><span class="p">,</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Rest</span><span class="p">):</span>

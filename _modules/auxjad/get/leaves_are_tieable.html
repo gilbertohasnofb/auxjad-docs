@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>auxjad.get.leaves_are_tieable &mdash; auxjad 0.9.3 documentation</title>
+  <title>auxjad.get.leaves_are_tieable &mdash; auxjad 0.9.4 documentation</title>
   
 
   
@@ -171,15 +171,17 @@
                                      <span class="n">Iterable</span><span class="p">[</span><span class="n">abjad</span><span class="o">.</span><span class="n">Component</span><span class="p">],</span>
                                      <span class="n">Iterable</span><span class="p">[</span><span class="n">abjad</span><span class="o">.</span><span class="n">LogicalTie</span><span class="p">],</span>
                                      <span class="p">],</span>
+                       <span class="o">*</span><span class="p">,</span>
+                       <span class="n">only_identical_pitches</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
                        <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
     <span class="sa">r</span><span class="sd">&quot;&quot;&quot;Returns a :obj:`bool` representing whether or not two or more input</span>
-<span class="sd">    leaves have identical pitch(es) and thus can be tied. Input argument can be</span>
-<span class="sd">    a single |abjad.Selection| with multiple leaves, or an iterable with</span>
+<span class="sd">    leaves have any identical pitch(es) and thus can be tied. Input argument</span>
+<span class="sd">    can be a single |abjad.Selection| with multiple leaves, or an iterable with</span>
 <span class="sd">    elements of type |abjad.Leaf| or child classes.</span>
 
 <span class="sd">    Basic usage:</span>
-<span class="sd">        When the pitches in both leaves are identical, this function returns</span>
-<span class="sd">        ``True``:</span>
+<span class="sd">        When one or more pitches of a leave is also present in the next one,</span>
+<span class="sd">        the function returns ``True``:</span>
 
 <span class="sd">        &gt;&gt;&gt; leaf1 = abjad.Note(r&quot;c&#39;4&quot;)</span>
 <span class="sd">        &gt;&gt;&gt; leaf2 = abjad.Note(r&quot;c&#39;4&quot;)</span>
@@ -213,7 +215,7 @@
 <span class="sd">        False</span>
 
 <span class="sd">    Chords:</span>
-<span class="sd">        Handles chords as well as pitches.</span>
+<span class="sd">        Handles chords.</span>
 
 <span class="sd">        &gt;&gt;&gt; chord1 = abjad.Chord(r&quot;&lt;c&#39; e&#39; g&#39;&gt;4&quot;)</span>
 <span class="sd">        &gt;&gt;&gt; chord2 = abjad.Chord(r&quot;&lt;c&#39; e&#39; g&#39;&gt;16&quot;)</span>
@@ -225,6 +227,48 @@
 <span class="sd">        &gt;&gt;&gt; auxjad.get.leaves_are_tieable([chord2, chord3])</span>
 <span class="sd">        False</span>
 
+<span class="sd">    ``only_identical_pitches``:</span>
+<span class="sd">        By default, if any pitch in a leaf (be it either a note or chord) can</span>
+<span class="sd">        be tied to the next leaf, the function returns ``True``:</span>
+
+<span class="sd">        &gt;&gt;&gt; chord1 = abjad.Chord(r&quot;&lt;c&#39; e&#39; g&#39;&gt;4&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; chord2 = abjad.Chord(r&quot;&lt;c&#39; e&#39; g&#39; bf&#39;&gt;4&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; note = abjad.Note(r&quot;c&#39;4&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; auxjad.get.leaves_are_tieable([chord1, chord2])</span>
+<span class="sd">        True</span>
+<span class="sd">        &gt;&gt;&gt; auxjad.get.leaves_are_tieable([chord2, note])</span>
+<span class="sd">        True</span>
+
+<span class="sd">        Set the argument ``only_identical_pitches`` to ``True`` so that the</span>
+<span class="sd">        function only returns ``True`` for identical pitch collections:</span>
+
+<span class="sd">        &gt;&gt;&gt; chord1 = abjad.Chord(r&quot;&lt;c&#39; e&#39; g&#39;&gt;4&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; chord2 = abjad.Chord(r&quot;&lt;c&#39; e&#39; g&#39; bf&#39;&gt;4&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; note = abjad.Note(r&quot;c&#39;4&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; auxjad.get.leaves_are_tieable([chord1, chord2],</span>
+<span class="sd">        ...                               only_identical_pitches=True,</span>
+<span class="sd">        ...                               )</span>
+<span class="sd">        False</span>
+<span class="sd">        &gt;&gt;&gt; auxjad.get.leaves_are_tieable([chord2, note],</span>
+<span class="sd">        ...                               only_identical_pitches=True,</span>
+<span class="sd">        ...                               )</span>
+<span class="sd">        False</span>
+<span class="sd">        &gt;&gt;&gt; chord3 = abjad.Chord(r&quot;&lt;c&#39; e&#39; g&#39; bf&#39;&gt;4&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; chord4 = abjad.Chord(r&quot;&lt;c&#39; e&#39; g&#39; bf&#39;&gt;4&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; auxjad.get.leaves_are_tieable([chord3, chord4],</span>
+<span class="sd">        ...                               only_identical_pitches=True,</span>
+<span class="sd">        ...                               )</span>
+<span class="sd">        True</span>
+
+<span class="sd">    Rests:</span>
+<span class="sd">        If rests are input, the return value is ``False``. It also handles</span>
+<span class="sd">        multi-measure rests.</span>
+
+<span class="sd">        &gt;&gt;&gt; leaf = abjad.Note(r&quot;c&#39;4&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; rest = abjad.Rest(r&quot;r4&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; auxjad.get.leaves_are_tieable([leaf, rest])</span>
+<span class="sd">        False</span>
+
 <span class="sd">    Parentage:</span>
 <span class="sd">        Leaves can also be part of |abjad.Container|&#39;s or child classes.</span>
 
@@ -232,15 +276,10 @@
 <span class="sd">        &gt;&gt;&gt; auxjad.get.leaves_are_tieable([container[1], container[2]])</span>
 <span class="sd">        True</span>
 
-<span class="sd">    Rests:</span>
-<span class="sd">        If rests are input, the return value is ``False``.</span>
-
-<span class="sd">        &gt;&gt;&gt; container = abjad.Container(r&quot;r4 g&#39;4 r2&quot;)</span>
-<span class="sd">        &gt;&gt;&gt; auxjad.get.leaves_are_tieable(leaves)</span>
-<span class="sd">        False</span>
-
 <span class="sd">    Multiple leaves:</span>
-<span class="sd">        Accepts more than two notes:</span>
+<span class="sd">        It accepts more than two leaves and will return ``True`` if all leaves</span>
+<span class="sd">        can be tied sequentially (i.e. leaf one to leaf two, leaf two to leaf</span>
+<span class="sd">        three, etc.):</span>
 
 <span class="sd">        &gt;&gt;&gt; leaf1 = abjad.Note(r&quot;c&#39;4&quot;)</span>
 <span class="sd">        &gt;&gt;&gt; leaf2 = abjad.Note(r&quot;c&#39;4&quot;)</span>
@@ -258,8 +297,9 @@
 <span class="sd">        True</span>
 
 <span class="sd">    Selections:</span>
-<span class="sd">        Accepts a single |abjad.Selection| as input. It will consider all of</span>
-<span class="sd">        its leaves.</span>
+<span class="sd">        Accepts a single |abjad.Selection| as input and will return ``True`` if</span>
+<span class="sd">        all leaves can be tied sequentially (i.e. leaf one to leaf two, leaf</span>
+<span class="sd">        two to leaf three, etc.):</span>
 
 <span class="sd">        &gt;&gt;&gt; staff = abjad.Staff(r&quot;c&#39;2 c&#39;4. c&#39;8&quot;)</span>
 <span class="sd">        &gt;&gt;&gt; auxjad.get.leaves_are_tieable(staff[:])</span>
@@ -276,30 +316,44 @@
             <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;argument must be &#39;abjad.Selection&#39; or an &quot;</span>
                             <span class="s2">&quot;iterable of &#39;abjad.Component&#39;s or &quot;</span>
                             <span class="s2">&quot;&#39;abjad.LogicalTie&#39;s&quot;</span><span class="p">)</span>
-    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">leaves</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">only_identical_pitches</span><span class="p">,</span> <span class="nb">bool</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;&#39;only_identical_pitches&#39; must be &#39;bool&#39;&quot;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">leaves</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">2</span><span class="p">:</span>
         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;argument must contain two or more leaves&quot;</span><span class="p">)</span>
+
     <span class="k">for</span> <span class="n">index</span><span class="p">,</span> <span class="n">leaf1</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">leaves</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]):</span>
         <span class="k">for</span> <span class="n">leaf2</span> <span class="ow">in</span> <span class="n">leaves</span><span class="p">[</span><span class="n">index</span> <span class="o">+</span> <span class="mi">1</span><span class="p">:]:</span>
             <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">leaf1</span><span class="p">,</span> <span class="n">abjad</span><span class="o">.</span><span class="n">LogicalTie</span><span class="p">):</span>
                 <span class="n">leaf1</span> <span class="o">=</span> <span class="n">leaf1</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">leaf2</span><span class="p">,</span> <span class="n">abjad</span><span class="o">.</span><span class="n">LogicalTie</span><span class="p">):</span>
+            <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">leaf2</span><span class="p">,</span> <span class="n">abjad</span><span class="o">.</span><span class="n">LogicalTie</span><span class="p">):</span>
                 <span class="n">leaf2</span> <span class="o">=</span> <span class="n">leaf2</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-            <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">leaf1</span><span class="p">,</span> <span class="nb">type</span><span class="p">(</span><span class="n">leaf2</span><span class="p">)):</span>
+            <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">leaf1</span><span class="p">,</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Rest</span><span class="p">):</span>
                 <span class="k">return</span> <span class="kc">False</span>
-            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">leaf1</span><span class="p">,</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Rest</span><span class="p">):</span>
+            <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">leaf1</span><span class="p">,</span> <span class="n">abjad</span><span class="o">.</span><span class="n">MultimeasureRest</span><span class="p">):</span>
                 <span class="k">return</span> <span class="kc">False</span>
-            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">leaf1</span><span class="p">,</span> <span class="n">abjad</span><span class="o">.</span><span class="n">MultimeasureRest</span><span class="p">):</span>
+            <span class="k">elif</span> <span class="p">(</span><span class="nb">isinstance</span><span class="p">(</span><span class="n">leaf1</span><span class="p">,</span> <span class="p">(</span><span class="n">abjad</span><span class="o">.</span><span class="n">Note</span><span class="p">,</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Chord</span><span class="p">))</span>
+                    <span class="ow">and</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">leaf2</span><span class="p">,</span> <span class="p">(</span><span class="n">abjad</span><span class="o">.</span><span class="n">Note</span><span class="p">,</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Chord</span><span class="p">))):</span>
+                <span class="k">try</span><span class="p">:</span>
+                    <span class="n">pitches_1</span> <span class="o">=</span> <span class="p">[</span><span class="n">leaf1</span><span class="o">.</span><span class="n">written_pitch</span><span class="p">]</span>
+                <span class="k">except</span> <span class="ne">AttributeError</span><span class="p">:</span>
+                    <span class="n">pitches_1</span> <span class="o">=</span> <span class="p">[</span><span class="n">p</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">leaf1</span><span class="o">.</span><span class="n">written_pitches</span><span class="p">]</span>
+                <span class="n">pitches_1</span><span class="o">.</span><span class="n">sort</span><span class="p">()</span>
+                <span class="k">try</span><span class="p">:</span>
+                    <span class="n">pitches_2</span> <span class="o">=</span> <span class="p">[</span><span class="n">leaf2</span><span class="o">.</span><span class="n">written_pitch</span><span class="p">]</span>
+                <span class="k">except</span> <span class="ne">AttributeError</span><span class="p">:</span>
+                    <span class="n">pitches_2</span> <span class="o">=</span> <span class="p">[</span><span class="n">p</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">leaf2</span><span class="o">.</span><span class="n">written_pitches</span><span class="p">]</span>
+                <span class="n">pitches_2</span><span class="o">.</span><span class="n">sort</span><span class="p">()</span>
+                <span class="k">if</span> <span class="n">only_identical_pitches</span> <span class="ow">and</span> <span class="n">pitches_1</span> <span class="o">!=</span> <span class="n">pitches_2</span><span class="p">:</span>
+                    <span class="k">return</span> <span class="kc">False</span>
+                <span class="k">elif</span> <span class="ow">not</span> <span class="nb">any</span><span class="p">([</span><span class="n">p</span> <span class="ow">in</span> <span class="n">pitches_2</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">pitches_1</span><span class="p">]):</span>
+                    <span class="k">return</span> <span class="kc">False</span>
+            <span class="k">else</span><span class="p">:</span>
                 <span class="k">return</span> <span class="kc">False</span>
-            <span class="k">if</span> <span class="p">(</span><span class="nb">isinstance</span><span class="p">(</span><span class="n">leaf1</span><span class="p">,</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Note</span><span class="p">)</span>
-                    <span class="ow">and</span> <span class="n">leaf1</span><span class="o">.</span><span class="n">written_pitch</span> <span class="o">!=</span> <span class="n">leaf2</span><span class="o">.</span><span class="n">written_pitch</span><span class="p">):</span>
-                <span class="k">return</span> <span class="kc">False</span>
-            <span class="k">if</span> <span class="p">(</span><span class="nb">isinstance</span><span class="p">(</span><span class="n">leaf1</span><span class="p">,</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Chord</span><span class="p">)</span>
-                    <span class="ow">and</span> <span class="n">leaf1</span><span class="o">.</span><span class="n">written_pitches</span> <span class="o">!=</span> <span class="n">leaf2</span><span class="o">.</span><span class="n">written_pitches</span><span class="p">):</span>
-                <span class="k">return</span> <span class="kc">False</span>
-            <span class="n">leaf1_graces</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">get</span><span class="o">.</span><span class="n">before_grace_container</span><span class="p">(</span><span class="n">leaf1</span><span class="p">)</span>
-            <span class="n">leaf2_graces</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">get</span><span class="o">.</span><span class="n">before_grace_container</span><span class="p">(</span><span class="n">leaf2</span><span class="p">)</span>
-            <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">leaf1_graces</span><span class="p">,</span> <span class="nb">type</span><span class="p">(</span><span class="n">leaf2_graces</span><span class="p">)):</span>
-                <span class="k">return</span> <span class="kc">False</span>
+
+            <span class="c1"># leaf1_graces = abjad.get.before_grace_container(leaf1)</span>
+            <span class="c1"># leaf2_graces = abjad.get.before_grace_container(leaf2)</span>
+            <span class="c1"># if not isinstance(leaf1_graces, type(leaf2_graces)):</span>
+            <span class="c1">#     return False</span>
     <span class="k">return</span> <span class="kc">True</span></div>
 </pre></div>
 

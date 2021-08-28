@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>auxjad.mutate.prettify_rewrite_meter &mdash; auxjad 0.9.3 documentation</title>
+  <title>auxjad.mutate.prettify_rewrite_meter &mdash; auxjad 0.9.4 documentation</title>
   
 
   
@@ -256,10 +256,11 @@
 <span class="sd">        searches for logical ties of specific length and offset, and its</span>
 <span class="sd">        surroundings do not matter.</span>
 
-<span class="sd">        &gt;&gt;&gt; staff = abjad.Staff(r&quot;\time 3/4 c&#39;32 d&#39;32 e&#39;8 f&#39;16 &quot;</span>
-<span class="sd">        ...                     r&quot;\times 2/3 {g&#39;32 a&#39;32 b&#39;32} c&#39;&#39;8 &quot;</span>
-<span class="sd">        ...                     r&quot;r16 r32. d&#39;&#39;64 e&#39;&#39;8 f&#39;&#39;32 g&#39;&#39;32&quot;</span>
-<span class="sd">        ...                     )</span>
+<span class="sd">        &gt;&gt;&gt; staff = abjad.Staff(</span>
+<span class="sd">        ...     r&quot;\time 3/4 c&#39;32 d&#39;32 e&#39;8 f&#39;16 &quot;</span>
+<span class="sd">        ...     r&quot;\times 2/3 {g&#39;32 a&#39;32 b&#39;32} c&#39;&#39;8 &quot;</span>
+<span class="sd">        ...     r&quot;r16 r32. d&#39;&#39;64 e&#39;&#39;8 f&#39;&#39;32 g&#39;&#39;32&quot;</span>
+<span class="sd">        ... )</span>
 <span class="sd">        &gt;&gt;&gt; meter = abjad.Meter((3, 4))</span>
 <span class="sd">        &gt;&gt;&gt; abjad.mutate.rewrite_meter(staff[:], meter)</span>
 <span class="sd">        &gt;&gt;&gt; abjad.show(staff)</span>
@@ -487,9 +488,10 @@
 <span class="sd">        This function can take handle multiple measures at once, as long as</span>
 <span class="sd">        they share the same meter.</span>
 
-<span class="sd">        &gt;&gt;&gt; staff = abjad.Staff(r&quot;\time 5/8 c&#39;16 d&#39;8 e&#39;8 f&#39;8 g&#39;8 a&#39;16 ~ &quot;</span>
-<span class="sd">        ...                     r&quot;a&#39;16 b&#39;8 c&#39;&#39;8 d&#39;&#39;8 e&#39;&#39;8 f&#39;&#39;16&quot;</span>
-<span class="sd">        ...                     )</span>
+<span class="sd">        &gt;&gt;&gt; staff = abjad.Staff(</span>
+<span class="sd">        ...     r&quot;\time 5/8 c&#39;16 d&#39;8 e&#39;8 f&#39;8 g&#39;8 a&#39;16 ~ &quot;</span>
+<span class="sd">        ...     r&quot;a&#39;16 b&#39;8 c&#39;&#39;8 d&#39;&#39;8 e&#39;&#39;8 f&#39;&#39;16&quot;</span>
+<span class="sd">        ... )</span>
 <span class="sd">        &gt;&gt;&gt; meter = abjad.Meter((5, 8))</span>
 <span class="sd">        &gt;&gt;&gt; for measure in abjad.select(staff[:]).group_by_measure():</span>
 <span class="sd">        ...     abjad.mutate.rewrite_meter(staff[:], meter)</span>
@@ -566,8 +568,10 @@
 <span class="sd">        Similarly to |abjad.Meter.rewrite_meter()|, this function accepts</span>
 <span class="sd">        selections of multiple measures:</span>
 
-<span class="sd">        &gt;&gt;&gt; staff = abjad.Staff(r&quot;\time 4/4 c&#39;8 d&#39;4 e&#39;4 f&#39;4 g&#39;8 | &quot;</span>
-<span class="sd">        ...                     r&quot;a&#39;8 b&#39;4 c&#39;&#39;8 d&#39;&#39;16 e&#39;&#39;4 f&#39;&#39;8.&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; staff = abjad.Staff(</span>
+<span class="sd">        ...     r&quot;\time 4/4 c&#39;8 d&#39;4 e&#39;4 f&#39;4 g&#39;8 | &quot;</span>
+<span class="sd">        ...     r&quot;a&#39;8 b&#39;4 c&#39;&#39;8 d&#39;&#39;16 e&#39;&#39;4 f&#39;&#39;8.&quot;</span>
+<span class="sd">        ... )</span>
 <span class="sd">        &gt;&gt;&gt; meter = abjad.Meter((4, 4))</span>
 <span class="sd">        &gt;&gt;&gt; for measure in abjad.select(staff[:]).group_by_measure():</span>
 <span class="sd">        ...     abjad.mutate.rewrite_meter(measure, meter)</span>
@@ -635,8 +639,10 @@
 <span class="sd">        If the measures have different meters, they can be passed on</span>
 <span class="sd">        individually using :func:`zip()` as shown below.</span>
 
-<span class="sd">        &gt;&gt;&gt; staff = abjad.Staff(r&quot;\time 3/4 c&#39;8 d&#39;4 e&#39;4 f&#39;16 g&#39;16 | &quot;</span>
-<span class="sd">        ...                     r&quot;\time 4/4 a&#39;8 b&#39;4 c&#39;&#39;8 d&#39;&#39;16 e&#39;&#39;4 f&#39;&#39;8.&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; staff = abjad.Staff(</span>
+<span class="sd">        ...     r&quot;\time 3/4 c&#39;8 d&#39;4 e&#39;4 f&#39;16 g&#39;16 | &quot;</span>
+<span class="sd">        ...     r&quot;\time 4/4 a&#39;8 b&#39;4 c&#39;&#39;8 d&#39;&#39;16 e&#39;&#39;4 f&#39;&#39;8.&quot;</span>
+<span class="sd">        ... )</span>
 <span class="sd">        &gt;&gt;&gt; meters = [abjad.Meter((3, 4)), abjad.Meter((4, 4))]</span>
 <span class="sd">        &gt;&gt;&gt; for meter, measure in zip(</span>
 <span class="sd">        ...     meters,</span>
