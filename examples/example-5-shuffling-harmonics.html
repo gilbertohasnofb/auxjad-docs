@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>Shuffling and fading harmonics &mdash; auxjad 0.9.4 documentation</title>
+  <title>Shuffling and fading harmonics &mdash; auxjad 0.9.6 documentation</title>
   
 
   
@@ -20,6 +20,8 @@
   
 
   
+  
+    <link rel="canonical" href="https://gilbertohasnofb.github.io/auxjad-docs/examples/example-5-shuffling-harmonics.html"/>
   
 
   
@@ -42,7 +44,7 @@
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Score gallery" href="../score_gallery/index.html" />
-    <link rel="prev" title="Hocket with random pitches" href="example-4-hocket-with-random-pitches.html" /> 
+    <link rel="prev" title="Random repetitions" href="example-4-random-repetitions.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -52,7 +54,7 @@
     
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
-        <div class="wy-side-nav-search" >
+        <div class="wy-side-nav-search"  style="background: #53c1ab" >
           
 
           
@@ -62,13 +64,6 @@
           
           </a>
 
-          
-            
-            
-              <div class="version">
-                0.9
-              </div>
-            
           
 
           
@@ -93,12 +88,12 @@
             
               <p class="caption"><span class="caption-text">Contents</span></p>
 <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="../index.html">Welcome to Auxjad’s documentation!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../index.html">Welcome to Auxjad’s documentation</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="index.html">Examples of usage</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="example-1-clapping-music.html">Steve Reich’s <em>Clapping Music</em></a></li>
 <li class="toctree-l2"><a class="reference internal" href="example-2-looping.html">Looping with <code class="xref py py-class docutils literal notranslate"><span class="pre">auxjad.LeafLooper</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="example-3-looping.html">Looping with <code class="xref py py-class docutils literal notranslate"><span class="pre">auxjad.WindowLooper</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="example-4-hocket-with-random-pitches.html">Hocket with random pitches</a></li>
+<li class="toctree-l2"><a class="reference internal" href="example-4-random-repetitions.html">Random repetitions</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">Shuffling and fading harmonics</a></li>
 </ul>
 </li>
@@ -188,11 +183,11 @@ Let’s use the class <a class="reference internal" href="../_api_members/auxjad
 and rests.</p>
 <blockquote>
 <div><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">container</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">([</span>
-<span class="gp">... </span>    <span class="n">auxjad</span><span class="o">.</span><span class="n">ArtificialHarmonic</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;&lt;ds&#39; gs&#39;&gt;4&quot;</span><span class="p">),</span>
+<span class="gp">... </span>    <span class="n">auxjad</span><span class="o">.</span><span class="n">ArtificialHarmonic</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;&lt;ef&#39; af&#39;&gt;4&quot;</span><span class="p">),</span>
 <span class="gp">... </span>    <span class="n">auxjad</span><span class="o">.</span><span class="n">ArtificialHarmonic</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;&lt;b e&#39;&gt;8.&quot;</span><span class="p">),</span>
 <span class="gp">... </span>    <span class="n">auxjad</span><span class="o">.</span><span class="n">ArtificialHarmonic</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;&lt;g c&#39;&gt;16&quot;</span><span class="p">,</span> <span class="n">is_parenthesized</span><span class="o">=</span><span class="kc">True</span><span class="p">),</span>
 <span class="gp">... </span>    <span class="n">abjad</span><span class="o">.</span><span class="n">Rest</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;r4&quot;</span><span class="p">),</span>
-<span class="gp">... </span>    <span class="n">abjad</span><span class="o">.</span><span class="n">Chord</span><span class="p">([</span><span class="mi">2</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">9</span><span class="p">],</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">8</span><span class="p">)),</span>
+<span class="gp">... </span>    <span class="n">abjad</span><span class="o">.</span><span class="n">Chord</span><span class="p">([</span><span class="o">-</span><span class="mi">5</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">9</span><span class="p">],</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">8</span><span class="p">)),</span>
 <span class="gp">... </span>    <span class="n">auxjad</span><span class="o">.</span><span class="n">ArtificialHarmonic</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;&lt;d&#39; a&#39;&gt;8&quot;</span><span class="p">,</span> <span class="n">is_parenthesized</span><span class="o">=</span><span class="kc">True</span><span class="p">),</span>
 <span class="gp">... </span><span class="p">])</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">container</span><span class="p">)</span>
@@ -202,7 +197,7 @@ and rests.</p>
 <img alt="../_images/example-5-shuffling-harmonics-vuu4ho4hjk7.png" src="../_images/example-5-shuffling-harmonics-vuu4ho4hjk7.png" />
 </div>
 </div></blockquote>
-<p>The spelling of the chord <code class="docutils literal notranslate"><span class="pre">&lt;d'</span> <span class="pre">af'</span> <span class="pre">a'&gt;</span></code> could be improved. This can be done
+<p>The spelling of the chord <code class="docutils literal notranslate"><span class="pre">&lt;g</span> <span class="pre">af'</span> <span class="pre">a'&gt;</span></code> could be improved. This can be done
 by using <a class="reference internal" href="../_api_members/auxjad.mutate.respell_augmented_unisons.html#auxjad.mutate.respell_augmented_unisons" title="auxjad.mutate.respell_augmented_unisons"><code class="xref py py-func docutils literal notranslate"><span class="pre">auxjad.mutate.respell_augmented_unisons()</span></code></a>. Auxjad automatically adds
 this mutation as an extension method to <a class="reference external" href="https://abjad.github.io/api/abjad/mutate.html#module-abjad.mutate" title="(in Abjad v3.4)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">abjad.mutate</span></code></a> so it can also be
 accessed using <a class="reference internal" href="../_api_members/auxjad.mutate.respell_augmented_unisons.html#auxjad.mutate.respell_augmented_unisons" title="auxjad.mutate.respell_augmented_unisons"><code class="xref py py-func docutils literal notranslate"><span class="pre">abjad.mutate.respell_augmented_unisons()</span></code></a>.</p>
@@ -255,27 +250,20 @@ single note.</p>
 <img alt="../_images/example-5-shuffling-harmonics-1rxgv2my0lr.png" src="../_images/example-5-shuffling-harmonics-1rxgv2my0lr.png" />
 </div>
 </div></blockquote>
-<p>To finalise the score, let’s improve the spelling of some rhythms. Most classes
-and functions in this library use <a class="reference external" href="https://abjad.github.io/api/abjad/meter.html#abjad.meter.Meter.rewrite_meter" title="(in Abjad v3.4)"><code class="xref py py-meth docutils literal notranslate"><span class="pre">abjad.Meter.rewrite_meter()</span></code></a> mutation
-to adjust the spelling of rhythms according to a meter. Unfortunately, this
-mutation sometimes uses ties within a single beat, resulting in rhythms that
-are less ideally notated than they could.
-<a class="reference internal" href="../_api_members/auxjad.mutate.prettify_rewrite_meter.html#auxjad.mutate.prettify_rewrite_meter" title="auxjad.mutate.prettify_rewrite_meter"><code class="xref py py-func docutils literal notranslate"><span class="pre">auxjad.mutate.prettify_rewrite_meter()</span></code></a> fuses pitched leaves according to
-some specific rules, improving the default output of
-<a class="reference external" href="https://abjad.github.io/api/abjad/meter.html#abjad.meter.Meter.rewrite_meter" title="(in Abjad v3.4)"><code class="xref py py-meth docutils literal notranslate"><span class="pre">abjad.Meter.rewrite_meter()</span></code></a>. This function is also available as the method
-<a class="reference internal" href="../_api_members/auxjad.mutate.prettify_rewrite_meter.html#auxjad.mutate.prettify_rewrite_meter" title="auxjad.mutate.prettify_rewrite_meter"><code class="xref py py-func docutils literal notranslate"><span class="pre">abjad.mutate.prettify_rewrite_meter()</span></code></a>, which Auxjad automatically adds as
-an extension method to <a class="reference external" href="https://abjad.github.io/api/abjad/mutate.html#module-abjad.mutate" title="(in Abjad v3.4)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">abjad.mutate</span></code></a>.</p>
 <p>Notice that the time signature has been repeated. While the method
 <a class="reference internal" href="../_api_members/auxjad.Fader.html#auxjad.Fader.output_all" title="auxjad.Fader.output_all"><code class="xref py py-meth docutils literal notranslate"><span class="pre">output_all()</span></code></a> takes care of repeated time signatures,
 dynamics, and clefs, consecutive calls may result in repetitions. But we can
 simply use <a class="reference internal" href="../_api_members/auxjad.mutate.remove_repeated_time_signatures.html#auxjad.mutate.remove_repeated_time_signatures" title="auxjad.mutate.remove_repeated_time_signatures"><code class="xref py py-func docutils literal notranslate"><span class="pre">auxjad.mutate.remove_repeated_time_signatures()</span></code></a> to take care of
 that for us. This function is also available as the extension method
 <a class="reference internal" href="../_api_members/auxjad.mutate.remove_repeated_time_signatures.html#auxjad.mutate.remove_repeated_time_signatures" title="auxjad.mutate.remove_repeated_time_signatures"><code class="xref py py-func docutils literal notranslate"><span class="pre">abjad.mutate.remove_repeated_time_signatures()</span></code></a>, which Auxjad automatically
-adds to <a class="reference external" href="https://abjad.github.io/api/abjad/mutate.html#module-abjad.mutate" title="(in Abjad v3.4)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">abjad.mutate</span></code></a>.</p>
+adds to <a class="reference external" href="https://abjad.github.io/api/abjad/mutate.html#module-abjad.mutate" title="(in Abjad v3.4)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">abjad.mutate</span></code></a>. To finalise the score, let’s remove the last empty
+measure and add a final bar line.</p>
 <blockquote>
-<div><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">mutate</span><span class="o">.</span><span class="n">prettify_rewrite_meter</span><span class="p">(</span><span class="n">staff</span><span class="p">[:],</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Meter</span><span class="p">((</span><span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">)))</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">mutate</span><span class="o">.</span><span class="n">remove_repeated_time_signatures</span><span class="p">(</span><span class="n">staff</span><span class="p">[:])</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">staff</span><span class="p">)</span>
+<div><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">mutate</span><span class="o">.</span><span class="n">remove_repeated_time_signatures</span><span class="p">(</span><span class="n">staff</span><span class="p">[:])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">staff</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">score</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Score</span><span class="p">([</span><span class="n">staff</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">score</span><span class="o">.</span><span class="n">add_final_bar_line</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">score</span><span class="p">)</span>
 </pre></div>
 </div>
 <div class="figure align-default">
@@ -291,7 +279,7 @@ adds to <a class="reference external" href="https://abjad.github.io/api/abjad/mu
           <footer>
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
         <a href="../score_gallery/index.html" class="btn btn-neutral float-right" title="Score gallery" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
-        <a href="example-4-hocket-with-random-pitches.html" class="btn btn-neutral float-left" title="Hocket with random pitches" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="example-4-random-repetitions.html" class="btn btn-neutral float-left" title="Random repetitions" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
     </div>
 
   <hr/>

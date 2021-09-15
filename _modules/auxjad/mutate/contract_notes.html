@@ -1,0 +1,715 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>auxjad.mutate.contract_notes &mdash; auxjad 0.9.6 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+
+  
+  
+
+  
+  
+    <link rel="canonical" href="https://gilbertohasnofb.github.io/auxjad-docs/_modules/auxjad/mutate/contract_notes.html"/>
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+        <script src="../../../_static/jquery.js"></script>
+        <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/doctools.js"></script>
+    
+    <script type="text/javascript" src="../../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #53c1ab" >
+          
+
+          
+            <a href="../../../index.html" class="icon icon-home"> auxjad
+          
+
+          
+          </a>
+
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../index.html">Welcome to Auxjad’s documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../examples/index.html">Examples of usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../score_gallery/index.html">Score gallery</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../api/index.html">Auxjad API</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">auxjad</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../../index.html">Module code</a> &raquo;</li>
+        
+      <li>auxjad.mutate.contract_notes</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for auxjad.mutate.contract_notes</h1><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">abjad</span>
+
+<span class="kn">from</span> <span class="nn">..</span> <span class="kn">import</span> <span class="n">get</span><span class="p">,</span> <span class="n">mutate</span>
+
+
+<div class="viewcode-block" id="contract_notes"><a class="viewcode-back" href="../../../_api_members/auxjad.mutate.contract_notes.html#auxjad.mutate.contract_notes">[docs]</a><span class="k">def</span> <span class="nf">contract_notes</span><span class="p">(</span><span class="n">container</span><span class="p">:</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">,</span>
+                   <span class="n">max_contraction_duration</span><span class="p">:</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Duration</span><span class="p">,</span>
+                   <span class="o">*</span><span class="p">,</span>
+                   <span class="n">minimum_duration</span><span class="p">:</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Duration</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Duration</span><span class="p">((</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)),</span>
+                   <span class="n">use_multimeasure_rests</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+                   <span class="n">rewrite_meter</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+                   <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="sa">r</span><span class="sd">&quot;&quot;&quot;Mutates an input |abjad.Container| (or child class) in place and has no</span>
+<span class="sd">    return value; this function contracts all logical ties (notes and chords)</span>
+<span class="sd">    by a maximum contraction duration.</span>
+
+<span class="sd">    Basic usage:</span>
+<span class="sd">        This function will contract the duration of each logical tie up by the</span>
+<span class="sd">        allowed maximum contraction duration.</span>
+
+<span class="sd">        &gt;&gt;&gt; staff = abjad.Staff(r&quot;c&#39;4 r2. d&#39;2 r2 e&#39;2. r4 f&#39;1&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; abjad.show(staff)</span>
+
+<span class="sd">        ..  docs::</span>
+
+<span class="sd">            \new Staff</span>
+<span class="sd">            {</span>
+<span class="sd">                c&#39;4</span>
+<span class="sd">                r2.</span>
+<span class="sd">                d&#39;2</span>
+<span class="sd">                r2</span>
+<span class="sd">                e&#39;2.</span>
+<span class="sd">                r4</span>
+<span class="sd">                f&#39;1</span>
+<span class="sd">            }</span>
+
+
+<span class="sd">        ..  figure:: ../_images/contract_notes-DtvjEcpLMF.png</span>
+
+<span class="sd">        &gt;&gt;&gt; auxjad.mutate.contract_notes(staff, abjad.Duration((1, 8)))</span>
+<span class="sd">        &gt;&gt;&gt; abjad.show(staff)</span>
+
+<span class="sd">        ..  docs::</span>
+
+<span class="sd">            \new Staff</span>
+<span class="sd">            {</span>
+<span class="sd">                c&#39;8</span>
+<span class="sd">                r2..</span>
+<span class="sd">                d&#39;4.</span>
+<span class="sd">                r8</span>
+<span class="sd">                r2</span>
+<span class="sd">                e&#39;2</span>
+<span class="sd">                ~</span>
+<span class="sd">                e&#39;8</span>
+<span class="sd">                r4.</span>
+<span class="sd">                f&#39;2..</span>
+<span class="sd">                r8</span>
+<span class="sd">            }</span>
+
+<span class="sd">        ..  figure:: ../_images/contract_notes-PEgTVggwUR.png</span>
+
+<span class="sd">    ..  note::</span>
+
+<span class="sd">        Auxjad automatically adds this function as an extension function to</span>
+<span class="sd">        |abjad.mutate|. It can thus be used from either |auxjad.mutate|_ or</span>
+<span class="sd">        |abjad.mutate| namespaces. Therefore, the two lines below are</span>
+<span class="sd">        equivalent:</span>
+
+<span class="sd">        &gt;&gt;&gt; auxjad.mutate.contract_notes(staff)</span>
+<span class="sd">        &gt;&gt;&gt; abjad.mutate.contract_notes(staff)</span>
+
+<span class="sd">    Chords:</span>
+<span class="sd">        This function works with chords:</span>
+
+<span class="sd">        &gt;&gt;&gt; staff = abjad.Staff(r&quot;\time 3/4 c&#39;2. &lt;d&#39; e&#39; f&#39;&gt;2 r4 g&#39;4 r2&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; abjad.show(staff)</span>
+
+<span class="sd">        ..  docs::</span>
+
+<span class="sd">            \new Staff</span>
+<span class="sd">            {</span>
+<span class="sd">                \time 3/4</span>
+<span class="sd">                c&#39;2.</span>
+<span class="sd">                &lt;d&#39; e&#39; f&#39;&gt;2</span>
+<span class="sd">                r4</span>
+<span class="sd">                g&#39;4</span>
+<span class="sd">                r2</span>
+<span class="sd">            }</span>
+
+<span class="sd">        ..  figure:: ../_images/contract_notes-MtQM9vn5rV.png</span>
+
+<span class="sd">        &gt;&gt;&gt; auxjad.mutate.contract_notes(staff, abjad.Duration((1, 16)))</span>
+<span class="sd">        &gt;&gt;&gt; abjad.show(staff)</span>
+
+<span class="sd">        ..  docs::</span>
+
+<span class="sd">            \new Staff</span>
+<span class="sd">            {</span>
+<span class="sd">                \time 3/4</span>
+<span class="sd">                c&#39;2</span>
+<span class="sd">                ~</span>
+<span class="sd">                c&#39;8.</span>
+<span class="sd">                r16</span>
+<span class="sd">                &lt;d&#39; e&#39; f&#39;&gt;4..</span>
+<span class="sd">                r16</span>
+<span class="sd">                r4</span>
+<span class="sd">                g&#39;8.</span>
+<span class="sd">                r16</span>
+<span class="sd">                r2</span>
+<span class="sd">            }</span>
+
+<span class="sd">        ..  figure:: ../_images/contract_notes-3KViO6UZ74.png</span>
+
+<span class="sd">    Second positional argument:</span>
+<span class="sd">        The second positional argument must be an |abjad.Duration| or objects</span>
+<span class="sd">        that can instantiate an |abjad.Duration|, such as :obj:`str`,</span>
+<span class="sd">        :obj:`tuple`, :obj:`int`, and :obj:`float`. The notes will be contract</span>
+<span class="sd">        by up to that duration, or until the note is removed:</span>
+
+<span class="sd">        &gt;&gt;&gt; staff = abjad.Staff(</span>
+<span class="sd">        ...     r&quot;c&#39;4 r2. d&#39;2 r2 e&#39;2. r4 f&#39;1&quot;</span>
+<span class="sd">        ... )</span>
+<span class="sd">        &gt;&gt;&gt; abjad.show(staff)</span>
+
+<span class="sd">        ..  docs::</span>
+
+<span class="sd">            \new Staff</span>
+<span class="sd">            {</span>
+<span class="sd">                c&#39;4</span>
+<span class="sd">                r2.</span>
+<span class="sd">                d&#39;2</span>
+<span class="sd">                r2</span>
+<span class="sd">                e&#39;2.</span>
+<span class="sd">                r4</span>
+<span class="sd">                f&#39;1</span>
+<span class="sd">            }</span>
+
+<span class="sd">        ..  figure:: ../_images/contract_notes-OgFmg6p3VP.png</span>
+
+<span class="sd">        &gt;&gt;&gt; auxjad.mutate.contract_notes(staff, abjad.Duration((1, 2)))</span>
+<span class="sd">        &gt;&gt;&gt; abjad.show(staff)</span>
+
+<span class="sd">        ..  docs::</span>
+
+<span class="sd">            \new Staff</span>
+<span class="sd">            {</span>
+<span class="sd">                R1</span>
+<span class="sd">                R1</span>
+<span class="sd">                e&#39;4</span>
+<span class="sd">                r2.</span>
+<span class="sd">                f&#39;2</span>
+<span class="sd">                r2</span>
+<span class="sd">            }</span>
+
+<span class="sd">        ..  figure:: ../_images/contract_notes-YfZ3maHywo.png</span>
+
+<span class="sd">    Dynamics:</span>
+<span class="sd">        Dynamics are preserved:</span>
+
+<span class="sd">        &gt;&gt;&gt; staff = abjad.Staff(r&quot;c&#39;4\ppp r2. d&#39;2\ff r2 e&#39;2.\f r4 f&#39;1\mp&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; abjad.show(staff)</span>
+
+<span class="sd">        ..  docs::</span>
+
+<span class="sd">            \new Staff</span>
+<span class="sd">            {</span>
+<span class="sd">                c&#39;4</span>
+<span class="sd">                \ppp</span>
+<span class="sd">                r2.</span>
+<span class="sd">                d&#39;2</span>
+<span class="sd">                \ff</span>
+<span class="sd">                r2</span>
+<span class="sd">                e&#39;2.</span>
+<span class="sd">                \f</span>
+<span class="sd">                r4</span>
+<span class="sd">                f&#39;1</span>
+<span class="sd">                \mp</span>
+<span class="sd">            }</span>
+
+<span class="sd">        ..  figure:: ../_images/contract_notes-zKIFJdZuSX.png</span>
+
+<span class="sd">        &gt;&gt;&gt; auxjad.mutate.contract_notes(staff, abjad.Duration((1, 8)))</span>
+<span class="sd">        &gt;&gt;&gt; abjad.show(staff)</span>
+
+<span class="sd">        ..  docs::</span>
+
+<span class="sd">            \new Staff</span>
+<span class="sd">            {</span>
+<span class="sd">                c&#39;8</span>
+<span class="sd">                \ppp</span>
+<span class="sd">                r2..</span>
+<span class="sd">                d&#39;4.</span>
+<span class="sd">                \ff</span>
+<span class="sd">                r8</span>
+<span class="sd">                r2</span>
+<span class="sd">                e&#39;2</span>
+<span class="sd">                \f</span>
+<span class="sd">                ~</span>
+<span class="sd">                e&#39;8</span>
+<span class="sd">                r4.</span>
+<span class="sd">                f&#39;2..</span>
+<span class="sd">                \mp</span>
+<span class="sd">                r8</span>
+<span class="sd">            }</span>
+
+<span class="sd">        ..  figure:: ../_images/contract_notes-iKVB9DmxJf.png</span>
+
+<span class="sd">    Time signatures changes:</span>
+<span class="sd">        This function handles time signature changes:</span>
+
+<span class="sd">        &gt;&gt;&gt; staff = abjad.Staff(</span>
+<span class="sd">        ...     r&quot;\time 3/4 c&#39;4 r2 &quot;</span>
+<span class="sd">        ...     r&quot;\time 2/4 d&#39;2 &quot;</span>
+<span class="sd">        ...     r&quot;\time 3/4 e&#39;2. &quot;</span>
+<span class="sd">        ...     r&quot;\time 4/4 f&#39;1&quot;</span>
+<span class="sd">        ... )</span>
+<span class="sd">        &gt;&gt;&gt; abjad.show(staff)</span>
+
+<span class="sd">        ..  docs::</span>
+
+<span class="sd">            \new Staff</span>
+<span class="sd">            {</span>
+<span class="sd">                \time 3/4</span>
+<span class="sd">                c&#39;4</span>
+<span class="sd">                r2</span>
+<span class="sd">                \time 2/4</span>
+<span class="sd">                d&#39;2</span>
+<span class="sd">                \time 3/4</span>
+<span class="sd">                e&#39;2.</span>
+<span class="sd">                \time 4/4</span>
+<span class="sd">                f&#39;1</span>
+<span class="sd">            }</span>
+
+<span class="sd">        ..  figure:: ../_images/contract_notes-cpRcyhRgB7.png</span>
+
+<span class="sd">        &gt;&gt;&gt; auxjad.mutate.contract_notes(staff, abjad.Duration((3, 4)))</span>
+<span class="sd">        &gt;&gt;&gt; abjad.show(staff)</span>
+
+<span class="sd">        ..  docs::</span>
+
+<span class="sd">            \new Staff</span>
+<span class="sd">            {</span>
+<span class="sd">                \time 3/4</span>
+<span class="sd">                c&#39;8</span>
+<span class="sd">                r8</span>
+<span class="sd">                r2</span>
+<span class="sd">                \time 2/4</span>
+<span class="sd">                d&#39;4.</span>
+<span class="sd">                r8</span>
+<span class="sd">                \time 3/4</span>
+<span class="sd">                e&#39;2</span>
+<span class="sd">                ~</span>
+<span class="sd">                e&#39;8</span>
+<span class="sd">                r8</span>
+<span class="sd">                \time 4/4</span>
+<span class="sd">                f&#39;2..</span>
+<span class="sd">                r8</span>
+<span class="sd">            }</span>
+
+<span class="sd">        ..  figure:: ../_images/contract_notes-R6hnRYZU68.png</span>
+
+<span class="sd">    ``minimum_duration``:</span>
+<span class="sd">        Use the argument ``minimum_duration`` to ensure that notes will not be</span>
+<span class="sd">        contracted further than this value:</span>
+
+<span class="sd">        &gt;&gt;&gt; staff = abjad.Staff(r&quot;c&#39;4 r2. d&#39;2 r2 e&#39;2. r4 f&#39;1&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; abjad.show(staff)</span>
+
+<span class="sd">        ..  docs::</span>
+
+<span class="sd">            \new Staff</span>
+<span class="sd">            {</span>
+<span class="sd">                c&#39;4</span>
+<span class="sd">                r2.</span>
+<span class="sd">                d&#39;2</span>
+<span class="sd">                r2</span>
+<span class="sd">                e&#39;2.</span>
+<span class="sd">                r4</span>
+<span class="sd">                f&#39;1</span>
+<span class="sd">            }</span>
+
+<span class="sd">        ..  figure:: ../_images/contract_notes-lzHgoaJ2Es.png</span>
+
+<span class="sd">        &gt;&gt;&gt; auxjad.mutate.contract_notes(staff,</span>
+<span class="sd">        ...                            abjad.Duration((1, 2)),</span>
+<span class="sd">        ...                            minimum_duration=abjad.Duration((1, 8)),</span>
+<span class="sd">        ...                            )</span>
+<span class="sd">        &gt;&gt;&gt; abjad.show(staff)</span>
+
+<span class="sd">        ..  docs::</span>
+
+<span class="sd">            \new Staff</span>
+<span class="sd">            {</span>
+<span class="sd">                c&#39;8</span>
+<span class="sd">                r2..</span>
+<span class="sd">                d&#39;8</span>
+<span class="sd">                r2..</span>
+<span class="sd">                e&#39;4</span>
+<span class="sd">                r2.</span>
+<span class="sd">                f&#39;2</span>
+<span class="sd">                r2</span>
+<span class="sd">            }</span>
+
+<span class="sd">        ..  figure:: ../_images/contract_notes-o5lELCkJm8.png</span>
+
+<span class="sd">    ``use_multimeasure_rests``:</span>
+<span class="sd">        By default, this function uses multi-measure rests</span>
+
+<span class="sd">        &gt;&gt;&gt; staff = abjad.Staff(</span>
+<span class="sd">        ...     r&quot;\time 4/4 c&#39;4 r2. \time 3/4 d&#39;4 r2 \time 4/4 e&#39;4 r2.&quot;</span>
+<span class="sd">        ... )</span>
+<span class="sd">        &gt;&gt;&gt; auxjad.mutate.contract_notes(staff, abjad.Duration((1, 2)))</span>
+<span class="sd">        &gt;&gt;&gt; abjad.show(staff)</span>
+
+<span class="sd">        ..  docs::</span>
+
+<span class="sd">            \new Staff</span>
+<span class="sd">            {</span>
+<span class="sd">                \time 4/4</span>
+<span class="sd">                R1</span>
+<span class="sd">                \time 3/4</span>
+<span class="sd">                R1 * 3/4</span>
+<span class="sd">                \time 4/4</span>
+<span class="sd">                R1</span>
+<span class="sd">            }</span>
+
+<span class="sd">        ..  figure:: ../_images/contract_notes-olfdBpIydF.png</span>
+
+
+<span class="sd">        Set the keyword argument ``use_multimeasure_rests`` to ``False`` to</span>
+<span class="sd">        disable this behaviour.</span>
+
+<span class="sd">        &gt;&gt;&gt; staff = abjad.Staff(</span>
+<span class="sd">        ...     r&quot;\time 4/4 c&#39;4 r2. \time 3/4 d&#39;4 r2 \time 4/4 e&#39;4 r2.&quot;</span>
+<span class="sd">        ... )</span>
+<span class="sd">        &gt;&gt;&gt; auxjad.mutate.contract_notes(staff,</span>
+<span class="sd">        ...                              abjad.Duration((1, 2)),</span>
+<span class="sd">        ...                              use_multimeasure_rests=False,</span>
+<span class="sd">        ...                              )</span>
+<span class="sd">        &gt;&gt;&gt; abjad.show(staff)</span>
+
+<span class="sd">        ..  docs::</span>
+
+<span class="sd">            \new Staff</span>
+<span class="sd">            {</span>
+<span class="sd">                \time 4/4</span>
+<span class="sd">                r1</span>
+<span class="sd">                \time 3/4</span>
+<span class="sd">                r2.</span>
+<span class="sd">                \time 4/4</span>
+<span class="sd">                r1</span>
+<span class="sd">            }</span>
+
+<span class="sd">        ..  figure:: ../_images/contract_notes-VNPRYNnFl5.png</span>
+
+<span class="sd">    ``rewrite_meter``</span>
+<span class="sd">        By default, this function applies |auxjad.mutate.auto_rewrite_meter()|</span>
+<span class="sd">        at the end of its process.</span>
+
+<span class="sd">        &gt;&gt;&gt; staff = abjad.Staff(r&quot;\time 3/4 r8 c&#39;8 ~ c&#39;2 r8 d&#39;8 ~ d&#39;2&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; abjad.show(staff)</span>
+
+<span class="sd">        ..  docs::</span>
+
+<span class="sd">            \new Staff</span>
+<span class="sd">            {</span>
+<span class="sd">                \time 3/4</span>
+<span class="sd">                r8</span>
+<span class="sd">                c&#39;8</span>
+<span class="sd">                ~</span>
+<span class="sd">                c&#39;2</span>
+<span class="sd">                r8</span>
+<span class="sd">                d&#39;8</span>
+<span class="sd">                ~</span>
+<span class="sd">                d&#39;2</span>
+<span class="sd">            }</span>
+
+<span class="sd">        ..  figure:: ../_images/contract_notes-rGCxpXl3rI.png</span>
+
+<span class="sd">        &gt;&gt;&gt; auxjad.mutate.contract_notes(staff, abjad.Duration((1, 8)))</span>
+<span class="sd">        &gt;&gt;&gt; abjad.show(staff)</span>
+
+<span class="sd">        ..  docs::</span>
+
+<span class="sd">            \new Staff</span>
+<span class="sd">            {</span>
+<span class="sd">                \time 3/4</span>
+<span class="sd">                r8</span>
+<span class="sd">                c&#39;8</span>
+<span class="sd">                ~</span>
+<span class="sd">                c&#39;4.</span>
+<span class="sd">                ~</span>
+<span class="sd">                r8</span>
+<span class="sd">                r8</span>
+<span class="sd">                d&#39;8</span>
+<span class="sd">                ~</span>
+<span class="sd">                d&#39;4.</span>
+<span class="sd">                ~</span>
+<span class="sd">                r8</span>
+<span class="sd">            }</span>
+
+<span class="sd">        ..  figure:: ../_images/contract_notes-NoBsRNQJos.png</span>
+
+<span class="sd">        Set ``rewrite_meter`` to ``False`` to disable this. The main reason for</span>
+<span class="sd">        doing this is performance: when multiple mutations are being applied,</span>
+<span class="sd">        it is faster to rewrite the meter just once at the end.</span>
+
+<span class="sd">        &gt;&gt;&gt; staff = abjad.Staff(r&quot;\time 3/4 r8 c&#39;8 ~ c&#39;2 r8 d&#39;8 ~ d&#39;2&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; auxjad.mutate.contract_notes(staff,</span>
+<span class="sd">        ...                            abjad.Duration((1, 8)),</span>
+<span class="sd">        ...                            rewrite_meter=False,</span>
+<span class="sd">        ...                            )</span>
+<span class="sd">        &gt;&gt;&gt; abjad.show(staff)</span>
+
+<span class="sd">        ..  docs::</span>
+
+<span class="sd">            \new Staff</span>
+<span class="sd">            {</span>
+<span class="sd">                \time 3/4</span>
+<span class="sd">                r8</span>
+<span class="sd">                c&#39;2</span>
+<span class="sd">                ~</span>
+<span class="sd">                r8</span>
+<span class="sd">                r8</span>
+<span class="sd">                d&#39;2</span>
+<span class="sd">                ~</span>
+<span class="sd">                r8</span>
+<span class="sd">            }</span>
+
+<span class="sd">        ..  figure:: ../_images/contract_notes-VNHowP6bFi.png</span>
+
+<span class="sd">    ..  warning::</span>
+
+<span class="sd">        This function does not support tuplets. Using a container with one or</span>
+<span class="sd">        more tuplets will result in a :exc:`ValueError` exception being raised:</span>
+
+<span class="sd">        &gt;&gt;&gt; staff = abjad.Staff(r&quot;c&#39;4 r4 \times 2/3 {r4 d&#39;4 r4} e&#39;4 r2.&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; auxjad.mutate.contract_notes(staff, abjad.Duration((1, 8)))</span>
+<span class="sd">        ValueError: first positional argument contains one ore more tuplets,</span>
+<span class="sd">        which are not currently supported</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">container</span><span class="p">,</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;first positional argument must be &#39;abjad.Container&#39; &quot;</span>
+                        <span class="s2">&quot;or child class&quot;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">abjad</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="n">container</span><span class="p">)</span><span class="o">.</span><span class="n">tuplets</span><span class="p">())</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;first positional argument contains one ore more &quot;</span>
+                         <span class="s2">&quot;tuplets, which are not currently supported&quot;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">max_contraction_duration</span><span class="p">,</span>
+                      <span class="p">(</span><span class="n">abjad</span><span class="o">.</span><span class="n">Duration</span><span class="p">,</span> <span class="nb">str</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">,</span> <span class="nb">int</span><span class="p">,</span> <span class="nb">float</span><span class="p">),</span>
+                      <span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;second positional argument must be &#39;abjad.Duration&#39;, &quot;</span>
+                        <span class="s2">&quot;&#39;str&#39;, &#39;tuple&#39;, or a number&quot;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">max_contraction_duration</span><span class="p">,</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Duration</span><span class="p">):</span>
+        <span class="n">max_contraction_duration</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Duration</span><span class="p">(</span><span class="n">max_contraction_duration</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">minimum_duration</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">minimum_duration</span><span class="p">,</span> <span class="p">(</span><span class="n">abjad</span><span class="o">.</span><span class="n">Duration</span><span class="p">,</span>
+                                             <span class="nb">str</span><span class="p">,</span>
+                                             <span class="nb">tuple</span><span class="p">,</span>
+                                             <span class="nb">int</span><span class="p">,</span>
+                                             <span class="nb">float</span><span class="p">,</span>
+                                             <span class="p">)):</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;&#39;minimum_duration&#39; must be &#39;abjad.Duration&#39;, &quot;</span>
+                            <span class="s2">&quot;&#39;str&#39;, &#39;tuple&#39;, or a number&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">minimum_duration</span><span class="p">,</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Duration</span><span class="p">):</span>
+            <span class="n">minimum_duration</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Duration</span><span class="p">(</span><span class="n">minimum_duration</span><span class="p">)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">use_multimeasure_rests</span><span class="p">,</span> <span class="nb">bool</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;&#39;use_multimeasure_rests&#39; must be &#39;bool&#39;&quot;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">rewrite_meter</span><span class="p">,</span> <span class="nb">bool</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;&#39;rewrite_meter&#39; must be &#39;bool&#39;&quot;</span><span class="p">)</span>
+
+    <span class="n">time_signatures</span> <span class="o">=</span> <span class="n">get</span><span class="o">.</span><span class="n">time_signature_list</span><span class="p">(</span><span class="n">container</span><span class="p">,</span>
+                                              <span class="n">implicit_common_time</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+                                              <span class="p">)</span>
+    <span class="k">for</span> <span class="n">logical_tie</span> <span class="ow">in</span> <span class="n">abjad</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="n">container</span><span class="p">)</span><span class="o">.</span><span class="n">logical_ties</span><span class="p">():</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">logical_tie</span><span class="o">.</span><span class="n">head</span><span class="p">,</span> <span class="p">(</span><span class="n">abjad</span><span class="o">.</span><span class="n">Rest</span><span class="p">,</span> <span class="n">abjad</span><span class="o">.</span><span class="n">MultimeasureRest</span><span class="p">)):</span>
+            <span class="k">continue</span>
+        <span class="n">total_duration</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">get</span><span class="o">.</span><span class="n">duration</span><span class="p">(</span><span class="n">logical_tie</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">total_duration</span> <span class="o">&lt;=</span> <span class="n">minimum_duration</span><span class="p">:</span>
+            <span class="k">continue</span>
+        <span class="n">rest_duration</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">max_contraction_duration</span><span class="p">,</span>
+                            <span class="n">total_duration</span> <span class="o">-</span> <span class="n">minimum_duration</span>
+                            <span class="p">)</span>
+        <span class="k">if</span> <span class="n">rest_duration</span> <span class="o">==</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Duration</span><span class="p">((</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)):</span>
+            <span class="k">continue</span>
+        <span class="n">pitched_duration</span> <span class="o">=</span> <span class="n">total_duration</span> <span class="o">-</span> <span class="n">rest_duration</span>
+
+        <span class="n">indicators</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">get</span><span class="o">.</span><span class="n">indicators</span><span class="p">(</span><span class="n">logical_tie</span><span class="o">.</span><span class="n">head</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">pitched_duration</span> <span class="o">&gt;</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Duration</span><span class="p">((</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)):</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">logical_tie</span><span class="o">.</span><span class="n">head</span><span class="p">,</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Note</span><span class="p">):</span>
+                <span class="n">pitches</span> <span class="o">=</span> <span class="n">logical_tie</span><span class="o">.</span><span class="n">head</span><span class="o">.</span><span class="n">written_pitch</span>
+            <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">logical_tie</span><span class="o">.</span><span class="n">head</span><span class="p">,</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Chord</span><span class="p">):</span>
+                <span class="n">pitches</span> <span class="o">=</span> <span class="p">[</span><span class="n">pitch</span> <span class="k">for</span> <span class="n">pitch</span> <span class="ow">in</span> <span class="n">logical_tie</span><span class="o">.</span><span class="n">head</span><span class="o">.</span><span class="n">written_pitches</span><span class="p">]</span>
+            <span class="n">replacement_items</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">LeafMaker</span><span class="p">()(</span>
+                <span class="p">[</span><span class="n">pitches</span><span class="p">,</span> <span class="kc">None</span><span class="p">],</span>
+                <span class="p">[</span><span class="n">pitched_duration</span><span class="p">,</span> <span class="n">rest_duration</span><span class="p">],</span>
+            <span class="p">)</span>
+            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">indicators</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="k">for</span> <span class="n">indicator</span> <span class="ow">in</span> <span class="n">indicators</span><span class="p">:</span>
+                    <span class="n">abjad</span><span class="o">.</span><span class="n">attach</span><span class="p">(</span><span class="n">indicator</span><span class="p">,</span> <span class="n">replacement_items</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">replacement_items</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">LeafMaker</span><span class="p">()([</span><span class="kc">None</span><span class="p">],</span> <span class="p">[</span><span class="n">rest_duration</span><span class="p">])</span>
+        <span class="n">abjad</span><span class="o">.</span><span class="n">mutate</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="n">logical_tie</span><span class="p">,</span> <span class="n">replacement_items</span><span class="p">)</span>
+    <span class="n">mutate</span><span class="o">.</span><span class="n">enforce_time_signature</span><span class="p">(</span><span class="n">container</span><span class="p">,</span>
+                                  <span class="n">time_signatures</span><span class="p">,</span>
+                                  <span class="n">disable_rewrite_meter</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                                  <span class="p">)</span>
+    <span class="k">if</span> <span class="n">rewrite_meter</span><span class="p">:</span>
+        <span class="n">mutate</span><span class="o">.</span><span class="n">auto_rewrite_meter</span><span class="p">(</span><span class="n">container</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">use_multimeasure_rests</span><span class="p">:</span>
+        <span class="n">mutate</span><span class="o">.</span><span class="n">rests_to_multimeasure_rest</span><span class="p">(</span><span class="n">container</span><span class="p">[:])</span></div>
+</pre></div>
+
+           </div>
+           
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2020, Gilberto Agostinho.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

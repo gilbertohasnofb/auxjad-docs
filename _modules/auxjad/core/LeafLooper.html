@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>auxjad.core.LeafLooper &mdash; auxjad 0.9.4 documentation</title>
+  <title>auxjad.core.LeafLooper &mdash; auxjad 0.9.6 documentation</title>
   
 
   
@@ -20,6 +20,8 @@
   
 
   
+  
+    <link rel="canonical" href="https://gilbertohasnofb.github.io/auxjad-docs/_modules/auxjad/core/LeafLooper.html"/>
   
 
   
@@ -50,7 +52,7 @@
     
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
-        <div class="wy-side-nav-search" >
+        <div class="wy-side-nav-search"  style="background: #53c1ab" >
           
 
           
@@ -60,13 +62,6 @@
           
           </a>
 
-          
-            
-            
-              <div class="version">
-                0.9
-              </div>
-            
           
 
           
@@ -91,7 +86,7 @@
             
               <p class="caption"><span class="caption-text">Contents</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../../../index.html">Welcome to Auxjad’s documentation!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../index.html">Welcome to Auxjad’s documentation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../examples/index.html">Examples of usage</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../score_gallery/index.html">Score gallery</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../api/index.html">Auxjad API</a></li>
@@ -359,8 +354,14 @@
 <span class="sd">        value of ``0.0`` will move the window only backwards).</span>
 <span class="sd">        :attr:`head_position` can be used to offset the starting position of</span>
 <span class="sd">        the looping window. It must be an :obj:`int` and its default value is</span>
-<span class="sd">        ``0``. Lastly, set :attr:`end_with_max_n_leaves` to ``True`` to end the</span>
-<span class="sd">        process when the final window has the maximum number of leaves.</span>
+<span class="sd">        ``0``. Set :attr:`end_with_max_n_leaves` to ``True`` to end the process</span>
+<span class="sd">        when the final window has the maximum number of leaves. The attribute</span>
+<span class="sd">        :attr:`after_rest` sets the length of rests that separate consecutive</span>
+<span class="sd">        iterations (default is ``abjad.Duration(0)``, i.e. no rest). When using</span>
+<span class="sd">        after rests, :attr:`after_rest_in_new_measure` dictates whether or not</span>
+<span class="sd">        rests are appended to the same output measure or to a new one. When in</span>
+<span class="sd">        their own measure, :attr:`use_multimeasure_rests` sets if multi-measure</span>
+<span class="sd">        rests should be used or not.</span>
 
 <span class="sd">        &gt;&gt;&gt; container = abjad.Container(r&quot;c&#39;4 d&#39;2 e&#39;4 f&#39;2 ~ f&#39;8 g&#39;4.&quot;)</span>
 <span class="sd">        &gt;&gt;&gt; looper = auxjad.LeafLooper(container,</span>
@@ -373,6 +374,9 @@
 <span class="sd">        ...                            end_with_max_n_leaves=True,</span>
 <span class="sd">        ...                            omit_time_signatures=False,</span>
 <span class="sd">        ...                            process_on_first_call=True,</span>
+<span class="sd">        ...                            after_rest=(1, 8),</span>
+<span class="sd">        ...                            after_rest_in_new_measure=True,</span>
+<span class="sd">        ...                            use_multimeasure_rests=False,</span>
 <span class="sd">        ...                            )</span>
 <span class="sd">        &gt;&gt;&gt; looper.window_size</span>
 <span class="sd">        3</span>
@@ -392,6 +396,12 @@
 <span class="sd">        False</span>
 <span class="sd">        &gt;&gt;&gt; looper.process_on_first_call</span>
 <span class="sd">        True</span>
+<span class="sd">        &gt;&gt;&gt; looper.after_rest</span>
+<span class="sd">        abjad.Duration((1, 8))</span>
+<span class="sd">        &gt;&gt;&gt; looper.after_rest_in_new_measure</span>
+<span class="sd">        True</span>
+<span class="sd">        &gt;&gt;&gt; looper.use_multimeasure_rests</span>
+<span class="sd">        False</span>
 
 <span class="sd">        Use the properties below to change these values after initialisation.</span>
 
@@ -404,6 +414,9 @@
 <span class="sd">        &gt;&gt;&gt; looper.end_with_max_n_leaves = False</span>
 <span class="sd">        &gt;&gt;&gt; looper.omit_time_signatures = True</span>
 <span class="sd">        &gt;&gt;&gt; looper.process_on_first_call = False</span>
+<span class="sd">        &gt;&gt;&gt; looper.after_rest = 0</span>
+<span class="sd">        &gt;&gt;&gt; looper.after_rest_in_new_measure = False</span>
+<span class="sd">        &gt;&gt;&gt; looper.use_multimeasure_rests = True</span>
 <span class="sd">        &gt;&gt;&gt; looper.window_size</span>
 <span class="sd">        2</span>
 <span class="sd">        &gt;&gt;&gt; looper.step_size</span>
@@ -422,6 +435,12 @@
 <span class="sd">        True</span>
 <span class="sd">        &gt;&gt;&gt; looper.process_on_first_call</span>
 <span class="sd">        False</span>
+<span class="sd">        &gt;&gt;&gt; looper.after_rest</span>
+<span class="sd">        abjad.Duration(0)</span>
+<span class="sd">        &gt;&gt;&gt; looper.after_rest_in_new_measure</span>
+<span class="sd">        False</span>
+<span class="sd">        &gt;&gt;&gt; looper.use_multimeasure_rests</span>
+<span class="sd">        True</span>
 
 <span class="sd">    Setting :attr:`forward_bias` to ``0.0``:</span>
 <span class="sd">        Set :attr:`forward_bias` to ``0.0`` to move backwards instead of</span>
@@ -662,6 +681,16 @@
 
 <span class="sd">        ..  figure:: ../_images/LeafLooper-w389c0wnl2.png</span>
 
+<span class="sd">    ..  tip::</span>
+
+<span class="sd">        All methods that return an |abjad.Selection| will add an initial time</span>
+<span class="sd">        signature to it. The :meth:`output_n` and :meth:`output_all` methods</span>
+<span class="sd">        automatically remove repeated time signatures. When joining selections</span>
+<span class="sd">        output by multiple method calls, use</span>
+<span class="sd">        |auxjad.mutate.remove_repeated_time_signatures()| on the whole</span>
+<span class="sd">        container after fusing the selections to remove any unecessary time</span>
+<span class="sd">        signature changes.</span>
+
 <span class="sd">    :attr:`omit_time_signatures`:</span>
 <span class="sd">        To disable time signatures altogether, initialise this class with the</span>
 <span class="sd">        keyword argument :attr:`omit_time_signatures` set to ``True`` (default</span>
@@ -688,15 +717,139 @@
 
 <span class="sd">        ..  figure:: ../_images/LeafLooper-t3wqox0d0qe.png</span>
 
-<span class="sd">    ..  tip::</span>
+<span class="sd">    :attr:`after_rest`:</span>
+<span class="sd">        To append rests after the output (useful to create separations between</span>
+<span class="sd">        consecutive windows), set the keyword argument :attr:`after_rest` to</span>
+<span class="sd">        an :obj:`int`, :obj:`float`, :obj:`tuple`, or |abjad.Duration| with the</span>
+<span class="sd">        total length of the rests. Setting it to ``abjad.Duration(0)`` will</span>
+<span class="sd">        disable rests (which is the default value).</span>
 
-<span class="sd">        All methods that return an |abjad.Selection| will add an initial time</span>
-<span class="sd">        signature to it. The :meth:`output_n` and :meth:`output_all` methods</span>
-<span class="sd">        automatically remove repeated time signatures. When joining selections</span>
-<span class="sd">        output by multiple method calls, use</span>
-<span class="sd">        |auxjad.mutate.remove_repeated_time_signatures()| on the whole</span>
-<span class="sd">        container after fusing the selections to remove any unecessary time</span>
-<span class="sd">        signature changes.</span>
+<span class="sd">        &gt;&gt;&gt; container = abjad.Container(r&quot;c&#39;4 d&#39;4 e&#39;4 f&#39;4&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; looper = auxjad.LeafLooper(container,</span>
+<span class="sd">        ...                            window_size=2,</span>
+<span class="sd">        ...                            after_rest=(1, 8),</span>
+<span class="sd">        ...                            )</span>
+<span class="sd">        &gt;&gt;&gt; notes = looper.output_all()</span>
+<span class="sd">        &gt;&gt;&gt; staff = abjad.Staff(notes)</span>
+<span class="sd">        &gt;&gt;&gt; abjad.show(staff)</span>
+
+<span class="sd">        ..  docs::</span>
+
+<span class="sd">            \new Staff</span>
+<span class="sd">            {</span>
+<span class="sd">                \time 5/8</span>
+<span class="sd">                c&#39;4</span>
+<span class="sd">                d&#39;8</span>
+<span class="sd">                ~</span>
+<span class="sd">                d&#39;8</span>
+<span class="sd">                r8</span>
+<span class="sd">                d&#39;4</span>
+<span class="sd">                e&#39;8</span>
+<span class="sd">                ~</span>
+<span class="sd">                e&#39;8</span>
+<span class="sd">                r8</span>
+<span class="sd">                e&#39;4</span>
+<span class="sd">                f&#39;8</span>
+<span class="sd">                ~</span>
+<span class="sd">                f&#39;8</span>
+<span class="sd">                r8</span>
+<span class="sd">                \time 3/8</span>
+<span class="sd">                f&#39;4</span>
+<span class="sd">                r8</span>
+<span class="sd">            }</span>
+
+<span class="sd">        ..  figure:: ../_images/LeafLooper-AXXMUqnFfD.png</span>
+
+<span class="sd">    :attr:`after_rest_in_new_measure`:</span>
+<span class="sd">        When using after rests, the keyword argument</span>
+<span class="sd">        :attr:`after_rest_in_new_measure` controls whether or not the rests are</span>
+<span class="sd">        appended to the same output measure or to a new one.</span>
+
+<span class="sd">        &gt;&gt;&gt; container = abjad.Container(r&quot;c&#39;4 d&#39;4 e&#39;4 f&#39;4&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; looper = auxjad.LeafLooper(container,</span>
+<span class="sd">        ...                            window_size=2,</span>
+<span class="sd">        ...                            after_rest=(1, 8),</span>
+<span class="sd">        ...                            after_rest_in_new_measure=True,</span>
+<span class="sd">        ...                            )</span>
+<span class="sd">        &gt;&gt;&gt; notes = looper.output_all()</span>
+<span class="sd">        &gt;&gt;&gt; staff = abjad.Staff(notes)</span>
+<span class="sd">        &gt;&gt;&gt; abjad.show(staff)</span>
+
+<span class="sd">        ..  docs::</span>
+
+<span class="sd">            \new Staff</span>
+<span class="sd">            {</span>
+<span class="sd">                \time 2/4</span>
+<span class="sd">                c&#39;4</span>
+<span class="sd">                d&#39;4</span>
+<span class="sd">                \time 1/8</span>
+<span class="sd">                R1 * 1/8</span>
+<span class="sd">                \time 2/4</span>
+<span class="sd">                d&#39;4</span>
+<span class="sd">                e&#39;4</span>
+<span class="sd">                \time 1/8</span>
+<span class="sd">                R1 * 1/8</span>
+<span class="sd">                \time 2/4</span>
+<span class="sd">                e&#39;4</span>
+<span class="sd">                f&#39;4</span>
+<span class="sd">                \time 1/8</span>
+<span class="sd">                R1 * 1/8</span>
+<span class="sd">                \time 1/4</span>
+<span class="sd">                f&#39;4</span>
+<span class="sd">                \time 1/8</span>
+<span class="sd">                R1 * 1/8</span>
+<span class="sd">            }</span>
+
+<span class="sd">        ..  figure:: ../_images/LeafLooper-FQtegfLdcr.png</span>
+
+
+<span class="sd">    :attr:`use_multimeasure_rests`:</span>
+<span class="sd">        When after rests are used and :attr:`after_rest_in_new_measure` is set</span>
+<span class="sd">        to ``True``, multi-measure rests are automatically used. To use regular</span>
+<span class="sd">        rests, set :attr:`use_multimeasure_rests` to ``False``.</span>
+
+<span class="sd">        &gt;&gt;&gt; container = abjad.Container(r&quot;c&#39;4 d&#39;4 e&#39;4 f&#39;4&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; looper = auxjad.LeafLooper(container,</span>
+<span class="sd">        ...                            window_size=2,</span>
+<span class="sd">        ...                            after_rest=(1, 8),</span>
+<span class="sd">        ...                            after_rest_in_new_measure=True,</span>
+<span class="sd">        ...                            use_multimeasure_rests=False,</span>
+<span class="sd">        ...                            )</span>
+<span class="sd">        &gt;&gt;&gt; notes = looper.output_all()</span>
+<span class="sd">        &gt;&gt;&gt; staff = abjad.Staff(notes)</span>
+<span class="sd">        &gt;&gt;&gt; abjad.show(staff)</span>
+
+<span class="sd">        ..  docs::</span>
+
+<span class="sd">            \new Staff</span>
+<span class="sd">            {</span>
+<span class="sd">                \time 2/4</span>
+<span class="sd">                c&#39;4</span>
+<span class="sd">                d&#39;4</span>
+<span class="sd">                \time 1/8</span>
+<span class="sd">                r8</span>
+<span class="sd">                \time 2/4</span>
+<span class="sd">                d&#39;4</span>
+<span class="sd">                e&#39;4</span>
+<span class="sd">                \time 1/8</span>
+<span class="sd">                r8</span>
+<span class="sd">                \time 2/4</span>
+<span class="sd">                e&#39;4</span>
+<span class="sd">                f&#39;4</span>
+<span class="sd">                \time 1/8</span>
+<span class="sd">                r8</span>
+<span class="sd">                \time 1/4</span>
+<span class="sd">                f&#39;4</span>
+<span class="sd">                \time 1/8</span>
+<span class="sd">                r8</span>
+<span class="sd">            }</span>
+
+<span class="sd">        ..  figure:: ../_images/LeafLooper-wqN3GAcMTR.png</span>
+
+<span class="sd">    ..  note::</span>
+
+<span class="sd">        Multi-measure rests will not be used if :attr:`omit_time_signatures` is</span>
+<span class="sd">        ``True``, regardless of the value of :attr:`use_multimeasure_rests`.</span>
 
 <span class="sd">    :attr:`end_with_max_n_leaves`:</span>
 <span class="sd">        When ``True``, the last bar in the output will contain the maximum</span>
@@ -1111,6 +1264,9 @@
                  <span class="s1">&#39;_fuse_across_groups_of_beats&#39;</span><span class="p">,</span>
                  <span class="s1">&#39;_fuse_quadruple_meter&#39;</span><span class="p">,</span>
                  <span class="s1">&#39;_fuse_triple_meter&#39;</span><span class="p">,</span>
+                 <span class="s1">&#39;_after_rest&#39;</span><span class="p">,</span>
+                 <span class="s1">&#39;_after_rest_in_new_measure&#39;</span><span class="p">,</span>
+                 <span class="s1">&#39;_use_multimeasure_rests&#39;</span><span class="p">,</span>
                  <span class="p">)</span>
 
     <span class="c1">### INITIALISER ###</span>
@@ -1136,6 +1292,15 @@
                  <span class="n">fuse_across_groups_of_beats</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
                  <span class="n">fuse_quadruple_meter</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
                  <span class="n">fuse_triple_meter</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+                 <span class="n">after_rest</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span>
+                                   <span class="nb">float</span><span class="p">,</span>
+                                   <span class="nb">str</span><span class="p">,</span>
+                                   <span class="nb">tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">],</span>
+                                   <span class="n">abjad</span><span class="o">.</span><span class="n">Duration</span><span class="p">,</span>
+                                   <span class="n">abjad</span><span class="o">.</span><span class="n">Rest</span><span class="p">,</span>
+                                   <span class="p">]</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
+                 <span class="n">after_rest_in_new_measure</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+                 <span class="n">use_multimeasure_rests</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
                  <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="sa">r</span><span class="s1">&#39;Initialises self.&#39;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">contents</span> <span class="o">=</span> <span class="n">contents</span>
@@ -1150,6 +1315,9 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">fuse_across_groups_of_beats</span> <span class="o">=</span> <span class="n">fuse_across_groups_of_beats</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">fuse_quadruple_meter</span> <span class="o">=</span> <span class="n">fuse_quadruple_meter</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">fuse_triple_meter</span> <span class="o">=</span> <span class="n">fuse_triple_meter</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">after_rest</span> <span class="o">=</span> <span class="n">after_rest</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">after_rest_in_new_measure</span> <span class="o">=</span> <span class="n">after_rest_in_new_measure</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">use_multimeasure_rests</span> <span class="o">=</span> <span class="n">use_multimeasure_rests</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">head_position</span><span class="o">=</span><span class="n">head_position</span><span class="p">,</span>
                          <span class="n">window_size</span><span class="o">=</span><span class="n">window_size</span><span class="p">,</span>
                          <span class="n">step_size</span><span class="o">=</span><span class="n">step_size</span><span class="p">,</span>
@@ -1194,6 +1362,26 @@
                                       <span class="p">)</span>
                 <span class="n">abjad</span><span class="o">.</span><span class="n">mutate</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="n">logical_tie_</span><span class="p">,</span> <span class="n">tuplet</span><span class="p">)</span>
             <span class="n">time_signature_duration</span> <span class="o">+=</span> <span class="n">effective_duration</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_after_rest</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">if</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_after_rest_in_new_measure</span>
+                    <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">_use_multimeasure_rests</span>
+                    <span class="ow">and</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_omit_time_signatures</span><span class="p">):</span>
+                <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_after_rest</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+                    <span class="n">multiplier</span> <span class="o">=</span> <span class="kc">None</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">multiplier</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Multiplier</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_after_rest</span><span class="p">)</span>
+                <span class="n">rest</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">MultimeasureRest</span><span class="p">((</span><span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">),</span>
+                                              <span class="n">multiplier</span><span class="o">=</span><span class="n">multiplier</span><span class="p">,</span>
+                                              <span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">rest</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">LeafMaker</span><span class="p">()([</span><span class="kc">None</span><span class="p">],</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">_after_rest</span><span class="p">])</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_after_rest_in_new_measure</span><span class="p">:</span>
+                <span class="n">time_signature_duration</span> <span class="o">+=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_after_rest</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">time_signature</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">TimeSignature</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_after_rest</span><span class="p">)</span>
+                <span class="n">time_signature</span><span class="o">.</span><span class="n">simplify_ratio</span><span class="p">()</span>
+                <span class="n">abjad</span><span class="o">.</span><span class="n">attach</span><span class="p">(</span><span class="n">time_signature</span><span class="p">,</span> <span class="n">abjad</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="n">rest</span><span class="p">)</span><span class="o">.</span><span class="n">leaf</span><span class="p">(</span><span class="mi">0</span><span class="p">))</span>
+            <span class="n">dummy_container</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">rest</span><span class="p">)</span>
         <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">logical_ties</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
             <span class="n">time_signature</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">TimeSignature</span><span class="p">(</span><span class="n">time_signature_duration</span><span class="p">)</span>
             <span class="n">time_signature</span><span class="o">.</span><span class="n">simplify_ratio</span><span class="p">()</span>
@@ -1447,6 +1635,62 @@
         <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">fuse_triple_meter</span><span class="p">,</span> <span class="nb">bool</span><span class="p">):</span>
             <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;&#39;fuse_triple_meter&#39; must be &#39;bool&#39;&quot;</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_fuse_triple_meter</span> <span class="o">=</span> <span class="n">fuse_triple_meter</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">after_rest</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Duration</span><span class="p">:</span>
+        <span class="sa">r</span><span class="sd">&quot;&quot;&quot;Sets the length of the rest appended at the end of the window</span>
+<span class="sd">        (default is ``0``).</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_after_rest</span>
+
+    <span class="nd">@after_rest</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">after_rest</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+                   <span class="n">after_rest</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span>
+                                     <span class="nb">float</span><span class="p">,</span>
+                                     <span class="nb">str</span><span class="p">,</span>
+                                     <span class="nb">tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">],</span>
+                                     <span class="n">abjad</span><span class="o">.</span><span class="n">Duration</span><span class="p">,</span>
+                                     <span class="n">abjad</span><span class="o">.</span><span class="n">Rest</span><span class="p">,</span>
+                                     <span class="p">],</span>
+                   <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">after_rest</span><span class="p">,</span>
+                          <span class="p">(</span><span class="n">abjad</span><span class="o">.</span><span class="n">Duration</span><span class="p">,</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Rest</span><span class="p">,</span> <span class="nb">str</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">,</span> <span class="nb">int</span><span class="p">,</span> <span class="nb">float</span><span class="p">),</span>
+                          <span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;&#39;after_rest&#39; must be &#39;abjad.Duration&#39;, &quot;</span>
+                            <span class="s2">&quot;&#39;abjad.Rest&#39;, &#39;str&#39;, &#39;tuple&#39;, or a number&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">after_rest</span><span class="p">,</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Rest</span><span class="p">):</span>
+            <span class="n">after_rest</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">get</span><span class="o">.</span><span class="n">duration</span><span class="p">(</span><span class="n">after_rest</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_after_rest</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Duration</span><span class="p">(</span><span class="n">after_rest</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">after_rest_in_new_measure</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+        <span class="sa">r</span><span class="sd">&quot;&quot;&quot;If ``True``, then after rests will be added to their own measure</span>
+<span class="sd">        (default is ``False``).</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_after_rest_in_new_measure</span>
+
+    <span class="nd">@after_rest_in_new_measure</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">after_rest_in_new_measure</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+                                  <span class="n">after_rest_in_new_measure</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
+                                  <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">after_rest_in_new_measure</span><span class="p">,</span> <span class="nb">bool</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;&#39;after_rest_in_new_measure&#39; must be &#39;bool&#39;&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_after_rest_in_new_measure</span> <span class="o">=</span> <span class="n">after_rest_in_new_measure</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">use_multimeasure_rests</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+        <span class="sa">r</span><span class="sd">&quot;&quot;&quot;If ``True``, then multi-measure rests will be used for after rests</span>
+<span class="sd">        when added to their own measure (default is ``True``).</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_use_multimeasure_rests</span>
+
+    <span class="nd">@use_multimeasure_rests</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">use_multimeasure_rests</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+                               <span class="n">use_multimeasure_rests</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
+                               <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">use_multimeasure_rests</span><span class="p">,</span> <span class="nb">bool</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;&#39;use_multimeasure_rests&#39; must be &#39;bool&#39;&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_use_multimeasure_rests</span> <span class="o">=</span> <span class="n">use_multimeasure_rests</span>
 
     <span class="c1">### PRIVATE PROPERTIES ###</span>
 
