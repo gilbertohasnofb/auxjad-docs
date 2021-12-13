@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>Random repetitions &mdash; auxjad 0.9.6 documentation</title>
+  <title>Random repetitions &mdash; Auxjad 1.0.0 documentation</title>
   
 
   
@@ -54,16 +54,26 @@
     
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
-        <div class="wy-side-nav-search"  style="background: #53c1ab" >
+        <div class="wy-side-nav-search" >
           
 
           
-            <a href="../index.html" class="icon icon-home"> auxjad
+            <a href="../index.html" class="icon icon-home"> Auxjad
           
 
+          
+            
+            <img src="../_static/auxjad-logo.png" class="logo" alt="Logo"/>
           
           </a>
 
+          
+            
+            
+              <div class="version">
+                1.0
+              </div>
+            
           
 
           
@@ -114,7 +124,7 @@
       <nav class="wy-nav-top" aria-label="top navigation">
         
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="../index.html">auxjad</a>
+          <a href="../index.html">Auxjad</a>
         
       </nav>
 
@@ -179,8 +189,7 @@ repeated measures.</p>
 </div>
 <p>First, let’s create a container with an arbitrary rhythm. The pitches do not
 matter at this point since we will randomise them shortly.</p>
-<blockquote>
-<div><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">container</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">(</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">container</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">(</span>
 <span class="gp">... </span>    <span class="sa">r</span><span class="s2">&quot;c&#39;4-- c&#39;8.-- c&#39;16( c&#39;8)-. c&#39;8-. c&#39;8-. r8&quot;</span>
 <span class="gp">... </span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">container</span><span class="p">)</span>
@@ -189,9 +198,8 @@ matter at this point since we will randomise them shortly.</p>
 <div class="figure align-default">
 <img alt="../_images/example-4-random-repetitions-h990mzwoa7f.png" src="../_images/example-4-random-repetitions-h990mzwoa7f.png" />
 </div>
-</div></blockquote>
 <p>Next, let’s initialise <a class="reference internal" href="../_api_members/auxjad.PitchRandomiser.html#auxjad.PitchRandomiser" title="auxjad.PitchRandomiser"><code class="xref py py-class docutils literal notranslate"><span class="pre">auxjad.PitchRandomiser</span></code></a> with this container as
-well as a <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.9)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code></a> representing pitches. This will be the source for the
+well as a <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.10)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code></a> representing pitches. This will be the source for the
 random pitches selected by this randomiser.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">pitch_list</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;c&#39;&quot;</span><span class="p">,</span> <span class="s2">&quot;cs&#39;&quot;</span><span class="p">,</span> <span class="s2">&quot;d&#39;&quot;</span><span class="p">,</span> <span class="s2">&quot;ef&#39;&quot;</span><span class="p">,</span> <span class="s2">&quot;e&#39;&quot;</span><span class="p">]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">randomiser</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">PitchRandomiser</span><span class="p">(</span><span class="n">container</span><span class="p">,</span>
@@ -201,8 +209,7 @@ random pitches selected by this randomiser.</p>
 </div>
 <p>Let’s now output a first group of two measures with random pitches using the
 method <a class="reference internal" href="../_api_members/auxjad.PitchRandomiser.html#auxjad.PitchRandomiser.output_n" title="auxjad.PitchRandomiser.output_n"><code class="xref py py-meth docutils literal notranslate"><span class="pre">auxjad.PitchRandomiser.output_n()</span></code></a>.</p>
-<blockquote>
-<div><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">notes</span> <span class="o">=</span> <span class="n">randomiser</span><span class="o">.</span><span class="n">output_n</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">notes</span> <span class="o">=</span> <span class="n">randomiser</span><span class="o">.</span><span class="n">output_n</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">group_1</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span><span class="n">notes</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">group_1</span><span class="p">)</span>
 </pre></div>
@@ -210,12 +217,10 @@ method <a class="reference internal" href="../_api_members/auxjad.PitchRandomise
 <div class="figure align-default">
 <img alt="../_images/example-4-random-repetitions-5s17pjm02j5.png" src="../_images/example-4-random-repetitions-5s17pjm02j5.png" />
 </div>
-</div></blockquote>
-<p>Let’s now change the pitch <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.9)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code></a> using the property
+<p>Let’s now change the pitch <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.10)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code></a> using the property
 <a class="reference internal" href="../_api_members/auxjad.PitchRandomiser.html#auxjad.PitchRandomiser.pitches" title="auxjad.PitchRandomiser.pitches"><code class="xref py py-attr docutils literal notranslate"><span class="pre">pitches</span></code></a> of the randomiser and create another
 group of measures.</p>
-<blockquote>
-<div><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">randomiser</span><span class="o">.</span><span class="n">pitches</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;a&quot;</span><span class="p">,</span> <span class="s2">&quot;b&quot;</span><span class="p">,</span> <span class="s2">&quot;bf&#39;&quot;</span><span class="p">,</span> <span class="s2">&quot;a&#39;&#39;&quot;</span><span class="p">,</span> <span class="s2">&quot;b&#39;&#39;&quot;</span><span class="p">]</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">randomiser</span><span class="o">.</span><span class="n">pitches</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;a&quot;</span><span class="p">,</span> <span class="s2">&quot;b&quot;</span><span class="p">,</span> <span class="s2">&quot;bf&#39;&quot;</span><span class="p">,</span> <span class="s2">&quot;a&#39;&#39;&quot;</span><span class="p">,</span> <span class="s2">&quot;b&#39;&#39;&quot;</span><span class="p">]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">notes</span> <span class="o">=</span> <span class="n">randomiser</span><span class="o">.</span><span class="n">output_n</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">group_2</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span><span class="n">notes</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">group_2</span><span class="p">)</span>
@@ -224,18 +229,16 @@ group of measures.</p>
 <div class="figure align-default">
 <img alt="../_images/example-4-random-repetitions-xnmxj4w1d0s.png" src="../_images/example-4-random-repetitions-xnmxj4w1d0s.png" />
 </div>
-</div></blockquote>
 <p>Up to now, the pitches were being selected with equal weight (i.e. an uniform
 distribution). Changing the <a class="reference internal" href="../_api_members/auxjad.PitchRandomiser.html#auxjad.PitchRandomiser.weights" title="auxjad.PitchRandomiser.weights"><code class="xref py py-attr docutils literal notranslate"><span class="pre">weights</span></code></a> property to
-a <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.9)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code></a> of <a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">int</span></code></a>’s or <a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.9)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">float</span></code></a>’s allow us to give more weight to
-certain pitches. It’s important that this <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.9)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code></a> has the same length as
+a <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.10)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code></a> of <a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">int</span></code></a>’s or <a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">float</span></code></a>’s allow us to give more weight to
+certain pitches. It’s important that this <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.10)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code></a> has the same length as
 the number of pitches in <a class="reference internal" href="../_api_members/auxjad.PitchRandomiser.html#auxjad.PitchRandomiser.pitches" title="auxjad.PitchRandomiser.pitches"><code class="xref py py-attr docutils literal notranslate"><span class="pre">pitches</span></code></a>.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">randomiser</span><span class="o">.</span><span class="n">weights</span> <span class="o">=</span> <span class="p">[</span><span class="mi">6</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
 </pre></div>
 </div>
 <p>At this point, let’s also change the input container for the randomiser:</p>
-<blockquote>
-<div><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">container</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">(</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">container</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">(</span>
 <span class="gp">... </span>    <span class="sa">r</span><span class="s2">&quot;\time 3/4 c&#39;4--( ~ &quot;</span>
 <span class="gp">... </span>    <span class="sa">r</span><span class="s2">&quot;\times 4/5 {c&#39;16 c&#39;16-. c&#39;16-. c&#39;16-. c&#39;16-.)} &quot;</span>
 <span class="gp">... </span>    <span class="sa">r</span><span class="s2">&quot;r8 c&#39;8-&gt;&quot;</span>
@@ -246,11 +249,9 @@ the number of pitches in <a class="reference internal" href="../_api_members/aux
 <div class="figure align-default">
 <img alt="../_images/example-4-random-repetitions-KVefBW5cfu.png" src="../_images/example-4-random-repetitions-KVefBW5cfu.png" />
 </div>
-</div></blockquote>
 <p>Now, with the new contents of the randomiser, let’s output two more measures as
 the third and final group of measures.</p>
-<blockquote>
-<div><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">randomiser</span><span class="o">.</span><span class="n">contents</span> <span class="o">=</span> <span class="n">container</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">randomiser</span><span class="o">.</span><span class="n">contents</span> <span class="o">=</span> <span class="n">container</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">notes</span> <span class="o">=</span> <span class="n">randomiser</span><span class="o">.</span><span class="n">output_n</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">group_3</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span><span class="n">notes</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">group_3</span><span class="p">)</span>
@@ -259,14 +260,12 @@ the third and final group of measures.</p>
 <div class="figure align-default">
 <img alt="../_images/example-4-random-repetitions-dF9FpK16kE.png" src="../_images/example-4-random-repetitions-dF9FpK16kE.png" />
 </div>
-</div></blockquote>
 <p>We can now use <a class="reference internal" href="../_api_members/auxjad.Repeater.html#auxjad.Repeater" title="auxjad.Repeater"><code class="xref py py-class docutils literal notranslate"><span class="pre">auxjad.Repeater</span></code></a> to create a staff made out of multiple
 repetitions of these three groups. When the repeater type is set to to
 <code class="docutils literal notranslate"><span class="pre">'volta'</span></code> using the attribute <code class="xref py py-attr docutils literal notranslate"><span class="pre">repeat_type</span></code>, it will
 output measures with repetition bar lines and with a written indication for the
 number of repeats. Let’s start with the first group and repeat it 3x.</p>
-<blockquote>
-<div><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">staff</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">()</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">staff</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">()</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">repeater</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">Repeater</span><span class="p">(</span><span class="n">group_1</span><span class="p">,</span>
 <span class="gp">... </span>                           <span class="n">repeat_type</span><span class="o">=</span><span class="s1">&#39;volta&#39;</span><span class="p">,</span>
 <span class="gp">... </span>                           <span class="p">)</span>
@@ -278,11 +277,9 @@ number of repeats. Let’s start with the first group and repeat it 3x.</p>
 <div class="figure align-default">
 <img alt="../_images/example-4-random-repetitions-7vipmn3n2ts.png" src="../_images/example-4-random-repetitions-7vipmn3n2ts.png" />
 </div>
-</div></blockquote>
 <p>Let’s now do the same with the second group, repeating it 5x and appending it
 to our staff.</p>
-<blockquote>
-<div><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">repeater</span><span class="o">.</span><span class="n">contents</span> <span class="o">=</span> <span class="n">group_2</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">repeater</span><span class="o">.</span><span class="n">contents</span> <span class="o">=</span> <span class="n">group_2</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">notes</span> <span class="o">=</span> <span class="n">repeater</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">staff</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">notes</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">staff</span><span class="p">)</span>
@@ -291,11 +288,9 @@ to our staff.</p>
 <div class="figure align-default">
 <img alt="../_images/example-4-random-repetitions-CPWBSKlHBd.png" src="../_images/example-4-random-repetitions-CPWBSKlHBd.png" />
 </div>
-</div></blockquote>
 <p>Finally, let’s do the same with the third group and repeat it 4x. This will be
 our final score.</p>
-<blockquote>
-<div><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">repeater</span><span class="o">.</span><span class="n">contents</span> <span class="o">=</span> <span class="n">group_3</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">repeater</span><span class="o">.</span><span class="n">contents</span> <span class="o">=</span> <span class="n">group_3</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">notes</span> <span class="o">=</span> <span class="n">repeater</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">staff</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">notes</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">staff</span><span class="p">)</span>
@@ -304,7 +299,6 @@ our final score.</p>
 <div class="figure align-default">
 <img alt="../_images/example-4-random-repetitions-3A9Bt4Xifq.png" src="../_images/example-4-random-repetitions-3A9Bt4Xifq.png" />
 </div>
-</div></blockquote>
 </div>
 
 

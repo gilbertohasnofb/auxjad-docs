@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>Shuffling and fading harmonics &mdash; auxjad 0.9.6 documentation</title>
+  <title>Shuffling and fading harmonics &mdash; Auxjad 1.0.0 documentation</title>
   
 
   
@@ -54,16 +54,26 @@
     
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
-        <div class="wy-side-nav-search"  style="background: #53c1ab" >
+        <div class="wy-side-nav-search" >
           
 
           
-            <a href="../index.html" class="icon icon-home"> auxjad
+            <a href="../index.html" class="icon icon-home"> Auxjad
           
 
+          
+            
+            <img src="../_static/auxjad-logo.png" class="logo" alt="Logo"/>
           
           </a>
 
+          
+            
+            
+              <div class="version">
+                1.0
+              </div>
+            
           
 
           
@@ -114,7 +124,7 @@
       <nav class="wy-nav-top" aria-label="top navigation">
         
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="../index.html">auxjad</a>
+          <a href="../index.html">Auxjad</a>
         
       </nav>
 
@@ -181,8 +191,7 @@ some musical material using the <a class="reference internal" href="../_api_memb
 <p>Let’s now create a container with some arbitrary material to be manipulated.
 Let’s use the class <a class="reference internal" href="../_api_members/auxjad.ArtificialHarmonic.html#auxjad.ArtificialHarmonic" title="auxjad.ArtificialHarmonic"><code class="xref py py-class docutils literal notranslate"><span class="pre">auxjad.ArtificialHarmonic</span></code></a> as well as some chords
 and rests.</p>
-<blockquote>
-<div><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">container</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">([</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">container</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">([</span>
 <span class="gp">... </span>    <span class="n">auxjad</span><span class="o">.</span><span class="n">ArtificialHarmonic</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;&lt;ef&#39; af&#39;&gt;4&quot;</span><span class="p">),</span>
 <span class="gp">... </span>    <span class="n">auxjad</span><span class="o">.</span><span class="n">ArtificialHarmonic</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;&lt;b e&#39;&gt;8.&quot;</span><span class="p">),</span>
 <span class="gp">... </span>    <span class="n">auxjad</span><span class="o">.</span><span class="n">ArtificialHarmonic</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;&lt;g c&#39;&gt;16&quot;</span><span class="p">,</span> <span class="n">is_parenthesized</span><span class="o">=</span><span class="kc">True</span><span class="p">),</span>
@@ -196,20 +205,17 @@ and rests.</p>
 <div class="figure align-default">
 <img alt="../_images/example-5-shuffling-harmonics-vuu4ho4hjk7.png" src="../_images/example-5-shuffling-harmonics-vuu4ho4hjk7.png" />
 </div>
-</div></blockquote>
 <p>The spelling of the chord <code class="docutils literal notranslate"><span class="pre">&lt;g</span> <span class="pre">af'</span> <span class="pre">a'&gt;</span></code> could be improved. This can be done
 by using <a class="reference internal" href="../_api_members/auxjad.mutate.respell_augmented_unisons.html#auxjad.mutate.respell_augmented_unisons" title="auxjad.mutate.respell_augmented_unisons"><code class="xref py py-func docutils literal notranslate"><span class="pre">auxjad.mutate.respell_augmented_unisons()</span></code></a>. Auxjad automatically adds
 this mutation as an extension method to <a class="reference external" href="https://abjad.github.io/api/abjad/mutate.html#module-abjad.mutate" title="(in Abjad v3.4)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">abjad.mutate</span></code></a> so it can also be
 accessed using <a class="reference internal" href="../_api_members/auxjad.mutate.respell_augmented_unisons.html#auxjad.mutate.respell_augmented_unisons" title="auxjad.mutate.respell_augmented_unisons"><code class="xref py py-func docutils literal notranslate"><span class="pre">abjad.mutate.respell_augmented_unisons()</span></code></a>.</p>
-<blockquote>
-<div><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">mutate</span><span class="o">.</span><span class="n">respell_augmented_unisons</span><span class="p">(</span><span class="n">container</span><span class="p">[:])</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">mutate</span><span class="o">.</span><span class="n">respell_augmented_unisons</span><span class="p">(</span><span class="n">container</span><span class="p">[:])</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">container</span><span class="p">)</span>
 </pre></div>
 </div>
 <div class="figure align-default">
 <img alt="../_images/example-5-shuffling-harmonics-yast6lxvpz.png" src="../_images/example-5-shuffling-harmonics-yast6lxvpz.png" />
 </div>
-</div></blockquote>
 <p>Let’s now use this material as input for <a class="reference internal" href="../_api_members/auxjad.Shuffler.html#auxjad.Shuffler" title="auxjad.Shuffler"><code class="xref py py-class docutils literal notranslate"><span class="pre">auxjad.Shuffler</span></code></a>. This class
 will randomly shuffle the logical ties of the input container.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">shuffler</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">Shuffler</span><span class="p">(</span><span class="n">container</span><span class="p">,</span>
@@ -219,8 +225,7 @@ will randomly shuffle the logical ties of the input container.</p>
 </div>
 <p>We can now use the method <a class="reference internal" href="../_api_members/auxjad.Shuffler.html#auxjad.Shuffler.shuffle_n" title="auxjad.Shuffler.shuffle_n"><code class="xref py py-meth docutils literal notranslate"><span class="pre">shuffle_n()</span></code></a> to generate some
 measures of shuffled logical ties.</p>
-<blockquote>
-<div><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">staff</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">()</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">staff</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">()</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">notes</span> <span class="o">=</span> <span class="n">shuffler</span><span class="o">.</span><span class="n">shuffle_n</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">staff</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">notes</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">staff</span><span class="p">)</span>
@@ -229,19 +234,15 @@ measures of shuffled logical ties.</p>
 <div class="figure align-default">
 <img alt="../_images/example-5-shuffling-harmonics-rnpvdobaxw.png" src="../_images/example-5-shuffling-harmonics-rnpvdobaxw.png" />
 </div>
-</div></blockquote>
 <p>We can now grab the last window output by shuffler and use it as the input
 container of a <a class="reference internal" href="../_api_members/auxjad.Fader.html#auxjad.Fader" title="auxjad.Fader"><code class="xref py py-class docutils literal notranslate"><span class="pre">auxjad.Fader</span></code></a>. When its property
 <a class="reference internal" href="../_api_members/auxjad.Fader.html#auxjad.Fader.mode" title="auxjad.Fader.mode"><code class="xref py py-attr docutils literal notranslate"><span class="pre">mode</span></code></a> is set to <code class="docutils literal notranslate"><span class="pre">'out'</span></code>, it will remove a logical tie
 one by one at each iteration. Note how <a class="reference internal" href="../_api_members/auxjad.Fader.html#auxjad.Fader" title="auxjad.Fader"><code class="xref py py-class docutils literal notranslate"><span class="pre">auxjad.Fader</span></code></a> removes the notes
 of chords one by one, but consider an <a class="reference internal" href="../_api_members/auxjad.ArtificialHarmonic.html#auxjad.ArtificialHarmonic" title="auxjad.ArtificialHarmonic"><code class="xref py py-class docutils literal notranslate"><span class="pre">auxjad.ArtificialHarmonic</span></code></a> as a
 single note.</p>
-<blockquote>
-<div><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">container</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">(</span><span class="n">shuffler</span><span class="o">.</span><span class="n">current_window</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">container</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">(</span><span class="n">shuffler</span><span class="o">.</span><span class="n">current_window</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">fader</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">Fader</span><span class="p">(</span><span class="n">container</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;out&#39;</span><span class="p">)</span>
-</pre></div>
-</div>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">notes</span> <span class="o">=</span> <span class="n">fader</span><span class="o">.</span><span class="n">output_all</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">notes</span> <span class="o">=</span> <span class="n">fader</span><span class="o">.</span><span class="n">output_all</span><span class="p">()</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">staff</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">notes</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">staff</span><span class="p">)</span>
 </pre></div>
@@ -249,7 +250,6 @@ single note.</p>
 <div class="figure align-default">
 <img alt="../_images/example-5-shuffling-harmonics-1rxgv2my0lr.png" src="../_images/example-5-shuffling-harmonics-1rxgv2my0lr.png" />
 </div>
-</div></blockquote>
 <p>Notice that the time signature has been repeated. While the method
 <a class="reference internal" href="../_api_members/auxjad.Fader.html#auxjad.Fader.output_all" title="auxjad.Fader.output_all"><code class="xref py py-meth docutils literal notranslate"><span class="pre">output_all()</span></code></a> takes care of repeated time signatures,
 dynamics, and clefs, consecutive calls may result in repetitions. But we can
@@ -258,8 +258,7 @@ that for us. This function is also available as the extension method
 <a class="reference internal" href="../_api_members/auxjad.mutate.remove_repeated_time_signatures.html#auxjad.mutate.remove_repeated_time_signatures" title="auxjad.mutate.remove_repeated_time_signatures"><code class="xref py py-func docutils literal notranslate"><span class="pre">abjad.mutate.remove_repeated_time_signatures()</span></code></a>, which Auxjad automatically
 adds to <a class="reference external" href="https://abjad.github.io/api/abjad/mutate.html#module-abjad.mutate" title="(in Abjad v3.4)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">abjad.mutate</span></code></a>. To finalise the score, let’s remove the last empty
 measure and add a final bar line.</p>
-<blockquote>
-<div><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">mutate</span><span class="o">.</span><span class="n">remove_repeated_time_signatures</span><span class="p">(</span><span class="n">staff</span><span class="p">[:])</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">mutate</span><span class="o">.</span><span class="n">remove_repeated_time_signatures</span><span class="p">(</span><span class="n">staff</span><span class="p">[:])</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">staff</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">score</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Score</span><span class="p">([</span><span class="n">staff</span><span class="p">])</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">score</span><span class="o">.</span><span class="n">add_final_bar_line</span><span class="p">()</span>
@@ -269,7 +268,6 @@ measure and add a final bar line.</p>
 <div class="figure align-default">
 <img alt="../_images/example-5-shuffling-harmonics-rmw99goyuc.png" src="../_images/example-5-shuffling-harmonics-rmw99goyuc.png" />
 </div>
-</div></blockquote>
 </div>
 
 

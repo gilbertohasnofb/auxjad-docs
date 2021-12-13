@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>Looping with auxjad.LeafLooper &mdash; auxjad 0.9.6 documentation</title>
+  <title>Looping with auxjad.LeafLooper &mdash; Auxjad 1.0.0 documentation</title>
   
 
   
@@ -54,16 +54,26 @@
     
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
-        <div class="wy-side-nav-search"  style="background: #53c1ab" >
+        <div class="wy-side-nav-search" >
           
 
           
-            <a href="../index.html" class="icon icon-home"> auxjad
+            <a href="../index.html" class="icon icon-home"> Auxjad
           
 
+          
+            
+            <img src="../_static/auxjad-logo.png" class="logo" alt="Logo"/>
           
           </a>
 
+          
+            
+            
+              <div class="version">
+                1.0
+              </div>
+            
           
 
           
@@ -114,7 +124,7 @@
       <nav class="wy-nav-top" aria-label="top navigation">
         
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="../index.html">auxjad</a>
+          <a href="../index.html">Auxjad</a>
         
       </nav>
 
@@ -182,7 +192,7 @@ ties and has a looping window of variable size.</p>
 by the looper. For that, let’s use <a class="reference internal" href="../_api_members/auxjad.TenneySelector.html#auxjad.TenneySelector" title="auxjad.TenneySelector"><code class="xref py py-class docutils literal notranslate"><span class="pre">auxjad.TenneySelector</span></code></a> to generate
 the random material. This class is an implementation of the Dissonant
 Counterpoint Algorithm by James Tenney. In a nutshell, this algorithm can be
-used to randomly select elements from a <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.9)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code></a>, giving priority to
+used to randomly select elements from a <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.10)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code></a>, giving priority to
 elements that have not been chosen for the longest time. It also ensures that
 elements are not repeated.</p>
 <p>To start, we create two selectors, one for pitches and one for durations.</p>
@@ -208,14 +218,13 @@ will serve as our input material for the looper.</p>
 <span class="gp">... </span>    <span class="n">durations</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">duration_selector</span><span class="p">())</span>
 </pre></div>
 </div>
-<p>We can now use <a class="reference external" href="https://abjad.github.io/api/abjad/makers.html#abjad.makers.LeafMaker" title="(in Abjad v3.4)"><code class="xref py py-class docutils literal notranslate"><span class="pre">abjad.LeafMaker</span></code></a> to convert those two <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.9)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code></a>’s of pitches
+<p>We can now use <a class="reference external" href="https://abjad.github.io/api/abjad/makers.html#abjad.makers.LeafMaker" title="(in Abjad v3.4)"><code class="xref py py-class docutils literal notranslate"><span class="pre">abjad.LeafMaker</span></code></a> to convert those two <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.10)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code></a>’s of pitches
 and durations into notes. It’s important to note that there is no time
 signature being imposed at this point, so LilyPond will fallback to a four by
 four when displaying the container below. This is not a problem since this will
 be used as the basic material for the looper, which will then automatically
 take care of time signatures.</p>
-<blockquote>
-<div><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">notes</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">LeafMaker</span><span class="p">()(</span><span class="n">pitches</span><span class="p">,</span> <span class="n">durations</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">notes</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">LeafMaker</span><span class="p">()(</span><span class="n">pitches</span><span class="p">,</span> <span class="n">durations</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">container</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">(</span><span class="n">notes</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">container</span><span class="p">)</span>
 </pre></div>
@@ -223,7 +232,6 @@ take care of time signatures.</p>
 <div class="figure align-default">
 <img alt="../_images/example-2-looping-4qwapicxjz3.png" src="../_images/example-2-looping-4qwapicxjz3.png" />
 </div>
-</div></blockquote>
 <p>At this point, we can create the <a class="reference internal" href="../_api_members/auxjad.LeafLooper.html#auxjad.LeafLooper" title="auxjad.LeafLooper"><code class="xref py py-class docutils literal notranslate"><span class="pre">auxjad.LeafLooper</span></code></a> and initialise it
 using the material we generated above. A <a class="reference internal" href="../_api_members/auxjad.LeafLooper.html#auxjad.LeafLooper.window_size" title="auxjad.LeafLooper.window_size"><code class="xref py py-attr docutils literal notranslate"><span class="pre">window_size</span></code></a>
 of size <code class="docutils literal notranslate"><span class="pre">4</span></code> will select four notes at each iteration. Setting
@@ -242,20 +250,17 @@ measure by themselves.</p>
 <p>We can now use the <a class="reference internal" href="../_api_members/auxjad.LeafLooper.html#auxjad.LeafLooper.output_n" title="auxjad.LeafLooper.output_n"><code class="xref py py-meth docutils literal notranslate"><span class="pre">output_n()</span></code></a> to output several
 measures of the looping process for us. In this case, let’s output seven
 measures.</p>
-<blockquote>
-<div><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">staff</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span><span class="n">looper</span><span class="o">.</span><span class="n">output_n</span><span class="p">(</span><span class="mi">7</span><span class="p">))</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">staff</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span><span class="n">looper</span><span class="o">.</span><span class="n">output_n</span><span class="p">(</span><span class="mi">7</span><span class="p">))</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">staff</span><span class="p">)</span>
 </pre></div>
 </div>
 <div class="figure align-default">
 <img alt="../_images/example-2-looping-9mzjqtfcru8.png" src="../_images/example-2-looping-9mzjqtfcru8.png" />
 </div>
-</div></blockquote>
 <p>At this point, let’s change the <a class="reference internal" href="../_api_members/auxjad.LeafLooper.html#auxjad.LeafLooper.window_size" title="auxjad.LeafLooper.window_size"><code class="xref py py-attr docutils literal notranslate"><span class="pre">window_size</span></code></a> to a
 smaller value as well as change the duration of the separator rest. Let’s then
 output five more measures.</p>
-<blockquote>
-<div><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">looper</span><span class="o">.</span><span class="n">window_size</span> <span class="o">=</span> <span class="mi">3</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">looper</span><span class="o">.</span><span class="n">window_size</span> <span class="o">=</span> <span class="mi">3</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">looper</span><span class="o">.</span><span class="n">after_rest</span> <span class="o">=</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">16</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">staff</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">looper</span><span class="o">.</span><span class="n">output_n</span><span class="p">(</span><span class="mi">5</span><span class="p">))</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">staff</span><span class="p">)</span>
@@ -264,7 +269,6 @@ output five more measures.</p>
 <div class="figure align-default">
 <img alt="../_images/example-2-looping-v5h9hyfmjj.png" src="../_images/example-2-looping-v5h9hyfmjj.png" />
 </div>
-</div></blockquote>
 <p>Let’s now remove the last empty bar, add this staff to an <a class="reference external" href="https://abjad.github.io/api/abjad/score.html#abjad.score.Score" title="(in Abjad v3.4)"><code class="xref py py-class docutils literal notranslate"><span class="pre">abjad.Score</span></code></a> and
 call the method <a class="reference internal" href="../_api_members/auxjad.Score.add_final_bar_line.html#auxjad.Score.add_final_bar_line" title="auxjad.Score.add_final_bar_line"><code class="xref py py-meth docutils literal notranslate"><span class="pre">add_final_bar_line()</span></code></a> which Auxjad adds to
 <a class="reference external" href="https://abjad.github.io/api/abjad/score.html#abjad.score.Score" title="(in Abjad v3.4)"><code class="xref py py-class docutils literal notranslate"><span class="pre">abjad.Score</span></code></a>.</p>
@@ -274,14 +278,12 @@ call the method <a class="reference internal" href="../_api_members/auxjad.Score
 </pre></div>
 </div>
 <p>This is the final result:</p>
-<blockquote>
-<div><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">score</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">score</span><span class="p">)</span>
 </pre></div>
 </div>
 <div class="figure align-default">
 <img alt="../_images/example-2-looping-KzWUHdwdBN.png" src="../_images/example-2-looping-KzWUHdwdBN.png" />
 </div>
-</div></blockquote>
 </div>
 
 

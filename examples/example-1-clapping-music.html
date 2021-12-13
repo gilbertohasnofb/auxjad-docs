@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>Steve Reich’s Clapping Music &mdash; auxjad 0.9.6 documentation</title>
+  <title>Steve Reich’s Clapping Music &mdash; Auxjad 1.0.0 documentation</title>
   
 
   
@@ -54,16 +54,26 @@
     
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
-        <div class="wy-side-nav-search"  style="background: #53c1ab" >
+        <div class="wy-side-nav-search" >
           
 
           
-            <a href="../index.html" class="icon icon-home"> auxjad
+            <a href="../index.html" class="icon icon-home"> Auxjad
           
 
+          
+            
+            <img src="../_static/auxjad-logo.png" class="logo" alt="Logo"/>
           
           </a>
 
+          
+            
+            
+              <div class="version">
+                1.0
+              </div>
+            
           
 
           
@@ -114,7 +124,7 @@
       <nav class="wy-nav-top" aria-label="top navigation">
         
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="../index.html">auxjad</a>
+          <a href="../index.html">Auxjad</a>
         
       </nav>
 
@@ -182,8 +192,7 @@ composition. The original score is notated using a rhythmic staff, so we can
 initialise <a class="reference external" href="https://abjad.github.io/api/abjad/score.html#abjad.score.Staff" title="(in Abjad v3.4)"><code class="xref py py-class docutils literal notranslate"><span class="pre">abjad.Staff</span></code></a> with the property
 <code class="xref py py-attr docutils literal notranslate"><span class="pre">lilypond_type</span></code> set to
 <code class="docutils literal notranslate"><span class="pre">&quot;RhythmicStaff&quot;</span></code>.</p>
-<blockquote>
-<div><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">material</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;\time 12/8 c8 c c r c c r c r c c r&quot;</span><span class="p">,</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">material</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;\time 12/8 c8 c c r c c r c r c c r&quot;</span><span class="p">,</span>
 <span class="gp">... </span>                       <span class="n">lilypond_type</span><span class="o">=</span><span class="s2">&quot;RhythmicStaff&quot;</span><span class="p">,</span>
 <span class="gp">... </span>                       <span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">material</span><span class="p">)</span>
@@ -192,7 +201,6 @@ initialise <a class="reference external" href="https://abjad.github.io/api/abjad
 <div class="figure align-default">
 <img alt="../_images/example-1-clapping-music-46ql3n3hznt.png" src="../_images/example-1-clapping-music-46ql3n3hznt.png" />
 </div>
-</div></blockquote>
 <p>Next, we create an instance of <a class="reference internal" href="../_api_members/auxjad.Phaser.html#auxjad.Phaser" title="auxjad.Phaser"><code class="xref py py-class docutils literal notranslate"><span class="pre">auxjad.Phaser</span></code></a> which will be used to
 create the phasing process of the initial material. We initialise it with
 <code class="docutils literal notranslate"><span class="pre">material</span></code> as well as a <a class="reference internal" href="../_api_members/auxjad.Phaser.html#auxjad.Phaser.step_size" title="auxjad.Phaser.step_size"><code class="xref py py-attr docutils literal notranslate"><span class="pre">step_size</span></code></a> of the length of a
@@ -205,8 +213,7 @@ quaver.</p>
 <p>Since Reich’s composition phases the material until it is back at its initial
 position, we can use the method <a class="reference internal" href="../_api_members/auxjad.Phaser.html#auxjad.Phaser.output_all" title="auxjad.Phaser.output_all"><code class="xref py py-meth docutils literal notranslate"><span class="pre">output_all()</span></code></a> to generate
 all thirtee measures of the bottom staff.</p>
-<blockquote>
-<div><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">notes</span> <span class="o">=</span> <span class="n">phaser</span><span class="o">.</span><span class="n">output_all</span><span class="p">()</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">notes</span> <span class="o">=</span> <span class="n">phaser</span><span class="o">.</span><span class="n">output_all</span><span class="p">()</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">phased_staff</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span><span class="n">notes</span><span class="p">,</span>
 <span class="gp">... </span>                           <span class="n">lilypond_type</span><span class="o">=</span><span class="s2">&quot;RhythmicStaff&quot;</span><span class="p">,</span>
 <span class="gp">... </span>                           <span class="p">)</span>
@@ -216,13 +223,11 @@ all thirtee measures of the bottom staff.</p>
 <div class="figure align-default">
 <img alt="../_images/example-1-clapping-music-gosdyid8m5c.png" src="../_images/example-1-clapping-music-gosdyid8m5c.png" />
 </div>
-</div></blockquote>
 <p>The upper staff of the composition consists of thirteen measures of the
 material being repeated. We can thus use the class <a class="reference internal" href="../_api_members/auxjad.Repeater.html#auxjad.Repeater" title="auxjad.Repeater"><code class="xref py py-func docutils literal notranslate"><span class="pre">auxjad.Repeater()</span></code></a> to
 generate these repetitions and take care of removing the time signatures of the
 repeated measures.</p>
-<blockquote>
-<div><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">repeater</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">Repeater</span><span class="p">(</span><span class="n">material</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">repeater</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">Repeater</span><span class="p">(</span><span class="n">material</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">notes</span> <span class="o">=</span> <span class="n">repeater</span><span class="p">(</span><span class="mi">13</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">constant_staff</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span><span class="n">notes</span><span class="p">,</span>
 <span class="gp">... </span>                             <span class="n">lilypond_type</span><span class="o">=</span><span class="s2">&quot;RhythmicStaff&quot;</span><span class="p">,</span>
@@ -233,22 +238,18 @@ repeated measures.</p>
 <div class="figure align-default">
 <img alt="../_images/example-1-clapping-music-vdcucelr7bc.png" src="../_images/example-1-clapping-music-vdcucelr7bc.png" />
 </div>
-</div></blockquote>
 <p>With both staves created, we can now add them to a single score.</p>
-<blockquote>
-<div><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">score</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Score</span><span class="p">([</span><span class="n">constant_staff</span><span class="p">,</span> <span class="n">phased_staff</span><span class="p">])</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">score</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Score</span><span class="p">([</span><span class="n">constant_staff</span><span class="p">,</span> <span class="n">phased_staff</span><span class="p">])</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">score</span><span class="p">)</span>
 </pre></div>
 </div>
 <div class="figure align-default">
 <img alt="../_images/example-1-clapping-music-36foxn3jk9.png" src="../_images/example-1-clapping-music-36foxn3jk9.png" />
 </div>
-</div></blockquote>
 <p>We now group the leaves of the upper staff by measures and add a double
 repetition bar line to the last leaf of each measure. The very last leaf of the
 score should have a single end repetition bar line.</p>
-<blockquote>
-<div><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">measures</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="n">constant_staff</span><span class="p">[:])</span><span class="o">.</span><span class="n">group_by_measure</span><span class="p">()</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">measures</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="n">constant_staff</span><span class="p">[:])</span><span class="o">.</span><span class="n">group_by_measure</span><span class="p">()</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">measure</span> <span class="ow">in</span> <span class="n">measures</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]:</span>
 <span class="gp">... </span>    <span class="n">abjad</span><span class="o">.</span><span class="n">attach</span><span class="p">(</span><span class="n">abjad</span><span class="o">.</span><span class="n">BarLine</span><span class="p">(</span><span class="s1">&#39;:..:&#39;</span><span class="p">),</span> <span class="n">measure</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">attach</span><span class="p">(</span><span class="n">abjad</span><span class="o">.</span><span class="n">BarLine</span><span class="p">(</span><span class="s1">&#39;:|.&#39;</span><span class="p">),</span> <span class="n">constant_staff</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
@@ -258,7 +259,6 @@ score should have a single end repetition bar line.</p>
 <div class="figure align-default">
 <img alt="../_images/example-1-clapping-music-k6vxi0vtu6o.png" src="../_images/example-1-clapping-music-k6vxi0vtu6o.png" />
 </div>
-</div></blockquote>
 </div>
 
 
