@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>Looping with auxjad.WindowLooper &mdash; Auxjad 1.0.0 documentation</title>
+  <title>Looping with auxjad.WindowLooper &mdash; Auxjad 1.0.1 documentation</title>
   
 
   
@@ -183,7 +183,7 @@
 <p>In this next example, we will use some of <a class="reference external" href="index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">auxjad</span></code></a>’s classes to generate
 a container of randomly selected material, and then use this material as input
 for the looping and shuffling classes.</p>
-<p>First, we start by importing both <a class="reference external" href="https://abjad.github.io/api/abjad/index.html#module-abjad" title="(in Abjad v3.4)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">abjad</span></code></a> and <a class="reference external" href="index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">auxjad</span></code></a>.</p>
+<p>First, we start by importing both <a class="reference external" href="https://abjad.github.io/api/abjad/index.html#module-abjad" title="(in Abjad v3.19)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">abjad</span></code></a> and <a class="reference external" href="index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">auxjad</span></code></a>.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">abjad</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">auxjad</span>
 </pre></div>
@@ -221,7 +221,7 @@ selected by the classes above.</p>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">articulations</span> <span class="o">=</span> <span class="p">[</span><span class="n">articulation_selector</span><span class="p">()</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">8</span><span class="p">)]</span>
 </pre></div>
 </div>
-<p>With these <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.10)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code></a>’s’ of pitches, durations, dynamics, and articulations,
+<p>With these <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.12)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code></a>’s’ of pitches, durations, dynamics, and articulations,
 we can now use <a class="reference internal" href="../_api_members/auxjad.LeafDynMaker.html#auxjad.LeafDynMaker" title="auxjad.LeafDynMaker"><code class="xref py py-class docutils literal notranslate"><span class="pre">auxjad.LeafDynMaker</span></code></a> to create the individual abjad
 leaves for us. It’s important to note that there is no time signature being
 imposed at this point, so LilyPond will fallback to a four by four when
@@ -290,8 +290,8 @@ then output six more measures.</p>
 <div class="figure align-default">
 <img alt="../_images/example-3-looping-snpku7bedo.png" src="../_images/example-3-looping-snpku7bedo.png" />
 </div>
-<p>Let’s now add this staff to an <a class="reference external" href="https://abjad.github.io/api/abjad/score.html#abjad.score.Score" title="(in Abjad v3.4)"><code class="xref py py-class docutils literal notranslate"><span class="pre">abjad.Score</span></code></a> and call the method
-<a class="reference internal" href="../_api_members/auxjad.Score.add_final_bar_line.html#auxjad.Score.add_final_bar_line" title="auxjad.Score.add_final_bar_line"><code class="xref py py-meth docutils literal notranslate"><span class="pre">add_final_bar_line()</span></code></a> which Auxjad adds to <a class="reference external" href="https://abjad.github.io/api/abjad/score.html#abjad.score.Score" title="(in Abjad v3.4)"><code class="xref py py-class docutils literal notranslate"><span class="pre">abjad.Score</span></code></a>.</p>
+<p>Let’s now add this staff to an <a class="reference external" href="https://abjad.github.io/api/abjad/score.html#abjad.score.Score" title="(in Abjad v3.19)"><code class="xref py py-class docutils literal notranslate"><span class="pre">abjad.Score</span></code></a> and call the method
+<a class="reference internal" href="../_api_members/auxjad.Score.add_final_bar_line.html#auxjad.Score.add_final_bar_line" title="auxjad.Score.add_final_bar_line"><code class="xref py py-meth docutils literal notranslate"><span class="pre">add_final_bar_line()</span></code></a> which Auxjad adds to <a class="reference external" href="https://abjad.github.io/api/abjad/score.html#abjad.score.Score" title="(in Abjad v3.19)"><code class="xref py py-class docutils literal notranslate"><span class="pre">abjad.Score</span></code></a>.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">score</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Score</span><span class="p">([</span><span class="n">staff</span><span class="p">])</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">score</span><span class="o">.</span><span class="n">add_final_bar_line</span><span class="p">()</span>
 </pre></div>
