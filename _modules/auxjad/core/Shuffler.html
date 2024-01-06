@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>auxjad.core.Shuffler &mdash; Auxjad 1.0.1 documentation</title>
+  <title>auxjad.core.Shuffler &mdash; Auxjad 1.0.2 documentation</title>
   
 
   
@@ -171,7 +171,7 @@
 
 <span class="kn">import</span> <span class="nn">abjad</span>
 
-<span class="kn">from</span> <span class="nn">..</span> <span class="kn">import</span> <span class="n">get</span><span class="p">,</span> <span class="n">mutate</span>
+<span class="kn">from</span> <span class="nn">..</span> <span class="kn">import</span> <span class="n">get</span><span class="p">,</span> <span class="n">mutate</span><span class="p">,</span> <span class="n">select</span>
 
 
 <div class="viewcode-block" id="Shuffler"><a class="viewcode-back" href="../../../_api_members/auxjad.Shuffler.html#auxjad.Shuffler">[docs]</a><span class="k">class</span> <span class="nc">Shuffler</span><span class="p">:</span>
@@ -1395,9 +1395,7 @@
 
     <span class="k">def</span> <span class="nf">_update_logical_selections</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="sa">r</span><span class="s1">&#39;Updates the selection of logical ties of :attr:`contents`.&#39;</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_logical_selections</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_logical_selections</span><span class="p">(</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">_contents</span>
-        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_logical_selections</span> <span class="o">=</span> <span class="n">select</span><span class="o">.</span><span class="n">logical_selections</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_contents</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_logical_selections_indeces</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="fm">__len__</span><span class="p">()))</span>
 
     <span class="k">def</span> <span class="nf">_get_pitch_list</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
@@ -1530,7 +1528,7 @@
         <span class="sa">r</span><span class="s1">&#39;Rewrites the logical selections of the current window.&#39;</span>
         <span class="c1"># writing dummy_container in shuffled order</span>
         <span class="n">dummy_container</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">()</span>
-        <span class="n">logical_selections</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_logical_selections</span><span class="p">(</span>
+        <span class="n">logical_selections</span> <span class="o">=</span> <span class="n">select</span><span class="o">.</span><span class="n">logical_selections</span><span class="p">(</span>
             <span class="n">abjad</span><span class="o">.</span><span class="n">mutate</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_contents</span><span class="p">)</span>
         <span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_force_dynamics</span><span class="p">(</span><span class="n">logical_selections</span><span class="p">)</span>
@@ -1617,17 +1615,6 @@
     <span class="k">def</span> <span class="nf">_get_lilypond_format</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
         <span class="sa">r</span><span class="s1">&#39;Returns interpreter representation of  :attr:`contents`.&#39;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="fm">__repr__</span><span class="p">()</span>
-
-    <span class="nd">@staticmethod</span>
-    <span class="k">def</span> <span class="nf">_get_logical_selections</span><span class="p">(</span><span class="n">container</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Selection</span><span class="p">:</span>
-        <span class="sa">r</span><span class="s1">&#39;Updates the selection of logical ties of a container.&#39;</span>
-        <span class="k">def</span> <span class="nf">group_logical_ties</span><span class="p">(</span><span class="n">logical_tie</span><span class="p">):</span>
-            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">logical_tie</span><span class="o">.</span><span class="n">head</span><span class="p">,</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Rest</span><span class="p">):</span>
-                <span class="k">return</span> <span class="kc">True</span>
-            <span class="k">else</span><span class="p">:</span>
-                <span class="k">return</span> <span class="n">logical_tie</span><span class="o">.</span><span class="n">head</span>
-        <span class="n">logical_ties</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="n">container</span><span class="p">)</span><span class="o">.</span><span class="n">logical_ties</span><span class="p">()</span>
-        <span class="k">return</span> <span class="n">logical_ties</span><span class="o">.</span><span class="n">group_by</span><span class="p">(</span><span class="n">group_logical_ties</span><span class="p">)</span>
 
     <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">_remove_all_time_signatures</span><span class="p">(</span><span class="n">container</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>

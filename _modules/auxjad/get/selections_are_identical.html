@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>auxjad.get.selections_are_identical &mdash; Auxjad 1.0.1 documentation</title>
+  <title>auxjad.get.selections_are_identical &mdash; Auxjad 1.0.2 documentation</title>
   
 
   
@@ -192,6 +192,22 @@
 <span class="sd">        &gt;&gt;&gt; auxjad.get.selections_are_identical(selections)</span>
 <span class="sd">        True</span>
 
+<span class="sd">        This function can handle multiple selections, and will compare them</span>
+<span class="sd">        among each other returning ``True`` if all are identical:</span>
+
+<span class="sd">        &gt;&gt;&gt; container1 = abjad.Staff(r&quot;c&#39;4 d&#39;4 e&#39;4 f&#39;4 &lt;g&#39; a&#39;&gt;2 r2&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; container2 = abjad.Staff(r&quot;c&#39;4 d&#39;4 e&#39;4 f&#39;4 &lt;g&#39; a&#39;&gt;2 r2&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; container3 = abjad.Staff(r&quot;c&#39;4 d&#39;4 e&#39;4 f&#39;4 &lt;g&#39; a&#39;&gt;2 r2&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; container4 = abjad.Staff(r&quot;c&#39;4 d&#39;4 e&#39;4 f&#39;4 &lt;g&#39; a&#39;&gt;2 r2&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; selections = [</span>
+<span class="sd">        ...     container1[:],</span>
+<span class="sd">        ...     container2[:],</span>
+<span class="sd">        ...     container3[:],</span>
+<span class="sd">        ...     container4[:],</span>
+<span class="sd">        ... ]</span>
+<span class="sd">        &gt;&gt;&gt; auxjad.get.selections_are_identical(selections)</span>
+<span class="sd">        True</span>
+
 <span class="sd">    ..  note::</span>
 
 <span class="sd">        Auxjad automatically adds this function as an extension function to</span>
@@ -203,7 +219,7 @@
 <span class="sd">        &gt;&gt;&gt; selections = [container1[:], container2[:]]</span>
 <span class="sd">        &gt;&gt;&gt; auxjad.get.selections_are_identical(selections)</span>
 <span class="sd">        True</span>
-<span class="sd">        &gt;&gt;&gt; auxjad.get.selections_are_identical(selections)</span>
+<span class="sd">        &gt;&gt;&gt; abjad.get.selections_are_identical(selections)</span>
 <span class="sd">        True</span>
 
 <span class="sd">    Effective durations:</span>
@@ -290,10 +306,9 @@
 
 <span class="sd">    ..  warning::</span>
 
-<span class="sd">        It is important though to create selections using |abjad.select()| as</span>
-<span class="sd">        shown in the example above instead of using the syntax</span>
-<span class="sd">        ``container[:]``, since the latter selects only leaves which are not</span>
-<span class="sd">        grace notes.</span>
+<span class="sd">        It is important to create selections using |abjad.select()| as shown in</span>
+<span class="sd">        the example above, instead of using the syntax ``container[:]``, since</span>
+<span class="sd">        the latter ignores grace notes.</span>
 
 <span class="sd">    ..  note::</span>
 
@@ -343,9 +358,12 @@
                                    <span class="ow">in</span> <span class="n">abjad</span><span class="o">.</span><span class="n">get</span><span class="o">.</span><span class="n">indicators</span><span class="p">(</span><span class="n">leaf1</span><span class="p">)]</span>
                     <span class="n">indicators2</span> <span class="o">=</span> <span class="p">[</span><span class="nb">format</span><span class="p">(</span><span class="n">indicator</span><span class="p">)</span> <span class="k">for</span> <span class="n">indicator</span>
                                    <span class="ow">in</span> <span class="n">abjad</span><span class="o">.</span><span class="n">get</span><span class="o">.</span><span class="n">indicators</span><span class="p">(</span><span class="n">leaf2</span><span class="p">)]</span>
-                    <span class="k">for</span> <span class="n">indicator1</span> <span class="ow">in</span> <span class="n">indicators1</span><span class="p">:</span>
-                        <span class="k">if</span> <span class="n">indicator1</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">indicators2</span><span class="p">:</span>
-                            <span class="k">return</span> <span class="kc">False</span>
+                    <span class="k">if</span> <span class="ow">not</span> <span class="nb">all</span><span class="p">(</span><span class="n">indicator1</span> <span class="ow">in</span> <span class="n">indicators2</span>
+                               <span class="k">for</span> <span class="n">indicator1</span> <span class="ow">in</span> <span class="n">indicators1</span><span class="p">):</span>
+                        <span class="k">return</span> <span class="kc">False</span>
+                    <span class="k">if</span> <span class="ow">not</span> <span class="nb">all</span><span class="p">(</span><span class="n">indicator2</span> <span class="ow">in</span> <span class="n">indicators1</span>
+                               <span class="k">for</span> <span class="n">indicator2</span> <span class="ow">in</span> <span class="n">indicators2</span><span class="p">):</span>
+                        <span class="k">return</span> <span class="kc">False</span>
     <span class="k">return</span> <span class="kc">True</span></div>
 </pre></div>
 

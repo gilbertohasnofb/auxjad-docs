@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>auxjad.core.Fader &mdash; Auxjad 1.0.1 documentation</title>
+  <title>auxjad.core.Fader &mdash; Auxjad 1.0.2 documentation</title>
   
 
   
@@ -1327,7 +1327,7 @@
 <span class="sd">        documentation of this function for more details on these arguments.</span>
 
 <span class="sd">    Indicators:</span>
-<span class="sd">        This class can handle dynamics and articulations too.</span>
+<span class="sd">        This class can handle dynamics and articulations.</span>
 
 <span class="sd">        &gt;&gt;&gt; container = abjad.Container(</span>
 <span class="sd">        ...     r&quot;\time 3/4 c&#39;8-&gt;\f d&#39;8\p ~ d&#39;4 e&#39;8..-- f&#39;32-.&quot;</span>
@@ -1750,7 +1750,7 @@
     <span class="c1">### PRIVATE METHODS ###</span>
 
     <span class="k">def</span> <span class="nf">_remove_element</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="sa">r</span><span class="s1">&#39;Sets a random element of the mask to ``False``.&#39;</span>
+        <span class="sa">r</span><span class="s1">&#39;Sets a random element of the mask to `0`.&#39;</span>
         <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_max_steps</span><span class="p">)):</span>
             <span class="k">if</span> <span class="mi">1</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_mask</span><span class="p">:</span>
                 <span class="n">total_count</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_mask</span><span class="p">)</span>
@@ -1764,7 +1764,7 @@
                 <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s2">&quot;&#39;current_window&#39; is already empty&quot;</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">_add_element</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="sa">r</span><span class="s1">&#39;Sets a random element of the mask to ``True``.&#39;</span>
+        <span class="sa">r</span><span class="s1">&#39;Sets a random element of the mask to `1`.&#39;</span>
         <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_max_steps</span><span class="p">)):</span>
             <span class="k">if</span> <span class="mi">0</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_mask</span><span class="p">:</span>
                 <span class="n">total_count</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="fm">__len__</span><span class="p">()</span> <span class="o">-</span> <span class="nb">sum</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_mask</span><span class="p">)</span>

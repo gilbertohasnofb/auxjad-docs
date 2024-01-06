@@ -1,0 +1,387 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>auxjad.get.rhythms_are_identical &mdash; Auxjad 1.0.2 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+
+  
+  
+
+  
+  
+    <link rel="canonical" href="https://gilbertohasnofb.github.io/auxjad-docs/_modules/auxjad/get/rhythms_are_identical.html"/>
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+        <script src="../../../_static/jquery.js"></script>
+        <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/doctools.js"></script>
+    
+    <script type="text/javascript" src="../../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../../index.html" class="icon icon-home"> Auxjad
+          
+
+          
+            
+            <img src="../../../_static/auxjad-logo.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../index.html">Welcome to Auxjad’s documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../examples/index.html">Examples of usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../score_gallery/index.html">Score gallery</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../api/index.html">Auxjad API</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">Auxjad</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../../index.html">Module code</a> &raquo;</li>
+        
+      <li>auxjad.get.rhythms_are_identical</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for auxjad.get.rhythms_are_identical</h1><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">collections.abc</span> <span class="kn">import</span> <span class="n">Iterable</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Union</span>
+
+<span class="kn">import</span> <span class="nn">abjad</span>
+
+<span class="kn">from</span> <span class="nn">..</span> <span class="kn">import</span> <span class="n">select</span>
+
+
+<div class="viewcode-block" id="rhythms_are_identical"><a class="viewcode-back" href="../../../_api_members/auxjad.get.rhythms_are_identical.html#auxjad.get.rhythms_are_identical">[docs]</a><span class="k">def</span> <span class="nf">rhythms_are_identical</span><span class="p">(</span><span class="n">selections</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">Iterable</span><span class="p">[</span><span class="n">abjad</span><span class="o">.</span><span class="n">Component</span><span class="p">],</span>
+                                            <span class="n">Iterable</span><span class="p">[</span><span class="n">abjad</span><span class="o">.</span><span class="n">Selection</span><span class="p">],</span>
+                                            <span class="p">],</span>
+                          <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+    <span class="sa">r</span><span class="sd">&quot;&quot;&quot;Returns a :obj:`bool` representing whether two or more selections are</span>
+<span class="sd">    rhytmically identical or not. Input argument must be an iterable made of</span>
+<span class="sd">    two or more |abjad.Selection|&#39;s.</span>
+
+<span class="sd">    Basic usage:</span>
+<span class="sd">        When the pitches and effective durations of all leaves in all</span>
+<span class="sd">        selections are identical, this function returns ``True``:</span>
+
+<span class="sd">        &gt;&gt;&gt; container1 = abjad.Staff(r&quot;c&#39;4 d&#39;4 e&#39;4 f&#39;4&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; container2 = abjad.Staff(r&quot;c&#39;&#39;4 b&#39;4 a&#39;4 g&#39;4&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; selections = [container1[:], container2[:]]</span>
+<span class="sd">        &gt;&gt;&gt; auxjad.get.rhythms_are_identical(selections)</span>
+<span class="sd">        True</span>
+
+<span class="sd">        Rests and chords are also handled.</span>
+
+<span class="sd">        &gt;&gt;&gt; container1 = abjad.Staff(r&quot;c&#39;4. d&#39;8 e&#39;4 f&#39;4 &lt;g&#39; a&#39;&gt;2 r2&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; container2 = abjad.Staff(r&quot;c&#39;&#39;4. r8 &lt;b&#39; a&#39;&gt;4 r4 g&#39;2 f&#39;2&quot;)</span>
+
+<span class="sd">        When comparing rests, this function considers consecutive rests as a</span>
+<span class="sd">        single logical tie.</span>
+
+<span class="sd">        &gt;&gt;&gt; container1 = abjad.Staff(</span>
+<span class="sd">        ...     r&quot;c&#39;4 ~ c&#39;16 r8. r8. &lt;d&#39; e&#39;&gt;16 ~ &lt;d&#39; e&#39;&gt;4&quot;</span>
+<span class="sd">        ... )</span>
+<span class="sd">        &gt;&gt;&gt; container2 = abjad.Staff(r&quot;r4 r16 c&#39;&#39;8. ~ c&#39;&#39;8. b&#39;16 ~ b&#39;4&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; selections = [container1[:], container2[:]]</span>
+<span class="sd">        &gt;&gt;&gt; auxjad.get.rhythms_are_identical(selections)</span>
+<span class="sd">        True</span>
+<span class="sd">        &gt;&gt;&gt; container1 = abjad.Staff(</span>
+<span class="sd">        ...     r&quot;c&#39;4 ~ c&#39;16 r8. r8. &lt;d&#39; e&#39;&gt;16 ~ &lt;d&#39; e&#39;&gt;4&quot;</span>
+<span class="sd">        ... )</span>
+<span class="sd">        &gt;&gt;&gt; container2 = abjad.Staff(r&quot;r4 r16 c&#39;&#39;8. b&#39;8. a&#39;16 ~ a&#39;4&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; selections = [container1[:], container2[:]]</span>
+<span class="sd">        &gt;&gt;&gt; auxjad.get.rhythms_are_identical(selections)</span>
+<span class="sd">        False</span>
+
+<span class="sd">        This function can handle multiple selections, and will compare them</span>
+<span class="sd">        among each other returning ``True`` if all are identical:</span>
+
+<span class="sd">        &gt;&gt;&gt; container1 = abjad.Staff(r&quot;c&#39;4 d&#39;4 e&#39;4 f&#39;4 &lt;g&#39; a&#39;&gt;2 r2&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; container2 = abjad.Staff(r&quot;c&#39;&#39;4 r4 &lt;b&#39; a&#39;&gt;4 r4 g&#39;2 f&#39;2&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; container3 = abjad.Staff(r&quot;c&#39;&#39;&#39;4 c&#39;&#39;&#39;4 b&#39;&#39;4 b&#39;&#39;4 a&#39;&#39;2 a&#39;&#39;2&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; container4 = abjad.Staff(r&quot;c4 d4 e4 f4 g2 a2&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; selections = [</span>
+<span class="sd">        ...     container1[:],</span>
+<span class="sd">        ...     container2[:],</span>
+<span class="sd">        ...     container3[:],</span>
+<span class="sd">        ...     container4[:],</span>
+<span class="sd">        ... ]</span>
+<span class="sd">        &gt;&gt;&gt; auxjad.get.rhythms_are_identical(selections)</span>
+<span class="sd">        True</span>
+
+<span class="sd">    ..  note::</span>
+
+<span class="sd">        Auxjad automatically adds this function as an extension function to</span>
+<span class="sd">        |abjad.get|. It can thus be used from either |auxjad.get|_ or</span>
+<span class="sd">        |abjad.get| namespaces. Therefore, the two lines below are equivalent:</span>
+
+<span class="sd">        &gt;&gt;&gt; container1 = abjad.Staff(r&quot;c&#39;4 d&#39;4 e&#39;4 f&#39;4&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; container2 = abjad.Staff(r&quot;c&#39;&#39;4 b&#39;4 a&#39;4 g&#39;4&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; selections = [container1[:], container2[:]]</span>
+<span class="sd">        &gt;&gt;&gt; auxjad.get.rhythms_are_identical(selections)</span>
+<span class="sd">        True</span>
+<span class="sd">        &gt;&gt;&gt; abjad.get.rhythms_are_identical(selections)</span>
+<span class="sd">        True</span>
+
+<span class="sd">    Effective durations:</span>
+<span class="sd">        Even if all leaves of both selections are identical in relation to both</span>
+<span class="sd">        pitches and written durations, the function considers the effective</span>
+<span class="sd">        durations. This means that situations like the one below do not yield a</span>
+<span class="sd">        false positive:</span>
+
+<span class="sd">        &gt;&gt;&gt; container1 = abjad.Staff(r&quot;c&#39;4 d&#39;4 e&#39;4 f&#39;4 &lt;g&#39; a&#39;&gt;2 r2&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; container2 = abjad.Staff(</span>
+<span class="sd">        ...     r&quot;\times 3/2 {c&#39;4 d&#39;4 e&#39;4} f&#39;4 &lt;g&#39; a&#39;&gt;2 r2&quot;</span>
+<span class="sd">        ... )</span>
+<span class="sd">        &gt;&gt;&gt; selections = [container1[:], container2[:]]</span>
+<span class="sd">        &gt;&gt;&gt; auxjad.get.rhythms_are_identical(selections)</span>
+<span class="sd">        False</span>
+
+<span class="sd">    Grace notes:</span>
+<span class="sd">        This function also handles grace notes.</span>
+
+<span class="sd">        &gt;&gt;&gt; container1 = abjad.Staff(r&quot;c&#39;4 d&#39;4 e&#39;4 f&#39;4&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; container2 = abjad.Staff(r&quot;c&#39;4 \grace{d&#39;4} d&#39;4 e&#39;4 f&#39;4&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; selection1 = abjad.select(container1)</span>
+<span class="sd">        &gt;&gt;&gt; selection2 = abjad.select(container2)</span>
+<span class="sd">        &gt;&gt;&gt; selections = [selection1, selection2]</span>
+<span class="sd">        &gt;&gt;&gt; auxjad.get.rhythms_are_identical(selections)</span>
+<span class="sd">        False</span>
+
+<span class="sd">        &gt;&gt;&gt; container1 = abjad.Staff(r&quot;c&#39;4 d&#39;4 e&#39;4 f&#39;4 &lt;g&#39; a&#39;&gt;2 r2&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; container2 = abjad.Staff(</span>
+<span class="sd">        ...     r&quot;c&#39;4 \grace{c&#39;&#39;4} d&#39;4 e&#39;4 f&#39;4 &lt;g&#39; a&#39;&gt;2 r2&quot;</span>
+<span class="sd">        ... )</span>
+<span class="sd">        &gt;&gt;&gt; selection1 = abjad.select(container1)</span>
+<span class="sd">        &gt;&gt;&gt; selection2 = abjad.select(container2)</span>
+<span class="sd">        &gt;&gt;&gt; selections = [selection1, selection2]</span>
+<span class="sd">        &gt;&gt;&gt; auxjad.get.rhythms_are_identical(selections)</span>
+<span class="sd">        False</span>
+
+<span class="sd">        &gt;&gt;&gt; container1 = abjad.Staff(</span>
+<span class="sd">        ...     r&quot;c&#39;4 \grace{c&#39;&#39;4} d&#39;4 e&#39;4 f&#39;4 &lt;g&#39; a&#39;&gt;2 r2&quot;</span>
+<span class="sd">        ... )</span>
+<span class="sd">        &gt;&gt;&gt; container2 = abjad.Staff(</span>
+<span class="sd">        ...     r&quot;c&#39;4 \grace{b4} d&#39;4 e&#39;4 f&#39;4 &lt;g&#39; a&#39;&gt;2 r2&quot;</span>
+<span class="sd">        ... )</span>
+<span class="sd">        &gt;&gt;&gt; selection1 = abjad.select(container1)</span>
+<span class="sd">        &gt;&gt;&gt; selection2 = abjad.select(container2)</span>
+<span class="sd">        &gt;&gt;&gt; selections = [selection1, selection2]</span>
+<span class="sd">        &gt;&gt;&gt; auxjad.get.rhythms_are_identical(selections)</span>
+<span class="sd">        True</span>
+
+<span class="sd">    ..  warning::</span>
+
+<span class="sd">        It is important to create selections using |abjad.select()| as shown in</span>
+<span class="sd">        the example above, instead of using the syntax ``container[:]``, since</span>
+<span class="sd">        the latter ignores grace notes.</span>
+
+<span class="sd">    ..  note::</span>
+
+<span class="sd">        It is important to note it is the contents of the containers which are</span>
+<span class="sd">        compared, so containers of different classes can still return a</span>
+<span class="sd">        ``True`` value.</span>
+
+<span class="sd">        &gt;&gt;&gt; container1 = abjad.Container(r&quot;c&#39;4 d&#39;4 e&#39;4 f&#39;4&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; container2 = abjad.Staff(r&quot;c&#39;4 d&#39;4 e&#39;4 f&#39;4&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; selections = [container1[:], container2[:]]</span>
+<span class="sd">        &gt;&gt;&gt; auxjad.get.rhythms_are_identical(selections)</span>
+<span class="sd">        True</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">selections</span><span class="p">,</span> <span class="n">Iterable</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;argument must be an iterable of &#39;abjad.Selection&#39;s &quot;</span>
+                        <span class="s2">&quot;or &#39;abjad.Component&#39;s&quot;</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">selection</span> <span class="ow">in</span> <span class="n">selections</span><span class="p">:</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">selection</span><span class="p">,</span> <span class="p">(</span><span class="n">abjad</span><span class="o">.</span><span class="n">Component</span><span class="p">,</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Selection</span><span class="p">)):</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;argument must be an iterable of &quot;</span>
+                            <span class="s2">&quot;&#39;abjad.Selection&#39;s or &#39;abjad.Component&#39;s&quot;</span><span class="p">)</span>
+
+    <span class="k">for</span> <span class="n">index</span><span class="p">,</span> <span class="n">selection1</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">selections</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]):</span>
+        <span class="k">for</span> <span class="n">selection2</span> <span class="ow">in</span> <span class="n">selections</span><span class="p">[</span><span class="n">index</span> <span class="o">+</span> <span class="mi">1</span><span class="p">:]:</span>
+            <span class="n">logical_selections1</span> <span class="o">=</span> <span class="p">[</span><span class="n">logical_selection</span> <span class="k">for</span> <span class="n">logical_selection</span>
+                                   <span class="ow">in</span> <span class="n">select</span><span class="o">.</span><span class="n">logical_selections</span><span class="p">(</span><span class="n">selection1</span><span class="p">)]</span>
+            <span class="n">logical_selections2</span> <span class="o">=</span> <span class="p">[</span><span class="n">logical_selection</span> <span class="k">for</span> <span class="n">logical_selection</span>
+                                   <span class="ow">in</span> <span class="n">select</span><span class="o">.</span><span class="n">logical_selections</span><span class="p">(</span><span class="n">selection2</span><span class="p">)]</span>
+            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">logical_selections1</span><span class="p">)</span> <span class="o">!=</span> <span class="nb">len</span><span class="p">(</span><span class="n">logical_selections2</span><span class="p">):</span>
+                <span class="k">return</span> <span class="kc">False</span>
+            <span class="k">for</span> <span class="n">logical_sel1</span><span class="p">,</span> <span class="n">logical_sel2</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">logical_selections1</span><span class="p">,</span>
+                                                  <span class="n">logical_selections2</span><span class="p">,</span>
+                                                  <span class="p">):</span>
+                <span class="k">if</span> <span class="p">(</span><span class="n">abjad</span><span class="o">.</span><span class="n">get</span><span class="o">.</span><span class="n">duration</span><span class="p">(</span><span class="n">logical_sel1</span><span class="p">)</span>
+                        <span class="o">!=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">get</span><span class="o">.</span><span class="n">duration</span><span class="p">(</span><span class="n">logical_sel2</span><span class="p">)):</span>
+                    <span class="k">return</span> <span class="kc">False</span>
+                <span class="n">leaf1</span> <span class="o">=</span> <span class="n">logical_sel1</span><span class="o">.</span><span class="n">leaf</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+                <span class="n">leaf2</span> <span class="o">=</span> <span class="n">logical_sel2</span><span class="o">.</span><span class="n">leaf</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+                <span class="n">leaf1_graces</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">get</span><span class="o">.</span><span class="n">before_grace_container</span><span class="p">(</span><span class="n">leaf1</span><span class="p">)</span>
+                <span class="n">leaf2_graces</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">get</span><span class="o">.</span><span class="n">before_grace_container</span><span class="p">(</span><span class="n">leaf2</span><span class="p">)</span>
+                <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">leaf1_graces</span><span class="p">,</span> <span class="nb">type</span><span class="p">(</span><span class="n">leaf2_graces</span><span class="p">)):</span>
+                    <span class="k">return</span> <span class="kc">False</span>
+    <span class="k">return</span> <span class="kc">True</span></div>
+</pre></div>
+
+           </div>
+           
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2020, Gilberto Agostinho.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

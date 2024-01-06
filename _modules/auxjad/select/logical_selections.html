@@ -1,0 +1,293 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>auxjad.select.logical_selections &mdash; Auxjad 1.0.2 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+
+  
+  
+
+  
+  
+    <link rel="canonical" href="https://gilbertohasnofb.github.io/auxjad-docs/_modules/auxjad/select/logical_selections.html"/>
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+        <script src="../../../_static/jquery.js"></script>
+        <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/doctools.js"></script>
+    
+    <script type="text/javascript" src="../../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../../index.html" class="icon icon-home"> Auxjad
+          
+
+          
+            
+            <img src="../../../_static/auxjad-logo.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../index.html">Welcome to Auxjad’s documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../examples/index.html">Examples of usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../score_gallery/index.html">Score gallery</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../api/index.html">Auxjad API</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">Auxjad</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../../index.html">Module code</a> &raquo;</li>
+        
+      <li>auxjad.select.logical_selections</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for auxjad.select.logical_selections</h1><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Union</span>
+
+<span class="kn">import</span> <span class="nn">abjad</span>
+
+
+<span class="k">def</span> <span class="nf">_group_consecutive_rests</span><span class="p">(</span><span class="n">logical_tie</span><span class="p">:</span> <span class="n">abjad</span><span class="o">.</span><span class="n">LogicalTie</span><span class="p">,</span>
+                             <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Union</span><span class="p">[</span><span class="n">abjad</span><span class="o">.</span><span class="n">Leaf</span><span class="p">,</span> <span class="nb">bool</span><span class="p">]:</span>
+    <span class="sa">r</span><span class="sd">&quot;&quot;&quot;Private function used by |auxjad.select.logical_selections()| in order</span>
+<span class="sd">    to group consecutive ties together. If a logical tie is made out of a rest,</span>
+<span class="sd">    this function returns the value ``True``, otherwise it returns the logical</span>
+<span class="sd">    tie&#39;s head object itself. When this output is used with</span>
+<span class="sd">    |abjad.select.group_by()|, consecutive ``True`` values will be grouped</span>
+<span class="sd">    together, thus selecting consecutive rests as a single &#39;logical selection&#39;.</span>
+<span class="sd">    Meanwhile, non-rest logical ties will return their individual unique head</span>
+<span class="sd">    object, maintaining their individual selections as is.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">logical_tie</span><span class="o">.</span><span class="n">head</span><span class="p">,</span> <span class="p">(</span><span class="n">abjad</span><span class="o">.</span><span class="n">Rest</span><span class="p">,</span> <span class="n">abjad</span><span class="o">.</span><span class="n">MultimeasureRest</span><span class="p">)):</span>
+        <span class="k">return</span> <span class="kc">True</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">logical_tie</span><span class="o">.</span><span class="n">head</span>
+
+
+<div class="viewcode-block" id="logical_selections"><a class="viewcode-back" href="../../../_api_members/auxjad.select.logical_selections.html#auxjad.select.logical_selections">[docs]</a><span class="k">def</span> <span class="nf">logical_selections</span><span class="p">(</span><span class="n">container</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">,</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Selection</span><span class="p">],</span>
+                       <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Selection</span><span class="p">:</span>
+    <span class="sa">r</span><span class="sd">&quot;&quot;&quot;Takes an |abjad.Container| (or child class).</span>
+<span class="sd">    Returns the logical selections of a container, that is the logical</span>
+<span class="sd">    ties but with consecutive rests grouped together. Return value is in the</span>
+<span class="sd">    form of a |abjad.Selection| of |abjad.Selection|&#39;s.</span>
+
+<span class="sd">    Basic usage:</span>
+<span class="sd">        Usage is similar to |abjad.select.logical_ties()|:</span>
+
+<span class="sd">        &gt;&gt;&gt; container = abjad.Container(r&quot;c&#39;4 ~ c&#39;16 r8. r4.. d&#39;16 ~ d&#39;4&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; logical_selections = auxjad.select.logical_selections(container)</span>
+<span class="sd">        &gt;&gt;&gt; for logical_selection in logical_selections:</span>
+<span class="sd">        ...     print(logical_selection.leaves())</span>
+<span class="sd">        Selection([Note(&quot;c&#39;4&quot;), Note(&quot;c&#39;16&quot;)])</span>
+<span class="sd">        Selection([Rest(&#39;r8.&#39;), Rest(&#39;r4..&#39;)])</span>
+<span class="sd">        Selection([Note(&quot;d&#39;16&quot;), Note(&quot;d&#39;4&quot;)])</span>
+
+<span class="sd">    ..  note::</span>
+
+<span class="sd">        Auxjad automatically adds this function as an extension function to</span>
+<span class="sd">        |abjad.select|. It can thus be used from either |auxjad.select|_ or</span>
+<span class="sd">        |abjad.select| namespaces. Therefore, the two lines below are</span>
+<span class="sd">        equivalent:</span>
+
+<span class="sd">        &gt;&gt;&gt; container = abjad.Container(r&quot;c&#39;4 ~ c&#39;16 r8. r4.. d&#39;16 ~ d&#39;4&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; for logical_sel in auxjad.select.logical_selections(container):</span>
+<span class="sd">        ...     print(logical_sel.leaves())</span>
+<span class="sd">        Selection([Note(&quot;c&#39;4&quot;), Note(&quot;c&#39;16&quot;)])</span>
+<span class="sd">        Selection([Rest(&#39;r8.&#39;), Rest(&#39;r4..&#39;)])</span>
+<span class="sd">        Selection([Note(&quot;d&#39;16&quot;), Note(&quot;d&#39;4&quot;)])</span>
+<span class="sd">        &gt;&gt;&gt; for logical_sel in abjad.select.logical_selections(container):</span>
+<span class="sd">        ...     print(logical_sel.leaves())</span>
+<span class="sd">        Selection([Note(&quot;c&#39;4&quot;), Note(&quot;c&#39;16&quot;)])</span>
+<span class="sd">        Selection([Rest(&#39;r8.&#39;), Rest(&#39;r4..&#39;)])</span>
+<span class="sd">        Selection([Note(&quot;d&#39;16&quot;), Note(&quot;d&#39;4&quot;)])</span>
+
+<span class="sd">    Multi-measure rests:</span>
+<span class="sd">        It also handles multi-measure rests.</span>
+
+<span class="sd">        &gt;&gt;&gt; container = abjad.Container(r&quot;c&#39;2. ~ c&#39;16 r8. R1 r4.. d&#39;16 ~ d&#39;2.&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; logical_selections = auxjad.select.logical_selections(container)</span>
+<span class="sd">        &gt;&gt;&gt; for logical_selection in logical_selections:</span>
+<span class="sd">        ...     print(logical_selection.leaves())</span>
+<span class="sd">        Selection([Note(&quot;c&#39;2.&quot;), Note(&quot;c&#39;16&quot;)])</span>
+<span class="sd">        Selection([Rest(&#39;r8.&#39;), MultimeasureRest(&#39;R1&#39;), Rest(&#39;r4..&#39;)])</span>
+<span class="sd">        Selection([Note(&quot;d&#39;16&quot;), Note(&quot;d&#39;2.&quot;)])</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">container</span><span class="p">,</span> <span class="p">(</span><span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">,</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Selection</span><span class="p">)):</span>
+        <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;Argument must be &#39;abjad.Container&#39;, &#39;abjad.Selection&#39;&quot;</span>
+                        <span class="s2">&quot;, or child classes&quot;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">container</span><span class="p">,</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">):</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">abjad</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="n">container</span><span class="p">)</span><span class="o">.</span><span class="n">leaves</span><span class="p">()</span><span class="o">.</span><span class="n">are_contiguous_logical_voice</span><span class="p">():</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Argument must be contiguous logical voice&quot;</span><span class="p">)</span>
+
+    <span class="n">logical_ties</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="n">container</span><span class="p">)</span><span class="o">.</span><span class="n">logical_ties</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">logical_ties</span><span class="o">.</span><span class="n">group_by</span><span class="p">(</span><span class="n">_group_consecutive_rests</span><span class="p">)</span></div>
+</pre></div>
+
+           </div>
+           
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2020, Gilberto Agostinho.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>
