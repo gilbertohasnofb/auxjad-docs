@@ -5,17 +5,17 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>auxjad.get.time_signature_list &mdash; Auxjad 1.0.5 documentation</title>
+  <title>auxjad.get.time_signature_list &mdash; Auxjad 1.0.7 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=ffec0d92" />
-      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=9edc463e" />
 
   
     <link rel="canonical" href="https://gilbertohasnofb.github.io/auxjad-docs/_modules/auxjad/get/time_signature_list.html"/>
       <script src="../../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../../../_static/documentation_options.js?v=d55fa986"></script>
-      <script src="../../../_static/doctools.js?v=9bcbadda"></script>
-      <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../../_static/documentation_options.js?v=46dfa7f5"></script>
+      <script src="../../../_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
     <script src="../../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" /> 
@@ -31,7 +31,6 @@
           
           <a href="../../../index.html" class="icon icon-home">
             Auxjad
-              <img src="../../../_static/auxjad-logo.png" class="logo" alt="Logo"/>
           </a>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
@@ -79,12 +78,13 @@
 
 <div class="viewcode-block" id="time_signature_list">
 <a class="viewcode-back" href="../../../_api_members/auxjad.get.time_signature_list.html#auxjad.get.time_signature_list">[docs]</a>
-<span class="k">def</span><span class="w"> </span><span class="nf">time_signature_list</span><span class="p">(</span><span class="n">container</span><span class="p">:</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">,</span>
-                        <span class="o">*</span><span class="p">,</span>
-                        <span class="n">do_not_use_none</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
-                        <span class="n">implicit_common_time</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
-                        <span class="n">omit_repeated</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
-                        <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="n">abjad</span><span class="o">.</span><span class="n">TimeSignature</span><span class="p">]:</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">time_signature_list</span><span class="p">(</span>
+    <span class="n">container</span><span class="p">:</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">,</span>
+    <span class="o">*</span><span class="p">,</span>
+    <span class="n">do_not_use_none</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+    <span class="n">implicit_common_time</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+    <span class="n">omit_repeated</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="n">abjad</span><span class="o">.</span><span class="n">TimeSignature</span><span class="p">]:</span>
 <span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Returns a :obj:`list` with the |abjad.TimeSignature|&#39;s for all measures</span>
 <span class="sd">    of an input |abjad.Container|.</span>
 
@@ -202,8 +202,7 @@
 <span class="sd">        &#39;omit_repeated&#39; set to &#39;True&#39;</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">container</span><span class="p">,</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">):</span>
-        <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;first argument must be &#39;abjad.Container&#39; or &quot;</span>
-                        <span class="s2">&quot;child class&quot;</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;first argument must be &#39;abjad.Container&#39; or child class&quot;</span><span class="p">)</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">do_not_use_none</span><span class="p">,</span> <span class="nb">bool</span><span class="p">):</span>
         <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;&#39;do_not_use_none&#39; must be &#39;bool&#39;&quot;</span><span class="p">)</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">implicit_common_time</span><span class="p">,</span> <span class="nb">bool</span><span class="p">):</span>
@@ -211,15 +210,16 @@
     <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">omit_repeated</span><span class="p">,</span> <span class="nb">bool</span><span class="p">):</span>
         <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;&#39;omit_repeated&#39; must be &#39;bool&#39;&quot;</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">omit_repeated</span> <span class="ow">and</span> <span class="n">do_not_use_none</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;&#39;omit_repeated&#39; and &#39;do_not_use_none&#39; cannot be &quot;</span>
-                         <span class="s2">&quot;both set to &#39;True&#39;&quot;</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;&#39;omit_repeated&#39; and &#39;do_not_use_none&#39; cannot be both set to &#39;True&#39;&quot;</span><span class="p">)</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="n">implicit_common_time</span> <span class="ow">and</span> <span class="n">do_not_use_none</span><span class="p">:</span>
         <span class="n">head_leaf</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="n">container</span><span class="p">)</span><span class="o">.</span><span class="n">leaf</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="n">abjad</span><span class="o">.</span><span class="n">get</span><span class="o">.</span><span class="n">indicator</span><span class="p">(</span><span class="n">head_leaf</span><span class="p">,</span> <span class="n">abjad</span><span class="o">.</span><span class="n">TimeSignature</span><span class="p">):</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;container does not have a time signature &quot;</span>
-                             <span class="s2">&quot;attached to its first leaf, with &quot;</span>
-                             <span class="s2">&quot;&#39;implicit_common_time&#39; set to &#39;False&#39; and &quot;</span>
-                             <span class="s2">&quot;&#39;omit_repeated&#39; set to &#39;True&#39;&quot;</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                <span class="s2">&quot;container does not have a time signature &quot;</span>
+                <span class="s2">&quot;attached to its first leaf, with &quot;</span>
+                <span class="s2">&quot;&#39;implicit_common_time&#39; set to &#39;False&#39; and &quot;</span>
+                <span class="s2">&quot;&#39;omit_repeated&#39; set to &#39;True&#39;&quot;</span>
+            <span class="p">)</span>
 
     <span class="n">measures</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="n">container</span><span class="p">[:])</span><span class="o">.</span><span class="n">group_by_measure</span><span class="p">()</span>
     <span class="n">time_signatures</span> <span class="o">=</span> <span class="p">[]</span>
@@ -237,17 +237,13 @@
             <span class="n">time_signatures</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">TimeSignature</span><span class="p">((</span><span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
         <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">time_signatures</span><span class="p">)):</span>
             <span class="k">if</span> <span class="n">time_signatures</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-                <span class="n">time_signatures</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">TimeSignature</span><span class="p">(</span>
-                    <span class="n">time_signatures</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">pair</span>
-                <span class="p">)</span>
+                <span class="n">time_signatures</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">TimeSignature</span><span class="p">(</span><span class="n">time_signatures</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">pair</span><span class="p">)</span>
     <span class="k">elif</span> <span class="n">omit_repeated</span><span class="p">:</span>
         <span class="n">effective_time_signature</span> <span class="o">=</span> <span class="kc">None</span>
         <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">time_signatures</span><span class="p">)):</span>
             <span class="n">current_time_signature</span> <span class="o">=</span> <span class="n">time_signatures</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
             <span class="k">if</span> <span class="n">current_time_signature</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-                <span class="n">current_time_signature</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">TimeSignature</span><span class="p">(</span>
-                    <span class="n">current_time_signature</span><span class="o">.</span><span class="n">pair</span>
-                <span class="p">)</span>
+                <span class="n">current_time_signature</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">TimeSignature</span><span class="p">(</span><span class="n">current_time_signature</span><span class="o">.</span><span class="n">pair</span><span class="p">)</span>
             <span class="k">if</span> <span class="n">current_time_signature</span> <span class="o">==</span> <span class="n">effective_time_signature</span><span class="p">:</span>
                 <span class="n">time_signatures</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
             <span class="k">else</span><span class="p">:</span>

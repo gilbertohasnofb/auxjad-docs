@@ -5,17 +5,17 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>auxjad.select.logical_selections &mdash; Auxjad 1.0.5 documentation</title>
+  <title>auxjad.select.logical_selections &mdash; Auxjad 1.0.7 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=ffec0d92" />
-      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=9edc463e" />
 
   
     <link rel="canonical" href="https://gilbertohasnofb.github.io/auxjad-docs/_modules/auxjad/select/logical_selections.html"/>
       <script src="../../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../../../_static/documentation_options.js?v=d55fa986"></script>
-      <script src="../../../_static/doctools.js?v=9bcbadda"></script>
-      <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../../_static/documentation_options.js?v=46dfa7f5"></script>
+      <script src="../../../_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
     <script src="../../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" /> 
@@ -31,7 +31,6 @@
           
           <a href="../../../index.html" class="icon icon-home">
             Auxjad
-              <img src="../../../_static/auxjad-logo.png" class="logo" alt="Logo"/>
           </a>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
@@ -80,10 +79,11 @@
 <span class="kn">import</span><span class="w"> </span><span class="nn">abjad</span>
 
 
-<span class="k">def</span><span class="w"> </span><span class="nf">_group_consecutive_rests</span><span class="p">(</span><span class="n">logical_tie</span><span class="p">:</span> <span class="n">abjad</span><span class="o">.</span><span class="n">LogicalTie</span><span class="p">,</span>
-                             <span class="o">*</span><span class="p">,</span>
-                             <span class="n">include_multimeasure_rests</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
-                             <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Union</span><span class="p">[</span><span class="n">abjad</span><span class="o">.</span><span class="n">Leaf</span><span class="p">,</span> <span class="nb">bool</span><span class="p">]:</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">_group_consecutive_rests</span><span class="p">(</span>
+    <span class="n">logical_tie</span><span class="p">:</span> <span class="n">abjad</span><span class="o">.</span><span class="n">LogicalTie</span><span class="p">,</span>
+    <span class="o">*</span><span class="p">,</span>
+    <span class="n">include_multimeasure_rests</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Union</span><span class="p">[</span><span class="n">abjad</span><span class="o">.</span><span class="n">Leaf</span><span class="p">,</span> <span class="nb">bool</span><span class="p">]:</span>
 <span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Private function used by |auxjad.select.logical_selections()| in order</span>
 <span class="sd">    to group consecutive ties together. If a logical tie is made out of a rest,</span>
 <span class="sd">    this function returns the value ``True``, otherwise it returns the logical</span>
@@ -95,8 +95,7 @@
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">logical_tie</span><span class="o">.</span><span class="n">head</span><span class="p">,</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Rest</span><span class="p">):</span>
         <span class="k">return</span> <span class="kc">True</span>
-    <span class="k">elif</span> <span class="p">(</span><span class="nb">isinstance</span><span class="p">(</span><span class="n">logical_tie</span><span class="o">.</span><span class="n">head</span><span class="p">,</span> <span class="n">abjad</span><span class="o">.</span><span class="n">MultimeasureRest</span><span class="p">)</span>
-            <span class="ow">and</span> <span class="n">include_multimeasure_rests</span><span class="p">):</span>
+    <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">logical_tie</span><span class="o">.</span><span class="n">head</span><span class="p">,</span> <span class="n">abjad</span><span class="o">.</span><span class="n">MultimeasureRest</span><span class="p">)</span> <span class="ow">and</span> <span class="n">include_multimeasure_rests</span><span class="p">:</span>
         <span class="k">return</span> <span class="kc">True</span>
     <span class="k">else</span><span class="p">:</span>
         <span class="k">return</span> <span class="n">logical_tie</span><span class="o">.</span><span class="n">head</span>
@@ -104,10 +103,11 @@
 
 <div class="viewcode-block" id="logical_selections">
 <a class="viewcode-back" href="../../../_api_members/auxjad.select.logical_selections.html#auxjad.select.logical_selections">[docs]</a>
-<span class="k">def</span><span class="w"> </span><span class="nf">logical_selections</span><span class="p">(</span><span class="n">container</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">,</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Selection</span><span class="p">],</span>
-                       <span class="o">*</span><span class="p">,</span>
-                       <span class="n">include_multimeasure_rests</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
-                       <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Selection</span><span class="p">:</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">logical_selections</span><span class="p">(</span>
+    <span class="n">container</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">,</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Selection</span><span class="p">],</span>
+    <span class="o">*</span><span class="p">,</span>
+    <span class="n">include_multimeasure_rests</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Selection</span><span class="p">:</span>
 <span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Takes an |abjad.Container| (or child class).</span>
 <span class="sd">    Returns the logical selections of a container, that is the logical</span>
 <span class="sd">    ties but with consecutive rests grouped together. Return value is in the</span>
@@ -173,17 +173,17 @@
 <span class="sd">        Selection([Note(&quot;d&#39;16&quot;), Note(&quot;d&#39;2.&quot;)])</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">container</span><span class="p">,</span> <span class="p">(</span><span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">,</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Selection</span><span class="p">)):</span>
-        <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;Argument must be &#39;abjad.Container&#39;, &#39;abjad.Selection&#39;&quot;</span>
-                        <span class="s2">&quot;, or child classes&quot;</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;Argument must be &#39;abjad.Container&#39;, &#39;abjad.Selection&#39;, or child classes&quot;</span><span class="p">)</span>
     <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">container</span><span class="p">,</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">):</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="n">abjad</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="n">container</span><span class="p">)</span><span class="o">.</span><span class="n">leaves</span><span class="p">()</span><span class="o">.</span><span class="n">are_contiguous_logical_voice</span><span class="p">():</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Argument must be contiguous logical voice&quot;</span><span class="p">)</span>
 
     <span class="n">logical_ties</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="n">container</span><span class="p">)</span><span class="o">.</span><span class="n">logical_ties</span><span class="p">()</span>
     <span class="k">return</span> <span class="n">logical_ties</span><span class="o">.</span><span class="n">group_by</span><span class="p">(</span>
-        <span class="n">partial</span><span class="p">(</span><span class="n">_group_consecutive_rests</span><span class="p">,</span>
-                <span class="n">include_multimeasure_rests</span><span class="o">=</span><span class="n">include_multimeasure_rests</span><span class="p">,</span>
-                <span class="p">)</span>
+        <span class="n">partial</span><span class="p">(</span>
+            <span class="n">_group_consecutive_rests</span><span class="p">,</span>
+            <span class="n">include_multimeasure_rests</span><span class="o">=</span><span class="n">include_multimeasure_rests</span><span class="p">,</span>
+        <span class="p">)</span>
     <span class="p">)</span></div>
 
 </pre></div>

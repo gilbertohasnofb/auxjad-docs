@@ -5,17 +5,17 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>auxjad.score.Score &mdash; Auxjad 1.0.5 documentation</title>
+  <title>auxjad.score.Score &mdash; Auxjad 1.0.7 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=ffec0d92" />
-      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=9edc463e" />
 
   
     <link rel="canonical" href="https://gilbertohasnofb.github.io/auxjad-docs/_modules/auxjad/score/Score.html"/>
       <script src="../../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../../../_static/documentation_options.js?v=d55fa986"></script>
-      <script src="../../../_static/doctools.js?v=9bcbadda"></script>
-      <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../../_static/documentation_options.js?v=46dfa7f5"></script>
+      <script src="../../../_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
     <script src="../../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" /> 
@@ -31,7 +31,6 @@
           
           <a href="../../../index.html" class="icon icon-home">
             Auxjad
-              <img src="../../../_static/auxjad-logo.png" class="logo" alt="Logo"/>
           </a>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
@@ -84,61 +83,298 @@
 
 <div class="viewcode-block" id="Score.add_final_bar_line">
 <a class="viewcode-back" href="../../../_api_members/auxjad.Score.add_final_bar_line.html#auxjad.Score.add_final_bar_line">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">add_final_bar_line</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
-                           <span class="n">bar_line</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">abjad</span><span class="o">.</span><span class="n">BarLine</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;|.&quot;</span><span class="p">,</span>
-                           <span class="o">*</span><span class="p">,</span>
-                           <span class="n">to_each_voice</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
-                           <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">add_final_bar_line</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">bar_line</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">abjad</span><span class="o">.</span><span class="n">BarLine</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;|.&quot;</span><span class="p">,</span>
+        <span class="o">*</span><span class="p">,</span>
+        <span class="n">to_each_voice</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Adds a final bar line to all components of |abjad.Score|. Note that</span>
-<span class="sd">        Auxjad adds this function as an extension method to |abjad.Score| (see</span>
-<span class="sd">        usage below).</span>
+<span class="sd">            Auxjad adds this function as an extension method to |abjad.Score| (see</span>
+<span class="sd">            usage below).</span>
 
-<span class="sd">        Basic usage:</span>
-<span class="sd">            &gt;&gt;&gt; staff = abjad.Staff(r&quot;c&#39;4 d&#39;4 e&#39;4 f&#39;4&quot;)</span>
-<span class="sd">            &gt;&gt;&gt; score = abjad.Score([staff])</span>
-<span class="sd">            &gt;&gt;&gt; abjad.show(score)</span>
+<span class="sd">            Basic usage:</span>
+<span class="sd">                &gt;&gt;&gt; staff = abjad.Staff(r&quot;c&#39;4 d&#39;4 e&#39;4 f&#39;4&quot;)</span>
+<span class="sd">                &gt;&gt;&gt; score = abjad.Score([staff])</span>
+<span class="sd">                &gt;&gt;&gt; abjad.show(score)</span>
 
-<span class="sd">            ..  docs::</span>
+<span class="sd">                ..  docs::</span>
 
-<span class="sd">                \new Score</span>
-<span class="sd">                &lt;&lt;</span>
+<span class="sd">                    \new Score</span>
+<span class="sd">                    &lt;&lt;</span>
+<span class="sd">                        \new Staff</span>
+<span class="sd">                        {</span>
+<span class="sd">                            c&#39;4</span>
+<span class="sd">                            d&#39;4</span>
+<span class="sd">                            e&#39;4</span>
+<span class="sd">                            f&#39;4</span>
+<span class="sd">                        }</span>
+<span class="sd">                    &gt;&gt;</span>
+
+<span class="sd">                ..  figure:: ../_images/Score-fdO5TP6ff9.png</span>
+
+<span class="sd">                &gt;&gt;&gt; score.add_final_bar_line()</span>
+<span class="sd">                &gt;&gt;&gt; abjad.show(score)</span>
+
+<span class="sd">                ..  docs::</span>
+
+<span class="sd">                    \new Score</span>
+<span class="sd">                    &lt;&lt;</span>
+<span class="sd">                        \new Staff</span>
+<span class="sd">                        {</span>
+<span class="sd">                            c&#39;4</span>
+<span class="sd">                            d&#39;4</span>
+<span class="sd">                            e&#39;4</span>
+<span class="sd">                            f&#39;4</span>
+<span class="sd">                            \bar &quot;|.&quot;</span>
+<span class="sd">                        }</span>
+<span class="sd">                    &gt;&gt;</span>
+
+<span class="sd">                ..  figure:: ../_images/Score-SHok9MqNVh.png</span>
+
+<span class="sd">            Multiple staves:</span>
+<span class="sd">                Works with multiple staves:</span>
+
+<span class="sd">                &gt;&gt;&gt; staff_1 = abjad.Staff(r&quot;c&#39;&#39;1 d&#39;&#39;1 e&#39;&#39;1 f&#39;&#39;1&quot;)</span>
+<span class="sd">                &gt;&gt;&gt; staff_2 = abjad.Staff(r&quot;c&#39;1 d&#39;1 e&#39;1 f&#39;1&quot;)</span>
+<span class="sd">                &gt;&gt;&gt; score = abjad.Score([staff_1, staff_2])</span>
+<span class="sd">                &gt;&gt;&gt; score.add_final_bar_line()</span>
+<span class="sd">                &gt;&gt;&gt; abjad.show(score)</span>
+
+<span class="sd">                ..  docs::</span>
+
+<span class="sd">                    \new Score</span>
+<span class="sd">                    &lt;&lt;</span>
+<span class="sd">                        \new Staff</span>
+<span class="sd">                        {</span>
+<span class="sd">                            c&#39;&#39;1</span>
+<span class="sd">                            d&#39;&#39;1</span>
+<span class="sd">                            e&#39;&#39;1</span>
+<span class="sd">                            f&#39;&#39;1</span>
+<span class="sd">                            \bar &quot;|.&quot;</span>
+<span class="sd">                        }</span>
+<span class="sd">                        \new Staff</span>
+<span class="sd">                        {</span>
+<span class="sd">                            c&#39;1</span>
+<span class="sd">                            d&#39;1</span>
+<span class="sd">                            e&#39;1</span>
+<span class="sd">                            f&#39;1</span>
+<span class="sd">                            \bar &quot;|.&quot;</span>
+<span class="sd">                        }</span>
+<span class="sd">                    &gt;&gt;</span>
+
+<span class="sd">                ..  figure:: ../_images/Score-oCR5QGUz6W.png</span>
+
+<span class="sd">                Each stave will receive their own final bar line, which can be</span>
+<span class="sd">                useful when part extracting:</span>
+
+<span class="sd">                &gt;&gt;&gt; abjad.show(staff_1)</span>
+
+<span class="sd">                ..  docs::</span>
+
 <span class="sd">                    \new Staff</span>
 <span class="sd">                    {</span>
-<span class="sd">                        c&#39;4</span>
-<span class="sd">                        d&#39;4</span>
-<span class="sd">                        e&#39;4</span>
-<span class="sd">                        f&#39;4</span>
-<span class="sd">                    }</span>
-<span class="sd">                &gt;&gt;</span>
-
-<span class="sd">            ..  figure:: ../_images/Score-fdO5TP6ff9.png</span>
-
-<span class="sd">            &gt;&gt;&gt; score.add_final_bar_line()</span>
-<span class="sd">            &gt;&gt;&gt; abjad.show(score)</span>
-
-<span class="sd">            ..  docs::</span>
-
-<span class="sd">                \new Score</span>
-<span class="sd">                &lt;&lt;</span>
-<span class="sd">                    \new Staff</span>
-<span class="sd">                    {</span>
-<span class="sd">                        c&#39;4</span>
-<span class="sd">                        d&#39;4</span>
-<span class="sd">                        e&#39;4</span>
-<span class="sd">                        f&#39;4</span>
+<span class="sd">                        c&#39;&#39;1</span>
+<span class="sd">                        d&#39;&#39;1</span>
+<span class="sd">                        e&#39;&#39;1</span>
+<span class="sd">                        f&#39;&#39;1</span>
 <span class="sd">                        \bar &quot;|.&quot;</span>
 <span class="sd">                    }</span>
-<span class="sd">                &gt;&gt;</span>
 
-<span class="sd">            ..  figure:: ../_images/Score-SHok9MqNVh.png</span>
+<span class="sd">                ..  figure:: ../_images/Score-tTXh7GOAop.png</span>
 
-<span class="sd">        Multiple staves:</span>
-<span class="sd">            Works with multiple staves:</span>
+<span class="sd">                &gt;&gt;&gt; abjad.show(staff_2)</span>
+
+<span class="sd">                ..  docs::</span>
+
+<span class="sd">                    \new Staff</span>
+<span class="sd">                    {</span>
+<span class="sd">                        c&#39;1</span>
+<span class="sd">                        d&#39;1</span>
+<span class="sd">                        e&#39;1</span>
+<span class="sd">                        f&#39;1</span>
+<span class="sd">                        \bar &quot;|.&quot;</span>
+<span class="sd">                    }</span>
+
+<span class="sd">                ..  figure:: ../_images/Score-MRWgOyiqt3.png</span>
+
+<span class="sd">            ``to_each_voice``</span>
+<span class="sd">                When multiple voices are present in a staff, the final bar line is</span>
+<span class="sd">                added to the last voice only:</span>
+
+<span class="sd">                &gt;&gt;&gt; voice_1 = abjad.Voice(r&quot;c&#39;&#39;1 d&#39;&#39;1 e&#39;&#39;1 f&#39;&#39;1&quot;)</span>
+<span class="sd">                &gt;&gt;&gt; voice_2 = abjad.Voice(r&quot;c&#39;2 d&#39;2 e&#39;2 f&#39;2 g&#39;2 a&#39;2 b&#39;2 c&#39;&#39;2&quot;)</span>
+<span class="sd">                &gt;&gt;&gt; staff = abjad.Staff([voice_1, voice_2], simultaneous=True)</span>
+<span class="sd">                &gt;&gt;&gt; abjad.attach(abjad.LilyPondLiteral(r&#39;\voiceOne&#39;), voice_1)</span>
+<span class="sd">                &gt;&gt;&gt; abjad.attach(abjad.LilyPondLiteral(r&#39;\voiceTwo&#39;), voice_2)</span>
+<span class="sd">                &gt;&gt;&gt; score = auxjad.Score([staff])</span>
+<span class="sd">                &gt;&gt;&gt; score.add_final_bar_line()</span>
+<span class="sd">                &gt;&gt;&gt; abjad.show(score)</span>
+
+<span class="sd">                ..  docs::</span>
+
+<span class="sd">                    \new Score</span>
+<span class="sd">                    &lt;&lt;</span>
+<span class="sd">                        \new Staff</span>
+<span class="sd">                        &lt;&lt;</span>
+<span class="sd">                            \new Voice</span>
+<span class="sd">                            {</span>
+<span class="sd">                                \voiceOne</span>
+<span class="sd">                                c&#39;&#39;1</span>
+<span class="sd">                                d&#39;&#39;1</span>
+<span class="sd">                                e&#39;&#39;1</span>
+<span class="sd">                                f&#39;&#39;1</span>
+<span class="sd">                            }</span>
+<span class="sd">                            \new Voice</span>
+<span class="sd">                            {</span>
+<span class="sd">                                \voiceTwo</span>
+<span class="sd">                                c&#39;2</span>
+<span class="sd">                                d&#39;2</span>
+<span class="sd">                                e&#39;2</span>
+<span class="sd">                                f&#39;2</span>
+<span class="sd">                                g&#39;2</span>
+<span class="sd">                                a&#39;2</span>
+<span class="sd">                                b&#39;2</span>
+<span class="sd">                                c&#39;&#39;2</span>
+<span class="sd">                                \bar &quot;|.&quot;</span>
+<span class="sd">                            }</span>
+<span class="sd">                        &gt;&gt;</span>
+<span class="sd">                    &gt;&gt;</span>
+
+<span class="sd">                ..  figure:: ../_images/Score-8mnllVCEoL.png</span>
+
+<span class="sd">                &gt;&gt;&gt; abjad.show(voice_1)</span>
+
+<span class="sd">                ..  docs::</span>
+
+<span class="sd">                    \new Voice</span>
+<span class="sd">                    {</span>
+<span class="sd">                        \voiceOne</span>
+<span class="sd">                        c&#39;&#39;1</span>
+<span class="sd">                        d&#39;&#39;1</span>
+<span class="sd">                        e&#39;&#39;1</span>
+<span class="sd">                        f&#39;&#39;1</span>
+<span class="sd">                    }</span>
+
+<span class="sd">                ..  figure:: ../_images/Score-DPW54DDeyM.png</span>
+
+<span class="sd">                &gt;&gt;&gt; abjad.show(voice_2)</span>
+
+<span class="sd">                ..  docs::</span>
+
+<span class="sd">                    \new Voice</span>
+<span class="sd">                    {</span>
+<span class="sd">                        \voiceTwo</span>
+<span class="sd">                        c&#39;2</span>
+<span class="sd">                        d&#39;2</span>
+<span class="sd">                        e&#39;2</span>
+<span class="sd">                        f&#39;2</span>
+<span class="sd">                        g&#39;2</span>
+<span class="sd">                        a&#39;2</span>
+<span class="sd">                        b&#39;2</span>
+<span class="sd">                        c&#39;&#39;2</span>
+<span class="sd">                        \bar &quot;|.&quot;</span>
+<span class="sd">                    }</span>
+
+<span class="sd">                ..  figure:: ../_images/Score-ua8cZAITB5.png</span>
+
+<span class="sd">                Setting ``to_each_voice`` to ``True`` will add a bar line to each</span>
+<span class="sd">                voice in a staff:</span>
+
+<span class="sd">                &gt;&gt;&gt; voice_1 = abjad.Voice(r&quot;c&#39;&#39;1 d&#39;&#39;1 e&#39;&#39;1 f&#39;&#39;1&quot;)</span>
+<span class="sd">                &gt;&gt;&gt; voice_2 = abjad.Voice(r&quot;c&#39;2 d&#39;2 e&#39;2 f&#39;2 g&#39;2 a&#39;2 b&#39;2 c&#39;&#39;2&quot;)</span>
+<span class="sd">                &gt;&gt;&gt; staff = abjad.Staff([voice_1, voice_2], simultaneous=True)</span>
+<span class="sd">                &gt;&gt;&gt; abjad.attach(abjad.LilyPondLiteral(r&#39;\voiceOne&#39;), voice_1)</span>
+<span class="sd">                &gt;&gt;&gt; abjad.attach(abjad.LilyPondLiteral(r&#39;\voiceTwo&#39;), voice_2)</span>
+<span class="sd">                &gt;&gt;&gt; score = auxjad.Score([staff])</span>
+<span class="sd">                &gt;&gt;&gt; score.add_final_bar_line(to_each_voice=True)</span>
+<span class="sd">                &gt;&gt;&gt; abjad.show(voice_1)</span>
+
+<span class="sd">                ..  docs::</span>
+
+<span class="sd">                    \new Voice</span>
+<span class="sd">                    {</span>
+<span class="sd">                        \voiceOne</span>
+<span class="sd">                        c&#39;&#39;1</span>
+<span class="sd">                        d&#39;&#39;1</span>
+<span class="sd">                        e&#39;&#39;1</span>
+<span class="sd">                        f&#39;&#39;1</span>
+<span class="sd">                        \bar &quot;|.&quot;</span>
+<span class="sd">                    }</span>
+
+<span class="sd">                ..  figure:: ../_images/Score-adtLRR3v1W.png</span>
+
+<span class="sd">                &gt;&gt;&gt; abjad.show(voice_2)</span>
+
+<span class="sd">                ..  docs::</span>
+
+<span class="sd">                    \new Voice</span>
+<span class="sd">                    {</span>
+<span class="sd">                        \voiceTwo</span>
+<span class="sd">                        c&#39;2</span>
+<span class="sd">                        d&#39;2</span>
+<span class="sd">                        e&#39;2</span>
+<span class="sd">                        f&#39;2</span>
+<span class="sd">                        g&#39;2</span>
+<span class="sd">                        a&#39;2</span>
+<span class="sd">                        b&#39;2</span>
+<span class="sd">                        c&#39;&#39;2</span>
+<span class="sd">                        \bar &quot;|.&quot;</span>
+<span class="sd">                    }</span>
+
+<span class="sd">                ..  figure:: ../_images/Score-DqhspXgvIJ.png</span>
+
+<span class="sd">            ..  warning::</span>
+
+<span class="sd">                If voices do not end together then manually adding bar lines will</span>
+<span class="sd">                be required:</span>
+
+<span class="sd">                &gt;&gt;&gt; voice_1 = abjad.Voice(r&quot;c&#39;&#39;1 d&#39;&#39;1 e&#39;&#39;1 f&#39;&#39;1&quot;)</span>
+<span class="sd">                &gt;&gt;&gt; voice_2 = abjad.Voice(r&quot;c&#39;1 d&#39;1 e&#39;1&quot;)</span>
+<span class="sd">                &gt;&gt;&gt; staff = abjad.Staff([voice_1, voice_2], simultaneous=True)</span>
+<span class="sd">                &gt;&gt;&gt; abjad.attach(abjad.LilyPondLiteral(r&#39;\voiceOne&#39;), voice_1)</span>
+<span class="sd">                &gt;&gt;&gt; abjad.attach(abjad.LilyPondLiteral(r&#39;\voiceTwo&#39;), voice_2)</span>
+<span class="sd">                &gt;&gt;&gt; score = auxjad.Score([staff])</span>
+<span class="sd">                &gt;&gt;&gt; score.add_final_bar_line(to_each_voice=True)</span>
+<span class="sd">                &gt;&gt;&gt; abjad.show(score)</span>
+
+<span class="sd">                ..  docs::</span>
+
+<span class="sd">                    \new Score</span>
+<span class="sd">                    &lt;&lt;</span>
+<span class="sd">                        \new Staff</span>
+<span class="sd">                        &lt;&lt;</span>
+<span class="sd">                            \new Voice</span>
+<span class="sd">                            {</span>
+<span class="sd">                                \voiceOne</span>
+<span class="sd">                                c&#39;&#39;1</span>
+<span class="sd">                                d&#39;&#39;1</span>
+<span class="sd">                                e&#39;&#39;1</span>
+<span class="sd">                                f&#39;&#39;1</span>
+<span class="sd">                                \bar &quot;|.&quot;</span>
+<span class="sd">                            }</span>
+<span class="sd">                            \new Voice</span>
+<span class="sd">                            {</span>
+<span class="sd">                                \voiceTwo</span>
+<span class="sd">                                c&#39;1</span>
+<span class="sd">                                d&#39;1</span>
+<span class="sd">                                e&#39;1</span>
+<span class="sd">                                \bar &quot;|.&quot;</span>
+<span class="sd">                            }</span>
+<span class="sd">                        &gt;&gt;</span>
+<span class="sd">                    &gt;&gt;</span>
+
+<span class="sd">                ..  figure:: ../_images/Score-duPkS4pJGc.png</span>
+
+<span class="sd">        argument:</span>
+<span class="sd">            The default bar line is of type ``&#39;|.&#39;``. To change this behaviour,</span>
+<span class="sd">            call this method with an argument of type :obj:`str` or |abjad.BarLine|</span>
+<span class="sd">            with the desired bar line type:</span>
 
 <span class="sd">            &gt;&gt;&gt; staff_1 = abjad.Staff(r&quot;c&#39;&#39;1 d&#39;&#39;1 e&#39;&#39;1 f&#39;&#39;1&quot;)</span>
 <span class="sd">            &gt;&gt;&gt; staff_2 = abjad.Staff(r&quot;c&#39;1 d&#39;1 e&#39;1 f&#39;1&quot;)</span>
-<span class="sd">            &gt;&gt;&gt; score = abjad.Score([staff_1, staff_2])</span>
-<span class="sd">            &gt;&gt;&gt; score.add_final_bar_line()</span>
+<span class="sd">            &gt;&gt;&gt; score = auxjad.Score([staff_1, staff_2])</span>
+<span class="sd">            &gt;&gt;&gt; score.add_final_bar_line(abjad.BarLine(&quot;:|.&quot;))</span>
 <span class="sd">            &gt;&gt;&gt; abjad.show(score)</span>
 
 <span class="sd">            ..  docs::</span>
@@ -151,7 +387,7 @@
 <span class="sd">                        d&#39;&#39;1</span>
 <span class="sd">                        e&#39;&#39;1</span>
 <span class="sd">                        f&#39;&#39;1</span>
-<span class="sd">                        \bar &quot;|.&quot;</span>
+<span class="sd">                        \bar &quot;:|.&quot;</span>
 <span class="sd">                    }</span>
 <span class="sd">                    \new Staff</span>
 <span class="sd">                    {</span>
@@ -159,247 +395,11 @@
 <span class="sd">                        d&#39;1</span>
 <span class="sd">                        e&#39;1</span>
 <span class="sd">                        f&#39;1</span>
-<span class="sd">                        \bar &quot;|.&quot;</span>
+<span class="sd">                        \bar &quot;:|.&quot;</span>
 <span class="sd">                    }</span>
 <span class="sd">                &gt;&gt;</span>
 
-<span class="sd">            ..  figure:: ../_images/Score-oCR5QGUz6W.png</span>
-
-<span class="sd">            Each stave will receive their own final bar line, which can be</span>
-<span class="sd">            useful when part extracting:</span>
-
-<span class="sd">            &gt;&gt;&gt; abjad.show(staff_1)</span>
-
-<span class="sd">            ..  docs::</span>
-
-<span class="sd">                \new Staff</span>
-<span class="sd">                {</span>
-<span class="sd">                    c&#39;&#39;1</span>
-<span class="sd">                    d&#39;&#39;1</span>
-<span class="sd">                    e&#39;&#39;1</span>
-<span class="sd">                    f&#39;&#39;1</span>
-<span class="sd">                    \bar &quot;|.&quot;</span>
-<span class="sd">                }</span>
-
-<span class="sd">            ..  figure:: ../_images/Score-tTXh7GOAop.png</span>
-
-<span class="sd">            &gt;&gt;&gt; abjad.show(staff_2)</span>
-
-<span class="sd">            ..  docs::</span>
-
-<span class="sd">                \new Staff</span>
-<span class="sd">                {</span>
-<span class="sd">                    c&#39;1</span>
-<span class="sd">                    d&#39;1</span>
-<span class="sd">                    e&#39;1</span>
-<span class="sd">                    f&#39;1</span>
-<span class="sd">                    \bar &quot;|.&quot;</span>
-<span class="sd">                }</span>
-
-<span class="sd">            ..  figure:: ../_images/Score-MRWgOyiqt3.png</span>
-
-<span class="sd">        ``to_each_voice``</span>
-<span class="sd">            When multiple voices are present in a staff, the final bar line is</span>
-<span class="sd">            added to the last voice only:</span>
-
-<span class="sd">            &gt;&gt;&gt; voice_1 = abjad.Voice(r&quot;c&#39;&#39;1 d&#39;&#39;1 e&#39;&#39;1 f&#39;&#39;1&quot;)</span>
-<span class="sd">            &gt;&gt;&gt; voice_2 = abjad.Voice(r&quot;c&#39;2 d&#39;2 e&#39;2 f&#39;2 g&#39;2 a&#39;2 b&#39;2 c&#39;&#39;2&quot;)</span>
-<span class="sd">            &gt;&gt;&gt; staff = abjad.Staff([voice_1, voice_2], simultaneous=True)</span>
-<span class="sd">            &gt;&gt;&gt; abjad.attach(abjad.LilyPondLiteral(r&#39;\voiceOne&#39;), voice_1)</span>
-<span class="sd">            &gt;&gt;&gt; abjad.attach(abjad.LilyPondLiteral(r&#39;\voiceTwo&#39;), voice_2)</span>
-<span class="sd">            &gt;&gt;&gt; score = auxjad.Score([staff])</span>
-<span class="sd">            &gt;&gt;&gt; score.add_final_bar_line()</span>
-<span class="sd">            &gt;&gt;&gt; abjad.show(score)</span>
-
-<span class="sd">            ..  docs::</span>
-
-<span class="sd">                \new Score</span>
-<span class="sd">                &lt;&lt;</span>
-<span class="sd">                    \new Staff</span>
-<span class="sd">                    &lt;&lt;</span>
-<span class="sd">                        \new Voice</span>
-<span class="sd">                        {</span>
-<span class="sd">                            \voiceOne</span>
-<span class="sd">                            c&#39;&#39;1</span>
-<span class="sd">                            d&#39;&#39;1</span>
-<span class="sd">                            e&#39;&#39;1</span>
-<span class="sd">                            f&#39;&#39;1</span>
-<span class="sd">                        }</span>
-<span class="sd">                        \new Voice</span>
-<span class="sd">                        {</span>
-<span class="sd">                            \voiceTwo</span>
-<span class="sd">                            c&#39;2</span>
-<span class="sd">                            d&#39;2</span>
-<span class="sd">                            e&#39;2</span>
-<span class="sd">                            f&#39;2</span>
-<span class="sd">                            g&#39;2</span>
-<span class="sd">                            a&#39;2</span>
-<span class="sd">                            b&#39;2</span>
-<span class="sd">                            c&#39;&#39;2</span>
-<span class="sd">                            \bar &quot;|.&quot;</span>
-<span class="sd">                        }</span>
-<span class="sd">                    &gt;&gt;</span>
-<span class="sd">                &gt;&gt;</span>
-
-<span class="sd">            ..  figure:: ../_images/Score-8mnllVCEoL.png</span>
-
-<span class="sd">            &gt;&gt;&gt; abjad.show(voice_1)</span>
-
-<span class="sd">            ..  docs::</span>
-
-<span class="sd">                \new Voice</span>
-<span class="sd">                {</span>
-<span class="sd">                    \voiceOne</span>
-<span class="sd">                    c&#39;&#39;1</span>
-<span class="sd">                    d&#39;&#39;1</span>
-<span class="sd">                    e&#39;&#39;1</span>
-<span class="sd">                    f&#39;&#39;1</span>
-<span class="sd">                }</span>
-
-<span class="sd">            ..  figure:: ../_images/Score-DPW54DDeyM.png</span>
-
-<span class="sd">            &gt;&gt;&gt; abjad.show(voice_2)</span>
-
-<span class="sd">            ..  docs::</span>
-
-<span class="sd">                \new Voice</span>
-<span class="sd">                {</span>
-<span class="sd">                    \voiceTwo</span>
-<span class="sd">                    c&#39;2</span>
-<span class="sd">                    d&#39;2</span>
-<span class="sd">                    e&#39;2</span>
-<span class="sd">                    f&#39;2</span>
-<span class="sd">                    g&#39;2</span>
-<span class="sd">                    a&#39;2</span>
-<span class="sd">                    b&#39;2</span>
-<span class="sd">                    c&#39;&#39;2</span>
-<span class="sd">                    \bar &quot;|.&quot;</span>
-<span class="sd">                }</span>
-
-<span class="sd">            ..  figure:: ../_images/Score-ua8cZAITB5.png</span>
-
-<span class="sd">            Setting ``to_each_voice`` to ``True`` will add a bar line to each</span>
-<span class="sd">            voice in a staff:</span>
-
-<span class="sd">            &gt;&gt;&gt; voice_1 = abjad.Voice(r&quot;c&#39;&#39;1 d&#39;&#39;1 e&#39;&#39;1 f&#39;&#39;1&quot;)</span>
-<span class="sd">            &gt;&gt;&gt; voice_2 = abjad.Voice(r&quot;c&#39;2 d&#39;2 e&#39;2 f&#39;2 g&#39;2 a&#39;2 b&#39;2 c&#39;&#39;2&quot;)</span>
-<span class="sd">            &gt;&gt;&gt; staff = abjad.Staff([voice_1, voice_2], simultaneous=True)</span>
-<span class="sd">            &gt;&gt;&gt; abjad.attach(abjad.LilyPondLiteral(r&#39;\voiceOne&#39;), voice_1)</span>
-<span class="sd">            &gt;&gt;&gt; abjad.attach(abjad.LilyPondLiteral(r&#39;\voiceTwo&#39;), voice_2)</span>
-<span class="sd">            &gt;&gt;&gt; score = auxjad.Score([staff])</span>
-<span class="sd">            &gt;&gt;&gt; score.add_final_bar_line(to_each_voice=True)</span>
-<span class="sd">            &gt;&gt;&gt; abjad.show(voice_1)</span>
-
-<span class="sd">            ..  docs::</span>
-
-<span class="sd">                \new Voice</span>
-<span class="sd">                {</span>
-<span class="sd">                    \voiceOne</span>
-<span class="sd">                    c&#39;&#39;1</span>
-<span class="sd">                    d&#39;&#39;1</span>
-<span class="sd">                    e&#39;&#39;1</span>
-<span class="sd">                    f&#39;&#39;1</span>
-<span class="sd">                    \bar &quot;|.&quot;</span>
-<span class="sd">                }</span>
-
-<span class="sd">            ..  figure:: ../_images/Score-adtLRR3v1W.png</span>
-
-<span class="sd">            &gt;&gt;&gt; abjad.show(voice_2)</span>
-
-<span class="sd">            ..  docs::</span>
-
-<span class="sd">                \new Voice</span>
-<span class="sd">                {</span>
-<span class="sd">                    \voiceTwo</span>
-<span class="sd">                    c&#39;2</span>
-<span class="sd">                    d&#39;2</span>
-<span class="sd">                    e&#39;2</span>
-<span class="sd">                    f&#39;2</span>
-<span class="sd">                    g&#39;2</span>
-<span class="sd">                    a&#39;2</span>
-<span class="sd">                    b&#39;2</span>
-<span class="sd">                    c&#39;&#39;2</span>
-<span class="sd">                    \bar &quot;|.&quot;</span>
-<span class="sd">                }</span>
-
-<span class="sd">            ..  figure:: ../_images/Score-DqhspXgvIJ.png</span>
-
-<span class="sd">        ..  warning::</span>
-
-<span class="sd">            If voices do not end together then manually adding bar lines will</span>
-<span class="sd">            be required:</span>
-
-<span class="sd">            &gt;&gt;&gt; voice_1 = abjad.Voice(r&quot;c&#39;&#39;1 d&#39;&#39;1 e&#39;&#39;1 f&#39;&#39;1&quot;)</span>
-<span class="sd">            &gt;&gt;&gt; voice_2 = abjad.Voice(r&quot;c&#39;1 d&#39;1 e&#39;1&quot;)</span>
-<span class="sd">            &gt;&gt;&gt; staff = abjad.Staff([voice_1, voice_2], simultaneous=True)</span>
-<span class="sd">            &gt;&gt;&gt; abjad.attach(abjad.LilyPondLiteral(r&#39;\voiceOne&#39;), voice_1)</span>
-<span class="sd">            &gt;&gt;&gt; abjad.attach(abjad.LilyPondLiteral(r&#39;\voiceTwo&#39;), voice_2)</span>
-<span class="sd">            &gt;&gt;&gt; score = auxjad.Score([staff])</span>
-<span class="sd">            &gt;&gt;&gt; score.add_final_bar_line(to_each_voice=True)</span>
-<span class="sd">            &gt;&gt;&gt; abjad.show(score)</span>
-
-<span class="sd">            ..  docs::</span>
-
-<span class="sd">                \new Score</span>
-<span class="sd">                &lt;&lt;</span>
-<span class="sd">                    \new Staff</span>
-<span class="sd">                    &lt;&lt;</span>
-<span class="sd">                        \new Voice</span>
-<span class="sd">                        {</span>
-<span class="sd">                            \voiceOne</span>
-<span class="sd">                            c&#39;&#39;1</span>
-<span class="sd">                            d&#39;&#39;1</span>
-<span class="sd">                            e&#39;&#39;1</span>
-<span class="sd">                            f&#39;&#39;1</span>
-<span class="sd">                            \bar &quot;|.&quot;</span>
-<span class="sd">                        }</span>
-<span class="sd">                        \new Voice</span>
-<span class="sd">                        {</span>
-<span class="sd">                            \voiceTwo</span>
-<span class="sd">                            c&#39;1</span>
-<span class="sd">                            d&#39;1</span>
-<span class="sd">                            e&#39;1</span>
-<span class="sd">                            \bar &quot;|.&quot;</span>
-<span class="sd">                        }</span>
-<span class="sd">                    &gt;&gt;</span>
-<span class="sd">                &gt;&gt;</span>
-
-<span class="sd">            ..  figure:: ../_images/Score-duPkS4pJGc.png</span>
-
-<span class="sd">    argument:</span>
-<span class="sd">        The default bar line is of type ``&#39;|.&#39;``. To change this behaviour,</span>
-<span class="sd">        call this method with an argument of type :obj:`str` or |abjad.BarLine|</span>
-<span class="sd">        with the desired bar line type:</span>
-
-<span class="sd">        &gt;&gt;&gt; staff_1 = abjad.Staff(r&quot;c&#39;&#39;1 d&#39;&#39;1 e&#39;&#39;1 f&#39;&#39;1&quot;)</span>
-<span class="sd">        &gt;&gt;&gt; staff_2 = abjad.Staff(r&quot;c&#39;1 d&#39;1 e&#39;1 f&#39;1&quot;)</span>
-<span class="sd">        &gt;&gt;&gt; score = auxjad.Score([staff_1, staff_2])</span>
-<span class="sd">        &gt;&gt;&gt; score.add_final_bar_line(abjad.BarLine(&quot;:|.&quot;))</span>
-<span class="sd">        &gt;&gt;&gt; abjad.show(score)</span>
-
-<span class="sd">        ..  docs::</span>
-
-<span class="sd">            \new Score</span>
-<span class="sd">            &lt;&lt;</span>
-<span class="sd">                \new Staff</span>
-<span class="sd">                {</span>
-<span class="sd">                    c&#39;&#39;1</span>
-<span class="sd">                    d&#39;&#39;1</span>
-<span class="sd">                    e&#39;&#39;1</span>
-<span class="sd">                    f&#39;&#39;1</span>
-<span class="sd">                    \bar &quot;:|.&quot;</span>
-<span class="sd">                }</span>
-<span class="sd">                \new Staff</span>
-<span class="sd">                {</span>
-<span class="sd">                    c&#39;1</span>
-<span class="sd">                    d&#39;1</span>
-<span class="sd">                    e&#39;1</span>
-<span class="sd">                    f&#39;1</span>
-<span class="sd">                    \bar &quot;:|.&quot;</span>
-<span class="sd">                }</span>
-<span class="sd">            &gt;&gt;</span>
-
-<span class="sd">        ..  figure:: ../_images/Score-3JvhD9DKvE.png</span>
+<span class="sd">            ..  figure:: ../_images/Score-3JvhD9DKvE.png</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">bar_line</span><span class="p">,</span> <span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="n">abjad</span><span class="o">.</span><span class="n">BarLine</span><span class="p">)):</span>
             <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;argument must be &#39;str&#39; or &#39;abjad.BarLine&#39;&quot;</span><span class="p">)</span>
@@ -410,18 +410,17 @@
         <span class="k">if</span> <span class="ow">not</span> <span class="n">to_each_voice</span><span class="p">:</span>
             <span class="k">for</span> <span class="n">staff</span> <span class="ow">in</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Iteration</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">components</span><span class="p">(</span><span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">):</span>
                 <span class="n">last_leaf</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">_iterate</span><span class="o">.</span><span class="n">_get_leaf</span><span class="p">(</span><span class="n">staff</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
-                <span class="n">abjad</span><span class="o">.</span><span class="n">attach</span><span class="p">(</span><span class="n">bar_line</span><span class="p">,</span> <span class="n">last_leaf</span><span class="p">,</span> <span class="n">context</span><span class="o">=</span><span class="s1">&#39;Staff&#39;</span><span class="p">)</span>
+                <span class="n">abjad</span><span class="o">.</span><span class="n">attach</span><span class="p">(</span><span class="n">bar_line</span><span class="p">,</span> <span class="n">last_leaf</span><span class="p">,</span> <span class="n">context</span><span class="o">=</span><span class="s2">&quot;Staff&quot;</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="k">for</span> <span class="n">staff</span> <span class="ow">in</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Iteration</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">components</span><span class="p">(</span><span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">):</span>
-                <span class="n">voices</span> <span class="o">=</span> <span class="p">[</span><span class="n">voice</span> <span class="k">for</span> <span class="n">voice</span>
-                          <span class="ow">in</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Iteration</span><span class="p">(</span><span class="n">staff</span><span class="p">)</span><span class="o">.</span><span class="n">components</span><span class="p">(</span><span class="n">abjad</span><span class="o">.</span><span class="n">Voice</span><span class="p">)]</span>
+                <span class="n">voices</span> <span class="o">=</span> <span class="p">[</span><span class="n">voice</span> <span class="k">for</span> <span class="n">voice</span> <span class="ow">in</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Iteration</span><span class="p">(</span><span class="n">staff</span><span class="p">)</span><span class="o">.</span><span class="n">components</span><span class="p">(</span><span class="n">abjad</span><span class="o">.</span><span class="n">Voice</span><span class="p">)]</span>
                 <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">voices</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
                     <span class="n">last_leaf</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">_iterate</span><span class="o">.</span><span class="n">_get_leaf</span><span class="p">(</span><span class="n">staff</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
-                    <span class="n">abjad</span><span class="o">.</span><span class="n">attach</span><span class="p">(</span><span class="n">bar_line</span><span class="p">,</span> <span class="n">last_leaf</span><span class="p">,</span> <span class="n">context</span><span class="o">=</span><span class="s1">&#39;Staff&#39;</span><span class="p">)</span>
+                    <span class="n">abjad</span><span class="o">.</span><span class="n">attach</span><span class="p">(</span><span class="n">bar_line</span><span class="p">,</span> <span class="n">last_leaf</span><span class="p">,</span> <span class="n">context</span><span class="o">=</span><span class="s2">&quot;Staff&quot;</span><span class="p">)</span>
                 <span class="k">else</span><span class="p">:</span>
                     <span class="k">for</span> <span class="n">voice</span> <span class="ow">in</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Iteration</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">components</span><span class="p">(</span><span class="n">abjad</span><span class="o">.</span><span class="n">Voice</span><span class="p">):</span>
                         <span class="n">last_leaf</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">_iterate</span><span class="o">.</span><span class="n">_get_leaf</span><span class="p">(</span><span class="n">voice</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
-                        <span class="n">abjad</span><span class="o">.</span><span class="n">attach</span><span class="p">(</span><span class="n">bar_line</span><span class="p">,</span> <span class="n">last_leaf</span><span class="p">,</span> <span class="n">context</span><span class="o">=</span><span class="s1">&#39;Voice&#39;</span><span class="p">)</span></div>
+                        <span class="n">abjad</span><span class="o">.</span><span class="n">attach</span><span class="p">(</span><span class="n">bar_line</span><span class="p">,</span> <span class="n">last_leaf</span><span class="p">,</span> <span class="n">context</span><span class="o">=</span><span class="s2">&quot;Voice&quot;</span><span class="p">)</span></div>
 
 
 <div class="viewcode-block" id="Score.add_double_bar_lines_before_time_signatures">
@@ -815,8 +814,7 @@
         <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">to_each_voice</span><span class="p">,</span> <span class="nb">bool</span><span class="p">):</span>
             <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;&#39;to_each_voice&#39; must be &#39;bool&#39;&quot;</span><span class="p">)</span>
         <span class="k">for</span> <span class="n">staff</span> <span class="ow">in</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Iteration</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">components</span><span class="p">(</span><span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">):</span>
-            <span class="n">voices</span> <span class="o">=</span> <span class="p">[</span><span class="n">voice</span> <span class="k">for</span> <span class="n">voice</span>
-                      <span class="ow">in</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Iteration</span><span class="p">(</span><span class="n">staff</span><span class="p">)</span><span class="o">.</span><span class="n">components</span><span class="p">(</span><span class="n">abjad</span><span class="o">.</span><span class="n">Voice</span><span class="p">)]</span>
+            <span class="n">voices</span> <span class="o">=</span> <span class="p">[</span><span class="n">voice</span> <span class="k">for</span> <span class="n">voice</span> <span class="ow">in</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Iteration</span><span class="p">(</span><span class="n">staff</span><span class="p">)</span><span class="o">.</span><span class="n">components</span><span class="p">(</span><span class="n">abjad</span><span class="o">.</span><span class="n">Voice</span><span class="p">)]</span>
             <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">voices</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">_double_bar_line_adder</span><span class="p">(</span><span class="n">staff</span><span class="p">)</span>
             <span class="k">elif</span> <span class="ow">not</span> <span class="n">to_each_voice</span><span class="p">:</span>
@@ -827,8 +825,9 @@
 
 
     <span class="nd">@staticmethod</span>
-    <span class="k">def</span><span class="w"> </span><span class="nf">_double_bar_line_adder</span><span class="p">(</span><span class="n">container</span><span class="p">:</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">,</span>
-                               <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_double_bar_line_adder</span><span class="p">(</span>
+        <span class="n">container</span><span class="p">:</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Goes through a container and adds double bar lines before each and</span>
 <span class="sd">        every time signature change.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -837,14 +836,15 @@
             <span class="n">time_signature</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">get</span><span class="o">.</span><span class="n">indicator</span><span class="p">(</span><span class="n">leaf</span><span class="p">,</span> <span class="n">abjad</span><span class="o">.</span><span class="n">TimeSignature</span><span class="p">)</span>
             <span class="k">if</span> <span class="n">time_signature</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
                 <span class="n">bar_line</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">get</span><span class="o">.</span><span class="n">indicator</span><span class="p">(</span><span class="n">leaves</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">],</span> <span class="n">abjad</span><span class="o">.</span><span class="n">BarLine</span><span class="p">)</span>
-                <span class="k">if</span> <span class="n">bar_line</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">bar_line</span><span class="o">.</span><span class="n">abbreviation</span> <span class="ow">in</span> <span class="p">(</span><span class="s1">&#39;|&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">):</span>
+                <span class="k">if</span> <span class="n">bar_line</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">bar_line</span><span class="o">.</span><span class="n">abbreviation</span> <span class="ow">in</span> <span class="p">(</span><span class="s2">&quot;|&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">):</span>
                     <span class="n">abjad</span><span class="o">.</span><span class="n">detach</span><span class="p">(</span><span class="n">abjad</span><span class="o">.</span><span class="n">BarLine</span><span class="p">,</span> <span class="n">leaves</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">])</span>
                     <span class="n">bar_line</span> <span class="o">=</span> <span class="kc">None</span>
                 <span class="k">if</span> <span class="n">bar_line</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-                    <span class="n">abjad</span><span class="o">.</span><span class="n">attach</span><span class="p">(</span><span class="n">abjad</span><span class="o">.</span><span class="n">BarLine</span><span class="p">(</span><span class="s2">&quot;||&quot;</span><span class="p">),</span>
-                                 <span class="n">leaves</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">],</span>
-                                 <span class="n">context</span><span class="o">=</span><span class="s1">&#39;Voice&#39;</span><span class="p">,</span>
-                                 <span class="p">)</span>
+                    <span class="n">abjad</span><span class="o">.</span><span class="n">attach</span><span class="p">(</span>
+                        <span class="n">abjad</span><span class="o">.</span><span class="n">BarLine</span><span class="p">(</span><span class="s2">&quot;||&quot;</span><span class="p">),</span>
+                        <span class="n">leaves</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">],</span>
+                        <span class="n">context</span><span class="o">=</span><span class="s2">&quot;Voice&quot;</span><span class="p">,</span>
+                    <span class="p">)</span>
 
 
 <span class="c1">### EXTENSION METHODS ###</span>

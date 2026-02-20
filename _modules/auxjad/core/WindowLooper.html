@@ -5,17 +5,17 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>auxjad.core.WindowLooper &mdash; Auxjad 1.0.5 documentation</title>
+  <title>auxjad.core.WindowLooper &mdash; Auxjad 1.0.7 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=ffec0d92" />
-      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=9edc463e" />
 
   
     <link rel="canonical" href="https://gilbertohasnofb.github.io/auxjad-docs/_modules/auxjad/core/WindowLooper.html"/>
       <script src="../../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../../../_static/documentation_options.js?v=d55fa986"></script>
-      <script src="../../../_static/doctools.js?v=9bcbadda"></script>
-      <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../../_static/documentation_options.js?v=46dfa7f5"></script>
+      <script src="../../../_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
     <script src="../../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" /> 
@@ -31,7 +31,6 @@
           
           <a href="../../../index.html" class="icon icon-home">
             Auxjad
-              <img src="../../../_static/auxjad-logo.png" class="logo" alt="Logo"/>
           </a>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
@@ -1333,75 +1332,80 @@
 
     <span class="c1">### CLASS VARIABLES ###</span>
 
-    <span class="vm">__slots__</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;_omit_time_signatures&#39;</span><span class="p">,</span>
-                 <span class="s1">&#39;_fill_with_rests&#39;</span><span class="p">,</span>
-                 <span class="s1">&#39;_contents_length&#39;</span><span class="p">,</span>
-                 <span class="s1">&#39;_contents_no_time_signature&#39;</span><span class="p">,</span>
-                 <span class="s1">&#39;_disable_rewrite_meter&#39;</span><span class="p">,</span>
-                 <span class="s1">&#39;_boundary_depth&#39;</span><span class="p">,</span>
-                 <span class="s1">&#39;_maximum_dot_count&#39;</span><span class="p">,</span>
-                 <span class="s1">&#39;_rewrite_tuplets&#39;</span><span class="p">,</span>
-                 <span class="s1">&#39;_prettify_rewrite_meter&#39;</span><span class="p">,</span>
-                 <span class="s1">&#39;_extract_trivial_tuplets&#39;</span><span class="p">,</span>
-                 <span class="s1">&#39;_fuse_across_groups_of_beats&#39;</span><span class="p">,</span>
-                 <span class="s1">&#39;_fuse_quadruple_meter&#39;</span><span class="p">,</span>
-                 <span class="s1">&#39;_fuse_triple_meter&#39;</span><span class="p">,</span>
-                 <span class="s1">&#39;_after_rest&#39;</span><span class="p">,</span>
-                 <span class="s1">&#39;_after_rest_in_new_measure&#39;</span><span class="p">,</span>
-                 <span class="s1">&#39;_use_multimeasure_rests&#39;</span><span class="p">,</span>
-                 <span class="p">)</span>
+    <span class="vm">__slots__</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="s2">&quot;_omit_time_signatures&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;_fill_with_rests&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;_contents_length&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;_contents_no_time_signature&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;_disable_rewrite_meter&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;_boundary_depth&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;_maximum_dot_count&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;_rewrite_tuplets&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;_prettify_rewrite_meter&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;_extract_trivial_tuplets&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;_fuse_across_groups_of_beats&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;_fuse_quadruple_meter&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;_fuse_triple_meter&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;_after_rest&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;_after_rest_in_new_measure&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;_use_multimeasure_rests&quot;</span><span class="p">,</span>
+    <span class="p">)</span>
 
     <span class="c1">### INITIALISER ###</span>
 
 <div class="viewcode-block" id="WindowLooper.__init__">
 <a class="viewcode-back" href="../../../_api_members/auxjad.WindowLooper.html#auxjad.WindowLooper.__init__">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
-                 <span class="n">contents</span><span class="p">:</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">,</span>
-                 <span class="o">*</span><span class="p">,</span>
-                 <span class="n">window_size</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span>
-                                    <span class="nb">float</span><span class="p">,</span>
-                                    <span class="nb">str</span><span class="p">,</span>
-                                    <span class="nb">tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">],</span>
-                                    <span class="n">abjad</span><span class="o">.</span><span class="n">Duration</span><span class="p">,</span>
-                                    <span class="n">abjad</span><span class="o">.</span><span class="n">Meter</span><span class="p">,</span>
-                                    <span class="p">],</span>
-                 <span class="n">step_size</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span>
-                                  <span class="nb">float</span><span class="p">,</span>
-                                  <span class="nb">str</span><span class="p">,</span>
-                                  <span class="nb">tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">],</span>
-                                  <span class="n">abjad</span><span class="o">.</span><span class="n">Duration</span><span class="p">,</span>
-                                  <span class="p">],</span>
-                 <span class="n">max_steps</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span>
-                 <span class="n">repetition_chance</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.0</span><span class="p">,</span>
-                 <span class="n">forward_bias</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1.0</span><span class="p">,</span>
-                 <span class="n">head_position</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span>
-                                      <span class="nb">float</span><span class="p">,</span>
-                                      <span class="nb">tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">],</span>
-                                      <span class="n">abjad</span><span class="o">.</span><span class="n">Duration</span><span class="p">,</span>
-                                      <span class="p">]</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
-                 <span class="n">omit_time_signatures</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
-                 <span class="n">process_on_first_call</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
-                 <span class="n">fill_with_rests</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
-                 <span class="n">disable_rewrite_meter</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
-                 <span class="n">boundary_depth</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-                 <span class="n">maximum_dot_count</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-                 <span class="n">rewrite_tuplets</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
-                 <span class="n">prettify_rewrite_meter</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
-                 <span class="n">extract_trivial_tuplets</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
-                 <span class="n">fuse_across_groups_of_beats</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
-                 <span class="n">fuse_quadruple_meter</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
-                 <span class="n">fuse_triple_meter</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
-                 <span class="n">after_rest</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span>
-                                   <span class="nb">float</span><span class="p">,</span>
-                                   <span class="nb">str</span><span class="p">,</span>
-                                   <span class="nb">tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">],</span>
-                                   <span class="n">abjad</span><span class="o">.</span><span class="n">Duration</span><span class="p">,</span>
-                                   <span class="n">abjad</span><span class="o">.</span><span class="n">Rest</span><span class="p">,</span>
-                                   <span class="p">]</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
-                 <span class="n">after_rest_in_new_measure</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
-                 <span class="n">use_multimeasure_rests</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
-                 <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Initialises self.&quot;&quot;&quot;</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">contents</span><span class="p">:</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">,</span>
+        <span class="o">*</span><span class="p">,</span>
+        <span class="n">window_size</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span>
+            <span class="nb">int</span><span class="p">,</span>
+            <span class="nb">float</span><span class="p">,</span>
+            <span class="nb">str</span><span class="p">,</span>
+            <span class="nb">tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">],</span>
+            <span class="n">abjad</span><span class="o">.</span><span class="n">Duration</span><span class="p">,</span>
+            <span class="n">abjad</span><span class="o">.</span><span class="n">Meter</span><span class="p">,</span>
+        <span class="p">],</span>
+        <span class="n">step_size</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span>
+            <span class="nb">int</span><span class="p">,</span>
+            <span class="nb">float</span><span class="p">,</span>
+            <span class="nb">str</span><span class="p">,</span>
+            <span class="nb">tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">],</span>
+            <span class="n">abjad</span><span class="o">.</span><span class="n">Duration</span><span class="p">,</span>
+        <span class="p">],</span>
+        <span class="n">max_steps</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span>
+        <span class="n">repetition_chance</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.0</span><span class="p">,</span>
+        <span class="n">forward_bias</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1.0</span><span class="p">,</span>
+        <span class="n">head_position</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span>
+            <span class="nb">int</span><span class="p">,</span>
+            <span class="nb">float</span><span class="p">,</span>
+            <span class="nb">tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">],</span>
+            <span class="n">abjad</span><span class="o">.</span><span class="n">Duration</span><span class="p">,</span>
+        <span class="p">]</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="n">omit_time_signatures</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+        <span class="n">process_on_first_call</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+        <span class="n">fill_with_rests</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+        <span class="n">disable_rewrite_meter</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+        <span class="n">boundary_depth</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">maximum_dot_count</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">rewrite_tuplets</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+        <span class="n">prettify_rewrite_meter</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+        <span class="n">extract_trivial_tuplets</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+        <span class="n">fuse_across_groups_of_beats</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+        <span class="n">fuse_quadruple_meter</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+        <span class="n">fuse_triple_meter</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+        <span class="n">after_rest</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span>
+            <span class="nb">int</span><span class="p">,</span>
+            <span class="nb">float</span><span class="p">,</span>
+            <span class="nb">str</span><span class="p">,</span>
+            <span class="nb">tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">],</span>
+            <span class="n">abjad</span><span class="o">.</span><span class="n">Duration</span><span class="p">,</span>
+            <span class="n">abjad</span><span class="o">.</span><span class="n">Rest</span><span class="p">,</span>
+        <span class="p">]</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="n">after_rest_in_new_measure</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+        <span class="n">use_multimeasure_rests</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">contents</span> <span class="o">=</span> <span class="n">contents</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">omit_time_signatures</span> <span class="o">=</span> <span class="n">omit_time_signatures</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">fill_with_rests</span> <span class="o">=</span> <span class="n">fill_with_rests</span>
@@ -1417,14 +1421,15 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">after_rest</span> <span class="o">=</span> <span class="n">after_rest</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">after_rest_in_new_measure</span> <span class="o">=</span> <span class="n">after_rest_in_new_measure</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">use_multimeasure_rests</span> <span class="o">=</span> <span class="n">use_multimeasure_rests</span>
-        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">head_position</span><span class="o">=</span><span class="n">head_position</span><span class="p">,</span>
-                         <span class="n">window_size</span><span class="o">=</span><span class="n">window_size</span><span class="p">,</span>
-                         <span class="n">step_size</span><span class="o">=</span><span class="n">step_size</span><span class="p">,</span>
-                         <span class="n">max_steps</span><span class="o">=</span><span class="n">max_steps</span><span class="p">,</span>
-                         <span class="n">repetition_chance</span><span class="o">=</span><span class="n">repetition_chance</span><span class="p">,</span>
-                         <span class="n">forward_bias</span><span class="o">=</span><span class="n">forward_bias</span><span class="p">,</span>
-                         <span class="n">process_on_first_call</span><span class="o">=</span><span class="n">process_on_first_call</span><span class="p">,</span>
-                         <span class="p">)</span></div>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span>
+            <span class="n">head_position</span><span class="o">=</span><span class="n">head_position</span><span class="p">,</span>
+            <span class="n">window_size</span><span class="o">=</span><span class="n">window_size</span><span class="p">,</span>
+            <span class="n">step_size</span><span class="o">=</span><span class="n">step_size</span><span class="p">,</span>
+            <span class="n">max_steps</span><span class="o">=</span><span class="n">max_steps</span><span class="p">,</span>
+            <span class="n">repetition_chance</span><span class="o">=</span><span class="n">repetition_chance</span><span class="p">,</span>
+            <span class="n">forward_bias</span><span class="o">=</span><span class="n">forward_bias</span><span class="p">,</span>
+            <span class="n">process_on_first_call</span><span class="o">=</span><span class="n">process_on_first_call</span><span class="p">,</span>
+        <span class="p">)</span></div>
 
 
     <span class="c1">### SPECIAL METHODS ###</span>
@@ -1474,28 +1479,29 @@
         <span class="n">dummy_container</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">mutate</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_contents_no_time_signature</span><span class="p">)</span>
         <span class="c1"># splitting leaves at both slicing points</span>
         <span class="k">if</span> <span class="n">head</span> <span class="o">&gt;</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Duration</span><span class="p">(</span><span class="mi">0</span><span class="p">):</span>
-            <span class="n">abjad</span><span class="o">.</span><span class="n">mutate</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">dummy_container</span><span class="p">[:],</span>
-                               <span class="p">[</span><span class="n">head</span><span class="p">,</span> <span class="n">window_size</span><span class="o">.</span><span class="n">duration</span><span class="p">],</span>
-                               <span class="p">)</span>
+            <span class="n">abjad</span><span class="o">.</span><span class="n">mutate</span><span class="o">.</span><span class="n">split</span><span class="p">(</span>
+                <span class="n">dummy_container</span><span class="p">[:],</span>
+                <span class="p">[</span><span class="n">head</span><span class="p">,</span> <span class="n">window_size</span><span class="o">.</span><span class="n">duration</span><span class="p">],</span>
+            <span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="n">abjad</span><span class="o">.</span><span class="n">mutate</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">dummy_container</span><span class="p">[:],</span> <span class="p">[</span><span class="n">window_size</span><span class="o">.</span><span class="n">duration</span><span class="p">])</span>
         <span class="c1"># finding start and end indeces for the window</span>
         <span class="k">for</span> <span class="n">start</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">dummy_container</span><span class="p">)):</span>
-            <span class="k">if</span> <span class="n">abjad</span><span class="o">.</span><span class="n">get</span><span class="o">.</span><span class="n">duration</span><span class="p">(</span><span class="n">dummy_container</span><span class="p">[:</span><span class="n">start</span> <span class="o">+</span> <span class="mi">1</span><span class="p">])</span> <span class="o">&gt;</span> <span class="n">head</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">abjad</span><span class="o">.</span><span class="n">get</span><span class="o">.</span><span class="n">duration</span><span class="p">(</span><span class="n">dummy_container</span><span class="p">[:</span> <span class="n">start</span> <span class="o">+</span> <span class="mi">1</span><span class="p">])</span> <span class="o">&gt;</span> <span class="n">head</span><span class="p">:</span>
                 <span class="k">break</span>
         <span class="k">for</span> <span class="n">end</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">start</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">dummy_container</span><span class="p">)):</span>
-            <span class="k">if</span> <span class="p">(</span><span class="n">abjad</span><span class="o">.</span><span class="n">get</span><span class="o">.</span><span class="n">duration</span><span class="p">(</span><span class="n">dummy_container</span><span class="p">[</span><span class="n">start</span> <span class="p">:</span> <span class="n">end</span><span class="p">])</span>
-                    <span class="o">==</span> <span class="n">window_size</span><span class="o">.</span><span class="n">duration</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">abjad</span><span class="o">.</span><span class="n">get</span><span class="o">.</span><span class="n">duration</span><span class="p">(</span><span class="n">dummy_container</span><span class="p">[</span><span class="n">start</span><span class="p">:</span><span class="n">end</span><span class="p">])</span> <span class="o">==</span> <span class="n">window_size</span><span class="o">.</span><span class="n">duration</span><span class="p">:</span>
                 <span class="k">break</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="n">end</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">dummy_container</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_notate_music</span><span class="p">(</span><span class="n">dummy_container</span><span class="p">,</span> <span class="n">start</span><span class="p">,</span> <span class="n">end</span><span class="p">)</span>
 
-    <span class="k">def</span><span class="w"> </span><span class="nf">_notate_music</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
-                      <span class="n">dummy_container</span><span class="p">:</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">,</span>
-                      <span class="n">start</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
-                      <span class="n">end</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
-                      <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_notate_music</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">dummy_container</span><span class="p">:</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">,</span>
+        <span class="n">start</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">end</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Handles the notation aspects of the looping window.&quot;&quot;&quot;</span>
         <span class="n">window_size</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_window_size</span>
         <span class="c1"># passing on indicators from the head of an initial splitted leaf</span>
@@ -1508,12 +1514,14 @@
                     <span class="k">for</span> <span class="n">indicator</span> <span class="ow">in</span> <span class="n">abjad</span><span class="o">.</span><span class="n">get</span><span class="o">.</span><span class="n">indicators</span><span class="p">(</span>
                         <span class="n">dummy_container</span><span class="p">[</span><span class="n">index</span><span class="p">],</span>
                     <span class="p">):</span>
-                        <span class="k">if</span> <span class="p">(</span><span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">indicator</span><span class="p">,</span> <span class="p">(</span><span class="n">abjad</span><span class="o">.</span><span class="n">TimeSignature</span><span class="p">,</span>
-                                                       <span class="n">abjad</span><span class="o">.</span><span class="n">Tie</span><span class="p">))</span>
-                                <span class="ow">and</span> <span class="n">abjad</span><span class="o">.</span><span class="n">get</span><span class="o">.</span><span class="n">indicator</span><span class="p">(</span><span class="n">dummy_container</span><span class="p">[</span><span class="n">start</span><span class="p">],</span>
-                                                        <span class="nb">type</span><span class="p">(</span><span class="n">indicator</span><span class="p">),</span>
-                                                        <span class="p">)</span>
-                                <span class="ow">is</span> <span class="kc">None</span><span class="p">):</span>
+                        <span class="k">if</span> <span class="p">(</span>
+                            <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">indicator</span><span class="p">,</span> <span class="p">(</span><span class="n">abjad</span><span class="o">.</span><span class="n">TimeSignature</span><span class="p">,</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Tie</span><span class="p">))</span>
+                            <span class="ow">and</span> <span class="n">abjad</span><span class="o">.</span><span class="n">get</span><span class="o">.</span><span class="n">indicator</span><span class="p">(</span>
+                                <span class="n">dummy_container</span><span class="p">[</span><span class="n">start</span><span class="p">],</span>
+                                <span class="nb">type</span><span class="p">(</span><span class="n">indicator</span><span class="p">),</span>
+                            <span class="p">)</span>
+                            <span class="ow">is</span> <span class="kc">None</span>
+                        <span class="p">):</span>
                             <span class="n">abjad</span><span class="o">.</span><span class="n">attach</span><span class="p">(</span><span class="n">indicator</span><span class="p">,</span> <span class="n">dummy_container</span><span class="p">[</span><span class="n">start</span><span class="p">])</span>
         <span class="c1"># removing ties generated by the split mutation</span>
         <span class="n">abjad</span><span class="o">.</span><span class="n">detach</span><span class="p">(</span><span class="n">abjad</span><span class="o">.</span><span class="n">Tie</span><span class="p">,</span> <span class="n">dummy_container</span><span class="p">[</span><span class="n">start</span> <span class="o">-</span> <span class="mi">1</span><span class="p">])</span>
@@ -1521,48 +1529,53 @@
         <span class="c1"># handling initial dynamics and slurs</span>
         <span class="n">start_head</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="n">dummy_container</span><span class="p">[</span><span class="n">start</span><span class="p">:])</span><span class="o">.</span><span class="n">logical_tie</span><span class="p">(</span><span class="mi">0</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
         <span class="n">start_tail</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="n">dummy_container</span><span class="p">[</span><span class="n">start</span><span class="p">:])</span><span class="o">.</span><span class="n">logical_tie</span><span class="p">(</span><span class="mi">0</span><span class="p">)[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
-        <span class="k">if</span> <span class="p">(</span><span class="n">abjad</span><span class="o">.</span><span class="n">get</span><span class="o">.</span><span class="n">indicator</span><span class="p">(</span><span class="n">start_head</span><span class="p">,</span> <span class="n">abjad</span><span class="o">.</span><span class="n">StartSlur</span><span class="p">)</span> <span class="ow">is</span> <span class="kc">None</span>
-                <span class="ow">and</span> <span class="n">abjad</span><span class="o">.</span><span class="n">get</span><span class="o">.</span><span class="n">indicator</span><span class="p">(</span><span class="n">start_tail</span><span class="p">,</span> <span class="n">abjad</span><span class="o">.</span><span class="n">StopSlur</span><span class="p">)</span>
-                <span class="ow">is</span> <span class="kc">None</span><span class="p">):</span>
-            <span class="k">for</span> <span class="n">leaf</span> <span class="ow">in</span> <span class="n">dummy_container</span><span class="p">[</span><span class="n">start</span> <span class="o">-</span> <span class="mi">1</span><span class="p">::</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">leaves</span><span class="p">():</span>
+        <span class="k">if</span> <span class="p">(</span>
+            <span class="n">abjad</span><span class="o">.</span><span class="n">get</span><span class="o">.</span><span class="n">indicator</span><span class="p">(</span><span class="n">start_head</span><span class="p">,</span> <span class="n">abjad</span><span class="o">.</span><span class="n">StartSlur</span><span class="p">)</span> <span class="ow">is</span> <span class="kc">None</span>
+            <span class="ow">and</span> <span class="n">abjad</span><span class="o">.</span><span class="n">get</span><span class="o">.</span><span class="n">indicator</span><span class="p">(</span><span class="n">start_tail</span><span class="p">,</span> <span class="n">abjad</span><span class="o">.</span><span class="n">StopSlur</span><span class="p">)</span> <span class="ow">is</span> <span class="kc">None</span>
+        <span class="p">):</span>
+            <span class="k">for</span> <span class="n">leaf</span> <span class="ow">in</span> <span class="n">dummy_container</span><span class="p">[</span><span class="n">start</span> <span class="o">-</span> <span class="mi">1</span> <span class="p">::</span> <span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">leaves</span><span class="p">():</span>
                 <span class="k">if</span> <span class="n">abjad</span><span class="o">.</span><span class="n">get</span><span class="o">.</span><span class="n">indicator</span><span class="p">(</span><span class="n">leaf</span><span class="p">,</span> <span class="n">abjad</span><span class="o">.</span><span class="n">StartSlur</span><span class="p">)</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
                     <span class="n">abjad</span><span class="o">.</span><span class="n">attach</span><span class="p">(</span><span class="n">abjad</span><span class="o">.</span><span class="n">StartSlur</span><span class="p">(),</span> <span class="n">start_head</span><span class="p">)</span>
                     <span class="k">break</span>
                 <span class="k">elif</span> <span class="n">abjad</span><span class="o">.</span><span class="n">get</span><span class="o">.</span><span class="n">indicator</span><span class="p">(</span><span class="n">leaf</span><span class="p">,</span> <span class="n">abjad</span><span class="o">.</span><span class="n">StopSlur</span><span class="p">)</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
                     <span class="k">break</span>
-        <span class="k">if</span> <span class="p">(</span><span class="n">abjad</span><span class="o">.</span><span class="n">get</span><span class="o">.</span><span class="n">indicator</span><span class="p">(</span><span class="n">start_head</span><span class="p">,</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Dynamic</span><span class="p">)</span> <span class="ow">is</span> <span class="kc">None</span>
-                <span class="ow">and</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">start_head</span><span class="p">,</span> <span class="p">(</span><span class="n">abjad</span><span class="o">.</span><span class="n">Rest</span><span class="p">,</span>
-                                                <span class="n">abjad</span><span class="o">.</span><span class="n">MultimeasureRest</span><span class="p">,</span>
-                                                <span class="p">))):</span>
-            <span class="k">for</span> <span class="n">leaf</span> <span class="ow">in</span> <span class="n">dummy_container</span><span class="p">[</span><span class="n">start</span> <span class="o">-</span> <span class="mi">1</span><span class="p">::</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">leaves</span><span class="p">():</span>
+        <span class="k">if</span> <span class="n">abjad</span><span class="o">.</span><span class="n">get</span><span class="o">.</span><span class="n">indicator</span><span class="p">(</span><span class="n">start_head</span><span class="p">,</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Dynamic</span><span class="p">)</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">and</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span>
+            <span class="n">start_head</span><span class="p">,</span>
+            <span class="p">(</span>
+                <span class="n">abjad</span><span class="o">.</span><span class="n">Rest</span><span class="p">,</span>
+                <span class="n">abjad</span><span class="o">.</span><span class="n">MultimeasureRest</span><span class="p">,</span>
+            <span class="p">),</span>
+        <span class="p">):</span>
+            <span class="k">for</span> <span class="n">leaf</span> <span class="ow">in</span> <span class="n">dummy_container</span><span class="p">[</span><span class="n">start</span> <span class="o">-</span> <span class="mi">1</span> <span class="p">::</span> <span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">leaves</span><span class="p">():</span>
                 <span class="n">dynamic</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">get</span><span class="o">.</span><span class="n">indicator</span><span class="p">(</span><span class="n">leaf</span><span class="p">,</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Dynamic</span><span class="p">)</span>
                 <span class="k">if</span> <span class="n">dynamic</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
                     <span class="n">abjad</span><span class="o">.</span><span class="n">attach</span><span class="p">(</span><span class="n">dynamic</span><span class="p">,</span> <span class="n">start_head</span><span class="p">)</span>
                     <span class="k">break</span>
         <span class="c1"># appending rests if necessary</span>
-        <span class="n">contents_dur</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">get</span><span class="o">.</span><span class="n">duration</span><span class="p">(</span><span class="n">dummy_container</span><span class="p">[</span><span class="n">start</span> <span class="p">:</span> <span class="n">end</span><span class="p">])</span>
+        <span class="n">contents_dur</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">get</span><span class="o">.</span><span class="n">duration</span><span class="p">(</span><span class="n">dummy_container</span><span class="p">[</span><span class="n">start</span><span class="p">:</span><span class="n">end</span><span class="p">])</span>
         <span class="k">if</span> <span class="n">contents_dur</span> <span class="o">&lt;</span> <span class="n">window_size</span><span class="o">.</span><span class="n">duration</span><span class="p">:</span>
             <span class="n">missing_dur</span> <span class="o">=</span> <span class="n">window_size</span><span class="o">.</span><span class="n">duration</span> <span class="o">-</span> <span class="n">contents_dur</span>
             <span class="n">rests</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">LeafMaker</span><span class="p">()(</span><span class="kc">None</span><span class="p">,</span> <span class="n">missing_dur</span><span class="p">)</span>
             <span class="n">dummy_container</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">rests</span><span class="p">)</span>
             <span class="n">end</span> <span class="o">+=</span> <span class="nb">len</span><span class="p">(</span><span class="n">rests</span><span class="p">)</span>
         <span class="c1"># transforming abjad.Selection -&gt; abjad.Container for rewrite_meter</span>
-        <span class="n">dummy_container</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">(</span>
-            <span class="n">abjad</span><span class="o">.</span><span class="n">mutate</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="n">dummy_container</span><span class="p">[</span><span class="n">start</span> <span class="p">:</span> <span class="n">end</span><span class="p">])</span>
-        <span class="p">)</span>
+        <span class="n">dummy_container</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">(</span><span class="n">abjad</span><span class="o">.</span><span class="n">mutate</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="n">dummy_container</span><span class="p">[</span><span class="n">start</span><span class="p">:</span><span class="n">end</span><span class="p">]))</span>
         <span class="c1"># handling after rests and time signatures</span>
         <span class="n">time_signature_duration</span> <span class="o">=</span> <span class="n">window_size</span><span class="o">.</span><span class="n">duration</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_after_rest</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
-            <span class="k">if</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_after_rest_in_new_measure</span>
-                    <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">_use_multimeasure_rests</span>
-                    <span class="ow">and</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_omit_time_signatures</span><span class="p">):</span>
+            <span class="k">if</span> <span class="p">(</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_after_rest_in_new_measure</span>
+                <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">_use_multimeasure_rests</span>
+                <span class="ow">and</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_omit_time_signatures</span>
+            <span class="p">):</span>
                 <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_after_rest</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
                     <span class="n">multiplier</span> <span class="o">=</span> <span class="kc">None</span>
                 <span class="k">else</span><span class="p">:</span>
                     <span class="n">multiplier</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Multiplier</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_after_rest</span><span class="p">)</span>
-                <span class="n">rest</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">MultimeasureRest</span><span class="p">((</span><span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">),</span>
-                                              <span class="n">multiplier</span><span class="o">=</span><span class="n">multiplier</span><span class="p">,</span>
-                                              <span class="p">)</span>
+                <span class="n">rest</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">MultimeasureRest</span><span class="p">(</span>
+                    <span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">),</span>
+                    <span class="n">multiplier</span><span class="o">=</span><span class="n">multiplier</span><span class="p">,</span>
+                <span class="p">)</span>
             <span class="k">else</span><span class="p">:</span>
                 <span class="n">rest</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">LeafMaker</span><span class="p">()([</span><span class="kc">None</span><span class="p">],</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">_after_rest</span><span class="p">])</span>
             <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_after_rest_in_new_measure</span><span class="p">:</span>
@@ -1605,12 +1618,12 @@
         <span class="k">return</span> <span class="n">abjad</span><span class="o">.</span><span class="n">mutate</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_contents</span><span class="p">)</span>
 
     <span class="nd">@contents</span><span class="o">.</span><span class="n">setter</span>
-    <span class="k">def</span><span class="w"> </span><span class="nf">contents</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
-                 <span class="n">contents</span><span class="p">:</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">,</span>
-                 <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">contents</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">contents</span><span class="p">:</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">contents</span><span class="p">,</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">):</span>
-            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;&#39;contents&#39; must be &#39;abjad.Container&#39; or &quot;</span>
-                            <span class="s2">&quot;child class&quot;</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;&#39;contents&#39; must be &#39;abjad.Container&#39; or child class&quot;</span><span class="p">)</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="n">abjad</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="n">contents</span><span class="p">)</span><span class="o">.</span><span class="n">leaves</span><span class="p">()</span><span class="o">.</span><span class="n">are_contiguous_logical_voice</span><span class="p">():</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;&#39;contents&#39; must be contiguous logical voice&quot;</span><span class="p">)</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">contents</span><span class="p">,</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Score</span><span class="p">):</span>
@@ -1630,26 +1643,27 @@
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_head_position</span>
 
     <span class="nd">@head_position</span><span class="o">.</span><span class="n">setter</span>
-    <span class="k">def</span><span class="w"> </span><span class="nf">head_position</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
-                      <span class="n">head_position</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span>
-                                           <span class="nb">float</span><span class="p">,</span>
-                                           <span class="nb">str</span><span class="p">,</span>
-                                           <span class="nb">tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">],</span>
-                                           <span class="n">abjad</span><span class="o">.</span><span class="n">Duration</span><span class="p">,</span>
-                                           <span class="p">],</span>
-                      <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">head_position</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">head_position</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span>
+            <span class="nb">int</span><span class="p">,</span>
+            <span class="nb">float</span><span class="p">,</span>
+            <span class="nb">str</span><span class="p">,</span>
+            <span class="nb">tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">],</span>
+            <span class="n">abjad</span><span class="o">.</span><span class="n">Duration</span><span class="p">,</span>
+        <span class="p">],</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;This setter method replaces the parent&#39;s one since the parent&#39;s</span>
 <span class="sd">        method uses :obj:`int` as input intead of number, :obj:`tuple`, or</span>
 <span class="sd">        |abjad.Duration|.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">head_position</span><span class="p">,</span>
-                          <span class="p">(</span><span class="n">abjad</span><span class="o">.</span><span class="n">Duration</span><span class="p">,</span> <span class="nb">str</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">,</span> <span class="nb">int</span><span class="p">,</span> <span class="nb">float</span><span class="p">),</span>
-                          <span class="p">):</span>
-            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;&#39;head_position&#39; must be &#39;abjad.Duration&#39;, &#39;str&#39;, &quot;</span>
-                            <span class="s2">&quot;&#39;tuple&#39;, or a number&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span>
+            <span class="n">head_position</span><span class="p">,</span>
+            <span class="p">(</span><span class="n">abjad</span><span class="o">.</span><span class="n">Duration</span><span class="p">,</span> <span class="nb">str</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">,</span> <span class="nb">int</span><span class="p">,</span> <span class="nb">float</span><span class="p">),</span>
+        <span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;&#39;head_position&#39; must be &#39;abjad.Duration&#39;, &#39;str&#39;, &#39;tuple&#39;, or a number&quot;</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Duration</span><span class="p">(</span><span class="n">head_position</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_contents_length</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;&#39;head_position&#39; must be smaller than the &quot;</span>
-                             <span class="s2">&quot;length of &#39;contents&#39;&quot;</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;&#39;head_position&#39; must be smaller than the length of &#39;contents&#39;&quot;</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_is_first_window</span> <span class="o">=</span> <span class="kc">True</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_head_position</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Duration</span><span class="p">(</span><span class="n">head_position</span><span class="p">)</span>
 
@@ -1659,31 +1673,38 @@
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_window_size</span>
 
     <span class="nd">@window_size</span><span class="o">.</span><span class="n">setter</span>
-    <span class="k">def</span><span class="w"> </span><span class="nf">window_size</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
-                    <span class="n">window_size</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span>
-                                       <span class="nb">float</span><span class="p">,</span>
-                                       <span class="nb">str</span><span class="p">,</span>
-                                       <span class="nb">tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">],</span>
-                                       <span class="n">abjad</span><span class="o">.</span><span class="n">Duration</span><span class="p">,</span>
-                                       <span class="n">abjad</span><span class="o">.</span><span class="n">Meter</span><span class="p">,</span>
-                                       <span class="p">],</span>
-                    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">window_size</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">window_size</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span>
+            <span class="nb">int</span><span class="p">,</span>
+            <span class="nb">float</span><span class="p">,</span>
+            <span class="nb">str</span><span class="p">,</span>
+            <span class="nb">tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">],</span>
+            <span class="n">abjad</span><span class="o">.</span><span class="n">Duration</span><span class="p">,</span>
+            <span class="n">abjad</span><span class="o">.</span><span class="n">Meter</span><span class="p">,</span>
+        <span class="p">],</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;This setter method replaces the parent&#39;s one since the parent&#39;s</span>
 <span class="sd">        method uses :obj:`int` as input intead of number, :obj:`tuple`, or</span>
 <span class="sd">        |abjad.Meter|.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">window_size</span><span class="p">,</span> <span class="p">(</span><span class="nb">int</span><span class="p">,</span>
-                                        <span class="nb">float</span><span class="p">,</span>
-                                        <span class="nb">tuple</span><span class="p">,</span>
-                                        <span class="n">abjad</span><span class="o">.</span><span class="n">Duration</span><span class="p">,</span>
-                                        <span class="n">abjad</span><span class="o">.</span><span class="n">Meter</span><span class="p">,</span>
-                                        <span class="p">)):</span>
-            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;&#39;window_size&#39; must be a number, &#39;tuple&#39;, &quot;</span>
-                            <span class="s2">&quot;&#39;abjad.Duration&#39;, or &#39;abjad.Meter&#39;&quot;</span><span class="p">)</span>
-        <span class="k">if</span> <span class="p">(</span><span class="n">abjad</span><span class="o">.</span><span class="n">Meter</span><span class="p">(</span><span class="n">window_size</span><span class="p">)</span><span class="o">.</span><span class="n">duration</span>
-                <span class="o">&gt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">_contents_length</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">_head_position</span><span class="p">):</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;&#39;window_size&#39; must be smaller than or equal &quot;</span>
-                             <span class="s2">&quot;to the length of &#39;contents&#39;&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span>
+            <span class="n">window_size</span><span class="p">,</span>
+            <span class="p">(</span>
+                <span class="nb">int</span><span class="p">,</span>
+                <span class="nb">float</span><span class="p">,</span>
+                <span class="nb">tuple</span><span class="p">,</span>
+                <span class="n">abjad</span><span class="o">.</span><span class="n">Duration</span><span class="p">,</span>
+                <span class="n">abjad</span><span class="o">.</span><span class="n">Meter</span><span class="p">,</span>
+            <span class="p">),</span>
+        <span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span>
+                <span class="s2">&quot;&#39;window_size&#39; must be a number, &#39;tuple&#39;, &#39;abjad.Duration&#39;, or &#39;abjad.Meter&#39;&quot;</span>
+            <span class="p">)</span>
+        <span class="k">if</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Meter</span><span class="p">(</span><span class="n">window_size</span><span class="p">)</span><span class="o">.</span><span class="n">duration</span> <span class="o">&gt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">_contents_length</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">_head_position</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                <span class="s2">&quot;&#39;window_size&#39; must be smaller than or equal to the length of &#39;contents&#39;&quot;</span>
+            <span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_window_size</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Meter</span><span class="p">(</span><span class="n">window_size</span><span class="p">)</span>
 
     <span class="nd">@property</span>
@@ -1692,20 +1713,21 @@
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_step_size</span>
 
     <span class="nd">@step_size</span><span class="o">.</span><span class="n">setter</span>
-    <span class="k">def</span><span class="w"> </span><span class="nf">step_size</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
-                  <span class="n">step_size</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span>
-                                   <span class="nb">float</span><span class="p">,</span>
-                                   <span class="nb">tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">],</span>
-                                   <span class="n">abjad</span><span class="o">.</span><span class="n">Duration</span><span class="p">,</span>
-                                   <span class="p">],</span>
-                  <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">step_size</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">step_size</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span>
+            <span class="nb">int</span><span class="p">,</span>
+            <span class="nb">float</span><span class="p">,</span>
+            <span class="nb">tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">],</span>
+            <span class="n">abjad</span><span class="o">.</span><span class="n">Duration</span><span class="p">,</span>
+        <span class="p">],</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;This setter method replaces the parent&#39;s one since the parent&#39;s</span>
 <span class="sd">        method uses :obj:`int` as input intead of number, :obj:`tuple`, or</span>
 <span class="sd">        |abjad.Duration|.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">step_size</span><span class="p">,</span> <span class="p">(</span><span class="n">abjad</span><span class="o">.</span><span class="n">Duration</span><span class="p">,</span> <span class="nb">str</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">,</span> <span class="nb">int</span><span class="p">,</span> <span class="nb">float</span><span class="p">)):</span>
-            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;&#39;step_size&#39; must be &#39;abjad.Duration&#39;, &#39;str&#39;, &quot;</span>
-                            <span class="s2">&quot;&#39;tuple&#39;, or a number&quot;</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;&#39;step_size&#39; must be &#39;abjad.Duration&#39;, &#39;str&#39;, &#39;tuple&#39;, or a number&quot;</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_step_size</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Duration</span><span class="p">(</span><span class="n">step_size</span><span class="p">)</span>
 
     <span class="nd">@property</span>
@@ -1714,9 +1736,10 @@
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_omit_time_signatures</span>
 
     <span class="nd">@omit_time_signatures</span><span class="o">.</span><span class="n">setter</span>
-    <span class="k">def</span><span class="w"> </span><span class="nf">omit_time_signatures</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
-                             <span class="n">omit_time_signatures</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
-                             <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">omit_time_signatures</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">omit_time_signatures</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">omit_time_signatures</span><span class="p">,</span> <span class="nb">bool</span><span class="p">):</span>
             <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;&#39;omit_time_signatures&#39; must be &#39;bool&#39;&quot;</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_omit_time_signatures</span> <span class="o">=</span> <span class="n">omit_time_signatures</span>
@@ -1730,9 +1753,10 @@
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_disable_rewrite_meter</span>
 
     <span class="nd">@disable_rewrite_meter</span><span class="o">.</span><span class="n">setter</span>
-    <span class="k">def</span><span class="w"> </span><span class="nf">disable_rewrite_meter</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
-                              <span class="n">disable_rewrite_meter</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
-                              <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">disable_rewrite_meter</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">disable_rewrite_meter</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">disable_rewrite_meter</span><span class="p">,</span> <span class="nb">bool</span><span class="p">):</span>
             <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;&#39;disable_rewrite_meter&#39; must be &#39;bool&#39;&quot;</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_disable_rewrite_meter</span> <span class="o">=</span> <span class="n">disable_rewrite_meter</span>
@@ -1743,9 +1767,10 @@
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_fill_with_rests</span>
 
     <span class="nd">@fill_with_rests</span><span class="o">.</span><span class="n">setter</span>
-    <span class="k">def</span><span class="w"> </span><span class="nf">fill_with_rests</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
-                        <span class="n">fill_with_rests</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
-                        <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">fill_with_rests</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">fill_with_rests</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">fill_with_rests</span><span class="p">,</span> <span class="nb">bool</span><span class="p">):</span>
             <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;&#39;fill_with_rests&#39; must be &#39;bool&#39;&quot;</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_fill_with_rests</span> <span class="o">=</span> <span class="n">fill_with_rests</span>
@@ -1758,9 +1783,10 @@
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_boundary_depth</span>
 
     <span class="nd">@boundary_depth</span><span class="o">.</span><span class="n">setter</span>
-    <span class="k">def</span><span class="w"> </span><span class="nf">boundary_depth</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
-                       <span class="n">boundary_depth</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">],</span>
-                       <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">boundary_depth</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">boundary_depth</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">],</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="k">if</span> <span class="n">boundary_depth</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
             <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">boundary_depth</span><span class="p">,</span> <span class="nb">int</span><span class="p">):</span>
                 <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;&#39;boundary_depth&#39; must be &#39;int&#39;&quot;</span><span class="p">)</span>
@@ -1774,9 +1800,10 @@
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_maximum_dot_count</span>
 
     <span class="nd">@maximum_dot_count</span><span class="o">.</span><span class="n">setter</span>
-    <span class="k">def</span><span class="w"> </span><span class="nf">maximum_dot_count</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
-                          <span class="n">maximum_dot_count</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">],</span>
-                          <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">maximum_dot_count</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">maximum_dot_count</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">],</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="k">if</span> <span class="n">maximum_dot_count</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
             <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">maximum_dot_count</span><span class="p">,</span> <span class="nb">int</span><span class="p">):</span>
                 <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;&#39;maximum_dot_count&#39; must be &#39;int&#39;&quot;</span><span class="p">)</span>
@@ -1790,9 +1817,10 @@
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_rewrite_tuplets</span>
 
     <span class="nd">@rewrite_tuplets</span><span class="o">.</span><span class="n">setter</span>
-    <span class="k">def</span><span class="w"> </span><span class="nf">rewrite_tuplets</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
-                        <span class="n">rewrite_tuplets</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
-                        <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">rewrite_tuplets</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">rewrite_tuplets</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">rewrite_tuplets</span><span class="p">,</span> <span class="nb">bool</span><span class="p">):</span>
             <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;&#39;rewrite_tuplets&#39; must be &#39;bool&#39;&quot;</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_rewrite_tuplets</span> <span class="o">=</span> <span class="n">rewrite_tuplets</span>
@@ -1805,9 +1833,10 @@
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_prettify_rewrite_meter</span>
 
     <span class="nd">@prettify_rewrite_meter</span><span class="o">.</span><span class="n">setter</span>
-    <span class="k">def</span><span class="w"> </span><span class="nf">prettify_rewrite_meter</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
-                               <span class="n">prettify_rewrite_meter</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
-                               <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">prettify_rewrite_meter</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">prettify_rewrite_meter</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">prettify_rewrite_meter</span><span class="p">,</span> <span class="nb">bool</span><span class="p">):</span>
             <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;&#39;prettify_rewrite_meter&#39; must be &#39;bool&#39;&quot;</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_prettify_rewrite_meter</span> <span class="o">=</span> <span class="n">prettify_rewrite_meter</span>
@@ -1820,9 +1849,10 @@
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_extract_trivial_tuplets</span>
 
     <span class="nd">@extract_trivial_tuplets</span><span class="o">.</span><span class="n">setter</span>
-    <span class="k">def</span><span class="w"> </span><span class="nf">extract_trivial_tuplets</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
-                                <span class="n">extract_trivial_tuplets</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
-                                <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">extract_trivial_tuplets</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">extract_trivial_tuplets</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">extract_trivial_tuplets</span><span class="p">,</span> <span class="nb">bool</span><span class="p">):</span>
             <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;&#39;extract_trivial_tuplets&#39; must be &#39;bool&#39;&quot;</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_extract_trivial_tuplets</span> <span class="o">=</span> <span class="n">extract_trivial_tuplets</span>
@@ -1835,9 +1865,10 @@
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_fuse_across_groups_of_beats</span>
 
     <span class="nd">@fuse_across_groups_of_beats</span><span class="o">.</span><span class="n">setter</span>
-    <span class="k">def</span><span class="w"> </span><span class="nf">fuse_across_groups_of_beats</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
-                                    <span class="n">fuse_across_groups_of_beats</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
-                                    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">fuse_across_groups_of_beats</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">fuse_across_groups_of_beats</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">fuse_across_groups_of_beats</span><span class="p">,</span> <span class="nb">bool</span><span class="p">):</span>
             <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;&#39;fuse_across_groups_of_beats&#39; must be &#39;bool&#39;&quot;</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_fuse_across_groups_of_beats</span> <span class="o">=</span> <span class="n">fuse_across_groups_of_beats</span>
@@ -1850,9 +1881,10 @@
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_fuse_quadruple_meter</span>
 
     <span class="nd">@fuse_quadruple_meter</span><span class="o">.</span><span class="n">setter</span>
-    <span class="k">def</span><span class="w"> </span><span class="nf">fuse_quadruple_meter</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
-                             <span class="n">fuse_quadruple_meter</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
-                             <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">fuse_quadruple_meter</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">fuse_quadruple_meter</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">fuse_quadruple_meter</span><span class="p">,</span> <span class="nb">bool</span><span class="p">):</span>
             <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;&#39;fuse_quadruple_meter&#39; must be &#39;bool&#39;&quot;</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_fuse_quadruple_meter</span> <span class="o">=</span> <span class="n">fuse_quadruple_meter</span>
@@ -1865,9 +1897,10 @@
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_fuse_triple_meter</span>
 
     <span class="nd">@fuse_triple_meter</span><span class="o">.</span><span class="n">setter</span>
-    <span class="k">def</span><span class="w"> </span><span class="nf">fuse_triple_meter</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
-                          <span class="n">fuse_triple_meter</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
-                          <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">fuse_triple_meter</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">fuse_triple_meter</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">fuse_triple_meter</span><span class="p">,</span> <span class="nb">bool</span><span class="p">):</span>
             <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;&#39;fuse_triple_meter&#39; must be &#39;bool&#39;&quot;</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_fuse_triple_meter</span> <span class="o">=</span> <span class="n">fuse_triple_meter</span>
@@ -1880,20 +1913,25 @@
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_after_rest</span>
 
     <span class="nd">@after_rest</span><span class="o">.</span><span class="n">setter</span>
-    <span class="k">def</span><span class="w"> </span><span class="nf">after_rest</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
-                   <span class="n">after_rest</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span>
-                                     <span class="nb">float</span><span class="p">,</span>
-                                     <span class="nb">str</span><span class="p">,</span>
-                                     <span class="nb">tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">],</span>
-                                     <span class="n">abjad</span><span class="o">.</span><span class="n">Duration</span><span class="p">,</span>
-                                     <span class="n">abjad</span><span class="o">.</span><span class="n">Rest</span><span class="p">,</span>
-                                     <span class="p">],</span>
-                   <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">after_rest</span><span class="p">,</span>
-                          <span class="p">(</span><span class="n">abjad</span><span class="o">.</span><span class="n">Duration</span><span class="p">,</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Rest</span><span class="p">,</span> <span class="nb">str</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">,</span> <span class="nb">int</span><span class="p">,</span> <span class="nb">float</span><span class="p">),</span>
-                          <span class="p">):</span>
-            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;&#39;after_rest&#39; must be &#39;abjad.Duration&#39;, &quot;</span>
-                            <span class="s2">&quot;&#39;abjad.Rest&#39;, &#39;str&#39;, &#39;tuple&#39;, or a number&quot;</span><span class="p">)</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">after_rest</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">after_rest</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span>
+            <span class="nb">int</span><span class="p">,</span>
+            <span class="nb">float</span><span class="p">,</span>
+            <span class="nb">str</span><span class="p">,</span>
+            <span class="nb">tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">],</span>
+            <span class="n">abjad</span><span class="o">.</span><span class="n">Duration</span><span class="p">,</span>
+            <span class="n">abjad</span><span class="o">.</span><span class="n">Rest</span><span class="p">,</span>
+        <span class="p">],</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span>
+            <span class="n">after_rest</span><span class="p">,</span>
+            <span class="p">(</span><span class="n">abjad</span><span class="o">.</span><span class="n">Duration</span><span class="p">,</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Rest</span><span class="p">,</span> <span class="nb">str</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">,</span> <span class="nb">int</span><span class="p">,</span> <span class="nb">float</span><span class="p">),</span>
+        <span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span>
+                <span class="s2">&quot;&#39;after_rest&#39; must be &#39;abjad.Duration&#39;, &quot;</span>
+                <span class="s2">&quot;&#39;abjad.Rest&#39;, &#39;str&#39;, &#39;tuple&#39;, or a number&quot;</span>
+            <span class="p">)</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">after_rest</span><span class="p">,</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Rest</span><span class="p">):</span>
             <span class="n">after_rest</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">get</span><span class="o">.</span><span class="n">duration</span><span class="p">(</span><span class="n">after_rest</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_after_rest</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Duration</span><span class="p">(</span><span class="n">after_rest</span><span class="p">)</span>
@@ -1906,9 +1944,10 @@
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_after_rest_in_new_measure</span>
 
     <span class="nd">@after_rest_in_new_measure</span><span class="o">.</span><span class="n">setter</span>
-    <span class="k">def</span><span class="w"> </span><span class="nf">after_rest_in_new_measure</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
-                                  <span class="n">after_rest_in_new_measure</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
-                                  <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">after_rest_in_new_measure</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">after_rest_in_new_measure</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">after_rest_in_new_measure</span><span class="p">,</span> <span class="nb">bool</span><span class="p">):</span>
             <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;&#39;after_rest_in_new_measure&#39; must be &#39;bool&#39;&quot;</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_after_rest_in_new_measure</span> <span class="o">=</span> <span class="n">after_rest_in_new_measure</span>
@@ -1921,9 +1960,10 @@
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_use_multimeasure_rests</span>
 
     <span class="nd">@use_multimeasure_rests</span><span class="o">.</span><span class="n">setter</span>
-    <span class="k">def</span><span class="w"> </span><span class="nf">use_multimeasure_rests</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
-                               <span class="n">use_multimeasure_rests</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
-                               <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">use_multimeasure_rests</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">use_multimeasure_rests</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">use_multimeasure_rests</span><span class="p">,</span> <span class="nb">bool</span><span class="p">):</span>
             <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;&#39;use_multimeasure_rests&#39; must be &#39;bool&#39;&quot;</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_use_multimeasure_rests</span> <span class="o">=</span> <span class="n">use_multimeasure_rests</span>
@@ -1939,11 +1979,12 @@
 <span class="sd">        uses the number of indeces of :attr:`contents`.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_fill_with_rests</span><span class="p">:</span>
-            <span class="k">return</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_head_position</span> <span class="o">&gt;=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_contents_length</span>
-                    <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">_head_position</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">)</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_head_position</span> <span class="o">&gt;=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_contents_length</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">_head_position</span> <span class="o">&lt;</span> <span class="mi">0</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="k">return</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_head_position</span> <span class="o">&gt;=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_contents_length</span>
-                    <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">_head_position</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">_head_position</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">)</span></div>
+            <span class="k">return</span> <span class="p">(</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_head_position</span> <span class="o">&gt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">_contents_length</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">_window_size</span><span class="o">.</span><span class="n">duration</span>
+                <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">_head_position</span> <span class="o">&lt;</span> <span class="mi">0</span>
+            <span class="p">)</span></div>
 
 </pre></div>
 

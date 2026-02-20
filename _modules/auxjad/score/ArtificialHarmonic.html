@@ -5,17 +5,17 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>auxjad.score.ArtificialHarmonic &mdash; Auxjad 1.0.5 documentation</title>
+  <title>auxjad.score.ArtificialHarmonic &mdash; Auxjad 1.0.7 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=ffec0d92" />
-      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=9edc463e" />
 
   
     <link rel="canonical" href="https://gilbertohasnofb.github.io/auxjad-docs/_modules/auxjad/score/ArtificialHarmonic.html"/>
       <script src="../../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../../../_static/documentation_options.js?v=d55fa986"></script>
-      <script src="../../../_static/doctools.js?v=9bcbadda"></script>
-      <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../../_static/documentation_options.js?v=46dfa7f5"></script>
+      <script src="../../../_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
     <script src="../../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" /> 
@@ -31,7 +31,6 @@
           
           <a href="../../../index.html" class="icon icon-home">
             Auxjad
-              <img src="../../../_static/auxjad-logo.png" class="logo" alt="Logo"/>
           </a>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
@@ -423,32 +422,34 @@
 
     <span class="c1">### CLASS VARIABLES ###</span>
 
-    <span class="vm">__slots__</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;_style&#39;</span><span class="p">,</span>
-                 <span class="s1">&#39;_is_parenthesized&#39;</span><span class="p">,</span>
-                 <span class="s1">&#39;_direction&#39;</span><span class="p">,</span>
-                 <span class="s1">&#39;_centre_markup&#39;</span><span class="p">,</span>
-                 <span class="s1">&#39;_markup&#39;</span><span class="p">,</span>
-                 <span class="p">)</span>
+    <span class="vm">__slots__</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="s2">&quot;_style&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;_is_parenthesized&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;_direction&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;_centre_markup&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;_markup&quot;</span><span class="p">,</span>
+    <span class="p">)</span>
 
     <span class="c1">### INITIALISER ###</span>
 
 <div class="viewcode-block" id="ArtificialHarmonic.__init__">
 <a class="viewcode-back" href="../../../_api_members/auxjad.ArtificialHarmonic.html#auxjad.ArtificialHarmonic.__init__">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
-                 <span class="o">*</span><span class="n">arguments</span><span class="p">,</span>
-                 <span class="n">multiplier</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">abjad</span><span class="o">.</span><span class="n">typings</span><span class="o">.</span><span class="n">DurationTyping</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-                 <span class="n">tag</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">abjad</span><span class="o">.</span><span class="n">Tag</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-                 <span class="n">style</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;#&#39;harmonic&quot;</span><span class="p">,</span>
-                 <span class="n">is_parenthesized</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
-                 <span class="n">markup</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-                 <span class="n">centre_markup</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
-                 <span class="n">direction</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">abjad</span><span class="o">.</span><span class="n">enums</span><span class="o">.</span><span class="n">VerticalAlignment</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;up&#39;</span><span class="p">,</span>
-                 <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Initialises self.&quot;&quot;&quot;</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="o">*</span><span class="n">arguments</span><span class="p">,</span>
+        <span class="n">multiplier</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">abjad</span><span class="o">.</span><span class="n">typings</span><span class="o">.</span><span class="n">DurationTyping</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">tag</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">abjad</span><span class="o">.</span><span class="n">Tag</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">style</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;#&#39;harmonic&quot;</span><span class="p">,</span>
+        <span class="n">is_parenthesized</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+        <span class="n">markup</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">centre_markup</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+        <span class="n">direction</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">abjad</span><span class="o">.</span><span class="n">enums</span><span class="o">.</span><span class="n">VerticalAlignment</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;up&quot;</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="o">*</span><span class="n">arguments</span><span class="p">,</span> <span class="n">multiplier</span><span class="o">=</span><span class="n">multiplier</span><span class="p">,</span> <span class="n">tag</span><span class="o">=</span><span class="n">tag</span><span class="p">)</span>
         <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">written_pitches</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">2</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;&#39;ArtificialHarmonic&#39; requires exactly two &quot;</span>
-                             <span class="s2">&quot;&#39;written_pitches&#39; for initialisation&quot;</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                <span class="s2">&quot;&#39;ArtificialHarmonic&#39; requires exactly two &#39;written_pitches&#39; for initialisation&quot;</span>
+            <span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">style</span> <span class="o">=</span> <span class="n">style</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">is_parenthesized</span> <span class="o">=</span> <span class="n">is_parenthesized</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_direction</span> <span class="o">=</span> <span class="n">direction</span>
@@ -462,27 +463,25 @@
 <a class="viewcode-back" href="../../../_api_members/auxjad.ArtificialHarmonic.html#auxjad.ArtificialHarmonic.sounding_pitch">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">sounding_pitch</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Pitch</span><span class="p">:</span>
 <span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Returns the sounding pitch of the harmonic as an |abjad.Pitch|.&quot;&quot;&quot;</span>
-        <span class="n">interval</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">written_pitches</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
-                       <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">written_pitches</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span><span class="o">.</span><span class="n">semitones</span>
-        <span class="n">sounding_pitch_dict</span> <span class="o">=</span> <span class="p">{</span><span class="mi">1</span><span class="p">:</span> <span class="mi">48</span><span class="p">,</span>
-                               <span class="mi">2</span><span class="p">:</span> <span class="mi">36</span><span class="p">,</span>
-                               <span class="mi">3</span><span class="p">:</span> <span class="mi">31</span><span class="p">,</span>
-                               <span class="mi">4</span><span class="p">:</span> <span class="mi">28</span><span class="p">,</span>
-                               <span class="mi">5</span><span class="p">:</span> <span class="mi">24</span><span class="p">,</span>
-                               <span class="mi">7</span><span class="p">:</span> <span class="mi">19</span><span class="p">,</span>
-                               <span class="mi">9</span><span class="p">:</span> <span class="mi">28</span><span class="p">,</span>
-                               <span class="mi">12</span><span class="p">:</span> <span class="mi">12</span><span class="p">,</span>
-                               <span class="mi">16</span><span class="p">:</span> <span class="mi">28</span><span class="p">,</span>
-                               <span class="mi">19</span><span class="p">:</span> <span class="mi">19</span><span class="p">,</span>
-                               <span class="mi">24</span><span class="p">:</span> <span class="mi">24</span><span class="p">,</span>
-                               <span class="mi">28</span><span class="p">:</span> <span class="mi">28</span><span class="p">,</span>
-                               <span class="p">}</span>
+        <span class="n">interval</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">written_pitches</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">written_pitches</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span><span class="o">.</span><span class="n">semitones</span>
+        <span class="n">sounding_pitch_dict</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="mi">1</span><span class="p">:</span> <span class="mi">48</span><span class="p">,</span>
+            <span class="mi">2</span><span class="p">:</span> <span class="mi">36</span><span class="p">,</span>
+            <span class="mi">3</span><span class="p">:</span> <span class="mi">31</span><span class="p">,</span>
+            <span class="mi">4</span><span class="p">:</span> <span class="mi">28</span><span class="p">,</span>
+            <span class="mi">5</span><span class="p">:</span> <span class="mi">24</span><span class="p">,</span>
+            <span class="mi">7</span><span class="p">:</span> <span class="mi">19</span><span class="p">,</span>
+            <span class="mi">9</span><span class="p">:</span> <span class="mi">28</span><span class="p">,</span>
+            <span class="mi">12</span><span class="p">:</span> <span class="mi">12</span><span class="p">,</span>
+            <span class="mi">16</span><span class="p">:</span> <span class="mi">28</span><span class="p">,</span>
+            <span class="mi">19</span><span class="p">:</span> <span class="mi">19</span><span class="p">,</span>
+            <span class="mi">24</span><span class="p">:</span> <span class="mi">24</span><span class="p">,</span>
+            <span class="mi">28</span><span class="p">:</span> <span class="mi">28</span><span class="p">,</span>
+        <span class="p">}</span>
         <span class="k">try</span><span class="p">:</span>
-            <span class="n">sounding_pitch</span> <span class="o">=</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">written_pitches</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-                              <span class="o">+</span> <span class="n">sounding_pitch_dict</span><span class="p">[</span><span class="n">interval</span><span class="p">])</span>
+            <span class="n">sounding_pitch</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">written_pitches</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="n">sounding_pitch_dict</span><span class="p">[</span><span class="n">interval</span><span class="p">]</span>
         <span class="k">except</span> <span class="ne">KeyError</span> <span class="k">as</span> <span class="n">err</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;cannot calculate sounding pitch for given &#39;</span>
-                             <span class="s1">&#39;interval&#39;</span><span class="p">)</span> <span class="kn">from</span><span class="w"> </span><span class="nn">err</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;cannot calculate sounding pitch for given interval&quot;</span><span class="p">)</span> <span class="kn">from</span><span class="w"> </span><span class="nn">err</span>
         <span class="k">return</span> <span class="n">sounding_pitch</span></div>
 
 
@@ -500,23 +499,15 @@
 
     <span class="k">def</span><span class="w"> </span><span class="nf">_attach_centre_markup</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Attaches the centre markup tweaks.&quot;&quot;&quot;</span>
-        <span class="n">literal1</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">LilyPondLiteral</span><span class="p">(</span>
-            <span class="sa">r</span><span class="s1">&#39;\once \override TextScript.parent-alignment-X = 0&#39;</span>
-        <span class="p">)</span>
-        <span class="n">literal2</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">LilyPondLiteral</span><span class="p">(</span>
-            <span class="sa">r</span><span class="s1">&#39;\once \override TextScript.self-alignment-X = 0&#39;</span>
-        <span class="p">)</span>
+        <span class="n">literal1</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">LilyPondLiteral</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;\once \override TextScript.parent-alignment-X = 0&quot;</span><span class="p">)</span>
+        <span class="n">literal2</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">LilyPondLiteral</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;\once \override TextScript.self-alignment-X = 0&quot;</span><span class="p">)</span>
         <span class="n">abjad</span><span class="o">.</span><span class="n">attach</span><span class="p">(</span><span class="n">literal1</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span>
         <span class="n">abjad</span><span class="o">.</span><span class="n">attach</span><span class="p">(</span><span class="n">literal2</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">_detach_centre_markup</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Detaches the centre markup tweaks.&quot;&quot;&quot;</span>
-        <span class="n">literal1</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">LilyPondLiteral</span><span class="p">(</span>
-            <span class="sa">r</span><span class="s1">&#39;\once \override TextScript.parent-alignment-X = 0&#39;</span>
-        <span class="p">)</span>
-        <span class="n">literal2</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">LilyPondLiteral</span><span class="p">(</span>
-            <span class="sa">r</span><span class="s1">&#39;\once \override TextScript.self-alignment-X = 0&#39;</span>
-        <span class="p">)</span>
+        <span class="n">literal1</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">LilyPondLiteral</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;\once \override TextScript.parent-alignment-X = 0&quot;</span><span class="p">)</span>
+        <span class="n">literal2</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">LilyPondLiteral</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;\once \override TextScript.self-alignment-X = 0&quot;</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">abjad</span><span class="o">.</span><span class="n">get</span><span class="o">.</span><span class="n">indicator</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">literal1</span><span class="p">):</span>
             <span class="n">abjad</span><span class="o">.</span><span class="n">detach</span><span class="p">(</span><span class="n">literal1</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">abjad</span><span class="o">.</span><span class="n">get</span><span class="o">.</span><span class="n">indicator</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">literal2</span><span class="p">):</span>
@@ -533,13 +524,13 @@
         <span class="p">)</span>
 
     <span class="nd">@written_pitches</span><span class="o">.</span><span class="n">setter</span>
-    <span class="k">def</span><span class="w"> </span><span class="nf">written_pitches</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
-                        <span class="n">written_pitches</span><span class="p">,</span>
-                        <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">written_pitches</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">written_pitches</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="n">written_pitches_</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">PitchSegment</span><span class="p">(</span><span class="n">written_pitches</span><span class="p">)</span>
         <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">written_pitches_</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">2</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;&#39;ArtificialHarmonic&#39; requires exactly two &quot;</span>
-                             <span class="s2">&quot;pitches&quot;</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;&#39;ArtificialHarmonic&#39; requires exactly two pitches&quot;</span><span class="p">)</span>
         <span class="k">for</span> <span class="n">index</span><span class="p">,</span> <span class="n">pitch</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">written_pitches_</span><span class="p">):</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_note_heads</span><span class="p">[</span><span class="n">index</span><span class="p">]</span><span class="o">.</span><span class="n">written_pitch</span> <span class="o">=</span> <span class="n">pitch</span>
 
@@ -549,9 +540,10 @@
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_style</span>
 
     <span class="nd">@style</span><span class="o">.</span><span class="n">setter</span>
-    <span class="k">def</span><span class="w"> </span><span class="nf">style</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
-              <span class="n">style</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
-              <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">style</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">style</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">style</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
             <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;&#39;style&#39; must be &#39;str&#39;&quot;</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_style</span> <span class="o">=</span> <span class="n">style</span>
@@ -565,9 +557,10 @@
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_centre_markup</span>
 
     <span class="nd">@centre_markup</span><span class="o">.</span><span class="n">setter</span>
-    <span class="k">def</span><span class="w"> </span><span class="nf">centre_markup</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
-                      <span class="n">centre_markup</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
-                      <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">centre_markup</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">centre_markup</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">centre_markup</span><span class="p">,</span> <span class="nb">bool</span><span class="p">):</span>
             <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;&#39;style&#39; must be &#39;bool&#39;&quot;</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_centre_markup</span> <span class="o">=</span> <span class="n">centre_markup</span>
@@ -578,9 +571,10 @@
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_is_parenthesized</span>
 
     <span class="nd">@is_parenthesized</span><span class="o">.</span><span class="n">setter</span>
-    <span class="k">def</span><span class="w"> </span><span class="nf">is_parenthesized</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
-                         <span class="n">is_parenthesized</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
-                         <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">is_parenthesized</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">is_parenthesized</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">is_parenthesized</span><span class="p">,</span> <span class="nb">bool</span><span class="p">):</span>
             <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;&#39;is_parenthesized&#39; must be &#39;bool&#39;&quot;</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_is_parenthesized</span> <span class="o">=</span> <span class="n">is_parenthesized</span>
@@ -594,16 +588,18 @@
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_markup</span>
 
     <span class="nd">@markup</span><span class="o">.</span><span class="n">setter</span>
-    <span class="k">def</span><span class="w"> </span><span class="nf">markup</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
-               <span class="n">markup</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
-               <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">markup</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">markup</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="k">if</span> <span class="n">markup</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
             <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">markup</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
                 <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;&#39;markup&#39; must be &#39;str&#39;&quot;</span><span class="p">)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_markup</span> <span class="o">=</span> <span class="n">markup</span>
-            <span class="n">markup</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Markup</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_markup</span><span class="p">,</span>
-                                  <span class="n">direction</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_direction</span><span class="p">,</span>
-                                  <span class="p">)</span>
+            <span class="n">markup</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Markup</span><span class="p">(</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_markup</span><span class="p">,</span>
+                <span class="n">direction</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_direction</span><span class="p">,</span>
+            <span class="p">)</span>
             <span class="n">abjad</span><span class="o">.</span><span class="n">attach</span><span class="p">(</span><span class="n">markup</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span>
             <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_centre_markup</span><span class="p">:</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">_attach_centre_markup</span><span class="p">()</span>

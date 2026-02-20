@@ -5,17 +5,17 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>auxjad.mutate.prettify_rewrite_meter &mdash; Auxjad 1.0.5 documentation</title>
+  <title>auxjad.mutate.prettify_rewrite_meter &mdash; Auxjad 1.0.7 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=ffec0d92" />
-      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=9edc463e" />
 
   
     <link rel="canonical" href="https://gilbertohasnofb.github.io/auxjad-docs/_modules/auxjad/mutate/prettify_rewrite_meter.html"/>
       <script src="../../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../../../_static/documentation_options.js?v=d55fa986"></script>
-      <script src="../../../_static/doctools.js?v=9bcbadda"></script>
-      <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../../_static/documentation_options.js?v=46dfa7f5"></script>
+      <script src="../../../_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
     <script src="../../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" /> 
@@ -31,7 +31,6 @@
           
           <a href="../../../index.html" class="icon icon-home">
             Auxjad
-              <img src="../../../_static/auxjad-logo.png" class="logo" alt="Logo"/>
           </a>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
@@ -85,15 +84,16 @@
 
 <div class="viewcode-block" id="prettify_rewrite_meter">
 <a class="viewcode-back" href="../../../_api_members/auxjad.mutate.prettify_rewrite_meter.html#auxjad.mutate.prettify_rewrite_meter">[docs]</a>
-<span class="k">def</span><span class="w"> </span><span class="nf">prettify_rewrite_meter</span><span class="p">(</span><span class="n">selection</span><span class="p">:</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Selection</span><span class="p">,</span>
-                           <span class="n">meter</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">abjad</span><span class="o">.</span><span class="n">Meter</span><span class="p">,</span> <span class="n">abjad</span><span class="o">.</span><span class="n">TimeSignature</span><span class="p">],</span>
-                           <span class="o">*</span><span class="p">,</span>
-                           <span class="n">fuse_across_groups_of_beats</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
-                           <span class="n">fuse_quadruple_meter</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
-                           <span class="n">fuse_triple_meter</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
-                           <span class="n">extract_trivial_tuplets</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
-                           <span class="n">split_quadruple_meter</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
-                           <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">prettify_rewrite_meter</span><span class="p">(</span>
+    <span class="n">selection</span><span class="p">:</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Selection</span><span class="p">,</span>
+    <span class="n">meter</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">abjad</span><span class="o">.</span><span class="n">Meter</span><span class="p">,</span> <span class="n">abjad</span><span class="o">.</span><span class="n">TimeSignature</span><span class="p">],</span>
+    <span class="o">*</span><span class="p">,</span>
+    <span class="n">fuse_across_groups_of_beats</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+    <span class="n">fuse_quadruple_meter</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+    <span class="n">fuse_triple_meter</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+    <span class="n">extract_trivial_tuplets</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+    <span class="n">split_quadruple_meter</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Mutates an input |abjad.Selection| in place and has no return value;</span>
 <span class="sd">    this function fuses pitched leaves according to the rules shown below,</span>
 <span class="sd">    improving the default output of |abjad.Meter.rewrite_meter()|.</span>
@@ -949,8 +949,7 @@
     <span class="k">if</span> <span class="ow">not</span> <span class="n">selection</span><span class="o">.</span><span class="n">leaves</span><span class="p">()</span><span class="o">.</span><span class="n">are_contiguous_logical_voice</span><span class="p">():</span>
         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;first argument must be contiguous logical voice&quot;</span><span class="p">)</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">meter</span><span class="p">,</span> <span class="p">(</span><span class="n">abjad</span><span class="o">.</span><span class="n">Meter</span><span class="p">,</span> <span class="n">abjad</span><span class="o">.</span><span class="n">TimeSignature</span><span class="p">)):</span>
-        <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;argument must be &#39;abjad.Meter&#39; or &quot;</span>
-                        <span class="s2">&quot;&#39;abjad.TimeSignature&#39;&quot;</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;argument must be &#39;abjad.Meter&#39; or &#39;abjad.TimeSignature&#39;&quot;</span><span class="p">)</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">fuse_across_groups_of_beats</span><span class="p">,</span> <span class="nb">bool</span><span class="p">):</span>
         <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;&#39;fuse_across_groups_of_beats&#39; must be &#39;bool&#39;&quot;</span><span class="p">)</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">fuse_quadruple_meter</span><span class="p">,</span> <span class="nb">bool</span><span class="p">):</span>
@@ -976,19 +975,22 @@
     <span class="k">def</span><span class="w"> </span><span class="nf">_merge_indicators_then_fuse</span><span class="p">(</span><span class="n">logical_tie</span><span class="p">):</span>
         <span class="n">last_indicators</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">get</span><span class="o">.</span><span class="n">indicators</span><span class="p">(</span><span class="n">logical_tie</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
         <span class="n">initial_indicators</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">get</span><span class="o">.</span><span class="n">indicators</span><span class="p">(</span><span class="n">logical_tie</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
-        <span class="n">initial_indicators_types</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">indicator</span><span class="p">)</span> <span class="k">for</span> <span class="n">indicator</span>
-                                         <span class="ow">in</span> <span class="n">initial_indicators</span><span class="p">)</span>
+        <span class="n">initial_indicators_types</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">indicator</span><span class="p">)</span> <span class="k">for</span> <span class="n">indicator</span> <span class="ow">in</span> <span class="n">initial_indicators</span><span class="p">)</span>
         <span class="n">abjad</span><span class="o">.</span><span class="n">mutate</span><span class="o">.</span><span class="n">fuse</span><span class="p">(</span><span class="n">logical_tie</span><span class="p">)</span>
         <span class="k">for</span> <span class="n">indicator</span> <span class="ow">in</span> <span class="n">last_indicators</span><span class="p">:</span>
-            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">indicator</span><span class="p">,</span> <span class="p">(</span><span class="n">abjad</span><span class="o">.</span><span class="n">Dynamic</span><span class="p">,</span>
-                                      <span class="n">abjad</span><span class="o">.</span><span class="n">StopSlur</span><span class="p">,</span>
-                                      <span class="n">abjad</span><span class="o">.</span><span class="n">StopGroup</span><span class="p">,</span>
-                                      <span class="n">abjad</span><span class="o">.</span><span class="n">StopHairpin</span><span class="p">,</span>
-                                      <span class="n">abjad</span><span class="o">.</span><span class="n">StopTextSpan</span><span class="p">,</span>
-                                      <span class="n">abjad</span><span class="o">.</span><span class="n">StopTrillSpan</span><span class="p">,</span>
-                                      <span class="n">abjad</span><span class="o">.</span><span class="n">StopPianoPedal</span><span class="p">,</span>
-                                      <span class="n">abjad</span><span class="o">.</span><span class="n">StopPhrasingSlur</span><span class="p">,</span>
-                                      <span class="p">)):</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span>
+                <span class="n">indicator</span><span class="p">,</span>
+                <span class="p">(</span>
+                    <span class="n">abjad</span><span class="o">.</span><span class="n">Dynamic</span><span class="p">,</span>
+                    <span class="n">abjad</span><span class="o">.</span><span class="n">StopSlur</span><span class="p">,</span>
+                    <span class="n">abjad</span><span class="o">.</span><span class="n">StopGroup</span><span class="p">,</span>
+                    <span class="n">abjad</span><span class="o">.</span><span class="n">StopHairpin</span><span class="p">,</span>
+                    <span class="n">abjad</span><span class="o">.</span><span class="n">StopTextSpan</span><span class="p">,</span>
+                    <span class="n">abjad</span><span class="o">.</span><span class="n">StopTrillSpan</span><span class="p">,</span>
+                    <span class="n">abjad</span><span class="o">.</span><span class="n">StopPianoPedal</span><span class="p">,</span>
+                    <span class="n">abjad</span><span class="o">.</span><span class="n">StopPhrasingSlur</span><span class="p">,</span>
+                <span class="p">),</span>
+            <span class="p">):</span>
                 <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">indicator</span><span class="p">,</span> <span class="n">initial_indicators_types</span><span class="p">):</span>
                     <span class="n">abjad</span><span class="o">.</span><span class="n">attach</span><span class="p">(</span><span class="n">indicator</span><span class="p">,</span> <span class="n">logical_tie</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
 
@@ -1006,8 +1008,7 @@
             <span class="n">offset</span> <span class="o">%=</span> <span class="n">meter</span><span class="o">.</span><span class="n">duration</span>
             <span class="n">offset_mod</span> <span class="o">=</span> <span class="n">offset</span> <span class="o">%</span> <span class="n">base</span>
             <span class="k">if</span> <span class="n">offset_mod</span> <span class="o">==</span> <span class="n">base</span> <span class="o">/</span> <span class="mi">2</span><span class="p">:</span>
-                <span class="k">if</span> <span class="p">(</span><span class="ow">not</span> <span class="n">offset</span> <span class="o">+</span> <span class="n">base</span> <span class="o">/</span> <span class="mi">2</span>
-                        <span class="ow">in</span> <span class="n">meter</span><span class="o">.</span><span class="n">depthwise_offset_inventory</span><span class="p">[</span><span class="mi">1</span><span class="p">]):</span>
+                <span class="k">if</span> <span class="ow">not</span> <span class="n">offset</span> <span class="o">+</span> <span class="n">base</span> <span class="o">/</span> <span class="mi">2</span> <span class="ow">in</span> <span class="n">meter</span><span class="o">.</span><span class="n">depthwise_offset_inventory</span><span class="p">[</span><span class="mi">1</span><span class="p">]:</span>
                     <span class="n">_merge_indicators_then_fuse</span><span class="p">(</span><span class="n">logical_tie</span><span class="p">)</span>
 
     <span class="k">if</span> <span class="n">fuse_quadruple_meter</span> <span class="ow">and</span> <span class="n">meter</span><span class="o">.</span><span class="n">numerator</span> <span class="o">==</span> <span class="mi">4</span><span class="p">:</span>
@@ -1017,10 +1018,11 @@
             <span class="n">offset</span> <span class="o">%=</span> <span class="n">meter</span><span class="o">.</span><span class="n">duration</span>
             <span class="n">offset_mod</span> <span class="o">=</span> <span class="n">offset</span> <span class="o">%</span> <span class="n">base</span>
             <span class="k">if</span> <span class="n">offset_mod</span> <span class="o">==</span> <span class="n">base</span> <span class="o">/</span> <span class="mi">2</span><span class="p">:</span>
-                <span class="k">if</span> <span class="ow">not</span> <span class="n">offset</span> <span class="o">+</span> <span class="n">base</span> <span class="o">/</span> <span class="mi">2</span> <span class="ow">in</span> <span class="p">(</span><span class="n">abjad</span><span class="o">.</span><span class="n">Offset</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span>
-                                             <span class="n">abjad</span><span class="o">.</span><span class="n">Offset</span><span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">base</span><span class="p">),</span>
-                                             <span class="n">abjad</span><span class="o">.</span><span class="n">Offset</span><span class="p">(</span><span class="mi">4</span> <span class="o">*</span> <span class="n">base</span><span class="p">),</span>
-                                             <span class="p">):</span>
+                <span class="k">if</span> <span class="ow">not</span> <span class="n">offset</span> <span class="o">+</span> <span class="n">base</span> <span class="o">/</span> <span class="mi">2</span> <span class="ow">in</span> <span class="p">(</span>
+                    <span class="n">abjad</span><span class="o">.</span><span class="n">Offset</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span>
+                    <span class="n">abjad</span><span class="o">.</span><span class="n">Offset</span><span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">base</span><span class="p">),</span>
+                    <span class="n">abjad</span><span class="o">.</span><span class="n">Offset</span><span class="p">(</span><span class="mi">4</span> <span class="o">*</span> <span class="n">base</span><span class="p">),</span>
+                <span class="p">):</span>
                     <span class="n">_merge_indicators_then_fuse</span><span class="p">(</span><span class="n">logical_tie</span><span class="p">)</span>
 
     <span class="k">if</span> <span class="n">fuse_triple_meter</span> <span class="ow">and</span> <span class="n">meter</span><span class="o">.</span><span class="n">numerator</span> <span class="o">==</span> <span class="mi">3</span><span class="p">:</span>
@@ -1030,9 +1032,10 @@
             <span class="n">offset</span> <span class="o">%=</span> <span class="n">meter</span><span class="o">.</span><span class="n">duration</span>
             <span class="n">offset_mod</span> <span class="o">=</span> <span class="n">offset</span> <span class="o">%</span> <span class="n">base</span>
             <span class="k">if</span> <span class="n">offset_mod</span> <span class="o">==</span> <span class="n">base</span> <span class="o">/</span> <span class="mi">2</span><span class="p">:</span>
-                <span class="k">if</span> <span class="ow">not</span> <span class="n">offset</span> <span class="o">+</span> <span class="n">base</span> <span class="o">/</span> <span class="mi">2</span> <span class="ow">in</span> <span class="p">(</span><span class="n">abjad</span><span class="o">.</span><span class="n">Offset</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span>
-                                             <span class="n">abjad</span><span class="o">.</span><span class="n">Offset</span><span class="p">(</span><span class="mi">3</span> <span class="o">*</span> <span class="n">base</span><span class="p">),</span>
-                                             <span class="p">):</span>
+                <span class="k">if</span> <span class="ow">not</span> <span class="n">offset</span> <span class="o">+</span> <span class="n">base</span> <span class="o">/</span> <span class="mi">2</span> <span class="ow">in</span> <span class="p">(</span>
+                    <span class="n">abjad</span><span class="o">.</span><span class="n">Offset</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span>
+                    <span class="n">abjad</span><span class="o">.</span><span class="n">Offset</span><span class="p">(</span><span class="mi">3</span> <span class="o">*</span> <span class="n">base</span><span class="p">),</span>
+                <span class="p">):</span>
                     <span class="n">_merge_indicators_then_fuse</span><span class="p">(</span><span class="n">logical_tie</span><span class="p">)</span>
 
     <span class="n">logical_ties</span> <span class="o">=</span> <span class="n">selection</span><span class="o">.</span><span class="n">logical_ties</span><span class="p">()</span>  <span class="c1"># splitting not only pitched</span>
@@ -1050,23 +1053,23 @@
             <span class="n">offset1</span> <span class="o">%=</span> <span class="n">meter</span><span class="o">.</span><span class="n">duration</span>
             <span class="k">if</span> <span class="n">offset1</span> <span class="o">==</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Offset</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">):</span>
                 <span class="n">offset1</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Offset</span><span class="p">(</span><span class="n">meter</span><span class="o">.</span><span class="n">duration</span><span class="p">)</span>
-            <span class="k">if</span> <span class="p">(</span><span class="n">offset0</span> <span class="o">%</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Offset</span><span class="p">(</span><span class="n">base</span><span class="p">)</span> <span class="o">==</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Offset</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
-                    <span class="ow">and</span> <span class="n">offset1</span> <span class="o">%</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Offset</span><span class="p">(</span><span class="n">base</span><span class="p">)</span> <span class="o">==</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Offset</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)):</span>
+            <span class="k">if</span> <span class="n">offset0</span> <span class="o">%</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Offset</span><span class="p">(</span><span class="n">base</span><span class="p">)</span> <span class="o">==</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Offset</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span> <span class="ow">and</span> <span class="n">offset1</span> <span class="o">%</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Offset</span><span class="p">(</span>
+                <span class="n">base</span>
+            <span class="p">)</span> <span class="o">==</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Offset</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">):</span>
                 <span class="c1"># do not split things like r4 c&#39;2.</span>
                 <span class="k">continue</span>
             <span class="k">if</span> <span class="n">offset0</span> <span class="o">&lt;</span> <span class="n">half_point_offset</span> <span class="o">&lt;</span> <span class="n">offset1</span><span class="p">:</span>
-                <span class="k">if</span> <span class="p">(</span><span class="n">offset1</span> <span class="o">==</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Offset</span><span class="p">(</span><span class="n">meter</span><span class="o">.</span><span class="n">duration</span><span class="p">)</span>
-                        <span class="ow">and</span> <span class="nb">len</span><span class="p">(</span><span class="n">logical_tie</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">):</span>
+                <span class="k">if</span> <span class="n">offset1</span> <span class="o">==</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Offset</span><span class="p">(</span><span class="n">meter</span><span class="o">.</span><span class="n">duration</span><span class="p">)</span> <span class="ow">and</span> <span class="nb">len</span><span class="p">(</span><span class="n">logical_tie</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
                     <span class="c1"># do not split r8 c&#39;2.., r16 c&#39;2..., etc.</span>
                     <span class="k">break</span>
-                <span class="k">if</span> <span class="nb">any</span><span class="p">(</span><span class="n">abjad</span><span class="o">.</span><span class="n">get</span><span class="o">.</span><span class="n">duration</span><span class="p">(</span><span class="n">leaf</span><span class="p">)</span>
-                       <span class="o">==</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Duration</span><span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">base</span><span class="p">)</span> <span class="k">for</span> <span class="n">leaf</span> <span class="ow">in</span> <span class="n">logical_tie</span><span class="p">):</span>
+                <span class="k">if</span> <span class="nb">any</span><span class="p">(</span>
+                    <span class="n">abjad</span><span class="o">.</span><span class="n">get</span><span class="o">.</span><span class="n">duration</span><span class="p">(</span><span class="n">leaf</span><span class="p">)</span> <span class="o">==</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Duration</span><span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">base</span><span class="p">)</span> <span class="k">for</span> <span class="n">leaf</span> <span class="ow">in</span> <span class="n">logical_tie</span>
+                <span class="p">):</span>
                     <span class="c1"># do not split r8 c&#39;8~c&#39;2 r4, r16 c&#39;8.~c&#39;2~c&#39;8 r8, etc.</span>
                     <span class="k">break</span>
                 <span class="c1"># do not split tuplets</span>
                 <span class="n">result</span> <span class="o">=</span> <span class="n">selection</span><span class="o">.</span><span class="n">tuplets</span><span class="p">()</span>
-                <span class="n">result</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="n">abjad</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="n">_</span><span class="p">)</span><span class="o">.</span><span class="n">logical_ties</span><span class="p">()</span>
-                                      <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="n">result</span><span class="p">)</span>
+                <span class="n">result</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="n">abjad</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="n">_</span><span class="p">)</span><span class="o">.</span><span class="n">logical_ties</span><span class="p">()</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="n">result</span><span class="p">)</span>
                 <span class="n">result</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">flatten</span><span class="p">()</span>
                 <span class="k">if</span> <span class="n">logical_tie</span> <span class="ow">in</span> <span class="n">result</span><span class="p">:</span>
                     <span class="k">break</span>

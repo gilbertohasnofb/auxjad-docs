@@ -5,17 +5,17 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>auxjad.core.Repeater &mdash; Auxjad 1.0.5 documentation</title>
+  <title>auxjad.core.Repeater &mdash; Auxjad 1.0.7 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=ffec0d92" />
-      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=9edc463e" />
 
   
     <link rel="canonical" href="https://gilbertohasnofb.github.io/auxjad-docs/_modules/auxjad/core/Repeater.html"/>
       <script src="../../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../../../_static/documentation_options.js?v=d55fa986"></script>
-      <script src="../../../_static/doctools.js?v=9bcbadda"></script>
-      <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../../_static/documentation_options.js?v=46dfa7f5"></script>
+      <script src="../../../_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
     <script src="../../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" /> 
@@ -31,7 +31,6 @@
           
           <a href="../../../index.html" class="icon icon-home">
             Auxjad
-              <img src="../../../_static/auxjad-logo.png" class="logo" alt="Logo"/>
           </a>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
@@ -81,7 +80,7 @@
 
 <div class="viewcode-block" id="Repeater">
 <a class="viewcode-back" href="../../../_api_members/auxjad.Repeater.html#auxjad.Repeater">[docs]</a>
-<span class="k">class</span><span class="w"> </span><span class="nc">Repeater</span><span class="p">():</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">Repeater</span><span class="p">:</span>
 <span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Takes an |abjad.Container| (or child class) as input and outputs an</span>
 <span class="sd">    |abjad.Selection| with ``n`` repetitions. It can be of type unfold or</span>
 <span class="sd">    volta.</span>
@@ -773,33 +772,34 @@
 
     <span class="c1">### CLASS VARIABLES ###</span>
 
-    <span class="vm">__slots__</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;_contents&#39;</span><span class="p">,</span>
-                 <span class="s1">&#39;_current_window&#39;</span><span class="p">,</span>
-                 <span class="s1">&#39;_omit_time_signatures&#39;</span><span class="p">,</span>
-                 <span class="s1">&#39;_force_identical_time_signatures&#39;</span><span class="p">,</span>
-                 <span class="s1">&#39;_reposition_clefs&#39;</span><span class="p">,</span>
-                 <span class="s1">&#39;_reposition_dynamics&#39;</span><span class="p">,</span>
-                 <span class="s1">&#39;_reposition_slurs&#39;</span><span class="p">,</span>
-                 <span class="s1">&#39;_repeat_type&#39;</span><span class="p">,</span>
-                 <span class="s1">&#39;_include_2x_volta_text&#39;</span><span class="p">,</span>
-                 <span class="p">)</span>
+    <span class="vm">__slots__</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="s2">&quot;_contents&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;_current_window&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;_omit_time_signatures&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;_force_identical_time_signatures&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;_reposition_clefs&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;_reposition_dynamics&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;_reposition_slurs&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;_repeat_type&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;_include_2x_volta_text&quot;</span><span class="p">,</span>
+    <span class="p">)</span>
 
     <span class="c1">### INITIALISER ###</span>
 
 <div class="viewcode-block" id="Repeater.__init__">
 <a class="viewcode-back" href="../../../_api_members/auxjad.Repeater.html#auxjad.Repeater.__init__">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
-                 <span class="n">contents</span><span class="p">:</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">,</span>
-                 <span class="o">*</span><span class="p">,</span>
-                 <span class="n">omit_time_signatures</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
-                 <span class="n">force_identical_time_signatures</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
-                 <span class="n">reposition_clefs</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
-                 <span class="n">reposition_dynamics</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
-                 <span class="n">reposition_slurs</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
-                 <span class="n">repeat_type</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;unfold&#39;</span><span class="p">,</span>
-                 <span class="n">include_2x_volta_text</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
-                 <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Initialises self.&quot;&quot;&quot;</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">contents</span><span class="p">:</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">,</span>
+        <span class="o">*</span><span class="p">,</span>
+        <span class="n">omit_time_signatures</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+        <span class="n">force_identical_time_signatures</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+        <span class="n">reposition_clefs</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+        <span class="n">reposition_dynamics</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+        <span class="n">reposition_slurs</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+        <span class="n">repeat_type</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;unfold&quot;</span><span class="p">,</span>
+        <span class="n">include_2x_volta_text</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">contents</span> <span class="o">=</span> <span class="n">contents</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">omit_time_signatures</span> <span class="o">=</span> <span class="n">omit_time_signatures</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">force_identical_time_signatures</span> <span class="o">=</span> <span class="n">force_identical_time_signatures</span>
@@ -821,24 +821,23 @@
 
 <div class="viewcode-block" id="Repeater.__call__">
 <a class="viewcode-back" href="../../../_api_members/auxjad.Repeater.html#auxjad.Repeater.__call__">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
-                 <span class="n">n</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span>
-                 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Selection</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__call__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">n</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Selection</span><span class="p">:</span>
 <span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Calls the repeater process for ``n`` iterations, returning an</span>
 <span class="sd">        |abjad.Selection|. Default ``n`` is ``1``.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="nb">int</span><span class="p">):</span>
             <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;first positional argument must be &#39;int&#39;&quot;</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">n</span> <span class="o">&lt;</span> <span class="mi">1</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;first positional argument must be a positive &quot;</span>
-                             <span class="s2">&quot;&#39;int&#39;&quot;</span><span class="p">)</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_repeat_type</span> <span class="o">==</span> <span class="s1">&#39;unfold&#39;</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;first positional argument must be a positive &#39;int&#39;&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_repeat_type</span> <span class="o">==</span> <span class="s2">&quot;unfold&quot;</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_repeat_unfold</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
-        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">_repeat_type</span> <span class="o">==</span> <span class="s1">&#39;volta&#39;</span><span class="p">:</span>
+        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">_repeat_type</span> <span class="o">==</span> <span class="s2">&quot;volta&quot;</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_repeat_volta</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;&#39;repeat_type&#39; must be either &#39;unfold&#39; or &quot;</span>
-                             <span class="s2">&quot;&#39;volta&#39;&quot;</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;&#39;repeat_type&#39; must be either &#39;unfold&#39; or &#39;volta&#39;&quot;</span><span class="p">)</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">current_window</span></div>
 
 
@@ -862,9 +861,10 @@
 
 <div class="viewcode-block" id="Repeater.output_n">
 <a class="viewcode-back" href="../../../_api_members/auxjad.Repeater.html#auxjad.Repeater.output_n">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">output_n</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
-                 <span class="n">n</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span>
-                 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Selection</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">output_n</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">n</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Selection</span><span class="p">:</span>
 <span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Calls the repeater process for ``n`` iterations, returning an</span>
 <span class="sd">        |abjad.Selection|. Default ``n`` is ``1``.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -873,9 +873,10 @@
 
     <span class="c1">### PRIVATE METHODS ###</span>
 
-    <span class="k">def</span><span class="w"> </span><span class="nf">_repeat_unfold</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
-                       <span class="n">n</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
-                       <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_repeat_unfold</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">n</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Repeats a container ``n`` times.&quot;&quot;&quot;</span>
         <span class="n">dummy_container</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">mutate</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_contents</span><span class="p">)</span>
         <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">):</span>
@@ -891,9 +892,10 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">_current_window</span> <span class="o">=</span> <span class="n">dummy_container</span><span class="p">[:]</span>
         <span class="n">dummy_container</span><span class="p">[:]</span> <span class="o">=</span> <span class="p">[]</span>
 
-    <span class="k">def</span><span class="w"> </span><span class="nf">_repeat_volta</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
-                      <span class="n">n</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
-                      <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_repeat_volta</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">n</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Adds repetition bars and ``n`` times written indication.&quot;&quot;&quot;</span>
         <span class="n">dummy_contents</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">mutate</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_contents</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
@@ -903,14 +905,14 @@
         <span class="n">repeat</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Repeat</span><span class="p">(</span><span class="n">repeat_count</span><span class="o">=</span><span class="n">n</span><span class="p">)</span>
         <span class="n">abjad</span><span class="o">.</span><span class="n">attach</span><span class="p">(</span><span class="n">repeat</span><span class="p">,</span> <span class="n">dummy_contents</span><span class="p">)</span>
         <span class="n">strings</span> <span class="o">=</span> <span class="p">[</span>
-            <span class="sa">r</span><span class="s1">&#39;\tweak RehearsalMark.self-alignment-X #RIGHT&#39;</span><span class="p">,</span>
-            <span class="sa">r</span><span class="s1">&#39;\tweak RehearsalMark.break-visibility #begin-of-line-invisible&#39;</span><span class="p">,</span>
+            <span class="sa">r</span><span class="s2">&quot;\tweak RehearsalMark.self-alignment-X #RIGHT&quot;</span><span class="p">,</span>
+            <span class="sa">r</span><span class="s2">&quot;\tweak RehearsalMark.break-visibility #begin-of-line-invisible&quot;</span><span class="p">,</span>
             <span class="sa">r</span><span class="s1">&#39;\mark \markup{\box &quot;&#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;×&quot;}&#39;</span><span class="p">,</span>
         <span class="p">]</span>
         <span class="k">if</span> <span class="n">n</span> <span class="o">&gt;</span> <span class="mi">2</span> <span class="ow">or</span> <span class="p">(</span><span class="n">n</span> <span class="o">==</span> <span class="mi">2</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">_include_2x_volta_text</span><span class="p">):</span>
             <span class="k">for</span> <span class="n">string</span> <span class="ow">in</span> <span class="n">strings</span><span class="p">:</span>
                 <span class="n">abjad</span><span class="o">.</span><span class="n">attach</span><span class="p">(</span>
-                    <span class="n">abjad</span><span class="o">.</span><span class="n">LilyPondLiteral</span><span class="p">(</span><span class="n">string</span><span class="p">,</span> <span class="n">format_slot</span><span class="o">=</span><span class="s1">&#39;after&#39;</span><span class="p">),</span>
+                    <span class="n">abjad</span><span class="o">.</span><span class="n">LilyPondLiteral</span><span class="p">(</span><span class="n">string</span><span class="p">,</span> <span class="n">format_slot</span><span class="o">=</span><span class="s2">&quot;after&quot;</span><span class="p">),</span>
                     <span class="n">abjad</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="n">dummy_contents</span><span class="p">)</span><span class="o">.</span><span class="n">leaf</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">),</span>
                 <span class="p">)</span>
         <span class="n">dummy_container</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">([</span><span class="n">abjad</span><span class="o">.</span><span class="n">mutate</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="n">dummy_contents</span><span class="p">)])</span>
@@ -923,8 +925,9 @@
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="fm">__repr__</span><span class="p">()</span>
 
     <span class="nd">@staticmethod</span>
-    <span class="k">def</span><span class="w"> </span><span class="nf">_remove_all_time_signatures</span><span class="p">(</span><span class="n">container</span><span class="p">:</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">,</span>
-                                    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_remove_all_time_signatures</span><span class="p">(</span>
+        <span class="n">container</span><span class="p">:</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Removes all time signatures of an |abjad.Container|.&quot;&quot;&quot;</span>
         <span class="k">for</span> <span class="n">leaf</span> <span class="ow">in</span> <span class="n">abjad</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="n">container</span><span class="p">)</span><span class="o">.</span><span class="n">leaves</span><span class="p">():</span>
             <span class="k">if</span> <span class="n">abjad</span><span class="o">.</span><span class="n">get</span><span class="o">.</span><span class="n">effective</span><span class="p">(</span><span class="n">leaf</span><span class="p">,</span> <span class="n">abjad</span><span class="o">.</span><span class="n">TimeSignature</span><span class="p">):</span>
@@ -938,12 +941,12 @@
         <span class="k">return</span> <span class="n">abjad</span><span class="o">.</span><span class="n">mutate</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_contents</span><span class="p">)</span>
 
     <span class="nd">@contents</span><span class="o">.</span><span class="n">setter</span>
-    <span class="k">def</span><span class="w"> </span><span class="nf">contents</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
-                 <span class="n">contents</span><span class="p">:</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">,</span>
-                 <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">contents</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">contents</span><span class="p">:</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">contents</span><span class="p">,</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">):</span>
-            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;&#39;contents&#39; must be &#39;abjad.Container&#39; or child &quot;</span>
-                            <span class="s2">&quot;class&quot;</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;&#39;contents&#39; must be &#39;abjad.Container&#39; or child class&quot;</span><span class="p">)</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="n">abjad</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="n">contents</span><span class="p">)</span><span class="o">.</span><span class="n">leaves</span><span class="p">()</span><span class="o">.</span><span class="n">are_contiguous_logical_voice</span><span class="p">():</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;&#39;contents&#39; must be contiguous logical voice&quot;</span><span class="p">)</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">contents</span><span class="p">,</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Score</span><span class="p">):</span>
@@ -964,9 +967,10 @@
                 <span class="n">mutate</span><span class="o">.</span><span class="n">close_container</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_contents</span><span class="p">)</span>
                 <span class="n">mutate</span><span class="o">.</span><span class="n">close_container</span><span class="p">(</span><span class="n">dummy_container</span><span class="p">)</span>
         <span class="k">except</span> <span class="ne">ValueError</span> <span class="k">as</span> <span class="n">err</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;&#39;contents&#39; is malformed, with an underfull &quot;</span>
-                             <span class="s2">&quot;measure preceding a time signature change&quot;</span>
-                             <span class="p">)</span> <span class="kn">from</span><span class="w"> </span><span class="nn">err</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                <span class="s2">&quot;&#39;contents&#39; is malformed, with an underfull &quot;</span>
+                <span class="s2">&quot;measure preceding a time signature change&quot;</span>
+            <span class="p">)</span> <span class="kn">from</span><span class="w"> </span><span class="nn">err</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_current_window</span> <span class="o">=</span> <span class="n">dummy_container</span><span class="p">[:]</span>
         <span class="n">dummy_container</span><span class="p">[:]</span> <span class="o">=</span> <span class="p">[]</span>
 
@@ -986,9 +990,10 @@
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_omit_time_signatures</span>
 
     <span class="nd">@omit_time_signatures</span><span class="o">.</span><span class="n">setter</span>
-    <span class="k">def</span><span class="w"> </span><span class="nf">omit_time_signatures</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
-                             <span class="n">omit_time_signatures</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
-                             <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">omit_time_signatures</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">omit_time_signatures</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">omit_time_signatures</span><span class="p">,</span> <span class="nb">bool</span><span class="p">):</span>
             <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;&#39;omit_time_signatures&#39; must be &#39;bool&#39;&quot;</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_omit_time_signatures</span> <span class="o">=</span> <span class="n">omit_time_signatures</span>
@@ -1015,9 +1020,10 @@
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_reposition_clefs</span>
 
     <span class="nd">@reposition_clefs</span><span class="o">.</span><span class="n">setter</span>
-    <span class="k">def</span><span class="w"> </span><span class="nf">reposition_clefs</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
-                         <span class="n">reposition_clefs</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
-                         <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">reposition_clefs</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">reposition_clefs</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">reposition_clefs</span><span class="p">,</span> <span class="nb">bool</span><span class="p">):</span>
             <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;&#39;reposition_clefs&#39; must be &#39;bool&#39;&quot;</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_reposition_clefs</span> <span class="o">=</span> <span class="n">reposition_clefs</span>
@@ -1028,9 +1034,10 @@
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_reposition_dynamics</span>
 
     <span class="nd">@reposition_dynamics</span><span class="o">.</span><span class="n">setter</span>
-    <span class="k">def</span><span class="w"> </span><span class="nf">reposition_dynamics</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
-                            <span class="n">reposition_dynamics</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
-                            <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">reposition_dynamics</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">reposition_dynamics</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">reposition_dynamics</span><span class="p">,</span> <span class="nb">bool</span><span class="p">):</span>
             <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;&#39;reposition_dynamics&#39; must be &#39;bool&#39;&quot;</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_reposition_dynamics</span> <span class="o">=</span> <span class="n">reposition_dynamics</span>
@@ -1041,9 +1048,10 @@
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_reposition_slurs</span>
 
     <span class="nd">@reposition_slurs</span><span class="o">.</span><span class="n">setter</span>
-    <span class="k">def</span><span class="w"> </span><span class="nf">reposition_slurs</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
-                         <span class="n">reposition_slurs</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
-                         <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">reposition_slurs</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">reposition_slurs</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">reposition_slurs</span><span class="p">,</span> <span class="nb">bool</span><span class="p">):</span>
             <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;&#39;reposition_slurs&#39; must be &#39;bool&#39;&quot;</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_reposition_slurs</span> <span class="o">=</span> <span class="n">reposition_slurs</span>
@@ -1054,15 +1062,15 @@
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_repeat_type</span>
 
     <span class="nd">@repeat_type</span><span class="o">.</span><span class="n">setter</span>
-    <span class="k">def</span><span class="w"> </span><span class="nf">repeat_type</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
-                    <span class="n">repeat_type</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
-                    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">repeat_type</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">repeat_type</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">repeat_type</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
             <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;&#39;repeat_type&#39; must be &#39;str&#39;&quot;</span><span class="p">)</span>
         <span class="n">repeat_type</span> <span class="o">=</span> <span class="n">repeat_type</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
-        <span class="k">if</span> <span class="n">repeat_type</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">(</span><span class="s1">&#39;unfold&#39;</span><span class="p">,</span> <span class="s1">&#39;volta&#39;</span><span class="p">):</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;&#39;repeat_type&#39; must be either &#39;unfold&#39; or &quot;</span>
-                             <span class="s2">&quot;&#39;volta&#39;&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">repeat_type</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">(</span><span class="s2">&quot;unfold&quot;</span><span class="p">,</span> <span class="s2">&quot;volta&quot;</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;&#39;repeat_type&#39; must be either &#39;unfold&#39; or &#39;volta&#39;&quot;</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_repeat_type</span> <span class="o">=</span> <span class="n">repeat_type</span>
 
     <span class="nd">@property</span>
@@ -1074,9 +1082,10 @@
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_include_2x_volta_text</span>
 
     <span class="nd">@include_2x_volta_text</span><span class="o">.</span><span class="n">setter</span>
-    <span class="k">def</span><span class="w"> </span><span class="nf">include_2x_volta_text</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
-                              <span class="n">include_2x_volta_text</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
-                              <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">include_2x_volta_text</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">include_2x_volta_text</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">include_2x_volta_text</span><span class="p">,</span> <span class="nb">bool</span><span class="p">):</span>
             <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;&#39;include_2x_volta_text&#39; must be &#39;bool&#39;&quot;</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_include_2x_volta_text</span> <span class="o">=</span> <span class="n">include_2x_volta_text</span></div>

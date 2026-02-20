@@ -6,17 +6,17 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Shuffling and fading harmonics &mdash; Auxjad 1.0.5 documentation</title>
+  <title>Shuffling and fading harmonics &mdash; Auxjad 1.0.7 documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=ffec0d92" />
-      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=9edc463e" />
 
   
     <link rel="canonical" href="https://gilbertohasnofb.github.io/auxjad-docs/examples/example-5-shuffling-harmonics.html"/>
       <script src="../_static/jquery.js?v=5d32c60e"></script>
       <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../_static/documentation_options.js?v=d55fa986"></script>
-      <script src="../_static/doctools.js?v=9bcbadda"></script>
-      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../_static/documentation_options.js?v=46dfa7f5"></script>
+      <script src="../_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -34,7 +34,6 @@
           
           <a href="../index.html" class="icon icon-home">
             Auxjad
-              <img src="../_static/auxjad-logo.png" class="logo" alt="Logo"/>
           </a>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
@@ -89,7 +88,7 @@
 <p>In this example, we will use some of <a class="reference external" href="index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">auxjad</span></code></a>’s classes to manipulate
 some musical material using the <a class="reference internal" href="../_api_members/auxjad.Shuffler.html#auxjad.Shuffler" title="auxjad.Shuffler"><code class="xref py py-class docutils literal notranslate"><span class="pre">auxjad.Shuffler</span></code></a> and
 <a class="reference internal" href="../_api_members/auxjad.Fader.html#auxjad.Fader" title="auxjad.Fader"><code class="xref py py-class docutils literal notranslate"><span class="pre">auxjad.Fader</span></code></a> classes.</p>
-<p>First, we start by importing both <a class="reference external" href="https://abjad.github.io/api/abjad/index.html#module-abjad" title="(in Abjad v3.25)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">abjad</span></code></a> and <a class="reference external" href="index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">auxjad</span></code></a>.</p>
+<p>First, we start by importing both <code class="xref py py-mod docutils literal notranslate"><span class="pre">abjad</span></code> and <a class="reference external" href="index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">auxjad</span></code></a>.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span><span class="w"> </span><span class="nn">abjad</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span><span class="w"> </span><span class="nn">auxjad</span>
 </pre></div>
@@ -113,7 +112,7 @@ and rests.</p>
 </figure>
 <p>The spelling of the chord <code class="docutils literal notranslate"><span class="pre">&lt;g</span> <span class="pre">af'</span> <span class="pre">a'&gt;</span></code> could be improved. This can be done
 by using <a class="reference internal" href="../_api_members/auxjad.mutate.respell_augmented_unisons.html#auxjad.mutate.respell_augmented_unisons" title="auxjad.mutate.respell_augmented_unisons"><code class="xref py py-func docutils literal notranslate"><span class="pre">auxjad.mutate.respell_augmented_unisons()</span></code></a>. Auxjad automatically adds
-this mutation as an extension method to <a class="reference external" href="https://abjad.github.io/api/abjad/mutate.html#module-abjad.mutate" title="(in Abjad v3.25)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">abjad.mutate</span></code></a> so it can also be
+this mutation as an extension method to <code class="xref py py-mod docutils literal notranslate"><span class="pre">abjad.mutate</span></code> so it can also be
 accessed using <a class="reference internal" href="../_api_members/auxjad.mutate.respell_augmented_unisons.html#auxjad.mutate.respell_augmented_unisons" title="auxjad.mutate.respell_augmented_unisons"><code class="xref py py-func docutils literal notranslate"><span class="pre">abjad.mutate.respell_augmented_unisons()</span></code></a>.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">mutate</span><span class="o">.</span><span class="n">respell_augmented_unisons</span><span class="p">(</span><span class="n">container</span><span class="p">[:])</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">container</span><span class="p">)</span>
@@ -162,7 +161,7 @@ dynamics, and clefs, consecutive calls may result in repetitions. But we can
 simply use <a class="reference internal" href="../_api_members/auxjad.mutate.remove_repeated_time_signatures.html#auxjad.mutate.remove_repeated_time_signatures" title="auxjad.mutate.remove_repeated_time_signatures"><code class="xref py py-func docutils literal notranslate"><span class="pre">auxjad.mutate.remove_repeated_time_signatures()</span></code></a> to take care of
 that for us. This function is also available as the extension method
 <a class="reference internal" href="../_api_members/auxjad.mutate.remove_repeated_time_signatures.html#auxjad.mutate.remove_repeated_time_signatures" title="auxjad.mutate.remove_repeated_time_signatures"><code class="xref py py-func docutils literal notranslate"><span class="pre">abjad.mutate.remove_repeated_time_signatures()</span></code></a>, which Auxjad automatically
-adds to <a class="reference external" href="https://abjad.github.io/api/abjad/mutate.html#module-abjad.mutate" title="(in Abjad v3.25)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">abjad.mutate</span></code></a>. To finalise the score, let’s remove the last empty
+adds to <code class="xref py py-mod docutils literal notranslate"><span class="pre">abjad.mutate</span></code>. To finalise the score, let’s remove the last empty
 measure and add a final bar line.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">mutate</span><span class="o">.</span><span class="n">remove_repeated_time_signatures</span><span class="p">(</span><span class="n">staff</span><span class="p">[:])</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">staff</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>

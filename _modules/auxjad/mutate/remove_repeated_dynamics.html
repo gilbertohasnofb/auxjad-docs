@@ -5,17 +5,17 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>auxjad.mutate.remove_repeated_dynamics &mdash; Auxjad 1.0.5 documentation</title>
+  <title>auxjad.mutate.remove_repeated_dynamics &mdash; Auxjad 1.0.7 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=ffec0d92" />
-      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=9edc463e" />
 
   
     <link rel="canonical" href="https://gilbertohasnofb.github.io/auxjad-docs/_modules/auxjad/mutate/remove_repeated_dynamics.html"/>
       <script src="../../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../../../_static/documentation_options.js?v=d55fa986"></script>
-      <script src="../../../_static/doctools.js?v=9bcbadda"></script>
-      <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../../_static/documentation_options.js?v=46dfa7f5"></script>
+      <script src="../../../_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
     <script src="../../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" /> 
@@ -31,7 +31,6 @@
           
           <a href="../../../index.html" class="icon icon-home">
             Auxjad
-              <img src="../../../_static/auxjad-logo.png" class="logo" alt="Logo"/>
           </a>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
@@ -81,14 +80,13 @@
 
 <div class="viewcode-block" id="remove_repeated_dynamics">
 <a class="viewcode-back" href="../../../_api_members/auxjad.mutate.remove_repeated_dynamics.html#auxjad.mutate.remove_repeated_dynamics">[docs]</a>
-<span class="k">def</span><span class="w"> </span><span class="nf">remove_repeated_dynamics</span><span class="p">(</span><span class="n">selection</span><span class="p">:</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Selection</span><span class="p">,</span>
-                             <span class="o">*</span><span class="p">,</span>
-                             <span class="n">ignore_hairpins</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
-                             <span class="n">reset_after_rests</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
-                             <span class="n">reset_after_duration</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span>
-                                 <span class="n">Union</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="nb">int</span><span class="p">,</span> <span class="nb">str</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">,</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Duration</span><span class="p">]</span>
-                             <span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-                             <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">remove_repeated_dynamics</span><span class="p">(</span>
+    <span class="n">selection</span><span class="p">:</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Selection</span><span class="p">,</span>
+    <span class="o">*</span><span class="p">,</span>
+    <span class="n">ignore_hairpins</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+    <span class="n">reset_after_rests</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+    <span class="n">reset_after_duration</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="nb">int</span><span class="p">,</span> <span class="nb">str</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">,</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Duration</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Mutates an input |abjad.Selection| in place and has no return value;</span>
 <span class="sd">    this function removes all consecutive repeated dynamic markings.</span>
 
@@ -481,14 +479,19 @@
     <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">reset_after_rests</span><span class="p">,</span> <span class="nb">bool</span><span class="p">):</span>
         <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;&#39;reset_after_rests&#39; must be &#39;bool&#39;&quot;</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">reset_after_duration</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">reset_after_duration</span><span class="p">,</span> <span class="p">(</span><span class="n">abjad</span><span class="o">.</span><span class="n">Duration</span><span class="p">,</span>
-                                                 <span class="nb">str</span><span class="p">,</span>
-                                                 <span class="nb">tuple</span><span class="p">,</span>
-                                                 <span class="nb">int</span><span class="p">,</span>
-                                                 <span class="nb">float</span><span class="p">,</span>
-                                                 <span class="p">)):</span>
-            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;&#39;reset_after_duration&#39; must be &#39;abjad.Duration&#39;, &quot;</span>
-                            <span class="s2">&quot;&#39;str&#39;, &#39;tuple&#39;, or a number&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span>
+            <span class="n">reset_after_duration</span><span class="p">,</span>
+            <span class="p">(</span>
+                <span class="n">abjad</span><span class="o">.</span><span class="n">Duration</span><span class="p">,</span>
+                <span class="nb">str</span><span class="p">,</span>
+                <span class="nb">tuple</span><span class="p">,</span>
+                <span class="nb">int</span><span class="p">,</span>
+                <span class="nb">float</span><span class="p">,</span>
+            <span class="p">),</span>
+        <span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span>
+                <span class="s2">&quot;&#39;reset_after_duration&#39; must be &#39;abjad.Duration&#39;, &#39;str&#39;, &#39;tuple&#39;, or a number&quot;</span>
+            <span class="p">)</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">reset_after_duration</span><span class="p">,</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Duration</span><span class="p">):</span>
             <span class="n">reset_after_duration</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Duration</span><span class="p">(</span><span class="n">reset_after_duration</span><span class="p">)</span>
 
@@ -510,13 +513,13 @@
         <span class="k">else</span><span class="p">:</span>
             <span class="n">duration_since_last_note</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Duration</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
             <span class="n">indicators</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">get</span><span class="o">.</span><span class="n">indicators</span><span class="p">(</span><span class="n">leaf</span><span class="p">)</span>
-            <span class="n">hairpin_present</span> <span class="o">=</span> <span class="nb">any</span><span class="p">([</span><span class="nb">isinstance</span><span class="p">(</span><span class="n">indicator</span><span class="p">,</span> <span class="n">abjad</span><span class="o">.</span><span class="n">StartHairpin</span><span class="p">)</span>
-                                   <span class="k">for</span> <span class="n">indicator</span> <span class="ow">in</span> <span class="n">indicators</span><span class="p">])</span>
+            <span class="n">hairpin_present</span> <span class="o">=</span> <span class="nb">any</span><span class="p">(</span>
+                <span class="p">[</span><span class="nb">isinstance</span><span class="p">(</span><span class="n">indicator</span><span class="p">,</span> <span class="n">abjad</span><span class="o">.</span><span class="n">StartHairpin</span><span class="p">)</span> <span class="k">for</span> <span class="n">indicator</span> <span class="ow">in</span> <span class="n">indicators</span><span class="p">]</span>
+            <span class="p">)</span>
             <span class="k">if</span> <span class="n">hairpin_present</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">ignore_hairpins</span><span class="p">:</span>
                 <span class="k">for</span> <span class="n">indicator</span> <span class="ow">in</span> <span class="n">indicators</span><span class="p">:</span>
                     <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">indicator</span><span class="p">,</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Dynamic</span><span class="p">):</span>
-                        <span class="k">if</span> <span class="p">(</span><span class="n">indicator</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span>
-                                <span class="ow">and</span> <span class="n">indicator</span> <span class="o">==</span> <span class="n">previous_dynamic</span><span class="p">):</span>
+                        <span class="k">if</span> <span class="n">indicator</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">indicator</span> <span class="o">==</span> <span class="n">previous_dynamic</span><span class="p">:</span>
                             <span class="n">abjad</span><span class="o">.</span><span class="n">detach</span><span class="p">(</span><span class="n">abjad</span><span class="o">.</span><span class="n">Dynamic</span><span class="p">,</span> <span class="n">leaf</span><span class="p">)</span>
                 <span class="n">current_dynamic</span> <span class="o">=</span> <span class="kc">None</span>
             <span class="k">else</span><span class="p">:</span>

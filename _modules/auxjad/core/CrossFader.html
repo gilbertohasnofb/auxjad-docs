@@ -5,17 +5,17 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>auxjad.core.CrossFader &mdash; Auxjad 1.0.5 documentation</title>
+  <title>auxjad.core.CrossFader &mdash; Auxjad 1.0.7 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=ffec0d92" />
-      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=9edc463e" />
 
   
     <link rel="canonical" href="https://gilbertohasnofb.github.io/auxjad-docs/_modules/auxjad/core/CrossFader.html"/>
       <script src="../../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../../../_static/documentation_options.js?v=d55fa986"></script>
-      <script src="../../../_static/doctools.js?v=9bcbadda"></script>
-      <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../../_static/documentation_options.js?v=46dfa7f5"></script>
+      <script src="../../../_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
     <script src="../../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" /> 
@@ -31,7 +31,6 @@
           
           <a href="../../../index.html" class="icon icon-home">
             Auxjad
-              <img src="../../../_static/auxjad-logo.png" class="logo" alt="Logo"/>
           </a>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
@@ -85,7 +84,7 @@
 
 <div class="viewcode-block" id="CrossFader">
 <a class="viewcode-back" href="../../../_api_members/auxjad.CrossFader.html#auxjad.CrossFader">[docs]</a>
-<span class="k">class</span><span class="w"> </span><span class="nc">CrossFader</span><span class="p">():</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">CrossFader</span><span class="p">:</span>
 <span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Takes two |abjad.Container|&#39;s&#39; (or child class) and gradually</span>
 <span class="sd">    crossfades from one into the other, by fading out the first while fading in</span>
 <span class="sd">    the second. It makes use of two :class:`auxjad.Fader` for that.</span>
@@ -1714,62 +1713,61 @@
 
     <span class="c1">### CLASS VARIABLES ###</span>
 
-    <span class="vm">__slots__</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;_fade_out_contents&#39;</span><span class="p">,</span>
-                 <span class="s1">&#39;_fade_in_contents&#39;</span><span class="p">,</span>
-                 <span class="s1">&#39;_fader_in&#39;</span><span class="p">,</span>
-                 <span class="s1">&#39;_fader_out&#39;</span><span class="p">,</span>
-                 <span class="s1">&#39;_faders&#39;</span><span class="p">,</span>
-                 <span class="s1">&#39;_weights&#39;</span><span class="p">,</span>
-                 <span class="s1">&#39;_weighted_duration&#39;</span><span class="p">,</span>
-                 <span class="s1">&#39;_is_first_window&#39;</span><span class="p">,</span>
-                 <span class="s1">&#39;_is_first_process&#39;</span><span class="p">,</span>
-                 <span class="s1">&#39;_repetition_chance&#39;</span><span class="p">,</span>
-                 <span class="s1">&#39;_initial_repetitions&#39;</span><span class="p">,</span>
-                 <span class="s1">&#39;_final_repetitions&#39;</span><span class="p">,</span>
-                 <span class="s1">&#39;_initial_repetitions_counter&#39;</span><span class="p">,</span>
-                 <span class="s1">&#39;_final_repetitions_counter&#39;</span><span class="p">,</span>
-                 <span class="s1">&#39;_disable_rewrite_meter&#39;</span><span class="p">,</span>
-                 <span class="s1">&#39;_omit_time_signatures&#39;</span><span class="p">,</span>
-                 <span class="s1">&#39;_use_multimeasure_rests&#39;</span><span class="p">,</span>
-                 <span class="s1">&#39;_boundary_depth&#39;</span><span class="p">,</span>
-                 <span class="s1">&#39;_maximum_dot_count&#39;</span><span class="p">,</span>
-                 <span class="s1">&#39;_rewrite_tuplets&#39;</span><span class="p">,</span>
-                 <span class="s1">&#39;_fade_in_first&#39;</span><span class="p">,</span>
-                 <span class="s1">&#39;_fade_out_last&#39;</span><span class="p">,</span>
-                 <span class="p">)</span>
+    <span class="vm">__slots__</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="s2">&quot;_fade_out_contents&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;_fade_in_contents&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;_fader_in&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;_fader_out&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;_faders&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;_weights&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;_weighted_duration&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;_is_first_window&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;_is_first_process&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;_repetition_chance&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;_initial_repetitions&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;_final_repetitions&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;_initial_repetitions_counter&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;_final_repetitions_counter&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;_disable_rewrite_meter&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;_omit_time_signatures&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;_use_multimeasure_rests&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;_boundary_depth&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;_maximum_dot_count&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;_rewrite_tuplets&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;_fade_in_first&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;_fade_out_last&quot;</span><span class="p">,</span>
+    <span class="p">)</span>
 
     <span class="c1">### INITIALISER ###</span>
 
 <div class="viewcode-block" id="CrossFader.__init__">
 <a class="viewcode-back" href="../../../_api_members/auxjad.CrossFader.html#auxjad.CrossFader.__init__">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
-                 <span class="n">fade_out_contents</span><span class="p">:</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">,</span>
-                 <span class="n">fade_in_contents</span><span class="p">:</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">,</span>
-                 <span class="o">*</span><span class="p">,</span>
-                 <span class="n">fade_in_first</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
-                 <span class="n">fade_out_last</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
-                 <span class="n">initial_repetitions</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span>
-                 <span class="n">final_repetitions</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span>
-                 <span class="n">repetition_chance</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.0</span><span class="p">,</span>
-                 <span class="n">weighted_duration</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
-                 <span class="n">disable_rewrite_meter</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
-                 <span class="n">omit_time_signatures</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
-                 <span class="n">use_multimeasure_rests</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
-                 <span class="n">boundary_depth</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-                 <span class="n">maximum_dot_count</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-                 <span class="n">rewrite_tuplets</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
-                 <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Initialises self.&quot;&quot;&quot;</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">fade_out_contents</span><span class="p">:</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">,</span>
+        <span class="n">fade_in_contents</span><span class="p">:</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">,</span>
+        <span class="o">*</span><span class="p">,</span>
+        <span class="n">fade_in_first</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+        <span class="n">fade_out_last</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+        <span class="n">initial_repetitions</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span>
+        <span class="n">final_repetitions</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span>
+        <span class="n">repetition_chance</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.0</span><span class="p">,</span>
+        <span class="n">weighted_duration</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+        <span class="n">disable_rewrite_meter</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+        <span class="n">omit_time_signatures</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+        <span class="n">use_multimeasure_rests</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+        <span class="n">boundary_depth</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">maximum_dot_count</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">rewrite_tuplets</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">fade_out_contents</span><span class="p">,</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">):</span>
-            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;&#39;fade_out_contents&#39; must be &#39;abjad.Container&#39; or &quot;</span>
-                            <span class="s2">&quot;child class&quot;</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;&#39;fade_out_contents&#39; must be &#39;abjad.Container&#39; or child class&quot;</span><span class="p">)</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">fade_in_contents</span><span class="p">,</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">):</span>
-            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;&#39;fade_in_contents&#39; must be &#39;abjad.Container&#39; or &quot;</span>
-                            <span class="s2">&quot;child class&quot;</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;&#39;fade_in_contents&#39; must be &#39;abjad.Container&#39; or child class&quot;</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_fade_out_contents</span> <span class="o">=</span> <span class="n">fade_out_contents</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_fade_in_contents</span> <span class="o">=</span> <span class="n">fade_in_contents</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_fader_out</span> <span class="o">=</span> <span class="n">Fader</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_fade_out_contents</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;out&#39;</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_fader_in</span> <span class="o">=</span> <span class="n">Fader</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_fade_in_contents</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;in&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_fader_out</span> <span class="o">=</span> <span class="n">Fader</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_fade_out_contents</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s2">&quot;out&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_fader_in</span> <span class="o">=</span> <span class="n">Fader</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_fade_in_contents</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s2">&quot;in&quot;</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_faders</span> <span class="o">=</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_fader_in</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_fader_out</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_is_first_window</span> <span class="o">=</span> <span class="kc">True</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_is_first_process</span> <span class="o">=</span> <span class="kc">True</span>
@@ -1799,7 +1797,7 @@
             <span class="n">abjad</span><span class="o">.</span><span class="n">lilypond</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_fader_out</span><span class="p">),</span>
             <span class="n">abjad</span><span class="o">.</span><span class="n">lilypond</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_fader_in</span><span class="p">),</span>
         <span class="p">)</span>
-        <span class="k">return</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">strings</span><span class="p">)</span></div>
+        <span class="k">return</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">strings</span><span class="p">)</span></div>
 
 
 <div class="viewcode-block" id="CrossFader.__len__">
@@ -1868,17 +1866,17 @@
 
 <div class="viewcode-block" id="CrossFader.output_n">
 <a class="viewcode-back" href="../../../_api_members/auxjad.CrossFader.html#auxjad.CrossFader.output_n">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">output_n</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
-                 <span class="n">n</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
-                 <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="n">abjad</span><span class="o">.</span><span class="n">Selection</span><span class="p">]:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">output_n</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">n</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="n">abjad</span><span class="o">.</span><span class="n">Selection</span><span class="p">]:</span>
 <span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Goes through ``n`` iterations of the fading process and outputs a</span>
 <span class="sd">        tuple of two |abjad.Selection| objects.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="nb">int</span><span class="p">):</span>
             <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;first positional argument must be &#39;int&#39;&quot;</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">n</span> <span class="o">&lt;</span> <span class="mi">1</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;first positional argument must be a positive &quot;</span>
-                             <span class="s2">&quot;&#39;int&#39;&quot;</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;first positional argument must be a positive &#39;int&#39;&quot;</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">reset</span><span class="p">()</span>
         <span class="n">dummy_container_a</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">()</span>
         <span class="n">dummy_container_b</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">()</span>
@@ -1928,19 +1926,26 @@
             <span class="k">else</span><span class="p">:</span>
                 <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s2">&quot;both faders have been exhausted&quot;</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="k">if</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_is_first_process</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">_repetition_chance</span> <span class="o">==</span> <span class="mf">0.0</span>
-                    <span class="ow">or</span> <span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">()</span> <span class="o">&gt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">_repetition_chance</span><span class="p">):</span>
+            <span class="k">if</span> <span class="p">(</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_is_first_process</span>
+                <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">_repetition_chance</span> <span class="o">==</span> <span class="mf">0.0</span>
+                <span class="ow">or</span> <span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">()</span> <span class="o">&gt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">_repetition_chance</span>
+            <span class="p">):</span>
                 <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_fade_in_first</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">_is_first_process</span><span class="p">:</span>
                     <span class="bp">self</span><span class="o">.</span><span class="n">_fader_in</span><span class="p">()</span>
                     <span class="bp">self</span><span class="o">.</span><span class="n">_is_first_process</span> <span class="o">=</span> <span class="kc">False</span>
-                <span class="k">elif</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_fade_out_last</span> <span class="ow">and</span> <span class="nb">sum</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_fader_out</span><span class="o">.</span><span class="n">_mask</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span>
-                        <span class="ow">and</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_fader_in</span><span class="o">.</span><span class="n">_done</span><span class="p">):</span>
+                <span class="k">elif</span> <span class="p">(</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">_fade_out_last</span>
+                    <span class="ow">and</span> <span class="nb">sum</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_fader_out</span><span class="o">.</span><span class="n">_mask</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span>
+                    <span class="ow">and</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_fader_in</span><span class="o">.</span><span class="n">_done</span>
+                <span class="p">):</span>
                     <span class="bp">self</span><span class="o">.</span><span class="n">_fader_in</span><span class="p">()</span>
                 <span class="k">else</span><span class="p">:</span>
                     <span class="k">try</span><span class="p">:</span>
-                        <span class="n">random_fader</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">choices</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_faders</span><span class="p">,</span>
-                                                      <span class="n">weights</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_weights</span><span class="p">,</span>
-                                                      <span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+                        <span class="n">random_fader</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">choices</span><span class="p">(</span>
+                            <span class="bp">self</span><span class="o">.</span><span class="n">_faders</span><span class="p">,</span>
+                            <span class="n">weights</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_weights</span><span class="p">,</span>
+                        <span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
                         <span class="n">random_fader</span><span class="p">()</span>
                     <span class="k">except</span> <span class="ne">RuntimeError</span><span class="p">:</span>
                         <span class="n">other_fader</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_faders</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
@@ -1962,16 +1967,15 @@
         <span class="k">return</span> <span class="n">abjad</span><span class="o">.</span><span class="n">mutate</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_fade_out_contents</span><span class="p">)</span>
 
     <span class="nd">@fade_out_contents</span><span class="o">.</span><span class="n">setter</span>
-    <span class="k">def</span><span class="w"> </span><span class="nf">fade_out_contents</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
-                          <span class="n">fade_out_contents</span><span class="p">:</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">,</span>
-                          <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">fade_out_contents</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">fade_out_contents</span><span class="p">:</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">fade_out_contents</span><span class="p">,</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">):</span>
-            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;&#39;fade_out_contents&#39; must be &#39;abjad.Container&#39; or &quot;</span>
-                            <span class="s2">&quot;child class&quot;</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;&#39;fade_out_contents&#39; must be &#39;abjad.Container&#39; or child class&quot;</span><span class="p">)</span>
         <span class="n">leaves</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="n">fade_out_contents</span><span class="p">)</span><span class="o">.</span><span class="n">leaves</span><span class="p">()</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="n">leaves</span><span class="o">.</span><span class="n">are_contiguous_logical_voice</span><span class="p">():</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;&#39;fade_out_contents&#39; must be contiguous logical &quot;</span>
-                             <span class="s2">&quot;voice&quot;</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;&#39;fade_out_contents&#39; must be contiguous logical voice&quot;</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_fade_out_contents</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">mutate</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="n">fade_out_contents</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_fader_out</span><span class="o">.</span><span class="n">contents</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_fade_out_contents</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">reset</span><span class="p">()</span>
@@ -1982,16 +1986,15 @@
         <span class="k">return</span> <span class="n">abjad</span><span class="o">.</span><span class="n">mutate</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_fade_in_contents</span><span class="p">)</span>
 
     <span class="nd">@fade_in_contents</span><span class="o">.</span><span class="n">setter</span>
-    <span class="k">def</span><span class="w"> </span><span class="nf">fade_in_contents</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
-                         <span class="n">fade_in_contents</span><span class="p">:</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">,</span>
-                         <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">fade_in_contents</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">fade_in_contents</span><span class="p">:</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">fade_in_contents</span><span class="p">,</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">):</span>
-            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;&#39;fade_in_contents&#39; must be &#39;abjad.Container&#39; or &quot;</span>
-                            <span class="s2">&quot;child class&quot;</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;&#39;fade_in_contents&#39; must be &#39;abjad.Container&#39; or child class&quot;</span><span class="p">)</span>
         <span class="n">leaves</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="n">fade_in_contents</span><span class="p">)</span><span class="o">.</span><span class="n">leaves</span><span class="p">()</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="n">leaves</span><span class="o">.</span><span class="n">are_contiguous_logical_voice</span><span class="p">():</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;&#39;fade_in_contents&#39; must be contiguous logical &quot;</span>
-                             <span class="s2">&quot;voice&quot;</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;&#39;fade_in_contents&#39; must be contiguous logical voice&quot;</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_fade_in_contents</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">mutate</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="n">fade_in_contents</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_fader_in</span><span class="o">.</span><span class="n">contents</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_fade_in_contents</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">reset</span><span class="p">()</span>
@@ -2011,9 +2014,10 @@
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_weighted_duration</span>
 
     <span class="nd">@weighted_duration</span><span class="o">.</span><span class="n">setter</span>
-    <span class="k">def</span><span class="w"> </span><span class="nf">weighted_duration</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
-                          <span class="n">weighted_duration</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
-                          <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">weighted_duration</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">weighted_duration</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">weighted_duration</span><span class="p">,</span> <span class="nb">bool</span><span class="p">):</span>
             <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;&#39;weighted_duration&#39; must be &#39;bool&#39;&quot;</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_weighted_duration</span> <span class="o">=</span> <span class="n">weighted_duration</span>
@@ -2036,9 +2040,10 @@
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_repetition_chance</span>
 
     <span class="nd">@repetition_chance</span><span class="o">.</span><span class="n">setter</span>
-    <span class="k">def</span><span class="w"> </span><span class="nf">repetition_chance</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
-                          <span class="n">repetition_chance</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
-                          <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">repetition_chance</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">repetition_chance</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">repetition_chance</span><span class="p">,</span> <span class="nb">float</span><span class="p">):</span>
             <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;&#39;repetition_chance&#39; must be &#39;float&#39;&quot;</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">repetition_chance</span> <span class="o">&lt;</span> <span class="mf">0.0</span> <span class="ow">or</span> <span class="n">repetition_chance</span> <span class="o">&gt;</span> <span class="mf">1.0</span><span class="p">:</span>
@@ -2053,9 +2058,10 @@
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_initial_repetitions</span>
 
     <span class="nd">@initial_repetitions</span><span class="o">.</span><span class="n">setter</span>
-    <span class="k">def</span><span class="w"> </span><span class="nf">initial_repetitions</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
-                            <span class="n">initial_repetitions</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
-                            <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">initial_repetitions</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">initial_repetitions</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">initial_repetitions</span><span class="p">,</span> <span class="nb">int</span><span class="p">):</span>
             <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;&#39;initial_repetitions&#39; must be &#39;int&#39;&quot;</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">initial_repetitions</span> <span class="o">&lt;</span> <span class="mi">1</span><span class="p">:</span>
@@ -2070,9 +2076,10 @@
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_final_repetitions</span>
 
     <span class="nd">@final_repetitions</span><span class="o">.</span><span class="n">setter</span>
-    <span class="k">def</span><span class="w"> </span><span class="nf">final_repetitions</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
-                          <span class="n">final_repetitions</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
-                          <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">final_repetitions</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">final_repetitions</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">final_repetitions</span><span class="p">,</span> <span class="nb">int</span><span class="p">):</span>
             <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;&#39;final_repetitions&#39; must be &#39;int&#39;&quot;</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">final_repetitions</span> <span class="o">&lt;</span> <span class="mi">1</span><span class="p">:</span>
@@ -2101,9 +2108,10 @@
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_fade_in_first</span>
 
     <span class="nd">@fade_in_first</span><span class="o">.</span><span class="n">setter</span>
-    <span class="k">def</span><span class="w"> </span><span class="nf">fade_in_first</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
-                      <span class="n">fade_in_first</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
-                      <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">fade_in_first</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">fade_in_first</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">fade_in_first</span><span class="p">,</span> <span class="nb">bool</span><span class="p">):</span>
             <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;&#39;fade_in_first&#39; must be &#39;bool&#39;&quot;</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_fade_in_first</span> <span class="o">=</span> <span class="n">fade_in_first</span>
@@ -2116,9 +2124,10 @@
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_fade_out_last</span>
 
     <span class="nd">@fade_out_last</span><span class="o">.</span><span class="n">setter</span>
-    <span class="k">def</span><span class="w"> </span><span class="nf">fade_out_last</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
-                      <span class="n">fade_out_last</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
-                      <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">fade_out_last</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">fade_out_last</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">fade_out_last</span><span class="p">,</span> <span class="nb">bool</span><span class="p">):</span>
             <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;&#39;fade_out_last&#39; must be &#39;bool&#39;&quot;</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_fade_out_last</span> <span class="o">=</span> <span class="n">fade_out_last</span>
@@ -2131,9 +2140,10 @@
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_disable_rewrite_meter</span>
 
     <span class="nd">@disable_rewrite_meter</span><span class="o">.</span><span class="n">setter</span>
-    <span class="k">def</span><span class="w"> </span><span class="nf">disable_rewrite_meter</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
-                              <span class="n">disable_rewrite_meter</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
-                              <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">disable_rewrite_meter</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">disable_rewrite_meter</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">disable_rewrite_meter</span><span class="p">,</span> <span class="nb">bool</span><span class="p">):</span>
             <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;&#39;disable_rewrite_meter&#39; must be &#39;bool&#39;&quot;</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_disable_rewrite_meter</span> <span class="o">=</span> <span class="n">disable_rewrite_meter</span>
@@ -2148,9 +2158,10 @@
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_omit_time_signatures</span>
 
     <span class="nd">@omit_time_signatures</span><span class="o">.</span><span class="n">setter</span>
-    <span class="k">def</span><span class="w"> </span><span class="nf">omit_time_signatures</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
-                             <span class="n">omit_time_signatures</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
-                             <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">omit_time_signatures</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">omit_time_signatures</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">omit_time_signatures</span><span class="p">,</span> <span class="nb">bool</span><span class="p">):</span>
             <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;&#39;omit_time_signatures&#39; must be &#39;bool&#39;&quot;</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_omit_time_signatures</span> <span class="o">=</span> <span class="n">omit_time_signatures</span>
@@ -2165,9 +2176,10 @@
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_use_multimeasure_rests</span>
 
     <span class="nd">@use_multimeasure_rests</span><span class="o">.</span><span class="n">setter</span>
-    <span class="k">def</span><span class="w"> </span><span class="nf">use_multimeasure_rests</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
-                               <span class="n">use_multimeasure_rests</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
-                               <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">use_multimeasure_rests</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">use_multimeasure_rests</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">use_multimeasure_rests</span><span class="p">,</span> <span class="nb">bool</span><span class="p">):</span>
             <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;&#39;use_multimeasure_rests&#39; must be &#39;bool&#39;&quot;</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_use_multimeasure_rests</span> <span class="o">=</span> <span class="n">use_multimeasure_rests</span>
@@ -2182,9 +2194,10 @@
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_boundary_depth</span>
 
     <span class="nd">@boundary_depth</span><span class="o">.</span><span class="n">setter</span>
-    <span class="k">def</span><span class="w"> </span><span class="nf">boundary_depth</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
-                       <span class="n">boundary_depth</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">],</span>
-                       <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">boundary_depth</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">boundary_depth</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">],</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="k">if</span> <span class="n">boundary_depth</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
             <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">boundary_depth</span><span class="p">,</span> <span class="nb">int</span><span class="p">):</span>
                 <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;&#39;boundary_depth&#39; must be &#39;int&#39;&quot;</span><span class="p">)</span>
@@ -2200,9 +2213,10 @@
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_maximum_dot_count</span>
 
     <span class="nd">@maximum_dot_count</span><span class="o">.</span><span class="n">setter</span>
-    <span class="k">def</span><span class="w"> </span><span class="nf">maximum_dot_count</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
-                          <span class="n">maximum_dot_count</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">],</span>
-                          <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">maximum_dot_count</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">maximum_dot_count</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">],</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="k">if</span> <span class="n">maximum_dot_count</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
             <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">maximum_dot_count</span><span class="p">,</span> <span class="nb">int</span><span class="p">):</span>
                 <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;&#39;maximum_dot_count&#39; must be &#39;int&#39;&quot;</span><span class="p">)</span>
@@ -2218,9 +2232,10 @@
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_rewrite_tuplets</span>
 
     <span class="nd">@rewrite_tuplets</span><span class="o">.</span><span class="n">setter</span>
-    <span class="k">def</span><span class="w"> </span><span class="nf">rewrite_tuplets</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
-                        <span class="n">rewrite_tuplets</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
-                        <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">rewrite_tuplets</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">rewrite_tuplets</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">rewrite_tuplets</span><span class="p">,</span> <span class="nb">bool</span><span class="p">):</span>
             <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;&#39;rewrite_tuplets&#39; must be &#39;bool&#39;&quot;</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_rewrite_tuplets</span> <span class="o">=</span> <span class="n">rewrite_tuplets</span>

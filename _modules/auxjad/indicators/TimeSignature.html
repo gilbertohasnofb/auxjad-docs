@@ -5,17 +5,17 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>auxjad.indicators.TimeSignature &mdash; Auxjad 1.0.5 documentation</title>
+  <title>auxjad.indicators.TimeSignature &mdash; Auxjad 1.0.7 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=ffec0d92" />
-      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=9edc463e" />
 
   
     <link rel="canonical" href="https://gilbertohasnofb.github.io/auxjad-docs/_modules/auxjad/indicators/TimeSignature.html"/>
       <script src="../../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../../../_static/documentation_options.js?v=d55fa986"></script>
-      <script src="../../../_static/doctools.js?v=9bcbadda"></script>
-      <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../../_static/documentation_options.js?v=46dfa7f5"></script>
+      <script src="../../../_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
     <script src="../../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" /> 
@@ -31,7 +31,6 @@
           
           <a href="../../../index.html" class="icon icon-home">
             Auxjad
-              <img src="../../../_static/auxjad-logo.png" class="logo" alt="Logo"/>
           </a>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
@@ -82,10 +81,11 @@
 
 <div class="viewcode-block" id="TimeSignature.simplify_ratio">
 <a class="viewcode-back" href="../../../_api_members/auxjad.TimeSignature.simplify_ratio.html#auxjad.TimeSignature.simplify_ratio">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">simplify_ratio</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
-                       <span class="o">*</span><span class="p">,</span>
-                       <span class="n">min_denominator</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">4</span><span class="p">,</span>
-                       <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">simplify_ratio</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="o">*</span><span class="p">,</span>
+        <span class="n">min_denominator</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">4</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Simplifies the ratio of an |abjad.TimeSignature| according to a</span>
 <span class="sd">        minimum denominator value. Mutates the ratio in place and has no return</span>
 <span class="sd">        value. Note that Auxjad adds this function as an extension method to</span>
@@ -144,8 +144,11 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">_numerator</span> <span class="o">*=</span> <span class="mi">2</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_denominator</span> <span class="o">*=</span> <span class="mi">2</span>
         <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
-            <span class="k">if</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_numerator</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">_denominator</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">0</span>
-                    <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">_denominator</span> <span class="o">&gt;=</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">min_denominator</span><span class="p">):</span>
+            <span class="k">if</span> <span class="p">(</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_numerator</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">0</span>
+                <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">_denominator</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">0</span>
+                <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">_denominator</span> <span class="o">&gt;=</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">min_denominator</span>
+            <span class="p">):</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">_numerator</span> <span class="o">//=</span> <span class="mi">2</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">_denominator</span> <span class="o">//=</span> <span class="mi">2</span>
             <span class="k">else</span><span class="p">:</span>

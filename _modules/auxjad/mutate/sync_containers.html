@@ -5,17 +5,17 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>auxjad.mutate.sync_containers &mdash; Auxjad 1.0.5 documentation</title>
+  <title>auxjad.mutate.sync_containers &mdash; Auxjad 1.0.7 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=ffec0d92" />
-      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=9edc463e" />
 
   
     <link rel="canonical" href="https://gilbertohasnofb.github.io/auxjad-docs/_modules/auxjad/mutate/sync_containers.html"/>
       <script src="../../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../../../_static/documentation_options.js?v=d55fa986"></script>
-      <script src="../../../_static/doctools.js?v=9bcbadda"></script>
-      <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../../_static/documentation_options.js?v=46dfa7f5"></script>
+      <script src="../../../_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
     <script src="../../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" /> 
@@ -31,7 +31,6 @@
           
           <a href="../../../index.html" class="icon icon-home">
             Auxjad
-              <img src="../../../_static/auxjad-logo.png" class="logo" alt="Logo"/>
           </a>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
@@ -86,13 +85,15 @@
 
 <div class="viewcode-block" id="sync_containers">
 <a class="viewcode-back" href="../../../_api_members/auxjad.mutate.sync_containers.html#auxjad.mutate.sync_containers">[docs]</a>
-<span class="k">def</span><span class="w"> </span><span class="nf">sync_containers</span><span class="p">(</span><span class="n">containers</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">Iterable</span><span class="p">[</span><span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">],</span>
-                                      <span class="n">abjad</span><span class="o">.</span><span class="n">Score</span><span class="p">,</span>
-                                      <span class="p">],</span>
-                    <span class="o">*</span><span class="p">,</span>
-                    <span class="n">use_multimeasure_rests</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
-                    <span class="n">adjust_last_time_signature</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
-                    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">sync_containers</span><span class="p">(</span>
+    <span class="n">containers</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span>
+        <span class="n">Iterable</span><span class="p">[</span><span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">],</span>
+        <span class="n">abjad</span><span class="o">.</span><span class="n">Score</span><span class="p">,</span>
+    <span class="p">],</span>
+    <span class="o">*</span><span class="p">,</span>
+    <span class="n">use_multimeasure_rests</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+    <span class="n">adjust_last_time_signature</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Mutates two or more input containers in place and has no return value;</span>
 <span class="sd">    this function finds the longest container among the inputs and adds rests</span>
 <span class="sd">    to all the shorter ones, making them the same length. Input argument can</span>
@@ -882,29 +883,28 @@
 <span class="sd">        measure preceding a time signature change</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">containers</span><span class="p">,</span> <span class="p">(</span><span class="n">Iterable</span><span class="p">,</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Score</span><span class="p">)):</span>
-        <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;argument must be &#39;abjad.Score&#39; or iterable of &quot;</span>
-                        <span class="s2">&quot;&#39;abjad.Container&#39;s&quot;</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;argument must be &#39;abjad.Score&#39; or iterable of &#39;abjad.Container&#39;s&quot;</span><span class="p">)</span>
     <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">containers</span><span class="p">,</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Score</span><span class="p">):</span>
         <span class="n">containers</span> <span class="o">=</span> <span class="n">containers</span><span class="p">[:]</span>
     <span class="k">for</span> <span class="n">container</span> <span class="ow">in</span> <span class="n">containers</span><span class="p">:</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">container</span><span class="p">,</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">):</span>
-            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;argument must be &#39;abjad.Score&#39; or iterable of &quot;</span>
-                            <span class="s2">&quot;&#39;abjad.Container&#39;s&quot;</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;argument must be &#39;abjad.Score&#39; or iterable of &#39;abjad.Container&#39;s&quot;</span><span class="p">)</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="n">abjad</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="n">container</span><span class="p">)</span><span class="o">.</span><span class="n">leaves</span><span class="p">()</span><span class="o">.</span><span class="n">are_contiguous_logical_voice</span><span class="p">():</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;argument must each be contiguous logical voice&quot;</span><span class="p">)</span>
         <span class="k">try</span><span class="p">:</span>
             <span class="n">get</span><span class="o">.</span><span class="n">selection_is_full</span><span class="p">(</span><span class="n">container</span><span class="p">[:])</span>
         <span class="k">except</span> <span class="ne">ValueError</span> <span class="k">as</span> <span class="n">err</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;at least one &#39;container&#39; is malformed, with an &quot;</span>
-                             <span class="s2">&quot;underfull measure preceding a time signature &quot;</span>
-                             <span class="s2">&quot;change&quot;</span><span class="p">)</span> <span class="kn">from</span><span class="w"> </span><span class="nn">err</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                <span class="s2">&quot;at least one &#39;container&#39; is malformed, with an &quot;</span>
+                <span class="s2">&quot;underfull measure preceding a time signature &quot;</span>
+                <span class="s2">&quot;change&quot;</span>
+            <span class="p">)</span> <span class="kn">from</span><span class="w"> </span><span class="nn">err</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">use_multimeasure_rests</span><span class="p">,</span> <span class="nb">bool</span><span class="p">):</span>
         <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;&#39;use_multimeasure_rests&#39; must be &#39;bool&#39;&quot;</span><span class="p">)</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">adjust_last_time_signature</span><span class="p">,</span> <span class="nb">bool</span><span class="p">):</span>
         <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;&#39;adjust_last_time_signature&#39; must be &#39;bool&#39;&quot;</span><span class="p">)</span>
 
-    <span class="n">durations</span> <span class="o">=</span> <span class="p">[</span><span class="n">abjad</span><span class="o">.</span><span class="n">get</span><span class="o">.</span><span class="n">duration</span><span class="p">(</span><span class="n">container</span><span class="p">[:])</span> <span class="k">for</span> <span class="n">container</span>
-                 <span class="ow">in</span> <span class="n">containers</span><span class="p">]</span>
+    <span class="n">durations</span> <span class="o">=</span> <span class="p">[</span><span class="n">abjad</span><span class="o">.</span><span class="n">get</span><span class="o">.</span><span class="n">duration</span><span class="p">(</span><span class="n">container</span><span class="p">[:])</span> <span class="k">for</span> <span class="n">container</span> <span class="ow">in</span> <span class="n">containers</span><span class="p">]</span>
     <span class="n">max_duration</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">durations</span><span class="p">)</span>
     <span class="k">for</span> <span class="n">container</span><span class="p">,</span> <span class="n">duration</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">containers</span><span class="p">,</span> <span class="n">durations</span><span class="p">):</span>
         <span class="n">duration_difference</span> <span class="o">=</span> <span class="n">max_duration</span> <span class="o">-</span> <span class="n">duration</span>
@@ -912,16 +912,17 @@
             <span class="c1"># handling duration left in the last measure, if any</span>
             <span class="k">if</span> <span class="ow">not</span> <span class="n">get</span><span class="o">.</span><span class="n">selection_is_full</span><span class="p">(</span><span class="n">container</span><span class="p">[:]):</span>
                 <span class="n">duration_left</span> <span class="o">=</span> <span class="n">get</span><span class="o">.</span><span class="n">underfull_duration</span><span class="p">(</span><span class="n">container</span><span class="p">[:])</span>
-                <span class="n">underfull_rests_duration</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">duration_difference</span><span class="p">,</span>
-                                               <span class="n">duration_left</span><span class="p">,</span>
-                                               <span class="p">)</span>
-                <span class="n">underfull_rests</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">LeafMaker</span><span class="p">()(</span><span class="kc">None</span><span class="p">,</span>
-                                                    <span class="n">underfull_rests_duration</span><span class="p">,</span>
-                                                    <span class="p">)</span>
+                <span class="n">underfull_rests_duration</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span>
+                    <span class="n">duration_difference</span><span class="p">,</span>
+                    <span class="n">duration_left</span><span class="p">,</span>
+                <span class="p">)</span>
+                <span class="n">underfull_rests</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">LeafMaker</span><span class="p">()(</span>
+                    <span class="kc">None</span><span class="p">,</span>
+                    <span class="n">underfull_rests_duration</span><span class="p">,</span>
+                <span class="p">)</span>
                 <span class="n">duration_difference</span> <span class="o">-=</span> <span class="n">underfull_rests_duration</span>
                 <span class="n">container</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">underfull_rests</span><span class="p">)</span>
-                <span class="k">if</span> <span class="p">(</span><span class="n">duration_difference</span> <span class="o">==</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Duration</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
-                        <span class="ow">and</span> <span class="n">adjust_last_time_signature</span><span class="p">):</span>
+                <span class="k">if</span> <span class="n">duration_difference</span> <span class="o">==</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Duration</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="ow">and</span> <span class="n">adjust_last_time_signature</span><span class="p">:</span>
                     <span class="n">close_container</span><span class="p">(</span><span class="n">container</span><span class="p">)</span>
                 <span class="k">if</span> <span class="n">duration_difference</span> <span class="o">==</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Duration</span><span class="p">(</span><span class="mi">0</span><span class="p">):</span>
                     <span class="k">continue</span>
@@ -955,8 +956,7 @@
                 <span class="n">rests_to_multimeasure_rest</span><span class="p">(</span><span class="n">container</span><span class="p">[:])</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="c1"># closing longest container if necessary</span>
-            <span class="k">if</span> <span class="p">(</span><span class="n">adjust_last_time_signature</span>
-                    <span class="ow">and</span> <span class="ow">not</span> <span class="n">get</span><span class="o">.</span><span class="n">selection_is_full</span><span class="p">(</span><span class="n">container</span><span class="p">[:])):</span>
+            <span class="k">if</span> <span class="n">adjust_last_time_signature</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">get</span><span class="o">.</span><span class="n">selection_is_full</span><span class="p">(</span><span class="n">container</span><span class="p">[:]):</span>
                 <span class="n">close_container</span><span class="p">(</span><span class="n">container</span><span class="p">)</span></div>
 
 </pre></div>
