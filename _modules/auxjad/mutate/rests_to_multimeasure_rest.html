@@ -497,15 +497,12 @@
 
 <span class="sd">    ..  warning::</span>
 
-<span class="sd">        The input selection must be a contiguous logical voice. When dealing</span>
-<span class="sd">        with a container with multiple subcontainers (e.g. a score containing</span>
-<span class="sd">        multiple staves), the best approach is to cycle through these</span>
-<span class="sd">        subcontainers, applying this function to them individually.</span>
+<span class="sd">        When dealing with a container with multiple subcontainers (e.g. a score containing multiple</span>
+<span class="sd">        staves), the best approach is to cycle through these subcontainers, applying this function</span>
+<span class="sd">        to them individually.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">selection</span><span class="p">,</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Selection</span><span class="p">):</span>
         <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;argument must be &#39;abjad.Selection&#39;&quot;</span><span class="p">)</span>
-    <span class="k">if</span> <span class="ow">not</span> <span class="n">selection</span><span class="o">.</span><span class="n">leaves</span><span class="p">()</span><span class="o">.</span><span class="n">are_contiguous_logical_voice</span><span class="p">():</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;argument must be contiguous logical voice&quot;</span><span class="p">)</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">ignore_clefs</span><span class="p">,</span> <span class="nb">bool</span><span class="p">):</span>
         <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;&#39;ignore_clefs&#39; must be &#39;bool&#39;&quot;</span><span class="p">)</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">ignore_dynamics</span><span class="p">,</span> <span class="nb">bool</span><span class="p">):</span>

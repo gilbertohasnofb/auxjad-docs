@@ -889,8 +889,6 @@
     <span class="k">for</span> <span class="n">container</span> <span class="ow">in</span> <span class="n">containers</span><span class="p">:</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">container</span><span class="p">,</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">):</span>
             <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;argument must be &#39;abjad.Score&#39; or iterable of &#39;abjad.Container&#39;s&quot;</span><span class="p">)</span>
-        <span class="k">if</span> <span class="ow">not</span> <span class="n">abjad</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="n">container</span><span class="p">)</span><span class="o">.</span><span class="n">leaves</span><span class="p">()</span><span class="o">.</span><span class="n">are_contiguous_logical_voice</span><span class="p">():</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;argument must each be contiguous logical voice&quot;</span><span class="p">)</span>
         <span class="k">try</span><span class="p">:</span>
             <span class="n">get</span><span class="o">.</span><span class="n">selection_is_full</span><span class="p">(</span><span class="n">container</span><span class="p">[:])</span>
         <span class="k">except</span> <span class="ne">ValueError</span> <span class="k">as</span> <span class="n">err</span><span class="p">:</span>
