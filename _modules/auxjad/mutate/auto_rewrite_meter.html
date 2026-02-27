@@ -5,15 +5,15 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>auxjad.mutate.auto_rewrite_meter &mdash; Auxjad 1.0.7 documentation</title>
-      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=ffec0d92" />
+  <title>auxjad.mutate.auto_rewrite_meter &mdash; Auxjad 1.0.8 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=9ca51bb7" />
       <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=9edc463e" />
 
   
     <link rel="canonical" href="https://gilbertohasnofb.github.io/auxjad-docs/_modules/auxjad/mutate/auto_rewrite_meter.html"/>
       <script src="../../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../../../_static/documentation_options.js?v=46dfa7f5"></script>
+      <script src="../../../_static/documentation_options.js?v=aec50437"></script>
       <script src="../../../_static/doctools.js?v=fd6eb6e6"></script>
       <script src="../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
     <script src="../../../_static/js/theme.js"></script>
@@ -31,6 +31,7 @@
           
           <a href="../../../index.html" class="icon icon-home">
             Auxjad
+              <img src="../../../_static/auxjad-logo.png" class="logo" alt="Logo"/>
           </a>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
@@ -107,6 +108,9 @@
     <span class="n">fuse_across_groups_of_beats</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
     <span class="n">fuse_quadruple_meter</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
     <span class="n">fuse_triple_meter</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+    <span class="n">fuse_rests_across_groups_of_beats</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+    <span class="n">fuse_rests_in_quadruple_meter</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+    <span class="n">fuse_rests_in_triple_meter</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
     <span class="n">boundary_depth</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="n">maximum_dot_count</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="n">rewrite_tuplets</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
@@ -618,14 +622,14 @@
 
 <span class="sd">    ..  note::</span>
 
-<span class="sd">        This function also accepts the arguments ``boundary_depth``,</span>
-<span class="sd">        ``maximum_dot_count``, and ``rewrite_tuplets``, which are passed on to</span>
-<span class="sd">        |abjad.Meter.rewrite_meter()|, and ``fuse_across_groups_of_beats``,</span>
-<span class="sd">        ``fuse_quadruple_meter``, ``fuse_triple_meter``, and</span>
-<span class="sd">        ``split_quadruple_meter``, which are passed on to</span>
-<span class="sd">        |auxjad.mutate.prettify_rewrite_meter()|. ``merge_partial_tuplets``</span>
-<span class="sd">        is used to invoke |auxjad.mutate.merge_partial_tuplets()| See the</span>
-<span class="sd">        documentation of these functions for more details on these arguments.</span>
+<span class="sd">        This function also accepts the arguments ``boundary_depth``, ``maximum_dot_count``, and</span>
+<span class="sd">        ``rewrite_tuplets``, which are passed on to |abjad.Meter.rewrite_meter()|, and</span>
+<span class="sd">        ``fuse_across_groups_of_beats``, ``fuse_quadruple_meter``, ``fuse_triple_meter``,</span>
+<span class="sd">        ``fuse_rests_across_groups_of_beats``, ``fuse_rests_in_quadruple_meter``,</span>
+<span class="sd">        ``fuse_rests_in_triple_meterand``, and ``split_quadruple_meter``, which are passed on to</span>
+<span class="sd">        |auxjad.mutate.prettify_rewrite_meter()|. ``merge_partial_tuplets`` is used to invoke</span>
+<span class="sd">        |auxjad.mutate.merge_partial_tuplets()| See the documentation of these functions for more</span>
+<span class="sd">        details on these arguments.</span>
 
 <span class="sd">    ..  warning::</span>
 
@@ -642,7 +646,7 @@
 <span class="sd">        &gt;&gt;&gt; staff = abjad.Staff(r&quot;\time 4/4 c&#39;4. d&#39;4. e&#39;4 f&#39;8 g&#39;4 a&#39;4 b&#39;4.&quot;)</span>
 <span class="sd">        &gt;&gt;&gt; meter = abjad.Meter((4, 4))</span>
 <span class="sd">        &gt;&gt;&gt; for measure in abjad.select(staff[:]).group_by_measure():</span>
-<span class="sd">        ...     abjad.mutate.rewrite_meter(measure, meter, boundary_depth=1)</span>
+<span class="sd">        ...     abjad.Meter.rewrite_meter(measure, meter, boundary_depth=1)</span>
 <span class="sd">        &gt;&gt;&gt; for measure in abjad.select(staff[:]).group_by_measure():</span>
 <span class="sd">        ...     auxjad.mutate.prettify_rewrite_meter(measure, meter)</span>
 <span class="sd">        &gt;&gt;&gt; abjad.show(staff)</span>
@@ -729,6 +733,12 @@
         <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;&#39;fuse_quadruple_meter&#39; must be &#39;bool&#39;&quot;</span><span class="p">)</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">fuse_triple_meter</span><span class="p">,</span> <span class="nb">bool</span><span class="p">):</span>
         <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;&#39;fuse_triple_meter&#39; must be &#39;bool&#39;&quot;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">fuse_rests_across_groups_of_beats</span><span class="p">,</span> <span class="nb">bool</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;&#39;fuse_rests_across_groups_of_beats&#39; must be &#39;bool&#39;&quot;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">fuse_rests_in_quadruple_meter</span><span class="p">,</span> <span class="nb">bool</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;&#39;fuse_rests_in_quadruple_meter&#39; must be &#39;bool&#39;&quot;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">fuse_rests_in_triple_meter</span><span class="p">,</span> <span class="nb">bool</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;&#39;fuse_rests_in_triple_meter&#39; must be &#39;bool&#39;&quot;</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">boundary_depth</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">boundary_depth</span><span class="p">,</span> <span class="nb">int</span><span class="p">):</span>
             <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;&#39;boundary_depth&#39; must be &#39;int&#39;&quot;</span><span class="p">)</span>
@@ -774,6 +784,9 @@
                     <span class="n">fuse_across_groups_of_beats</span><span class="o">=</span><span class="n">fuse_across_groups_of_beats</span><span class="p">,</span>
                     <span class="n">fuse_quadruple_meter</span><span class="o">=</span><span class="n">fuse_quadruple_meter</span><span class="p">,</span>
                     <span class="n">fuse_triple_meter</span><span class="o">=</span><span class="n">fuse_triple_meter</span><span class="p">,</span>
+                    <span class="n">fuse_rests_across_groups_of_beats</span><span class="o">=</span><span class="n">fuse_rests_across_groups_of_beats</span><span class="p">,</span>
+                    <span class="n">fuse_rests_in_quadruple_meter</span><span class="o">=</span><span class="n">fuse_rests_in_quadruple_meter</span><span class="p">,</span>
+                    <span class="n">fuse_rests_in_triple_meter</span><span class="o">=</span><span class="n">fuse_rests_in_triple_meter</span><span class="p">,</span>
                     <span class="n">extract_trivial_tuplets</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
                     <span class="n">split_quadruple_meter</span><span class="o">=</span><span class="n">split_quadruple_meter</span><span class="p">,</span>
                 <span class="p">)</span>
@@ -784,6 +797,9 @@
                     <span class="n">fuse_across_groups_of_beats</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
                     <span class="n">fuse_quadruple_meter</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
                     <span class="n">fuse_triple_meter</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+                    <span class="n">fuse_rests_across_groups_of_beats</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+                    <span class="n">fuse_rests_in_quadruple_meter</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+                    <span class="n">fuse_rests_in_triple_meter</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
                     <span class="n">extract_trivial_tuplets</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
                     <span class="n">split_quadruple_meter</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
                 <span class="p">)</span></div>
