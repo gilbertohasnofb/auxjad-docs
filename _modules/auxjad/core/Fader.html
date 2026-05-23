@@ -5,7 +5,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>auxjad.core.Fader &mdash; Auxjad 1.0.8 documentation</title>
+  <title>auxjad.core.Fader &mdash; Auxjad 1.0.9 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=9ca51bb7" />
       <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=9edc463e" />
 
@@ -13,7 +13,7 @@
     <link rel="canonical" href="https://gilbertohasnofb.github.io/auxjad-docs/_modules/auxjad/core/Fader.html"/>
       <script src="../../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../../../_static/documentation_options.js?v=aec50437"></script>
+      <script src="../../../_static/documentation_options.js?v=0abd802e"></script>
       <script src="../../../_static/doctools.js?v=fd6eb6e6"></script>
       <script src="../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
     <script src="../../../_static/js/theme.js"></script>
@@ -219,15 +219,15 @@
 
 <span class="sd">    :attr:`mode`:</span>
 <span class="sd">        This class has two modes, set by the keyword argument :attr:`mode`. The</span>
-<span class="sd">        default mode is ``&#39;out&#39;`` (i.e. &#39;fade out mode&#39;), in which the fader</span>
+<span class="sd">        default mode is ``&quot;out&quot;`` (i.e. &#39;fade out mode&#39;), in which the fader</span>
 <span class="sd">        will gradually remove notes one by one (see examples above). When set</span>
-<span class="sd">        to ``&#39;in&#39;`` (i.e. &#39;fade in mode&#39;), the fader will start with an empty</span>
+<span class="sd">        to ``&quot;in&quot;`` (i.e. &#39;fade in mode&#39;), the fader will start with an empty</span>
 <span class="sd">        container with the same length and time signature  structure as the</span>
 <span class="sd">        input music and will gradually add the original notes one by one.</span>
 
 <span class="sd">        &gt;&gt;&gt; container = abjad.Container(r&quot;c&#39;4 ~ c&#39;16 d&#39;8. e&#39;8 f&#39;4.&quot;)</span>
 <span class="sd">        &gt;&gt;&gt; fader = auxjad.Fader(container,</span>
-<span class="sd">        ...                      mode=&#39;in&#39;,</span>
+<span class="sd">        ...                      mode=&quot;in&quot;,</span>
 <span class="sd">        ...                      )</span>
 <span class="sd">        &gt;&gt;&gt; notes = fader()</span>
 <span class="sd">        &gt;&gt;&gt; staff = abjad.Staff(notes)</span>
@@ -334,7 +334,7 @@
 
 <span class="sd">        ..  figure:: ../_images/Fader-aqq1docvezb.png</span>
 
-<span class="sd">        &gt;&gt;&gt; fader.mode = &#39;in&#39;</span>
+<span class="sd">        &gt;&gt;&gt; fader.mode = &quot;in&quot;</span>
 <span class="sd">        &gt;&gt;&gt; notes = fader()</span>
 <span class="sd">        &gt;&gt;&gt; staff = abjad.Staff(notes)</span>
 <span class="sd">        &gt;&gt;&gt; abjad.show(staff)</span>
@@ -370,15 +370,15 @@
 <span class="sd">        ..  figure:: ../_images/Fader-2i22so5t5pf.png</span>
 
 <span class="sd">    :attr:`include_empty_measures`:</span>
-<span class="sd">        When :attr:`mode` is set to ``&#39;out&#39;``, the process will end on an empty</span>
-<span class="sd">        measure and when it is set to ``&#39;in&#39;``, it will start on an empty</span>
+<span class="sd">        When :attr:`mode` is set to ``&quot;out&quot;``, the process will end on an empty</span>
+<span class="sd">        measure and when it is set to ``&quot;in&quot;``, it will start on an empty</span>
 <span class="sd">        measure. Set :attr:`include_empty_measures` to ``False`` to exclude the</span>
 <span class="sd">        empty measures (default is ``True``). This can be used in conjunction</span>
 <span class="sd">        with  :attr:`process_on_first_call`.</span>
 
 <span class="sd">        &gt;&gt;&gt; container = abjad.Container(r&quot;c&#39;4 d&#39;4 e&#39;2&quot;)</span>
 <span class="sd">        &gt;&gt;&gt; fader = auxjad.Fader(container,</span>
-<span class="sd">        ...                      mode=&#39;in&#39;,</span>
+<span class="sd">        ...                      mode=&quot;in&quot;,</span>
 <span class="sd">        ...                      include_empty_measures=False,</span>
 <span class="sd">        ...                      )</span>
 <span class="sd">        &gt;&gt;&gt; staff = abjad.Staff(fader.output_all())</span>
@@ -403,7 +403,7 @@
 
 <span class="sd">        &gt;&gt;&gt; container = abjad.Container(r&quot;c&#39;4 d&#39;4 e&#39;2&quot;)</span>
 <span class="sd">        &gt;&gt;&gt; fader = auxjad.Fader(container,</span>
-<span class="sd">        ...                      mode=&#39;out&#39;,</span>
+<span class="sd">        ...                      mode=&quot;out&quot;,</span>
 <span class="sd">        ...                      include_empty_measures=False,</span>
 <span class="sd">        ...                      )</span>
 <span class="sd">        &gt;&gt;&gt; staff = abjad.Staff(fader.output_all())</span>
@@ -486,8 +486,8 @@
 <span class="sd">        to disable this behaviour. It is possible to set an initial mask for</span>
 <span class="sd">        the notes using :attr:`mask`, which should be a :obj:`list` of the same</span>
 <span class="sd">        length as the number of notes in the input container. When :attr:`mode`</span>
-<span class="sd">        is set to ``&#39;out&#39;``, the mask is initialised with ``1``&#39;s, and when it</span>
-<span class="sd">        is set to ``&#39;in&#39;``, it is initialised with ``0``&#39;s. Change it to a mix</span>
+<span class="sd">        is set to ``&quot;out&quot;``, the mask is initialised with ``1``&#39;s, and when it</span>
+<span class="sd">        is set to ``&quot;in&quot;``, it is initialised with ``0``&#39;s. Change it to a mix</span>
 <span class="sd">        of ``1``&#39;s and ``0``&#39;s to start the process with some specific notes</span>
 <span class="sd">        already hidden or present. The properties :attr:`boundary_depth`,</span>
 <span class="sd">        :attr:`maximum_dot_count`, and :attr:`rewrite_tuplets` are passed as</span>
@@ -496,7 +496,7 @@
 
 <span class="sd">        &gt;&gt;&gt; container = abjad.Container(r&quot;c&#39;4 d&#39;2 e&#39;4 f&#39;2 ~ f&#39;8 g&#39;4.&quot;)</span>
 <span class="sd">        &gt;&gt;&gt; fader = auxjad.Fader(container,</span>
-<span class="sd">        ...                      mode=&#39;in&#39;,</span>
+<span class="sd">        ...                      mode=&quot;in&quot;,</span>
 <span class="sd">        ...                      max_steps=2,</span>
 <span class="sd">        ...                      repetition_chance=0.7,</span>
 <span class="sd">        ...                      disable_rewrite_meter=True,</span>
@@ -510,7 +510,7 @@
 <span class="sd">        ...                      include_empty_measures=False,</span>
 <span class="sd">        ...                      )</span>
 <span class="sd">        &gt;&gt;&gt; fader.mode</span>
-<span class="sd">        &#39;in&#39;</span>
+<span class="sd">        &quot;in&quot;</span>
 <span class="sd">        &gt;&gt;&gt; fader.max_steps</span>
 <span class="sd">        2</span>
 <span class="sd">        &gt;&gt;&gt; fader.repetition_chance</span>
@@ -536,7 +536,7 @@
 
 <span class="sd">        Use the properties below to change these values after initialisation.</span>
 
-<span class="sd">        &gt;&gt;&gt; fader.mode = &#39;out&#39;</span>
+<span class="sd">        &gt;&gt;&gt; fader.mode = &quot;out&quot;</span>
 <span class="sd">        &gt;&gt;&gt; fader.max_steps = 1</span>
 <span class="sd">        &gt;&gt;&gt; fader.repetition_chance = 0.23</span>
 <span class="sd">        &gt;&gt;&gt; fader.disable_rewrite_meter = False</span>
@@ -549,7 +549,7 @@
 <span class="sd">        &gt;&gt;&gt; fader.process_on_first_call = False</span>
 <span class="sd">        &gt;&gt;&gt; fader.include_empty_measures = True</span>
 <span class="sd">        &gt;&gt;&gt; fader.mode</span>
-<span class="sd">        &#39;out&#39;</span>
+<span class="sd">        &quot;out&quot;</span>
 <span class="sd">        &gt;&gt;&gt; fader.max_steps</span>
 <span class="sd">        1</span>
 <span class="sd">        &gt;&gt;&gt; fader.repetition_chance</span>
@@ -906,8 +906,8 @@
 <span class="sd">        The property :attr:`mask` is used to represent whether each note is</span>
 <span class="sd">        hidden or present. It is a :obj:`list` of the same length as the number</span>
 <span class="sd">        of notes in the input container (use the :func:`len()` function to read</span>
-<span class="sd">        that value). When :attr:`mode` is set to ``&#39;out&#39;``, the mask is</span>
-<span class="sd">        initialised with ``1``&#39;s, and when it is set to ``&#39;in&#39;``, it is</span>
+<span class="sd">        that value). When :attr:`mode` is set to ``&quot;out&quot;``, the mask is</span>
+<span class="sd">        initialised with ``1``&#39;s, and when it is set to ``&quot;in&quot;``, it is</span>
 <span class="sd">        initialised with ``0``&#39;s. Change it to a mix of ``1``&#39;s and ``0``&#39;s to</span>
 <span class="sd">        start the process with some notes already hidden or present. Use the</span>
 <span class="sd">        method :meth:`reset` to reset it back to its default value (depending</span>
@@ -918,7 +918,7 @@
 <span class="sd">        &gt;&gt;&gt; fader.mask</span>
 <span class="sd">        [1, 1, 1, 1, 1]</span>
 <span class="sd">        &gt;&gt;&gt; fader = auxjad.Fader(container,</span>
-<span class="sd">        ...                      mode=&#39;in&#39;,</span>
+<span class="sd">        ...                      mode=&quot;in&quot;,</span>
 <span class="sd">        ...                      )</span>
 <span class="sd">        &gt;&gt;&gt; fader.mask</span>
 <span class="sd">        [0, 0, 0, 0, 0]</span>
@@ -1449,7 +1449,7 @@
 <span class="sd">        This class can handle time signature changes.</span>
 
 <span class="sd">        &gt;&gt;&gt; container = abjad.Container(r&quot;\time 4/4 c&#39;2( d&#39;2 \time 3/4 e&#39;2.)&quot;)</span>
-<span class="sd">        &gt;&gt;&gt; fader = auxjad.Fader(container, mode=&#39;in&#39;)</span>
+<span class="sd">        &gt;&gt;&gt; fader = auxjad.Fader(container, mode=&quot;in&quot;)</span>
 <span class="sd">        &gt;&gt;&gt; notes = fader.output_all()</span>
 <span class="sd">        &gt;&gt;&gt; staff = abjad.Staff(notes)</span>
 <span class="sd">        &gt;&gt;&gt; abjad.show(staff)</span>
@@ -1887,7 +1887,7 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">mode</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Mode of fading, must be either ``&#39;in&#39;`` or ``&#39;out&#39;``.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Mode of fading, must be either ``&quot;in&quot;`` or ``&quot;out&quot;``.&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_mode</span>
 
     <span class="nd">@mode</span><span class="o">.</span><span class="n">setter</span>
@@ -2173,9 +2173,9 @@
     <span class="nd">@property</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">_done</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
 <span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;:obj:`bool` indicating whether the process is done, which is when</span>
-<span class="sd">        the mask is filled with ``1``&#39;s with :attr:`mode` set to ``&#39;in&#39;`` or</span>
+<span class="sd">        the mask is filled with ``1``&#39;s with :attr:`mode` set to ``&quot;in&quot;`` or</span>
 <span class="sd">        when the mask is filled with ``0``&#39;s with :attr:`mode` set to</span>
-<span class="sd">        ``&#39;out&#39;``.</span>
+<span class="sd">        ``&quot;out&quot;``.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_mode</span> <span class="o">==</span> <span class="s2">&quot;out&quot;</span><span class="p">:</span>
             <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_include_empty_measures</span><span class="p">:</span>

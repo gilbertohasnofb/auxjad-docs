@@ -5,7 +5,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>auxjad.core.ListLooper &mdash; Auxjad 1.0.8 documentation</title>
+  <title>auxjad.core.ListLooper &mdash; Auxjad 1.0.9 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=9ca51bb7" />
       <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=9edc463e" />
 
@@ -13,7 +13,7 @@
     <link rel="canonical" href="https://gilbertohasnofb.github.io/auxjad-docs/_modules/auxjad/core/ListLooper.html"/>
       <script src="../../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../../../_static/documentation_options.js?v=aec50437"></script>
+      <script src="../../../_static/documentation_options.js?v=0abd802e"></script>
       <script src="../../../_static/doctools.js?v=fd6eb6e6"></script>
       <script src="../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
     <script src="../../../_static/js/theme.js"></script>
@@ -110,18 +110,18 @@
 <span class="sd">        process. Each call of the object will move the window forwards and</span>
 <span class="sd">        output the result.</span>
 
-<span class="sd">        &gt;&gt;&gt; input_list = [&#39;A&#39;, &#39;B&#39;, &#39;C&#39;, &#39;D&#39;, &#39;E&#39;, &#39;F&#39;]</span>
+<span class="sd">        &gt;&gt;&gt; input_list = [&quot;A&quot;, &quot;B&quot;, &quot;C&quot;, &quot;D&quot;, &quot;E&quot;, &quot;F&quot;]</span>
 <span class="sd">        &gt;&gt;&gt; looper = auxjad.ListLooper(input_list, window_size=3)</span>
 <span class="sd">        &gt;&gt;&gt; looper()</span>
-<span class="sd">        [&#39;A&#39;, &#39;B&#39;, &#39;C&#39;]</span>
+<span class="sd">        [&quot;A&quot;, &quot;B&quot;, &quot;C&quot;]</span>
 <span class="sd">        &gt;&gt;&gt; looper()</span>
-<span class="sd">        [&#39;B&#39;, &#39;C&#39;, &#39;D&#39;]</span>
+<span class="sd">        [&quot;B&quot;, &quot;C&quot;, &quot;D&quot;]</span>
 
 <span class="sd">        The property :attr:`current_window` can be used to access the current</span>
 <span class="sd">        window without moving the head forwards.</span>
 
 <span class="sd">        &gt;&gt;&gt; looper.current_window</span>
-<span class="sd">        [&#39;B&#39;, &#39;C&#39;, &#39;D&#39;]</span>
+<span class="sd">        [&quot;B&quot;, &quot;C&quot;, &quot;D&quot;]</span>
 
 <span class="sd">    :attr:`process_on_first_call`:</span>
 <span class="sd">        The very first call will output the input :obj:`list` without</span>
@@ -129,30 +129,30 @@
 <span class="sd">        move on the very first call, initialise the class with the keyword</span>
 <span class="sd">        argument :attr:`process_on_first_call` set to ``True``.</span>
 
-<span class="sd">        &gt;&gt;&gt; input_list = [&#39;A&#39;, &#39;B&#39;, &#39;C&#39;, &#39;D&#39;, &#39;E&#39;, &#39;F&#39;]</span>
+<span class="sd">        &gt;&gt;&gt; input_list = [&quot;A&quot;, &quot;B&quot;, &quot;C&quot;, &quot;D&quot;, &quot;E&quot;, &quot;F&quot;]</span>
 <span class="sd">        &gt;&gt;&gt; looper = auxjad.ListLooper(input_list,</span>
 <span class="sd">        ...                            window_size=3,</span>
 <span class="sd">        ...                            process_on_first_call=True,</span>
 <span class="sd">        ...                            )</span>
 <span class="sd">        &gt;&gt;&gt; looper()</span>
-<span class="sd">        [&#39;B&#39;, &#39;C&#39;, &#39;D&#39;]</span>
+<span class="sd">        [&quot;B&quot;, &quot;C&quot;, &quot;D&quot;]</span>
 
 <span class="sd">    Using as iterator:</span>
 <span class="sd">        The instances of this class can also be used as an iterator, which can</span>
 <span class="sd">        then be used in a for loop to exhaust all windows.</span>
 
-<span class="sd">        &gt;&gt;&gt; input_list = [&#39;A&#39;, &#39;B&#39;, &#39;C&#39;, &#39;D&#39;, &#39;E&#39;, &#39;F&#39;]</span>
+<span class="sd">        &gt;&gt;&gt; input_list = [&quot;A&quot;, &quot;B&quot;, &quot;C&quot;, &quot;D&quot;, &quot;E&quot;, &quot;F&quot;]</span>
 <span class="sd">        &gt;&gt;&gt; looper = auxjad.ListLooper(input_list,</span>
 <span class="sd">        ...                            window_size=3,</span>
 <span class="sd">        ...                            )</span>
 <span class="sd">        &gt;&gt;&gt; for window in looper:</span>
 <span class="sd">        ...     print(window)</span>
-<span class="sd">        [&#39;A&#39;, &#39;B&#39;, &#39;C&#39;]</span>
-<span class="sd">        [&#39;B&#39;, &#39;C&#39;, &#39;D&#39;]</span>
-<span class="sd">        [&#39;C&#39;, &#39;D&#39;, &#39;E&#39;]</span>
-<span class="sd">        [&#39;D&#39;, &#39;E&#39;, &#39;F&#39;]</span>
-<span class="sd">        [&#39;E&#39;, &#39;F&#39;]</span>
-<span class="sd">        [&#39;F&#39;]</span>
+<span class="sd">        [&quot;A&quot;, &quot;B&quot;, &quot;C&quot;]</span>
+<span class="sd">        [&quot;B&quot;, &quot;C&quot;, &quot;D&quot;]</span>
+<span class="sd">        [&quot;C&quot;, &quot;D&quot;, &quot;E&quot;]</span>
+<span class="sd">        [&quot;D&quot;, &quot;E&quot;, &quot;F&quot;]</span>
+<span class="sd">        [&quot;E&quot;, &quot;F&quot;]</span>
+<span class="sd">        [&quot;F&quot;]</span>
 
 <span class="sd">    Arguments and properties:</span>
 <span class="sd">        This class can take many optional keyword arguments during its</span>
@@ -176,7 +176,7 @@
 <span class="sd">        set :attr:`end_with_max_n_elements` to ``True`` to end the process when</span>
 <span class="sd">        the final window has the maximum number of elements.</span>
 
-<span class="sd">        &gt;&gt;&gt; input_list = [&#39;A&#39;, &#39;B&#39;, &#39;C&#39;, &#39;D&#39;, &#39;E&#39;, &#39;F&#39;]</span>
+<span class="sd">        &gt;&gt;&gt; input_list = [&quot;A&quot;, &quot;B&quot;, &quot;C&quot;, &quot;D&quot;, &quot;E&quot;, &quot;F&quot;]</span>
 <span class="sd">        &gt;&gt;&gt; looper = auxjad.ListLooper(input_list,</span>
 <span class="sd">        ...                            window_size=3,</span>
 <span class="sd">        ...                            step_size=1,</span>
@@ -238,14 +238,14 @@
 <span class="sd">        in the very first call (since it will not be able to move backwards</span>
 <span class="sd">        from that position).</span>
 
-<span class="sd">        &gt;&gt;&gt; input_list = [&#39;A&#39;, &#39;B&#39;, &#39;C&#39;, &#39;D&#39;]</span>
+<span class="sd">        &gt;&gt;&gt; input_list = [&quot;A&quot;, &quot;B&quot;, &quot;C&quot;, &quot;D&quot;]</span>
 <span class="sd">        &gt;&gt;&gt; looper = auxjad.ListLooper(input_list,</span>
 <span class="sd">        ...                            window_size=2,</span>
 <span class="sd">        ...                            head_position=2,</span>
 <span class="sd">        ...                            forward_bias=0.0,</span>
 <span class="sd">        ...                            )</span>
 <span class="sd">        &gt;&gt;&gt; looper.output_all()</span>
-<span class="sd">        [&#39;C&#39;, &#39;D&#39;, &#39;B&#39;, &#39;C&#39;, &#39;A&#39;, &#39;B&#39;]</span>
+<span class="sd">        [&quot;C&quot;, &quot;D&quot;, &quot;B&quot;, &quot;C&quot;, &quot;A&quot;, &quot;B&quot;]</span>
 
 <span class="sd">    :attr:`forward_bias` between ``0.0`` and ``1.0``:</span>
 <span class="sd">        Setingt :attr:`forward_bias` to a value in between ``0.0`` and ``1.0``</span>
@@ -255,34 +255,34 @@
 <span class="sd">        looper attempts to move backwards after reaching the head position</span>
 <span class="sd">        ``0``.</span>
 
-<span class="sd">        &gt;&gt;&gt; input_list = [&#39;A&#39;, &#39;B&#39;, &#39;C&#39;, &#39;D&#39;, &#39;E&#39;, &#39;F&#39;, &#39;G&#39;, &#39;H&#39;]</span>
+<span class="sd">        &gt;&gt;&gt; input_list = [&quot;A&quot;, &quot;B&quot;, &quot;C&quot;, &quot;D&quot;, &quot;E&quot;, &quot;F&quot;, &quot;G&quot;, &quot;H&quot;]</span>
 <span class="sd">        &gt;&gt;&gt; looper = auxjad.ListLooper(input_list,</span>
 <span class="sd">        ...                            window_size=2,</span>
 <span class="sd">        ...                            head_position=4,</span>
 <span class="sd">        ...                            forward_bias=0.5,</span>
 <span class="sd">        ...                            )</span>
 <span class="sd">        &gt;&gt;&gt; looper.output_n(4)</span>
-<span class="sd">        [&#39;E&#39;, &#39;F&#39;, &#39;D&#39;, &#39;E&#39;, &#39;C&#39;, &#39;D&#39;, &#39;B&#39;, &#39;C&#39;]</span>
+<span class="sd">        [&quot;E&quot;, &quot;F&quot;, &quot;D&quot;, &quot;E&quot;, &quot;C&quot;, &quot;D&quot;, &quot;B&quot;, &quot;C&quot;]</span>
 
 <span class="sd">    :attr:`max_steps`:</span>
 <span class="sd">        Setting the keyword argument :attr:`max_steps` to a value larger than</span>
 <span class="sd">        ``1`` will result in a random number of steps (between ``1`` and</span>
 <span class="sd">        :attr:`max_steps`) being applied at each call.</span>
 
-<span class="sd">        &gt;&gt;&gt; input_list = [&#39;A&#39;, &#39;B&#39;, &#39;C&#39;, &#39;D&#39;, &#39;E&#39;, &#39;F&#39;, &#39;G&#39;, &#39;H&#39;]</span>
+<span class="sd">        &gt;&gt;&gt; input_list = [&quot;A&quot;, &quot;B&quot;, &quot;C&quot;, &quot;D&quot;, &quot;E&quot;, &quot;F&quot;, &quot;G&quot;, &quot;H&quot;]</span>
 <span class="sd">        &gt;&gt;&gt; looper = auxjad.ListLooper(input_list,</span>
 <span class="sd">        ...                            window_size=2,</span>
 <span class="sd">        ...                            head_position=2,</span>
 <span class="sd">        ...                            max_steps=4,</span>
 <span class="sd">        ...                            )</span>
 <span class="sd">        &gt;&gt;&gt; looper.output_n(4)</span>
-<span class="sd">        [&#39;C&#39;, &#39;D&#39;, &#39;D&#39;, &#39;E&#39;, &#39;E&#39;, &#39;F&#39;, &#39;H&#39;]</span>
+<span class="sd">        [&quot;C&quot;, &quot;D&quot;, &quot;D&quot;, &quot;E&quot;, &quot;E&quot;, &quot;F&quot;, &quot;H&quot;]</span>
 
 <span class="sd">    :func:`len()`:</span>
 <span class="sd">        The function :func:`len()` can be used to get the total number of</span>
 <span class="sd">        elements in the container.</span>
 
-<span class="sd">        &gt;&gt;&gt; input_list = [&#39;A&#39;, &#39;B&#39;, &#39;C&#39;, &#39;D&#39;, &#39;E&#39;, &#39;F&#39;]</span>
+<span class="sd">        &gt;&gt;&gt; input_list = [&quot;A&quot;, &quot;B&quot;, &quot;C&quot;, &quot;D&quot;, &quot;E&quot;, &quot;F&quot;]</span>
 <span class="sd">        &gt;&gt;&gt; looper = auxjad.ListLooper(input_list, window_size=3)</span>
 <span class="sd">        &gt;&gt;&gt; len(looper)</span>
 <span class="sd">        6</span>
@@ -292,20 +292,20 @@
 <span class="sd">        from the initial head position until the process outputs the single</span>
 <span class="sd">        last element, use the method :meth:`output_all`.</span>
 
-<span class="sd">        &gt;&gt;&gt; input_list = [&#39;A&#39;, &#39;B&#39;, &#39;C&#39;, &#39;D&#39;]</span>
+<span class="sd">        &gt;&gt;&gt; input_list = [&quot;A&quot;, &quot;B&quot;, &quot;C&quot;, &quot;D&quot;]</span>
 <span class="sd">        &gt;&gt;&gt; looper = auxjad.ListLooper(input_list, window_size=3)</span>
 <span class="sd">        &gt;&gt;&gt; looper.output_all()</span>
-<span class="sd">        [&#39;A&#39;, &#39;B&#39;, &#39;C&#39;, &#39;B&#39;, &#39;C&#39;, &#39;D&#39;, &#39;C&#39;, &#39;D&#39;, &#39;D&#39;]</span>
+<span class="sd">        [&quot;A&quot;, &quot;B&quot;, &quot;C&quot;, &quot;B&quot;, &quot;C&quot;, &quot;D&quot;, &quot;C&quot;, &quot;D&quot;, &quot;D&quot;]</span>
 
 <span class="sd">    :meth:`output_n`:</span>
 <span class="sd">        To run through just part of the process and output it as a single</span>
 <span class="sd">        :obj:`list`, starting from the initial head position, use the method</span>
 <span class="sd">        :meth:`output_n` and pass the number of iterations as argument.</span>
 
-<span class="sd">        &gt;&gt;&gt; input_list = [&#39;A&#39;, &#39;B&#39;, &#39;C&#39;, &#39;D&#39;]</span>
+<span class="sd">        &gt;&gt;&gt; input_list = [&quot;A&quot;, &quot;B&quot;, &quot;C&quot;, &quot;D&quot;]</span>
 <span class="sd">        &gt;&gt;&gt; looper = auxjad.ListLooper(input_list, window_size=3)</span>
 <span class="sd">        &gt;&gt;&gt; looper.output_n(2)</span>
-<span class="sd">        [&#39;A&#39;, &#39;B&#39;, &#39;C&#39;, &#39;B&#39;, &#39;C&#39;, &#39;D&#39;]</span>
+<span class="sd">        [&quot;A&quot;, &quot;B&quot;, &quot;C&quot;, &quot;B&quot;, &quot;C&quot;, &quot;D&quot;]</span>
 
 <span class="sd">    :attr:`end_with_max_n_elements`:</span>
 <span class="sd">        When ``True``, the last bar in the output will contain the maximum</span>
@@ -322,17 +322,17 @@
 
 <span class="sd">        Compare the two examples below:</span>
 
-<span class="sd">        &gt;&gt;&gt; input_list = [&#39;A&#39;, &#39;B&#39;, &#39;C&#39;, &#39;D&#39;]</span>
+<span class="sd">        &gt;&gt;&gt; input_list = [&quot;A&quot;, &quot;B&quot;, &quot;C&quot;, &quot;D&quot;]</span>
 <span class="sd">        &gt;&gt;&gt; looper = auxjad.ListLooper(input_list, window_size=3)</span>
 <span class="sd">        &gt;&gt;&gt; looper.output_all()</span>
-<span class="sd">        [&#39;A&#39;, &#39;B&#39;, &#39;C&#39;, &#39;B&#39;, &#39;C&#39;, &#39;D&#39;, &#39;C&#39;, &#39;D&#39;, &#39;D&#39;]</span>
-<span class="sd">        &gt;&gt;&gt; input_list = [&#39;A&#39;, &#39;B&#39;, &#39;C&#39;, &#39;D&#39;]</span>
+<span class="sd">        [&quot;A&quot;, &quot;B&quot;, &quot;C&quot;, &quot;B&quot;, &quot;C&quot;, &quot;D&quot;, &quot;C&quot;, &quot;D&quot;, &quot;D&quot;]</span>
+<span class="sd">        &gt;&gt;&gt; input_list = [&quot;A&quot;, &quot;B&quot;, &quot;C&quot;, &quot;D&quot;]</span>
 <span class="sd">        &gt;&gt;&gt; looper = auxjad.ListLooper(input_list,</span>
 <span class="sd">        ...                            window_size=3,</span>
 <span class="sd">        ...                            end_with_max_n_elements=True,</span>
 <span class="sd">        ...                            )</span>
 <span class="sd">        &gt;&gt;&gt; looper.output_all()</span>
-<span class="sd">        [&#39;A&#39;, &#39;B&#39;, &#39;C&#39;, &#39;B&#39;, &#39;C&#39;, &#39;D&#39;]</span>
+<span class="sd">        [&quot;A&quot;, &quot;B&quot;, &quot;C&quot;, &quot;B&quot;, &quot;C&quot;, &quot;D&quot;]</span>
 
 <span class="sd">    :attr:`window_size`:</span>
 <span class="sd">        To change the size of the looping window after instantiation, use the</span>
@@ -343,13 +343,13 @@
 <span class="sd">        the element in the next position, thus outputting the second, third,</span>
 <span class="sd">        fourth, and fifth elements.</span>
 
-<span class="sd">        &gt;&gt;&gt; input_list = [&#39;A&#39;, &#39;B&#39;, &#39;C&#39;, &#39;D&#39;, &#39;E&#39;, &#39;F&#39;]</span>
+<span class="sd">        &gt;&gt;&gt; input_list = [&quot;A&quot;, &quot;B&quot;, &quot;C&quot;, &quot;D&quot;, &quot;E&quot;, &quot;F&quot;]</span>
 <span class="sd">        &gt;&gt;&gt; looper = auxjad.ListLooper(input_list, window_size=3)</span>
 <span class="sd">        &gt;&gt;&gt; looper()</span>
-<span class="sd">        [&#39;A&#39;, &#39;B&#39;, &#39;C&#39;]</span>
+<span class="sd">        [&quot;A&quot;, &quot;B&quot;, &quot;C&quot;]</span>
 <span class="sd">        &gt;&gt;&gt; looper.window_size = 4</span>
 <span class="sd">        &gt;&gt;&gt; looper()</span>
-<span class="sd">        [&#39;B&#39;, &#39;C&#39;, &#39;D&#39;, &#39;E&#39;]</span>
+<span class="sd">        [&quot;B&quot;, &quot;C&quot;, &quot;D&quot;, &quot;E&quot;]</span>
 
 <span class="sd">    :attr:`contents`:</span>
 <span class="sd">        Use the :attr:`contents` property to read as well as overwrite the</span>
@@ -357,16 +357,16 @@
 <span class="sd">        remain on its previous value and must be reset to ``0`` if that&#39;s</span>
 <span class="sd">        required.</span>
 
-<span class="sd">        &gt;&gt;&gt; input_list = [&#39;A&#39;, &#39;B&#39;, &#39;C&#39;, &#39;D&#39;, &#39;E&#39;, &#39;F&#39;]</span>
+<span class="sd">        &gt;&gt;&gt; input_list = [&quot;A&quot;, &quot;B&quot;, &quot;C&quot;, &quot;D&quot;, &quot;E&quot;, &quot;F&quot;]</span>
 <span class="sd">        &gt;&gt;&gt; looper = auxjad.ListLooper(input_list,</span>
 <span class="sd">        ...                            window_size=3,</span>
 <span class="sd">        ...                            )</span>
 <span class="sd">        &gt;&gt;&gt; looper.contents</span>
-<span class="sd">        [&#39;A&#39;, &#39;B&#39;, &#39;C&#39;, &#39;D&#39;, &#39;E&#39;, &#39;F&#39;]</span>
+<span class="sd">        [&quot;A&quot;, &quot;B&quot;, &quot;C&quot;, &quot;D&quot;, &quot;E&quot;, &quot;F&quot;]</span>
 <span class="sd">        &gt;&gt;&gt; looper()</span>
-<span class="sd">        [&#39;A&#39;, &#39;B&#39;, &#39;C&#39;]</span>
+<span class="sd">        [&quot;A&quot;, &quot;B&quot;, &quot;C&quot;]</span>
 <span class="sd">        &gt;&gt;&gt; looper()</span>
-<span class="sd">        [&#39;B&#39;, &#39;C&#39;, &#39;D&#39;]</span>
+<span class="sd">        [&quot;B&quot;, &quot;C&quot;, &quot;D&quot;]</span>
 <span class="sd">        &gt;&gt;&gt; looper.contents = [0, 1, 2, 3, 4]</span>
 <span class="sd">        &gt;&gt;&gt; looper.contents</span>
 <span class="sd">        [0, 1, 2, 3, 4]</span>
@@ -379,10 +379,10 @@
 <span class="sd">    Types in the input list:</span>
 <span class="sd">        The input :obj:`list` can contain any types of elements:</span>
 
-<span class="sd">        &gt;&gt;&gt; input_list = [123, &#39;foo&#39;, (3, 4), 3.14]</span>
+<span class="sd">        &gt;&gt;&gt; input_list = [123, &quot;foo&quot;, (3, 4), 3.14]</span>
 <span class="sd">        &gt;&gt;&gt; looper = auxjad.ListLooper(input_list, window_size=3)</span>
 <span class="sd">        &gt;&gt;&gt; looper()</span>
-<span class="sd">        [123, &#39;foo&#39;, (3, 4)]</span>
+<span class="sd">        [123, &quot;foo&quot;, (3, 4)]</span>
 
 <span class="sd">        This also include Abjad&#39;s types. Abjad&#39;s exclusive membership</span>
 <span class="sd">        requirement is respected since each call returns a</span>

@@ -77,7 +77,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../api/api-score.html">score</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../api/api-select.html">select</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../api/api-spanners.html">spanners</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../api/api-utilities.html">utilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/api-utils.html">utils</a></li>
 </ul>
 </li>
 </ul>
@@ -125,9 +125,9 @@ Music 5(2). pp. 63–82.</p>
 <dl>
 <dt>Basic usage:</dt><dd><p>The selector should be initialised with a <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.14)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code></a>. The elements of
 this <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.14)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code></a> can be of any type.</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">selector</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">TenneySelector</span><span class="p">([</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="s1">&#39;B&#39;</span><span class="p">,</span> <span class="s1">&#39;C&#39;</span><span class="p">,</span> <span class="s1">&#39;D&#39;</span><span class="p">,</span> <span class="s1">&#39;E&#39;</span><span class="p">,</span> <span class="s1">&#39;F&#39;</span><span class="p">])</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">selector</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">TenneySelector</span><span class="p">([</span><span class="s2">&quot;A&quot;</span><span class="p">,</span> <span class="s2">&quot;B&quot;</span><span class="p">,</span> <span class="s2">&quot;C&quot;</span><span class="p">,</span> <span class="s2">&quot;D&quot;</span><span class="p">,</span> <span class="s2">&quot;E&quot;</span><span class="p">,</span> <span class="s2">&quot;F&quot;</span><span class="p">])</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">selector</span><span class="o">.</span><span class="n">contents</span>
-<span class="go">[&#39;A&#39;, &#39;B&#39;, &#39;C&#39;, &#39;D&#39;, &#39;E&#39;, &#39;F&#39;]</span>
+<span class="go">[&quot;A&quot;, &quot;B&quot;, &quot;C&quot;, &quot;D&quot;, &quot;E&quot;, &quot;F&quot;]</span>
 </pre></div>
 </div>
 <p>Applying the <a class="reference external" href="https://docs.python.org/3/library/functions.html#len" title="(in Python v3.14)"><code class="xref py py-func docutils literal notranslate"><span class="pre">len()</span></code></a> function to the selector will return the
@@ -160,10 +160,10 @@ method to get the next result.</p>
 </pre></div>
 </div>
 <p>After each call, the object updates all probability values, setting the
-previously selected element’s probability at <code class="docutils literal notranslate"><span class="pre">0.0</span></code> and raising all
+previously selected element”s probability at <code class="docutils literal notranslate"><span class="pre">0.0</span></code> and raising all
 other probabilities according to a growth function (more on this
 below).</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">result</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">result</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">30</span><span class="p">):</span>
 <span class="gp">... </span>    <span class="n">result</span> <span class="o">+=</span> <span class="n">selector</span><span class="p">()</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">result</span>
@@ -185,7 +185,7 @@ non-zero value). Checking the <a class="reference internal" href="#auxjad.Tenney
 <dt><a class="reference internal" href="#auxjad.TenneySelector.previous_result" title="auxjad.TenneySelector.previous_result"><code class="xref py py-attr docutils literal notranslate"><span class="pre">previous_result</span></code></a> and <a class="reference internal" href="#auxjad.TenneySelector.previous_index" title="auxjad.TenneySelector.previous_index"><code class="xref py py-attr docutils literal notranslate"><span class="pre">previous_index</span></code></a>:</dt><dd><p>Use the read-only properties <a class="reference internal" href="#auxjad.TenneySelector.previous_result" title="auxjad.TenneySelector.previous_result"><code class="xref py py-attr docutils literal notranslate"><span class="pre">previous_result</span></code></a> and
 <a class="reference internal" href="#auxjad.TenneySelector.previous_index" title="auxjad.TenneySelector.previous_index"><code class="xref py py-attr docutils literal notranslate"><span class="pre">previous_index</span></code></a> to output the previous result and its index.
 Default values for both is <code class="docutils literal notranslate"><span class="pre">None</span></code>.</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">selector</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">TenneySelector</span><span class="p">([</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="s1">&#39;B&#39;</span><span class="p">,</span> <span class="s1">&#39;C&#39;</span><span class="p">,</span> <span class="s1">&#39;D&#39;</span><span class="p">,</span> <span class="s1">&#39;E&#39;</span><span class="p">,</span> <span class="s1">&#39;F&#39;</span><span class="p">])</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">selector</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">TenneySelector</span><span class="p">([</span><span class="s2">&quot;A&quot;</span><span class="p">,</span> <span class="s2">&quot;B&quot;</span><span class="p">,</span> <span class="s2">&quot;C&quot;</span><span class="p">,</span> <span class="s2">&quot;D&quot;</span><span class="p">,</span> <span class="s2">&quot;E&quot;</span><span class="p">,</span> <span class="s2">&quot;F&quot;</span><span class="p">])</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">selector</span><span class="o">.</span><span class="n">previous_index</span>
 <span class="go">None</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">selector</span><span class="o">.</span><span class="n">previous_result</span>
@@ -222,7 +222,7 @@ vector with all values set to <code class="docutils literal notranslate"><span c
 selected one which will be set to <code class="docutils literal notranslate"><span class="pre">0.0</span></code>; this will result in a
 uniformly random selection without repetition.</p>
 <p>With linear curvature (default value of <code class="docutils literal notranslate"><span class="pre">1.0</span></code>):</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">selector</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">TenneySelector</span><span class="p">([</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="s1">&#39;B&#39;</span><span class="p">,</span> <span class="s1">&#39;C&#39;</span><span class="p">,</span> <span class="s1">&#39;D&#39;</span><span class="p">,</span> <span class="s1">&#39;E&#39;</span><span class="p">,</span> <span class="s1">&#39;F&#39;</span><span class="p">])</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">selector</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">TenneySelector</span><span class="p">([</span><span class="s2">&quot;A&quot;</span><span class="p">,</span> <span class="s2">&quot;B&quot;</span><span class="p">,</span> <span class="s2">&quot;C&quot;</span><span class="p">,</span> <span class="s2">&quot;D&quot;</span><span class="p">,</span> <span class="s2">&quot;E&quot;</span><span class="p">,</span> <span class="s2">&quot;F&quot;</span><span class="p">])</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">selector</span><span class="o">.</span><span class="n">curvature</span>
 <span class="go">1.0</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">selector</span><span class="o">.</span><span class="n">weights</span>
@@ -230,7 +230,7 @@ uniformly random selection without repetition.</p>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">selector</span><span class="o">.</span><span class="n">probabilities</span>
 <span class="go">[1.0, 1.0, 1.0, 1.0, 1.0, 1.0]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">selector</span><span class="p">()</span>
-<span class="go">&#39;B&#39;</span>
+<span class="go">&quot;B&quot;</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">selector</span><span class="o">.</span><span class="n">curvature</span>
 <span class="go">1.0</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">selector</span><span class="o">.</span><span class="n">weights</span>
@@ -242,7 +242,7 @@ uniformly random selection without repetition.</p>
 </dd>
 <dt>Convex <a class="reference internal" href="#auxjad.TenneySelector.curvature" title="auxjad.TenneySelector.curvature"><code class="xref py py-attr docutils literal notranslate"><span class="pre">curvature</span></code></a>:</dt><dd><p>Using a convex <a class="reference internal" href="#auxjad.TenneySelector.curvature" title="auxjad.TenneySelector.curvature"><code class="xref py py-attr docutils literal notranslate"><span class="pre">curvature</span></code></a> (i.e. greater than <code class="docutils literal notranslate"><span class="pre">0.0</span></code> and less
 than <code class="docutils literal notranslate"><span class="pre">1.0</span></code>):</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">selector</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">TenneySelector</span><span class="p">([</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="s1">&#39;B&#39;</span><span class="p">,</span> <span class="s1">&#39;C&#39;</span><span class="p">,</span> <span class="s1">&#39;D&#39;</span><span class="p">,</span> <span class="s1">&#39;E&#39;</span><span class="p">,</span> <span class="s1">&#39;F&#39;</span><span class="p">],</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">selector</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">TenneySelector</span><span class="p">([</span><span class="s2">&quot;A&quot;</span><span class="p">,</span> <span class="s2">&quot;B&quot;</span><span class="p">,</span> <span class="s2">&quot;C&quot;</span><span class="p">,</span> <span class="s2">&quot;D&quot;</span><span class="p">,</span> <span class="s2">&quot;E&quot;</span><span class="p">,</span> <span class="s2">&quot;F&quot;</span><span class="p">],</span>
 <span class="gp">... </span>                                 <span class="n">curvature</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span>
 <span class="gp">... </span>                                 <span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">selector</span><span class="o">.</span><span class="n">curvature</span>
@@ -252,7 +252,7 @@ than <code class="docutils literal notranslate"><span class="pre">1.0</span></co
 <span class="gp">&gt;&gt;&gt; </span><span class="n">selector</span><span class="o">.</span><span class="n">probabilities</span>
 <span class="go">[1.0, 1.0, 1.0, 1.0, 1.0, 1.0]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">selector</span><span class="p">()</span>
-<span class="go">&#39;C&#39;</span>
+<span class="go">&quot;C&quot;</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">selector</span><span class="o">.</span><span class="n">curvature</span>
 <span class="go">0.2</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">selector</span><span class="o">.</span><span class="n">weights</span>
@@ -269,8 +269,8 @@ there will be between any non-previously selected elements. This
 results in sequences which have more chances of a same element being
 near each other. In the sequence below, note how there are many cases
 of a same element being separated only by a single other one, such as
-<code class="docutils literal notranslate"><span class="pre">'ACA'</span></code> in index <code class="docutils literal notranslate"><span class="pre">6</span></code>.</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">result</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+<code class="docutils literal notranslate"><span class="pre">&quot;ABC&quot;</span></code> in index <code class="docutils literal notranslate"><span class="pre">6</span></code>.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">result</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">30</span><span class="p">):</span>
 <span class="gp">... </span>    <span class="n">result</span> <span class="o">+=</span> <span class="n">selector</span><span class="p">()</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">result</span>
@@ -288,7 +288,7 @@ which is why there is a high chance of an element being selected again
 just two iterations apart.</p>
 </dd>
 <dt>Concave <a class="reference internal" href="#auxjad.TenneySelector.curvature" title="auxjad.TenneySelector.curvature"><code class="xref py py-attr docutils literal notranslate"><span class="pre">curvature</span></code></a>:</dt><dd><p>Using a concave <a class="reference internal" href="#auxjad.TenneySelector.curvature" title="auxjad.TenneySelector.curvature"><code class="xref py py-attr docutils literal notranslate"><span class="pre">curvature</span></code></a> (i.e. greater than <code class="docutils literal notranslate"><span class="pre">1.0</span></code>):</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">selector</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">TenneySelector</span><span class="p">([</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="s1">&#39;B&#39;</span><span class="p">,</span> <span class="s1">&#39;C&#39;</span><span class="p">,</span> <span class="s1">&#39;D&#39;</span><span class="p">,</span> <span class="s1">&#39;E&#39;</span><span class="p">,</span> <span class="s1">&#39;F&#39;</span><span class="p">],</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">selector</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">TenneySelector</span><span class="p">([</span><span class="s2">&quot;A&quot;</span><span class="p">,</span> <span class="s2">&quot;B&quot;</span><span class="p">,</span> <span class="s2">&quot;C&quot;</span><span class="p">,</span> <span class="s2">&quot;D&quot;</span><span class="p">,</span> <span class="s2">&quot;E&quot;</span><span class="p">,</span> <span class="s2">&quot;F&quot;</span><span class="p">],</span>
 <span class="gp">... </span>                                 <span class="n">curvature</span><span class="o">=</span><span class="mf">15.2</span><span class="p">,</span>
 <span class="gp">... </span>                                 <span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">selector</span><span class="o">.</span><span class="n">curvature</span>
@@ -298,7 +298,7 @@ just two iterations apart.</p>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">selector</span><span class="o">.</span><span class="n">probabilities</span>
 <span class="go">[1.0, 1.0, 1.0, 1.0, 1.0, 1.0]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">selector</span><span class="p">()</span>
-<span class="go">&#39;C&#39;</span>
+<span class="go">&quot;C&quot;</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">selector</span><span class="o">.</span><span class="n">curvature</span>
 <span class="go">0.2</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">selector</span><span class="o">.</span><span class="n">weights</span>
@@ -315,8 +315,8 @@ will be between any non-previously selected elements. This results in
 sequences which have less chances of a same element being near each
 other. In the sequence below, with a curvature of <code class="docutils literal notranslate"><span class="pre">15.2</span></code>, note how
 the elements are as far apart from each other, resulting in a repeating
-string of <code class="docutils literal notranslate"><span class="pre">'DFAECB'</span></code>.</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">result</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+string of <code class="docutils literal notranslate"><span class="pre">&quot;DFAECB&quot;</span></code>.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">result</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">30</span><span class="p">):</span>
 <span class="gp">... </span>    <span class="n">result</span> <span class="o">+=</span> <span class="n">selector</span><span class="p">()</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">result</span>
@@ -335,7 +335,7 @@ of them much more likely to be selected.</p>
 </dd>
 <dt><a class="reference internal" href="#auxjad.TenneySelector.curvature" title="auxjad.TenneySelector.curvature"><code class="xref py py-attr docutils literal notranslate"><span class="pre">curvature</span></code></a> property:</dt><dd><p>To change the curvature value at any point, simply set the property
 <a class="reference internal" href="#auxjad.TenneySelector.curvature" title="auxjad.TenneySelector.curvature"><code class="xref py py-attr docutils literal notranslate"><span class="pre">curvature</span></code></a> to a different value.</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">selector</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">TenneySelector</span><span class="p">([</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="s1">&#39;B&#39;</span><span class="p">,</span> <span class="s1">&#39;C&#39;</span><span class="p">,</span> <span class="s1">&#39;D&#39;</span><span class="p">,</span> <span class="s1">&#39;E&#39;</span><span class="p">,</span> <span class="s1">&#39;F&#39;</span><span class="p">])</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">selector</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">TenneySelector</span><span class="p">([</span><span class="s2">&quot;A&quot;</span><span class="p">,</span> <span class="s2">&quot;B&quot;</span><span class="p">,</span> <span class="s2">&quot;C&quot;</span><span class="p">,</span> <span class="s2">&quot;D&quot;</span><span class="p">,</span> <span class="s2">&quot;E&quot;</span><span class="p">,</span> <span class="s2">&quot;F&quot;</span><span class="p">])</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">selector</span><span class="o">.</span><span class="n">curvature</span>
 <span class="go">1.0</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">selector</span><span class="o">.</span><span class="n">curvature</span> <span class="o">=</span> <span class="mf">0.25</span>
@@ -348,14 +348,14 @@ of them much more likely to be selected.</p>
 affect the probability calculation. The example below uses the default
 linear curvature.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">selector</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">TenneySelector</span><span class="p">(</span>
-<span class="gp">... </span>    <span class="p">[</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="s1">&#39;B&#39;</span><span class="p">,</span> <span class="s1">&#39;C&#39;</span><span class="p">,</span> <span class="s1">&#39;D&#39;</span><span class="p">,</span> <span class="s1">&#39;E&#39;</span><span class="p">,</span> <span class="s1">&#39;F&#39;</span><span class="p">],</span>
+<span class="gp">... </span>    <span class="p">[</span><span class="s2">&quot;A&quot;</span><span class="p">,</span> <span class="s2">&quot;B&quot;</span><span class="p">,</span> <span class="s2">&quot;C&quot;</span><span class="p">,</span> <span class="s2">&quot;D&quot;</span><span class="p">,</span> <span class="s2">&quot;E&quot;</span><span class="p">,</span> <span class="s2">&quot;F&quot;</span><span class="p">],</span>
 <span class="gp">... </span>    <span class="n">weights</span><span class="o">=</span><span class="p">[</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">5.0</span><span class="p">,</span> <span class="mf">5.0</span><span class="p">,</span> <span class="mf">10.0</span><span class="p">,</span> <span class="mf">20.0</span><span class="p">],</span>
 <span class="gp">... </span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">selector</span><span class="o">.</span><span class="n">weights</span>
 <span class="go">[1.0, 1.0, 5.0, 5.0, 10.0, 20.0]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">selector</span><span class="o">.</span><span class="n">probabilities</span>
 <span class="go">[1.0, 1.0, 5.0, 5.0, 10.0, 20.0]</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">result</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">result</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">30</span><span class="p">):</span>
 <span class="gp">... </span>    <span class="n">result</span> <span class="o">+=</span> <span class="n">selector</span><span class="p">()</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">result</span>
@@ -368,7 +368,7 @@ linear curvature.</p>
 </div>
 <p>Set <a class="reference internal" href="#auxjad.TenneySelector.weights" title="auxjad.TenneySelector.weights"><code class="xref py py-attr docutils literal notranslate"><span class="pre">weights</span></code></a> to <code class="docutils literal notranslate"><span class="pre">None</span></code> to reset it to a uniform distribution.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">selector</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">TenneySelector</span><span class="p">(</span>
-<span class="gp">... </span>    <span class="p">[</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="s1">&#39;B&#39;</span><span class="p">,</span> <span class="s1">&#39;C&#39;</span><span class="p">,</span> <span class="s1">&#39;D&#39;</span><span class="p">,</span> <span class="s1">&#39;E&#39;</span><span class="p">,</span> <span class="s1">&#39;F&#39;</span><span class="p">],</span>
+<span class="gp">... </span>    <span class="p">[</span><span class="s2">&quot;A&quot;</span><span class="p">,</span> <span class="s2">&quot;B&quot;</span><span class="p">,</span> <span class="s2">&quot;C&quot;</span><span class="p">,</span> <span class="s2">&quot;D&quot;</span><span class="p">,</span> <span class="s2">&quot;E&quot;</span><span class="p">,</span> <span class="s2">&quot;F&quot;</span><span class="p">],</span>
 <span class="gp">... </span>    <span class="n">weights</span><span class="o">=</span><span class="p">[</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">5.0</span><span class="p">,</span> <span class="mf">5.0</span><span class="p">,</span> <span class="mf">10.0</span><span class="p">,</span> <span class="mf">20.0</span><span class="p">],</span>
 <span class="gp">... </span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">selector</span><span class="o">.</span><span class="n">weights</span>
@@ -382,7 +382,7 @@ linear curvature.</p>
 <dt><a class="reference internal" href="#auxjad.TenneySelector.reset_probabilities" title="auxjad.TenneySelector.reset_probabilities"><code class="xref py py-meth docutils literal notranslate"><span class="pre">reset_probabilities()</span></code></a>:</dt><dd><p>To reset the probability distribution of all elements to its initial
 value (an uniform distribution), use the method
 <a class="reference internal" href="#auxjad.TenneySelector.reset_probabilities" title="auxjad.TenneySelector.reset_probabilities"><code class="xref py py-meth docutils literal notranslate"><span class="pre">reset_probabilities()</span></code></a>.</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">selector</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">TenneySelector</span><span class="p">([</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="s1">&#39;B&#39;</span><span class="p">,</span> <span class="s1">&#39;C&#39;</span><span class="p">,</span> <span class="s1">&#39;D&#39;</span><span class="p">,</span> <span class="s1">&#39;E&#39;</span><span class="p">,</span> <span class="s1">&#39;F&#39;</span><span class="p">])</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">selector</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">TenneySelector</span><span class="p">([</span><span class="s2">&quot;A&quot;</span><span class="p">,</span> <span class="s2">&quot;B&quot;</span><span class="p">,</span> <span class="s2">&quot;C&quot;</span><span class="p">,</span> <span class="s2">&quot;D&quot;</span><span class="p">,</span> <span class="s2">&quot;E&quot;</span><span class="p">,</span> <span class="s2">&quot;F&quot;</span><span class="p">])</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">30</span><span class="p">):</span>
 <span class="gp">... </span>    <span class="n">selector</span><span class="p">()</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">selector</span><span class="o">.</span><span class="n">probabilities</span>
@@ -399,35 +399,35 @@ elements by assignment will not affect the <a class="reference internal" href="#
 property, and the new elements will have the same probability as the
 ones it replaced. Deleting element will delete the probability of that
 index.</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">selector</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">TenneySelector</span><span class="p">([</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="s1">&#39;B&#39;</span><span class="p">,</span> <span class="s1">&#39;C&#39;</span><span class="p">,</span> <span class="s1">&#39;D&#39;</span><span class="p">,</span> <span class="s1">&#39;E&#39;</span><span class="p">,</span> <span class="s1">&#39;F&#39;</span><span class="p">])</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">selector</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">TenneySelector</span><span class="p">([</span><span class="s2">&quot;A&quot;</span><span class="p">,</span> <span class="s2">&quot;B&quot;</span><span class="p">,</span> <span class="s2">&quot;C&quot;</span><span class="p">,</span> <span class="s2">&quot;D&quot;</span><span class="p">,</span> <span class="s2">&quot;E&quot;</span><span class="p">,</span> <span class="s2">&quot;F&quot;</span><span class="p">])</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">30</span><span class="p">):</span>
 <span class="gp">... </span>    <span class="n">selector</span><span class="p">()</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">selector</span><span class="o">.</span><span class="n">probabilities</span>
 <span class="go">[3.0, 2.0, 1.0, 7.0, 5.0, 0.0]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">selector</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
-<span class="go">&#39;C&#39;</span>
+<span class="go">&quot;C&quot;</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">selector</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="mi">4</span><span class="p">]</span>
-<span class="go">[&#39;B&#39;, &#39;C&#39;, &#39;D&#39;]</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">selector</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;X&#39;</span>
+<span class="go">[&quot;B&quot;, &quot;C&quot;, &quot;D&quot;]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">selector</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;X&quot;</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">selector</span><span class="o">.</span><span class="n">contents</span>
-<span class="go">[&#39;A&#39;, &#39;B&#39;, &#39;X&#39;, &#39;D&#39;, &#39;E&#39;, &#39;F&#39;]</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">selector</span><span class="p">[:]</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="s1">&#39;B&#39;</span><span class="p">,</span> <span class="s1">&#39;X&#39;</span><span class="p">,</span> <span class="s1">&#39;D&#39;</span><span class="p">,</span> <span class="s1">&#39;foo&#39;</span><span class="p">,</span> <span class="s1">&#39;bar&#39;</span><span class="p">]</span>
+<span class="go">[&quot;A&quot;, &quot;B&quot;, &quot;X&quot;, &quot;D&quot;, &quot;E&quot;, &quot;F&quot;]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">selector</span><span class="p">[:]</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;A&quot;</span><span class="p">,</span> <span class="s2">&quot;B&quot;</span><span class="p">,</span> <span class="s2">&quot;X&quot;</span><span class="p">,</span> <span class="s2">&quot;D&quot;</span><span class="p">,</span> <span class="s2">&quot;foo&quot;</span><span class="p">,</span> <span class="s2">&quot;bar&quot;</span><span class="p">]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">selector</span><span class="o">.</span><span class="n">contents</span>
-<span class="go">[&#39;A&#39;, &#39;B&#39;, &#39;X&#39;, &#39;D&#39;, &#39;foo&#39;, &#39;bar&#39;]</span>
+<span class="go">[&quot;A&quot;, &quot;B&quot;, &quot;X&quot;, &quot;D&quot;, &quot;foo&quot;, &quot;bar&quot;]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">selector</span><span class="o">.</span><span class="n">probabilities</span>
 <span class="go">[3.0, 2.0, 1.0, 7.0, 5.0, 0.0]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="k">del</span> <span class="n">selector</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">2</span><span class="p">]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">selector</span><span class="o">.</span><span class="n">contents</span>
-<span class="go">[&#39;X&#39;, &#39;D&#39;, &#39;foo&#39;, &#39;bar&#39;]</span>
+<span class="go">[&quot;X&quot;, &quot;D&quot;, &quot;foo&quot;, &quot;bar&quot;]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">selector</span><span class="o">.</span><span class="n">probabilities</span>
 <span class="go">[1.0, 7.0, 5.0, 0.0]</span>
 </pre></div>
 </div>
 <p>You can also check if the instance contains a specific element. In the
 case of the selector above, we have:</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="s1">&#39;X&#39;</span> <span class="ow">in</span> <span class="n">selector</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="s2">&quot;X&quot;</span> <span class="ow">in</span> <span class="n">selector</span>
 <span class="go">True</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="s1">&#39;A&#39;</span> <span class="ow">in</span> <span class="n">selector</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="s2">&quot;A&quot;</span> <span class="ow">in</span> <span class="n">selector</span>
 <span class="go">False</span>
 </pre></div>
 </div>
@@ -436,7 +436,7 @@ case of the selector above, we have:</p>
 the property <a class="reference internal" href="#auxjad.TenneySelector.contents" title="auxjad.TenneySelector.contents"><code class="xref py py-attr docutils literal notranslate"><span class="pre">contents</span></code></a>. Do notice that both
 <a class="reference internal" href="#auxjad.TenneySelector.probabilities" title="auxjad.TenneySelector.probabilities"><code class="xref py py-attr docutils literal notranslate"><span class="pre">probabilities</span></code></a> and <a class="reference internal" href="#auxjad.TenneySelector.weights" title="auxjad.TenneySelector.weights"><code class="xref py py-attr docutils literal notranslate"><span class="pre">weights</span></code></a> will be reset at that point.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">selector</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">TenneySelector</span><span class="p">(</span>
-<span class="gp">... </span>    <span class="p">[</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="s1">&#39;B&#39;</span><span class="p">,</span> <span class="s1">&#39;C&#39;</span><span class="p">,</span> <span class="s1">&#39;D&#39;</span><span class="p">,</span> <span class="s1">&#39;E&#39;</span><span class="p">,</span> <span class="s1">&#39;F&#39;</span><span class="p">],</span>
+<span class="gp">... </span>    <span class="p">[</span><span class="s2">&quot;A&quot;</span><span class="p">,</span> <span class="s2">&quot;B&quot;</span><span class="p">,</span> <span class="s2">&quot;C&quot;</span><span class="p">,</span> <span class="s2">&quot;D&quot;</span><span class="p">,</span> <span class="s2">&quot;E&quot;</span><span class="p">,</span> <span class="s2">&quot;F&quot;</span><span class="p">],</span>
 <span class="gp">... </span>    <span class="n">weights</span><span class="o">=</span><span class="p">[</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">5.0</span><span class="p">,</span> <span class="mf">5.0</span><span class="p">,</span> <span class="mf">10.0</span><span class="p">,</span> <span class="mf">20.0</span><span class="p">],</span>
 <span class="gp">... </span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">30</span><span class="p">):</span>
@@ -444,7 +444,7 @@ the property <a class="reference internal" href="#auxjad.TenneySelector.contents
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">len</span><span class="p">(</span><span class="n">selector</span><span class="p">)</span>
 <span class="go">6</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">selector</span><span class="o">.</span><span class="n">contents</span>
-<span class="go">[&#39;A&#39;, &#39;B&#39;, &#39;C&#39;, &#39;D&#39;, &#39;E&#39;, &#39;F&#39;]</span>
+<span class="go">[&quot;A&quot;, &quot;B&quot;, &quot;C&quot;, &quot;D&quot;, &quot;E&quot;, &quot;F&quot;]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">selector</span><span class="o">.</span><span class="n">weights</span>
 <span class="go">[1.0, 1.0, 5.0, 5.0, 10.0, 20.0]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">selector</span><span class="o">.</span><span class="n">probabilities</span>

@@ -5,7 +5,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>auxjad.core.TenneySelector &mdash; Auxjad 1.0.8 documentation</title>
+  <title>auxjad.core.TenneySelector &mdash; Auxjad 1.0.9 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=9ca51bb7" />
       <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=9edc463e" />
 
@@ -13,7 +13,7 @@
     <link rel="canonical" href="https://gilbertohasnofb.github.io/auxjad-docs/_modules/auxjad/core/TenneySelector.html"/>
       <script src="../../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../../../_static/documentation_options.js?v=aec50437"></script>
+      <script src="../../../_static/documentation_options.js?v=0abd802e"></script>
       <script src="../../../_static/doctools.js?v=fd6eb6e6"></script>
       <script src="../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
     <script src="../../../_static/js/theme.js"></script>
@@ -96,9 +96,9 @@
 <span class="sd">        The selector should be initialised with a :obj:`list`. The elements of</span>
 <span class="sd">        this :obj:`list` can be of any type.</span>
 
-<span class="sd">        &gt;&gt;&gt; selector = auxjad.TenneySelector([&#39;A&#39;, &#39;B&#39;, &#39;C&#39;, &#39;D&#39;, &#39;E&#39;, &#39;F&#39;])</span>
+<span class="sd">        &gt;&gt;&gt; selector = auxjad.TenneySelector([&quot;A&quot;, &quot;B&quot;, &quot;C&quot;, &quot;D&quot;, &quot;E&quot;, &quot;F&quot;])</span>
 <span class="sd">        &gt;&gt;&gt; selector.contents</span>
-<span class="sd">        [&#39;A&#39;, &#39;B&#39;, &#39;C&#39;, &#39;D&#39;, &#39;E&#39;, &#39;F&#39;]</span>
+<span class="sd">        [&quot;A&quot;, &quot;B&quot;, &quot;C&quot;, &quot;D&quot;, &quot;E&quot;, &quot;F&quot;]</span>
 
 <span class="sd">        Applying the :func:`len()` function to the selector will return the</span>
 <span class="sd">        length of the input :obj:`list`.</span>
@@ -130,11 +130,11 @@
 <span class="sd">        D</span>
 
 <span class="sd">        After each call, the object updates all probability values, setting the</span>
-<span class="sd">        previously selected element&#39;s probability at ``0.0`` and raising all</span>
+<span class="sd">        previously selected element&quot;s probability at ``0.0`` and raising all</span>
 <span class="sd">        other probabilities according to a growth function (more on this</span>
 <span class="sd">        below).</span>
 
-<span class="sd">        &gt;&gt;&gt; result = &#39;&#39;</span>
+<span class="sd">        &gt;&gt;&gt; result = &quot;&quot;</span>
 <span class="sd">        &gt;&gt;&gt; for _ in range(30):</span>
 <span class="sd">        ...     result += selector()</span>
 <span class="sd">        &gt;&gt;&gt; result</span>
@@ -156,7 +156,7 @@
 <span class="sd">        :attr:`previous_index` to output the previous result and its index.</span>
 <span class="sd">        Default values for both is ``None``.</span>
 
-<span class="sd">        &gt;&gt;&gt; selector = auxjad.TenneySelector([&#39;A&#39;, &#39;B&#39;, &#39;C&#39;, &#39;D&#39;, &#39;E&#39;, &#39;F&#39;])</span>
+<span class="sd">        &gt;&gt;&gt; selector = auxjad.TenneySelector([&quot;A&quot;, &quot;B&quot;, &quot;C&quot;, &quot;D&quot;, &quot;E&quot;, &quot;F&quot;])</span>
 <span class="sd">        &gt;&gt;&gt; selector.previous_index</span>
 <span class="sd">        None</span>
 <span class="sd">        &gt;&gt;&gt; selector.previous_result</span>
@@ -194,7 +194,7 @@
 
 <span class="sd">        With linear curvature (default value of ``1.0``):</span>
 
-<span class="sd">        &gt;&gt;&gt; selector = auxjad.TenneySelector([&#39;A&#39;, &#39;B&#39;, &#39;C&#39;, &#39;D&#39;, &#39;E&#39;, &#39;F&#39;])</span>
+<span class="sd">        &gt;&gt;&gt; selector = auxjad.TenneySelector([&quot;A&quot;, &quot;B&quot;, &quot;C&quot;, &quot;D&quot;, &quot;E&quot;, &quot;F&quot;])</span>
 <span class="sd">        &gt;&gt;&gt; selector.curvature</span>
 <span class="sd">        1.0</span>
 <span class="sd">        &gt;&gt;&gt; selector.weights</span>
@@ -202,7 +202,7 @@
 <span class="sd">        &gt;&gt;&gt; selector.probabilities</span>
 <span class="sd">        [1.0, 1.0, 1.0, 1.0, 1.0, 1.0]</span>
 <span class="sd">        &gt;&gt;&gt; selector()</span>
-<span class="sd">        &#39;B&#39;</span>
+<span class="sd">        &quot;B&quot;</span>
 <span class="sd">        &gt;&gt;&gt; selector.curvature</span>
 <span class="sd">        1.0</span>
 <span class="sd">        &gt;&gt;&gt; selector.weights</span>
@@ -214,7 +214,7 @@
 <span class="sd">        Using a convex :attr:`curvature` (i.e. greater than ``0.0`` and less</span>
 <span class="sd">        than ``1.0``):</span>
 
-<span class="sd">        &gt;&gt;&gt; selector = auxjad.TenneySelector([&#39;A&#39;, &#39;B&#39;, &#39;C&#39;, &#39;D&#39;, &#39;E&#39;, &#39;F&#39;],</span>
+<span class="sd">        &gt;&gt;&gt; selector = auxjad.TenneySelector([&quot;A&quot;, &quot;B&quot;, &quot;C&quot;, &quot;D&quot;, &quot;E&quot;, &quot;F&quot;],</span>
 <span class="sd">        ...                                  curvature=0.2,</span>
 <span class="sd">        ...                                  )</span>
 <span class="sd">        &gt;&gt;&gt; selector.curvature</span>
@@ -224,7 +224,7 @@
 <span class="sd">        &gt;&gt;&gt; selector.probabilities</span>
 <span class="sd">        [1.0, 1.0, 1.0, 1.0, 1.0, 1.0]</span>
 <span class="sd">        &gt;&gt;&gt; selector()</span>
-<span class="sd">        &#39;C&#39;</span>
+<span class="sd">        &quot;C&quot;</span>
 <span class="sd">        &gt;&gt;&gt; selector.curvature</span>
 <span class="sd">        0.2</span>
 <span class="sd">        &gt;&gt;&gt; selector.weights</span>
@@ -240,9 +240,9 @@
 <span class="sd">        results in sequences which have more chances of a same element being</span>
 <span class="sd">        near each other. In the sequence below, note how there are many cases</span>
 <span class="sd">        of a same element being separated only by a single other one, such as</span>
-<span class="sd">        ``&#39;ACA&#39;`` in index ``6``.</span>
+<span class="sd">        ``&quot;ABC&quot;`` in index ``6``.</span>
 
-<span class="sd">        &gt;&gt;&gt; result = &#39;&#39;</span>
+<span class="sd">        &gt;&gt;&gt; result = &quot;&quot;</span>
 <span class="sd">        &gt;&gt;&gt; for _ in range(30):</span>
 <span class="sd">        ...     result += selector()</span>
 <span class="sd">        &gt;&gt;&gt; result</span>
@@ -261,7 +261,7 @@
 <span class="sd">    Concave :attr:`curvature`:</span>
 <span class="sd">        Using a concave :attr:`curvature` (i.e. greater than ``1.0``):</span>
 
-<span class="sd">        &gt;&gt;&gt; selector = auxjad.TenneySelector([&#39;A&#39;, &#39;B&#39;, &#39;C&#39;, &#39;D&#39;, &#39;E&#39;, &#39;F&#39;],</span>
+<span class="sd">        &gt;&gt;&gt; selector = auxjad.TenneySelector([&quot;A&quot;, &quot;B&quot;, &quot;C&quot;, &quot;D&quot;, &quot;E&quot;, &quot;F&quot;],</span>
 <span class="sd">        ...                                  curvature=15.2,</span>
 <span class="sd">        ...                                  )</span>
 <span class="sd">        &gt;&gt;&gt; selector.curvature</span>
@@ -271,7 +271,7 @@
 <span class="sd">        &gt;&gt;&gt; selector.probabilities</span>
 <span class="sd">        [1.0, 1.0, 1.0, 1.0, 1.0, 1.0]</span>
 <span class="sd">        &gt;&gt;&gt; selector()</span>
-<span class="sd">        &#39;C&#39;</span>
+<span class="sd">        &quot;C&quot;</span>
 <span class="sd">        &gt;&gt;&gt; selector.curvature</span>
 <span class="sd">        0.2</span>
 <span class="sd">        &gt;&gt;&gt; selector.weights</span>
@@ -287,9 +287,9 @@
 <span class="sd">        sequences which have less chances of a same element being near each</span>
 <span class="sd">        other. In the sequence below, with a curvature of ``15.2``, note how</span>
 <span class="sd">        the elements are as far apart from each other, resulting in a repeating</span>
-<span class="sd">        string of ``&#39;DFAECB&#39;``.</span>
+<span class="sd">        string of ``&quot;DFAECB&quot;``.</span>
 
-<span class="sd">        &gt;&gt;&gt; result = &#39;&#39;</span>
+<span class="sd">        &gt;&gt;&gt; result = &quot;&quot;</span>
 <span class="sd">        &gt;&gt;&gt; for _ in range(30):</span>
 <span class="sd">        ...     result += selector()</span>
 <span class="sd">        &gt;&gt;&gt; result</span>
@@ -309,7 +309,7 @@
 <span class="sd">        To change the curvature value at any point, simply set the property</span>
 <span class="sd">        :attr:`curvature` to a different value.</span>
 
-<span class="sd">        &gt;&gt;&gt; selector = auxjad.TenneySelector([&#39;A&#39;, &#39;B&#39;, &#39;C&#39;, &#39;D&#39;, &#39;E&#39;, &#39;F&#39;])</span>
+<span class="sd">        &gt;&gt;&gt; selector = auxjad.TenneySelector([&quot;A&quot;, &quot;B&quot;, &quot;C&quot;, &quot;D&quot;, &quot;E&quot;, &quot;F&quot;])</span>
 <span class="sd">        &gt;&gt;&gt; selector.curvature</span>
 <span class="sd">        1.0</span>
 <span class="sd">        &gt;&gt;&gt; selector.curvature = 0.25</span>
@@ -322,14 +322,14 @@
 <span class="sd">        linear curvature.</span>
 
 <span class="sd">        &gt;&gt;&gt; selector = auxjad.TenneySelector(</span>
-<span class="sd">        ...     [&#39;A&#39;, &#39;B&#39;, &#39;C&#39;, &#39;D&#39;, &#39;E&#39;, &#39;F&#39;],</span>
+<span class="sd">        ...     [&quot;A&quot;, &quot;B&quot;, &quot;C&quot;, &quot;D&quot;, &quot;E&quot;, &quot;F&quot;],</span>
 <span class="sd">        ...     weights=[1.0, 1.0, 5.0, 5.0, 10.0, 20.0],</span>
 <span class="sd">        ... )</span>
 <span class="sd">        &gt;&gt;&gt; selector.weights</span>
 <span class="sd">        [1.0, 1.0, 5.0, 5.0, 10.0, 20.0]</span>
 <span class="sd">        &gt;&gt;&gt; selector.probabilities</span>
 <span class="sd">        [1.0, 1.0, 5.0, 5.0, 10.0, 20.0]</span>
-<span class="sd">        &gt;&gt;&gt; result = &#39;&#39;</span>
+<span class="sd">        &gt;&gt;&gt; result = &quot;&quot;</span>
 <span class="sd">        &gt;&gt;&gt; for _ in range(30):</span>
 <span class="sd">        ...     result += selector()</span>
 <span class="sd">        &gt;&gt;&gt; result</span>
@@ -342,7 +342,7 @@
 <span class="sd">        Set :attr:`weights` to ``None`` to reset it to a uniform distribution.</span>
 
 <span class="sd">        &gt;&gt;&gt; selector = auxjad.TenneySelector(</span>
-<span class="sd">        ...     [&#39;A&#39;, &#39;B&#39;, &#39;C&#39;, &#39;D&#39;, &#39;E&#39;, &#39;F&#39;],</span>
+<span class="sd">        ...     [&quot;A&quot;, &quot;B&quot;, &quot;C&quot;, &quot;D&quot;, &quot;E&quot;, &quot;F&quot;],</span>
 <span class="sd">        ...     weights=[1.0, 1.0, 5.0, 5.0, 10.0, 20.0],</span>
 <span class="sd">        ... )</span>
 <span class="sd">        &gt;&gt;&gt; selector.weights</span>
@@ -356,7 +356,7 @@
 <span class="sd">        value (an uniform distribution), use the method</span>
 <span class="sd">        :meth:`reset_probabilities`.</span>
 
-<span class="sd">        &gt;&gt;&gt; selector = auxjad.TenneySelector([&#39;A&#39;, &#39;B&#39;, &#39;C&#39;, &#39;D&#39;, &#39;E&#39;, &#39;F&#39;])</span>
+<span class="sd">        &gt;&gt;&gt; selector = auxjad.TenneySelector([&quot;A&quot;, &quot;B&quot;, &quot;C&quot;, &quot;D&quot;, &quot;E&quot;, &quot;F&quot;])</span>
 <span class="sd">        &gt;&gt;&gt; for _ in range(30):</span>
 <span class="sd">        ...     selector()</span>
 <span class="sd">        &gt;&gt;&gt; selector.probabilities</span>
@@ -373,35 +373,35 @@
 <span class="sd">        ones it replaced. Deleting element will delete the probability of that</span>
 <span class="sd">        index.</span>
 
-<span class="sd">        &gt;&gt;&gt; selector = auxjad.TenneySelector([&#39;A&#39;, &#39;B&#39;, &#39;C&#39;, &#39;D&#39;, &#39;E&#39;, &#39;F&#39;])</span>
+<span class="sd">        &gt;&gt;&gt; selector = auxjad.TenneySelector([&quot;A&quot;, &quot;B&quot;, &quot;C&quot;, &quot;D&quot;, &quot;E&quot;, &quot;F&quot;])</span>
 <span class="sd">        &gt;&gt;&gt; for _ in range(30):</span>
 <span class="sd">        ...     selector()</span>
 <span class="sd">        &gt;&gt;&gt; selector.probabilities</span>
 <span class="sd">        [3.0, 2.0, 1.0, 7.0, 5.0, 0.0]</span>
 <span class="sd">        &gt;&gt;&gt; selector[2]</span>
-<span class="sd">        &#39;C&#39;</span>
+<span class="sd">        &quot;C&quot;</span>
 <span class="sd">        &gt;&gt;&gt; selector[1:4]</span>
-<span class="sd">        [&#39;B&#39;, &#39;C&#39;, &#39;D&#39;]</span>
-<span class="sd">        &gt;&gt;&gt; selector[2] = &#39;X&#39;</span>
+<span class="sd">        [&quot;B&quot;, &quot;C&quot;, &quot;D&quot;]</span>
+<span class="sd">        &gt;&gt;&gt; selector[2] = &quot;X&quot;</span>
 <span class="sd">        &gt;&gt;&gt; selector.contents</span>
-<span class="sd">        [&#39;A&#39;, &#39;B&#39;, &#39;X&#39;, &#39;D&#39;, &#39;E&#39;, &#39;F&#39;]</span>
-<span class="sd">        &gt;&gt;&gt; selector[:] = [&#39;A&#39;, &#39;B&#39;, &#39;X&#39;, &#39;D&#39;, &#39;foo&#39;, &#39;bar&#39;]</span>
+<span class="sd">        [&quot;A&quot;, &quot;B&quot;, &quot;X&quot;, &quot;D&quot;, &quot;E&quot;, &quot;F&quot;]</span>
+<span class="sd">        &gt;&gt;&gt; selector[:] = [&quot;A&quot;, &quot;B&quot;, &quot;X&quot;, &quot;D&quot;, &quot;foo&quot;, &quot;bar&quot;]</span>
 <span class="sd">        &gt;&gt;&gt; selector.contents</span>
-<span class="sd">        [&#39;A&#39;, &#39;B&#39;, &#39;X&#39;, &#39;D&#39;, &#39;foo&#39;, &#39;bar&#39;]</span>
+<span class="sd">        [&quot;A&quot;, &quot;B&quot;, &quot;X&quot;, &quot;D&quot;, &quot;foo&quot;, &quot;bar&quot;]</span>
 <span class="sd">        &gt;&gt;&gt; selector.probabilities</span>
 <span class="sd">        [3.0, 2.0, 1.0, 7.0, 5.0, 0.0]</span>
 <span class="sd">        &gt;&gt;&gt; del selector[0:2]</span>
 <span class="sd">        &gt;&gt;&gt; selector.contents</span>
-<span class="sd">        [&#39;X&#39;, &#39;D&#39;, &#39;foo&#39;, &#39;bar&#39;]</span>
+<span class="sd">        [&quot;X&quot;, &quot;D&quot;, &quot;foo&quot;, &quot;bar&quot;]</span>
 <span class="sd">        &gt;&gt;&gt; selector.probabilities</span>
 <span class="sd">        [1.0, 7.0, 5.0, 0.0]</span>
 
 <span class="sd">        You can also check if the instance contains a specific element. In the</span>
 <span class="sd">        case of the selector above, we have:</span>
 
-<span class="sd">        &gt;&gt;&gt; &#39;X&#39; in selector</span>
+<span class="sd">        &gt;&gt;&gt; &quot;X&quot; in selector</span>
 <span class="sd">        True</span>
-<span class="sd">        &gt;&gt;&gt; &#39;A&#39; in selector</span>
+<span class="sd">        &gt;&gt;&gt; &quot;A&quot; in selector</span>
 <span class="sd">        False</span>
 
 <span class="sd">    Changing :attr:`contents` resets :attr:`probabilities` and :attr:`weights`:</span>
@@ -410,7 +410,7 @@
 <span class="sd">        :attr:`probabilities` and :attr:`weights` will be reset at that point.</span>
 
 <span class="sd">        &gt;&gt;&gt; selector = auxjad.TenneySelector(</span>
-<span class="sd">        ...     [&#39;A&#39;, &#39;B&#39;, &#39;C&#39;, &#39;D&#39;, &#39;E&#39;, &#39;F&#39;],</span>
+<span class="sd">        ...     [&quot;A&quot;, &quot;B&quot;, &quot;C&quot;, &quot;D&quot;, &quot;E&quot;, &quot;F&quot;],</span>
 <span class="sd">        ...     weights=[1.0, 1.0, 5.0, 5.0, 10.0, 20.0],</span>
 <span class="sd">        ... )</span>
 <span class="sd">        &gt;&gt;&gt; for _ in range(30):</span>
@@ -418,7 +418,7 @@
 <span class="sd">        &gt;&gt;&gt; len(selector)</span>
 <span class="sd">        6</span>
 <span class="sd">        &gt;&gt;&gt; selector.contents</span>
-<span class="sd">        [&#39;A&#39;, &#39;B&#39;, &#39;C&#39;, &#39;D&#39;, &#39;E&#39;, &#39;F&#39;]</span>
+<span class="sd">        [&quot;A&quot;, &quot;B&quot;, &quot;C&quot;, &quot;D&quot;, &quot;E&quot;, &quot;F&quot;]</span>
 <span class="sd">        &gt;&gt;&gt; selector.weights</span>
 <span class="sd">        [1.0, 1.0, 5.0, 5.0, 10.0, 20.0]</span>
 <span class="sd">        &gt;&gt;&gt; selector.probabilities</span>

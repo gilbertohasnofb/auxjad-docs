@@ -86,25 +86,21 @@
              
   <section id="looping-with-auxjad-windowlooper">
 <h1>Looping with <a class="reference internal" href="../_api_members/auxjad.WindowLooper.html#auxjad.WindowLooper" title="auxjad.WindowLooper"><code class="xref py py-class docutils literal notranslate"><span class="pre">auxjad.WindowLooper</span></code></a><a class="headerlink" href="#looping-with-auxjad-windowlooper" title="Link to this heading"></a></h1>
-<p>In this next example, we will use some of <a class="reference external" href="index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">auxjad</span></code></a>’s classes to generate
-a container of randomly selected material, and then use this material as input
-for the looping and shuffling classes.</p>
+<p>In this next example, we will use some of <a class="reference external" href="index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">auxjad</span></code></a>’s classes to generate a container of randomly
+selected material, and then use this material as input for the looping and shuffling classes.</p>
 <p>First, we start by importing both <code class="xref py py-mod docutils literal notranslate"><span class="pre">abjad</span></code> and <a class="reference external" href="index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">auxjad</span></code></a>.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span><span class="w"> </span><span class="nn">abjad</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span><span class="w"> </span><span class="nn">auxjad</span>
 </pre></div>
 </div>
-<p>Let’s start by deciding what random selectors will be responsible for
-generating each parameter of our basic material. Let’s use
-<a class="reference internal" href="../_api_members/auxjad.TenneySelector.html#auxjad.TenneySelector" title="auxjad.TenneySelector"><code class="xref py py-class docutils literal notranslate"><span class="pre">auxjad.TenneySelector</span></code></a> for pitches, which is an implementation of
-Tenney’s Dissonant Counterpoint Algorithm; at each call, this algorithm
-prioritises elements that haven’t been select for the longest time. For the
-durations, dynamics, and articulations, the example will use
-<a class="reference internal" href="../_api_members/auxjad.CartographySelector.html#auxjad.CartographySelector" title="auxjad.CartographySelector"><code class="xref py py-class docutils literal notranslate"><span class="pre">auxjad.CartographySelector</span></code></a>. Each element input into this type of
-selector has a probability of being selected which is dependent on its index.
-By default, the probability of consecutive elements decay with a rate of
-<code class="docutils literal notranslate"><span class="pre">0.75</span></code>. For more information on both of these classes, check <a class="reference external" href="index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">auxjad</span></code></a>’s API
-page (link in the left panel).</p>
+<p>Let’s start by deciding what random selectors will be responsible for generating each parameter of
+our basic material. Let’s use <a class="reference internal" href="../_api_members/auxjad.TenneySelector.html#auxjad.TenneySelector" title="auxjad.TenneySelector"><code class="xref py py-class docutils literal notranslate"><span class="pre">auxjad.TenneySelector</span></code></a> for pitches, which is an implementation
+of Tenney’s Dissonant Counterpoint Algorithm; at each call, this algorithm prioritises elements that
+haven’t been select for the longest time. For the durations, dynamics, and articulations, the
+example will use <a class="reference internal" href="../_api_members/auxjad.CartographySelector.html#auxjad.CartographySelector" title="auxjad.CartographySelector"><code class="xref py py-class docutils literal notranslate"><span class="pre">auxjad.CartographySelector</span></code></a>. Each element input into this type of selector
+has a probability of being selected which is dependent on its index. By default, the probability of
+consecutive elements decay with a rate of <code class="docutils literal notranslate"><span class="pre">0.75</span></code>. For more information on both of these classes,
+check <a class="reference external" href="index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">auxjad</span></code></a>’s API page (link in the left panel).</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">pitch_selector</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">TenneySelector</span><span class="p">([</span><span class="s2">&quot;c&#39;&quot;</span><span class="p">,</span>
 <span class="gp">... </span>                                        <span class="p">(</span><span class="s2">&quot;fs&#39;&quot;</span><span class="p">,</span> <span class="s2">&quot;g&#39;&quot;</span><span class="p">),</span>
 <span class="gp">... </span>                                        <span class="s2">&quot;ef&#39;&#39;&quot;</span><span class="p">,</span>
@@ -115,25 +111,23 @@ page (link in the left panel).</p>
 <span class="gp">... </span>                                                <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">8</span><span class="p">),</span>
 <span class="gp">... </span>                                                <span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">8</span><span class="p">),</span>
 <span class="gp">... </span>                                                <span class="p">])</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">dynamic_selector</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">CartographySelector</span><span class="p">([</span><span class="s1">&#39;p&#39;</span><span class="p">,</span> <span class="s1">&#39;mp&#39;</span><span class="p">,</span> <span class="s1">&#39;mf&#39;</span><span class="p">,</span> <span class="s1">&#39;f&#39;</span><span class="p">])</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">articulation_selector</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">CartographySelector</span><span class="p">([</span><span class="kc">None</span><span class="p">,</span> <span class="s1">&#39;-&#39;</span><span class="p">,</span> <span class="s1">&#39;&gt;&#39;</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">dynamic_selector</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">CartographySelector</span><span class="p">([</span><span class="s2">&quot;p&quot;</span><span class="p">,</span> <span class="s2">&quot;mp&quot;</span><span class="p">,</span> <span class="s2">&quot;mf&quot;</span><span class="p">,</span> <span class="s2">&quot;f&quot;</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">articulation_selector</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">CartographySelector</span><span class="p">([</span><span class="kc">None</span><span class="p">,</span> <span class="s2">&quot;-&quot;</span><span class="p">,</span> <span class="s2">&quot;&gt;&quot;</span><span class="p">])</span>
 </pre></div>
 </div>
-<p>Let’s now create eight random notes, each with four parameters randomly
-selected by the classes above.</p>
+<p>Let’s now create eight random notes, each with four parameters randomly selected by the classes
+above.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">pitches</span> <span class="o">=</span> <span class="p">[</span><span class="n">pitch_selector</span><span class="p">()</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">8</span><span class="p">)]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">durations</span> <span class="o">=</span> <span class="p">[</span><span class="n">duration_selector</span><span class="p">()</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">8</span><span class="p">)]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">dynamics</span> <span class="o">=</span> <span class="p">[</span><span class="n">dynamic_selector</span><span class="p">()</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">8</span><span class="p">)]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">articulations</span> <span class="o">=</span> <span class="p">[</span><span class="n">articulation_selector</span><span class="p">()</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">8</span><span class="p">)]</span>
 </pre></div>
 </div>
-<p>With these <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.14)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code></a>’s’ of pitches, durations, dynamics, and articulations,
-we can now use <a class="reference internal" href="../_api_members/auxjad.LeafDynMaker.html#auxjad.LeafDynMaker" title="auxjad.LeafDynMaker"><code class="xref py py-class docutils literal notranslate"><span class="pre">auxjad.LeafDynMaker</span></code></a> to create the individual abjad
-leaves for us. It’s important to note that there is no time signature being
-imposed at this point, so LilyPond will fallback to a four by four when
-displaying the container below. This is not a problem since this will be used
-as the basic material for the looper, which will then automatically take care
-of time signatures.</p>
+<p>With these <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.14)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code></a>’s’ of pitches, durations, dynamics, and articulations, we can now use
+<a class="reference internal" href="../_api_members/auxjad.LeafDynMaker.html#auxjad.LeafDynMaker" title="auxjad.LeafDynMaker"><code class="xref py py-class docutils literal notranslate"><span class="pre">auxjad.LeafDynMaker</span></code></a> to create the individual abjad leaves for us. It’s important to note
+that there is no time signature being imposed at this point, so LilyPond will fallback to a four by
+four when displaying the container below. This is not a problem since this will be used as the basic
+material for the looper, which will then automatically take care of time signatures.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">leaf_dyn_maker</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">LeafDynMaker</span><span class="p">()</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">notes</span> <span class="o">=</span> <span class="n">leaf_dyn_maker</span><span class="p">(</span><span class="n">pitches</span><span class="p">,</span> <span class="n">durations</span><span class="p">,</span> <span class="n">dynamics</span><span class="p">,</span> <span class="n">articulations</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">container</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">(</span><span class="n">notes</span><span class="p">)</span>
@@ -143,13 +137,11 @@ of time signatures.</p>
 <figure class="align-default">
 <img alt="../_images/example-3-looping-wcsvsyfmwm.png" src="../_images/example-3-looping-wcsvsyfmwm.png" />
 </figure>
-<p>Let’s now use <a class="reference internal" href="../_api_members/auxjad.WindowLooper.html#auxjad.WindowLooper" title="auxjad.WindowLooper"><code class="xref py py-class docutils literal notranslate"><span class="pre">auxjad.WindowLooper</span></code></a> to output loops of windows of the
-material. Let’s initiate this class with a window size of a 4/4 measure, and a
-step forward of a semiquaver. Setting
-<a class="reference internal" href="../_api_members/auxjad.LeafLooper.html#auxjad.LeafLooper.after_rest" title="auxjad.LeafLooper.after_rest"><code class="xref py py-attr docutils literal notranslate"><span class="pre">after_rest</span></code></a> to the duration <code class="docutils literal notranslate"><span class="pre">(1,</span> <span class="pre">4)</span></code> will add
-crotchet rests in between consecutive outputs of this looper. Setting
-<a class="reference internal" href="../_api_members/auxjad.LeafLooper.html#auxjad.LeafLooper.after_rest_in_new_measure" title="auxjad.LeafLooper.after_rest_in_new_measure"><code class="xref py py-attr docutils literal notranslate"><span class="pre">after_rest_in_new_measure</span></code></a> to <code class="docutils literal notranslate"><span class="pre">True</span></code> ensure that
-these rests (which work as separators of consecutive windows) are in a new
+<p>Let’s now use <a class="reference internal" href="../_api_members/auxjad.WindowLooper.html#auxjad.WindowLooper" title="auxjad.WindowLooper"><code class="xref py py-class docutils literal notranslate"><span class="pre">auxjad.WindowLooper</span></code></a> to output loops of windows of the material. Let’s
+initiate this class with a window size of a 4/4 measure, and a step forward of a semiquaver. Setting
+<a class="reference internal" href="../_api_members/auxjad.LeafLooper.html#auxjad.LeafLooper.after_rest" title="auxjad.LeafLooper.after_rest"><code class="xref py py-attr docutils literal notranslate"><span class="pre">after_rest</span></code></a> to the duration <code class="docutils literal notranslate"><span class="pre">(1,</span> <span class="pre">4)</span></code> will add crotchet rests in between
+consecutive outputs of this looper. Setting <a class="reference internal" href="../_api_members/auxjad.LeafLooper.html#auxjad.LeafLooper.after_rest_in_new_measure" title="auxjad.LeafLooper.after_rest_in_new_measure"><code class="xref py py-attr docutils literal notranslate"><span class="pre">after_rest_in_new_measure</span></code></a> to
+<code class="docutils literal notranslate"><span class="pre">True</span></code> ensure that these rests (which work as separators of consecutive windows) are in a new
 measure by themselves.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">looper</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">WindowLooper</span><span class="p">(</span><span class="n">container</span><span class="p">,</span>
 <span class="gp">... </span>                             <span class="n">window_size</span><span class="o">=</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">),</span>
@@ -159,9 +151,8 @@ measure by themselves.</p>
 <span class="gp">... </span>                             <span class="p">)</span>
 </pre></div>
 </div>
-<p>We can now use the <a class="reference internal" href="../_api_members/auxjad.WindowLooper.html#auxjad.WindowLooper.output_n" title="auxjad.WindowLooper.output_n"><code class="xref py py-meth docutils literal notranslate"><span class="pre">output_n()</span></code></a> to output several
-measures of the looping process for us. In this case, let’s output four
-measures.</p>
+<p>We can now use the <a class="reference internal" href="../_api_members/auxjad.WindowLooper.html#auxjad.WindowLooper.output_n" title="auxjad.WindowLooper.output_n"><code class="xref py py-meth docutils literal notranslate"><span class="pre">output_n()</span></code></a> to output several measures of the looping
+process for us. In this case, let’s output four measures.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">staff</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">()</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">notes</span> <span class="o">=</span> <span class="n">looper</span><span class="o">.</span><span class="n">output_n</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">staff</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">notes</span><span class="p">)</span>
@@ -171,8 +162,8 @@ measures.</p>
 <figure class="align-default">
 <img alt="../_images/example-3-looping-002erek662ml6.png" src="../_images/example-3-looping-002erek662ml6.png" />
 </figure>
-<p>Let’s now change the values of <a class="reference internal" href="../_api_members/auxjad.WindowLooper.html#auxjad.WindowLooper.step_size" title="auxjad.WindowLooper.step_size"><code class="xref py py-attr docutils literal notranslate"><span class="pre">step_size</span></code></a> from a
-semiquaver into a crotchet and output four more measures.</p>
+<p>Let’s now change the values of <a class="reference internal" href="../_api_members/auxjad.WindowLooper.html#auxjad.WindowLooper.step_size" title="auxjad.WindowLooper.step_size"><code class="xref py py-attr docutils literal notranslate"><span class="pre">step_size</span></code></a> from a semiquaver into a
+crotchet and output four more measures.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">looper</span><span class="o">.</span><span class="n">step_size</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">notes</span> <span class="o">=</span> <span class="n">looper</span><span class="o">.</span><span class="n">output_n</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">staff</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">notes</span><span class="p">)</span>
@@ -183,8 +174,8 @@ semiquaver into a crotchet and output four more measures.</p>
 <img alt="../_images/example-3-looping-qodelstkbvo.png" src="../_images/example-3-looping-qodelstkbvo.png" />
 </figure>
 <p>Let’s now change both <a class="reference internal" href="../_api_members/auxjad.WindowLooper.html#auxjad.WindowLooper.window_size" title="auxjad.WindowLooper.window_size"><code class="xref py py-attr docutils literal notranslate"><span class="pre">window_size</span></code></a> and
-<a class="reference internal" href="../_api_members/auxjad.WindowLooper.html#auxjad.WindowLooper.step_size" title="auxjad.WindowLooper.step_size"><code class="xref py py-attr docutils literal notranslate"><span class="pre">step_size</span></code></a> as well as remove the after rests, and
-then output six more measures.</p>
+<a class="reference internal" href="../_api_members/auxjad.WindowLooper.html#auxjad.WindowLooper.step_size" title="auxjad.WindowLooper.step_size"><code class="xref py py-attr docutils literal notranslate"><span class="pre">step_size</span></code></a> as well as remove the after rests, and then output six more
+measures.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">looper</span><span class="o">.</span><span class="n">window_size</span> <span class="o">=</span> <span class="p">(</span><span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">looper</span><span class="o">.</span><span class="n">step_size</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">16</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">looper</span><span class="o">.</span><span class="n">after_rest</span> <span class="o">=</span> <span class="mi">0</span>

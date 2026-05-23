@@ -77,7 +77,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../api/api-score.html">score</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../api/api-select.html">select</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../api/api-spanners.html">spanners</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../api/api-utilities.html">utilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/api-utils.html">utils</a></li>
 </ul>
 </li>
 </ul>
@@ -187,7 +187,7 @@ first call, initialise the class with the keyword argument
 of the process is set by <a class="reference internal" href="#auxjad.Echoer.min_dynamic" title="auxjad.Echoer.min_dynamic"><code class="xref py py-attr docutils literal notranslate"><span class="pre">min_dynamic</span></code></a>.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">container</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;c&#39;4\f d&#39;4 e&#39;4 f&#39;4&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">echoer</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">Echoer</span><span class="p">(</span><span class="n">container</span><span class="p">,</span>
-<span class="gp">... </span>                       <span class="n">min_dynamic</span><span class="o">=</span><span class="s1">&#39;mp&#39;</span><span class="p">,</span>
+<span class="gp">... </span>                       <span class="n">min_dynamic</span><span class="o">=</span><span class="s2">&quot;mp&quot;</span><span class="p">,</span>
 <span class="gp">... </span>                       <span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">notes</span> <span class="o">=</span> <span class="n">echoer</span><span class="p">()</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">staff</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span><span class="n">notes</span><span class="p">)</span>
@@ -242,7 +242,7 @@ initialisation, as shown below.</p>
 <figure class="align-default">
 <img alt="../_images/Echoer-aqq1docvezb.png" src="../_images/Echoer-aqq1docvezb.png" />
 </figure>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">echoer</span><span class="o">.</span><span class="n">min_dynamic</span> <span class="o">=</span> <span class="s1">&#39;pp&#39;</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">echoer</span><span class="o">.</span><span class="n">min_dynamic</span> <span class="o">=</span> <span class="s2">&quot;pp&quot;</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">notes</span> <span class="o">=</span> <span class="n">echoer</span><span class="p">()</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">staff</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span><span class="n">notes</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">staff</span><span class="p">)</span>
@@ -314,7 +314,7 @@ arguments to <code class="xref py py-meth docutils literal notranslate"><span cl
 more information.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">container</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;c&#39;4\mf d&#39;4\mp e&#39;\p f&#39;\pp&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">echoer</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">Echoer</span><span class="p">(</span><span class="n">container</span><span class="p">,</span>
-<span class="gp">... </span>                       <span class="n">min_dynamic</span><span class="o">=</span><span class="s1">&#39;p&#39;</span><span class="p">,</span>
+<span class="gp">... </span>                       <span class="n">min_dynamic</span><span class="o">=</span><span class="s2">&quot;p&quot;</span><span class="p">,</span>
 <span class="gp">... </span>                       <span class="n">max_steps</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
 <span class="gp">... </span>                       <span class="n">repetition_chance</span><span class="o">=</span><span class="mf">0.7</span><span class="p">,</span>
 <span class="gp">... </span>                       <span class="n">disable_rewrite_meter</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
@@ -327,7 +327,7 @@ more information.</p>
 <span class="gp">... </span>                       <span class="n">include_empty_measures</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
 <span class="gp">... </span>                       <span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">echoer</span><span class="o">.</span><span class="n">min_dynamic</span>
-<span class="go">&#39;p&#39;</span>
+<span class="go">&quot;p&quot;</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">echoer</span><span class="o">.</span><span class="n">max_steps</span>
 <span class="go">2</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">echoer</span><span class="o">.</span><span class="n">repetition_chance</span>
@@ -351,7 +351,7 @@ more information.</p>
 </pre></div>
 </div>
 <p>Use the properties below to change these values after initialisation.</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">echoer</span><span class="o">.</span><span class="n">min_dynamic</span> <span class="o">=</span> <span class="s1">&#39;mp&#39;</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">echoer</span><span class="o">.</span><span class="n">min_dynamic</span> <span class="o">=</span> <span class="s2">&quot;mp&quot;</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">echoer</span><span class="o">.</span><span class="n">max_steps</span> <span class="o">=</span> <span class="mi">1</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">echoer</span><span class="o">.</span><span class="n">repetition_chance</span> <span class="o">=</span> <span class="mf">0.23</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">echoer</span><span class="o">.</span><span class="n">disable_rewrite_meter</span> <span class="o">=</span> <span class="kc">False</span>
@@ -363,7 +363,7 @@ more information.</p>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">echoer</span><span class="o">.</span><span class="n">process_on_first_call</span> <span class="o">=</span> <span class="kc">False</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">echoer</span><span class="o">.</span><span class="n">include_empty_measures</span> <span class="o">=</span> <span class="kc">True</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">echoer</span><span class="o">.</span><span class="n">min_dynamic</span>
-<span class="go">&#39;mp&#39;</span>
+<span class="go">&quot;mp&quot;</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">echoer</span><span class="o">.</span><span class="n">max_steps</span>
 <span class="go">1</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">echoer</span><span class="o">.</span><span class="n">repetition_chance</span>

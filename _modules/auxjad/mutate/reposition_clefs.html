@@ -5,7 +5,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>auxjad.mutate.reposition_clefs &mdash; Auxjad 1.0.8 documentation</title>
+  <title>auxjad.mutate.reposition_clefs &mdash; Auxjad 1.0.9 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=9ca51bb7" />
       <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=9edc463e" />
 
@@ -13,7 +13,7 @@
     <link rel="canonical" href="https://gilbertohasnofb.github.io/auxjad-docs/_modules/auxjad/mutate/reposition_clefs.html"/>
       <script src="../../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../../../_static/documentation_options.js?v=aec50437"></script>
+      <script src="../../../_static/documentation_options.js?v=0abd802e"></script>
       <script src="../../../_static/doctools.js?v=fd6eb6e6"></script>
       <script src="../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
     <script src="../../../_static/js/theme.js"></script>
@@ -93,8 +93,8 @@
 <span class="sd">        When consecutive clefs are the same, the second one is removed:</span>
 
 <span class="sd">        &gt;&gt;&gt; staff = abjad.Staff(r&quot;c&#39;1 | d&#39;1&quot;)</span>
-<span class="sd">        &gt;&gt;&gt; abjad.attach(abjad.Clef(&#39;treble&#39;), staff[0])</span>
-<span class="sd">        &gt;&gt;&gt; abjad.attach(abjad.Clef(&#39;treble&#39;), staff[1])</span>
+<span class="sd">        &gt;&gt;&gt; abjad.attach(abjad.Clef(&quot;treble&quot;), staff[0])</span>
+<span class="sd">        &gt;&gt;&gt; abjad.attach(abjad.Clef(&quot;treble&quot;), staff[1])</span>
 <span class="sd">        &gt;&gt;&gt; string = abjad.lilypond(staff)</span>
 <span class="sd">        &gt;&gt;&gt; print(string)</span>
 <span class="sd">        \new Staff</span>
@@ -147,7 +147,7 @@
 <span class="sd">        although it won&#39;t then remove a subsequent repeated treble clef:</span>
 
 <span class="sd">        &gt;&gt;&gt; staff = abjad.Staff(r&quot;c&#39;1 | d&#39;1&quot;)</span>
-<span class="sd">        &gt;&gt;&gt; abjad.attach(abjad.Clef(&#39;treble&#39;), staff[1])</span>
+<span class="sd">        &gt;&gt;&gt; abjad.attach(abjad.Clef(&quot;treble&quot;), staff[1])</span>
 <span class="sd">        &gt;&gt;&gt; abjad.show(staff)</span>
 
 <span class="sd">        ..  docs::</span>
@@ -192,7 +192,7 @@
 <span class="sd">        number of leaves without clefs:</span>
 
 <span class="sd">        &gt;&gt;&gt; staff = abjad.Staff(r&quot;c&#39;1 | d&#39;2 e&#39;4 r4 | f&#39;1&quot;)</span>
-<span class="sd">        &gt;&gt;&gt; abjad.attach(abjad.Clef(&#39;treble&#39;), staff[4])</span>
+<span class="sd">        &gt;&gt;&gt; abjad.attach(abjad.Clef(&quot;treble&quot;), staff[4])</span>
 <span class="sd">        &gt;&gt;&gt; abjad.show(staff)</span>
 
 <span class="sd">        ..  docs::</span>
@@ -230,8 +230,8 @@
 <span class="sd">        already optimal.</span>
 
 <span class="sd">        &gt;&gt;&gt; staff = abjad.Staff(r&quot;c&#39;1 | a,2 bf,4 r4 | f&#39;1&quot;)</span>
-<span class="sd">        &gt;&gt;&gt; abjad.attach(abjad.Clef(&#39;bass&#39;), staff[1])</span>
-<span class="sd">        &gt;&gt;&gt; abjad.attach(abjad.Clef(&#39;treble&#39;), staff[4])</span>
+<span class="sd">        &gt;&gt;&gt; abjad.attach(abjad.Clef(&quot;bass&quot;), staff[1])</span>
+<span class="sd">        &gt;&gt;&gt; abjad.attach(abjad.Clef(&quot;treble&quot;), staff[4])</span>
 <span class="sd">        &gt;&gt;&gt; abjad.show(staff)</span>
 
 <span class="sd">        ..  docs::</span>
@@ -271,8 +271,8 @@
 <span class="sd">        The function handles rests and multi-measure rests.</span>
 
 <span class="sd">        &gt;&gt;&gt; staff = abjad.Staff(r&quot;c&#39;1 | d&#39;2 r2 | R1 | e&#39;1&quot;)</span>
-<span class="sd">        &gt;&gt;&gt; abjad.attach(abjad.Clef(&#39;treble&#39;), staff[0])</span>
-<span class="sd">        &gt;&gt;&gt; abjad.attach(abjad.Clef(&#39;treble&#39;), staff[4])</span>
+<span class="sd">        &gt;&gt;&gt; abjad.attach(abjad.Clef(&quot;treble&quot;), staff[0])</span>
+<span class="sd">        &gt;&gt;&gt; abjad.attach(abjad.Clef(&quot;treble&quot;), staff[4])</span>
 <span class="sd">        &gt;&gt;&gt; abjad.show(staff)</span>
 
 <span class="sd">        ..  docs::</span>
@@ -310,8 +310,8 @@
 <span class="sd">        leaf.</span>
 
 <span class="sd">        &gt;&gt;&gt; staff = abjad.Staff(r&quot;c&#39;1 | d&#39;2 r2 | fs1&quot;)</span>
-<span class="sd">        &gt;&gt;&gt; abjad.attach(abjad.Clef(&#39;treble&#39;), staff[0])</span>
-<span class="sd">        &gt;&gt;&gt; abjad.attach(abjad.Clef(&#39;bass&#39;), staff[2])</span>
+<span class="sd">        &gt;&gt;&gt; abjad.attach(abjad.Clef(&quot;treble&quot;), staff[0])</span>
+<span class="sd">        &gt;&gt;&gt; abjad.attach(abjad.Clef(&quot;bass&quot;), staff[2])</span>
 <span class="sd">        &gt;&gt;&gt; abjad.show(staff)</span>
 
 <span class="sd">        ..  docs::</span>
@@ -348,8 +348,8 @@
 <span class="sd">        Set ``shift_clef_to_notes`` to ``False`` to disable this behaviour.</span>
 
 <span class="sd">        &gt;&gt;&gt; staff = abjad.Staff(r&quot;c&#39;1 | d&#39;2 r2 | fs1&quot;)</span>
-<span class="sd">        &gt;&gt;&gt; abjad.attach(abjad.Clef(&#39;treble&#39;), staff[0])</span>
-<span class="sd">        &gt;&gt;&gt; abjad.attach(abjad.Clef(&#39;bass&#39;), staff[2])</span>
+<span class="sd">        &gt;&gt;&gt; abjad.attach(abjad.Clef(&quot;treble&quot;), staff[0])</span>
+<span class="sd">        &gt;&gt;&gt; abjad.attach(abjad.Clef(&quot;bass&quot;), staff[2])</span>
 <span class="sd">        &gt;&gt;&gt; auxjad.mutate.reposition_clefs(staff[:], shift_clef_to_notes=False)</span>
 <span class="sd">        &gt;&gt;&gt; abjad.show(staff)</span>
 
@@ -372,8 +372,8 @@
 <span class="sd">        rests.</span>
 
 <span class="sd">        &gt;&gt;&gt; staff = abjad.Staff(r&quot;\time 3/4 c&#39;2. | d&#39;4 r2 | R1 * 3/4 | e&#39;2.&quot;)</span>
-<span class="sd">        &gt;&gt;&gt; abjad.attach(abjad.Clef(&#39;treble&#39;), staff[0])</span>
-<span class="sd">        &gt;&gt;&gt; abjad.attach(abjad.Clef(&#39;bass&#39;), staff[2])</span>
+<span class="sd">        &gt;&gt;&gt; abjad.attach(abjad.Clef(&quot;treble&quot;), staff[0])</span>
+<span class="sd">        &gt;&gt;&gt; abjad.attach(abjad.Clef(&quot;bass&quot;), staff[2])</span>
 <span class="sd">        &gt;&gt;&gt; abjad.show(staff)</span>
 
 <span class="sd">        ..  docs::</span>
@@ -420,7 +420,7 @@
 <span class="sd">        ...                      abjad.Chord(&quot;&lt;d&#39; f&#39;&gt;2&quot;),</span>
 <span class="sd">        ...                      abjad.Tuplet((2, 3), &quot;g&#39;2 a&#39;2 b&#39;2&quot;),</span>
 <span class="sd">        ...                      ])</span>
-<span class="sd">        &gt;&gt;&gt; abjad.attach(abjad.Clef(&#39;treble&#39;), staff[2][1])</span>
+<span class="sd">        &gt;&gt;&gt; abjad.attach(abjad.Clef(&quot;treble&quot;), staff[2][1])</span>
 <span class="sd">        &gt;&gt;&gt; abjad.show(staff)</span>
 
 <span class="sd">        ..  docs::</span>
@@ -465,7 +465,7 @@
 <span class="sd">        fallback clef in LilyPond).</span>
 
 <span class="sd">        &gt;&gt;&gt; staff = abjad.Staff(r&quot;c&#39;1 | d&#39;1&quot;)</span>
-<span class="sd">        &gt;&gt;&gt; abjad.attach(abjad.Clef(&#39;treble&#39;), staff[1])</span>
+<span class="sd">        &gt;&gt;&gt; abjad.attach(abjad.Clef(&quot;treble&quot;), staff[1])</span>
 <span class="sd">        &gt;&gt;&gt; abjad.show(staff)</span>
 
 <span class="sd">        ..  docs::</span>
@@ -496,7 +496,7 @@
 <span class="sd">        change the implicit clef.</span>
 
 <span class="sd">        &gt;&gt;&gt; staff = abjad.Staff(r&quot;c1 | d1&quot;)</span>
-<span class="sd">        &gt;&gt;&gt; abjad.attach(abjad.Clef(&#39;bass&#39;), staff[1])</span>
+<span class="sd">        &gt;&gt;&gt; abjad.attach(abjad.Clef(&quot;bass&quot;), staff[1])</span>
 <span class="sd">        &gt;&gt;&gt; abjad.show(staff)</span>
 
 <span class="sd">        ..  docs::</span>
@@ -512,7 +512,7 @@
 
 <span class="sd">        &gt;&gt;&gt; auxjad.mutate.reposition_clefs(</span>
 <span class="sd">        ...     staff[:],</span>
-<span class="sd">        ...     implicit_clef=abjad.Clef(&#39;bass&#39;),</span>
+<span class="sd">        ...     implicit_clef=abjad.Clef(&quot;bass&quot;),</span>
 <span class="sd">        ... )</span>
 <span class="sd">        &gt;&gt;&gt; abjad.show(staff)</span>
 

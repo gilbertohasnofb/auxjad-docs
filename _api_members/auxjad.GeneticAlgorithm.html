@@ -77,7 +77,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../api/api-score.html">score</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../api/api-select.html">select</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../api/api-spanners.html">spanners</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../api/api-utilities.html">utilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/api-utils.html">utils</a></li>
 </ul>
 </li>
 </ul>
@@ -130,8 +130,8 @@ numbers (default value is <code class="docutils literal notranslate"><span class
 to be decreased, as it must always be smaller than
 <a class="reference internal" href="#auxjad.GeneticAlgorithm.population_size" title="auxjad.GeneticAlgorithm.population_size"><code class="xref py py-attr docutils literal notranslate"><span class="pre">population_size</span></code></a>.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ga</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">GeneticAlgorithm</span><span class="p">(</span>
-<span class="gp">... </span>    <span class="n">target</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="s1">&#39;B&#39;</span><span class="p">,</span> <span class="s1">&#39;C&#39;</span><span class="p">,</span> <span class="s1">&#39;D&#39;</span><span class="p">,</span> <span class="s1">&#39;E&#39;</span><span class="p">],</span>
-<span class="gp">... </span>    <span class="n">genes</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="s1">&#39;B&#39;</span><span class="p">,</span> <span class="s1">&#39;C&#39;</span><span class="p">,</span> <span class="s1">&#39;D&#39;</span><span class="p">,</span> <span class="s1">&#39;E&#39;</span><span class="p">,</span> <span class="s1">&#39;F&#39;</span><span class="p">,</span> <span class="s1">&#39;G&#39;</span><span class="p">,</span> <span class="s1">&#39;H&#39;</span><span class="p">,</span> <span class="s1">&#39;I&#39;</span><span class="p">,</span> <span class="s1">&#39;J&#39;</span><span class="p">],</span>
+<span class="gp">... </span>    <span class="n">target</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;A&quot;</span><span class="p">,</span> <span class="s2">&quot;B&quot;</span><span class="p">,</span> <span class="s2">&quot;C&quot;</span><span class="p">,</span> <span class="s2">&quot;D&quot;</span><span class="p">,</span> <span class="s2">&quot;E&quot;</span><span class="p">],</span>
+<span class="gp">... </span>    <span class="n">genes</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;A&quot;</span><span class="p">,</span> <span class="s2">&quot;B&quot;</span><span class="p">,</span> <span class="s2">&quot;C&quot;</span><span class="p">,</span> <span class="s2">&quot;D&quot;</span><span class="p">,</span> <span class="s2">&quot;E&quot;</span><span class="p">,</span> <span class="s2">&quot;F&quot;</span><span class="p">,</span> <span class="s2">&quot;G&quot;</span><span class="p">,</span> <span class="s2">&quot;H&quot;</span><span class="p">,</span> <span class="s2">&quot;I&quot;</span><span class="p">,</span> <span class="s2">&quot;J&quot;</span><span class="p">],</span>
 <span class="gp">... </span>    <span class="n">population_size</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span>
 <span class="gp">... </span>    <span class="n">select_n_parents</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
 <span class="gp">... </span><span class="p">)</span>
@@ -143,10 +143,10 @@ evaluation function. <a class="reference internal" href="#auxjad.GeneticAlgorith
 ordered from the fittest to the least fit.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ga</span><span class="p">()</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">ga</span><span class="o">.</span><span class="n">population</span>
-<span class="go">[[&#39;A&#39;, &#39;J&#39;, &#39;J&#39;, &#39;B&#39;, &#39;H&#39;],</span>
-<span class="go"> [&#39;D&#39;, &#39;A&#39;, &#39;E&#39;, &#39;A&#39;, &#39;F&#39;],</span>
-<span class="go"> [&#39;F&#39;, &#39;F&#39;, &#39;A&#39;, &#39;F&#39;, &#39;F&#39;],</span>
-<span class="go"> [&#39;F&#39;, &#39;F&#39;, &#39;E&#39;, &#39;J&#39;, &#39;C&#39;],</span>
+<span class="go">[[&quot;A&quot;, &quot;J&quot;, &quot;J&quot;, &quot;B&quot;, &quot;H&quot;],</span>
+<span class="go"> [&quot;D&quot;, &quot;A&quot;, &quot;E&quot;, &quot;A&quot;, &quot;F&quot;],</span>
+<span class="go"> [&quot;F&quot;, &quot;F&quot;, &quot;A&quot;, &quot;F&quot;, &quot;F&quot;],</span>
+<span class="go"> [&quot;F&quot;, &quot;F&quot;, &quot;E&quot;, &quot;J&quot;, &quot;C&quot;],</span>
 <span class="go"> ]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">ga</span><span class="o">.</span><span class="n">scores</span>
 <span class="go">[0.209603072,</span>
@@ -162,14 +162,14 @@ which will become increasingly fit.</p>
 <dt><a class="reference internal" href="#auxjad.GeneticAlgorithm.fittest_individual" title="auxjad.GeneticAlgorithm.fittest_individual"><code class="xref py py-attr docutils literal notranslate"><span class="pre">fittest_individual</span></code></a> and <a class="reference internal" href="#auxjad.GeneticAlgorithm.fittest_individual_score" title="auxjad.GeneticAlgorithm.fittest_individual_score"><code class="xref py py-attr docutils literal notranslate"><span class="pre">fittest_individual_score</span></code></a>:</dt><dd><p>The fittest individual of the whole population can be directly
 accessed using the property <a class="reference internal" href="#auxjad.GeneticAlgorithm.fittest_individual" title="auxjad.GeneticAlgorithm.fittest_individual"><code class="xref py py-attr docutils literal notranslate"><span class="pre">fittest_individual</span></code></a>:</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ga</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">GeneticAlgorithm</span><span class="p">(</span>
-<span class="gp">... </span>    <span class="n">target</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="s1">&#39;B&#39;</span><span class="p">,</span> <span class="s1">&#39;C&#39;</span><span class="p">,</span> <span class="s1">&#39;D&#39;</span><span class="p">,</span> <span class="s1">&#39;E&#39;</span><span class="p">],</span>
-<span class="gp">... </span>    <span class="n">genes</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="s1">&#39;B&#39;</span><span class="p">,</span> <span class="s1">&#39;C&#39;</span><span class="p">,</span> <span class="s1">&#39;D&#39;</span><span class="p">,</span> <span class="s1">&#39;E&#39;</span><span class="p">,</span> <span class="s1">&#39;F&#39;</span><span class="p">,</span> <span class="s1">&#39;G&#39;</span><span class="p">,</span> <span class="s1">&#39;H&#39;</span><span class="p">,</span> <span class="s1">&#39;I&#39;</span><span class="p">,</span> <span class="s1">&#39;J&#39;</span><span class="p">],</span>
+<span class="gp">... </span>    <span class="n">target</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;A&quot;</span><span class="p">,</span> <span class="s2">&quot;B&quot;</span><span class="p">,</span> <span class="s2">&quot;C&quot;</span><span class="p">,</span> <span class="s2">&quot;D&quot;</span><span class="p">,</span> <span class="s2">&quot;E&quot;</span><span class="p">],</span>
+<span class="gp">... </span>    <span class="n">genes</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;A&quot;</span><span class="p">,</span> <span class="s2">&quot;B&quot;</span><span class="p">,</span> <span class="s2">&quot;C&quot;</span><span class="p">,</span> <span class="s2">&quot;D&quot;</span><span class="p">,</span> <span class="s2">&quot;E&quot;</span><span class="p">,</span> <span class="s2">&quot;F&quot;</span><span class="p">,</span> <span class="s2">&quot;G&quot;</span><span class="p">,</span> <span class="s2">&quot;H&quot;</span><span class="p">,</span> <span class="s2">&quot;I&quot;</span><span class="p">,</span> <span class="s2">&quot;J&quot;</span><span class="p">],</span>
 <span class="gp">... </span>    <span class="n">population_size</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span>
 <span class="gp">... </span>    <span class="n">select_n_parents</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
 <span class="gp">... </span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">ga</span><span class="p">()</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">ga</span><span class="o">.</span><span class="n">fittest_individual</span>
-<span class="go">[&#39;A&#39;, &#39;J&#39;, &#39;J&#39;, &#39;B&#39;, &#39;H&#39;]</span>
+<span class="go">[&quot;A&quot;, &quot;J&quot;, &quot;J&quot;, &quot;B&quot;, &quot;H&quot;]</span>
 </pre></div>
 </div>
 <p>Its score is also directly accessible using
@@ -184,23 +184,23 @@ relation to the <a class="reference internal" href="#auxjad.GeneticAlgorithm.tar
 individual of each of <code class="docutils literal notranslate"><span class="pre">10</span></code> generations, with a
 <a class="reference internal" href="#auxjad.GeneticAlgorithm.population_size" title="auxjad.GeneticAlgorithm.population_size"><code class="xref py py-attr docutils literal notranslate"><span class="pre">population_size</span></code></a> to  <code class="docutils literal notranslate"><span class="pre">50</span></code>:</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ga</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">GeneticAlgorithm</span><span class="p">(</span>
-<span class="gp">... </span>    <span class="n">target</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="s1">&#39;B&#39;</span><span class="p">,</span> <span class="s1">&#39;C&#39;</span><span class="p">,</span> <span class="s1">&#39;D&#39;</span><span class="p">,</span> <span class="s1">&#39;E&#39;</span><span class="p">],</span>
-<span class="gp">... </span>    <span class="n">genes</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="s1">&#39;B&#39;</span><span class="p">,</span> <span class="s1">&#39;C&#39;</span><span class="p">,</span> <span class="s1">&#39;D&#39;</span><span class="p">,</span> <span class="s1">&#39;E&#39;</span><span class="p">,</span> <span class="s1">&#39;F&#39;</span><span class="p">,</span> <span class="s1">&#39;G&#39;</span><span class="p">,</span> <span class="s1">&#39;H&#39;</span><span class="p">,</span> <span class="s1">&#39;I&#39;</span><span class="p">,</span> <span class="s1">&#39;J&#39;</span><span class="p">],</span>
+<span class="gp">... </span>    <span class="n">target</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;A&quot;</span><span class="p">,</span> <span class="s2">&quot;B&quot;</span><span class="p">,</span> <span class="s2">&quot;C&quot;</span><span class="p">,</span> <span class="s2">&quot;D&quot;</span><span class="p">,</span> <span class="s2">&quot;E&quot;</span><span class="p">],</span>
+<span class="gp">... </span>    <span class="n">genes</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;A&quot;</span><span class="p">,</span> <span class="s2">&quot;B&quot;</span><span class="p">,</span> <span class="s2">&quot;C&quot;</span><span class="p">,</span> <span class="s2">&quot;D&quot;</span><span class="p">,</span> <span class="s2">&quot;E&quot;</span><span class="p">,</span> <span class="s2">&quot;F&quot;</span><span class="p">,</span> <span class="s2">&quot;G&quot;</span><span class="p">,</span> <span class="s2">&quot;H&quot;</span><span class="p">,</span> <span class="s2">&quot;I&quot;</span><span class="p">,</span> <span class="s2">&quot;J&quot;</span><span class="p">],</span>
 <span class="gp">... </span>    <span class="n">population_size</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span>
 <span class="gp">... </span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">):</span>
 <span class="gp">... </span>    <span class="n">ga</span><span class="p">()</span>
 <span class="gp">... </span>    <span class="nb">print</span><span class="p">(</span><span class="n">ga</span><span class="o">.</span><span class="n">fittest_individual</span><span class="p">,</span> <span class="n">ga</span><span class="o">.</span><span class="n">fittest_individual_score</span><span class="p">)</span>
-<span class="go">[&#39;A&#39;, &#39;J&#39;, &#39;B&#39;, &#39;E&#39;, &#39;E&#39;] 0.480000512</span>
-<span class="go">[&#39;A&#39;, &#39;H&#39;, &#39;C&#39;, &#39;D&#39;, &#39;J&#39;] 0.6000768</span>
-<span class="go">[&#39;A&#39;, &#39;C&#39;, &#39;D&#39;, &#39;D&#39;, &#39;E&#39;] 0.6799999999999999</span>
-<span class="go">[&#39;A&#39;, &#39;C&#39;, &#39;D&#39;, &#39;D&#39;, &#39;E&#39;] 0.6799999999999999</span>
-<span class="go">[&#39;A&#39;, &#39;C&#39;, &#39;D&#39;, &#39;D&#39;, &#39;E&#39;] 0.6799999999999999</span>
-<span class="go">[&#39;A&#39;, &#39;C&#39;, &#39;C&#39;, &#39;D&#39;, &#39;E&#39;] 0.8400000000000001</span>
-<span class="go">[&#39;A&#39;, &#39;C&#39;, &#39;C&#39;, &#39;D&#39;, &#39;E&#39;] 0.8400000000000001</span>
-<span class="go">[&#39;A&#39;, &#39;C&#39;, &#39;C&#39;, &#39;D&#39;, &#39;E&#39;] 0.8400000000000001</span>
-<span class="go">[&#39;A&#39;, &#39;C&#39;, &#39;C&#39;, &#39;D&#39;, &#39;E&#39;] 0.8400000000000001</span>
-<span class="go">[&#39;A&#39;, &#39;C&#39;, &#39;C&#39;, &#39;D&#39;, &#39;E&#39;] 0.8400000000000001</span>
+<span class="go">[&quot;A&quot;, &quot;J&quot;, &quot;B&quot;, &quot;E&quot;, &quot;E&quot;] 0.480000512</span>
+<span class="go">[&quot;A&quot;, &quot;H&quot;, &quot;C&quot;, &quot;D&quot;, &quot;J&quot;] 0.6000768</span>
+<span class="go">[&quot;A&quot;, &quot;C&quot;, &quot;D&quot;, &quot;D&quot;, &quot;E&quot;] 0.6799999999999999</span>
+<span class="go">[&quot;A&quot;, &quot;C&quot;, &quot;D&quot;, &quot;D&quot;, &quot;E&quot;] 0.6799999999999999</span>
+<span class="go">[&quot;A&quot;, &quot;C&quot;, &quot;D&quot;, &quot;D&quot;, &quot;E&quot;] 0.6799999999999999</span>
+<span class="go">[&quot;A&quot;, &quot;C&quot;, &quot;C&quot;, &quot;D&quot;, &quot;E&quot;] 0.8400000000000001</span>
+<span class="go">[&quot;A&quot;, &quot;C&quot;, &quot;C&quot;, &quot;D&quot;, &quot;E&quot;] 0.8400000000000001</span>
+<span class="go">[&quot;A&quot;, &quot;C&quot;, &quot;C&quot;, &quot;D&quot;, &quot;E&quot;] 0.8400000000000001</span>
+<span class="go">[&quot;A&quot;, &quot;C&quot;, &quot;C&quot;, &quot;D&quot;, &quot;E&quot;] 0.8400000000000001</span>
+<span class="go">[&quot;A&quot;, &quot;C&quot;, &quot;C&quot;, &quot;D&quot;, &quot;E&quot;] 0.8400000000000001</span>
 </pre></div>
 </div>
 </dd>
@@ -211,11 +211,11 @@ function compares each element of its elements with the element in the
 being used as genes (as opposed to numbers only), this comparison uses
 the distance between the current individual and target genes using the
 <a class="reference internal" href="#auxjad.GeneticAlgorithm.genes" title="auxjad.GeneticAlgorithm.genes"><code class="xref py py-attr docutils literal notranslate"><span class="pre">genes</span></code></a> property. Consider the following example, where the
-available genes are <code class="docutils literal notranslate"><span class="pre">['A',</span> <span class="pre">'B',</span> <span class="pre">'C',</span> <span class="pre">'D',</span> <span class="pre">'E',</span> <span class="pre">'F']</span></code> and the target
-is <code class="docutils literal notranslate"><span class="pre">['B',</span> <span class="pre">'A',</span> <span class="pre">'A',</span> <span class="pre">'C']</span></code>. Suppose an individual has the genes
-<code class="docutils literal notranslate"><span class="pre">['D',</span> <span class="pre">'D',</span> <span class="pre">'A',</span> <span class="pre">'B']</span></code>.</p>
+available genes are <code class="docutils literal notranslate"><span class="pre">[&quot;A&quot;,</span> <span class="pre">&quot;B&quot;,</span> <span class="pre">&quot;C&quot;,</span> <span class="pre">&quot;D&quot;,</span> <span class="pre">&quot;E&quot;,</span> <span class="pre">&quot;F&quot;]</span></code> and the target
+is <code class="docutils literal notranslate"><span class="pre">[&quot;B&quot;,</span> <span class="pre">&quot;A&quot;,</span> <span class="pre">&quot;A&quot;,</span> <span class="pre">&quot;C&quot;]</span></code>. Suppose an individual has the genes
+<code class="docutils literal notranslate"><span class="pre">[&quot;D&quot;,</span> <span class="pre">&quot;D&quot;,</span> <span class="pre">&quot;A&quot;,</span> <span class="pre">&quot;B&quot;]</span></code>.</p>
 <p>To evaluate this individual, first the algorithm finds the indices of
-both the target’s genes (in this case, <code class="docutils literal notranslate"><span class="pre">[1,</span> <span class="pre">0,</span> <span class="pre">0,</span> <span class="pre">2]</span></code>) and also of
+both the target”s genes (in this case, <code class="docutils literal notranslate"><span class="pre">[1,</span> <span class="pre">0,</span> <span class="pre">0,</span> <span class="pre">2]</span></code>) and also of
 the individual to be evaluated (in this case, <code class="docutils literal notranslate"><span class="pre">[3,</span> <span class="pre">3,</span> <span class="pre">0,</span> <span class="pre">1]</span></code>). It
 then scores each element of this individual against the target using:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">difference</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">target_gene_index</span> <span class="o">-</span> <span class="n">individual_gene_index</span><span class="p">)</span>
@@ -256,31 +256,31 @@ possible to set a custom initial individual as a starting point. This
 can be used to ‘morph’ fittest individual from this initial one to a
 fit one according to the target.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ga</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">GeneticAlgorithm</span><span class="p">(</span>
-<span class="gp">... </span>    <span class="n">target</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="s1">&#39;B&#39;</span><span class="p">,</span> <span class="s1">&#39;C&#39;</span><span class="p">,</span> <span class="s1">&#39;D&#39;</span><span class="p">,</span> <span class="s1">&#39;E&#39;</span><span class="p">],</span>
-<span class="gp">... </span>    <span class="n">genes</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="s1">&#39;B&#39;</span><span class="p">,</span> <span class="s1">&#39;C&#39;</span><span class="p">,</span> <span class="s1">&#39;D&#39;</span><span class="p">,</span> <span class="s1">&#39;E&#39;</span><span class="p">,</span> <span class="s1">&#39;F&#39;</span><span class="p">,</span> <span class="s1">&#39;G&#39;</span><span class="p">,</span> <span class="s1">&#39;H&#39;</span><span class="p">,</span> <span class="s1">&#39;I&#39;</span><span class="p">,</span> <span class="s1">&#39;J&#39;</span><span class="p">],</span>
-<span class="gp">... </span>    <span class="n">initial_individual</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;F&#39;</span><span class="p">,</span> <span class="s1">&#39;G&#39;</span><span class="p">,</span> <span class="s1">&#39;H&#39;</span><span class="p">,</span> <span class="s1">&#39;I&#39;</span><span class="p">,</span> <span class="s1">&#39;J&#39;</span><span class="p">],</span>
+<span class="gp">... </span>    <span class="n">target</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;A&quot;</span><span class="p">,</span> <span class="s2">&quot;B&quot;</span><span class="p">,</span> <span class="s2">&quot;C&quot;</span><span class="p">,</span> <span class="s2">&quot;D&quot;</span><span class="p">,</span> <span class="s2">&quot;E&quot;</span><span class="p">],</span>
+<span class="gp">... </span>    <span class="n">genes</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;A&quot;</span><span class="p">,</span> <span class="s2">&quot;B&quot;</span><span class="p">,</span> <span class="s2">&quot;C&quot;</span><span class="p">,</span> <span class="s2">&quot;D&quot;</span><span class="p">,</span> <span class="s2">&quot;E&quot;</span><span class="p">,</span> <span class="s2">&quot;F&quot;</span><span class="p">,</span> <span class="s2">&quot;G&quot;</span><span class="p">,</span> <span class="s2">&quot;H&quot;</span><span class="p">,</span> <span class="s2">&quot;I&quot;</span><span class="p">,</span> <span class="s2">&quot;J&quot;</span><span class="p">],</span>
+<span class="gp">... </span>    <span class="n">initial_individual</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;F&quot;</span><span class="p">,</span> <span class="s2">&quot;G&quot;</span><span class="p">,</span> <span class="s2">&quot;H&quot;</span><span class="p">,</span> <span class="s2">&quot;I&quot;</span><span class="p">,</span> <span class="s2">&quot;J&quot;</span><span class="p">],</span>
 <span class="gp">... </span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">):</span>
 <span class="gp">... </span>    <span class="n">ga</span><span class="p">()</span>
 <span class="gp">... </span>    <span class="n">ga</span><span class="o">.</span><span class="n">fittest_individual</span>
-<span class="go">[&#39;F&#39;, &#39;G&#39;, &#39;H&#39;, &#39;I&#39;, &#39;J&#39;]</span>
-<span class="go">[&#39;F&#39;, &#39;B&#39;, &#39;H&#39;, &#39;I&#39;, &#39;J&#39;]</span>
-<span class="go">[&#39;F&#39;, &#39;B&#39;, &#39;H&#39;, &#39;I&#39;, &#39;E&#39;]</span>
-<span class="go">[&#39;F&#39;, &#39;B&#39;, &#39;H&#39;, &#39;I&#39;, &#39;E&#39;]</span>
-<span class="go">[&#39;A&#39;, &#39;B&#39;, &#39;H&#39;, &#39;I&#39;, &#39;E&#39;]</span>
-<span class="go">[&#39;A&#39;, &#39;B&#39;, &#39;E&#39;, &#39;I&#39;, &#39;E&#39;]</span>
-<span class="go">[&#39;A&#39;, &#39;B&#39;, &#39;E&#39;, &#39;D&#39;, &#39;E&#39;]</span>
-<span class="go">[&#39;A&#39;, &#39;B&#39;, &#39;E&#39;, &#39;D&#39;, &#39;E&#39;]</span>
-<span class="go">[&#39;A&#39;, &#39;B&#39;, &#39;E&#39;, &#39;D&#39;, &#39;E&#39;]</span>
-<span class="go">[&#39;A&#39;, &#39;B&#39;, &#39;D&#39;, &#39;D&#39;, &#39;E&#39;]</span>
+<span class="go">[&quot;F&quot;, &quot;G&quot;, &quot;H&quot;, &quot;I&quot;, &quot;J&quot;]</span>
+<span class="go">[&quot;F&quot;, &quot;B&quot;, &quot;H&quot;, &quot;I&quot;, &quot;J&quot;]</span>
+<span class="go">[&quot;F&quot;, &quot;B&quot;, &quot;H&quot;, &quot;I&quot;, &quot;E&quot;]</span>
+<span class="go">[&quot;F&quot;, &quot;B&quot;, &quot;H&quot;, &quot;I&quot;, &quot;E&quot;]</span>
+<span class="go">[&quot;A&quot;, &quot;B&quot;, &quot;H&quot;, &quot;I&quot;, &quot;E&quot;]</span>
+<span class="go">[&quot;A&quot;, &quot;B&quot;, &quot;E&quot;, &quot;I&quot;, &quot;E&quot;]</span>
+<span class="go">[&quot;A&quot;, &quot;B&quot;, &quot;E&quot;, &quot;D&quot;, &quot;E&quot;]</span>
+<span class="go">[&quot;A&quot;, &quot;B&quot;, &quot;E&quot;, &quot;D&quot;, &quot;E&quot;]</span>
+<span class="go">[&quot;A&quot;, &quot;B&quot;, &quot;E&quot;, &quot;D&quot;, &quot;E&quot;]</span>
+<span class="go">[&quot;A&quot;, &quot;B&quot;, &quot;D&quot;, &quot;D&quot;, &quot;E&quot;]</span>
 </pre></div>
 </div>
 </dd>
 <dt><a class="reference internal" href="#auxjad.GeneticAlgorithm.reset" title="auxjad.GeneticAlgorithm.reset"><code class="xref py py-meth docutils literal notranslate"><span class="pre">reset()</span></code></a>:</dt><dd><p>Use the <a class="reference internal" href="#auxjad.GeneticAlgorithm.reset" title="auxjad.GeneticAlgorithm.reset"><code class="xref py py-meth docutils literal notranslate"><span class="pre">reset()</span></code></a> method to reset the genetic algorithm at any
 point:</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ga</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">GeneticAlgorithm</span><span class="p">(</span>
-<span class="gp">... </span>    <span class="n">target</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="s1">&#39;B&#39;</span><span class="p">,</span> <span class="s1">&#39;C&#39;</span><span class="p">,</span> <span class="s1">&#39;D&#39;</span><span class="p">,</span> <span class="s1">&#39;E&#39;</span><span class="p">],</span>
-<span class="gp">... </span>    <span class="n">genes</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="s1">&#39;B&#39;</span><span class="p">,</span> <span class="s1">&#39;C&#39;</span><span class="p">,</span> <span class="s1">&#39;D&#39;</span><span class="p">,</span> <span class="s1">&#39;E&#39;</span><span class="p">,</span> <span class="s1">&#39;F&#39;</span><span class="p">,</span> <span class="s1">&#39;G&#39;</span><span class="p">,</span> <span class="s1">&#39;H&#39;</span><span class="p">,</span> <span class="s1">&#39;I&#39;</span><span class="p">,</span> <span class="s1">&#39;J&#39;</span><span class="p">],</span>
+<span class="gp">... </span>    <span class="n">target</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;A&quot;</span><span class="p">,</span> <span class="s2">&quot;B&quot;</span><span class="p">,</span> <span class="s2">&quot;C&quot;</span><span class="p">,</span> <span class="s2">&quot;D&quot;</span><span class="p">,</span> <span class="s2">&quot;E&quot;</span><span class="p">],</span>
+<span class="gp">... </span>    <span class="n">genes</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;A&quot;</span><span class="p">,</span> <span class="s2">&quot;B&quot;</span><span class="p">,</span> <span class="s2">&quot;C&quot;</span><span class="p">,</span> <span class="s2">&quot;D&quot;</span><span class="p">,</span> <span class="s2">&quot;E&quot;</span><span class="p">,</span> <span class="s2">&quot;F&quot;</span><span class="p">,</span> <span class="s2">&quot;G&quot;</span><span class="p">,</span> <span class="s2">&quot;H&quot;</span><span class="p">,</span> <span class="s2">&quot;I&quot;</span><span class="p">,</span> <span class="s2">&quot;J&quot;</span><span class="p">],</span>
 <span class="gp">... </span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">ga</span><span class="o">.</span><span class="n">generation_number</span>
 <span class="go">None</span>
@@ -291,7 +291,7 @@ point:</p>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">ga</span><span class="o">.</span><span class="n">generation_number</span>
 <span class="go">9</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">ga</span><span class="o">.</span><span class="n">fittest_individual</span>
-<span class="go">[&#39;C&#39;, &#39;B&#39;, &#39;C&#39;, &#39;D&#39;, &#39;E&#39;]</span>
+<span class="go">[&quot;C&quot;, &quot;B&quot;, &quot;C&quot;, &quot;D&quot;, &quot;E&quot;]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">ga</span><span class="o">.</span><span class="n">reset</span><span class="p">()</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">ga</span><span class="o">.</span><span class="n">generation_number</span>
 <span class="go">None</span>
@@ -421,9 +421,9 @@ function. Sorts the population according to their scores.</p>
 <dd><p>The index used in the evaluation function. This index will be
 raised by the difference between indices of the target value and the
 current value. Consider the following example, where the available
-genes are <code class="docutils literal notranslate"><span class="pre">['A',</span> <span class="pre">'B',</span> <span class="pre">'C',</span> <span class="pre">'D',</span> <span class="pre">'E',</span> <span class="pre">'F']</span></code> and the target is
-<code class="docutils literal notranslate"><span class="pre">['B',</span> <span class="pre">'A',</span> <span class="pre">'A',</span> <span class="pre">'C']</span></code>. Suppose an individual has the genes
-<code class="docutils literal notranslate"><span class="pre">['D',</span> <span class="pre">'D',</span> <span class="pre">'A',</span> <span class="pre">'B']</span></code>.</p>
+genes are <code class="docutils literal notranslate"><span class="pre">[&quot;A&quot;,</span> <span class="pre">&quot;B&quot;,</span> <span class="pre">&quot;C&quot;,</span> <span class="pre">&quot;D&quot;,</span> <span class="pre">&quot;E&quot;,</span> <span class="pre">&quot;F&quot;]</span></code> and the target is
+<code class="docutils literal notranslate"><span class="pre">[&quot;B&quot;,</span> <span class="pre">&quot;A&quot;,</span> <span class="pre">&quot;A&quot;,</span> <span class="pre">&quot;C&quot;]</span></code>. Suppose an individual has the genes
+<code class="docutils literal notranslate"><span class="pre">[&quot;D&quot;,</span> <span class="pre">&quot;D&quot;,</span> <span class="pre">&quot;A&quot;,</span> <span class="pre">&quot;B&quot;]</span></code>.</p>
 <p>To evaluate this individual, first the algorithm finds the indices of
 both the target’s genes (in this case, <code class="docutils literal notranslate"><span class="pre">[1,</span> <span class="pre">0,</span> <span class="pre">0,</span> <span class="pre">2]</span></code>) and also of
 the individual to be evaluated (in this case, <code class="docutils literal notranslate"><span class="pre">[3,</span> <span class="pre">3,</span> <span class="pre">0,</span> <span class="pre">1]</span></code>). It

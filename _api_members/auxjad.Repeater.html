@@ -77,7 +77,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../api/api-score.html">score</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../api/api-select.html">select</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../api/api-spanners.html">spanners</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../api/api-utilities.html">utilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/api-utils.html">utils</a></li>
 </ul>
 </li>
 </ul>
@@ -149,14 +149,14 @@ results.</p>
 </figure>
 </dd>
 <dt><a class="reference internal" href="#auxjad.Repeater.repeat_type" title="auxjad.Repeater.repeat_type"><code class="xref py py-attr docutils literal notranslate"><span class="pre">repeat_type</span></code></a>:</dt><dd><p>Use the <a class="reference internal" href="#auxjad.Repeater.repeat_type" title="auxjad.Repeater.repeat_type"><code class="xref py py-attr docutils literal notranslate"><span class="pre">repeat_type</span></code></a> property to set the type of the repeater.
-It takes a single string, which should be either <code class="docutils literal notranslate"><span class="pre">'unfold'</span></code> or
-<code class="docutils literal notranslate"><span class="pre">'volta'</span></code>. Unfold is the default mode i.e. the repeater outputs a
+It takes a single string, which should be either <code class="docutils literal notranslate"><span class="pre">&quot;unfold&quot;</span></code> or
+<code class="docutils literal notranslate"><span class="pre">&quot;volta&quot;</span></code>. Unfold is the default mode i.e. the repeater outputs a
 selection of <code class="docutils literal notranslate"><span class="pre">n</span></code> identical consecutive measures. In volta mode,
 repeat bars are added as well as a written indication of the number of
 repeats. Compare:</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">container</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;c&#39;2 d&#39;2&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">repeater</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">Repeater</span><span class="p">(</span><span class="n">container</span><span class="p">,</span>
-<span class="gp">... </span>                           <span class="n">repeat_type</span><span class="o">=</span><span class="s1">&#39;unfold&#39;</span><span class="p">,</span>
+<span class="gp">... </span>                           <span class="n">repeat_type</span><span class="o">=</span><span class="s2">&quot;unfold&quot;</span><span class="p">,</span>
 <span class="gp">... </span>                           <span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">notes</span> <span class="o">=</span> <span class="n">repeater</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">staff</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span><span class="n">notes</span><span class="p">)</span>
@@ -168,7 +168,7 @@ repeats. Compare:</p>
 </figure>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">container</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;c&#39;2 d&#39;2&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">repeater</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">Repeater</span><span class="p">(</span><span class="n">container</span><span class="p">,</span>
-<span class="gp">... </span>                           <span class="n">repeat_type</span><span class="o">=</span><span class="s1">&#39;volta&#39;</span><span class="p">,</span>
+<span class="gp">... </span>                           <span class="n">repeat_type</span><span class="o">=</span><span class="s2">&quot;volta&quot;</span><span class="p">,</span>
 <span class="gp">... </span>                           <span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">notes</span> <span class="o">=</span> <span class="n">repeater</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">staff</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span><span class="n">notes</span><span class="p">)</span>
@@ -183,7 +183,7 @@ repeats. Compare:</p>
 way:</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">container</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;c&#39;4 d&#39;4 e&#39;4 f&#39;4&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">repeater</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">Repeater</span><span class="p">(</span><span class="n">container</span><span class="p">,</span>
-<span class="gp">... </span>                           <span class="n">repeat_type</span><span class="o">=</span><span class="s1">&#39;volta&#39;</span><span class="p">,</span>
+<span class="gp">... </span>                           <span class="n">repeat_type</span><span class="o">=</span><span class="s2">&quot;volta&quot;</span><span class="p">,</span>
 <span class="gp">... </span>                           <span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">notes</span> <span class="o">=</span> <span class="n">repeater</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">staff</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span><span class="n">notes</span><span class="p">)</span>
@@ -205,7 +205,7 @@ volta mode. To omit it when <code class="docutils literal notranslate"><span cla
 <a class="reference internal" href="#auxjad.Repeater.include_2x_volta_text" title="auxjad.Repeater.include_2x_volta_text"><code class="xref py py-attr docutils literal notranslate"><span class="pre">include_2x_volta_text</span></code></a> to <code class="docutils literal notranslate"><span class="pre">False</span></code>:</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">container</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;c&#39;4 d&#39;4 e&#39;4 f&#39;4&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">repeater</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">Repeater</span><span class="p">(</span><span class="n">container</span><span class="p">,</span>
-<span class="gp">... </span>                           <span class="n">repeat_type</span><span class="o">=</span><span class="s1">&#39;volta&#39;</span><span class="p">,</span>
+<span class="gp">... </span>                           <span class="n">repeat_type</span><span class="o">=</span><span class="s2">&quot;volta&quot;</span><span class="p">,</span>
 <span class="gp">... </span>                           <span class="n">include_2x_volta_text</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
 <span class="gp">... </span>                           <span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">notes</span> <span class="o">=</span> <span class="n">repeater</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
@@ -297,7 +297,7 @@ time signatures (including repeated ones) to be added to the output
 Check their documentation for more information on how they operate.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">container</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;\time 3/4 c&#39;4 d&#39;4 e&#39;4&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">repeater</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">Repeater</span><span class="p">(</span><span class="n">container</span><span class="p">,</span>
-<span class="gp">... </span>                           <span class="n">repeat_type</span><span class="o">=</span><span class="s1">&#39;volta&#39;</span><span class="p">,</span>
+<span class="gp">... </span>                           <span class="n">repeat_type</span><span class="o">=</span><span class="s2">&quot;volta&quot;</span><span class="p">,</span>
 <span class="gp">... </span>                           <span class="n">include_2x_volta_text</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
 <span class="gp">... </span>                           <span class="n">omit_time_signatures</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
 <span class="gp">... </span>                           <span class="n">force_identical_time_signatures</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
@@ -306,7 +306,7 @@ Check their documentation for more information on how they operate.</p>
 <span class="gp">... </span>                           <span class="n">reposition_slurs</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
 <span class="gp">... </span>                           <span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">repeater</span><span class="o">.</span><span class="n">repeat_type</span>
-<span class="go">&#39;volta&#39;</span>
+<span class="go">&quot;volta&quot;</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">repeater</span><span class="o">.</span><span class="n">include_2x_volta_text</span>
 <span class="go">False</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">repeater</span><span class="o">.</span><span class="n">omit_time_signatures</span>
@@ -322,7 +322,7 @@ Check their documentation for more information on how they operate.</p>
 </pre></div>
 </div>
 <p>Use the properties below to change these values after initialisation.</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">repeater</span><span class="o">.</span><span class="n">repeat_type</span> <span class="o">=</span> <span class="s1">&#39;unfold&#39;</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">repeater</span><span class="o">.</span><span class="n">repeat_type</span> <span class="o">=</span> <span class="s2">&quot;unfold&quot;</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">repeater</span><span class="o">.</span><span class="n">include_2x_volta_text</span> <span class="o">=</span> <span class="kc">True</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">repeater</span><span class="o">.</span><span class="n">omit_time_signatures</span> <span class="o">=</span> <span class="kc">True</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">repeater</span><span class="o">.</span><span class="n">force_identical_time_signatures</span> <span class="o">=</span> <span class="kc">True</span>
@@ -330,7 +330,7 @@ Check their documentation for more information on how they operate.</p>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">repeater</span><span class="o">.</span><span class="n">reposition_dynamics</span> <span class="o">=</span> <span class="kc">False</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">repeater</span><span class="o">.</span><span class="n">reposition_slurs</span> <span class="o">=</span> <span class="kc">False</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">repeater</span><span class="o">.</span><span class="n">repeat_type</span>
-<span class="go">&#39;unfold&#39;</span>
+<span class="go">&quot;unfold&quot;</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">repeater</span><span class="o">.</span><span class="n">include_2x_volta_text</span>
 <span class="go">True</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">repeater</span><span class="o">.</span><span class="n">omit_time_signatures</span>
@@ -510,7 +510,7 @@ exception.</p>
 <td><p>When <code class="docutils literal notranslate"><span class="pre">True</span></code>, all time signatures will be omitted from the output.</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="#auxjad.Repeater.repeat_type" title="auxjad.Repeater.repeat_type"><code class="xref py py-obj docutils literal notranslate"><span class="pre">repeat_type</span></code></a></p></td>
-<td><p>Defines the type of repeat, either <code class="docutils literal notranslate"><span class="pre">'unfold'</span></code> or <code class="docutils literal notranslate"><span class="pre">'volta'</span></code>.</p></td>
+<td><p>Defines the type of repeat, either <code class="docutils literal notranslate"><span class="pre">&quot;unfold&quot;</span></code> or <code class="docutils literal notranslate"><span class="pre">&quot;volta&quot;</span></code>.</p></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="#auxjad.Repeater.reposition_clefs" title="auxjad.Repeater.reposition_clefs"><code class="xref py py-obj docutils literal notranslate"><span class="pre">reposition_clefs</span></code></a></p></td>
 <td><p>When <code class="docutils literal notranslate"><span class="pre">True</span></code>, <a class="reference internal" href="auxjad.mutate.reposition_clefs.html#auxjad.mutate.reposition_clefs" title="auxjad.mutate.reposition_clefs"><code class="xref py py-func docutils literal notranslate"><span class="pre">auxjad.mutate.reposition_clefs()</span></code></a> is invoked.</p></td>
@@ -598,7 +598,7 @@ output.</p>
 <dl class="py property">
 <dt class="sig sig-object py" id="auxjad.Repeater.repeat_type">
 <span class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">repeat_type</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.14)"><span class="pre">bool</span></a></span><a class="headerlink" href="#auxjad.Repeater.repeat_type" title="Link to this definition"></a></dt>
-<dd><p>Defines the type of repeat, either <code class="docutils literal notranslate"><span class="pre">'unfold'</span></code> or <code class="docutils literal notranslate"><span class="pre">'volta'</span></code>.</p>
+<dd><p>Defines the type of repeat, either <code class="docutils literal notranslate"><span class="pre">&quot;unfold&quot;</span></code> or <code class="docutils literal notranslate"><span class="pre">&quot;volta&quot;</span></code>.</p>
 </dd></dl>
 
 <dl class="py property">
