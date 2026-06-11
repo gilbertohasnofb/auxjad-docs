@@ -5,7 +5,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>auxjad.core.TenneySelector &mdash; Auxjad 1.0.9 documentation</title>
+  <title>auxjad.core.TenneySelector &mdash; Auxjad 1.0.10 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=9ca51bb7" />
       <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=9edc463e" />
 
@@ -13,7 +13,7 @@
     <link rel="canonical" href="https://gilbertohasnofb.github.io/auxjad-docs/_modules/auxjad/core/TenneySelector.html"/>
       <script src="../../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../../../_static/documentation_options.js?v=0abd802e"></script>
+      <script src="../../../_static/documentation_options.js?v=377e76b0"></script>
       <script src="../../../_static/doctools.js?v=fd6eb6e6"></script>
       <script src="../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
     <script src="../../../_static/js/theme.js"></script>
@@ -75,7 +75,7 @@
              
   <h1>Source code for auxjad.core.TenneySelector</h1><div class="highlight"><pre>
 <span></span><span class="kn">import</span><span class="w"> </span><span class="nn">random</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Union</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Any</span>
 
 
 <div class="viewcode-block" id="TenneySelector">
@@ -89,8 +89,8 @@
 
 <span class="sd">    This implementation is based on the paper: Polansky, L., A. Barnett, and</span>
 <span class="sd">    M. Winter (2011). &#39;A Few More Words About James Tenney: Dissonant</span>
-<span class="sd">    Counterpoint and Statistical Feedback&#39;. In: Journal of Mathematics and</span>
-<span class="sd">    Music 5(2). pp. 63--82.</span>
+<span class="sd">    Counterpoint and Statistical Feedback&#39;. In: *Journal of Mathematics and</span>
+<span class="sd">    Music* **5**\(2). pp. 63--82.</span>
 
 <span class="sd">    Basic usage:</span>
 <span class="sd">        The selector should be initialised with a :obj:`list`. The elements of</span>
@@ -434,7 +434,7 @@
 <span class="sd">        [1.0, 1.0, 1.0, 1.0]</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="c1">### CLASS VARIABLES ###</span>
+    <span class="c1"># ---------- CLASS VARIABLES ----------</span>
 
     <span class="vm">__slots__</span> <span class="o">=</span> <span class="p">(</span>
         <span class="s2">&quot;_contents&quot;</span><span class="p">,</span>
@@ -445,7 +445,7 @@
         <span class="s2">&quot;_probabilities&quot;</span><span class="p">,</span>
     <span class="p">)</span>
 
-    <span class="c1">### INITIALISER ###</span>
+    <span class="c1"># ---------- INITIALISER ----------</span>
 
 <div class="viewcode-block" id="TenneySelector.__init__">
 <a class="viewcode-back" href="../../../_api_members/auxjad.TenneySelector.html#auxjad.TenneySelector.__init__">[docs]</a>
@@ -453,7 +453,7 @@
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">contents</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">Any</span><span class="p">],</span>
         <span class="o">*</span><span class="p">,</span>
-        <span class="n">weights</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">list</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">weights</span><span class="p">:</span> <span class="nb">list</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
         <span class="n">curvature</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1.0</span><span class="p">,</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">contents</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
@@ -470,8 +470,8 @@
         <span class="k">if</span> <span class="n">curvature</span> <span class="o">&lt;</span> <span class="mf">0.0</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;&#39;curvature&#39; must be larger than 0.0&quot;</span><span class="p">)</span>
         <span class="c1"># initialising using attributes, not properties, due to cyclic</span>
-        <span class="c1"># dependencies, as self._generate_probabilities() is called on all the</span>
-        <span class="c1"># relevant properties that could be used</span>
+        <span class="c1"># dependencies, as self._generate_probabilities() is called when setting</span>
+        <span class="c1"># each of the attributes below</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_contents</span> <span class="o">=</span> <span class="n">contents</span><span class="p">[:]</span>
         <span class="k">if</span> <span class="n">weights</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_weights</span> <span class="o">=</span> <span class="n">weights</span><span class="p">[:]</span>
@@ -483,7 +483,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">_previous_index</span> <span class="o">=</span> <span class="kc">None</span></div>
 
 
-    <span class="c1">### SPECIAL METHODS ###</span>
+    <span class="c1"># ---------- SPECIAL METHODS ----------</span>
 
 <div class="viewcode-block" id="TenneySelector.__repr__">
 <a class="viewcode-back" href="../../../_api_members/auxjad.TenneySelector.html#auxjad.TenneySelector.__repr__">[docs]</a>
@@ -547,7 +547,6 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">length_before_set</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="fm">__len__</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_contents</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">value</span>
-        <span class="nb">print</span><span class="p">(</span><span class="n">length_before_set</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="fm">__len__</span><span class="p">())</span>
         <span class="k">if</span> <span class="n">length_before_set</span> <span class="o">!=</span> <span class="bp">self</span><span class="o">.</span><span class="fm">__len__</span><span class="p">():</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">weights</span> <span class="o">=</span> <span class="kc">None</span></div>
 
@@ -567,7 +566,7 @@
         <span class="k">del</span> <span class="bp">self</span><span class="o">.</span><span class="n">_counter</span><span class="p">[</span><span class="n">key</span><span class="p">]</span></div>
 
 
-    <span class="c1">### PUBLIC METHODS ###</span>
+    <span class="c1"># ---------- PUBLIC METHODS ----------</span>
 
 <div class="viewcode-block" id="TenneySelector.reset_probabilities">
 <a class="viewcode-back" href="../../../_api_members/auxjad.TenneySelector.html#auxjad.TenneySelector.reset_probabilities">[docs]</a>
@@ -579,7 +578,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">_generate_probabilities</span><span class="p">()</span></div>
 
 
-    <span class="c1">### PRIVATE METHODS ###</span>
+    <span class="c1"># ---------- PRIVATE METHODS ----------</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">_regenerate_counts</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Increases the count of all elements except for the previously</span>
@@ -614,7 +613,7 @@
 <span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Applies the growth exponent given a number of counts.&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="n">count</span><span class="o">**</span><span class="bp">self</span><span class="o">.</span><span class="n">_curvature</span>
 
-    <span class="c1">### PUBLIC PROPERTIES ###</span>
+    <span class="c1"># ---------- PUBLIC PROPERTIES ----------</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">contents</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="n">Any</span><span class="p">]:</span>
@@ -633,7 +632,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">_generate_probabilities</span><span class="p">(</span><span class="n">reset</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
     <span class="nd">@property</span>
-    <span class="k">def</span><span class="w"> </span><span class="nf">weights</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="nb">int</span><span class="p">]]:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">weights</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">float</span> <span class="o">|</span> <span class="nb">int</span><span class="p">]:</span>
 <span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;The :obj:`list` with weights for each element of</span>
 <span class="sd">        :attr:`contents`.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -642,7 +641,7 @@
     <span class="nd">@weights</span><span class="o">.</span><span class="n">setter</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">weights</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
-        <span class="n">weights</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="nb">int</span><span class="p">]]],</span>
+        <span class="n">weights</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">float</span> <span class="o">|</span> <span class="nb">int</span><span class="p">]</span> <span class="o">|</span> <span class="kc">None</span><span class="p">,</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="k">if</span> <span class="n">weights</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
             <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">weights</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
@@ -676,7 +675,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">_generate_probabilities</span><span class="p">()</span>
 
     <span class="nd">@property</span>
-    <span class="k">def</span><span class="w"> </span><span class="nf">previous_index</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Union</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="kc">None</span><span class="p">]:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">previous_index</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span> <span class="o">|</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Read-only property, returns the index of the previously output</span>
 <span class="sd">        element.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -696,7 +695,7 @@
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_probabilities</span>
 
     <span class="nd">@property</span>
-    <span class="k">def</span><span class="w"> </span><span class="nf">counter</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Union</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">],</span> <span class="kc">None</span><span class="p">]:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">counter</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">|</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Read-only property, returns the list with the counts of how many</span>
 <span class="sd">        iterations has it been since a given element hasn&#39;t been selected. It</span>
 <span class="sd">        is initialised to a list of 1&#39;s. A 0 is assigned to the index of the</span>

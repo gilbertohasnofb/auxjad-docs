@@ -5,7 +5,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>auxjad.core.Hocketer &mdash; Auxjad 1.0.9 documentation</title>
+  <title>auxjad.core.Hocketer &mdash; Auxjad 1.0.10 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=9ca51bb7" />
       <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=9edc463e" />
 
@@ -13,7 +13,7 @@
     <link rel="canonical" href="https://gilbertohasnofb.github.io/auxjad-docs/_modules/auxjad/core/Hocketer.html"/>
       <script src="../../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../../../_static/documentation_options.js?v=0abd802e"></script>
+      <script src="../../../_static/documentation_options.js?v=377e76b0"></script>
       <script src="../../../_static/doctools.js?v=fd6eb6e6"></script>
       <script src="../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
     <script src="../../../_static/js/theme.js"></script>
@@ -75,7 +75,6 @@
              
   <h1>Source code for auxjad.core.Hocketer</h1><div class="highlight"><pre>
 <span></span><span class="kn">import</span><span class="w"> </span><span class="nn">random</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Union</span>
 
 <span class="kn">import</span><span class="w"> </span><span class="nn">abjad</span>
 
@@ -1415,7 +1414,7 @@
 <span class="sd">        better to attach those to the music after the fading process has ended.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="c1">### CLASS VARIABLES ###</span>
+    <span class="c1"># ---------- CLASS VARIABLES ----------</span>
 
     <span class="vm">__slots__</span> <span class="o">=</span> <span class="p">(</span>
         <span class="s2">&quot;_contents&quot;</span><span class="p">,</span>
@@ -1440,7 +1439,7 @@
         <span class="s2">&quot;_fuse_triple_meter&quot;</span><span class="p">,</span>
     <span class="p">)</span>
 
-    <span class="c1">### INITIALISER ###</span>
+    <span class="c1"># ---------- INITIALISER ----------</span>
 
 <div class="viewcode-block" id="Hocketer.__init__">
 <a class="viewcode-back" href="../../../_api_members/auxjad.Hocketer.html#auxjad.Hocketer.__init__">[docs]</a>
@@ -1449,16 +1448,16 @@
         <span class="n">contents</span><span class="p">:</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">,</span>
         <span class="o">*</span><span class="p">,</span>
         <span class="n">n_voices</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">2</span><span class="p">,</span>
-        <span class="n">pitch_ranges</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">list</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-        <span class="n">weights</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">list</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">pitch_ranges</span><span class="p">:</span> <span class="nb">list</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">weights</span><span class="p">:</span> <span class="nb">list</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
         <span class="n">k</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span>
         <span class="n">force_k_voices</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
         <span class="n">explode_chords</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
         <span class="n">disable_rewrite_meter</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
         <span class="n">use_multimeasure_rests</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
         <span class="n">omit_time_signatures</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
-        <span class="n">boundary_depth</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-        <span class="n">maximum_dot_count</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">boundary_depth</span><span class="p">:</span> <span class="nb">int</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">maximum_dot_count</span><span class="p">:</span> <span class="nb">int</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
         <span class="n">rewrite_tuplets</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
         <span class="n">prettify_rewrite_meter</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
         <span class="n">extract_trivial_tuplets</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
@@ -1490,7 +1489,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">fuse_triple_meter</span> <span class="o">=</span> <span class="n">fuse_triple_meter</span></div>
 
 
-    <span class="c1">### SPECIAL METHODS ###</span>
+    <span class="c1"># ---------- SPECIAL METHODS ----------</span>
 
 <div class="viewcode-block" id="Hocketer.__repr__">
 <a class="viewcode-back" href="../../../_api_members/auxjad.Hocketer.html#auxjad.Hocketer.__repr__">[docs]</a>
@@ -1529,7 +1528,7 @@
         <span class="k">return</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">output</span><span class="p">)</span></div>
 
 
-    <span class="c1">### PUBLIC METHODS ###</span>
+    <span class="c1"># ---------- PUBLIC METHODS ----------</span>
 
 <div class="viewcode-block" id="Hocketer.reset_weights">
 <a class="viewcode-back" href="../../../_api_members/auxjad.Hocketer.html#auxjad.Hocketer.reset_weights">[docs]</a>
@@ -1540,7 +1539,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">_weights</span> <span class="o">=</span> <span class="p">[</span><span class="mf">1.0</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="fm">__len__</span><span class="p">())]</span></div>
 
 
-    <span class="c1">### PRIVATE METHODS ###</span>
+    <span class="c1"># ---------- PRIVATE METHODS ----------</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">_make_music</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Runs the hocket process, returning a :obj:`tuple` of</span>
@@ -1657,7 +1656,7 @@
                         <span class="p">):</span>
                             <span class="k">break</span>
                         <span class="k">elif</span> <span class="n">counter</span> <span class="o">&gt;=</span> <span class="mi">1000</span><span class="p">:</span>
-                            <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span>
+                            <span class="k">raise</span> <span class="ne">StopIteration</span><span class="p">(</span>
                                 <span class="s2">&quot;No good distribution of chord &quot;</span>
                                 <span class="s2">&quot;found, please check the pitch &quot;</span>
                                 <span class="s2">&quot;ranges or try another seed.&quot;</span>
@@ -1678,7 +1677,7 @@
                         <span class="k">if</span> <span class="nb">all</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_pitch_in_range</span><span class="p">(</span><span class="n">pitch</span><span class="p">,</span> <span class="n">voice</span><span class="p">)</span> <span class="k">for</span> <span class="n">voice</span> <span class="ow">in</span> <span class="n">voices</span><span class="p">):</span>
                             <span class="k">break</span>
                         <span class="k">if</span> <span class="n">counter</span> <span class="o">&gt;=</span> <span class="mi">1000</span><span class="p">:</span>
-                            <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span>
+                            <span class="k">raise</span> <span class="ne">StopIteration</span><span class="p">(</span>
                                 <span class="s2">&quot;No good distribution of notes &quot;</span>
                                 <span class="s2">&quot;found, please check pitch &quot;</span>
                                 <span class="s2">&quot;ranges or try another seed.&quot;</span>
@@ -1701,7 +1700,7 @@
                     <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_pitch_in_range</span><span class="p">(</span><span class="n">pitch</span><span class="p">,</span> <span class="n">voice</span><span class="p">):</span>
                         <span class="n">voices</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">voice</span><span class="p">)</span>
                     <span class="k">if</span> <span class="n">counter</span> <span class="o">&gt;=</span> <span class="mi">1000</span><span class="p">:</span>
-                        <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span>
+                        <span class="k">raise</span> <span class="ne">StopIteration</span><span class="p">(</span>
                             <span class="s2">&quot;No good distribution of notes &quot;</span>
                             <span class="s2">&quot;found, please check pitch &quot;</span>
                             <span class="s2">&quot;ranges or try another seed.&quot;</span>
@@ -1711,7 +1710,7 @@
 
     <span class="k">def</span><span class="w"> </span><span class="nf">_pitch_in_range</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
-        <span class="n">pitch</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">abjad</span><span class="o">.</span><span class="n">Pitch</span><span class="p">,</span> <span class="n">abjad</span><span class="o">.</span><span class="n">PitchSegment</span><span class="p">,</span> <span class="kc">None</span><span class="p">],</span>
+        <span class="n">pitch</span><span class="p">:</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Pitch</span> <span class="o">|</span> <span class="n">abjad</span><span class="o">.</span><span class="n">PitchSegment</span> <span class="o">|</span> <span class="kc">None</span><span class="p">,</span>
         <span class="n">voice</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
 <span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Checks if a pitch is playable by a specific voice.&quot;&quot;&quot;</span>
@@ -1731,11 +1730,7 @@
     <span class="nd">@staticmethod</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">_get_pitch_from_logical_tie</span><span class="p">(</span>
         <span class="n">logical_tie</span><span class="p">:</span> <span class="n">abjad</span><span class="o">.</span><span class="n">LogicalTie</span><span class="p">,</span>
-    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Union</span><span class="p">[</span>
-        <span class="n">abjad</span><span class="o">.</span><span class="n">Pitch</span><span class="p">,</span>
-        <span class="n">abjad</span><span class="o">.</span><span class="n">PitchSegment</span><span class="p">,</span>
-        <span class="kc">None</span><span class="p">,</span>
-    <span class="p">]:</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Pitch</span> <span class="o">|</span> <span class="n">abjad</span><span class="o">.</span><span class="n">PitchSegment</span> <span class="o">|</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Gets the pitch of the first leaf of a logical tie.&quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">logical_tie</span><span class="o">.</span><span class="n">head</span><span class="p">,</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Note</span><span class="p">):</span>
             <span class="k">return</span> <span class="n">logical_tie</span><span class="o">.</span><span class="n">head</span><span class="o">.</span><span class="n">written_pitch</span>
@@ -1753,7 +1748,7 @@
             <span class="k">if</span> <span class="n">abjad</span><span class="o">.</span><span class="n">get</span><span class="o">.</span><span class="n">effective</span><span class="p">(</span><span class="n">leaf</span><span class="p">,</span> <span class="n">abjad</span><span class="o">.</span><span class="n">TimeSignature</span><span class="p">):</span>
                 <span class="n">abjad</span><span class="o">.</span><span class="n">detach</span><span class="p">(</span><span class="n">abjad</span><span class="o">.</span><span class="n">TimeSignature</span><span class="p">,</span> <span class="n">leaf</span><span class="p">)</span>
 
-    <span class="c1">### PUBLIC PROPERTIES ###</span>
+    <span class="c1"># ---------- PUBLIC PROPERTIES ----------</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">contents</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">:</span>
@@ -1800,14 +1795,14 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">_pitch_ranges</span> <span class="o">=</span> <span class="kc">None</span>
 
     <span class="nd">@property</span>
-    <span class="k">def</span><span class="w"> </span><span class="nf">weights</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="nb">int</span><span class="p">]]:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">weights</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">float</span> <span class="o">|</span> <span class="nb">int</span><span class="p">]:</span>
 <span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;The :obj:`list` with weights for each voice.&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_weights</span>
 
     <span class="nd">@weights</span><span class="o">.</span><span class="n">setter</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">weights</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
-        <span class="n">weights</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="nb">int</span><span class="p">]]],</span>
+        <span class="n">weights</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">float</span> <span class="o">|</span> <span class="nb">int</span><span class="p">]</span> <span class="o">|</span> <span class="kc">None</span><span class="p">,</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="k">if</span> <span class="n">weights</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
             <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">weights</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
@@ -1854,7 +1849,7 @@
     <span class="nd">@pitch_ranges</span><span class="o">.</span><span class="n">setter</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">pitch_ranges</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
-        <span class="n">pitch_ranges</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">list</span><span class="p">],</span>
+        <span class="n">pitch_ranges</span><span class="p">:</span> <span class="nb">list</span> <span class="o">|</span> <span class="kc">None</span><span class="p">,</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="k">if</span> <span class="n">pitch_ranges</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
             <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">pitch_ranges</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
@@ -1952,7 +1947,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">_use_multimeasure_rests</span> <span class="o">=</span> <span class="n">use_multimeasure_rests</span>
 
     <span class="nd">@property</span>
-    <span class="k">def</span><span class="w"> </span><span class="nf">boundary_depth</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Union</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="kc">None</span><span class="p">]:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">boundary_depth</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span> <span class="o">|</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Sets the argument ``boundary_depth`` of</span>
 <span class="sd">        |abjad.Meter.rewrite_meter()|.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -1961,7 +1956,7 @@
     <span class="nd">@boundary_depth</span><span class="o">.</span><span class="n">setter</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">boundary_depth</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
-        <span class="n">boundary_depth</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">],</span>
+        <span class="n">boundary_depth</span><span class="p">:</span> <span class="nb">int</span> <span class="o">|</span> <span class="kc">None</span><span class="p">,</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="k">if</span> <span class="n">boundary_depth</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
             <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">boundary_depth</span><span class="p">,</span> <span class="nb">int</span><span class="p">):</span>
@@ -1969,7 +1964,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">_boundary_depth</span> <span class="o">=</span> <span class="n">boundary_depth</span>
 
     <span class="nd">@property</span>
-    <span class="k">def</span><span class="w"> </span><span class="nf">maximum_dot_count</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Union</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="kc">None</span><span class="p">]:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">maximum_dot_count</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span> <span class="o">|</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Sets the argument ``maximum_dot_count`` of</span>
 <span class="sd">        |abjad.Meter.rewrite_meter()|.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -1978,7 +1973,7 @@
     <span class="nd">@maximum_dot_count</span><span class="o">.</span><span class="n">setter</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">maximum_dot_count</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
-        <span class="n">maximum_dot_count</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">],</span>
+        <span class="n">maximum_dot_count</span><span class="p">:</span> <span class="nb">int</span> <span class="o">|</span> <span class="kc">None</span><span class="p">,</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="k">if</span> <span class="n">maximum_dot_count</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
             <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">maximum_dot_count</span><span class="p">,</span> <span class="nb">int</span><span class="p">):</span>
@@ -2082,7 +2077,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">_fuse_triple_meter</span> <span class="o">=</span> <span class="n">fuse_triple_meter</span>
 
     <span class="nd">@property</span>
-    <span class="k">def</span><span class="w"> </span><span class="nf">current_window</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Union</span><span class="p">[</span><span class="nb">tuple</span><span class="p">,</span> <span class="kc">None</span><span class="p">]:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">current_window</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span> <span class="o">|</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Read-only property, returns the result of the last operation as a</span>
 <span class="sd">        :obj:`tuple` of |abjad.Selection|..</span>
 <span class="sd">        &quot;&quot;&quot;</span>

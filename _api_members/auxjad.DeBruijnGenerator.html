@@ -1,0 +1,720 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>DeBruijnGenerator &mdash; Auxjad 1.0.10 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=9ca51bb7" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=9edc463e" />
+
+  
+    <link rel="canonical" href="https://gilbertohasnofb.github.io/auxjad-docs/_api_members/auxjad.DeBruijnGenerator.html"/>
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=377e76b0"></script>
+      <script src="../_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
+      <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-mml-chtml.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Echoer" href="auxjad.Echoer.html" />
+    <link rel="prev" title="CrossFader" href="auxjad.CrossFader.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            Auxjad
+              <img src="../_static/auxjad-logo.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../index.html">Welcome to Auxjad’s documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../examples/index.html">Examples of usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../score_gallery/index.html">Score gallery</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../api/index.html">Auxjad API</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="../api/api-core.html">core</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="auxjad.CartographySelector.html">CartographySelector</a></li>
+<li class="toctree-l3"><a class="reference internal" href="auxjad.CrossFader.html">CrossFader</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">DeBruijnGenerator</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#auxjad.DeBruijnGenerator"><code class="docutils literal notranslate"><span class="pre">DeBruijnGenerator</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="auxjad.Echoer.html">Echoer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="auxjad.Fader.html">Fader</a></li>
+<li class="toctree-l3"><a class="reference internal" href="auxjad.GeneticAlgorithm.html">GeneticAlgorithm</a></li>
+<li class="toctree-l3"><a class="reference internal" href="auxjad.Hocketer.html">Hocketer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="auxjad.LeafLooper.html">LeafLooper</a></li>
+<li class="toctree-l3"><a class="reference internal" href="auxjad.ListLooper.html">ListLooper</a></li>
+<li class="toctree-l3"><a class="reference internal" href="auxjad.Phaser.html">Phaser</a></li>
+<li class="toctree-l3"><a class="reference internal" href="auxjad.PitchRandomiser.html">PitchRandomiser</a></li>
+<li class="toctree-l3"><a class="reference internal" href="auxjad.Repeater.html">Repeater</a></li>
+<li class="toctree-l3"><a class="reference internal" href="auxjad.Shuffler.html">Shuffler</a></li>
+<li class="toctree-l3"><a class="reference internal" href="auxjad.TenneySelector.html">TenneySelector</a></li>
+<li class="toctree-l3"><a class="reference internal" href="auxjad.WindowLooper.html">WindowLooper</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../api/api-get.html">get</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/api-indicators.html">indicators</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/api-makers.html">makers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/api-mutate.html">mutate</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/api-score.html">score</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/api-select.html">select</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/api-spanners.html">spanners</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/api-utils.html">utils</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Auxjad</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../api/index.html">Auxjad API</a></li>
+          <li class="breadcrumb-item"><a href="../api/api-core.html">core</a></li>
+      <li class="breadcrumb-item active">DeBruijnGenerator</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/_api_members/auxjad.DeBruijnGenerator.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="debruijngenerator">
+<h1>DeBruijnGenerator<a class="headerlink" href="#debruijngenerator" title="Link to this heading"></a></h1>
+<dl class="py class">
+<dt class="sig sig-object py" id="auxjad.DeBruijnGenerator">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">auxjad.</span></span><span class="sig-name descname"><span class="pre">DeBruijnGenerator</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">contents</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.14)"><span class="pre">list</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.14)"><span class="pre">Any</span></a><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="keyword-only-separator o"><abbr title="Keyword-only parameters separator (PEP 3102)"><span class="pre">*</span></abbr></span></em>, <em class="sig-param"><span class="n"><span class="pre">order</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><span class="pre">int</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">algorithm</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'pcr1'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cyclic</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.14)"><span class="pre">bool</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/auxjad/core/DeBruijnGenerator.html#DeBruijnGenerator"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#auxjad.DeBruijnGenerator" title="Link to this definition"></a></dt>
+<dd><p>An implementation of the De Bruijn Sequence and Universal Cycle Constructions generators,
+based on research by Joseph Sawada, Dennis Wong, Aaron Williams, Daniel Gabric. Original C
+implementation of algorithms PCR1 (GrandDaddy) and PCR2 (GrandMama) by Joseph Sawada, 2015-2018.
+This class can be used to generate sequences of elements from an input <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.14)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code></a> in which
+every combination of <span class="math notranslate nohighlight">\(n\)</span> elements from an alphabet of size <span class="math notranslate nohighlight">\(k\)</span> are present.</p>
+<p>E.g. for <span class="math notranslate nohighlight">\(n=2\)</span> and <span class="math notranslate nohighlight">\(k=3\)</span>, a possible construction of this sequence is:</p>
+<div class="math notranslate nohighlight">
+\[0010211220\]</div>
+<p>The sequence above contains every combination of 2 elements of the alphabet exactly once:</p>
+<div class="math notranslate nohighlight">
+\[00 \rightarrow 01 \rightarrow 10 \rightarrow 02 \rightarrow 21 \rightarrow 11 \rightarrow 12
+\rightarrow 22 \rightarrow 20\]</div>
+<p>This implementation is based on the code by Joseph Sawada, who generously shares it in his
+website <a class="reference external" href="https://debruijnsequence.org">https://debruijnsequence.org</a> as well as granted permission for it to be used  as the
+basis for this Python implementation.</p>
+<dl>
+<dt>Basic usage:</dt><dd><p>The generator should be initialised with a <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.14)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code></a> of objects and the attribute
+<a class="reference internal" href="#auxjad.DeBruijnGenerator.order" title="auxjad.DeBruijnGenerator.order"><code class="xref py py-attr docutils literal notranslate"><span class="pre">order</span></code></a>. The elements of this <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.14)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code></a> can be of any type.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">db_generator</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">DeBruijnGenerator</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="n">order</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">db_generator</span><span class="o">.</span><span class="n">contents</span>
+<span class="go">[0, 1, 2]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">db_generator</span><span class="o">.</span><span class="n">order</span>
+<span class="go">2</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">db_generator</span><span class="o">.</span><span class="n">algorithm</span>
+<span class="go">&quot;pcr1&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">db_generator</span><span class="o">.</span><span class="n">cyclic</span>
+<span class="go">False</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">db_generator</span><span class="o">.</span><span class="n">sequence_length</span>
+<span class="go">10</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">db_generator</span><span class="o">.</span><span class="n">previous_element</span>
+<span class="go">None</span>
+</pre></div>
+</div>
+<p>Calling the generator will output the next element of the de Bruijn sequence.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">db_generator</span><span class="p">()</span>
+<span class="go">0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">db_generator</span><span class="p">()</span>
+<span class="go">0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">db_generator</span><span class="p">()</span>
+<span class="go">1</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">db_generator</span><span class="o">.</span><span class="n">previous_element</span>
+<span class="go">1</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">db_generator</span><span class="o">.</span><span class="n">last_selected_index_of_sequence</span>
+<span class="go">2</span>
+</pre></div>
+</div>
+</dd>
+<dt><a class="reference external" href="https://docs.python.org/3/library/functions.html#len" title="(in Python v3.14)"><code class="xref py py-func docutils literal notranslate"><span class="pre">len()</span></code></a> function:</dt><dd><p>Applying the <a class="reference external" href="https://docs.python.org/3/library/functions.html#len" title="(in Python v3.14)"><code class="xref py py-func docutils literal notranslate"><span class="pre">len()</span></code></a> function to the generator returns the length of <a class="reference internal" href="#auxjad.DeBruijnGenerator.contents" title="auxjad.DeBruijnGenerator.contents"><code class="xref py py-attr docutils literal notranslate"><span class="pre">contents</span></code></a>.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">db_generator</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">DeBruijnGenerator</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="n">order</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">len</span><span class="p">(</span><span class="n">db_generator</span><span class="p">)</span>
+<span class="go">3</span>
+</pre></div>
+</div>
+</dd>
+<dt><a class="reference internal" href="#auxjad.DeBruijnGenerator.output_all" title="auxjad.DeBruijnGenerator.output_all"><code class="xref py py-meth docutils literal notranslate"><span class="pre">output_all()</span></code></a>:</dt><dd><p>Use <a class="reference internal" href="#auxjad.DeBruijnGenerator.output_all" title="auxjad.DeBruijnGenerator.output_all"><code class="xref py py-meth docutils literal notranslate"><span class="pre">output_all()</span></code></a> to output the full de Bruijn sequence as a <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.14)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code></a> in a single
+call. By default, the sequence is linear (i.e. <a class="reference internal" href="#auxjad.DeBruijnGenerator.cyclic" title="auxjad.DeBruijnGenerator.cyclic"><code class="xref py py-attr docutils literal notranslate"><span class="pre">cyclic</span></code></a> is <code class="docutils literal notranslate"><span class="pre">False</span></code>).</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">db_generator</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">DeBruijnGenerator</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="n">order</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">db_generator</span><span class="o">.</span><span class="n">output_all</span><span class="p">()</span>
+<span class="go">[0, 0, 1, 0, 2, 1, 1, 2, 2, 0]</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>If <a class="reference internal" href="#auxjad.DeBruijnGenerator.cyclic" title="auxjad.DeBruijnGenerator.cyclic"><code class="xref py py-attr docutils literal notranslate"><span class="pre">cyclic</span></code></a>: is set to <code class="docutils literal notranslate"><span class="pre">False</span></code>, the generator must be reset using <a class="reference internal" href="#auxjad.DeBruijnGenerator.reset" title="auxjad.DeBruijnGenerator.reset"><code class="xref py py-meth docutils literal notranslate"><span class="pre">reset()</span></code></a> if
+the sequence is finished.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">db_generator</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">DeBruijnGenerator</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="n">order</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">cyclic</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">db_generator</span><span class="o">.</span><span class="n">output_all</span><span class="p">()</span>
+<span class="go">[0, 0, 1, 0, 2, 1, 1, 2, 2, 0]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">db_generator</span><span class="o">.</span><span class="n">output_all</span><span class="p">()</span>
+<span class="go">StopIteration: sequence has been exhausted</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">db_generator</span><span class="o">.</span><span class="n">reset</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">db_generator</span><span class="o">.</span><span class="n">output_all</span><span class="p">()</span>
+<span class="go">[0, 0, 1, 0, 2, 1, 1, 2, 2, 0]</span>
+</pre></div>
+</div>
+<p>However, if <a class="reference internal" href="#auxjad.DeBruijnGenerator.cyclic" title="auxjad.DeBruijnGenerator.cyclic"><code class="xref py py-attr docutils literal notranslate"><span class="pre">cyclic</span></code></a>: is set to <code class="docutils literal notranslate"><span class="pre">True</span></code>, multiple calls will cycle through the
+sequence.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">db_generator</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">DeBruijnGenerator</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="n">order</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">cyclic</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">db_generator</span><span class="o">.</span><span class="n">output_all</span><span class="p">()</span>
+<span class="go">[0, 0, 1, 0, 2, 1, 1, 2, 2, 0]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">db_generator</span><span class="o">.</span><span class="n">output_all</span><span class="p">()</span>
+<span class="go">[0, 0, 1, 0, 2, 1, 1, 2, 2, 0]</span>
+</pre></div>
+</div>
+</div>
+<dl>
+<dt><a class="reference internal" href="#auxjad.DeBruijnGenerator.output_n" title="auxjad.DeBruijnGenerator.output_n"><code class="xref py py-meth docutils literal notranslate"><span class="pre">output_n()</span></code></a>:</dt><dd><p>Use <a class="reference internal" href="#auxjad.DeBruijnGenerator.output_n" title="auxjad.DeBruijnGenerator.output_n"><code class="xref py py-meth docutils literal notranslate"><span class="pre">output_n()</span></code></a> to output the next <code class="docutils literal notranslate"><span class="pre">n</span></code> elements of the de Bruijn sequence as a
+<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.14)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code></a>.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">db_generator</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">DeBruijnGenerator</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="n">order</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">db_generator</span><span class="o">.</span><span class="n">output_n</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+<span class="go">[0, 0, 1]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">db_generator</span><span class="o">.</span><span class="n">output_n</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+<span class="go">[0, 2, 1]</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>If the generator has output some subgroups before via direct call or the <a class="reference internal" href="#auxjad.DeBruijnGenerator.output_n" title="auxjad.DeBruijnGenerator.output_n"><code class="xref py py-meth docutils literal notranslate"><span class="pre">output_n()</span></code></a>
+method, then <a class="reference internal" href="#auxjad.DeBruijnGenerator.output_all" title="auxjad.DeBruijnGenerator.output_all"><code class="xref py py-meth docutils literal notranslate"><span class="pre">output_all()</span></code></a> will output all <em>remaining</em> elements, not from the
+beginning.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">db_generator</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">DeBruijnGenerator</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="n">order</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">db_generator</span><span class="o">.</span><span class="n">output_n</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+<span class="go">[0, 0, 1]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">db_generator</span><span class="o">.</span><span class="n">output_all</span><span class="p">()</span>
+<span class="go">[0, 2, 1, 1, 2, 2, 0]</span>
+</pre></div>
+</div>
+<p>If you want to output the full sequence after previous calls have been made, simply reset
+the object.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">db_generator</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">DeBruijnGenerator</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="n">order</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">db_generator</span><span class="o">.</span><span class="n">output_n</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+<span class="go">[0, 0, 1]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">db_generator</span><span class="o">.</span><span class="n">reset</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">db_generator</span><span class="o">.</span><span class="n">output_all</span><span class="p">()</span>
+<span class="go">[0, 0, 1, 0, 2, 1, 1, 2, 2, 0]</span>
+</pre></div>
+</div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>If <a class="reference internal" href="#auxjad.DeBruijnGenerator.cyclic" title="auxjad.DeBruijnGenerator.cyclic"><code class="xref py py-attr docutils literal notranslate"><span class="pre">cyclic</span></code></a> is set to <code class="docutils literal notranslate"><span class="pre">True</span></code>, <a class="reference internal" href="#auxjad.DeBruijnGenerator.output_n" title="auxjad.DeBruijnGenerator.output_n"><code class="xref py py-meth docutils literal notranslate"><span class="pre">output_n()</span></code></a> is allowed to wrap around outputting
+more elements than there are in the sequence.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">db_generator</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">DeBruijnGenerator</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="n">order</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">cyclic</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">db_generator</span><span class="o">.</span><span class="n">output_n</span><span class="p">(</span><span class="mi">20</span><span class="p">)</span>
+<span class="go">StopIteration: sequence has been exhausted</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">db_generator</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">DeBruijnGenerator</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="n">order</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">cyclic</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">db_generator</span><span class="o">.</span><span class="n">output_n</span><span class="p">(</span><span class="mi">20</span><span class="p">)</span>
+<span class="go">[0, 0, 1, 0, 2, 1, 1, 2, 2, 0, 0, 1, 0, 2, 1, 1, 2, 2, 0, 0]</span>
+</pre></div>
+</div>
+</div>
+<dl>
+<dt><a class="reference internal" href="#auxjad.DeBruijnGenerator.reset" title="auxjad.DeBruijnGenerator.reset"><code class="xref py py-meth docutils literal notranslate"><span class="pre">reset()</span></code></a>:</dt><dd><p>Use the <a class="reference internal" href="#auxjad.DeBruijnGenerator.reset" title="auxjad.DeBruijnGenerator.reset"><code class="xref py py-meth docutils literal notranslate"><span class="pre">reset()</span></code></a> method to reset the generator to its initial state. This can be used
+to restart the process at any time.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">db_generator</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">DeBruijnGenerator</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="n">order</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">cyclic</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">db_generator</span><span class="o">.</span><span class="n">output_n</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+<span class="go">[0, 0, 1, 0]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">db_generator</span><span class="o">.</span><span class="n">output_n</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+<span class="go">[2, 1, 1, 2]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">db_generator</span><span class="o">.</span><span class="n">reset</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">db_generator</span><span class="o">.</span><span class="n">output_n</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+<span class="go">[0, 0, 1, 0]</span>
+</pre></div>
+</div>
+</dd>
+<dt><a class="reference internal" href="#auxjad.DeBruijnGenerator.cyclic" title="auxjad.DeBruijnGenerator.cyclic"><code class="xref py py-attr docutils literal notranslate"><span class="pre">cyclic</span></code></a>:</dt><dd><p>By default, <a class="reference internal" href="#auxjad.DeBruijnGenerator.cyclic" title="auxjad.DeBruijnGenerator.cyclic"><code class="xref py py-attr docutils literal notranslate"><span class="pre">cyclic</span></code></a> is <code class="docutils literal notranslate"><span class="pre">False</span></code>, meaning the output sequence is linear and contains
+all <span class="math notranslate nohighlight">\(k^n\)</span> subgroups as explicit consecutive substrings. Setting <a class="reference internal" href="#auxjad.DeBruijnGenerator.cyclic" title="auxjad.DeBruijnGenerator.cyclic"><code class="xref py py-attr docutils literal notranslate"><span class="pre">cyclic</span></code></a> to
+<code class="docutils literal notranslate"><span class="pre">True</span></code> produces a shorter cyclic sequence where the final subgroups are implicit via
+wraparound.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">db_generator</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">DeBruijnGenerator</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="n">order</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">cyclic</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">db_generator</span><span class="o">.</span><span class="n">output_all</span><span class="p">()</span>
+<span class="go">[0, 0, 1, 0, 2, 1, 1, 2, 2]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">db_generator</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">DeBruijnGenerator</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="n">order</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">cyclic</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">db_generator</span><span class="o">.</span><span class="n">output_all</span><span class="p">()</span>
+<span class="go">[0, 0, 1, 0, 2, 1, 1, 2, 2, 0]</span>
+</pre></div>
+</div>
+</dd>
+<dt>Using as iterator:</dt><dd><p>The instances of this class can also be used as an iterator, which can then be used in a for
+loop to exhaust the sequence.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">db_generator</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">DeBruijnGenerator</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="n">order</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">cyclic</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">element</span> <span class="ow">in</span> <span class="n">db_generator</span><span class="p">:</span>
+<span class="gp">... </span>    <span class="n">element</span>
+<span class="go">0</span>
+<span class="go">0</span>
+<span class="go">1</span>
+<span class="go">0</span>
+<span class="go">2</span>
+<span class="go">1</span>
+<span class="go">1</span>
+<span class="go">2</span>
+<span class="go">2</span>
+<span class="go">0</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Please note that using an iterator in a loop with <a class="reference internal" href="#auxjad.DeBruijnGenerator.cyclic" title="auxjad.DeBruijnGenerator.cyclic"><code class="xref py py-attr docutils literal notranslate"><span class="pre">cyclic</span></code></a>: set to <code class="docutils literal notranslate"><span class="pre">True</span></code> will
+result in an infinite generation of elements. It will then be necessary to manually exit the
+loop.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">db_generator</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">DeBruijnGenerator</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">order</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">cyclic</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">element</span> <span class="ow">in</span> <span class="n">db_generator</span><span class="p">:</span>
+<span class="gp">... </span>    <span class="n">element</span>
+<span class="go">0</span>
+<span class="go">0</span>
+<span class="go">1</span>
+<span class="go">1</span>
+<span class="go">0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">db_generator</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">DeBruijnGenerator</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">order</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">cyclic</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">element</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">db_generator</span><span class="p">):</span>
+<span class="gp">... </span>    <span class="k">if</span> <span class="n">i</span> <span class="o">==</span> <span class="mi">10</span><span class="p">:</span>
+<span class="gp">... </span>        <span class="k">break</span>
+<span class="gp">... </span>    <span class="n">element</span>
+<span class="go">0</span>
+<span class="go">0</span>
+<span class="go">1</span>
+<span class="go">1</span>
+<span class="go">0</span>
+<span class="go">0</span>
+<span class="go">1</span>
+<span class="go">1</span>
+<span class="go">0</span>
+<span class="go">0</span>
+</pre></div>
+</div>
+</div>
+<dl>
+<dt><a class="reference internal" href="#auxjad.DeBruijnGenerator.algorithm" title="auxjad.DeBruijnGenerator.algorithm"><code class="xref py py-attr docutils literal notranslate"><span class="pre">algorithm</span></code></a>:</dt><dd><p>Thee are multiple algorithms which can generate de Bruijn sequences, which can be selected
+using <a class="reference internal" href="#auxjad.DeBruijnGenerator.algorithm" title="auxjad.DeBruijnGenerator.algorithm"><code class="xref py py-attr docutils literal notranslate"><span class="pre">algorithm</span></code></a>. Currently, options include <code class="docutils literal notranslate"><span class="pre">&quot;pcr1&quot;</span></code> or <code class="docutils literal notranslate"><span class="pre">&quot;pcr2&quot;</span></code>. Both produce
+valid de Bruijn sequences but differ for most combinations of order and alphabet size.
+<a class="reference internal" href="#auxjad.DeBruijnGenerator.algorithm" title="auxjad.DeBruijnGenerator.algorithm"><code class="xref py py-attr docutils literal notranslate"><span class="pre">algorithm</span></code></a> defaults to <code class="docutils literal notranslate"><span class="pre">&quot;pcr1&quot;</span></code>.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">db_generator</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">DeBruijnGenerator</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span>
+<span class="gp">... </span>    <span class="n">order</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">algorithm</span><span class="o">=</span><span class="s2">&quot;pcr2&quot;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">cyclic</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+<span class="gp">... </span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">db_generator</span><span class="o">.</span><span class="n">output_all</span><span class="p">()</span>
+<span class="go">[0, 0, 1, 1, 0, 2, 1, 2, 2]</span>
+</pre></div>
+</div>
+</dd>
+<dt><a class="reference internal" href="#auxjad.DeBruijnGenerator.order" title="auxjad.DeBruijnGenerator.order"><code class="xref py py-attr docutils literal notranslate"><span class="pre">order</span></code></a>:</dt><dd><p>The <a class="reference internal" href="#auxjad.DeBruijnGenerator.order" title="auxjad.DeBruijnGenerator.order"><code class="xref py py-attr docutils literal notranslate"><span class="pre">order</span></code></a> can be changed after initialisation. This regenerates the sequence.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">db_generator</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">DeBruijnGenerator</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="n">order</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">cyclic</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">db_generator</span><span class="o">.</span><span class="n">sequence_length</span>
+<span class="go">9</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">db_generator</span><span class="o">.</span><span class="n">order</span> <span class="o">=</span> <span class="mi">3</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">db_generator</span><span class="o">.</span><span class="n">sequence_length</span>
+<span class="go">27</span>
+</pre></div>
+</div>
+</dd>
+<dt><a class="reference internal" href="#auxjad.DeBruijnGenerator.contents" title="auxjad.DeBruijnGenerator.contents"><code class="xref py py-attr docutils literal notranslate"><span class="pre">contents</span></code></a>:</dt><dd><p>The <a class="reference internal" href="#auxjad.DeBruijnGenerator.contents" title="auxjad.DeBruijnGenerator.contents"><code class="xref py py-attr docutils literal notranslate"><span class="pre">contents</span></code></a> can be altered after initialisation.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">db_generator</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">DeBruijnGenerator</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="n">order</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">cyclic</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">db_generator</span><span class="o">.</span><span class="n">output_all</span><span class="p">()</span>
+<span class="go">[0, 0, 1, 0, 2, 1, 1, 2, 2]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">db_generator</span><span class="o">.</span><span class="n">contents</span> <span class="o">=</span> <span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">30</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">db_generator</span><span class="o">.</span><span class="n">output_all</span><span class="p">()</span>
+<span class="go">[10, 10, 20, 10, 30, 20, 20, 30, 30]</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>Changing <a class="reference internal" href="#auxjad.DeBruijnGenerator.contents" title="auxjad.DeBruijnGenerator.contents"><code class="xref py py-attr docutils literal notranslate"><span class="pre">contents</span></code></a> with a list of identical size will not reset the sequence.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">db_generator</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">DeBruijnGenerator</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="n">order</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">cyclic</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">db_generator</span><span class="o">.</span><span class="n">output_n</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+<span class="go">[0, 0, 1, 0]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">db_generator</span><span class="o">.</span><span class="n">contents</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;A&quot;</span><span class="p">,</span> <span class="s2">&quot;B&quot;</span><span class="p">,</span> <span class="s2">&quot;C&quot;</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">db_generator</span><span class="o">.</span><span class="n">output_all</span><span class="p">()</span>
+<span class="go">[&quot;C&quot;, &quot;B&quot;, &quot;B&quot;, &quot;C&quot;, &quot;C&quot;]</span>
+</pre></div>
+</div>
+</div>
+<dl>
+<dt>Slicing and indexing:</dt><dd><p>Instances of this class can be indexed and sliced, allowing reading, assigning, or deleting
+values from <a class="reference internal" href="#auxjad.DeBruijnGenerator.contents" title="auxjad.DeBruijnGenerator.contents"><code class="xref py py-attr docutils literal notranslate"><span class="pre">contents</span></code></a>. If These changes regenerate the sequence.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">db_generator</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">DeBruijnGenerator</span><span class="p">([</span><span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">30</span><span class="p">],</span> <span class="n">order</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">db_generator</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+<span class="go">20</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">db_generator</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">2</span><span class="p">]</span>
+<span class="go">[10, 20]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">db_generator</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="mi">99</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">db_generator</span><span class="o">.</span><span class="n">contents</span>
+<span class="go">[10, 99, 30]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">del</span> <span class="n">db_generator</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">db_generator</span><span class="o">.</span><span class="n">contents</span>
+<span class="go">[10, 99]</span>
+</pre></div>
+</div>
+</dd>
+<dt>Read-only properties:</dt><dd><p>This class has a number of ready-only properties. <a class="reference internal" href="#auxjad.DeBruijnGenerator.previous_element" title="auxjad.DeBruijnGenerator.previous_element"><code class="xref py py-attr docutils literal notranslate"><span class="pre">previous_element</span></code></a> returns the last
+selected element of <a class="reference internal" href="#auxjad.DeBruijnGenerator.contents" title="auxjad.DeBruijnGenerator.contents"><code class="xref py py-attr docutils literal notranslate"><span class="pre">contents</span></code></a>, and <a class="reference internal" href="#auxjad.DeBruijnGenerator.previous_element_index" title="auxjad.DeBruijnGenerator.previous_element_index"><code class="xref py py-attr docutils literal notranslate"><span class="pre">previous_element_index</span></code></a> returns its index
+within <a class="reference internal" href="#auxjad.DeBruijnGenerator.contents" title="auxjad.DeBruijnGenerator.contents"><code class="xref py py-attr docutils literal notranslate"><span class="pre">contents</span></code></a>; <a class="reference internal" href="#auxjad.DeBruijnGenerator.last_selected_index_of_sequence" title="auxjad.DeBruijnGenerator.last_selected_index_of_sequence"><code class="xref py py-attr docutils literal notranslate"><span class="pre">last_selected_index_of_sequence</span></code></a> returns the index of the
+last selected element in the de Bruijn sequence. <a class="reference internal" href="#auxjad.DeBruijnGenerator.sequence" title="auxjad.DeBruijnGenerator.sequence"><code class="xref py py-attr docutils literal notranslate"><span class="pre">sequence</span></code></a> returns the full de Bruijn
+sequence mapped to <a class="reference internal" href="#auxjad.DeBruijnGenerator.contents" title="auxjad.DeBruijnGenerator.contents"><code class="xref py py-attr docutils literal notranslate"><span class="pre">contents</span></code></a> as a <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.14)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code></a> without any of the call functions (i.e.
+it does not exhaust the generator); finally, <a class="reference internal" href="#auxjad.DeBruijnGenerator.sequence_length" title="auxjad.DeBruijnGenerator.sequence_length"><code class="xref py py-attr docutils literal notranslate"><span class="pre">sequence_length</span></code></a> returns the length of
+the de Bruijn sequence (remembering that <a class="reference external" href="https://docs.python.org/3/library/functions.html#len" title="(in Python v3.14)"><code class="xref py py-func docutils literal notranslate"><span class="pre">len()</span></code></a> returns the length of
+<a class="reference internal" href="#auxjad.DeBruijnGenerator.contents" title="auxjad.DeBruijnGenerator.contents"><code class="xref py py-attr docutils literal notranslate"><span class="pre">contents</span></code></a>, not the output sequence).</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">db_generator</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">DeBruijnGenerator</span><span class="p">([</span><span class="s2">&quot;A&quot;</span><span class="p">,</span> <span class="s2">&quot;B&quot;</span><span class="p">,</span> <span class="s2">&quot;C&quot;</span><span class="p">],</span> <span class="n">order</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">db_generator</span><span class="o">.</span><span class="n">output_n</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+<span class="go">[&quot;A&quot;, &quot;A&quot;, &quot;B&quot;]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">db_generator</span><span class="o">.</span><span class="n">previous_element</span>
+<span class="go">&quot;B&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">db_generator</span><span class="o">.</span><span class="n">previous_element_index</span>
+<span class="go">1</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">db_generator</span><span class="o">.</span><span class="n">last_selected_index_of_sequence</span>
+<span class="go">2</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">db_generator</span><span class="o">.</span><span class="n">sequence</span>
+<span class="go">[&quot;A&quot;, &quot;A&quot;, &quot;B&quot;, &quot;A&quot;, &quot;C&quot;, &quot;B&quot;, &quot;B&quot;, &quot;C&quot;, &quot;C&quot;, &quot;A&quot;]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">db_generator</span><span class="o">.</span><span class="n">sequence_length</span>
+<span class="go">10</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>This class is agnostic towards the data types of the elements of <a class="reference internal" href="#auxjad.DeBruijnGenerator.contents" title="auxjad.DeBruijnGenerator.contents"><code class="xref py py-attr docutils literal notranslate"><span class="pre">contents</span></code></a>. This also
+includes Abjad’s types. Abjad’s exclusive membership requirement is respected since
+<a class="reference external" href="https://docs.python.org/3/library/copy.html#copy.deepcopy" title="(in Python v3.14)"><code class="xref py py-func docutils literal notranslate"><span class="pre">copy.deepcopy()</span></code></a> is applied to any element being output.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">db_generator</span> <span class="o">=</span> <span class="n">auxjad</span><span class="o">.</span><span class="n">DeBruijnGenerator</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="p">[</span><span class="n">abjad</span><span class="o">.</span><span class="n">Note</span><span class="p">(</span><span class="s2">&quot;c&#39;8&quot;</span><span class="p">),</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Note</span><span class="p">(</span><span class="s2">&quot;d&#39;8&quot;</span><span class="p">),</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Note</span><span class="p">(</span><span class="s2">&quot;e&#39;8&quot;</span><span class="p">)],</span>
+<span class="gp">... </span>    <span class="n">order</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">cyclic</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+<span class="gp">... </span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">notes</span> <span class="o">=</span> <span class="n">db_generator</span><span class="o">.</span><span class="n">output_all</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">notes</span>
+<span class="go">[abjad.Note(&quot;c&#39;8&quot;), abjad.Note(&quot;c&#39;8&quot;), abjad.Note(&quot;d&#39;8&quot;), abjad.Note(&quot;c&#39;8&quot;),</span>
+<span class="go">abjad.Note(&quot;e&#39;8&quot;), abjad.Note(&quot;d&#39;8&quot;), abjad.Note(&quot;d&#39;8&quot;), abjad.Note(&quot;e&#39;8&quot;),</span>
+<span class="go">abjad.Note(&quot;e&#39;8&quot;)]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">staff</span> <span class="o">=</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Staff</span><span class="p">(</span><span class="n">notes</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abjad</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">staff</span><span class="p">)</span>
+</pre></div>
+</div>
+<figure class="align-default">
+<img alt="../_images/DeBruijnGenerator-gPsjYD6RZm.png" src="../_images/DeBruijnGenerator-gPsjYD6RZm.png" />
+</figure>
+</div>
+<p class="rubric">Methods</p>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#auxjad.DeBruijnGenerator.__call__" title="auxjad.DeBruijnGenerator.__call__"><code class="xref py py-obj docutils literal notranslate"><span class="pre">__call__</span></code></a>()</p></td>
+<td><p>Calls the selection process and outputs one element of <a class="reference internal" href="#auxjad.DeBruijnGenerator.contents" title="auxjad.DeBruijnGenerator.contents"><code class="xref py py-attr docutils literal notranslate"><span class="pre">contents</span></code></a>.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#auxjad.DeBruijnGenerator.__delitem__" title="auxjad.DeBruijnGenerator.__delitem__"><code class="xref py py-obj docutils literal notranslate"><span class="pre">__delitem__</span></code></a>(key)</p></td>
+<td><p>Deletes one or more elements of <a class="reference internal" href="#auxjad.DeBruijnGenerator.contents" title="auxjad.DeBruijnGenerator.contents"><code class="xref py py-attr docutils literal notranslate"><span class="pre">contents</span></code></a> through indexing or slicing.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#auxjad.DeBruijnGenerator.__getitem__" title="auxjad.DeBruijnGenerator.__getitem__"><code class="xref py py-obj docutils literal notranslate"><span class="pre">__getitem__</span></code></a>(key)</p></td>
+<td><p>Returns one or more elements of <a class="reference internal" href="#auxjad.DeBruijnGenerator.contents" title="auxjad.DeBruijnGenerator.contents"><code class="xref py py-attr docutils literal notranslate"><span class="pre">contents</span></code></a> through indexing or slicing.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#auxjad.DeBruijnGenerator.__init__" title="auxjad.DeBruijnGenerator.__init__"><code class="xref py py-obj docutils literal notranslate"><span class="pre">__init__</span></code></a>(contents, *, order[, algorithm, cyclic])</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#auxjad.DeBruijnGenerator.__iter__" title="auxjad.DeBruijnGenerator.__iter__"><code class="xref py py-obj docutils literal notranslate"><span class="pre">__iter__</span></code></a>()</p></td>
+<td><p>Returns an iterator, allowing instances to be used as iterators.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#auxjad.DeBruijnGenerator.__len__" title="auxjad.DeBruijnGenerator.__len__"><code class="xref py py-obj docutils literal notranslate"><span class="pre">__len__</span></code></a>()</p></td>
+<td><p>Returns the length of <a class="reference internal" href="#auxjad.DeBruijnGenerator.contents" title="auxjad.DeBruijnGenerator.contents"><code class="xref py py-attr docutils literal notranslate"><span class="pre">contents</span></code></a>.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#auxjad.DeBruijnGenerator.__next__" title="auxjad.DeBruijnGenerator.__next__"><code class="xref py py-obj docutils literal notranslate"><span class="pre">__next__</span></code></a>()</p></td>
+<td><p>Calls the selection process and outputs one element of <a class="reference internal" href="#auxjad.DeBruijnGenerator.contents" title="auxjad.DeBruijnGenerator.contents"><code class="xref py py-attr docutils literal notranslate"><span class="pre">contents</span></code></a>.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#auxjad.DeBruijnGenerator.__repr__" title="auxjad.DeBruijnGenerator.__repr__"><code class="xref py py-obj docutils literal notranslate"><span class="pre">__repr__</span></code></a>()</p></td>
+<td><p>Returns interpreter representation of <a class="reference internal" href="#auxjad.DeBruijnGenerator.contents" title="auxjad.DeBruijnGenerator.contents"><code class="xref py py-attr docutils literal notranslate"><span class="pre">contents</span></code></a>.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#auxjad.DeBruijnGenerator.__setitem__" title="auxjad.DeBruijnGenerator.__setitem__"><code class="xref py py-obj docutils literal notranslate"><span class="pre">__setitem__</span></code></a>(key, value)</p></td>
+<td><p>Assigns values to one or more elements of <a class="reference internal" href="#auxjad.DeBruijnGenerator.contents" title="auxjad.DeBruijnGenerator.contents"><code class="xref py py-attr docutils literal notranslate"><span class="pre">contents</span></code></a> through indexing or slicing.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#auxjad.DeBruijnGenerator.output_all" title="auxjad.DeBruijnGenerator.output_all"><code class="xref py py-obj docutils literal notranslate"><span class="pre">output_all</span></code></a>()</p></td>
+<td><p>Outputs remaining elements of the de Bruijn sequence as a single <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.14)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code></a>.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#auxjad.DeBruijnGenerator.output_n" title="auxjad.DeBruijnGenerator.output_n"><code class="xref py py-obj docutils literal notranslate"><span class="pre">output_n</span></code></a>(n)</p></td>
+<td><p>Outputs the next <code class="docutils literal notranslate"><span class="pre">n</span></code> elements of the de Bruijn sequence as a <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.14)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code></a>.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#auxjad.DeBruijnGenerator.reset" title="auxjad.DeBruijnGenerator.reset"><code class="xref py py-obj docutils literal notranslate"><span class="pre">reset</span></code></a>()</p></td>
+<td><p>Resets the generator to its initial state and regenerates the sequence.</p></td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Attributes</p>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#auxjad.DeBruijnGenerator.algorithm" title="auxjad.DeBruijnGenerator.algorithm"><code class="xref py py-obj docutils literal notranslate"><span class="pre">algorithm</span></code></a></p></td>
+<td><p>Thee are multiple algorithms which can generate de Bruijn sequences.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#auxjad.DeBruijnGenerator.contents" title="auxjad.DeBruijnGenerator.contents"><code class="xref py py-obj docutils literal notranslate"><span class="pre">contents</span></code></a></p></td>
+<td><p>The <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.14)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code></a> used by the generator, mapped to the de Bruijn sequence for the output sequence.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#auxjad.DeBruijnGenerator.cyclic" title="auxjad.DeBruijnGenerator.cyclic"><code class="xref py py-obj docutils literal notranslate"><span class="pre">cyclic</span></code></a></p></td>
+<td><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.14)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">bool</span></code></a> representing whether a sequence is cycle joined or not, defaulting to <code class="docutils literal notranslate"><span class="pre">False</span></code>.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#auxjad.DeBruijnGenerator.last_selected_index_of_sequence" title="auxjad.DeBruijnGenerator.last_selected_index_of_sequence"><code class="xref py py-obj docutils literal notranslate"><span class="pre">last_selected_index_of_sequence</span></code></a></p></td>
+<td><p>Read-only property, returns the index of the last element output by the object in the de Bruijn sequence (not <a class="reference internal" href="#auxjad.DeBruijnGenerator.contents" title="auxjad.DeBruijnGenerator.contents"><code class="xref py py-attr docutils literal notranslate"><span class="pre">contents</span></code></a>).</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#auxjad.DeBruijnGenerator.order" title="auxjad.DeBruijnGenerator.order"><code class="xref py py-obj docutils literal notranslate"><span class="pre">order</span></code></a></p></td>
+<td><p>The order of a de Bruijn sequence is the size of each of its subgroups, often notated as <span class="math notranslate nohighlight">\(n\)</span>.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#auxjad.DeBruijnGenerator.previous_element" title="auxjad.DeBruijnGenerator.previous_element"><code class="xref py py-obj docutils literal notranslate"><span class="pre">previous_element</span></code></a></p></td>
+<td><p>Read-only property, returns the last element output by the object mapped to <a class="reference internal" href="#auxjad.DeBruijnGenerator.contents" title="auxjad.DeBruijnGenerator.contents"><code class="xref py py-attr docutils literal notranslate"><span class="pre">contents</span></code></a>.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#auxjad.DeBruijnGenerator.previous_element_index" title="auxjad.DeBruijnGenerator.previous_element_index"><code class="xref py py-obj docutils literal notranslate"><span class="pre">previous_element_index</span></code></a></p></td>
+<td><p>Read-only property, returns the index in <a class="reference internal" href="#auxjad.DeBruijnGenerator.contents" title="auxjad.DeBruijnGenerator.contents"><code class="xref py py-attr docutils literal notranslate"><span class="pre">contents</span></code></a> of the previously output element of the sequence.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#auxjad.DeBruijnGenerator.sequence" title="auxjad.DeBruijnGenerator.sequence"><code class="xref py py-obj docutils literal notranslate"><span class="pre">sequence</span></code></a></p></td>
+<td><p>Read-only property, returns the de Bruijn sequence mapped to <a class="reference internal" href="#auxjad.DeBruijnGenerator.contents" title="auxjad.DeBruijnGenerator.contents"><code class="xref py py-attr docutils literal notranslate"><span class="pre">contents</span></code></a>.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#auxjad.DeBruijnGenerator.sequence_length" title="auxjad.DeBruijnGenerator.sequence_length"><code class="xref py py-obj docutils literal notranslate"><span class="pre">sequence_length</span></code></a></p></td>
+<td><p>Read-only property, returns the length of the de Bruijn sequence.</p></td>
+</tr>
+</tbody>
+</table>
+<dl class="py method">
+<dt class="sig sig-object py" id="auxjad.DeBruijnGenerator.__call__">
+<span class="sig-name descname"><span class="pre">__call__</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.14)"><span class="pre">Any</span></a></span></span><a class="reference internal" href="../_modules/auxjad/core/DeBruijnGenerator.html#DeBruijnGenerator.__call__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#auxjad.DeBruijnGenerator.__call__" title="Link to this definition"></a></dt>
+<dd><p>Calls the selection process and outputs one element of <a class="reference internal" href="#auxjad.DeBruijnGenerator.contents" title="auxjad.DeBruijnGenerator.contents"><code class="xref py py-attr docutils literal notranslate"><span class="pre">contents</span></code></a>.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="auxjad.DeBruijnGenerator.__delitem__">
+<span class="sig-name descname"><span class="pre">__delitem__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">key</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><span class="pre">int</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.14)"><span class="pre">None</span></a></span></span><a class="reference internal" href="../_modules/auxjad/core/DeBruijnGenerator.html#DeBruijnGenerator.__delitem__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#auxjad.DeBruijnGenerator.__delitem__" title="Link to this definition"></a></dt>
+<dd><p>Deletes one or more elements of <a class="reference internal" href="#auxjad.DeBruijnGenerator.contents" title="auxjad.DeBruijnGenerator.contents"><code class="xref py py-attr docutils literal notranslate"><span class="pre">contents</span></code></a> through indexing or slicing.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="auxjad.DeBruijnGenerator.__getitem__">
+<span class="sig-name descname"><span class="pre">__getitem__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">key</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><span class="pre">int</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.14)"><span class="pre">Any</span></a></span></span><a class="reference internal" href="../_modules/auxjad/core/DeBruijnGenerator.html#DeBruijnGenerator.__getitem__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#auxjad.DeBruijnGenerator.__getitem__" title="Link to this definition"></a></dt>
+<dd><p>Returns one or more elements of <a class="reference internal" href="#auxjad.DeBruijnGenerator.contents" title="auxjad.DeBruijnGenerator.contents"><code class="xref py py-attr docutils literal notranslate"><span class="pre">contents</span></code></a> through indexing
+or slicing.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="auxjad.DeBruijnGenerator.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">contents</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.14)"><span class="pre">list</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.14)"><span class="pre">Any</span></a><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="keyword-only-separator o"><abbr title="Keyword-only parameters separator (PEP 3102)"><span class="pre">*</span></abbr></span></em>, <em class="sig-param"><span class="n"><span class="pre">order</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><span class="pre">int</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">algorithm</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'pcr1'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cyclic</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.14)"><span class="pre">bool</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.14)"><span class="pre">None</span></a></span></span><a class="reference internal" href="../_modules/auxjad/core/DeBruijnGenerator.html#DeBruijnGenerator.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#auxjad.DeBruijnGenerator.__init__" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="auxjad.DeBruijnGenerator.__iter__">
+<span class="sig-name descname"><span class="pre">__iter__</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Iterator" title="(in Python v3.14)"><span class="pre">Iterator</span></a></span></span><a class="reference internal" href="../_modules/auxjad/core/DeBruijnGenerator.html#DeBruijnGenerator.__iter__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#auxjad.DeBruijnGenerator.__iter__" title="Link to this definition"></a></dt>
+<dd><p>Returns an iterator, allowing instances to be used as iterators.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="auxjad.DeBruijnGenerator.__len__">
+<span class="sig-name descname"><span class="pre">__len__</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><span class="pre">int</span></a></span></span><a class="reference internal" href="../_modules/auxjad/core/DeBruijnGenerator.html#DeBruijnGenerator.__len__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#auxjad.DeBruijnGenerator.__len__" title="Link to this definition"></a></dt>
+<dd><p>Returns the length of <a class="reference internal" href="#auxjad.DeBruijnGenerator.contents" title="auxjad.DeBruijnGenerator.contents"><code class="xref py py-attr docutils literal notranslate"><span class="pre">contents</span></code></a>. This is the equivalent of the alphabet size of
+the de Bruijn sequence, often notated as <span class="math notranslate nohighlight">\(k\)</span>.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="auxjad.DeBruijnGenerator.__next__">
+<span class="sig-name descname"><span class="pre">__next__</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.14)"><span class="pre">Any</span></a></span></span><a class="reference internal" href="../_modules/auxjad/core/DeBruijnGenerator.html#DeBruijnGenerator.__next__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#auxjad.DeBruijnGenerator.__next__" title="Link to this definition"></a></dt>
+<dd><p>Calls the selection process and outputs one element of <a class="reference internal" href="#auxjad.DeBruijnGenerator.contents" title="auxjad.DeBruijnGenerator.contents"><code class="xref py py-attr docutils literal notranslate"><span class="pre">contents</span></code></a>.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="auxjad.DeBruijnGenerator.__repr__">
+<span class="sig-name descname"><span class="pre">__repr__</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span></span><a class="reference internal" href="../_modules/auxjad/core/DeBruijnGenerator.html#DeBruijnGenerator.__repr__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#auxjad.DeBruijnGenerator.__repr__" title="Link to this definition"></a></dt>
+<dd><p>Returns interpreter representation of <a class="reference internal" href="#auxjad.DeBruijnGenerator.contents" title="auxjad.DeBruijnGenerator.contents"><code class="xref py py-attr docutils literal notranslate"><span class="pre">contents</span></code></a>.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="auxjad.DeBruijnGenerator.__setitem__">
+<span class="sig-name descname"><span class="pre">__setitem__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">key</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><span class="pre">int</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">value</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.14)"><span class="pre">Any</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.14)"><span class="pre">None</span></a></span></span><a class="reference internal" href="../_modules/auxjad/core/DeBruijnGenerator.html#DeBruijnGenerator.__setitem__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#auxjad.DeBruijnGenerator.__setitem__" title="Link to this definition"></a></dt>
+<dd><p>Assigns values to one or more elements of <a class="reference internal" href="#auxjad.DeBruijnGenerator.contents" title="auxjad.DeBruijnGenerator.contents"><code class="xref py py-attr docutils literal notranslate"><span class="pre">contents</span></code></a> through
+indexing or slicing.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="auxjad.DeBruijnGenerator.algorithm">
+<span class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">algorithm</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span><a class="headerlink" href="#auxjad.DeBruijnGenerator.algorithm" title="Link to this definition"></a></dt>
+<dd><p>Thee are multiple algorithms which can generate de Bruijn sequences. Current options
+include <code class="docutils literal notranslate"><span class="pre">&quot;pcr1&quot;</span></code> or <code class="docutils literal notranslate"><span class="pre">&quot;pcr2&quot;</span></code>.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="auxjad.DeBruijnGenerator.contents">
+<span class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">contents</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.14)"><span class="pre">list</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.14)"><span class="pre">Any</span></a><span class="p"><span class="pre">]</span></span></span><a class="headerlink" href="#auxjad.DeBruijnGenerator.contents" title="Link to this definition"></a></dt>
+<dd><p>The <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.14)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code></a> used by the generator, mapped to the de Bruijn sequence for the output
+sequence. This is the ordered alphabet used by the de Bruijn generator.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="auxjad.DeBruijnGenerator.cyclic">
+<span class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">cyclic</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.14)"><span class="pre">bool</span></a></span><a class="headerlink" href="#auxjad.DeBruijnGenerator.cyclic" title="Link to this definition"></a></dt>
+<dd><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.14)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">bool</span></code></a> representing whether a sequence is cycle joined or not, defaulting to
+<code class="docutils literal notranslate"><span class="pre">False</span></code>. E.g. consider a de Bruijn sequence of order 2 and alphabet size 3, generated by
+PCR1 using a cyclic output:</p>
+<div class="math notranslate nohighlight">
+\[001021122\]</div>
+<p>Notice that the substring <span class="math notranslate nohighlight">\(20\)</span> is not present in the output, but is implicit in the
+result via the cyclic joining of the end of the sequence with its own beginning. For an
+explicit sequence with all combinations (i.e. not cyclical), the output would become:</p>
+<div class="math notranslate nohighlight">
+\[0010211220\]</div>
+<p>Which truly has all combinations of order 2 (<span class="math notranslate nohighlight">\(n\)</span>) for an alphabet of size 3
+(<span class="math notranslate nohighlight">\(k\)</span>):</p>
+<div class="math notranslate nohighlight">
+\[00 \rightarrow 01 \rightarrow 10 \rightarrow 02 \rightarrow 21 \rightarrow 11
+\rightarrow 12 \rightarrow 22 \rightarrow 20\]</div>
+<p>It’s worth noticing that for cyclical sequences:</p>
+<ul class="simple">
+<li><p>The length of the output sequence is <span class="math notranslate nohighlight">\(k^n\)</span></p></li>
+<li><p>The total number of subgroups is <span class="math notranslate nohighlight">\(k^n - (n - 1)\)</span></p></li>
+</ul>
+<p>While for non-cyclical sequences:</p>
+<ul class="simple">
+<li><p>The length of the output sequence is <span class="math notranslate nohighlight">\(k^n + (n - 1)\)</span></p></li>
+<li><p>The total number of subgroups is <span class="math notranslate nohighlight">\(k^n\)</span></p></li>
+</ul>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="auxjad.DeBruijnGenerator.last_selected_index_of_sequence">
+<span class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">last_selected_index_of_sequence</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><span class="pre">int</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.14)"><span class="pre">None</span></a></span><a class="headerlink" href="#auxjad.DeBruijnGenerator.last_selected_index_of_sequence" title="Link to this definition"></a></dt>
+<dd><p>Read-only property, returns the index of the last element output by the object in the de
+Bruijn sequence (not <a class="reference internal" href="#auxjad.DeBruijnGenerator.contents" title="auxjad.DeBruijnGenerator.contents"><code class="xref py py-attr docutils literal notranslate"><span class="pre">contents</span></code></a>).</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="auxjad.DeBruijnGenerator.order">
+<span class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">order</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><span class="pre">int</span></a></span><a class="headerlink" href="#auxjad.DeBruijnGenerator.order" title="Link to this definition"></a></dt>
+<dd><p>The order of a de Bruijn sequence is the size of each of its subgroups, often notated
+as <span class="math notranslate nohighlight">\(n\)</span>.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="auxjad.DeBruijnGenerator.output_all">
+<span class="sig-name descname"><span class="pre">output_all</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.14)"><span class="pre">list</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.14)"><span class="pre">Any</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../_modules/auxjad/core/DeBruijnGenerator.html#DeBruijnGenerator.output_all"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#auxjad.DeBruijnGenerator.output_all" title="Link to this definition"></a></dt>
+<dd><p>Outputs remaining elements of the de Bruijn sequence as a single <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.14)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code></a>.</p>
+<p>If the generator has not been called before, returns the full sequence. If some elements
+have already been output via <a class="reference internal" href="#auxjad.DeBruijnGenerator.__call__" title="auxjad.DeBruijnGenerator.__call__"><code class="xref py py-meth docutils literal notranslate"><span class="pre">__call__()</span></code></a> or <a class="reference internal" href="#auxjad.DeBruijnGenerator.output_n" title="auxjad.DeBruijnGenerator.output_n"><code class="xref py py-meth docutils literal notranslate"><span class="pre">output_n()</span></code></a>, returns only the
+remaining elements from the current position to the end. Call <a class="reference internal" href="#auxjad.DeBruijnGenerator.reset" title="auxjad.DeBruijnGenerator.reset"><code class="xref py py-meth docutils literal notranslate"><span class="pre">reset()</span></code></a> first to always
+obtain the full sequence.</p>
+<p>Raises <a class="reference external" href="https://docs.python.org/3/library/exceptions.html#StopIteration" title="(in Python v3.14)"><code class="xref py py-exc docutils literal notranslate"><span class="pre">StopIteration</span></code></a> if the sequence has been exhausted and <a class="reference internal" href="#auxjad.DeBruijnGenerator.cyclic" title="auxjad.DeBruijnGenerator.cyclic"><code class="xref py py-attr docutils literal notranslate"><span class="pre">cyclic</span></code></a> is
+<code class="docutils literal notranslate"><span class="pre">False</span></code>. If <a class="reference internal" href="#auxjad.DeBruijnGenerator.cyclic" title="auxjad.DeBruijnGenerator.cyclic"><code class="xref py py-attr docutils literal notranslate"><span class="pre">cyclic</span></code></a> is <code class="docutils literal notranslate"><span class="pre">True</span></code>, resets and returns the full sequence instead.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="auxjad.DeBruijnGenerator.output_n">
+<span class="sig-name descname"><span class="pre">output_n</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><span class="pre">int</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.14)"><span class="pre">list</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.14)"><span class="pre">Any</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../_modules/auxjad/core/DeBruijnGenerator.html#DeBruijnGenerator.output_n"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#auxjad.DeBruijnGenerator.output_n" title="Link to this definition"></a></dt>
+<dd><p>Outputs the next <code class="docutils literal notranslate"><span class="pre">n</span></code> elements of the de Bruijn sequence as a <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.14)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code></a>.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="auxjad.DeBruijnGenerator.previous_element">
+<span class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">previous_element</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.14)"><span class="pre">Any</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.14)"><span class="pre">None</span></a></span><a class="headerlink" href="#auxjad.DeBruijnGenerator.previous_element" title="Link to this definition"></a></dt>
+<dd><p>Read-only property, returns the last element output by the object mapped to
+<a class="reference internal" href="#auxjad.DeBruijnGenerator.contents" title="auxjad.DeBruijnGenerator.contents"><code class="xref py py-attr docutils literal notranslate"><span class="pre">contents</span></code></a>.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="auxjad.DeBruijnGenerator.previous_element_index">
+<span class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">previous_element_index</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><span class="pre">int</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.14)"><span class="pre">None</span></a></span><a class="headerlink" href="#auxjad.DeBruijnGenerator.previous_element_index" title="Link to this definition"></a></dt>
+<dd><p>Read-only property, returns the index in <a class="reference internal" href="#auxjad.DeBruijnGenerator.contents" title="auxjad.DeBruijnGenerator.contents"><code class="xref py py-attr docutils literal notranslate"><span class="pre">contents</span></code></a> of the previously output
+element of the sequence.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="auxjad.DeBruijnGenerator.reset">
+<span class="sig-name descname"><span class="pre">reset</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.14)"><span class="pre">None</span></a></span></span><a class="reference internal" href="../_modules/auxjad/core/DeBruijnGenerator.html#DeBruijnGenerator.reset"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#auxjad.DeBruijnGenerator.reset" title="Link to this definition"></a></dt>
+<dd><p>Resets the generator to its initial state and regenerates the sequence.</p>
+<p>Resets <a class="reference internal" href="#auxjad.DeBruijnGenerator.last_selected_index_of_sequence" title="auxjad.DeBruijnGenerator.last_selected_index_of_sequence"><code class="xref py py-attr docutils literal notranslate"><span class="pre">last_selected_index_of_sequence</span></code></a> to <code class="docutils literal notranslate"><span class="pre">None</span></code> and clears
+<a class="reference internal" href="#auxjad.DeBruijnGenerator.previous_element" title="auxjad.DeBruijnGenerator.previous_element"><code class="xref py py-attr docutils literal notranslate"><span class="pre">previous_element</span></code></a> and <a class="reference internal" href="#auxjad.DeBruijnGenerator.previous_element_index" title="auxjad.DeBruijnGenerator.previous_element_index"><code class="xref py py-attr docutils literal notranslate"><span class="pre">previous_element_index</span></code></a>. Regenerates <a class="reference internal" href="#auxjad.DeBruijnGenerator.sequence" title="auxjad.DeBruijnGenerator.sequence"><code class="xref py py-attr docutils literal notranslate"><span class="pre">sequence</span></code></a> by
+calling <code class="xref py py-meth docutils literal notranslate"><span class="pre">_generate_sequence()</span></code>. This method is called automatically whenever
+<a class="reference internal" href="#auxjad.DeBruijnGenerator.contents" title="auxjad.DeBruijnGenerator.contents"><code class="xref py py-attr docutils literal notranslate"><span class="pre">contents</span></code></a>, <a class="reference internal" href="#auxjad.DeBruijnGenerator.order" title="auxjad.DeBruijnGenerator.order"><code class="xref py py-attr docutils literal notranslate"><span class="pre">order</span></code></a>, <a class="reference internal" href="#auxjad.DeBruijnGenerator.algorithm" title="auxjad.DeBruijnGenerator.algorithm"><code class="xref py py-attr docutils literal notranslate"><span class="pre">algorithm</span></code></a>, or <a class="reference internal" href="#auxjad.DeBruijnGenerator.cyclic" title="auxjad.DeBruijnGenerator.cyclic"><code class="xref py py-attr docutils literal notranslate"><span class="pre">cyclic</span></code></a> are changed.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="auxjad.DeBruijnGenerator.sequence">
+<span class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">sequence</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.14)"><span class="pre">list</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.14)"><span class="pre">Any</span></a><span class="p"><span class="pre">]</span></span></span><a class="headerlink" href="#auxjad.DeBruijnGenerator.sequence" title="Link to this definition"></a></dt>
+<dd><p>Read-only property, returns the de Bruijn sequence mapped to <a class="reference internal" href="#auxjad.DeBruijnGenerator.contents" title="auxjad.DeBruijnGenerator.contents"><code class="xref py py-attr docutils literal notranslate"><span class="pre">contents</span></code></a>.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="auxjad.DeBruijnGenerator.sequence_length">
+<span class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">sequence_length</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><span class="pre">int</span></a></span><a class="headerlink" href="#auxjad.DeBruijnGenerator.sequence_length" title="Link to this definition"></a></dt>
+<dd><p>Read-only property, returns the length of the de Bruijn sequence.</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="auxjad.CrossFader.html" class="btn btn-neutral float-left" title="CrossFader" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="auxjad.Echoer.html" class="btn btn-neutral float-right" title="Echoer" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Gilberto Agostinho.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

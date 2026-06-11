@@ -5,7 +5,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>auxjad.core.LeafLooper &mdash; Auxjad 1.0.9 documentation</title>
+  <title>auxjad.core.LeafLooper &mdash; Auxjad 1.0.10 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=9ca51bb7" />
       <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=9edc463e" />
 
@@ -13,7 +13,7 @@
     <link rel="canonical" href="https://gilbertohasnofb.github.io/auxjad-docs/_modules/auxjad/core/LeafLooper.html"/>
       <script src="../../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../../../_static/documentation_options.js?v=0abd802e"></script>
+      <script src="../../../_static/documentation_options.js?v=377e76b0"></script>
       <script src="../../../_static/doctools.js?v=fd6eb6e6"></script>
       <script src="../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
     <script src="../../../_static/js/theme.js"></script>
@@ -74,9 +74,7 @@
            <div itemprop="articleBody">
              
   <h1>Source code for auxjad.core.LeafLooper</h1><div class="highlight"><pre>
-<span></span><span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Union</span>
-
-<span class="kn">import</span><span class="w"> </span><span class="nn">abjad</span>
+<span></span><span class="kn">import</span><span class="w"> </span><span class="nn">abjad</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">..</span><span class="w"> </span><span class="kn">import</span> <span class="n">mutate</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">._LooperParent</span><span class="w"> </span><span class="kn">import</span> <span class="n">_LooperParent</span>
@@ -1170,7 +1168,7 @@
 <span class="sd">        better to attach those to the music after the fading process has ended.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="c1">### CLASS VARIABLES ###</span>
+    <span class="c1"># ---------- CLASS VARIABLES ----------</span>
 
     <span class="vm">__slots__</span> <span class="o">=</span> <span class="p">(</span>
         <span class="s2">&quot;_end_with_max_n_leaves&quot;</span><span class="p">,</span>
@@ -1190,7 +1188,7 @@
         <span class="s2">&quot;_use_multimeasure_rests&quot;</span><span class="p">,</span>
     <span class="p">)</span>
 
-    <span class="c1">### INITIALISER ###</span>
+    <span class="c1"># ---------- INITIALISER ----------</span>
 
 <div class="viewcode-block" id="LeafLooper.__init__">
 <a class="viewcode-back" href="../../../_api_members/auxjad.LeafLooper.html#auxjad.LeafLooper.__init__">[docs]</a>
@@ -1208,22 +1206,15 @@
         <span class="n">omit_time_signatures</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
         <span class="n">process_on_first_call</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
         <span class="n">disable_rewrite_meter</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
-        <span class="n">boundary_depth</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-        <span class="n">maximum_dot_count</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">boundary_depth</span><span class="p">:</span> <span class="nb">int</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">maximum_dot_count</span><span class="p">:</span> <span class="nb">int</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
         <span class="n">rewrite_tuplets</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
         <span class="n">prettify_rewrite_meter</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
         <span class="n">extract_trivial_tuplets</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
         <span class="n">fuse_across_groups_of_beats</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
         <span class="n">fuse_quadruple_meter</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
         <span class="n">fuse_triple_meter</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
-        <span class="n">after_rest</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span>
-            <span class="nb">int</span><span class="p">,</span>
-            <span class="nb">float</span><span class="p">,</span>
-            <span class="nb">str</span><span class="p">,</span>
-            <span class="nb">tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">],</span>
-            <span class="n">abjad</span><span class="o">.</span><span class="n">Duration</span><span class="p">,</span>
-            <span class="n">abjad</span><span class="o">.</span><span class="n">Rest</span><span class="p">,</span>
-        <span class="p">]</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="n">after_rest</span><span class="p">:</span> <span class="nb">int</span> <span class="o">|</span> <span class="nb">float</span> <span class="o">|</span> <span class="nb">str</span> <span class="o">|</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">|</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Duration</span> <span class="o">|</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Rest</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
         <span class="n">after_rest_in_new_measure</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
         <span class="n">use_multimeasure_rests</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
@@ -1253,7 +1244,7 @@
         <span class="p">)</span></div>
 
 
-    <span class="c1">### SPECIAL METHODS ###</span>
+    <span class="c1"># ---------- SPECIAL METHODS ----------</span>
 
 <div class="viewcode-block" id="LeafLooper.__repr__">
 <a class="viewcode-back" href="../../../_api_members/auxjad.LeafLooper.html#auxjad.LeafLooper.__repr__">[docs]</a>
@@ -1269,7 +1260,7 @@
         <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_contents_logical_ties</span><span class="p">)</span></div>
 
 
-    <span class="c1">### PRIVATE METHODS ###</span>
+    <span class="c1"># ---------- PRIVATE METHODS ----------</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">_slice_contents</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;This method takes a slice with :attr:`window_size` number of</span>
@@ -1370,7 +1361,7 @@
 <span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Returns interpreter representation of  :attr:`contents`.&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="fm">__repr__</span><span class="p">()</span>
 
-    <span class="c1">### PUBLIC PROPERTIES ###</span>
+    <span class="c1"># ---------- PUBLIC PROPERTIES ----------</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">contents</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">:</span>
@@ -1454,7 +1445,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">_disable_rewrite_meter</span> <span class="o">=</span> <span class="n">disable_rewrite_meter</span>
 
     <span class="nd">@property</span>
-    <span class="k">def</span><span class="w"> </span><span class="nf">boundary_depth</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Union</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="kc">None</span><span class="p">]:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">boundary_depth</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span> <span class="o">|</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Sets the argument ``boundary_depth`` of</span>
 <span class="sd">        |abjad.Meter.rewrite_meter()|.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -1463,7 +1454,7 @@
     <span class="nd">@boundary_depth</span><span class="o">.</span><span class="n">setter</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">boundary_depth</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
-        <span class="n">boundary_depth</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">],</span>
+        <span class="n">boundary_depth</span><span class="p">:</span> <span class="nb">int</span> <span class="o">|</span> <span class="kc">None</span><span class="p">,</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="k">if</span> <span class="n">boundary_depth</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
             <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">boundary_depth</span><span class="p">,</span> <span class="nb">int</span><span class="p">):</span>
@@ -1471,7 +1462,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">_boundary_depth</span> <span class="o">=</span> <span class="n">boundary_depth</span>
 
     <span class="nd">@property</span>
-    <span class="k">def</span><span class="w"> </span><span class="nf">maximum_dot_count</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Union</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="kc">None</span><span class="p">]:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">maximum_dot_count</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span> <span class="o">|</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Sets the argument ``maximum_dot_count`` of</span>
 <span class="sd">        |abjad.Meter.rewrite_meter()|.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -1480,7 +1471,7 @@
     <span class="nd">@maximum_dot_count</span><span class="o">.</span><span class="n">setter</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">maximum_dot_count</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
-        <span class="n">maximum_dot_count</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">],</span>
+        <span class="n">maximum_dot_count</span><span class="p">:</span> <span class="nb">int</span> <span class="o">|</span> <span class="kc">None</span><span class="p">,</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="k">if</span> <span class="n">maximum_dot_count</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
             <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">maximum_dot_count</span><span class="p">,</span> <span class="nb">int</span><span class="p">):</span>
@@ -1593,14 +1584,7 @@
     <span class="nd">@after_rest</span><span class="o">.</span><span class="n">setter</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">after_rest</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
-        <span class="n">after_rest</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span>
-            <span class="nb">int</span><span class="p">,</span>
-            <span class="nb">float</span><span class="p">,</span>
-            <span class="nb">str</span><span class="p">,</span>
-            <span class="nb">tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">],</span>
-            <span class="n">abjad</span><span class="o">.</span><span class="n">Duration</span><span class="p">,</span>
-            <span class="n">abjad</span><span class="o">.</span><span class="n">Rest</span><span class="p">,</span>
-        <span class="p">],</span>
+        <span class="n">after_rest</span><span class="p">:</span> <span class="nb">int</span> <span class="o">|</span> <span class="nb">float</span> <span class="o">|</span> <span class="nb">str</span> <span class="o">|</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">|</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Duration</span> <span class="o">|</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Rest</span><span class="p">,</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span>
             <span class="n">after_rest</span><span class="p">,</span>
@@ -1646,7 +1630,7 @@
             <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;&#39;use_multimeasure_rests&#39; must be &#39;bool&#39;&quot;</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_use_multimeasure_rests</span> <span class="o">=</span> <span class="n">use_multimeasure_rests</span>
 
-    <span class="c1">### PRIVATE PROPERTIES ###</span>
+    <span class="c1"># ---------- PRIVATE PROPERTIES ----------</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">_done</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>

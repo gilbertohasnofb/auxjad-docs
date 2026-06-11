@@ -1,0 +1,1024 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>auxjad.core.DeBruijnGenerator &mdash; Auxjad 1.0.10 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=9ca51bb7" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=9edc463e" />
+
+  
+    <link rel="canonical" href="https://gilbertohasnofb.github.io/auxjad-docs/_modules/auxjad/core/DeBruijnGenerator.html"/>
+      <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../_static/documentation_options.js?v=377e76b0"></script>
+      <script src="../../../_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../index.html" class="icon icon-home">
+            Auxjad
+              <img src="../../../_static/auxjad-logo.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../index.html">Welcome to Auxjad’s documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../examples/index.html">Examples of usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../score_gallery/index.html">Score gallery</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../api/index.html">Auxjad API</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">Auxjad</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">auxjad.core.DeBruijnGenerator</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for auxjad.core.DeBruijnGenerator</h1><div class="highlight"><pre>
+<span></span><span class="kn">import</span><span class="w"> </span><span class="nn">copy</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Iterator</span>
+
+
+<div class="viewcode-block" id="DeBruijnGenerator">
+<a class="viewcode-back" href="../../../_api_members/auxjad.DeBruijnGenerator.html#auxjad.DeBruijnGenerator">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">DeBruijnGenerator</span><span class="p">:</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;An implementation of the De Bruijn Sequence and Universal Cycle Constructions generators,</span>
+<span class="sd">    based on research by Joseph Sawada, Dennis Wong, Aaron Williams, Daniel Gabric. Original C</span>
+<span class="sd">    implementation of algorithms PCR1 (GrandDaddy) and PCR2 (GrandMama) by Joseph Sawada, 2015-2018.</span>
+<span class="sd">    This class can be used to generate sequences of elements from an input :obj:`list` in which</span>
+<span class="sd">    every combination of :math:`n` elements from an alphabet of size :math:`k` are present.</span>
+
+<span class="sd">    E.g. for :math:`n=2` and :math:`k=3`, a possible construction of this sequence is:</span>
+
+<span class="sd">    .. math::</span>
+
+<span class="sd">        0010211220</span>
+
+<span class="sd">    The sequence above contains every combination of 2 elements of the alphabet exactly once:</span>
+
+<span class="sd">    .. math::</span>
+
+<span class="sd">        00 \rightarrow 01 \rightarrow 10 \rightarrow 02 \rightarrow 21 \rightarrow 11 \rightarrow 12</span>
+<span class="sd">        \rightarrow 22 \rightarrow 20</span>
+
+<span class="sd">    This implementation is based on the code by Joseph Sawada, who generously shares it in his</span>
+<span class="sd">    website https://debruijnsequence.org as well as granted permission for it to be used  as the</span>
+<span class="sd">    basis for this Python implementation.</span>
+
+<span class="sd">    Basic usage:</span>
+<span class="sd">        The generator should be initialised with a :obj:`list` of objects and the attribute</span>
+<span class="sd">        :attr:`order`. The elements of this :obj:`list` can be of any type.</span>
+
+<span class="sd">        &gt;&gt;&gt; db_generator = auxjad.DeBruijnGenerator([0, 1, 2], order=2)</span>
+<span class="sd">        &gt;&gt;&gt; db_generator.contents</span>
+<span class="sd">        [0, 1, 2]</span>
+<span class="sd">        &gt;&gt;&gt; db_generator.order</span>
+<span class="sd">        2</span>
+<span class="sd">        &gt;&gt;&gt; db_generator.algorithm</span>
+<span class="sd">        &quot;pcr1&quot;</span>
+<span class="sd">        &gt;&gt;&gt; db_generator.cyclic</span>
+<span class="sd">        False</span>
+<span class="sd">        &gt;&gt;&gt; db_generator.sequence_length</span>
+<span class="sd">        10</span>
+<span class="sd">        &gt;&gt;&gt; db_generator.previous_element</span>
+<span class="sd">        None</span>
+
+<span class="sd">        Calling the generator will output the next element of the de Bruijn sequence.</span>
+
+<span class="sd">        &gt;&gt;&gt; db_generator()</span>
+<span class="sd">        0</span>
+<span class="sd">        &gt;&gt;&gt; db_generator()</span>
+<span class="sd">        0</span>
+<span class="sd">        &gt;&gt;&gt; db_generator()</span>
+<span class="sd">        1</span>
+<span class="sd">        &gt;&gt;&gt; db_generator.previous_element</span>
+<span class="sd">        1</span>
+<span class="sd">        &gt;&gt;&gt; db_generator.last_selected_index_of_sequence</span>
+<span class="sd">        2</span>
+
+<span class="sd">    :func:`len()` function:</span>
+<span class="sd">        Applying the :func:`len()` function to the generator returns the length of :attr:`contents`.</span>
+
+<span class="sd">        &gt;&gt;&gt; db_generator = auxjad.DeBruijnGenerator([0, 1, 2], order=2)</span>
+<span class="sd">        &gt;&gt;&gt; len(db_generator)</span>
+<span class="sd">        3</span>
+
+<span class="sd">    :meth:`output_all`:</span>
+<span class="sd">        Use :meth:`output_all` to output the full de Bruijn sequence as a :obj:`list` in a single</span>
+<span class="sd">        call. By default, the sequence is linear (i.e. :attr:`cyclic` is ``False``).</span>
+
+<span class="sd">        &gt;&gt;&gt; db_generator = auxjad.DeBruijnGenerator([0, 1, 2], order=2)</span>
+<span class="sd">        &gt;&gt;&gt; db_generator.output_all()</span>
+<span class="sd">        [0, 0, 1, 0, 2, 1, 1, 2, 2, 0]</span>
+
+<span class="sd">    ..  note::</span>
+
+<span class="sd">        If :attr:`cyclic`: is set to ``False``, the generator must be reset using :meth:`reset` if</span>
+<span class="sd">        the sequence is finished.</span>
+
+<span class="sd">        &gt;&gt;&gt; db_generator = auxjad.DeBruijnGenerator([0, 1, 2], order=2, cyclic=False)</span>
+<span class="sd">        &gt;&gt;&gt; db_generator.output_all()</span>
+<span class="sd">        [0, 0, 1, 0, 2, 1, 1, 2, 2, 0]</span>
+<span class="sd">        &gt;&gt;&gt; db_generator.output_all()</span>
+<span class="sd">        StopIteration: sequence has been exhausted</span>
+<span class="sd">        &gt;&gt;&gt; db_generator.reset()</span>
+<span class="sd">        &gt;&gt;&gt; db_generator.output_all()</span>
+<span class="sd">        [0, 0, 1, 0, 2, 1, 1, 2, 2, 0]</span>
+
+<span class="sd">        However, if :attr:`cyclic`: is set to ``True``, multiple calls will cycle through the</span>
+<span class="sd">        sequence.</span>
+
+<span class="sd">        &gt;&gt;&gt; db_generator = auxjad.DeBruijnGenerator([0, 1, 2], order=2, cyclic=True)</span>
+<span class="sd">        &gt;&gt;&gt; db_generator.output_all()</span>
+<span class="sd">        [0, 0, 1, 0, 2, 1, 1, 2, 2, 0]</span>
+<span class="sd">        &gt;&gt;&gt; db_generator.output_all()</span>
+<span class="sd">        [0, 0, 1, 0, 2, 1, 1, 2, 2, 0]</span>
+
+<span class="sd">    :meth:`output_n`:</span>
+<span class="sd">        Use :meth:`output_n` to output the next ``n`` elements of the de Bruijn sequence as a</span>
+<span class="sd">        :obj:`list`.</span>
+
+<span class="sd">        &gt;&gt;&gt; db_generator = auxjad.DeBruijnGenerator([0, 1, 2], order=2)</span>
+<span class="sd">        &gt;&gt;&gt; db_generator.output_n(3)</span>
+<span class="sd">        [0, 0, 1]</span>
+<span class="sd">        &gt;&gt;&gt; db_generator.output_n(3)</span>
+<span class="sd">        [0, 2, 1]</span>
+
+<span class="sd">    ..  note::</span>
+
+<span class="sd">        If the generator has output some subgroups before via direct call or the :meth:`output_n`</span>
+<span class="sd">        method, then :meth:`output_all` will output all *remaining* elements, not from the</span>
+<span class="sd">        beginning.</span>
+
+<span class="sd">        &gt;&gt;&gt; db_generator = auxjad.DeBruijnGenerator([0, 1, 2], order=2)</span>
+<span class="sd">        &gt;&gt;&gt; db_generator.output_n(3)</span>
+<span class="sd">        [0, 0, 1]</span>
+<span class="sd">        &gt;&gt;&gt; db_generator.output_all()</span>
+<span class="sd">        [0, 2, 1, 1, 2, 2, 0]</span>
+
+<span class="sd">        If you want to output the full sequence after previous calls have been made, simply reset</span>
+<span class="sd">        the object.</span>
+
+<span class="sd">        &gt;&gt;&gt; db_generator = auxjad.DeBruijnGenerator([0, 1, 2], order=2)</span>
+<span class="sd">        &gt;&gt;&gt; db_generator.output_n(3)</span>
+<span class="sd">        [0, 0, 1]</span>
+<span class="sd">        &gt;&gt;&gt; db_generator.reset()</span>
+<span class="sd">        &gt;&gt;&gt; db_generator.output_all()</span>
+<span class="sd">        [0, 0, 1, 0, 2, 1, 1, 2, 2, 0]</span>
+
+<span class="sd">    ..  note::</span>
+
+<span class="sd">        If :attr:`cyclic` is set to ``True``, :meth:`output_n` is allowed to wrap around outputting</span>
+<span class="sd">        more elements than there are in the sequence.</span>
+
+<span class="sd">        &gt;&gt;&gt; db_generator = auxjad.DeBruijnGenerator([0, 1, 2], order=2, cyclic=False)</span>
+<span class="sd">        &gt;&gt;&gt; db_generator.output_n(20)</span>
+<span class="sd">        StopIteration: sequence has been exhausted</span>
+<span class="sd">        &gt;&gt;&gt; db_generator = auxjad.DeBruijnGenerator([0, 1, 2], order=2, cyclic=True)</span>
+<span class="sd">        &gt;&gt;&gt; db_generator.output_n(20)</span>
+<span class="sd">        [0, 0, 1, 0, 2, 1, 1, 2, 2, 0, 0, 1, 0, 2, 1, 1, 2, 2, 0, 0]</span>
+
+<span class="sd">    :meth:`reset`:</span>
+<span class="sd">        Use the :meth:`reset` method to reset the generator to its initial state. This can be used</span>
+<span class="sd">        to restart the process at any time.</span>
+
+<span class="sd">        &gt;&gt;&gt; db_generator = auxjad.DeBruijnGenerator([0, 1, 2], order=2, cyclic=False)</span>
+<span class="sd">        &gt;&gt;&gt; db_generator.output_n(4)</span>
+<span class="sd">        [0, 0, 1, 0]</span>
+<span class="sd">        &gt;&gt;&gt; db_generator.output_n(4)</span>
+<span class="sd">        [2, 1, 1, 2]</span>
+<span class="sd">        &gt;&gt;&gt; db_generator.reset()</span>
+<span class="sd">        &gt;&gt;&gt; db_generator.output_n(4)</span>
+<span class="sd">        [0, 0, 1, 0]</span>
+
+<span class="sd">    :attr:`cyclic`:</span>
+<span class="sd">        By default, :attr:`cyclic` is ``False``, meaning the output sequence is linear and contains</span>
+<span class="sd">        all :math:`k^n` subgroups as explicit consecutive substrings. Setting :attr:`cyclic` to</span>
+<span class="sd">        ``True`` produces a shorter cyclic sequence where the final subgroups are implicit via</span>
+<span class="sd">        wraparound.</span>
+
+<span class="sd">        &gt;&gt;&gt; db_generator = auxjad.DeBruijnGenerator([0, 1, 2], order=2, cyclic=True)</span>
+<span class="sd">        &gt;&gt;&gt; db_generator.output_all()</span>
+<span class="sd">        [0, 0, 1, 0, 2, 1, 1, 2, 2]</span>
+<span class="sd">        &gt;&gt;&gt; db_generator = auxjad.DeBruijnGenerator([0, 1, 2], order=2, cyclic=False)</span>
+<span class="sd">        &gt;&gt;&gt; db_generator.output_all()</span>
+<span class="sd">        [0, 0, 1, 0, 2, 1, 1, 2, 2, 0]</span>
+
+<span class="sd">    Using as iterator:</span>
+<span class="sd">        The instances of this class can also be used as an iterator, which can then be used in a for</span>
+<span class="sd">        loop to exhaust the sequence.</span>
+
+<span class="sd">        &gt;&gt;&gt; db_generator = auxjad.DeBruijnGenerator([0, 1, 2], order=2, cyclic=False)</span>
+<span class="sd">        &gt;&gt;&gt; for element in db_generator:</span>
+<span class="sd">        ...     element</span>
+<span class="sd">        0</span>
+<span class="sd">        0</span>
+<span class="sd">        1</span>
+<span class="sd">        0</span>
+<span class="sd">        2</span>
+<span class="sd">        1</span>
+<span class="sd">        1</span>
+<span class="sd">        2</span>
+<span class="sd">        2</span>
+<span class="sd">        0</span>
+
+<span class="sd">    ..  warning::</span>
+
+<span class="sd">        Please note that using an iterator in a loop with :attr:`cyclic`: set to ``True`` will</span>
+<span class="sd">        result in an infinite generation of elements. It will then be necessary to manually exit the</span>
+<span class="sd">        loop.</span>
+
+<span class="sd">        &gt;&gt;&gt; db_generator = auxjad.DeBruijnGenerator([0, 1], order=2, cyclic=False)</span>
+<span class="sd">        &gt;&gt;&gt; for element in db_generator:</span>
+<span class="sd">        ...     element</span>
+<span class="sd">        0</span>
+<span class="sd">        0</span>
+<span class="sd">        1</span>
+<span class="sd">        1</span>
+<span class="sd">        0</span>
+<span class="sd">        &gt;&gt;&gt; db_generator = auxjad.DeBruijnGenerator([0, 1], order=2, cyclic=True)</span>
+<span class="sd">        &gt;&gt;&gt; for i, element in enumerate(db_generator):</span>
+<span class="sd">        ...     if i == 10:</span>
+<span class="sd">        ...         break</span>
+<span class="sd">        ...     element</span>
+<span class="sd">        0</span>
+<span class="sd">        0</span>
+<span class="sd">        1</span>
+<span class="sd">        1</span>
+<span class="sd">        0</span>
+<span class="sd">        0</span>
+<span class="sd">        1</span>
+<span class="sd">        1</span>
+<span class="sd">        0</span>
+<span class="sd">        0</span>
+
+<span class="sd">    :attr:`algorithm`:</span>
+<span class="sd">        Thee are multiple algorithms which can generate de Bruijn sequences, which can be selected</span>
+<span class="sd">        using :attr:`algorithm`. Currently, options include ``&quot;pcr1&quot;`` or ``&quot;pcr2&quot;``. Both produce</span>
+<span class="sd">        valid de Bruijn sequences but differ for most combinations of order and alphabet size.</span>
+<span class="sd">        :attr:`algorithm` defaults to ``&quot;pcr1&quot;``.</span>
+
+<span class="sd">        &gt;&gt;&gt; db_generator = auxjad.DeBruijnGenerator(</span>
+<span class="sd">        ...     [0, 1, 2],</span>
+<span class="sd">        ...     order=2,</span>
+<span class="sd">        ...     algorithm=&quot;pcr2&quot;,</span>
+<span class="sd">        ...     cyclic=True,</span>
+<span class="sd">        ... )</span>
+<span class="sd">        &gt;&gt;&gt; db_generator.output_all()</span>
+<span class="sd">        [0, 0, 1, 1, 0, 2, 1, 2, 2]</span>
+
+<span class="sd">    :attr:`order`:</span>
+<span class="sd">        The :attr:`order` can be changed after initialisation. This regenerates the sequence.</span>
+
+<span class="sd">        &gt;&gt;&gt; db_generator = auxjad.DeBruijnGenerator([0, 1, 2], order=2, cyclic=True)</span>
+<span class="sd">        &gt;&gt;&gt; db_generator.sequence_length</span>
+<span class="sd">        9</span>
+<span class="sd">        &gt;&gt;&gt; db_generator.order = 3</span>
+<span class="sd">        &gt;&gt;&gt; db_generator.sequence_length</span>
+<span class="sd">        27</span>
+
+<span class="sd">    :attr:`contents`:</span>
+<span class="sd">        The :attr:`contents` can be altered after initialisation.</span>
+
+<span class="sd">        &gt;&gt;&gt; db_generator = auxjad.DeBruijnGenerator([0, 1, 2], order=2, cyclic=True)</span>
+<span class="sd">        &gt;&gt;&gt; db_generator.output_all()</span>
+<span class="sd">        [0, 0, 1, 0, 2, 1, 1, 2, 2]</span>
+<span class="sd">        &gt;&gt;&gt; db_generator.contents = [10, 20, 30]</span>
+<span class="sd">        &gt;&gt;&gt; db_generator.output_all()</span>
+<span class="sd">        [10, 10, 20, 10, 30, 20, 20, 30, 30]</span>
+
+<span class="sd">    .. tip::</span>
+
+<span class="sd">        Changing :attr:`contents` with a list of identical size will not reset the sequence.</span>
+
+<span class="sd">        &gt;&gt;&gt; db_generator = auxjad.DeBruijnGenerator([0, 1, 2], order=2, cyclic=True)</span>
+<span class="sd">        &gt;&gt;&gt; db_generator.output_n(4)</span>
+<span class="sd">        [0, 0, 1, 0]</span>
+<span class="sd">        &gt;&gt;&gt; db_generator.contents = [&quot;A&quot;, &quot;B&quot;, &quot;C&quot;]</span>
+<span class="sd">        &gt;&gt;&gt; db_generator.output_all()</span>
+<span class="sd">        [&quot;C&quot;, &quot;B&quot;, &quot;B&quot;, &quot;C&quot;, &quot;C&quot;]</span>
+
+<span class="sd">    Slicing and indexing:</span>
+<span class="sd">        Instances of this class can be indexed and sliced, allowing reading, assigning, or deleting</span>
+<span class="sd">        values from :attr:`contents`. If These changes regenerate the sequence.</span>
+
+<span class="sd">        &gt;&gt;&gt; db_generator = auxjad.DeBruijnGenerator([10, 20, 30], order=2)</span>
+<span class="sd">        &gt;&gt;&gt; db_generator[1]</span>
+<span class="sd">        20</span>
+<span class="sd">        &gt;&gt;&gt; db_generator[0:2]</span>
+<span class="sd">        [10, 20]</span>
+<span class="sd">        &gt;&gt;&gt; db_generator[1] = 99</span>
+<span class="sd">        &gt;&gt;&gt; db_generator.contents</span>
+<span class="sd">        [10, 99, 30]</span>
+<span class="sd">        &gt;&gt;&gt; del db_generator[2]</span>
+<span class="sd">        &gt;&gt;&gt; db_generator.contents</span>
+<span class="sd">        [10, 99]</span>
+
+<span class="sd">    Read-only properties:</span>
+<span class="sd">        This class has a number of ready-only properties. :attr:`previous_element` returns the last</span>
+<span class="sd">        selected element of :attr:`contents`, and :attr:`previous_element_index` returns its index</span>
+<span class="sd">        within :attr:`contents`; :attr:`last_selected_index_of_sequence` returns the index of the</span>
+<span class="sd">        last selected element in the de Bruijn sequence. :attr:`sequence` returns the full de Bruijn</span>
+<span class="sd">        sequence mapped to :attr:`contents` as a :obj:`list` without any of the call functions (i.e.</span>
+<span class="sd">        it does not exhaust the generator); finally, :attr:`sequence_length` returns the length of</span>
+<span class="sd">        the de Bruijn sequence (remembering that :func:`len()` returns the length of</span>
+<span class="sd">        :attr:`contents`, not the output sequence).</span>
+
+<span class="sd">        &gt;&gt;&gt; db_generator = auxjad.DeBruijnGenerator([&quot;A&quot;, &quot;B&quot;, &quot;C&quot;], order=2)</span>
+<span class="sd">        &gt;&gt;&gt; db_generator.output_n(3)</span>
+<span class="sd">        [&quot;A&quot;, &quot;A&quot;, &quot;B&quot;]</span>
+<span class="sd">        &gt;&gt;&gt; db_generator.previous_element</span>
+<span class="sd">        &quot;B&quot;</span>
+<span class="sd">        &gt;&gt;&gt; db_generator.previous_element_index</span>
+<span class="sd">        1</span>
+<span class="sd">        &gt;&gt;&gt; db_generator.last_selected_index_of_sequence</span>
+<span class="sd">        2</span>
+<span class="sd">        &gt;&gt;&gt; db_generator.sequence</span>
+<span class="sd">        [&quot;A&quot;, &quot;A&quot;, &quot;B&quot;, &quot;A&quot;, &quot;C&quot;, &quot;B&quot;, &quot;B&quot;, &quot;C&quot;, &quot;C&quot;, &quot;A&quot;]</span>
+<span class="sd">        &gt;&gt;&gt; db_generator.sequence_length</span>
+<span class="sd">        10</span>
+
+<span class="sd">    ..  tip::</span>
+
+<span class="sd">        This class is agnostic towards the data types of the elements of :attr:`contents`. This also</span>
+<span class="sd">        includes Abjad&#39;s types. Abjad&#39;s exclusive membership requirement is respected since</span>
+<span class="sd">        :func:`copy.deepcopy` is applied to any element being output.</span>
+
+<span class="sd">        &gt;&gt;&gt; db_generator = auxjad.DeBruijnGenerator(</span>
+<span class="sd">        ...     [abjad.Note(&quot;c&#39;8&quot;), abjad.Note(&quot;d&#39;8&quot;), abjad.Note(&quot;e&#39;8&quot;)],</span>
+<span class="sd">        ...     order=2,</span>
+<span class="sd">        ...     cyclic=True,</span>
+<span class="sd">        ... )</span>
+<span class="sd">        &gt;&gt;&gt; notes = db_generator.output_all()</span>
+<span class="sd">        &gt;&gt;&gt; notes</span>
+<span class="sd">        [abjad.Note(&quot;c&#39;8&quot;), abjad.Note(&quot;c&#39;8&quot;), abjad.Note(&quot;d&#39;8&quot;), abjad.Note(&quot;c&#39;8&quot;),</span>
+<span class="sd">        abjad.Note(&quot;e&#39;8&quot;), abjad.Note(&quot;d&#39;8&quot;), abjad.Note(&quot;d&#39;8&quot;), abjad.Note(&quot;e&#39;8&quot;),</span>
+<span class="sd">        abjad.Note(&quot;e&#39;8&quot;)]</span>
+<span class="sd">        &gt;&gt;&gt; staff = abjad.Staff(notes)</span>
+<span class="sd">        &gt;&gt;&gt; abjad.show(staff)</span>
+
+<span class="sd">        ..  docs::</span>
+
+<span class="sd">            \new Staff</span>
+<span class="sd">            {</span>
+<span class="sd">                c&#39;8</span>
+<span class="sd">                c&#39;8</span>
+<span class="sd">                d&#39;8</span>
+<span class="sd">                c&#39;8</span>
+<span class="sd">                e&#39;8</span>
+<span class="sd">                d&#39;8</span>
+<span class="sd">                d&#39;8</span>
+<span class="sd">                e&#39;8</span>
+<span class="sd">                e&#39;8</span>
+<span class="sd">            }</span>
+
+<span class="sd">        ..  figure:: ../_images/DeBruijnGenerator-gPsjYD6RZm.png</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="c1"># ---------- CLASS VARIABLES ----------</span>
+
+    <span class="vm">__slots__</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="s2">&quot;_contents&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;_order&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;_algorithm&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;_cyclic&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;_sequence&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;_sequence_length&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;_last_selected_index_of_sequence&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;_previous_element&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;_previous_element_index&quot;</span><span class="p">,</span>
+    <span class="p">)</span>
+
+    <span class="n">_DE_BRUIJN_ALGORITHMS</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;pcr1&quot;</span><span class="p">,</span> <span class="s2">&quot;pcr2&quot;</span><span class="p">]</span>
+
+    <span class="c1"># ---------- INITIALISER ----------</span>
+
+<div class="viewcode-block" id="DeBruijnGenerator.__init__">
+<a class="viewcode-back" href="../../../_api_members/auxjad.DeBruijnGenerator.html#auxjad.DeBruijnGenerator.__init__">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">contents</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">Any</span><span class="p">],</span>
+        <span class="o">*</span><span class="p">,</span>
+        <span class="n">order</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">algorithm</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;pcr1&quot;</span><span class="p">,</span>
+        <span class="n">cyclic</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">contents</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;&#39;contents&#39; must be &#39;list&#39;&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">contents</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">2</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;&#39;contents&#39; must be a &#39;list&#39; of length 2 or greater&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">order</span><span class="p">,</span> <span class="nb">int</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;&#39;order&#39; must be &#39;int&#39;&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">order</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;&#39;order&#39; must be greater than 0&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">algorithm</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;&#39;algorithm&#39; must be &#39;str&#39;&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">algorithm</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_DE_BRUIJN_ALGORITHMS</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                <span class="sa">f</span><span class="s2">&quot;Invalid algorithm &#39;</span><span class="si">{</span><span class="n">algorithm</span><span class="si">}</span><span class="s2">&#39;, must be one of </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_DE_BRUIJN_ALGORITHMS</span><span class="si">}</span><span class="s2">&quot;</span>
+            <span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">cyclic</span><span class="p">,</span> <span class="nb">bool</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;&#39;cyclic&#39; must be &#39;bool&#39;&quot;</span><span class="p">)</span>
+        <span class="c1"># initialising using attributes, not properties, due to ordering constraints. This is</span>
+        <span class="c1"># because self._generate_sequence() is called when setting any of the attributes below, and</span>
+        <span class="c1"># this function requires the other attributes to have valid values.</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_contents</span> <span class="o">=</span> <span class="n">contents</span><span class="p">[:]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_algorithm</span> <span class="o">=</span> <span class="n">algorithm</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_cyclic</span> <span class="o">=</span> <span class="n">cyclic</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_order</span> <span class="o">=</span> <span class="n">order</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_previous_element</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_previous_element_index</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_last_selected_index_of_sequence</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">reset</span><span class="p">()</span></div>
+
+
+    <span class="c1"># ---------- SPECIAL METHODS ----------</span>
+
+<div class="viewcode-block" id="DeBruijnGenerator.__repr__">
+<a class="viewcode-back" href="../../../_api_members/auxjad.DeBruijnGenerator.html#auxjad.DeBruijnGenerator.__repr__">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Returns interpreter representation of :attr:`contents`.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_contents</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="DeBruijnGenerator.__len__">
+<a class="viewcode-back" href="../../../_api_members/auxjad.DeBruijnGenerator.html#auxjad.DeBruijnGenerator.__len__">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__len__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Returns the length of :attr:`contents`. This is the equivalent of the alphabet size of</span>
+<span class="sd">        the de Bruijn sequence, often notated as :math:`k`.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_contents</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="DeBruijnGenerator.__call__">
+<a class="viewcode-back" href="../../../_api_members/auxjad.DeBruijnGenerator.html#auxjad.DeBruijnGenerator.__call__">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Any</span><span class="p">:</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Calls the selection process and outputs one element of :attr:`contents`.&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_last_selected_index_of_sequence</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">next_index</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">cyclic</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">_done</span><span class="p">:</span>
+            <span class="n">next_index</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">next_index</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_last_selected_index_of_sequence</span> <span class="o">+</span> <span class="mi">1</span>
+            <span class="k">if</span> <span class="n">next_index</span> <span class="o">&gt;=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_sequence</span><span class="p">):</span>
+                <span class="k">raise</span> <span class="ne">StopIteration</span><span class="p">(</span><span class="s2">&quot;sequence has been exhausted&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_last_selected_index_of_sequence</span> <span class="o">=</span> <span class="n">next_index</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_previous_element_index</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_sequence</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">_last_selected_index_of_sequence</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_previous_element</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_contents</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">_previous_element_index</span><span class="p">]</span>
+
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">previous_element</span></div>
+
+
+<div class="viewcode-block" id="DeBruijnGenerator.__next__">
+<a class="viewcode-back" href="../../../_api_members/auxjad.DeBruijnGenerator.html#auxjad.DeBruijnGenerator.__next__">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__next__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Any</span><span class="p">:</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Calls the selection process and outputs one element of :attr:`contents`.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="fm">__call__</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="DeBruijnGenerator.__iter__">
+<a class="viewcode-back" href="../../../_api_members/auxjad.DeBruijnGenerator.html#auxjad.DeBruijnGenerator.__iter__">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__iter__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Iterator</span><span class="p">:</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Returns an iterator, allowing instances to be used as iterators.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span></div>
+
+
+<div class="viewcode-block" id="DeBruijnGenerator.__getitem__">
+<a class="viewcode-back" href="../../../_api_members/auxjad.DeBruijnGenerator.html#auxjad.DeBruijnGenerator.__getitem__">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__getitem__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">key</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Any</span><span class="p">:</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Returns one or more elements of :attr:`contents` through indexing</span>
+<span class="sd">        or slicing.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_contents</span><span class="p">[</span><span class="n">key</span><span class="p">]</span></div>
+
+
+<div class="viewcode-block" id="DeBruijnGenerator.__setitem__">
+<a class="viewcode-back" href="../../../_api_members/auxjad.DeBruijnGenerator.html#auxjad.DeBruijnGenerator.__setitem__">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__setitem__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">key</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">value</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Assigns values to one or more elements of :attr:`contents` through</span>
+<span class="sd">        indexing or slicing.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">length_before_set</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="fm">__len__</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_contents</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">value</span>
+        <span class="k">if</span> <span class="n">length_before_set</span> <span class="o">!=</span> <span class="bp">self</span><span class="o">.</span><span class="fm">__len__</span><span class="p">():</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">reset</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="DeBruijnGenerator.__delitem__">
+<a class="viewcode-back" href="../../../_api_members/auxjad.DeBruijnGenerator.html#auxjad.DeBruijnGenerator.__delitem__">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__delitem__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">key</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Deletes one or more elements of :attr:`contents` through indexing or slicing.&quot;&quot;&quot;</span>
+        <span class="k">del</span> <span class="bp">self</span><span class="o">.</span><span class="n">_contents</span><span class="p">[</span><span class="n">key</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">reset</span><span class="p">()</span></div>
+
+
+    <span class="c1"># ---------- PUBLIC METHODS ----------</span>
+
+<div class="viewcode-block" id="DeBruijnGenerator.output_all">
+<a class="viewcode-back" href="../../../_api_members/auxjad.DeBruijnGenerator.html#auxjad.DeBruijnGenerator.output_all">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">output_all</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="n">Any</span><span class="p">]:</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Outputs remaining elements of the de Bruijn sequence as a single :obj:`list`.</span>
+
+<span class="sd">        If the generator has not been called before, returns the full sequence. If some elements</span>
+<span class="sd">        have already been output via :meth:`__call__` or :meth:`output_n`, returns only the</span>
+<span class="sd">        remaining elements from the current position to the end. Call :meth:`reset` first to always</span>
+<span class="sd">        obtain the full sequence.</span>
+
+<span class="sd">        Raises :exc:`StopIteration` if the sequence has been exhausted and :attr:`cyclic` is</span>
+<span class="sd">        ``False``. If :attr:`cyclic` is ``True``, resets and returns the full sequence instead.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_done</span> <span class="ow">and</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cyclic</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">StopIteration</span><span class="p">(</span><span class="s2">&quot;sequence has been exhausted&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cyclic</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">_last_selected_index_of_sequence</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">sequence_length</span> <span class="o">-</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">reset</span><span class="p">()</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_last_selected_index_of_sequence</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_last_selected_index_of_sequence</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">sequence_length</span> <span class="o">-</span> <span class="mi">1</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">sequence</span>
+        <span class="n">output_sequence</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">sequence</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">_last_selected_index_of_sequence</span> <span class="o">+</span> <span class="mi">1</span> <span class="p">:]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_last_selected_index_of_sequence</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">sequence_length</span> <span class="o">-</span> <span class="mi">1</span>
+        <span class="k">return</span> <span class="n">output_sequence</span></div>
+
+
+<div class="viewcode-block" id="DeBruijnGenerator.output_n">
+<a class="viewcode-back" href="../../../_api_members/auxjad.DeBruijnGenerator.html#auxjad.DeBruijnGenerator.output_n">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">output_n</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">n</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="n">Any</span><span class="p">]:</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Outputs the next ``n`` elements of the de Bruijn sequence as a :obj:`list`.&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="nb">int</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;first positional argument must be &#39;int&#39;&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">n</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;first positional argument must be a positive &#39;int&#39;&quot;</span><span class="p">)</span>
+        <span class="n">output_list</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">output_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="fm">__call__</span><span class="p">())</span>
+            <span class="k">except</span> <span class="ne">StopIteration</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">StopIteration</span><span class="p">(</span>
+                    <span class="sa">f</span><span class="s2">&quot;sequence has been exhausted after </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">output_list</span><span class="p">)</span><span class="si">}</span><span class="s2"> of </span><span class="si">{</span><span class="n">n</span><span class="si">}</span><span class="s2"> elements&quot;</span>
+                <span class="p">)</span>
+        <span class="k">return</span> <span class="n">output_list</span></div>
+
+
+<div class="viewcode-block" id="DeBruijnGenerator.reset">
+<a class="viewcode-back" href="../../../_api_members/auxjad.DeBruijnGenerator.html#auxjad.DeBruijnGenerator.reset">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">reset</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Resets the generator to its initial state and regenerates the sequence.</span>
+
+<span class="sd">        Resets :attr:`last_selected_index_of_sequence` to ``None`` and clears</span>
+<span class="sd">        :attr:`previous_element` and :attr:`previous_element_index`. Regenerates :attr:`sequence` by</span>
+<span class="sd">        calling :meth:`_generate_sequence`. This method is called automatically whenever</span>
+<span class="sd">        :attr:`contents`, :attr:`order`, :attr:`algorithm`, or :attr:`cyclic` are changed.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_last_selected_index_of_sequence</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_previous_element</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_previous_element_index</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_generate_sequence</span><span class="p">()</span></div>
+
+
+    <span class="c1"># ---------- PRIVATE METHODS ----------</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_generate_sequence</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Generates the full de Bruijn sequence. Uses a specified :attr:`algorithm` for selecting</span>
+<span class="sd">        the next symbol in the sequence, and maps it to the correct element of :attr:`contents`.</span>
+
+<span class="sd">        Both PCR1 and PCR2 algorithms start with a window of length :attr:`order` filled with 0s,</span>
+<span class="sd">        e.g. for ``order = 4`` the window is ``[0, 0, 0, 0]``. Both algorithms work by dropping the</span>
+<span class="sd">        first item, shifting all others to the left, and appending the generated next item (where</span>
+<span class="sd">        the difference between PCR1 and PCR2 lies). E.g. for a window ``[a, b, c, d]``, the next</span>
+<span class="sd">        window would be ``[b, c, d, e]``. The algorithm works by fetching the first element of the</span>
+<span class="sd">        current window (initialised with zeroes only), then generating a valid next window. When the</span>
+<span class="sd">        newly generated window has looped back to its initial value (in the example above,</span>
+<span class="sd">        ``[0, 0, 0, 0]``), the loop is stops. Because we first fetch the first element of a window</span>
+<span class="sd">        at every loop before generating it, the final loop will look like this:</span>
+
+<span class="sd">        - current window: ``[x, 0, 0, 0]``</span>
+<span class="sd">        - fetches ``x`` and appends to output sequence</span>
+<span class="sd">        - window moves ``[x, 0, 0, 0]`` :math:`\rightarrow` ``[0, 0, 0, 0]``</span>
+<span class="sd">        - loop is terminated since we arrived at a window filled with zeroes</span>
+
+<span class="sd">        At this point, if :attr:`cyclic` is set to ``True``,  the algorithm is complete and the</span>
+<span class="sd">        output sequence thus ends with a series of ``x``&#39;s. However,  :attr:`cyclic` is set to</span>
+<span class="sd">        ``False``, the algorithm append order - 1 zeroes at the end of the sequence.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">generator_name</span> <span class="o">=</span> <span class="s2">&quot;_&quot;</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">_algorithm</span> <span class="o">+</span> <span class="s2">&quot;_generator&quot;</span>
+        <span class="n">successor_generator</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">generator_name</span><span class="p">)</span>
+        <span class="n">window</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">_order</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_sequence</span> <span class="o">=</span> <span class="p">[]</span>
+
+        <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_sequence</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">window</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+            <span class="n">next_symbol</span> <span class="o">=</span> <span class="n">successor_generator</span><span class="p">(</span>
+                <span class="n">window</span><span class="p">,</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_order</span><span class="p">,</span>
+                <span class="bp">self</span><span class="o">.</span><span class="fm">__len__</span><span class="p">(),</span>  <span class="c1"># length of contents = alphabet size</span>
+            <span class="p">)</span>
+            <span class="n">window</span> <span class="o">=</span> <span class="n">window</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span> <span class="o">+</span> <span class="p">[</span><span class="n">next_symbol</span><span class="p">]</span>
+            <span class="k">if</span> <span class="nb">all</span><span class="p">(</span><span class="n">symbol</span> <span class="o">==</span> <span class="mi">0</span> <span class="k">for</span> <span class="n">symbol</span> <span class="ow">in</span> <span class="n">window</span><span class="p">):</span>
+                <span class="k">break</span>
+
+        <span class="c1"># If not cyclic, we must get order - 1 zeroes to append at the end of both PCR1 and PCR2.</span>
+        <span class="c1"># Since window now contains order times zeroes, we simply extend the sequence by this window</span>
+        <span class="c1"># minus one element.</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cyclic</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_sequence</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">window</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_pcr1_generator</span><span class="p">(</span><span class="n">window</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">],</span> <span class="n">order</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">alphabet_size</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Generator of the next symbol using PCR1 (GrandDaddy) rule.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            window (list[int]): Current sliding window of length ``order``.</span>
+<span class="sd">            order (int): Order of the de Bruijn sequence.</span>
+<span class="sd">            alphabet_size (int): Number of distinct symbols in alphabet.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            int: The next symbol in the sequence.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">max_symbol</span> <span class="o">=</span> <span class="n">alphabet_size</span> <span class="o">-</span> <span class="mi">1</span>
+        <span class="n">next_symbol</span> <span class="o">=</span> <span class="n">DeBruijnGenerator</span><span class="o">.</span><span class="n">_pcr1_get_next_symbol</span><span class="p">(</span><span class="n">window</span><span class="p">,</span> <span class="n">order</span><span class="p">,</span> <span class="n">alphabet_size</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">next_symbol</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">window</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="n">max_symbol</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">next_symbol</span>
+        <span class="k">if</span> <span class="n">next_symbol</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">window</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">max_symbol</span> <span class="ow">and</span> <span class="n">window</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="n">next_symbol</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">window</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span>
+        <span class="k">return</span> <span class="n">window</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_pcr1_get_next_symbol</span><span class="p">(</span><span class="n">window</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">],</span> <span class="n">order</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">alphabet_size</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span> <span class="o">|</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Compute the smallest valid next symbol for the PCR1 rule (aka GrandDaddy).</span>
+
+<span class="sd">        Finds the tail of the window (all elements after the leading run of max symbols, starting at</span>
+<span class="sd">        index 1), then inlines necklace period detection to determine the smallest symbol that keeps</span>
+<span class="sd">        the sequence lexicographically minimal.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            window (list[int]): Current sliding window of length ``order``.</span>
+<span class="sd">            order (int): Order of the de Bruijn sequence.</span>
+<span class="sd">            alphabet_size (int): Number of distinct symbols in alphabet.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            int | None: The smallest valid next symbol, or None if no valid symbol exists (the</span>
+<span class="sd">                caller function will then keep the current symbol).</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">max_symbol</span> <span class="o">=</span> <span class="n">alphabet_size</span> <span class="o">-</span> <span class="mi">1</span>
+
+        <span class="n">first_non_max</span> <span class="o">=</span> <span class="mi">1</span>
+        <span class="k">while</span> <span class="n">first_non_max</span> <span class="o">&lt;</span> <span class="n">order</span> <span class="ow">and</span> <span class="n">window</span><span class="p">[</span><span class="n">first_non_max</span><span class="p">]</span> <span class="o">==</span> <span class="n">max_symbol</span><span class="p">:</span>
+            <span class="n">first_non_max</span> <span class="o">+=</span> <span class="mi">1</span>
+
+        <span class="k">if</span> <span class="n">first_non_max</span> <span class="o">==</span> <span class="n">order</span><span class="p">:</span>
+            <span class="k">return</span> <span class="mi">0</span>
+
+        <span class="c1"># Pad with a leading zero so that 1-based index arithmetic (tail[i - period]) stays</span>
+        <span class="c1"># consistent with the original C implementation. A trailing placeholder zero is also</span>
+        <span class="c1"># appended; it is overwritten on the very next line to hold the computed next symbol.</span>
+        <span class="n">tail_length</span> <span class="o">=</span> <span class="n">order</span> <span class="o">-</span> <span class="n">first_non_max</span>
+        <span class="n">tail</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="n">window</span><span class="p">[</span><span class="n">first_non_max</span><span class="p">:]</span> <span class="o">+</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span>  <span class="c1"># [sentinel, window tail, next_symbol_slot]</span>
+
+        <span class="n">period</span> <span class="o">=</span> <span class="mi">1</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">tail_length</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">tail</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="n">period</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">tail</span><span class="p">[</span><span class="n">i</span><span class="p">]:</span>
+                <span class="k">return</span> <span class="kc">None</span>
+            <span class="k">if</span> <span class="n">tail</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="n">period</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">tail</span><span class="p">[</span><span class="n">i</span><span class="p">]:</span>
+                <span class="n">period</span> <span class="o">=</span> <span class="n">i</span>
+
+        <span class="n">tail</span><span class="p">[</span><span class="n">tail_length</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">tail</span><span class="p">[(</span><span class="n">tail_length</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">-</span> <span class="n">period</span><span class="p">]</span>
+        <span class="n">next_symbol</span> <span class="o">=</span> <span class="n">tail</span><span class="p">[</span><span class="n">tail_length</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span>
+
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">tail_length</span> <span class="o">+</span> <span class="mi">2</span><span class="p">,</span> <span class="n">order</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">tail</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="n">period</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">max_symbol</span><span class="p">:</span>
+                <span class="k">return</span> <span class="n">next_symbol</span>
+
+        <span class="k">if</span> <span class="n">order</span> <span class="o">%</span> <span class="n">period</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">next_symbol</span>
+        <span class="k">if</span> <span class="n">next_symbol</span> <span class="o">&lt;</span> <span class="n">max_symbol</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">next_symbol</span> <span class="o">+</span> <span class="mi">1</span>
+
+        <span class="k">return</span> <span class="kc">None</span>
+
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_pcr2_generator</span><span class="p">(</span><span class="n">window</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">],</span> <span class="n">order</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">alphabet_size</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Generator of the next symbol using PCR2 (GrandMama) rule.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            window (list[int]): Current sliding window of length ``order``.</span>
+<span class="sd">            order (int): Order of the de Bruijn sequence.</span>
+<span class="sd">            alphabet_size (int): Number of distinct symbols in alphabet.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            int: The next symbol in the sequence.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">largest_candidate_symbol</span> <span class="o">=</span> <span class="n">DeBruijnGenerator</span><span class="o">.</span><span class="n">_get_pcr2_largest_candidate_symbol</span><span class="p">(</span>
+            <span class="n">window</span><span class="p">,</span>
+            <span class="n">order</span><span class="p">,</span>
+            <span class="n">alphabet_size</span><span class="p">,</span>
+        <span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">largest_candidate_symbol</span> <span class="o">!=</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">window</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="n">largest_candidate_symbol</span><span class="p">:</span>
+            <span class="k">return</span> <span class="mi">0</span>
+        <span class="k">if</span> <span class="n">largest_candidate_symbol</span> <span class="o">!=</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">window</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">largest_candidate_symbol</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">window</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span>
+        <span class="k">return</span> <span class="n">window</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_get_pcr2_largest_candidate_symbol</span><span class="p">(</span>
+        <span class="n">window</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">],</span>
+        <span class="n">order</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">alphabet_size</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Compute the largest valid candidate symbol for the PCR2 rule (aka GrandMama).</span>
+
+<span class="sd">        Scans backward from the end of the window, skipping trailing min-symbols (zeros), to find</span>
+<span class="sd">        the length ``last_non_min_index`` (:math:`j` in the original C implementation) of the</span>
+<span class="sd">        meaningful suffix.  Builds the rotated candidate string of length ``order`` with</span>
+<span class="sd">        ``(order - last_non_min_index)`` number of leading zeros followed by</span>
+<span class="sd">        ``window[:last_non_min_index]``, then returns the largest ``element`` (:math:`x` in the</span>
+<span class="sd">        original C implementation) in ``{1, ..., alphabet_size - 1}`` such that substituting</span>
+<span class="sd">        ``element`` at position ``order - last_non_min_index`` produces a necklace.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            window (list[int]): Current sliding window of length ``order``.</span>
+<span class="sd">            order (int): Order of the de Bruijn sequence.</span>
+<span class="sd">            alphabet_size (int): Number of distinct symbols.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            int: The largest valid ``element``, or ``0`` if no such value exists.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># Scan from the end of the window backward while symbols equal 0 (the min symbol). The</span>
+        <span class="c1"># variable last_non_min_index is a 1-based count of the meaningful prefix length, and</span>
+        <span class="c1"># window[last_non_min_index - 1] is the last non-zero symbol (or last_non_min_index stays at</span>
+        <span class="c1"># 1 if the entire window is zero).</span>
+        <span class="n">last_non_min_index</span> <span class="o">=</span> <span class="n">order</span>
+        <span class="k">while</span> <span class="n">last_non_min_index</span> <span class="o">&gt;</span> <span class="mi">1</span> <span class="ow">and</span> <span class="n">window</span><span class="p">[</span><span class="n">last_non_min_index</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">last_non_min_index</span> <span class="o">-=</span> <span class="mi">1</span>
+
+        <span class="c1"># Build the rotated candidate of length order:</span>
+        <span class="c1"># (order - last_non_min_index) leading zeros, then window[:last_non_min_index]</span>
+        <span class="n">candidate</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="p">(</span><span class="n">order</span> <span class="o">-</span> <span class="n">last_non_min_index</span><span class="p">)</span> <span class="o">+</span> <span class="n">window</span><span class="p">[:</span><span class="n">last_non_min_index</span><span class="p">]</span>
+
+        <span class="c1"># Try element from the largest possible symbol down to 1; return the first that yields a</span>
+        <span class="c1"># necklace. candidate[order - last_non_min_index] is the insertion point (the position of</span>
+        <span class="c1"># element in the rotated candidate.</span>
+        <span class="k">for</span> <span class="n">element</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">alphabet_size</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">):</span>
+            <span class="n">candidate</span><span class="p">[</span><span class="n">order</span> <span class="o">-</span> <span class="n">last_non_min_index</span><span class="p">]</span> <span class="o">=</span> <span class="n">element</span>
+            <span class="k">if</span> <span class="n">DeBruijnGenerator</span><span class="o">.</span><span class="n">_is_necklace</span><span class="p">(</span><span class="n">candidate</span><span class="p">):</span>
+                <span class="k">return</span> <span class="n">element</span>
+        <span class="k">return</span> <span class="mi">0</span>
+
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_is_necklace</span><span class="p">(</span><span class="n">sequence</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Return ``True`` if and only if ``sequence`` is a necklace (its own lexicographically</span>
+<span class="sd">        minimal rotation).</span>
+
+<span class="sd">        Pads with a leading zero so that period arithmetic uses 1-based positions, keeping ``i``</span>
+<span class="sd">        and ``period_candidate`` (:math:`p` in the original C implementation) directly comparable.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            sequence (list[int]): The sequence to test (0-based values).</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            bool: ``True`` if ``sequence`` is a necklace, ``False`` otherwise.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">sequence</span><span class="p">)</span>
+        <span class="c1"># Pad with a leading zero so that period arithmetic in the loop below uses 1-based</span>
+        <span class="c1"># positions, keeping i and period_candidate directly comparable</span>
+        <span class="n">padded_sequence</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="n">sequence</span>
+        <span class="n">period_candidate</span> <span class="o">=</span> <span class="mi">1</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">n</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">padded_sequence</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="n">period_candidate</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">padded_sequence</span><span class="p">[</span><span class="n">i</span><span class="p">]:</span>
+                <span class="k">return</span> <span class="kc">False</span>
+            <span class="k">if</span> <span class="n">padded_sequence</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="n">period_candidate</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">padded_sequence</span><span class="p">[</span><span class="n">i</span><span class="p">]:</span>
+                <span class="n">period_candidate</span> <span class="o">=</span> <span class="n">i</span>
+        <span class="k">return</span> <span class="n">n</span> <span class="o">%</span> <span class="n">period_candidate</span> <span class="o">==</span> <span class="mi">0</span>
+
+    <span class="c1"># ---------- PUBLIC PROPERTIES ----------</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">contents</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="n">Any</span><span class="p">]:</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;The :obj:`list` used by the generator, mapped to the de Bruijn sequence for the output</span>
+<span class="sd">        sequence. This is the ordered alphabet used by the de Bruijn generator.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_contents</span>
+
+    <span class="nd">@contents</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">contents</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">contents</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">Any</span><span class="p">],</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">contents</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;&#39;contents&#39; must be &#39;list&quot;</span><span class="p">)</span>
+        <span class="n">different_length</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="fm">__len__</span><span class="p">()</span> <span class="o">!=</span> <span class="nb">len</span><span class="p">(</span><span class="n">contents</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_contents</span> <span class="o">=</span> <span class="n">contents</span><span class="p">[:]</span>
+        <span class="k">if</span> <span class="n">different_length</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">reset</span><span class="p">()</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">algorithm</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Thee are multiple algorithms which can generate de Bruijn sequences. Current options</span>
+<span class="sd">        include ``&quot;pcr1&quot;`` or ``&quot;pcr2&quot;``.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_algorithm</span>
+
+    <span class="nd">@algorithm</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">algorithm</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">algorithm</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">algorithm</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;&#39;algorithm&#39; must be &#39;str&#39;&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">algorithm</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_DE_BRUIJN_ALGORITHMS</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                <span class="sa">f</span><span class="s2">&quot;Invalid algorithm &#39;</span><span class="si">{</span><span class="n">algorithm</span><span class="si">}</span><span class="s2">&#39;, must be one of </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_DE_BRUIJN_ALGORITHMS</span><span class="si">}</span><span class="s2">&quot;</span>
+            <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_algorithm</span> <span class="o">=</span> <span class="n">algorithm</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">reset</span><span class="p">()</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">order</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;The order of a de Bruijn sequence is the size of each of its subgroups, often notated</span>
+<span class="sd">        as :math:`n`.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_order</span>
+
+    <span class="nd">@order</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">order</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">order</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">order</span><span class="p">,</span> <span class="nb">int</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;&#39;order&#39; must be &#39;int&#39;&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">order</span> <span class="o">&lt;</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;&#39;order&#39; must be 1 or greater&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_order</span> <span class="o">=</span> <span class="n">order</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">reset</span><span class="p">()</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">cyclic</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;:obj:`bool` representing whether a sequence is cycle joined or not, defaulting to</span>
+<span class="sd">        ``False``. E.g. consider a de Bruijn sequence of order 2 and alphabet size 3, generated by</span>
+<span class="sd">        PCR1 using a cyclic output:</span>
+
+<span class="sd">        .. math::</span>
+
+<span class="sd">            001021122</span>
+
+<span class="sd">        Notice that the substring :math:`20` is not present in the output, but is implicit in the</span>
+<span class="sd">        result via the cyclic joining of the end of the sequence with its own beginning. For an</span>
+<span class="sd">        explicit sequence with all combinations (i.e. not cyclical), the output would become:</span>
+
+<span class="sd">        .. math::</span>
+
+<span class="sd">            0010211220</span>
+
+<span class="sd">        Which truly has all combinations of order 2 (:math:`n`) for an alphabet of size 3</span>
+<span class="sd">        (:math:`k`):</span>
+
+<span class="sd">        .. math::</span>
+
+<span class="sd">            00 \rightarrow 01 \rightarrow 10 \rightarrow 02 \rightarrow 21 \rightarrow 11</span>
+<span class="sd">            \rightarrow 12 \rightarrow 22 \rightarrow 20</span>
+
+<span class="sd">        It&#39;s worth noticing that for cyclical sequences:</span>
+
+<span class="sd">        - The length of the output sequence is :math:`k^n`</span>
+
+<span class="sd">        - The total number of subgroups is :math:`k^n - (n - 1)`</span>
+
+<span class="sd">        While for non-cyclical sequences:</span>
+
+<span class="sd">        - The length of the output sequence is :math:`k^n + (n - 1)`</span>
+
+<span class="sd">        - The total number of subgroups is :math:`k^n`</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cyclic</span>
+
+    <span class="nd">@cyclic</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">cyclic</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">cyclic</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">cyclic</span><span class="p">,</span> <span class="nb">bool</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;&#39;cyclic&#39; must be &#39;bool&#39;&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_cyclic</span> <span class="o">=</span> <span class="n">cyclic</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">reset</span><span class="p">()</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">previous_element_index</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span> <span class="o">|</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Read-only property, returns the index in :attr:`contents` of the previously output</span>
+<span class="sd">        element of the sequence.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_previous_element_index</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">previous_element</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Any</span> <span class="o">|</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Read-only property, returns the last element output by the object mapped to</span>
+<span class="sd">        :attr:`contents`.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_previous_element</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_previous_element</span>
+        <span class="k">return</span> <span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_previous_element</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">last_selected_index_of_sequence</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span> <span class="o">|</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Read-only property, returns the index of the last element output by the object in the de</span>
+<span class="sd">        Bruijn sequence (not :attr:`contents`).&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_last_selected_index_of_sequence</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">sequence</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="n">Any</span><span class="p">]:</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Read-only property, returns the de Bruijn sequence mapped to :attr:`contents`.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="p">[</span><span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_contents</span><span class="p">[</span><span class="n">index</span><span class="p">])</span> <span class="k">for</span> <span class="n">index</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_sequence</span><span class="p">]</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">sequence_length</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Read-only property, returns the length of the de Bruijn sequence.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_sequence</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_done</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;:obj:`bool` indicating whether the process is done (i.e. whether the index position has</span>
+<span class="sd">        overtaken the :attr:`contents`&#39;s length).</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_last_selected_index_of_sequence</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">False</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_last_selected_index_of_sequence</span> <span class="o">&gt;=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_sequence</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span></div>
+
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Gilberto Agostinho.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

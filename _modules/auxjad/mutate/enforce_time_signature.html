@@ -5,7 +5,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>auxjad.mutate.enforce_time_signature &mdash; Auxjad 1.0.9 documentation</title>
+  <title>auxjad.mutate.enforce_time_signature &mdash; Auxjad 1.0.10 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=9ca51bb7" />
       <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=9edc463e" />
 
@@ -13,7 +13,7 @@
     <link rel="canonical" href="https://gilbertohasnofb.github.io/auxjad-docs/_modules/auxjad/mutate/enforce_time_signature.html"/>
       <script src="../../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../../../_static/documentation_options.js?v=0abd802e"></script>
+      <script src="../../../_static/documentation_options.js?v=377e76b0"></script>
       <script src="../../../_static/doctools.js?v=fd6eb6e6"></script>
       <script src="../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
     <script src="../../../_static/js/theme.js"></script>
@@ -74,9 +74,7 @@
            <div itemprop="articleBody">
              
   <h1>Source code for auxjad.mutate.enforce_time_signature</h1><div class="highlight"><pre>
-<span></span><span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Union</span>
-
-<span class="kn">import</span><span class="w"> </span><span class="nn">abjad</span>
+<span></span><span class="kn">import</span><span class="w"> </span><span class="nn">abjad</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">.auto_rewrite_meter</span><span class="w"> </span><span class="kn">import</span> <span class="n">auto_rewrite_meter</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">.close_container</span><span class="w"> </span><span class="kn">import</span> <span class="n">close_container</span> <span class="k">as</span> <span class="n">close_container_function</span>
@@ -87,19 +85,15 @@
 <a class="viewcode-back" href="../../../_api_members/auxjad.mutate.enforce_time_signature.html#auxjad.mutate.enforce_time_signature">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">enforce_time_signature</span><span class="p">(</span>
     <span class="n">container</span><span class="p">:</span> <span class="n">abjad</span><span class="o">.</span><span class="n">Container</span><span class="p">,</span>
-    <span class="n">time_signatures</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span>
-        <span class="n">abjad</span><span class="o">.</span><span class="n">TimeSignature</span><span class="p">,</span>
-        <span class="nb">tuple</span><span class="p">,</span>
-        <span class="nb">list</span><span class="p">,</span>
-    <span class="p">],</span>
+    <span class="n">time_signatures</span><span class="p">:</span> <span class="n">abjad</span><span class="o">.</span><span class="n">TimeSignature</span> <span class="o">|</span> <span class="nb">tuple</span> <span class="o">|</span> <span class="nb">list</span><span class="p">,</span>
     <span class="o">*</span><span class="p">,</span>
     <span class="n">cyclic</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
     <span class="n">fill_with_rests</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
     <span class="n">close_container</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
     <span class="n">disable_rewrite_meter</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
     <span class="n">prettify_rewrite_meter</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
-    <span class="n">boundary_depth</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-    <span class="n">maximum_dot_count</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">boundary_depth</span><span class="p">:</span> <span class="nb">int</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">maximum_dot_count</span><span class="p">:</span> <span class="nb">int</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="n">rewrite_tuplets</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
     <span class="n">extract_trivial_tuplets</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
     <span class="n">fuse_across_groups_of_beats</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>

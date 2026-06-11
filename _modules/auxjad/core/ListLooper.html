@@ -5,7 +5,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>auxjad.core.ListLooper &mdash; Auxjad 1.0.9 documentation</title>
+  <title>auxjad.core.ListLooper &mdash; Auxjad 1.0.10 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=9ca51bb7" />
       <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=9edc463e" />
 
@@ -13,7 +13,7 @@
     <link rel="canonical" href="https://gilbertohasnofb.github.io/auxjad-docs/_modules/auxjad/core/ListLooper.html"/>
       <script src="../../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../../../_static/documentation_options.js?v=0abd802e"></script>
+      <script src="../../../_static/documentation_options.js?v=377e76b0"></script>
       <script src="../../../_static/doctools.js?v=fd6eb6e6"></script>
       <script src="../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
     <script src="../../../_static/js/theme.js"></script>
@@ -75,7 +75,7 @@
              
   <h1>Source code for auxjad.core.ListLooper</h1><div class="highlight"><pre>
 <span></span><span class="kn">import</span><span class="w"> </span><span class="nn">copy</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Union</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Any</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">._LooperParent</span><span class="w"> </span><span class="kn">import</span> <span class="n">_LooperParent</span>
 
@@ -384,7 +384,7 @@
 <span class="sd">        &gt;&gt;&gt; looper()</span>
 <span class="sd">        [123, &quot;foo&quot;, (3, 4)]</span>
 
-<span class="sd">        This also include Abjad&#39;s types. Abjad&#39;s exclusive membership</span>
+<span class="sd">        This also includes Abjad&#39;s types. Abjad&#39;s exclusive membership</span>
 <span class="sd">        requirement is respected since each call returns a</span>
 <span class="sd">        :func:`copy.deepcopy` of the window. The same is true to the</span>
 <span class="sd">        :meth:`output_all` method.</span>
@@ -451,11 +451,11 @@
 <span class="sd">        ..  figure:: ../_images/ListLooper-kvxaoz53y5f.png</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="c1">### CLASS VARIABLES ###</span>
+    <span class="c1"># ---------- CLASS VARIABLES ----------</span>
 
     <span class="vm">__slots__</span> <span class="o">=</span> <span class="s2">&quot;_end_with_max_n_elements&quot;</span>
 
-    <span class="c1">### INITIALISER ###</span>
+    <span class="c1"># ---------- INITIALISER ----------</span>
 
 <div class="viewcode-block" id="ListLooper.__init__">
 <a class="viewcode-back" href="../../../_api_members/auxjad.ListLooper.html#auxjad.ListLooper.__init__">[docs]</a>
@@ -485,7 +485,7 @@
         <span class="p">)</span></div>
 
 
-    <span class="c1">### SPECIAL METHODS ###</span>
+    <span class="c1"># ---------- SPECIAL METHODS ----------</span>
 
 <div class="viewcode-block" id="ListLooper.__repr__">
 <a class="viewcode-back" href="../../../_api_members/auxjad.ListLooper.html#auxjad.ListLooper.__repr__">[docs]</a>
@@ -501,7 +501,7 @@
         <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_contents</span><span class="p">)</span></div>
 
 
-    <span class="c1">### PUBLIC METHODS ###</span>
+    <span class="c1"># ---------- PUBLIC METHODS ----------</span>
 
 <div class="viewcode-block" id="ListLooper.output_all">
 <a class="viewcode-back" href="../../../_api_members/auxjad.ListLooper.html#auxjad.ListLooper.output_all">[docs]</a>
@@ -514,7 +514,7 @@
         <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
             <span class="k">try</span><span class="p">:</span>
                 <span class="n">dummy_container</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="fm">__call__</span><span class="p">())</span>
-            <span class="k">except</span> <span class="ne">RuntimeError</span><span class="p">:</span>
+            <span class="k">except</span> <span class="ne">StopIteration</span><span class="p">:</span>
                 <span class="k">break</span>
         <span class="k">return</span> <span class="n">dummy_container</span><span class="p">[:]</span></div>
 
@@ -527,16 +527,16 @@
 <span class="sd">        parent&#39;s method outputs an |abjad.Selection|.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="nb">int</span><span class="p">):</span>
-            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;argument must be &#39;int&#39;&quot;</span><span class="p">)</span>
-        <span class="k">if</span> <span class="n">n</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;argument must be a positive &#39;int&#39;&quot;</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;first positional argument must be &#39;int&#39;&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">n</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;first positional argument must be a positive &#39;int&#39;&quot;</span><span class="p">)</span>
         <span class="n">dummy_container</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
             <span class="n">dummy_container</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="fm">__call__</span><span class="p">())</span>
         <span class="k">return</span> <span class="n">dummy_container</span><span class="p">[:]</span></div>
 
 
-    <span class="c1">### PRIVATE METHODS ###</span>
+    <span class="c1"># ---------- PRIVATE METHODS ----------</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">_slice_contents</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;This method takes a slice with :attr:`window_size` number of</span>
@@ -547,7 +547,7 @@
         <span class="n">end</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_head_position</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">_window_size</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_current_window</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_contents</span><span class="p">[</span><span class="n">start</span><span class="p">:</span><span class="n">end</span><span class="p">]</span>
 
-    <span class="c1">### PUBLIC PROPERTIES ###</span>
+    <span class="c1"># ---------- PUBLIC PROPERTIES ----------</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">contents</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="n">Any</span><span class="p">]:</span>
@@ -565,7 +565,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">_is_first_window</span> <span class="o">=</span> <span class="kc">True</span>
 
     <span class="nd">@property</span>
-    <span class="k">def</span><span class="w"> </span><span class="nf">current_window</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Union</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="n">Any</span><span class="p">],</span> <span class="kc">None</span><span class="p">]:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">current_window</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="n">Any</span><span class="p">]</span> <span class="o">|</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Read-only property, returns the window at the current head</span>
 <span class="sd">        position.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -598,7 +598,7 @@
             <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;&#39;end_with_max_n_elements&#39; must be &#39;bool&#39;&quot;</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_end_with_max_n_elements</span> <span class="o">=</span> <span class="n">end_with_max_n_elements</span>
 
-    <span class="c1">### PRIVATE PROPERTIES ###</span>
+    <span class="c1"># ---------- PRIVATE PROPERTIES ----------</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">_done</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
