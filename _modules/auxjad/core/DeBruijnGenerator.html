@@ -5,7 +5,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>auxjad.core.DeBruijnGenerator &mdash; Auxjad 1.0.10 documentation</title>
+  <title>auxjad.core.DeBruijnGenerator &mdash; Auxjad 1.1.0 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=9ca51bb7" />
       <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=9edc463e" />
 
@@ -13,7 +13,7 @@
     <link rel="canonical" href="https://gilbertohasnofb.github.io/auxjad-docs/_modules/auxjad/core/DeBruijnGenerator.html"/>
       <script src="../../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../../../_static/documentation_options.js?v=377e76b0"></script>
+      <script src="../../../_static/documentation_options.js?v=fc837d61"></script>
       <script src="../../../_static/doctools.js?v=fd6eb6e6"></script>
       <script src="../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
     <script src="../../../_static/js/theme.js"></script>
@@ -291,6 +291,40 @@
 <span class="sd">        0</span>
 <span class="sd">        0</span>
 
+<span class="sd">    :attr:`offset`:</span>
+<span class="sd">        Rotates the output de Bruijn sequence by a number of indeces.</span>
+
+<span class="sd">        &gt;&gt;&gt; db_generator = auxjad.DeBruijnGenerator([0, 1, 2], order=2)</span>
+<span class="sd">        &gt;&gt;&gt; db_generator.sequence</span>
+<span class="sd">        [0, 0, 1, 0, 2, 1, 1, 2, 2, 0]</span>
+<span class="sd">        &gt;&gt;&gt; db_generator = auxjad.DeBruijnGenerator([0, 1, 2], order=2, offset=3)</span>
+<span class="sd">        &gt;&gt;&gt; db_generator.sequence</span>
+<span class="sd">        [0, 2, 1, 1, 2, 2, 0, 0, 1, 0]</span>
+
+<span class="sd">        Offset also works with cyclic sequences:</span>
+
+<span class="sd">        &gt;&gt;&gt; db_generator = auxjad.DeBruijnGenerator([0, 1, 2], order=2, cyclic=True)</span>
+<span class="sd">        &gt;&gt;&gt; db_generator.sequence</span>
+<span class="sd">        [0, 0, 1, 0, 2, 1, 1, 2, 2]</span>
+<span class="sd">        &gt;&gt;&gt; db_generator = auxjad.DeBruijnGenerator([0, 1, 2], order=2, cyclic=True, offset=3)</span>
+<span class="sd">        &gt;&gt;&gt; db_generator.sequence</span>
+<span class="sd">        [0, 2, 1, 1, 2, 2, 0, 0, 1]</span>
+
+<span class="sd">        If offset is larger than the sequence length or below zero, it wraps around.</span>
+
+<span class="sd">        &gt;&gt;&gt; db_generator = auxjad.DeBruijnGenerator([0, 1, 2], order=2)</span>
+<span class="sd">        &gt;&gt;&gt; db_generator.sequence</span>
+<span class="sd">        [0, 0, 1, 0, 2, 1, 1, 2, 2, 0]</span>
+<span class="sd">        &gt;&gt;&gt; db_generator = auxjad.DeBruijnGenerator([0, 1, 2], order=2, offset=3)</span>
+<span class="sd">        &gt;&gt;&gt; db_generator.sequence</span>
+<span class="sd">        [0, 2, 1, 1, 2, 2, 0, 0, 1, 0]</span>
+<span class="sd">        &gt;&gt;&gt; db_generator = auxjad.DeBruijnGenerator([0, 1, 2], order=2, offset=15)</span>
+<span class="sd">        &gt;&gt;&gt; db_generator.sequence</span>
+<span class="sd">        [1, 2, 2, 0, 0, 1, 0, 2, 1, 1]</span>
+<span class="sd">        &gt;&gt;&gt; db_generator = auxjad.DeBruijnGenerator([0, 1, 2], order=2, offset=-7)</span>
+<span class="sd">        &gt;&gt;&gt; db_generator.sequence</span>
+<span class="sd">        [1, 0, 2, 1, 1, 2, 2, 0, 0, 1]</span>
+
 <span class="sd">    :attr:`algorithm`:</span>
 <span class="sd">        Thee are multiple algorithms which can generate de Bruijn sequences, which can be selected</span>
 <span class="sd">        using :attr:`algorithm`. Currently, options include ``&quot;pcr1&quot;`` or ``&quot;pcr2&quot;``. Both produce</span>
@@ -421,6 +455,7 @@
         <span class="s2">&quot;_order&quot;</span><span class="p">,</span>
         <span class="s2">&quot;_algorithm&quot;</span><span class="p">,</span>
         <span class="s2">&quot;_cyclic&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;_offset&quot;</span><span class="p">,</span>
         <span class="s2">&quot;_sequence&quot;</span><span class="p">,</span>
         <span class="s2">&quot;_sequence_length&quot;</span><span class="p">,</span>
         <span class="s2">&quot;_last_selected_index_of_sequence&quot;</span><span class="p">,</span>
@@ -441,6 +476,7 @@
         <span class="n">order</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
         <span class="n">algorithm</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;pcr1&quot;</span><span class="p">,</span>
         <span class="n">cyclic</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+        <span class="n">offset</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">contents</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
             <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;&#39;contents&#39; must be &#39;list&#39;&quot;</span><span class="p">)</span>
@@ -458,6 +494,8 @@
             <span class="p">)</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">cyclic</span><span class="p">,</span> <span class="nb">bool</span><span class="p">):</span>
             <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;&#39;cyclic&#39; must be &#39;bool&#39;&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">offset</span><span class="p">,</span> <span class="nb">int</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;&#39;offset&#39; must be &#39;int&#39;&quot;</span><span class="p">)</span>
         <span class="c1"># initialising using attributes, not properties, due to ordering constraints. This is</span>
         <span class="c1"># because self._generate_sequence() is called when setting any of the attributes below, and</span>
         <span class="c1"># this function requires the other attributes to have valid values.</span>
@@ -465,6 +503,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">_algorithm</span> <span class="o">=</span> <span class="n">algorithm</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_cyclic</span> <span class="o">=</span> <span class="n">cyclic</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_order</span> <span class="o">=</span> <span class="n">order</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_offset</span> <span class="o">=</span> <span class="n">offset</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_previous_element</span> <span class="o">=</span> <span class="kc">None</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_previous_element_index</span> <span class="o">=</span> <span class="kc">None</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_last_selected_index_of_sequence</span> <span class="o">=</span> <span class="kc">None</span>
@@ -621,7 +660,12 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">_last_selected_index_of_sequence</span> <span class="o">=</span> <span class="kc">None</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_previous_element</span> <span class="o">=</span> <span class="kc">None</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_previous_element_index</span> <span class="o">=</span> <span class="kc">None</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_generate_sequence</span><span class="p">()</span></div>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_generate_sequence</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_offset_sequence</span><span class="p">()</span>
+        <span class="c1"># If not cyclic, we must get the initial order - 1 elements to append at the end of the</span>
+        <span class="c1"># sequence for both PCR1 and PCR2 algorithms.</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cyclic</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_sequence</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_sequence</span><span class="p">[:</span> <span class="bp">self</span><span class="o">.</span><span class="n">_order</span> <span class="o">-</span> <span class="mi">1</span><span class="p">])</span></div>
 
 
     <span class="c1"># ---------- PRIVATE METHODS ----------</span>
@@ -656,35 +700,23 @@
 
         <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_sequence</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">window</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
-            <span class="n">next_symbol</span> <span class="o">=</span> <span class="n">successor_generator</span><span class="p">(</span>
-                <span class="n">window</span><span class="p">,</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">_order</span><span class="p">,</span>
-                <span class="bp">self</span><span class="o">.</span><span class="fm">__len__</span><span class="p">(),</span>  <span class="c1"># length of contents = alphabet size</span>
-            <span class="p">)</span>
+            <span class="n">next_symbol</span> <span class="o">=</span> <span class="n">successor_generator</span><span class="p">(</span><span class="n">window</span><span class="p">)</span>
             <span class="n">window</span> <span class="o">=</span> <span class="n">window</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span> <span class="o">+</span> <span class="p">[</span><span class="n">next_symbol</span><span class="p">]</span>
             <span class="k">if</span> <span class="nb">all</span><span class="p">(</span><span class="n">symbol</span> <span class="o">==</span> <span class="mi">0</span> <span class="k">for</span> <span class="n">symbol</span> <span class="ow">in</span> <span class="n">window</span><span class="p">):</span>
                 <span class="k">break</span>
 
-        <span class="c1"># If not cyclic, we must get order - 1 zeroes to append at the end of both PCR1 and PCR2.</span>
-        <span class="c1"># Since window now contains order times zeroes, we simply extend the sequence by this window</span>
-        <span class="c1"># minus one element.</span>
-        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cyclic</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">_sequence</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">window</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
-
-    <span class="nd">@staticmethod</span>
-    <span class="k">def</span><span class="w"> </span><span class="nf">_pcr1_generator</span><span class="p">(</span><span class="n">window</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">],</span> <span class="n">order</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">alphabet_size</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_pcr1_generator</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">window</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
 <span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Generator of the next symbol using PCR1 (GrandDaddy) rule.</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            window (list[int]): Current sliding window of length ``order``.</span>
-<span class="sd">            order (int): Order of the de Bruijn sequence.</span>
-<span class="sd">            alphabet_size (int): Number of distinct symbols in alphabet.</span>
 
 <span class="sd">        Returns:</span>
 <span class="sd">            int: The next symbol in the sequence.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">alphabet_size</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="fm">__len__</span><span class="p">()</span>
         <span class="n">max_symbol</span> <span class="o">=</span> <span class="n">alphabet_size</span> <span class="o">-</span> <span class="mi">1</span>
-        <span class="n">next_symbol</span> <span class="o">=</span> <span class="n">DeBruijnGenerator</span><span class="o">.</span><span class="n">_pcr1_get_next_symbol</span><span class="p">(</span><span class="n">window</span><span class="p">,</span> <span class="n">order</span><span class="p">,</span> <span class="n">alphabet_size</span><span class="p">)</span>
+        <span class="n">next_symbol</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_pcr1_get_next_symbol</span><span class="p">(</span><span class="n">window</span><span class="p">)</span>
 
         <span class="k">if</span> <span class="n">next_symbol</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">window</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="n">max_symbol</span><span class="p">:</span>
             <span class="k">return</span> <span class="n">next_symbol</span>
@@ -692,8 +724,7 @@
             <span class="k">return</span> <span class="n">window</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span>
         <span class="k">return</span> <span class="n">window</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
 
-    <span class="nd">@staticmethod</span>
-    <span class="k">def</span><span class="w"> </span><span class="nf">_pcr1_get_next_symbol</span><span class="p">(</span><span class="n">window</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">],</span> <span class="n">order</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">alphabet_size</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span> <span class="o">|</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_pcr1_get_next_symbol</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">window</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">int</span> <span class="o">|</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Compute the smallest valid next symbol for the PCR1 rule (aka GrandDaddy).</span>
 
 <span class="sd">        Finds the tail of the window (all elements after the leading run of max symbols, starting at</span>
@@ -702,66 +733,55 @@
 
 <span class="sd">        Args:</span>
 <span class="sd">            window (list[int]): Current sliding window of length ``order``.</span>
-<span class="sd">            order (int): Order of the de Bruijn sequence.</span>
-<span class="sd">            alphabet_size (int): Number of distinct symbols in alphabet.</span>
 
 <span class="sd">        Returns:</span>
 <span class="sd">            int | None: The smallest valid next symbol, or None if no valid symbol exists (the</span>
 <span class="sd">                caller function will then keep the current symbol).</span>
 <span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">alphabet_size</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="fm">__len__</span><span class="p">()</span>
         <span class="n">max_symbol</span> <span class="o">=</span> <span class="n">alphabet_size</span> <span class="o">-</span> <span class="mi">1</span>
 
-        <span class="n">first_non_max</span> <span class="o">=</span> <span class="mi">1</span>
-        <span class="k">while</span> <span class="n">first_non_max</span> <span class="o">&lt;</span> <span class="n">order</span> <span class="ow">and</span> <span class="n">window</span><span class="p">[</span><span class="n">first_non_max</span><span class="p">]</span> <span class="o">==</span> <span class="n">max_symbol</span><span class="p">:</span>
-            <span class="n">first_non_max</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="n">first_non_max_index</span> <span class="o">=</span> <span class="mi">1</span>
+        <span class="k">while</span> <span class="n">first_non_max_index</span> <span class="o">&lt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">_order</span> <span class="ow">and</span> <span class="n">window</span><span class="p">[</span><span class="n">first_non_max_index</span><span class="p">]</span> <span class="o">==</span> <span class="n">max_symbol</span><span class="p">:</span>
+            <span class="n">first_non_max_index</span> <span class="o">+=</span> <span class="mi">1</span>
 
-        <span class="k">if</span> <span class="n">first_non_max</span> <span class="o">==</span> <span class="n">order</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">first_non_max_index</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">_order</span><span class="p">:</span>
             <span class="k">return</span> <span class="mi">0</span>
 
-        <span class="c1"># Pad with a leading zero so that 1-based index arithmetic (tail[i - period]) stays</span>
-        <span class="c1"># consistent with the original C implementation. A trailing placeholder zero is also</span>
-        <span class="c1"># appended; it is overwritten on the very next line to hold the computed next symbol.</span>
-        <span class="n">tail_length</span> <span class="o">=</span> <span class="n">order</span> <span class="o">-</span> <span class="n">first_non_max</span>
-        <span class="n">tail</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="n">window</span><span class="p">[</span><span class="n">first_non_max</span><span class="p">:]</span> <span class="o">+</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span>  <span class="c1"># [sentinel, window tail, next_symbol_slot]</span>
+        <span class="n">tail_length</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_order</span> <span class="o">-</span> <span class="n">first_non_max_index</span>
+        <span class="n">tail</span> <span class="o">=</span> <span class="n">window</span><span class="p">[</span><span class="n">first_non_max_index</span><span class="p">:]</span> <span class="o">+</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_order</span> <span class="o">-</span> <span class="n">tail_length</span><span class="p">)</span>
 
-        <span class="n">period</span> <span class="o">=</span> <span class="mi">1</span>
-        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">tail_length</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
-            <span class="k">if</span> <span class="n">tail</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="n">period</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">tail</span><span class="p">[</span><span class="n">i</span><span class="p">]:</span>
+        <span class="n">period_candidate</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">tail_length</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">tail</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="n">period_candidate</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">tail</span><span class="p">[</span><span class="n">i</span><span class="p">]:</span>
                 <span class="k">return</span> <span class="kc">None</span>
-            <span class="k">if</span> <span class="n">tail</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="n">period</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">tail</span><span class="p">[</span><span class="n">i</span><span class="p">]:</span>
-                <span class="n">period</span> <span class="o">=</span> <span class="n">i</span>
+            <span class="k">if</span> <span class="n">tail</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="n">period_candidate</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">tail</span><span class="p">[</span><span class="n">i</span><span class="p">]:</span>
+                <span class="n">period_candidate</span> <span class="o">=</span> <span class="n">i</span>
 
-        <span class="n">tail</span><span class="p">[</span><span class="n">tail_length</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">tail</span><span class="p">[(</span><span class="n">tail_length</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">-</span> <span class="n">period</span><span class="p">]</span>
-        <span class="n">next_symbol</span> <span class="o">=</span> <span class="n">tail</span><span class="p">[</span><span class="n">tail_length</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span>
+        <span class="n">tail</span><span class="p">[</span><span class="n">tail_length</span><span class="p">]</span> <span class="o">=</span> <span class="n">tail</span><span class="p">[</span><span class="n">tail_length</span> <span class="o">-</span> <span class="n">period_candidate</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span>
+        <span class="n">next_symbol</span> <span class="o">=</span> <span class="n">tail</span><span class="p">[</span><span class="n">tail_length</span><span class="p">]</span>
 
-        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">tail_length</span> <span class="o">+</span> <span class="mi">2</span><span class="p">,</span> <span class="n">order</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
-            <span class="k">if</span> <span class="n">tail</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="n">period</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">max_symbol</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">tail_length</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_order</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">tail</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="n">period_candidate</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">max_symbol</span><span class="p">:</span>
                 <span class="k">return</span> <span class="n">next_symbol</span>
 
-        <span class="k">if</span> <span class="n">order</span> <span class="o">%</span> <span class="n">period</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_order</span> <span class="o">%</span> <span class="p">(</span><span class="n">period_candidate</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
             <span class="k">return</span> <span class="n">next_symbol</span>
         <span class="k">if</span> <span class="n">next_symbol</span> <span class="o">&lt;</span> <span class="n">max_symbol</span><span class="p">:</span>
             <span class="k">return</span> <span class="n">next_symbol</span> <span class="o">+</span> <span class="mi">1</span>
 
         <span class="k">return</span> <span class="kc">None</span>
 
-    <span class="nd">@staticmethod</span>
-    <span class="k">def</span><span class="w"> </span><span class="nf">_pcr2_generator</span><span class="p">(</span><span class="n">window</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">],</span> <span class="n">order</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">alphabet_size</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_pcr2_generator</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">window</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
 <span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Generator of the next symbol using PCR2 (GrandMama) rule.</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            window (list[int]): Current sliding window of length ``order``.</span>
-<span class="sd">            order (int): Order of the de Bruijn sequence.</span>
-<span class="sd">            alphabet_size (int): Number of distinct symbols in alphabet.</span>
 
 <span class="sd">        Returns:</span>
 <span class="sd">            int: The next symbol in the sequence.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">largest_candidate_symbol</span> <span class="o">=</span> <span class="n">DeBruijnGenerator</span><span class="o">.</span><span class="n">_get_pcr2_largest_candidate_symbol</span><span class="p">(</span>
-            <span class="n">window</span><span class="p">,</span>
-            <span class="n">order</span><span class="p">,</span>
-            <span class="n">alphabet_size</span><span class="p">,</span>
-        <span class="p">)</span>
+        <span class="n">largest_candidate_symbol</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_pcr2_largest_candidate_symbol</span><span class="p">(</span><span class="n">window</span><span class="p">)</span>
 
         <span class="k">if</span> <span class="n">largest_candidate_symbol</span> <span class="o">!=</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">window</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="n">largest_candidate_symbol</span><span class="p">:</span>
             <span class="k">return</span> <span class="mi">0</span>
@@ -769,76 +789,60 @@
             <span class="k">return</span> <span class="n">window</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span>
         <span class="k">return</span> <span class="n">window</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
 
-    <span class="nd">@staticmethod</span>
-    <span class="k">def</span><span class="w"> </span><span class="nf">_get_pcr2_largest_candidate_symbol</span><span class="p">(</span>
-        <span class="n">window</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">],</span>
-        <span class="n">order</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
-        <span class="n">alphabet_size</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
-    <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_get_pcr2_largest_candidate_symbol</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">window</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
 <span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Compute the largest valid candidate symbol for the PCR2 rule (aka GrandMama).</span>
 
 <span class="sd">        Scans backward from the end of the window, skipping trailing min-symbols (zeros), to find</span>
-<span class="sd">        the length ``last_non_min_index`` (:math:`j` in the original C implementation) of the</span>
-<span class="sd">        meaningful suffix.  Builds the rotated candidate string of length ``order`` with</span>
-<span class="sd">        ``(order - last_non_min_index)`` number of leading zeros followed by</span>
-<span class="sd">        ``window[:last_non_min_index]``, then returns the largest ``element`` (:math:`x` in the</span>
-<span class="sd">        original C implementation) in ``{1, ..., alphabet_size - 1}`` such that substituting</span>
-<span class="sd">        ``element`` at position ``order - last_non_min_index`` produces a necklace.</span>
+<span class="sd">        the index ``last_non_min_index`` (:math:`j - 1` in the original C implementation, as it uses</span>
+<span class="sd">        base 1 for indexing) of the last non-zero symbol. Builds the rotated candidate string of</span>
+<span class="sd">        length ``order`` with ``(order - last_non_min_index - 1)`` number of leading zeros followed</span>
+<span class="sd">        by ``window[:last_non_min_index + 1]``, then returns the largest ``element`` (:math:`x` in</span>
+<span class="sd">        the original C implementation) in ``{1, ..., alphabet_size - 1}`` such that substituting</span>
+<span class="sd">        ``element`` at position ``order - last_non_min_index - 1`` produces a necklace.</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            window (list[int]): Current sliding window of length ``order``.</span>
-<span class="sd">            order (int): Order of the de Bruijn sequence.</span>
-<span class="sd">            alphabet_size (int): Number of distinct symbols.</span>
 
 <span class="sd">        Returns:</span>
 <span class="sd">            int: The largest valid ``element``, or ``0`` if no such value exists.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="c1"># Scan from the end of the window backward while symbols equal 0 (the min symbol). The</span>
-        <span class="c1"># variable last_non_min_index is a 1-based count of the meaningful prefix length, and</span>
-        <span class="c1"># window[last_non_min_index - 1] is the last non-zero symbol (or last_non_min_index stays at</span>
-        <span class="c1"># 1 if the entire window is zero).</span>
-        <span class="n">last_non_min_index</span> <span class="o">=</span> <span class="n">order</span>
-        <span class="k">while</span> <span class="n">last_non_min_index</span> <span class="o">&gt;</span> <span class="mi">1</span> <span class="ow">and</span> <span class="n">window</span><span class="p">[</span><span class="n">last_non_min_index</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">alphabet_size</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="fm">__len__</span><span class="p">()</span>
+
+        <span class="n">last_non_min_index</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_order</span> <span class="o">-</span> <span class="mi">1</span>
+        <span class="k">while</span> <span class="n">last_non_min_index</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">window</span><span class="p">[</span><span class="n">last_non_min_index</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
             <span class="n">last_non_min_index</span> <span class="o">-=</span> <span class="mi">1</span>
 
-        <span class="c1"># Build the rotated candidate of length order:</span>
-        <span class="c1"># (order - last_non_min_index) leading zeros, then window[:last_non_min_index]</span>
-        <span class="n">candidate</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="p">(</span><span class="n">order</span> <span class="o">-</span> <span class="n">last_non_min_index</span><span class="p">)</span> <span class="o">+</span> <span class="n">window</span><span class="p">[:</span><span class="n">last_non_min_index</span><span class="p">]</span>
+        <span class="n">candidate</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_order</span> <span class="o">-</span> <span class="n">last_non_min_index</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="n">window</span><span class="p">[:</span> <span class="n">last_non_min_index</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span>
 
-        <span class="c1"># Try element from the largest possible symbol down to 1; return the first that yields a</span>
-        <span class="c1"># necklace. candidate[order - last_non_min_index] is the insertion point (the position of</span>
-        <span class="c1"># element in the rotated candidate.</span>
         <span class="k">for</span> <span class="n">element</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">alphabet_size</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">):</span>
-            <span class="n">candidate</span><span class="p">[</span><span class="n">order</span> <span class="o">-</span> <span class="n">last_non_min_index</span><span class="p">]</span> <span class="o">=</span> <span class="n">element</span>
-            <span class="k">if</span> <span class="n">DeBruijnGenerator</span><span class="o">.</span><span class="n">_is_necklace</span><span class="p">(</span><span class="n">candidate</span><span class="p">):</span>
+            <span class="n">candidate</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">_order</span> <span class="o">-</span> <span class="n">last_non_min_index</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">element</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_is_necklace</span><span class="p">(</span><span class="n">candidate</span><span class="p">):</span>
                 <span class="k">return</span> <span class="n">element</span>
         <span class="k">return</span> <span class="mi">0</span>
 
-    <span class="nd">@staticmethod</span>
-    <span class="k">def</span><span class="w"> </span><span class="nf">_is_necklace</span><span class="p">(</span><span class="n">sequence</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_is_necklace</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sequence</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
 <span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Return ``True`` if and only if ``sequence`` is a necklace (its own lexicographically</span>
 <span class="sd">        minimal rotation).</span>
 
-<span class="sd">        Pads with a leading zero so that period arithmetic uses 1-based positions, keeping ``i``</span>
-<span class="sd">        and ``period_candidate`` (:math:`p` in the original C implementation) directly comparable.</span>
-
 <span class="sd">        Args:</span>
-<span class="sd">            sequence (list[int]): The sequence to test (0-based values).</span>
+<span class="sd">            sequence (list[int]): The sequence to test.</span>
 
 <span class="sd">        Returns:</span>
 <span class="sd">            bool: ``True`` if ``sequence`` is a necklace, ``False`` otherwise.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">sequence</span><span class="p">)</span>
-        <span class="c1"># Pad with a leading zero so that period arithmetic in the loop below uses 1-based</span>
-        <span class="c1"># positions, keeping i and period_candidate directly comparable</span>
-        <span class="n">padded_sequence</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="n">sequence</span>
-        <span class="n">period_candidate</span> <span class="o">=</span> <span class="mi">1</span>
-        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">n</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
-            <span class="k">if</span> <span class="n">padded_sequence</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="n">period_candidate</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">padded_sequence</span><span class="p">[</span><span class="n">i</span><span class="p">]:</span>
+        <span class="n">sequence_length</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">sequence</span><span class="p">)</span>
+        <span class="n">period_candidate</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">sequence_length</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">sequence</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="n">period_candidate</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">sequence</span><span class="p">[</span><span class="n">i</span><span class="p">]:</span>
                 <span class="k">return</span> <span class="kc">False</span>
-            <span class="k">if</span> <span class="n">padded_sequence</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="n">period_candidate</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">padded_sequence</span><span class="p">[</span><span class="n">i</span><span class="p">]:</span>
+            <span class="k">if</span> <span class="n">sequence</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="n">period_candidate</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">sequence</span><span class="p">[</span><span class="n">i</span><span class="p">]:</span>
                 <span class="n">period_candidate</span> <span class="o">=</span> <span class="n">i</span>
-        <span class="k">return</span> <span class="n">n</span> <span class="o">%</span> <span class="n">period_candidate</span> <span class="o">==</span> <span class="mi">0</span>
+        <span class="k">return</span> <span class="n">sequence_length</span> <span class="o">%</span> <span class="p">(</span><span class="n">period_candidate</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_offset_sequence</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Offsets the output sequence by the value given by ``offset``.&quot;&quot;&quot;</span>
+        <span class="n">normalised_offset</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_offset</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">sequence_length</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_sequence</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_sequence</span><span class="p">[</span><span class="n">normalised_offset</span><span class="p">:]</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">_sequence</span><span class="p">[:</span><span class="n">normalised_offset</span><span class="p">]</span>
 
     <span class="c1"># ---------- PUBLIC PROPERTIES ----------</span>
 
@@ -949,6 +953,21 @@
         <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">cyclic</span><span class="p">,</span> <span class="nb">bool</span><span class="p">):</span>
             <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;&#39;cyclic&#39; must be &#39;bool&#39;&quot;</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_cyclic</span> <span class="o">=</span> <span class="n">cyclic</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">reset</span><span class="p">()</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">offset</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;The offset of a de Bruijn sequence rotates the output list by its value.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_offset</span>
+
+    <span class="nd">@offset</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">offset</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">offset</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">offset</span><span class="p">,</span> <span class="nb">int</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;&#39;offset&#39; must be &#39;int&#39;&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_offset</span> <span class="o">=</span> <span class="n">offset</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">reset</span><span class="p">()</span>
 
     <span class="nd">@property</span>
